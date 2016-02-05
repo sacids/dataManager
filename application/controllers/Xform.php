@@ -19,8 +19,16 @@ class XmlElement {
 
 class Xform extends CI_Controller {
     
-    
-    public function __construct(){
+
+	var $form_defn; 
+	var $form_data;
+	var $xml_defn;
+	var $xml_data;
+	var $table_name;
+	
+	
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model(array('xform_model','users_model'));
         $this->load->library('form_auth');
@@ -28,20 +36,30 @@ class Xform extends CI_Controller {
 
     }
     
-    public function set_xml($filename){
-        
-        $this->file_name = $filename;
-        
-    }
     
-    public function get_xml(){
-        
-        return $this->file_name;
-    }
+	public function set_defn_file($filename)
+	{		
+		$this->xml_defn	= $filename;
+	}
+	
+	public function get_defn_file()
+	{		
+		return $this->xml_defn;
+	}
+	
+	public function set_data_file($filename)
+	{
+		$this->xml_data	= $filename;
+	}
+	
+	public function get_data_file()
+	{
+		return $this->xml_data;
+	}
     
     
     
- /**
+ 	/**
      * XML submission function
      * Author : Renfrid 
      * @param  string  $str    Input string
@@ -149,204 +167,328 @@ class Xform extends CI_Controller {
         //return response
         $this->get_response($response);
     }
+   /**
+    * inserts xform into database table
+    * Author : Eric Beda
+    * 
+    * @param int 	$user_id // sender user id
+    */ 
     
-    
-    public function insert($user_id){
+    public function insert($user_id)
+    {
         //submission form details
         $query=$this->db->get_where('submission_form',array('user_id' => $user_id,'status' => 0))->row();
         $file_name=$query->file_name;
         
         //call forms
-        $this->set_xml(FCPATH."assets/forms/data/xml/".$file_name);
-        $this->load_xml_data(); 
-        $this->insert_into_table();
+        $this->set_data_file(FCPATH."assets/forms/data/xml/".$file_name);
+        $this->load_xml_data();
+        $statement		= $this->data_insert_query();
+        //$this->load->model('xform_model');
         
         echo $this->xform_model->insert_data($statement);
         
     }
     
-    public function initialise($file_name){
-        
-        // create table structure
-        $this->set_xml(FCPATH."assets/forms/definition/".$file_name);
+    
+    /**
+     * Creates appropriate tables from an xform definition file
+     * Author : Eric Beda
+     * 
+     * @param string $file_name		xform definition file
+     */
+    public function initialise($file_name)
+    {      
+        // create table structure        
+        $this->set_defn_file(FCPATH."assets/forms/definition/".$file_name);
         $this->load_xml_definition();
-                
+        
         $statement = $this->create_structure();
-        $this->load->model('xform_model');
-        echo $this->xform_model->create_table($statement);
-        
+        //$this->load->model('xform_model');
+        echo $this->xform_model->create_table($statement);       
     }
-    
-    private function load_xml_data(){
+    /**
+     * sets form_data variable to an array containing all fields of a filled xform file submitted
+     * Author : Eric Beda
+     * 
+     */
+    private function load_xml_data()
+    {
         
-        $file_name  = $this->get_xml();
-        $xml        = file_get_contents($file_name);
-        $rxml       = $this->xml_to_object($xml);
+    	// get submitted file
+    	$file_name	= $this->get_data_file();
+    	
+    	// load file into a string
+		$xml		= file_get_contents($file_name);
+		
+		// convert string into an object
+		$rxml		= $this->xml_to_object($xml);		
 
-        // array to hold values and field names;
-        $this->darray       = array();
-        $this->table_name   = $rxml->attributes['id'];
-        foreach($rxml->children as $val){       
-            $this->get_path('',$val);   
-        }
+		// array to hold values and field names;
+		$this->form_data	= array();
+		$this->table_name	= str_replace("-","_",$rxml->attributes['id']);
+		
+		// loop through object
+		foreach($rxml->children as $val)
+		{		
+			$this->get_path('',$val);	
+		}
+    }
+    /**
+     * Recursive function that runs through xml xform object and uses array keys as 
+     * absolute path of variable, and sets its value to the data submitted by user
+     * Author : Eric Beda
+     * 
+     * @param string	$name 		name of xml element
+     * @param object	$obj		xml element 
+     */
+    private function get_path($name,$obj)
+    {
+    
+    	$name .= "_".$obj->name;
+		if(is_array($obj->children))
+		{
+			foreach($obj->children as $val)
+			{
+				$this->get_path($name,$val);
+			}
+		}
+		else
+		{
+			$this->form_data[substr($name,1)] = $obj->content;
+		}
     }
     
-    private function get_path($name,$obj){
-    
-        $name .= "_".$obj->name;
-        if(is_array($obj->children)){
-            foreach($obj->children as $val){
-                $this->get_path($name,$val);
-            }
-        }else{
-            $this->darray[substr($name,1)] = $obj->content;
-        }
-    }
-    
-    
-    private function insert_into_table(){
+    /**
+     * Create query string for inserting data into table from submitted xform data
+     * file
+     * Author : Eric Beda
+     * 
+     * @return boolean|string
+     */
+    private function data_insert_query()
+    {
 
-        $field_names    = "(`".implode("`,`",array_keys($this->darray))."`)";
-        $field_values   = "('".implode("','",array_values($this->darray))."')";
-        $table_name     = $this->table_name;
-        
-        $query          = "INSERT INTO $table_name $field_names VALUES $field_values";
-        
-        echo $query;
-    
+       	$table_name		= $this->table_name;		 
+		$form_data		= $this->form_data;
+		
+		// check to see if their was a point (spatial) field in table definition
+		if($field_name	= $this->xform_model->get_point_field($table_name))
+		{
+			
+			// spatial field detected
+			// extract spatial field components 
+			$geopoints	= explode(" ",$form_data[$field_name]);
+			$lat		= $geopoints[0];
+			$lon		= $geopoints[1];
+			$acc		= $geopoints[3];
+			$alt		= $geopoints[2];		
+			$point		= "GeomFromText('POINT($lat $lon)')";
+				
+			// build up query field names for spatial data
+			$fn			=  '`'.$field_name.'_lat`,`';
+			$fn			.= $field_name.'_lon`,`';
+			$fn			.= $field_name.'_acc`,`';
+			$fn			.= $field_name.'_alt`,`';
+			$fn			.= $field_name.'_point`';
+
+			// build up query data values for spatial data
+			$fd			= "'".$lat."',";
+			$fd			.= "'".$lon."',";
+			$fd			.= "'".$acc."',";
+			$fd			.= "'".$alt."',";
+			$fd			.= $point;
+		
+		}else{
+			// TO DO, error logging
+			echo 'error getting point field';
+				return false;
+		}
+		
+		$field_names	= "(`".implode("`,`",array_keys($this->form_data))."`,$fn)";
+		$field_values	= "('".implode("','",array_values($this->form_data))."',$fd)";
+		
+		$query			= "INSERT INTO $table_name $field_names VALUES $field_values";	
+		return $query; 
     }
     
     
-    
-    private function load_xml_definition(){
+    /**
+     * Create an array representative of xform definition file for easy transversing
+     * Author : Eric Beda
+     * 
+     */
+    private function load_xml_definition()
+    {
         
-        $file_name  = $this->get_xml();     
-        $xml        = file_get_contents($file_name);
-        $rxml       = $this->xml_to_object($xml);
-        
-        echo '<pre>';
-        
-        $instance   = $rxml->children[0]->children[1]->children[0]->children[0];
-        $table_name = str_replace("-","_",$instance->attributes['id']);
-        
-        // get array rep of xform
-        $this->binds = $this->get_binds();
-        
-        //print_r($this->binds);
-        $this->table_name = $table_name;
+       	$file_name	= $this->get_defn_file();
+		$xml		= file_get_contents($file_name);
+		$rxml		= $this->xml_to_object($xml);
+		
+		$instance	= $rxml->children[0]->children[1]->children[0]->children[0];
+		$table_name	= str_replace("-","_",$instance->attributes['id']);
+		
+		// get array rep of xform
+		$this->form_defn		= $this->get_form_definition();
+		
+		//print_r($this->binds);
+		$this->table_name	= $table_name;
     
     }
     
 
-    private function create_structure(){
+    /**
+     * creates query corresponding to mysql table structure of an xform definition file 
+     * Author : Eric Beda
+     * 
+     * @return string	mysql statement for creating table structure of xform
+     */
+    private function create_structure()
+    {
         
-        $structure  = $this->binds;
-        $tbl_name   = $this->table_name;
-        
-        $statement  = "CREATE TABLE $tbl_name ( id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY ";
-        foreach($structure as $key => $val){
-            
-            // check type
-            if(empty($val['type'])) continue;
-            
-            $type       = $val['type'];
-            $field_name = $val['field_name'];
-            
-            if(!empty($val['required'])){
-                $required = 'NOT NULL';
-            }
-            else{
-                $required   = '';
-            }
-            
-            if($type == 'string' || $type == 'binary'){         
-                $statement  .= ", $field_name VARCHAR(150) $required";
-            }
-            
-            if($type == 'select1'){             
-                $statement  .= ", $field_name ENUM('".implode("','",$val['option'])."') $required";             
-            }           
-            if($type == 'select' || $type == 'text'){
-                $statement  .= ", $field_name TEXT $required ";
-            }           
-            if($type == 'date'){
-                $statement  .= ", $field_name DATE $required ";
-            }           
-            if($type == 'int'){
-                $statement  .= ", $field_name INT(20) $required ";
-            }
-            
-            if($type == 'geopoint'){
-                
-                //echo 'somji';
-            }
+        $structure	= $this->form_defn;
+		$tbl_name	= $this->table_name;
+		
+		// initiate statement, set id as primary key, autoincrement
+		$statement	= "CREATE TABLE $tbl_name ( id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY ";
+		
+		// loop through xform definition array
+		foreach($structure as $key => $val)
+		{
+			
+			// check if type is empty
+			if(empty($val['type'])) continue;
+			
+			$type		= $val['type'];
+			$field_name	= $val['field_name'];			
+			
+			// check if field is required
+			if(!empty($val['required']))
+			{
+				$required = 'NOT NULL';
+			}
+			else{
+				$required	= '';
+			}
+			
+			if($type == 'string' || $type == 'binary')
+			{			
+				$statement	.= ", $field_name VARCHAR(150) $required";
+			}
+			
+			if($type == 'select1')
+			{				
+				$statement	.= ", $field_name ENUM('".implode("','",$val['option'])."') $required";				
+			}			
+			
+			if($type == 'select' || $type == 'text')
+			{
+				$statement 	.= ", $field_name TEXT $required ";
+			}			
+			
+			if($type == 'date')
+			{
+				$statement	.= ", $field_name DATE $required ";
+			}			
+			
+			if($type == 'int')
+			{
+				$statement 	.= ", $field_name INT(20) $required ";
+			}
+			
+			if($type == 'geopoint')
+			{
 
-            $statement .= "\n";
-        }
-        
-        $statement  .= ")";
-        
-    
-        
-        
-        return $statement;
+				$statement 	.= ",".$field_name." VARCHAR(150) $required ";
+				$statement 	.= ",".$field_name."_point POINT $required ";
+				$statement 	.= ",".$field_name."_lat DECIMAL(38,10) $required ";
+				$statement 	.= ",".$field_name."_lng DECIMAL(38,10) $required ";
+				$statement 	.= ",".$field_name."_acc DECIMAL(38,10) $required ";
+				$statement 	.= ",".$field_name."_alt DECIMAL(38,10) $required ";
+			}
+				
+				$statement .= "\n";
+		}
+				
+		$statement	.= ")";
+				
+		return $statement;
         
     }
     
     
     
     
-    
-    private function get_binds(){
-    
-        $rxml       = $this->xml_to_object(file_get_contents($this->get_xml()));
-        $tmp1       = $rxml->children[0]->children[1]->children;
-        $tmp2       = $rxml->children[0]->children[1]->children[1]->children[0]->children;
-        
-        $xarray     = array();
-                
-        foreach($tmp1 as $key => $val){
-            
-            if($val->name == 'bind'){
-                
-                $attributes     = $val->attributes;
-                $nodeset        = $attributes['nodeset'];
-                
-                $xarray[$nodeset]   = array();
-                $xarray[$nodeset]['field_name'] = str_replace("/","_",substr($nodeset,6));
-                
-                foreach($attributes as $k2 => $v2){
-                    
-                    $xarray[$nodeset][$k2]  = $v2;
-                }
-            }       
-        }
-        
-        foreach($tmp2 as $val){
-            
-            $att        = $val->attributes['id'];
-            $id         = explode(":",$att);
-            $nodeset    = $id[0];
-            $label      = $id[1];
-            $detail     = $val->children[0]->content;
+    /**
+     * Return a double array containing field path as key and a value containing
+     * array filled with its corresponding attributes
+     * Author : Eric Beda
+     * 
+     * @return array
+     */
+	private function get_form_definition()
+	{
+	
+		// retrieve object describing definition file
+		$rxml		= $this->xml_to_object(file_get_contents($this->get_defn_file()));
+		
+		// get the binds compononent of xform
+		$binds		= $rxml->children[0]->children[1]->children;
+		
+		// get the  body section of xform
+		$tmp2		= $rxml->children[0]->children[1]->children[1]->children[0]->children;	
+		
+		// container
+		$xarray		= array();
+				
+		foreach($binds as $key => $val)
+		{
+			
+			if($val->name == 'bind')
+			{
+				
+				$attributes		= $val->attributes;
+				$nodeset		= $attributes['nodeset'];
+				
+				$xarray[$nodeset]	= array();
+				$xarray[$nodeset]['field_name']	= str_replace("/","_",substr($nodeset,6));
+				
+				// set each attribute key and corresponding value
+				foreach($attributes as $k2 => $v2)
+				{
+					
+					$xarray[$nodeset][$k2]	= $v2;
+				}
+			}		
+		}
+		
+		foreach($tmp2 as $val)
+		{
+			
+			$att		= $val->attributes['id'];
+			$id			= explode(":",$att);
+			$nodeset	= $id[0];
+			$label		= $id[1];
+			$detail		= $val->children[0]->content;
 
-            // if its an option for select/select1
-            if(substr($label,0,6) == 'option'){
-                $xarray[$nodeset]['option'][substr($label,6)]   = $detail;
-            }else{          
-                $xarray[$nodeset][$label]   = $detail;
-            }       
-        }
-        
-        
-        return $xarray; 
-    }
+			// if its an option for select/select1
+			if(substr($label,0,6) == 'option')
+			{
+				$xarray[$nodeset]['option'][substr($label,6)]	= $detail;
+			}else
+			{			
+				$xarray[$nodeset][$label]	= $detail;
+			}		
+		}	
+		return $xarray;	
+	}
     
     
     
     
     
-    private function xml_to_object($xml) {
+    private function xml_to_object($xml)
+    {
         $parser = xml_parser_create();
         xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
         xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
@@ -355,25 +497,40 @@ class Xform extends CI_Controller {
     
         $elements = array();  // the currently filling [child] XmlElement array
         $stack = array();
-        foreach ($tags as $tag) {
+        foreach ($tags as $tag)
+        {
             
             $index = count($elements);
-            if ($tag['type'] == "complete" || $tag['type'] == "open") {
+            if ($tag['type'] == "complete" || $tag['type'] == "open")
+            {
                 $elements[$index] = new XmlElement;
                 $elements[$index]->name = $tag['tag'];
-                if(!empty($tag['attributes'])) $elements[$index]->attributes = $tag['attributes'];
-                if(!empty($tag['value'])) $elements[$index]->content = $tag['value'];
-                if ($tag['type'] == "open") {  // push
+                
+                if(!empty($tag['attributes']))
+                {
+                	$elements[$index]->attributes = $tag['attributes'];
+                }
+                
+                if(!empty($tag['value']))
+                {
+                	$elements[$index]->content = $tag['value'];
+                }
+                
+                if ($tag['type'] == "open") 
+                {  // push
                     $elements[$index]->children = array();
                     $stack[count($stack)] = &$elements;
                     $elements = &$elements[$index]->children;
                 }
             }
-            if ($tag['type'] == "close") {  // pop
+            
+            if ($tag['type'] == "close") 
+            {  // pop
                 $elements = &$stack[count($stack) - 1];
                 unset($stack[count($stack) - 1]);
             }
         }
+        
         return $elements[0];  // the single top-level element
     }
 
