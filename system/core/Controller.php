@@ -49,6 +49,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/general/controllers.html
  */
+
+/**
+ * @property xform_model $xform_model
+ */
+
 class CI_Controller {
 
 	/**

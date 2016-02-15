@@ -9,7 +9,7 @@ class Auth extends CI_Controller {
 		$this->load->helper(array('url','language'));
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 		$this->lang->load('auth');
-		$this->load->model('users_model');
+		$this->load->model('User_model');
 
 	}
 
@@ -25,6 +25,59 @@ class Auth extends CI_Controller {
 		}
 		
 	}
+
+
+	/**
+	 * List of all registered users
+	 *
+	 * @load view
+	 */
+
+	function users_list(){
+		if (!$this->ion_auth->logged_in()){
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+
+		//Displaying List of registered users/IF ADMIN
+        $this->data['users'] = $this->User_model->get_users();
+		$this->data['title']="Users List";
+		$this->load->view('header', $this->data);
+		$this->load->view('auth/menu');
+		$this->_render_page('auth/index');
+		$this->load->view('footer');
+	}
+
+
+	/**
+	 * Logged user profile
+	 *
+	 * @load view
+	 */
+	function profile(){
+		//Specific user id of login in user
+		$user_id=$this->session->userdata('user_id');
+
+		//Displaying Profile of registered user
+		$User=$this->User_model->find_by_id($user_id);
+			$this->data['fname']=$User->first_name.' '.$User->last_name;
+			$this->data['username']=$User->username;
+			$this->data['status']=$User->active;
+			$this->data['phone']=$User->phone;
+			$this->data['email']=$User->email;
+			$date_string = "%d-%m-%Y  %h:%i %a";
+			$this->data['created']=mdate($date_string, $User->created_on);
+			$this->data['last_login']=mdate($date_string, $User->last_login);
+
+		$this->data['title']='User Information';
+		$this->load->view('header',$this->data);
+		$this->load->view('profile/menu');
+		$this->load->view('profile/user_info');
+		$this->load->view('footer');
+	}
+
+
+
 
 	// log the user in
 	function login(){
@@ -135,7 +188,11 @@ class Auth extends CI_Controller {
 
 			// render
 			$this->data['title']="Change Password";
-			$this->_render_page('auth/change_password', $this->data);
+			$this->load->view('header', $this->data);
+			$this->load->view('profile/menu');
+			$this->_render_page('profile/change_password');
+			$this->load->view('footer');
+			//$this->_render_page('auth/change_password', $this->data);
 		}
 		else
 		{
@@ -523,8 +580,12 @@ class Auth extends CI_Controller {
                 'type'  => 'password',
                 'value' => $this->form_validation->set_value('password_confirm'),
             );
-			$this->data['title'] = "Register New User";
-            $this->_render_page('auth/create_user', $this->data);
+			$this->data['title'] = "Create New User";
+			$this->load->view('header', $this->data);
+			$this->load->view('auth/menu');
+			$this->_render_page('auth/create_user');
+			$this->load->view('footer');
+            //$this->_render_page('auth/create_user', $this->data);
         }
     }
 
@@ -656,11 +717,28 @@ class Auth extends CI_Controller {
 			'id'   => 'password_confirm',
 			'type' => 'password'
 		);
-
-			$this->data['title'] = "Edit User";
-            $this->_render_page('auth/edit_user', $this->data);
+		$this->load->view('header', $this->data);
+		$this->load->view('auth/menu');
+		$this->_render_page('auth/edit_user');
+		$this->load->view('footer');
 	}
 
+	//group lists
+	function group_list()
+	{
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+
+		$data['title']='Manage Groups';
+		$data['groups']=$this->db->get('groups')->result();
+		$this->load->view('header',$data);
+		$this->load->view('auth/menu');
+		$this->load->view('auth/group_list');
+		$this->load->view('footer');
+	}
 
 	// create a new group
 	function create_group()
@@ -704,9 +782,10 @@ class Auth extends CI_Controller {
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('description'),
 			);
-			//render view
-			$this->_render_page('auth/create_group', $this->data);
-			
+			$this->load->view('header', $this->data);
+			$this->load->view('auth/menu');
+			$this->_render_page('auth/create_group');
+			$this->load->view('footer');
 		}
 	}
 
@@ -771,9 +850,66 @@ class Auth extends CI_Controller {
 			'value' => $this->form_validation->set_value('description', $group->description),
 		);
 
-		//Render View
-		$this->_render_page('auth/edit_group', $this->data);
+		//Load View
+		$this->load->view('header', $this->data);
+		$this->load->view('auth/menu');
+		$this->_render_page('auth/edit_group');
+		$this->load->view('footer');
 	}
+
+
+	//assign privilege to group
+	function assign_privilege($group_id) {
+		if (!$this->ion_auth->logged_in()) {
+			//redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
+
+		//Group Name
+		$groups = $this->db->get_where('groups',array('id' => $group_id))->row();
+		$this->data['group_name']=$groups->name;
+
+
+		if ($this->input->post('save')) {
+			$priv = $this->User_model->privilege_list($group_id);
+
+			foreach ($priv[1] as $key => $value) {
+
+				foreach ($value as $k => $v):
+
+					if ($this->input->post('module_' . $v[0] . '_' . $v[1])) {
+						$check = $this->db->get_where('access_level',
+										array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k))->row();
+
+						if (count($check) == 1) {
+							$this->db->update('access_level',
+											  array('allow' => $this->input->post('module_' . $v[0] . '_' . $v[1])),
+											  array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k));
+						} else {
+							$this->db->insert('access_level',
+										array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k, 'allow' => 1));
+							}
+						} 
+						else {
+						$this->db->update('access_level',
+										  array('allow' => 0),
+										  array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k));
+					}
+				endforeach;
+			}
+			$this->session->set_flashdata('message', 'Privilege successfully configured');
+			redirect('auth/assign_privilege/' . $group_id, 'refresh');
+		}
+
+		$this->data['privilege_list'] = $this->User_model->privilege_list($group_id);
+		$this->data['group_id'] = $group_id;
+		$this->data['title']='Assign Privilege';
+		$this->load->view('header',$this->data);
+		$this->load->view('auth/menu');
+		$this->load->view('auth/assign_privilege');
+		$this->load->view('footer');
+	}
+
 
 	function _get_csrf_nonce()
 	{

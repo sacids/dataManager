@@ -14,16 +14,16 @@
   <meta name="author" content="" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="icon" TYPE="image/png" href="<?php echo base_url();?>favicon.png">
-  <link rel="stylesheet" href="<?php echo base_url();?>media/login/reset.css" type="text/css" media="screen" title="no title" />
-  <link rel="stylesheet" href="<?php echo base_url();?>media/login/text.css" type="text/css" media="screen" title="no title" />
-  <link rel="stylesheet" href="<?php echo base_url();?>media/login/buttons.css" type="text/css" media="screen" title="no title" />
-  <link rel="stylesheet" href="<?php echo base_url();?>media/login/login.css" type="text/css" media="screen" title="no title" />
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/public/login/reset.css" type="text/css" media="screen" title="no title" />
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/public/login/text.css" type="text/css" media="screen" title="no title" />
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/public/login/buttons.css" type="text/css" media="screen" title="no title" />
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/public/login/login.css" type="text/css" media="screen" title="no title" />
 </head>
 
 <body>
 
 <div id="login">
-  <center><img src="<?php echo base_url();?>media/images/sacidsLogo.jpg" width="180" /></center> 
+  <center><img src="<?php echo base_url();?>assets/public/images/sacidsLogo.jpg" width="180" /></center>
   <div id="login_panel">
     <?php if($message != ''):?>
       <div id="infoMessage"><?php echo $message;?></div>

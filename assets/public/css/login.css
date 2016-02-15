@@ -1,0 +1,202 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600);
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-family: "Open Sans", arial, sans-serif;
+    text-align: justify;
+}
+
+
+table{
+    /*border: 1px solid #2A6671;*/
+    border-collapse: collapse;
+    margin-top: 0;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+     text-align: center;
+}
+
+table td{
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+   
+}
+
+
+h2 {
+    margin-bottom: 4px;
+    color: #2A6671;
+}
+
+p {
+  
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 0px;
+}
+
+h4{
+    padding-top: 0px;
+     padding-bottom: 0px;
+    color: #2A6671;   
+    font-size: 14px;
+}
+
+h3{
+
+    color: #2A6671;
+    font-size: 15px;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+#banner {
+    height: 100px;
+    min-width:1000px;
+    color: #FFF;
+     background-color: #022859 ;
+
+}
+
+#students {
+    font-size: 11px;
+}
+
+
+#nembo {
+
+    height: 120px;
+    width:73px;
+    float:left;
+    /*    padding-left:20px;*/
+    padding-top:20px;
+
+}
+
+#HD1 {
+    padding-top:20px;
+    color: #FFF !important;
+    width:auto;
+    overflow:right;
+    min-width:300px;
+
+}
+
+
+#content_login {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 940px;
+    height: 400px;
+    background: #F8FAFC;
+        border: 1px solid #eee;
+    box-shadow: 2px 2px 8px #888888;
+}
+
+#welcomediv {
+    margin: 20px;
+    width: 440px;
+    height: 360px;
+    float: left;
+
+}
+
+#welcomediv h2{
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #022859;
+}
+
+#logindiv {
+    margin: 20px;
+    margin-left: 10px;
+    width: 400px;
+    height: 360px;
+    float: right;
+    border-left: 1px solid #022859;
+    padding-left: 20px;
+}
+
+#logindiv h2{
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #022859;
+}
+
+div#infoMessage{
+    min-height: 20px;
+    width: 100%;
+    padding-left: 10px;
+    line-height: 18px !important;
+    color: #FF0000;
+    font-size: 12px;
+}
+
+/* Inline help for forms */
+/* NOTE: pure-help-inline is deprecated. Use .pure-form-message-inline instead. */
+.pure-form .pure-help-inline,
+.pure-form-message-inline {
+    color: #FF0000;
+    font-size: 11px;
+}
+
+
+#login { 
+    width: 350px; 
+    margin-top: 10px;
+    position: absolute; 
+}
+
+#login_panel
+{
+    width: 320px;
+    background: inherit;
+    border: 1px solid #eee;
+    overflow: hidden;
+
+}
+
+#login_panel .login_fields { padding: 22px 15px 15px; }
+    #login_panel .login_fields input { width: 98%;
+}
+
+#login_panel .field { margin-bottom: 1.75em; }
+    #login_panel .field:last-child { margin-bottom: .85em; }
+    
+    #login_panel .field label { font-weight: bold; color: #555; display: block; position: relative; }   
+        #login_panel .field label small { position: absolute; right: 0; top: -2px; }
+            #login_panel .field label small a { color: #999; }
+
+#login .login_actions { background: #E8E8E8; width: auto; padding: 5px 15px; border-top: 1px dotted #CCC; }
+
+
+
+#underline {
+    width: 100%;
+    height: 2px;
+    background:#022859;
+}
+
+#footer {
+    margin: 0 auto;
+    padding-top: 5px;
+    margin-top: 20px;
+    width: 940px;
+    height: 70px;
+    border-top: 2px solid #022859;
+    text-align: center;
+}
+
+
+

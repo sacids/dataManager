@@ -18,6 +18,8 @@ class Feedback extends CI_Controller
         $this->load->library('form_auth');
         $this->load->helper(array('url', 'string'));
         log_message('debug', 'Feedback controller initialized');
+
+        //$this->output->enable_profiler(TRUE);
     }
 
 
@@ -32,58 +34,11 @@ class Feedback extends CI_Controller
     {
         //get form_id and last_feedback_id
         $form_id = $this->input->get('form_id');
-        $last_id = $this->input->get('id');
-
-        // Get the digest from the http header
-        $digest = $_SERVER['PHP_AUTH_DIGEST'];
-
-        //server realm and unique id
-        $realm = 'Authorized users of Sacids Openrosa';
-        $nonce = md5(uniqid());
-
-        // If there was no digest, show login
-        if (empty($digest)):
-
-            //populate login form if no digest authenticate
-            $this->form_auth->require_login_prompt($realm,$nonce);
-            exit;
-        endif;
-
-        //http_digest_parse
-        $digest_parts = $this->form_auth->http_digest_parse($digest);
-
-        //username from http digest obtained
-        $valid_user = $digest_parts['username'];
-
-        //get user details from database
-        $user=$this->Users_model->get_user_details($valid_user);
-        $valid_pass = $user->digest_password; //digest password
-        $user_id = $user->id; //user_id
-        $db_user = $user->username; //username
-
-        //show status header if user not available in database
-        if(empty($db_user)):
-            //populate login form if no digest authenticate
-            $this->form_auth->require_login_prompt($realm,$nonce);
-            exit;
-        endif;
-
-
-        // Based on all the info we gathered we can figure out what the response should be
-        $A1 = $valid_pass; //digest password
-        $A2 = md5("{$_SERVER['REQUEST_METHOD']}:{$digest_parts['uri']}");
-        $valid_response = md5("{$A1}:{$digest_parts['nonce']}:{$digest_parts['nc']}:{$digest_parts['cnonce']}:{$digest_parts['qop']}:{$A2}");
-
-        // If digest fails, show login
-        if ($digest_parts['response']!=$valid_response):
-            //populate login form if no digest authenticate
-            $this->form_auth->require_login_prompt($realm,$nonce);
-            exit;
-        endif;
-
+        $last_id = $this->input->get('last_id');
+        $user_id = 1;
 
         //IF Authentication PASSES
-        $feedback_db = $this->Feedback_model->get_feedback($last_id, $user_id, $form_id);
+        $feedback_db = $this->Feedback_model->get_feedback($user_id, $form_id, $last_id);
 
         $feedback = array();
         foreach($feedback_db as $value):
@@ -104,9 +59,5 @@ class Feedback extends CI_Controller
             echo json_encode($feedback);
         endif;
 
-
-
     }
-
-
 }
