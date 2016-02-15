@@ -8,56 +8,98 @@
  * @author      Renfrid Ngolongolo
  * @link        http://sacids.org
  */
-
 class Feedback extends CI_Controller
 {
 
-    function __construct() {
-        parent::__construct();
-        $this->load->model(array('Feedback_model','Users_model'));
-        $this->load->library('form_auth');
-        $this->load->helper(array('url', 'string'));
-        log_message('debug', 'Feedback controller initialized');
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->model(array('Feedback_model', 'User_model'));
+		$this->load->library('form_auth');
+		$this->load->helper(array('url', 'string'));
+		log_message('debug', 'Feedback controller initialized');
 
-        //$this->output->enable_profiler(TRUE);
-    }
+		//$this->output->enable_profiler(TRUE);
+	}
 
 
-    /**
-     * XML submission class
-     *
-     * @param  string  $str    Input string
-     * @return response
-     */
+	/**
+	 * XML submission class
+	 *
+	 * @param  string $str Input string
+	 * @return response
+	 */
 
-    function get_feedback()
-    {
-        //get form_id and last_feedback_id
-        $form_id = $this->input->get('form_id');
-        $last_id = $this->input->get('last_id');
-        $user_id = 1;
+	function get_feedback()
+	{
+		//get form_id and last_feedback_id
+		$username = $this->input->get("username");
+		$form_id = $this->input->get('form_id');
+		$last_id = $this->input->get('last_id');
 
-        //IF Authentication PASSES
-        $feedback_db = $this->Feedback_model->get_feedback($user_id, $form_id, $last_id);
+		$user = $this->User_model->find_by_username($username);
+		$feedback = $this->Feedback_model->get_feedback($user->id, $form_id, $last_id);
 
-        $feedback = array();
-        foreach($feedback_db as $value):
-            $feedback[] = array(
-                'id'=> $value->id,
-		        'user_id' => $value->user_id,
-		        'form_id' => $value->form_id,
-		        'message' => $value->message,
-		        'date' => date('m-d-Y H:i:s',strtotime($value->created_at))
-            );
-        endforeach;
+		if ($feedback) {
+			$response = array("feedback" => $feedback, "status" => "success");
+			$this->output
+				->set_status_header(200)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+				->_display();
+		} else {
+			$response = array("status" => "success", "message" => "No content");
+			$this->output
+				->set_status_header(204)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+				->_display();
+		}
+	}
 
-        //check if feedback array is empty
-        if(empty($feedback)):
-            echo json_encode(array("status"=>"success","message"=>"No content"));
-        else:
-            //print json feedback
-            echo json_encode($feedback);
-        endif;
+	function post_feedback()
+	{
 
-    }
+		$username = $this->input->post("username");
+
+		$feedback = array(
+			"username" => $username,
+			"form_id" => $this->input->post("form_id"),
+			"message" => $this->input->post("message")
+		);
+
+		$user = $this->User_model->find_by_username($username);
+
+		if ($user) {
+			if ($this->Feedback_model->create_feedback($feedback)) {
+				$response = array("message" => "Feedback was received successfully", "status" => "success");
+				$this->output
+					->set_status_header(200)
+					->set_content_type('application/json', 'utf-8')
+					->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+					->_display();
+			} else {
+				$response = array(
+					"status" => "failed",
+					"message" => "Unknown error occured"
+				);
+				$this->output
+					->set_status_header(400)
+					->set_content_type('application/json', 'utf-8')
+					->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+					->_display();
+			}
+		} else {
+			$response = array(
+				"status" => "failed",
+				"message" => "user does not exist"
+			);
+			$this->output
+				->set_status_header(400)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+				->_display();
+		}
+
+	}
 }

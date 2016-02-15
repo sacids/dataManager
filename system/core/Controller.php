@@ -51,7 +51,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 /**
- * @property xform_model $xform_model
+ * @property Xform_model $Xform_model
+ * @property User_model $User_model
+ * @property Feedback_model $Feedback_model
  */
 
 class CI_Controller {
