@@ -1,0 +1,73 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600);
+
+body {	
+	font: 12px/1.7em "Open Sans", arial, sans-serif;
+	margin: 75px;
+	background: #FFF;
+}
+
+div#infoMessage{
+    min-height: 20px;
+    width: 100%;
+    padding-left: 10px;
+    line-height: 18px !important;
+    color: #FF0000;
+    font-size: 12px;
+}
+
+/* Inline help for forms */
+/* NOTE: pure-help-inline is deprecated. Use .pure-form-message-inline instead. */
+.pure-form .pure-help-inline,
+.pure-form-message-inline {
+    color: #FF0000;
+    font-size: 11px;
+}
+
+
+#login { width: 350px; position: absolute; left: 50%; margin-left: -200px; }
+
+#login h1{
+	font-size: 20px;
+	color: #0b70b6;
+	text-align: center;
+	font-family: "Open Sans", arial, sans-serif;
+	text-transform: uppercase;
+	width: 350px;
+	height: 10px;
+	margin-top: 0;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+
+#login_panel{
+	background: #FFF;
+	width: 100%; 
+	border: 1px solid #eee;
+	box-shadow: 1px 1px 3px #EEEEEE;
+	overflow: hidden;
+
+}
+
+#login_panel .login_fields { padding: 25px 15px 15px; }
+	#login_panel .login_fields input { width: 98%;
+}
+
+#login_panel .field { margin-bottom: 1.75em; }
+	#login_panel .field:last-child { margin-bottom: .85em; }
+	
+	#login_panel .field label { font-weight: bold; color: #555; display: block; position: relative; } 	
+		#login_panel .field label small { position: absolute; right: 0; top: -2px; }
+			#login_panel .field label small a { color: #999; }
+
+#login .login_actions { background: #E8E8E8; width: auto; padding: 5px 15px; border-top: 1px dotted #CCC; }
+
+
+
+
+@media (max-width: 480px) {#login {
+		width: 90%; 
+		margin-left: -45%;
+	}
+}

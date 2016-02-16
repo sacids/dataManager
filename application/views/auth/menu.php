@@ -2,7 +2,7 @@
     <div class="container_12" id="content-middle" style="border: 1px solid #fff;">
         <div id="header-title" style="border-top:  1px solid #fff;border-left:  1px solid #fff;">
             <div style="width: auto; float: left; display: inline-block;">
-                <img src="<?php echo base_url(); ?>media/images/users.png"/>
+                <img src="<?php echo base_url(); ?>assets/public/images/users.png"/>
                 <h1>Manage Users</h1>
                 <h3><?php echo $title; ?></h3>
             </div>

@@ -11,25 +11,40 @@
 class Feedback_model extends CI_Model
 {
 
-    function  __construct() {
-        parent::__construct();
+	/**
+	 * Feedback table name
+	 *
+	 * @var string
+	 */
+	private static $table_name = "feedback";
 
-    }
+	function __construct()
+	{
+		parent::__construct();
+	}
 
+	/**
+	 * @param $user_id
+	 * @param $form_id
+	 * @param null $last_id
+	 * @return mixed
+	 */
+	function get_feedback($user_id, $form_id, $last_id = NULL)
+	{
+		if ($last_id != NULL)
+			$this->db->where('id > ', $last_id);
 
+		$this->db->where('user_id', $user_id);
+		$this->db->where('form_id', $form_id);
+		return $this->db->get(self::$table_name)->result();
+	}
 
-    function get_feedback($last_id = NULL, $user_id, $form_id){
-
-        //if last feedback IS NOT NULL
-        if($last_id != NULL):
-            $this->db->where('id > ', $last_id);
-        endif;
-        $query=$this->db->get_where('feedback',
-                            array('user_id' => $user_id, 'form_id' => $form_id))->result();
-        //return array object
-        return $query;
-    }
-
-
-
+	/**
+	 * @param $feedback array of feedback information.
+	 * @return mixed
+	 */
+	function create_feedback($feedback)
+	{
+		return $this->db->insert(self::$table_name, $feedback);
+	}
 }

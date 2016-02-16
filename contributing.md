@@ -1,7 +1,7 @@
-# Contributing to CodeIgniter
+# Contributing to dataManager
 
 
-CodeIgniter is a community driven project and accepts contributions of code and documentation from the community. These contributions are made in the form of Issues or [Pull Requests](http://help.github.com/send-pull-requests/) on the [CodeIgniter repository](https://github.com/bcit-ci/CodeIgniter>) on GitHub.
+CodeIgniter is a community driven project and accepts contributions of code and documentation from the community. These contributions are made in the form of issues or [Pull Requests](http://help.github.com/send-pull-requests/) on the [dataManager repository](https://github.com/sacids/dataManager.git) on GitHub.
 
 Issues are a quick way to point out a bug. If you find a bug or documentation error in CodeIgniter then please check a few things first:
 
@@ -69,14 +69,13 @@ Easy way GitHub allows in-line editing of files for making simple typo changes a
 Hard way The best way to contribute is to "clone" your fork of CodeIgniter to your development area. That sounds like some jargon, but "forking" on GitHub means "making a copy of that repo to your account" and "cloning" means "copying that code to your environment so you can work on it".
 
 1. Set up Git (Windows, Mac & Linux)
-2. Go to the CodeIgniter repo
+2. Go to the dataManager repo
 3. Fork it
-4. Clone your CodeIgniter repo: git@github.com:<your-name>/CodeIgniter.git
-5. Checkout the "develop" branch At this point you are ready to start making changes. 
-6. Fix existing bugs on the Issue tracker after taking a look to see nobody else is working on them.
-7. Commit the files
-8. Push your develop branch to your fork
-9. Send a pull request [http://help.github.com/send-pull-requests/](http://help.github.com/send-pull-requests/)
+4. Clone your dataManager repo: `git@github.com:<your-name>/dataManager.git`
+5. Fix existing bugs on the Issue tracker after taking a look to see nobody else is working on them.
+6. Commit the files
+7. Push your develop branch to your fork
+8. Send a pull request [http://help.github.com/send-pull-requests/](http://help.github.com/send-pull-requests/)
 
 The Reactor Engineers will now be alerted about the change and at least one of the team will respond. If your change fails to meet the guidelines it will be bounced, or feedback will be provided to help you improve it.
 
@@ -84,12 +83,13 @@ Once the Reactor Engineer handling your pull request is happy with it they will 
 
 ### Keeping your fork up-to-date
 
-Unlike systems like Subversion, Git can have multiple remotes. A remote is the name for a URL of a Git repository. By default your fork will have a remote named "origin" which points to your fork, but you can add another remote named "codeigniter" which points to `git://github.com/bcit-ci/CodeIgniter.git`. This is a read-only remote but you can pull from this develop branch to update your own.
+Unlike systems like Subversion, Git can have multiple remotes. A remote is the name for a URL of a Git repository. By default your fork will have a remote named "origin" which points to your fork, but you can add another remote named "upstream" which points to `https://github.com/sacids/dataManager.git`. This is a read-only remote but you can pull from this master branch to update your own.
 
 If you are using command-line you can do the following:
 
-1. `git remote add codeigniter git://github.com/bcit-ci/CodeIgniter.git`
-2. `git pull codeigniter develop`
-3. `git push origin develop`
+1. `git remote add upstream https://github.com/sacids/dataManager.git`
+2. `git pull upstream master`
+3. `git push origin`
+
 
 Now your fork is up to date. This should be done regularly, or before you send a pull request at least.

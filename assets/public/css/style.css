@@ -1,0 +1,322 @@
+/* 
+    Document   : style
+    Created on : Feb 26, 2014, 7:23:23 PM
+    Author     : miltone
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/*
+ * Format footer
+*/
+/*
+Google Webfonts
+1. Droid Sans Mono
+2. Open Sans
+*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600);
+
+body { font: 12px/1.7em "Open Sans", arial, sans-serif; color: #000; background-color: #fff;}
+
+#grid_padding{
+margin-top: 5px !important;
+}
+
+
+#navbar{
+    background-color: #b71c1c;
+    height: 35px;
+    border-bottom: 3px solid #3F3F3F;
+}
+
+
+
+div#header-title{
+    height: 85px;
+    border-bottom: 3px solid #D0D0D0;
+    padding-bottom: 10px;
+}
+
+div#header-title img{
+    width: 65px;
+    height: 65px;
+    border: 0px;
+    padding: 20px 0px 0px 15px;
+    float: left;
+}
+
+div#header-title h1{
+    margin: 0px;
+    padding: 25px 0px 0px 90px;
+    color: #333;
+    display: block;
+    font-size: 22px;
+}
+
+div#header-title h3{
+    margin: 0px;
+    padding: 5px 0px 0px 90px;
+    color: #B00;
+    display: block;
+    font-size: 17px;
+}
+
+div#logo_top{
+    float: left;
+    width: 80px;
+    text-align: left;
+    border: 0px;
+    height: 67px;
+}
+
+img.logo_image{
+   width: 80px;
+   height: 65px;
+}
+
+
+div#dashboard{
+    padding-top: 10px;
+}
+
+div#thumbnails{
+    margin: 0px auto;
+}
+
+
+
+.button-box{
+float: left;
+width: 175px;
+height: 175px;
+margin: 0px 0px 25px 25px;
+}
+
+div#content-middle{
+    height: auto;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px #999;
+    -moz-box-shadow: 0 0 10px #999;
+    -webkit-box-shadow: 0 0 10px #999;
+    padding: 0px 10px 100px 10px;
+    border-left: 1px solid #E1E1E1;
+    border-right: 1px solid #E1E1E1;
+    bottom: 0px;
+    background: transparent;
+}
+
+
+
+div.nav_links:hover{
+    background-color:#f1f1f1;
+    border-top:1px solid #cccccc;
+    border-left:1px solid #cccccc;
+    border-right:1px solid #cccccc;
+    border-bottom:1px solid #cccccc;
+}
+
+
+div#footer{
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    width:100%;
+    color: #ffffff;
+
+}
+
+div#footer_bottom{
+    background: #3F3F3F;
+    position: absolute;
+    height:50px;
+    width:100%;
+    left:0px;
+    bottom:0px;
+}
+
+/* IE 6 
+* html div#footer_inside {
+    position:absolute;
+    top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}*/
+
+/* IE 6 
+* html div#footer {
+    position:absolute;
+    top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}*/
+
+div#footer p#copyright{
+    margin-left: 40px;
+    padding-top:  10px;
+    float: left;
+}
+
+div#footer p#developers{
+    margin-right: 30px;
+    padding-top:  10px;
+    float: right;
+}
+
+div#footer p span{
+    font-style: normal
+}
+
+div#footer p a{
+    color: #ffffff;
+    text-decoration: none;
+
+}
+
+div#footer p a:hover{
+    color: #ffffff;
+    text-decoration: underline;
+
+}
+
+
+
+#nav {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+}
+#nav ul, #nav ul li ul{
+    margin: 0px;
+    padding: 0px;
+}
+#nav ul li,#nav ul li ul li{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+#nav li a {
+margin-top: 10px;
+margin-left: 10px;
+padding-left: 10px;
+padding-right: 10px;
+padding-top: 12px;
+padding-bottom: 11px;
+text-decoration: none;
+display: block;
+font-size: 13px;
+background-color:#f1f1f1;
+color: #333;
+border-top: 1px solid #E6E6E6;
+border-left: 1px solid #E6E6E6;
+border-bottom:  1px solid #E6E6E6;    
+border-right:  1px solid #E6E6E6;  
+}
+#nav li a:hover, #nav li a.active {
+   background-color: #DEDDDB; 
+    border-top:1px solid #cccccc;
+    border-left:1px solid #cccccc;
+    border-right:1px solid #cccccc;
+    border-bottom:1px solid #cccccc;
+}
+#nav li a.active {
+ background-color: #DEDDDB;   
+}
+#nav li ul {
+    display: none; /* used to hide sub-menus*/
+}
+#nav li ul li a {
+    padding: 10px 25px;
+    background: #ececec;
+    border-bottom: 1px dotted #ccc;
+    margin-top: 0px;
+}
+
+
+
+/*
+* Format data displayed in table
+*/
+table.table th, table.table td {
+	font-size: 12px;
+}
+
+table.table {
+	border-collapse: collapse;
+	border-spacing: 0px;
+	margin: 0px 0px 1em 1px;
+	width: 100%;
+}
+
+table.table th {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+    padding: 10px 10px;  
+    background: #EEE;
+    border-bottom: 1px solid #E3E3E3;
+    }
+
+table.table td {
+	vertical-align: top;
+    background: #FFF; 
+    border-bottom: 1px solid #E3E3E3;
+	padding: 10px;
+}
+table.table td a{
+    color: #0b70b6;
+    text-decoration: none !important;
+}
+
+.table tr:nth-child(odd) td { background-color: #FAFAFA; }
+.table tr:nth-child(even) td { background-color: #FFF; }
+
+.list-unstyled{
+list-style: none;
+
+}
+
+.list-unstyled  li a{
+text-decoration: none !important;
+font-size: 12px;
+}
+
+/*
+=======================================================================
+    Pagination Rules
+=======================================================================
+*/
+.pagination {
+    float:left;
+    width: auto;
+    margin-top: 10px;
+    z-index: 999;
+
+}
+.pagination ul{
+    float:left;
+}
+.pagination ul li{
+    float:left;
+    border: 1px solid #eee;
+}
+.pagination ul li a{
+    float:left;
+    font-size:12px;
+    text-decoration: none;
+    color:#4a4a4a;
+    padding:5px 8px;
+    border:#c6c6c6 solid 1px;
+    background:#fff;
+}
+.pagination ul li a:hover, .pagination ul li a.active{
+    color: #FFF;
+    background-color: #1977b0;
+    cursor:default;
+    font-weight: bold;
+}
+
+
+

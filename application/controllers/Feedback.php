@@ -8,105 +8,96 @@
  * @author      Renfrid Ngolongolo
  * @link        http://sacids.org
  */
-
 class Feedback extends CI_Controller
 {
 
-    function __construct() {
-        parent::__construct();
-        $this->load->model(array('Feedback_model','Users_model'));
-        $this->load->library('form_auth');
-        $this->load->helper(array('url', 'string'));
-        log_message('debug', 'Feedback controller initialized');
-    }
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->model(array('Feedback_model', 'User_model'));
+		$this->load->library('form_auth');
+		$this->load->helper(array('url', 'string'));
+		log_message('debug', 'Feedback controller initialized');
+
+		//$this->output->enable_profiler(TRUE);
+	}
 
 
-    /**
-     * XML submission class
-     *
-     * @param  string  $str    Input string
-     * @return response
-     */
+	/**
+	 * XML submission class
+	 * @return response
+	 */
 
-    function get_feedback()
-    {
-        //get form_id and last_feedback_id
-        $form_id = $this->input->get('form_id');
-        $last_id = $this->input->get('id');
+	function get_feedback()
+	{
+		//get form_id and last_feedback_id
+		$username = $this->input->get("username");
+		$form_id = $this->input->get('form_id');
+		$last_id = $this->input->get('last_id');
 
-        // Get the digest from the http header
-        $digest = $_SERVER['PHP_AUTH_DIGEST'];
+		$user = $this->User_model->find_by_username($username);
+		$feedback = $this->Feedback_model->get_feedback($user->id, $form_id, $last_id);
 
-        //server realm and unique id
-        $realm = 'Authorized users of Sacids Openrosa';
-        $nonce = md5(uniqid());
+		if ($feedback) {
+			$response = array("feedback" => $feedback, "status" => "success");
+			$this->output
+				->set_status_header(200)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+				->_display();
+		} else {
+			$response = array("status" => "success", "message" => "No content");
+			$this->output
+				->set_status_header(204)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+				->_display();
+		}
+	}
 
-        // If there was no digest, show login
-        if (empty($digest)):
+	function post_feedback()
+	{
 
-            //populate login form if no digest authenticate
-            $this->form_auth->require_login_prompt($realm,$nonce);
-            exit;
-        endif;
+		$username = $this->input->post("username");
 
-        //http_digest_parse
-        $digest_parts = $this->form_auth->http_digest_parse($digest);
+		$feedback = array(
+			"username" => $username,
+			"form_id" => $this->input->post("form_id"),
+			"message" => $this->input->post("message")
+		);
 
-        //username from http digest obtained
-        $valid_user = $digest_parts['username'];
+		$user = $this->User_model->find_by_username($username);
 
-        //get user details from database
-        $user=$this->Users_model->get_user_details($valid_user);
-        $valid_pass = $user->digest_password; //digest password
-        $user_id = $user->id; //user_id
-        $db_user = $user->username; //username
+		if ($user) {
+			if ($this->Feedback_model->create_feedback($feedback)) {
+				$response = array("message" => "Feedback was received successfully", "status" => "success");
+				$this->output
+					->set_status_header(200)
+					->set_content_type('application/json', 'utf-8')
+					->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+					->_display();
+			} else {
+				$response = array(
+					"status" => "failed",
+					"message" => "Unknown error occured"
+				);
+				$this->output
+					->set_status_header(400)
+					->set_content_type('application/json', 'utf-8')
+					->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+					->_display();
+			}
+		} else {
+			$response = array(
+				"status" => "failed",
+				"message" => "user does not exist"
+			);
+			$this->output
+				->set_status_header(400)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+				->_display();
+		}
 
-        //show status header if user not available in database
-        if(empty($db_user)):
-            //populate login form if no digest authenticate
-            $this->form_auth->require_login_prompt($realm,$nonce);
-            exit;
-        endif;
-
-
-        // Based on all the info we gathered we can figure out what the response should be
-        $A1 = $valid_pass; //digest password
-        $A2 = md5("{$_SERVER['REQUEST_METHOD']}:{$digest_parts['uri']}");
-        $valid_response = md5("{$A1}:{$digest_parts['nonce']}:{$digest_parts['nc']}:{$digest_parts['cnonce']}:{$digest_parts['qop']}:{$A2}");
-
-        // If digest fails, show login
-        if ($digest_parts['response']!=$valid_response):
-            //populate login form if no digest authenticate
-            $this->form_auth->require_login_prompt($realm,$nonce);
-            exit;
-        endif;
-
-
-        //IF Authentication PASSES
-        $feedback_db = $this->Feedback_model->get_feedback($last_id, $user_id, $form_id);
-
-        $feedback = array();
-        foreach($feedback_db as $value):
-            $feedback[] = array(
-                'id'=> $value->id,
-		        'user_id' => $value->user_id,
-		        'form_id' => $value->form_id,
-		        'message' => $value->message,
-		        'date' => date('m-d-Y H:i:s',strtotime($value->created_at))
-            );
-        endforeach;
-
-        //check if feedback array is empty
-        if(empty($feedback)):
-            echo json_encode(array("status"=>"success","message"=>"No content"));
-        else:
-            //print json feedback
-            echo json_encode($feedback);
-        endif;
-
-
-
-    }
-
-
+	}
 }
