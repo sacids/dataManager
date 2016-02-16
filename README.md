@@ -12,13 +12,13 @@ Clone this project to your local machine from [SACIDS dataManager](https://githu
 
 #####Setting up your database
  - Create a MySQL database
- - Change database username, password and database name in __database.php__ file located under __application/config/database.php__
+ - Change database username, password and database name in `database.php` file located under `application/config/database.php`
  - To initialize database base tables open terminal mac or linux or command prompt (CMD) on windows on and 
-navigate to the root or your directory and run **php index.php migration latest**
+navigate to the root or your directory and run `php index.php migration latest`
 
 All the tables will be created and you can start contributing on the project right away.
 
-####Code style
-We are using Allman style indenting on this project [Click here to read more](https://codeigniter.com/user_guide/general/styleguide.html)
+
+[Click to learn more how to contribute on this project](https://github.com/sacids/dataManager/blob/master/contributing.md)
 
 
