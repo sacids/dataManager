@@ -25,8 +25,6 @@ class Feedback extends CI_Controller
 
 	/**
 	 * XML submission class
-	 *
-	 * @param  string $str Input string
 	 * @return response
 	 */
 
