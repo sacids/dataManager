@@ -19,6 +19,11 @@ Clone this project to your local machine from [SACIDS dataManager](https://githu
 All the tables will be created and you can start contributing on the project right away.
 
 
+#####How to open application 
+* If you have successfully migrated your database follow below instructions.
+* Open your favorite web browser and type `http://localhost/<your-project-directory>`
+* Login with username as `admin` and password as `sacidsdemo`
+
 [Click to learn more how to contribute on this project](https://github.com/sacids/dataManager/blob/master/contributing.md)
 
 
