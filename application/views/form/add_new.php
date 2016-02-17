@@ -16,12 +16,6 @@
                 </div>
                 <div class="pure-form-message-inline"><?php echo form_error('title'); ?></div>
 
-                <div class="pure-control-group">
-                    <label>Form ID <span>*</span></label>
-                    <input type="text" name="form_id" placeholder="Enter Form ID"
-                           value="<?php echo set_value('form_id'); ?>" class="pure-input-1-2">
-                </div>
-                <div class="pure-form-message-inline"><?php echo form_error('form_id'); ?></div>
 
                 <div class="pure-control-group">
                     <label for="">Form XML File <span>*</span></label>
