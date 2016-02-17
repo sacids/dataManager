@@ -13,6 +13,50 @@ class Migration_Install_datamanager extends CI_Migration
 
 	public function up()
 	{
+		
+		
+		// Drop table 'users_groups' if it exists
+		$this->dbforge->drop_table('users_groups', TRUE);
+		
+		// Table structure for table 'users_groups'
+		$this->dbforge->add_field(array(
+				'id' => array(
+						'type' => 'MEDIUMINT',
+						'constraint' => '8',
+						'unsigned' => TRUE,
+						'auto_increment' => TRUE
+				),
+				'user_id' => array(
+						'type' => 'MEDIUMINT',
+						'constraint' => '8',
+						'unsigned' => TRUE
+				),
+				'group_id' => array(
+						'type' => 'MEDIUMINT',
+						'constraint' => '8',
+						'unsigned' => TRUE
+				)
+		));
+		$this->dbforge->add_key('id', TRUE);
+		$this->dbforge->create_table('users_groups');
+		
+		// Dumping data for table 'users_groups'
+		$data = array(
+				array(
+						'id' => '1',
+						'user_id' => '1',
+						'group_id' => '1',
+				),
+				array(
+						'id' => '2',
+						'user_id' => '1',
+						'group_id' => '2',
+				)
+		);
+		$this->db->insert_batch('users_groups', $data);
+		
+		
+		
 		// Drop table 'groups' if it exists
 		$this->dbforge->drop_table('groups', TRUE);
 
@@ -172,45 +216,7 @@ class Migration_Install_datamanager extends CI_Migration
 		$this->db->insert('users', $data);
 
 
-		// Drop table 'users_groups' if it exists
-		$this->dbforge->drop_table('users_groups', TRUE);
-
-		// Table structure for table 'users_groups'
-		$this->dbforge->add_field(array(
-			'id' => array(
-				'type' => 'MEDIUMINT',
-				'constraint' => '8',
-				'unsigned' => TRUE,
-				'auto_increment' => TRUE
-			),
-			'user_id' => array(
-				'type' => 'MEDIUMINT',
-				'constraint' => '8',
-				'unsigned' => TRUE
-			),
-			'group_id' => array(
-				'type' => 'MEDIUMINT',
-				'constraint' => '8',
-				'unsigned' => TRUE
-			)
-		));
-		$this->dbforge->add_key('id', TRUE);
-		$this->dbforge->create_table('users_groups');
-
-		// Dumping data for table 'users_groups'
-		$data = array(
-			array(
-				'id' => '1',
-				'user_id' => '1',
-				'group_id' => '1',
-			),
-			array(
-				'id' => '2',
-				'user_id' => '1',
-				'group_id' => '2',
-			)
-		);
-		$this->db->insert_batch('users_groups', $data);
+		
 
 
 		// Drop table 'login_attempts' if it exists
@@ -245,7 +251,7 @@ class Migration_Install_datamanager extends CI_Migration
 
 
 		// Drop table 'ci_sessions' if it exists
-		$this->dbforge->drop_table('login_attempts', TRUE);
+		$this->dbforge->drop_table('ci_sessions', TRUE);
 
 		$this->dbforge->add_field(
 			array(
@@ -285,6 +291,9 @@ class Migration_Install_datamanager extends CI_Migration
 				'form_id' => array(
 					'type' => 'VARCHAR',
 					'constraint' => 255
+				),
+				'description' => array(
+					'type' => 'TEXT'
 				),
 				'title' => array(
 					'type' => 'VARCHAR',
