@@ -27,6 +27,7 @@ class Xform_model extends CI_Model
         } else {
             $error = $this->db->error(); // Has keys 'code' and 'message'
             log_message("debug", $statement . ", error " . json_encode($error));
+            return FALSE;
         }
     }
 
@@ -52,6 +53,18 @@ class Xform_model extends CI_Model
     public function create_xform($form_details)
     {
         return $this->db->insert(self::$xform_table_name, $form_details);
+    }
+    
+    /**
+     * @param int xform_id the row that needs to be updated
+     * @param string form_id 
+     * @return bool
+     */
+    public function update_form_id($xform_id, $form_id){
+    	
+    	$data	= array('form_id' => $form_id);
+    	$this->db->where('id',$xform_id);
+    	return $this->db->update('xforms',$data);
     }
 
     /**

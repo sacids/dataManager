@@ -172,8 +172,7 @@ class Xform extends CI_Controller
 	 * inserts xform into database table
 	 * Author : Eric Beda
 	 *
-	 * @param int $filename
-	 *             sender user id
+	 * @param string $filename
 	 */
 	public function _insert($filename)
 	{
@@ -465,7 +464,7 @@ class Xform extends CI_Controller
 		$data['title'] = "Add new form";
 
 		$this->form_validation->set_rules("title", "Form title", "required|is_unique[xforms.title]");
-		$this->form_validation->set_rules("form_id", "Form ID", "required|is_unique[xforms.form_id]");
+		//$this->form_validation->set_rules("form_id", "Form ID", "required|is_unique[xforms.form_id]");
 
 		if ($this->form_validation->run() === FALSE) {
 
@@ -498,16 +497,24 @@ class Xform extends CI_Controller
 					//TODO Check if file already exist and prompt user.
 
 					$form_details = array(
-						"form_id" => $this->input->post("form_id"),
 						"title" => $this->input->post("title"),
 						"description" => $this->input->post("description"),
 						"filename" => $filename,
 						"date_created" => date("c"),
 					);
 
+					// ??? SET BLOCK in transaction ?
 					if ($this->Xform_model->create_xform($form_details)) {
+						//get last insert id
+						$xform_id = $this->db->insert_id();
+						
 						//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
 						$this->_initialize($filename); // create form table.
+						
+						//TODO perform error checking, 
+						//set form_id to current table_name variable
+						$this->Xform_model->update_form_id($xform_id, $this->table_name);
+						
 						$this->session->set_flashdata("message", "Form was successfully saved");
 					} else {
 						$this->session->set_flashdata("message", "Failed to save form");
@@ -538,9 +545,11 @@ class Xform extends CI_Controller
 
 		// TODO: change function name to get_something suggested get_form_table_definition
 		$statement = $this->get_create_table_sql_query();
-		// $this->load->model('Xform_model');
 
 		$result = $this->Xform_model->create_table($statement);
+		
+		// return result TRUE on success
+		return $result;
 		log_message("debug", "Create table result " . $result);
 	}
 
