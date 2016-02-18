@@ -42,6 +42,7 @@ class Feedback_model extends CI_Model
 	/**
 	 * @param $feedback array of feedback information.
 	 * @return mixed
+	 * @author Godluck Akyoo
 	 */
 	function create_feedback($feedback)
 	{
