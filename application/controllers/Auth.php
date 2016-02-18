@@ -524,7 +524,6 @@ class Auth extends CI_Controller
 			);
 		}
 		if ($this->form_validation->run() == TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data, $groups)) {
-			log_message("debug","Hapa inafika napo???");
 			// check to see if we are creating the user
 			// redirect them back to the admin page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
