@@ -25,6 +25,7 @@ class Feedback extends CI_Controller
 
 	/**
 	 * XML submission class
+	 *
 	 * @return response
 	 */
 
@@ -57,18 +58,19 @@ class Feedback extends CI_Controller
 
 	function post_feedback()
 	{
-
 		$username = $this->input->post("username");
-
-		$feedback = array(
-			"username" => $username,
-			"form_id" => $this->input->post("form_id"),
-			"message" => $this->input->post("message")
-		);
 
 		$user = $this->User_model->find_by_username($username);
 
+
 		if ($user) {
+			$feedback = array(
+				"user_id" => $user->id,
+				"form_id" => $this->input->post("form_id"),
+				"message" => $this->input->post("message"),
+				"created_at" => date("c")
+			);
+
 			if ($this->Feedback_model->create_feedback($feedback)) {
 				$response = array("message" => "Feedback was received successfully", "status" => "success");
 				$this->output
@@ -98,6 +100,5 @@ class Feedback extends CI_Controller
 				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 				->_display();
 		}
-
 	}
 }

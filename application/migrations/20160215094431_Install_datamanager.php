@@ -198,9 +198,9 @@ class Migration_Install_datamanager extends CI_Migration
 		$data = array(
 			'id' => '1',
 			'ip_address' => '127.0.0.1',
-			'username' => 'administrator',
-			'password' => '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36',
-			'digest_password' => '7fbc6f3304fa0561ecf1a5e651bed685',
+			'username' => 'admin',
+			'password' => '$2y$08$Vrbcwo2zOjND1iHIjl8v5u95M1OByh5I.eCvEU/Y1gph81layyt1.',
+			'digest_password' => 'f148100e1483c8438ecff8873f324caa',
 			'salt' => '',
 			'email' => 'admin@sacids.org',
 			'activation_code' => '',
