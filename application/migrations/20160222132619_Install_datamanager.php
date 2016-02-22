@@ -303,7 +303,7 @@ class Migration_Install_datamanager extends CI_Migration
 					'type' => 'DATETIME'
 				),
 				'last_updated' => array(
-					'type' => 'DATETIME',
+					'type' => 'TIMESTAMP',
 					'null' => TRUE
 				)
 			)
