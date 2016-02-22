@@ -61,6 +61,7 @@ local.properties
 .texlipse
 
 # Created by .ignore support plugin (hsz.mobi)
+database.php
 .idea/
 sql/
 assets/forms/data/audio/*.xml

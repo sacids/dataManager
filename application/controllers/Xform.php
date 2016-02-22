@@ -437,11 +437,15 @@ class Xform extends CI_Controller
 		$xml = '<xforms xmlns="http://openrosa.org/xforms/xformsList">';
 
 		foreach ($forms as $form) {
+			
+			// used to notify if anything has changed with the form, so that it may be updated on download
+			$hash	= md5($form->form_id.$form->date_created.$form->filename.$form->id.$form->description.$form->title);
+			
 			$xml .= '<xform>';
 			$xml .= '<formID>' . $form->form_id . '</formID>';
 			$xml .= '<name>' . $form->title . '</name>';
 			$xml .= '<version>1.1</version>';
-			$xml .= '<hash>md5:c28fc778a9291672badee04ac880a05d</hash>';
+			$xml .= '<hash>md5:'.$hash.'</hash>';
 			$xml .= '<descriptionText>' . $form->description . '</descriptionText>';
 			$xml .= '<downloadUrl>' . base_url() . 'assets/forms/definition/' . $form->filename . '</downloadUrl>';
 			$xml .= '</xform>';
@@ -464,7 +468,6 @@ class Xform extends CI_Controller
 		$data['title'] = "Add new form";
 
 		$this->form_validation->set_rules("title", "Form title", "required|is_unique[xforms.title]");
-		//$this->form_validation->set_rules("form_id", "Form ID", "required|is_unique[xforms.form_id]");
 
 		if ($this->form_validation->run() === FALSE) {
 
