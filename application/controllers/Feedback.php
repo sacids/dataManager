@@ -36,8 +36,20 @@ class Feedback extends CI_Controller
 		$form_id = $this->input->get('form_id');
 		$last_id = $this->input->get('last_id');
 
+		if (!$username) {
+			$response = array("status" => "failed", "message" => "Required username");
+			$this->output
+				->set_status_header(400)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+				->_display();
+		}
+
 		$user = $this->User_model->find_by_username($username);
-		$feedback = $this->Feedback_model->get_feedback($user->id, $form_id, $last_id);
+		if ($form_id && $last_id)
+			$feedback = $this->Feedback_model->get_feedback($user->id, $form_id, $last_id);
+		else
+			$feedback = $this->Feedback_model->get_feedback($user->id); //Todo add last id later
 
 		if ($feedback) {
 			$response = array("feedback" => $feedback, "status" => "success");
@@ -54,6 +66,7 @@ class Feedback extends CI_Controller
 				->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
 				->_display();
 		}
+
 	}
 
 	function post_feedback()
