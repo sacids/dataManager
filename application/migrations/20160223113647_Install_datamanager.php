@@ -13,50 +13,49 @@ class Migration_Install_datamanager extends CI_Migration
 
 	public function up()
 	{
-		
-		
+
+
 		// Drop table 'users_groups' if it exists
 		$this->dbforge->drop_table('users_groups', TRUE);
-		
+
 		// Table structure for table 'users_groups'
 		$this->dbforge->add_field(array(
-				'id' => array(
-						'type' => 'MEDIUMINT',
-						'constraint' => '8',
-						'unsigned' => TRUE,
-						'auto_increment' => TRUE
-				),
-				'user_id' => array(
-						'type' => 'MEDIUMINT',
-						'constraint' => '8',
-						'unsigned' => TRUE
-				),
-				'group_id' => array(
-						'type' => 'MEDIUMINT',
-						'constraint' => '8',
-						'unsigned' => TRUE
-				)
+			'id' => array(
+				'type' => 'MEDIUMINT',
+				'constraint' => '8',
+				'unsigned' => TRUE,
+				'auto_increment' => TRUE
+			),
+			'user_id' => array(
+				'type' => 'MEDIUMINT',
+				'constraint' => '8',
+				'unsigned' => TRUE
+			),
+			'group_id' => array(
+				'type' => 'MEDIUMINT',
+				'constraint' => '8',
+				'unsigned' => TRUE
+			)
 		));
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('users_groups');
-		
+
 		// Dumping data for table 'users_groups'
 		$data = array(
-				array(
-						'id' => '1',
-						'user_id' => '1',
-						'group_id' => '1',
-				),
-				array(
-						'id' => '2',
-						'user_id' => '1',
-						'group_id' => '2',
-				)
+			array(
+				'id' => '1',
+				'user_id' => '1',
+				'group_id' => '1',
+			),
+			array(
+				'id' => '2',
+				'user_id' => '1',
+				'group_id' => '2',
+			)
 		);
 		$this->db->insert_batch('users_groups', $data);
-		
-		
-		
+
+
 		// Drop table 'groups' if it exists
 		$this->dbforge->drop_table('groups', TRUE);
 
@@ -216,9 +215,6 @@ class Migration_Install_datamanager extends CI_Migration
 		$this->db->insert('users', $data);
 
 
-		
-
-
 		// Drop table 'login_attempts' if it exists
 		$this->dbforge->drop_table('login_attempts', TRUE);
 
@@ -305,6 +301,10 @@ class Migration_Install_datamanager extends CI_Migration
 				),
 				'date_created' => array(
 					'type' => 'DATETIME'
+				),
+				'last_updated' => array(
+					'type' => 'TIMESTAMP',
+					'null' => TRUE
 				)
 			)
 		);
@@ -312,6 +312,47 @@ class Migration_Install_datamanager extends CI_Migration
 		$this->dbforge->add_key("id", TRUE);
 		$this->dbforge->create_table("xforms");
 		$this->db->query('ALTER TABLE xforms  ADD UNIQUE INDEX (form_id)');
+		$this->db->query('ALTER TABLE xforms  ADD UNIQUE INDEX (filename)');
+
+
+		// Drop table 'archive_xforms' if it exists
+		$this->dbforge->drop_table('archive_xforms', TRUE);
+
+		$this->dbforge->add_field(
+			array(
+				'id' => array(
+					'type' => 'INT',
+					'constraint' => 11,
+					'unsigned' => TRUE,
+					'auto_increment' => TRUE
+				),
+				'form_id' => array(
+					'type' => 'VARCHAR',
+					'constraint' => 255
+				),
+				'description' => array(
+					'type' => 'TEXT'
+				),
+				'title' => array(
+					'type' => 'VARCHAR',
+					'constraint' => 255
+				),
+				'filename' => array(
+					'type' => 'VARCHAR',
+					'constraint' => 255
+				),
+				'date_created' => array(
+					'type' => 'DATETIME'
+				),
+				'last_updated' => array(
+					'type' => 'TIMESTAMP',
+					'null' => TRUE
+				)
+			)
+		);
+
+		$this->dbforge->add_key("id", TRUE);
+		$this->dbforge->create_table("archive_xform");
 		$this->db->query('ALTER TABLE xforms  ADD UNIQUE INDEX (filename)');
 
 		// Drop table 'submission_form' if it exists

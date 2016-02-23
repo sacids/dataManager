@@ -29,13 +29,15 @@ class Feedback_model extends CI_Model
 	 * @param null $last_id
 	 * @return mixed
 	 */
-	function get_feedback($user_id, $form_id, $last_id = NULL)
+	function get_feedback($user_id, $form_id = NULL, $last_id = NULL)
 	{
 		if ($last_id != NULL)
 			$this->db->where('id > ', $last_id);
 
+		if ($form_id != NULL)
+			$this->db->where('form_id', $form_id);
+
 		$this->db->where('user_id', $user_id);
-		$this->db->where('form_id', $form_id);
 		return $this->db->get(self::$table_name)->result();
 	}
 

@@ -5,10 +5,10 @@ defined('BASEPATH') or exit ('No direct script access allowed');
 /**
  * XForm Class
  *
- * @package XForm
+ * @package  XForm
  * @category Controller
- * @author Eric Beda
- * @link http://sacids.org
+ * @author   Eric Beda
+ * @link     http://sacids.org
  */
 class XmlElement
 {
@@ -36,7 +36,7 @@ class Xform extends CI_Controller
 			'User_model'
 		)); // TODO check case of model names if we can ucfirst
 		$this->load->library('form_auth');
-		$this->load->model('submission_model');
+		$this->load->model('Submission_model');
 
 		//$this->output->enable_profiler(TRUE);
 	}
@@ -49,7 +49,7 @@ class Xform extends CI_Controller
 	function forms()
 	{
 
-		$data['title'] = "Forms list";
+		$data['title'] = $this->lang->line("heading_form_list");
 		$data['forms'] = $this->Xform_model->get_form_list();
 
 		//Displaying List of registered users/IF ADMIN
@@ -75,7 +75,7 @@ class Xform extends CI_Controller
 		$digest = $_SERVER ['PHP_AUTH_DIGEST'];
 
 		// server realm and unique id
-		$realm = 'Authorized users of Sacids Openrosa';
+		$realm = $this->config->item("realm");
 		$nonce = md5(uniqid());
 
 		// Check if there was no digest, show login
@@ -133,7 +133,7 @@ class Xform extends CI_Controller
 
 				if ($file_extension === 'xml') {
 					// path to store xml
-					$path = FCPATH . "assets/forms/data/xml/" . $file_name;
+					$path = $this->config->item("form_data_upload_dir") . $file_name;
 
 					// insert form details in database
 					$data = array(
@@ -142,19 +142,19 @@ class Xform extends CI_Controller
 					);
 					//TODO Track file name
 
-					$this->submission_model->create($data);
+					$this->Submission_model->create($data);
 
 				} elseif ($file_extension == 'jpg' or $file_extension == 'jpeg' or $file_extension == 'png') {
 					// path to store images
-					$path = FCPATH . "assets/forms/data/images/" . $file_name;
+					$path = $this->config->item("images_data_upload_dir") . $file_name;
 
 				} elseif ($file_extension == '3gpp' or $file_extension == 'amr') {
 					// path to store audio
-					$path = FCPATH . "assets/forms/data/audio/" . $file_name;
+					$path = $this->config->item("audio_data_upload_dir") . $file_name;
 
 				} elseif ($file_extension == '3gp' or $file_extension == 'mp4') {
 					// path to store video
-					$path = FCPATH . "assets/forms/data/video/" . $file_name;
+					$path = $this->config->item("video_data_upload_dir") . $file_name;
 				}
 
 				// upload file to the server
@@ -177,7 +177,7 @@ class Xform extends CI_Controller
 	public function _insert($filename)
 	{
 		// call forms
-		$this->set_data_file(FCPATH . "assets/forms/data/xml/" . $filename);
+		$this->set_data_file($this->config->item("form_data_upload_dir") . $filename);
 		$this->load_xml_data();
 
 		// get mysql statement used to insert form data into corresponding table
@@ -350,7 +350,7 @@ class Xform extends CI_Controller
 			$fd .= $point;
 		} else {
 			log_message("debug", 'error getting point field');
-			return false;
+			return FALSE;
 		}
 
 		$field_names = "(`" . implode("`,`", array_keys($this->form_data)) . "`,$fn)";
@@ -378,7 +378,7 @@ class Xform extends CI_Controller
 		// set header response
 		header("X-OpenRosa-Version: 1.0");
 		header("X-OpenRosa-Accept-Content-Length:" . $content_length);
-		header("Date: " . date('r'), false, $http_response_code);
+		header("Date: " . date('r'), FALSE, $http_response_code);
 		echo $response;
 	}
 
@@ -388,16 +388,17 @@ class Xform extends CI_Controller
 		$digest = $_SERVER['PHP_AUTH_DIGEST'];
 
 		//server realm and unique id
-		$realm = 'Authorized users of Sacids Openrosa';
+		$realm = $this->config->item("realm");
+
 		$nonce = md5(uniqid());
 
 		// If there was no digest, show login
-		if (empty($digest)):
+		if (empty($digest)) {
 
 			//populate login form if no digest authenticate
 			$this->form_auth->require_login_prompt($realm, $nonce);
 			exit;
-		endif;
+		}
 
 		//http_digest_parse
 		$digest_parts = $this->form_auth->http_digest_parse($digest);
@@ -412,11 +413,11 @@ class Xform extends CI_Controller
 		$db_user = $user->username; //username
 
 		//show status header if user not available in database
-		if (empty($db_user)):
+		if (empty($db_user)) {
 			//populate login form if no digest authenticate
 			$this->form_auth->require_login_prompt($realm, $nonce);
 			exit;
-		endif;
+		}
 
 		// Based on all the info we gathered we can figure out what the response should be
 		$A1 = $password; //digest password
@@ -424,11 +425,11 @@ class Xform extends CI_Controller
 		$valid_response = md5("{$A1}:{$digest_parts['nonce']}:{$digest_parts['nc']}:{$digest_parts['cnonce']}:{$digest_parts['qop']}:{$A2}");
 
 		// If digest fails, show login
-		if ($digest_parts['response'] != $valid_response):
+		if ($digest_parts['response'] != $valid_response) {
 			//populate login form if no digest authenticate
 			$this->form_auth->require_login_prompt($realm, $nonce);
 			exit;
-		endif;
+		}
 
 
 		//TODO Add access control here
@@ -437,15 +438,15 @@ class Xform extends CI_Controller
 		$xml = '<xforms xmlns="http://openrosa.org/xforms/xformsList">';
 
 		foreach ($forms as $form) {
-			
+
 			// used to notify if anything has changed with the form, so that it may be updated on download
-			$hash	= md5($form->form_id.$form->date_created.$form->filename.$form->id.$form->description.$form->title);
-			
+			$hash = md5($form->form_id . $form->date_created . $form->filename . $form->id . $form->description . $form->title);
+
 			$xml .= '<xform>';
 			$xml .= '<formID>' . $form->form_id . '</formID>';
 			$xml .= '<name>' . $form->title . '</name>';
 			$xml .= '<version>1.1</version>';
-			$xml .= '<hash>md5:'.$hash.'</hash>';
+			$xml .= '<hash>md5:' . $hash . '</hash>';
 			$xml .= '<descriptionText>' . $form->description . '</descriptionText>';
 			$xml .= '<downloadUrl>' . base_url() . 'assets/forms/definition/' . $form->filename . '</downloadUrl>';
 			$xml .= '</xform>';
@@ -458,32 +459,31 @@ class Xform extends CI_Controller
 		header('"HTTP_X_OPENROSA_VERSION": "1.0"');
 		header("X-OpenRosa-Accept-Content-Length:" . $content_length);
 		header('X-OpenRosa-Version:1.0');
-		header("Date: " . date('r'), false);
+		header("Date: " . date('r'), FALSE);
 
 		echo $xml;
 	}
 
 	function add_new()
 	{
-		$data['title'] = "Add new form";
+		$data['title'] = $this->lang->line("heading_add_new_form");
 
-		$this->form_validation->set_rules("title", "Form title", "required|is_unique[xforms.title]");
+		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
 
 		if ($this->form_validation->run() === FALSE) {
-
 			$this->load->view('header', $data);
 			$this->load->view("form/menu");
 			$this->load->view("form/add_new");
 			$this->load->view('footer');
 		} else {
 
-			$form_upload_dir = FCPATH . "assets" . DS . "forms" . DS . "definition";
+			$form_definition_upload_dir = $this->config->item("form_definition_upload_dir");
 
 			if (!empty($_FILES['userfile']['name'])) {
 
 				$this->load->library('upload');
 
-				$config['upload_path'] = $form_upload_dir;
+				$config['upload_path'] = $form_definition_upload_dir;
 				$config['allowed_types'] = 'xml';
 				$config['max_size'] = '1024';
 				$config['remove_spaces'] = TRUE;
@@ -510,23 +510,23 @@ class Xform extends CI_Controller
 					if ($this->Xform_model->create_xform($form_details)) {
 						//get last insert id
 						$xform_id = $this->db->insert_id();
-						
+
 						//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
 						$this->_initialize($filename); // create form table.
-						
+
 						//TODO perform error checking, 
 						//set form_id to current table_name variable
 						$this->Xform_model->update_form_id($xform_id, $this->table_name);
-						
-						$this->session->set_flashdata("message", "Form was successfully saved");
+
+						$this->session->set_flashdata("message", $this->lang->line("form_upload_successful"));
 					} else {
-						$this->session->set_flashdata("message", "Failed to save form");
+						$this->session->set_flashdata("message", $this->lang->line("form_upload_failed"));
 					}
 					redirect("xform/add_new");
 				}
 
 			} else {
-				$this->session->set_flashdata("msg", "Failed to save form");
+				$this->session->set_flashdata("msg", $this->lang->line("form_saving_failed"));
 				redirect("xform/add_new");
 			}
 		}
@@ -538,22 +538,23 @@ class Xform extends CI_Controller
 	 *
 	 * @param string $file_name
 	 *            definition file
+	 * @return bool
 	 */
 	public function _initialize($file_name)
 	{
 		log_message("debug", "File to load " . $file_name);
 		// create table structure
-		$this->set_defn_file(FCPATH . "assets/forms/definition/" . $file_name);
+		$this->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
 		$this->load_xml_definition();
 
 		// TODO: change function name to get_something suggested get_form_table_definition
 		$statement = $this->get_create_table_sql_query();
 
 		$result = $this->Xform_model->create_table($statement);
-		
+
 		// return result TRUE on success
-		return $result;
 		log_message("debug", "Create table result " . $result);
+		return $result;
 	}
 
 	/**
@@ -720,5 +721,88 @@ class Xform extends CI_Controller
 		$statement .= ")";
 
 		return $statement;
+	}
+
+
+	function edit_form($xform_id)
+	{
+		if (!$xform_id) {
+			$this->session->set_flashdata("message", $this->lang->line("select_form_to_edit"));
+			redirect("xform/forms");
+			exit;
+		}
+
+		$data['title'] = $this->lang->line("heading_edit_form");
+		$data['form'] = $form = $this->Xform_model->find_by_id($xform_id);
+
+		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required");
+
+		if ($this->form_validation->run() === FALSE) {
+
+			$this->load->view('header', $data);
+			$this->load->view("form/menu");
+			$this->load->view("form/edit_form");
+			$this->load->view('footer');
+
+		} else {
+
+			if ($form) {
+				$new_form_details = array(
+					"title" => $this->input->post("title"),
+					"description" => $this->input->post("description"),
+					"last_updated" => time()
+				);
+
+				if ($this->Xform_model->update_form($xform_id, $new_form_details)) {
+					$this->session->set_flashdata("message", $this->lang->line("form_update_successful"));
+				} else {
+					$this->session->set_flashdata("message", $this->lang->line("form_update_failed"));
+				}
+				redirect("xform/forms");
+
+			} else {
+				$this->session->set_flashdata("message", $this->lang->line("unknown_error_occurred"));
+				redirect("xform/forms");
+			}
+		}
+	}
+
+	function delete_xform($xform_id)
+	{
+		if (!$xform_id) {
+			$this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
+			redirect("xform/forms");
+			exit;
+		}
+
+		$xform = $this->Xform_model->find_by_id($xform_id);
+		$archive_xform_data = (array)$xform;
+		$archive_xform_data['filename'] = time() . "_" . $xform->filename; //appended timestamp to avoid overriding existing files
+		$archive_xform_data['last_updated'] = date("c"); //todo time form deleted
+
+		$this->db->trans_start();
+		$this->Xform_model->create_archive($archive_xform_data);
+
+		$this->Xform_model->delete_form($xform_id);
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status()) {
+
+			$file_to_move = $this->config->item("form_definition_upload_dir") . $xform->filename;
+			$file_destination = $this->config->item("form_definition_archive_dir") . $archive_xform_data['filename'];
+
+			if (file_exists($file_to_move)) {
+
+				if (rename($file_to_move, $file_destination))
+					log_message("debug", "Move form definition file " . $xform->filename . " to " . $file_destination);
+				else
+					log_message("debug", "Failed to move form definition file " . $xform->filename);
+			}
+
+			$this->session->set_flashdata("message", $this->lang->line("form_delete_successful"));
+		} else {
+			$this->session->set_flashdata("message", $this->lang->line("error_failed_to_delete_form"));
+		}
+		redirect("xform/forms");
 	}
 }

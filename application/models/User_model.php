@@ -16,6 +16,14 @@ class User_model extends CI_Model
 	}
 
 	/**
+	 * Initializes table names from configuration files
+	 */
+	private function initialize_table()
+	{
+		self::$xform_table_name = $this->config->item("table_users");
+	}
+
+	/**
 	 * @return mixed
 	 */
 	function get_users()

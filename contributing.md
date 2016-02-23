@@ -34,6 +34,12 @@ compatible with PHP 5.2.4 so all code supplied must stick to this
 requirement. If PHP 5.3 (and above) functions or features are used then
 there must be a fallback for PHP 5.2.4.
 
+###Debugging
+All debugging messages should go to log files when debugging, avoid using `print_r()` or `echo` or `var_dump()` log messages instead e.g `log_message()`
+
+###Messages
+Any messages that will be displayed in a _view_ should be in a language file to allow internationalization
+
 ### Branching
 
 CodeIgniter uses the [Git-Flow](http://nvie.com/posts/a-successful-git-branching-model/) branching model which requires all pull requests to be sent to the "develop" branch. This is
