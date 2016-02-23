@@ -1,0 +1,783 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head><!-- ODK Aggregate upload time: 2014-12-18T09:34:42.164+0000 on http://epi.sacids.org:8080/ODKAggregate -->
+    <h:title>Dalili-za-Binadamu</h:title>
+    <model>
+      <instance>
+        <data id="build_Dalili-za-Binadamu_1418894655">
+          <meta>
+            <instanceID/>
+            <deviceID/>
+          </meta>
+          <taarifa_za_awali>
+            <jina_la_mkusanyaji_taarifa/>
+            <wilaya/>
+            <kijiji/>
+            <kitongoji/>
+            <tarehe_ya_ukusanyaji_taarifa/>
+          </taarifa_za_awali>
+          <dalili>
+            <jinsia/>
+            <zinazoonesha/>
+            <zingine/>
+          </dalili>
+          <Umri_idadi_vifo>
+            <umri/>
+            <Idadi_dalili_chini_miaka_5>
+              0
+            </Idadi_dalili_chini_miaka_5>
+            <idadi_dalili_watoto>
+              0
+            </idadi_dalili_watoto>
+            <Idadi_dalili_vijana>
+              0
+            </Idadi_dalili_vijana>
+            <Idadi_dalili_wazee>
+              0
+            </Idadi_dalili_wazee>
+            <idadi_vifo_chini_5>
+              0
+            </idadi_vifo_chini_5>
+            <idadi_vifo_watoto>
+              0
+            </idadi_vifo_watoto>
+            <idadi_vifo_vijana>
+              0
+            </idadi_vifo_vijana>
+            <Idadi_vifo_wazee>
+              0
+            </Idadi_vifo_wazee>
+          </Umri_idadi_vifo>
+          <GPS_picha_ugonjwa>
+            <ugonjwa_unaodhaniwa/>
+            <picture/>
+            <GPS/>
+          </GPS_picha_ugonjwa>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="eng">
+          <text id="/data/taarifa_za_awali:label">
+            <value>Taarifa za awali</value>
+          </text>
+          <text id="/data/taarifa_za_awali/jina_la_mkusanyaji_taarifa:label">
+            <value>Jina la mkusanyaji Taarifa</value>
+          </text>
+          <text id="/data/taarifa_za_awali/wilaya:label">
+            <value>Wilaya</value>
+          </text>
+          <text id="/data/taarifa_za_awali/wilaya:option0">
+            <value>Ngorongoro</value>
+          </text>
+          <text id="/data/taarifa_za_awali/wilaya:option1">
+            <value>Kibaha</value>
+          </text>
+          <text id="/data/taarifa_za_awali/wilaya:option2">
+            <value>Bagamoyo</value>
+          </text>
+          <text id="/data/taarifa_za_awali/kijiji:label">
+            <value>Kijiji</value>
+          </text>
+          <text id="/data/taarifa_za_awali/kitongoji:label">
+            <value>Kitongoji</value>
+          </text>
+          <text id="/data/taarifa_za_awali/tarehe_ya_ukusanyaji_taarifa:label">
+            <value>Tarehe ya ukusanyaji taarifa</value>
+          </text>
+          <text id="/data/dalili:label">
+            <value>Dalili</value>
+          </text>
+          <text id="/data/dalili/jinsia:label">
+            <value>Jinsia</value>
+          </text>
+          <text id="/data/dalili/jinsia:hint">
+            <value>Chagua jinsia ya mgonjwa</value>
+          </text>
+          <text id="/data/dalili/jinsia:option0">
+            <value>mme</value>
+          </text>
+          <text id="/data/dalili/jinsia:option1">
+            <value>mke</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:label">
+            <value>Dalili zilizoonekana kwa mgonjwa</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option0">
+            <value>Kuharisha</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option1">
+            <value>Kuhara damu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option2">
+            <value>Homa / joto kali</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option3">
+            <value>Majipu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option4">
+            <value>Macho mekundu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option5">
+            <value>Kukakamaa shingo</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option6">
+            <value>Tumbo Kuuma / Kusokota</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option7">
+            <value>Kukohoa</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option8">
+            <value>Kutokwa damu sehemu zenye matundu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option9">
+            <value>Manjano kwenye sehemu nyeupe ya macho / ngozi</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option10">
+            <value>Maumivu ya kichwa</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option11">
+            <value>Kutapika</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option12">
+            <value>Maumivu ya viungo</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option13">
+            <value>Mafua</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option14">
+            <value>Uchovu / mwili kulegea</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option15">
+            <value>Kulala-lala / kusinzia-sinzia</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option16">
+            <value>Kichefu chefu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option17">
+            <value>Kuhisi baridi</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option18">
+            <value>Vidonda mdomoni</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option19">
+            <value>Michubuko midomoni</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option20">
+            <value>Mwili kuvimba hasa miguu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option21">
+            <value>Kupoteza hamu ya kula</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option22">
+            <value>Ulemavu wa ghafla</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option23">
+            <value>Mapunye</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option24">
+            <value>Kuchanganyikiwa</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option25">
+            <value>Vipele</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option26">
+            <value>Kushindwa kunyonya au kula</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option27">
+            <value>Malengelenge</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option28">
+            <value>Mimba Kuharibika</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option29">
+            <value>Dalili isiyo ya kawaida</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option30">
+            <value>Degedege</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option31">
+            <value>Kukohoa damu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option32">
+            <value>Kupoteza fahamu</value>
+          </text>
+          <text id="/data/dalili/zingine:label">
+            <value>Dalili zingine</value>
+          </text>
+          <text id="/data/dalili/zingine:hint">
+            <value>Kama kuna dalili zingine mbali ya zilizotajwa hapo juu; tafadhali taja</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo:label">
+            <value>Umri / Idadi / Vifo</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:label">
+            <value>Chagua umri wa mgonjwa</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option0">
+            <value>Chini ya miaka 5</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option1">
+            <value>6 - 18</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option2">
+            <value>19 - 25</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option3">
+            <value>26 - 35</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option4">
+            <value>36 - 45</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option5">
+            <value>56 - 65</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option6">
+            <value>Zaidi ya 65</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/Idadi_dalili_chini_miaka_5:label">
+            <value>Idadi ya walioonesha dalili chini ya miaka 5</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/idadi_dalili_watoto:label">
+            <value>Idadi ya walioonesha dalili watoto ( &lt; 18)</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/Idadi_dalili_vijana:label">
+            <value>Idadi ya walioonesha dalili vijana ( &lt; 45)</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/Idadi_dalili_wazee:label">
+            <value>Idadi ya walioonesha dalili wazee( &gt;45)</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/idadi_vifo_chini_5:label">
+            <value>Waliokufa chini ya miaka 5</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/idadi_vifo_watoto:label">
+            <value>Idadi ya waliokufa watoto ( &lt; 18 )</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/idadi_vifo_vijana:label">
+            <value>Idadi ya waliokufa vijana (&lt; 45 )</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/Idadi_vifo_wazee:label">
+            <value>Idadi ya waliokufa wazee (&gt;45)</value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa:label">
+            <value>Ugonjwa / Picha / GPS</value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa/ugonjwa_unaodhaniwa:label">
+            <value>Kutokana na dalili zilizotajwa</value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa/ugonjwa_unaodhaniwa:hint">
+            <value>Tafadhali taja jina la ugonjwa unaodhaniwa</value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa/picture:label">
+            <value>Chukua picha ya dalili inayoonekana</value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa/picture:hint">
+            <value>PALE TU utakapopata ridhaa ya mgonjwa</value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa/GPS:label">
+            <value>Chukua GPS ya eneo ya tukio</value>
+          </text>
+        </translation>
+        <translation lang="swa">
+          <text id="/data/taarifa_za_awali:label">
+            <value>Taarifa za awali </value>
+          </text>
+          <text id="/data/taarifa_za_awali/jina_la_mkusanyaji_taarifa:label">
+            <value>ina la mkusanyaji Taarifa</value>
+          </text>
+          <text id="/data/taarifa_za_awali/wilaya:label">
+            <value>Wilaya </value>
+          </text>
+          <text id="/data/taarifa_za_awali/wilaya:option0">
+            <value>Ngorongoro</value>
+          </text>
+          <text id="/data/taarifa_za_awali/wilaya:option1">
+            <value>Kibaha</value>
+          </text>
+          <text id="/data/taarifa_za_awali/wilaya:option2">
+            <value>Bagamoyo</value>
+          </text>
+          <text id="/data/taarifa_za_awali/kijiji:label">
+            <value>Kijiji </value>
+          </text>
+          <text id="/data/taarifa_za_awali/kitongoji:label">
+            <value>Kitongoji</value>
+          </text>
+          <text id="/data/taarifa_za_awali/tarehe_ya_ukusanyaji_taarifa:label">
+            <value>Tarehe ya ukusanyaji taarifa</value>
+          </text>
+          <text id="/data/dalili:label">
+            <value>Dalili</value>
+          </text>
+          <text id="/data/dalili/jinsia:label">
+            <value>Jinsia</value>
+          </text>
+          <text id="/data/dalili/jinsia:hint">
+            <value></value>
+          </text>
+          <text id="/data/dalili/jinsia:option0">
+            <value>mme</value>
+          </text>
+          <text id="/data/dalili/jinsia:option1">
+            <value>mke</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:label">
+            <value>Dalili zilizoonekana kwa mgonjwa</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option0">
+            <value>Kuharisha</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option1">
+            <value>Kuhara damu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option2">
+            <value>Homa / joto kali</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option3">
+            <value>Majipu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option4">
+            <value>Macho mekundu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option5">
+            <value>Kukakamaa shingo</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option6">
+            <value>Tumbo Kuuma / Kusokota</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option7">
+            <value>Kukohoa</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option8">
+            <value>Kutokwa damu sehemu zenye matundu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option9">
+            <value>Manjano kwenye sehemu nyeupe ya macho / ngozi</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option10">
+            <value>Maumivu ya kichwa</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option11">
+            <value>Kutapika</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option12">
+            <value>Maumivu ya viungo</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option13">
+            <value>Mafua</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option14">
+            <value>Uchovu / mwili kulegea</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option15">
+            <value>Kulala-lala / kusinzia-sinzia</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option16">
+            <value>Kichefu chefu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option17">
+            <value>Kuhisi baridi</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option18">
+            <value>Vidonda mdomoni</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option19">
+            <value>Michubuko midomoni</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option20">
+            <value>Mwili kuvimba hasa miguu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option21">
+            <value>Kupoteza hamu ya kula</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option22">
+            <value>Ulemavu wa ghafla</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option23">
+            <value>Mapunye</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option24">
+            <value>Kuchanganyikiwa</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option25">
+            <value>Vipele</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option26">
+            <value>Kushindwa kunyonya au kula</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option27">
+            <value>Malengelenge</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option28">
+            <value>Mimba Kuharibika</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option29">
+            <value>Dalili isiyo ya kawaida</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option30">
+            <value>Degedege</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option31">
+            <value>Kukohoa damu</value>
+          </text>
+          <text id="/data/dalili/zinazoonesha:option32">
+            <value>Kupoteza fahamu</value>
+          </text>
+          <text id="/data/dalili/zingine:label">
+            <value>Dalili zingine</value>
+          </text>
+          <text id="/data/dalili/zingine:hint">
+            <value>hari ibindi bimenyetso bimenyeshe hasi</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo:label">
+            <value>Umri / Idadi / Vifo</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:label">
+            <value>Chagua umri wa mgonjwa</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option0">
+            <value>Chini ya miaka 5</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option1">
+            <value>6 - 18</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option2">
+            <value>19 - 25</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option3">
+            <value>26 - 35</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option4">
+            <value>36 - 45</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option5">
+            <value>56 - 65</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/umri:option6">
+            <value>Zaidi ya 65</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/Idadi_dalili_chini_miaka_5:label">
+            <value>dadi ya walioonesha dalili chini ya miaka 5</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/idadi_dalili_watoto:label">
+            <value>Idadi ya walioonesha dalili (watoto)</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/Idadi_dalili_vijana:label">
+            <value>Idadi ya walioonesha dalili (vijana)</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/Idadi_dalili_wazee:label">
+            <value>Idadi ya walioonesha dalili wazee ( &gt;45)</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/idadi_vifo_chini_5:label">
+            <value>Waliokufa chini ya miaka 5</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/idadi_vifo_watoto:label">
+            <value>Idadi ya waliokufa watoto ( &lt; 18 )</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/idadi_vifo_vijana:label">
+            <value>Idadi ya waliokufa vijana (&lt; 45 )</value>
+          </text>
+          <text id="/data/Umri_idadi_vifo/Idadi_vifo_wazee:label">
+            <value>Idadi ya waliokufa wazee</value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa:label">
+            <value>Ugonjwa / Picha / GPS</value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa/ugonjwa_unaodhaniwa:label">
+            <value>Kutokana na dalili zilizotajwa</value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa/ugonjwa_unaodhaniwa:hint">
+            <value></value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa/picture:label">
+            <value>Chukua picha ya dalili inayoonekana</value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa/picture:hint">
+            <value></value>
+          </text>
+          <text id="/data/GPS_picha_ugonjwa/GPS:label">
+            <value>GPS</value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <bind nodeset="/data/meta/deviceID" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+      <bind nodeset="/data/taarifa_za_awali/jina_la_mkusanyaji_taarifa" type="string" required="true()"/>
+      <bind nodeset="/data/taarifa_za_awali/wilaya" type="select1" required="true()"/>
+      <bind nodeset="/data/taarifa_za_awali/kijiji" type="string" required="true()"/>
+      <bind nodeset="/data/taarifa_za_awali/kitongoji" type="string"/>
+      <bind nodeset="/data/taarifa_za_awali/tarehe_ya_ukusanyaji_taarifa" type="date" required="true()"/>
+      <bind nodeset="/data/dalili/jinsia" type="select1" required="true()"/>
+      <bind nodeset="/data/dalili/zinazoonesha" type="select"/>
+      <bind nodeset="/data/dalili/zingine" type="string"/>
+      <bind nodeset="/data/Umri_idadi_vifo/umri" type="select1" required="true()"/>
+      <bind nodeset="/data/Umri_idadi_vifo/Idadi_dalili_chini_miaka_5" type="int" required="true()"/>
+      <bind nodeset="/data/Umri_idadi_vifo/idadi_dalili_watoto" type="int" required="true()"/>
+      <bind nodeset="/data/Umri_idadi_vifo/Idadi_dalili_vijana" type="int" required="true()"/>
+      <bind nodeset="/data/Umri_idadi_vifo/Idadi_dalili_wazee" type="int" required="true()"/>
+      <bind nodeset="/data/Umri_idadi_vifo/idadi_vifo_chini_5" type="int" required="true()"/>
+      <bind nodeset="/data/Umri_idadi_vifo/idadi_vifo_watoto" type="int" required="true()"/>
+      <bind nodeset="/data/Umri_idadi_vifo/idadi_vifo_vijana" type="int" required="true()"/>
+      <bind nodeset="/data/Umri_idadi_vifo/Idadi_vifo_wazee" type="int" required="true()"/>
+      <bind nodeset="/data/GPS_picha_ugonjwa/ugonjwa_unaodhaniwa" type="string"/>
+      <bind nodeset="/data/GPS_picha_ugonjwa/picture" type="binary"/>
+      <bind nodeset="/data/GPS_picha_ugonjwa/GPS" type="geopoint" required="true()"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/taarifa_za_awali:label')"/>
+      <input ref="/data/taarifa_za_awali/jina_la_mkusanyaji_taarifa">
+        <label ref="jr:itext('/data/taarifa_za_awali/jina_la_mkusanyaji_taarifa:label')"/>
+      </input>
+      <select1 ref="/data/taarifa_za_awali/wilaya">
+        <label ref="jr:itext('/data/taarifa_za_awali/wilaya:label')"/>
+        <item>
+          <label ref="jr:itext('/data/taarifa_za_awali/wilaya:option0')"/>
+          <value>Ngorongoro</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/taarifa_za_awali/wilaya:option1')"/>
+          <value>Kibaha</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/taarifa_za_awali/wilaya:option2')"/>
+          <value>Bagamoyo</value>
+        </item>
+      </select1>
+      <input ref="/data/taarifa_za_awali/kijiji">
+        <label ref="jr:itext('/data/taarifa_za_awali/kijiji:label')"/>
+      </input>
+      <input ref="/data/taarifa_za_awali/kitongoji">
+        <label ref="jr:itext('/data/taarifa_za_awali/kitongoji:label')"/>
+      </input>
+      <input ref="/data/taarifa_za_awali/tarehe_ya_ukusanyaji_taarifa" appearance="no-calendar">
+        <label ref="jr:itext('/data/taarifa_za_awali/tarehe_ya_ukusanyaji_taarifa:label')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/dalili:label')"/>
+      <select1 ref="/data/dalili/jinsia">
+        <label ref="jr:itext('/data/dalili/jinsia:label')"/>
+        <hint ref="jr:itext('/data/dalili/jinsia:hint')"/>
+        <item>
+          <label ref="jr:itext('/data/dalili/jinsia:option0')"/>
+          <value>mme</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/jinsia:option1')"/>
+          <value>mke</value>
+        </item>
+      </select1>
+      <select ref="/data/dalili/zinazoonesha">
+        <label ref="jr:itext('/data/dalili/zinazoonesha:label')"/>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option0')"/>
+          <value>Kuharisha</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option1')"/>
+          <value>Kuhara-damu</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option2')"/>
+          <value>Homa-joto-kali</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option3')"/>
+          <value>Majipu</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option4')"/>
+          <value>Macho-mekundu</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option5')"/>
+          <value>Kukakamaa-shingo</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option6')"/>
+          <value>Tumbo-kuuma-kusokota</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option7')"/>
+          <value>Kukohoa</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option8')"/>
+          <value>Kutokwa-damu-sehemu-zenye-matundu</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option9')"/>
+          <value>Manjano-sehemu-nyeupe-ya-macho-ngozi</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option10')"/>
+          <value>Maumivu-ya-kichwa</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option11')"/>
+          <value>Kutapika</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option12')"/>
+          <value>Maumivu-ya-viungo</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option13')"/>
+          <value>Mafua</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option14')"/>
+          <value>Uchovu-mwili kulegea</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option15')"/>
+          <value>Kulala-lala-au-kusinzia-sinzia</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option16')"/>
+          <value>Kichefuchefu</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option17')"/>
+          <value>Kuhisi-baridi</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option18')"/>
+          <value>Vidonda-mdomoni</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option19')"/>
+          <value>Michubuko-midomoni</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option20')"/>
+          <value>Mwili-kuvimba-hasa-miguu</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option21')"/>
+          <value>Kupoteza-hamu-ya-kula</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option22')"/>
+          <value>Ulemavu-wa-ghafla</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option23')"/>
+          <value>Mapunye</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option24')"/>
+          <value>Kuchanganyikiwa</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option25')"/>
+          <value>Vipele</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option26')"/>
+          <value>Kushindwa-kunyonya-au-kula</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option27')"/>
+          <value>malengelenge</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option28')"/>
+          <value>Mimba-kuharibika</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option29')"/>
+          <value>Dalili-isiyo-ya-kawaida</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option30')"/>
+          <value>degedege</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option31')"/>
+          <value>kukohoa-damu</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/dalili/zinazoonesha:option32')"/>
+          <value>kupoteza-fahamu</value>
+        </item>
+      </select>
+      <input ref="/data/dalili/zingine">
+        <label ref="jr:itext('/data/dalili/zingine:label')"/>
+        <hint ref="jr:itext('/data/dalili/zingine:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Umri_idadi_vifo:label')"/>
+      <select1 ref="/data/Umri_idadi_vifo/umri">
+        <label ref="jr:itext('/data/Umri_idadi_vifo/umri:label')"/>
+        <item>
+          <label ref="jr:itext('/data/Umri_idadi_vifo/umri:option0')"/>
+          <value>chini_miaka_5</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Umri_idadi_vifo/umri:option1')"/>
+          <value>6-18</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Umri_idadi_vifo/umri:option2')"/>
+          <value>19-25</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Umri_idadi_vifo/umri:option3')"/>
+          <value>26-35</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Umri_idadi_vifo/umri:option4')"/>
+          <value>36-45</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Umri_idadi_vifo/umri:option5')"/>
+          <value>56-65</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Umri_idadi_vifo/umri:option6')"/>
+          <value>zaidi-ya-65</value>
+        </item>
+      </select1>
+      <input ref="/data/Umri_idadi_vifo/Idadi_dalili_chini_miaka_5">
+        <label ref="jr:itext('/data/Umri_idadi_vifo/Idadi_dalili_chini_miaka_5:label')"/>
+      </input>
+      <input ref="/data/Umri_idadi_vifo/idadi_dalili_watoto">
+        <label ref="jr:itext('/data/Umri_idadi_vifo/idadi_dalili_watoto:label')"/>
+      </input>
+      <input ref="/data/Umri_idadi_vifo/Idadi_dalili_vijana">
+        <label ref="jr:itext('/data/Umri_idadi_vifo/Idadi_dalili_vijana:label')"/>
+      </input>
+      <input ref="/data/Umri_idadi_vifo/Idadi_dalili_wazee">
+        <label ref="jr:itext('/data/Umri_idadi_vifo/Idadi_dalili_wazee:label')"/>
+      </input>
+      <input ref="/data/Umri_idadi_vifo/idadi_vifo_chini_5">
+        <label ref="jr:itext('/data/Umri_idadi_vifo/idadi_vifo_chini_5:label')"/>
+      </input>
+      <input ref="/data/Umri_idadi_vifo/idadi_vifo_watoto">
+        <label ref="jr:itext('/data/Umri_idadi_vifo/idadi_vifo_watoto:label')"/>
+      </input>
+      <input ref="/data/Umri_idadi_vifo/idadi_vifo_vijana">
+        <label ref="jr:itext('/data/Umri_idadi_vifo/idadi_vifo_vijana:label')"/>
+      </input>
+      <input ref="/data/Umri_idadi_vifo/Idadi_vifo_wazee">
+        <label ref="jr:itext('/data/Umri_idadi_vifo/Idadi_vifo_wazee:label')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/GPS_picha_ugonjwa:label')"/>
+      <input ref="/data/GPS_picha_ugonjwa/ugonjwa_unaodhaniwa">
+        <label ref="jr:itext('/data/GPS_picha_ugonjwa/ugonjwa_unaodhaniwa:label')"/>
+        <hint ref="jr:itext('/data/GPS_picha_ugonjwa/ugonjwa_unaodhaniwa:hint')"/>
+      </input>
+      <upload ref="/data/GPS_picha_ugonjwa/picture" mediatype="image/*">
+        <label ref="jr:itext('/data/GPS_picha_ugonjwa/picture:label')"/>
+        <hint ref="jr:itext('/data/GPS_picha_ugonjwa/picture:hint')"/>
+      </upload>
+      <input ref="/data/GPS_picha_ugonjwa/GPS">
+        <label ref="jr:itext('/data/GPS_picha_ugonjwa/GPS:label')"/>
+      </input>
+    </group>
+  </h:body>
+</h:html>

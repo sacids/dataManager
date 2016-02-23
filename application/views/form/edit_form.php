@@ -10,14 +10,14 @@
 
 			<fieldset>
 				<div class="pure-control-group">
-					<label>Form title <span>*</span></label>
+					<label><?php echo $this->lang->line("label_form_title")?> <span>*</span></label>
 					<input type="text" name="title" placeholder="Enter Form Title" class="pure-input-1-2"
 					       value="<?php echo set_value('title', $form->title); ?>">
 				</div>
 				<div class="pure-form-message-inline"><?php echo form_error('title'); ?></div>
 
 				<div class="pure-control-group">
-					<label> <label for="campus">Description:</label> </label>
+					<label> <label for="campus"><?php echo $this->lang->line("label_description") ?>:</label> </label>
                         <textarea class="pure-input-1-2" name="description"
                                   id="description"><?php echo set_value('description', $form->description); ?></textarea>
 				</div>

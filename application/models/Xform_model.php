@@ -13,14 +13,30 @@ class Xform_model extends CI_Model
 	 *
 	 * @var string
 	 */
-	private static $xform_table_name = "xforms";
+	private static $xform_table_name = "xforms"; //default value
 
 	/**
 	 * Table name for archived/deleted xforms
 	 *
 	 * @var string
 	 */
-	private static $archive_xform_table_name = "archive_xform";
+	private static $archive_xform_table_name = "archive_xform"; //default value
+
+
+	public function __construct()
+	{
+		$this->initialize_table();
+	}
+
+	/**
+	 * Initializes table names from configuration files
+	 */
+	private function initialize_table()
+	{
+		self::$xform_table_name = $this->config->item("table_xform");
+		log_message("debug", "Xform table => " . $this->config->item("table_xform"));
+		self::$archive_xform_table_name = $this->config->item("table_archive_xform");
+	}
 
 	/**
 	 * @param $statement
@@ -98,7 +114,6 @@ class Xform_model extends CI_Model
 		return $this->db->get(self::$xform_table_name)->result();
 	}
 
-
 	/**
 	 * Finds a table field with point data type
 	 *
@@ -116,7 +131,6 @@ class Xform_model extends CI_Model
 
 		return ($query->num_rows() == 1) ? $query->row(1)->COLUMN_NAME : FALSE;
 	}
-
 
 	/**
 	 * @param $form_id
@@ -138,7 +152,6 @@ class Xform_model extends CI_Model
 		$this->db->where("id", $xform_id);
 		return $this->db->delete(self::$xform_table_name);
 	}
-
 
 	/**
 	 * @param $xform_archive_data

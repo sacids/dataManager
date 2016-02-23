@@ -36,7 +36,7 @@ class Xform extends CI_Controller
 			'User_model'
 		)); // TODO check case of model names if we can ucfirst
 		$this->load->library('form_auth');
-		$this->load->model('submission_model');
+		$this->load->model('Submission_model');
 
 		//$this->output->enable_profiler(TRUE);
 	}
@@ -142,7 +142,7 @@ class Xform extends CI_Controller
 					);
 					//TODO Track file name
 
-					$this->submission_model->create($data);
+					$this->Submission_model->create($data);
 
 				} elseif ($file_extension == 'jpg' or $file_extension == 'jpeg' or $file_extension == 'png') {
 					// path to store images
