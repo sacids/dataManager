@@ -314,6 +314,47 @@ class Migration_Install_datamanager extends CI_Migration
 		$this->db->query('ALTER TABLE xforms  ADD UNIQUE INDEX (form_id)');
 		$this->db->query('ALTER TABLE xforms  ADD UNIQUE INDEX (filename)');
 
+
+		// Drop table 'archive_xform' if it exists
+		$this->dbforge->drop_table('archive_xform', TRUE);
+
+		$this->dbforge->add_field(
+			array(
+				'id' => array(
+					'type' => 'INT',
+					'constraint' => 11,
+					'unsigned' => TRUE,
+					'auto_increment' => TRUE
+				),
+				'form_id' => array(
+					'type' => 'VARCHAR',
+					'constraint' => 255
+				),
+				'description' => array(
+					'type' => 'TEXT'
+				),
+				'title' => array(
+					'type' => 'VARCHAR',
+					'constraint' => 255
+				),
+				'filename' => array(
+					'type' => 'VARCHAR',
+					'constraint' => 255
+				),
+				'date_created' => array(
+					'type' => 'DATETIME'
+				),
+				'last_updated' => array(
+					'type' => 'TIMESTAMP',
+					'null' => TRUE
+				)
+			)
+		);
+
+		$this->dbforge->add_key("id", TRUE);
+		$this->dbforge->create_table("archive_xform");
+		$this->db->query('ALTER TABLE xforms  ADD UNIQUE INDEX (filename)');
+
 		// Drop table 'submission_form' if it exists
 		$this->dbforge->drop_table('submission_form', TRUE);
 
