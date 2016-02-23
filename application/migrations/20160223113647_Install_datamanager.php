@@ -315,8 +315,8 @@ class Migration_Install_datamanager extends CI_Migration
 		$this->db->query('ALTER TABLE xforms  ADD UNIQUE INDEX (filename)');
 
 
-		// Drop table 'archive_xform' if it exists
-		$this->dbforge->drop_table('archive_xform', TRUE);
+		// Drop table 'archive_xforms' if it exists
+		$this->dbforge->drop_table('archive_xforms', TRUE);
 
 		$this->dbforge->add_field(
 			array(

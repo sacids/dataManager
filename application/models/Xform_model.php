@@ -20,7 +20,7 @@ class Xform_model extends CI_Model
 	 *
 	 * @var string
 	 */
-	private static $archive_xform_table_name = "archive_xform"; //default value
+	private static $archive_xform_table_name = "archive_xformx"; //default value
 
 
 	public function __construct()
