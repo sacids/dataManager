@@ -46,7 +46,7 @@ class Feedback extends CI_Controller
 		}
 
 		$user = $this->User_model->find_by_username($username);
-		if ($form_id && $last_id)
+		if ($form_id)
 			$feedback = $this->Feedback_model->get_feedback($user->id, $form_id, $last_id);
 		else
 			$feedback = $this->Feedback_model->get_feedback($user->id); //Todo add last id later
@@ -74,7 +74,6 @@ class Feedback extends CI_Controller
 		$username = $this->input->post("username");
 
 		$user = $this->User_model->find_by_username($username);
-
 
 		if ($user) {
 			$feedback = array(
