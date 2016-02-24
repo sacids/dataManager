@@ -24,17 +24,19 @@ class Xform extends CI_Controller
 
 	var $form_defn;
 	var $form_data;
-	var $xml_defn;
-	var $xml_data; //xml data filename
+	var $xml_defn_filename;
+	var $xml_data_filename;
 	var $table_name;
 
 	public function __construct()
 	{
 		parent::__construct();
+
 		$this->load->model(array(
 			'Xform_model',
 			'User_model'
-		)); // TODO check case of model names if we can ucfirst
+		));
+
 		$this->load->library('form_auth');
 		$this->load->model('Submission_model');
 
@@ -48,11 +50,8 @@ class Xform extends CI_Controller
 
 	function forms()
 	{
-
 		$data['title'] = $this->lang->line("heading_form_list");
-		$data['forms'] = $this->Xform_model->get_form_list();
-
-		//Displaying List of registered users/IF ADMIN
+		$data['forms'] = $this->Xform_model->get_form_list($this->session->userdata("user_id"));
 
 		$this->load->view('header', $data);
 		$this->load->view("form/menu");
@@ -72,7 +71,8 @@ class Xform extends CI_Controller
 		$http_response_code = 201;
 
 		// Get the digest from the http header
-		$digest = $_SERVER ['PHP_AUTH_DIGEST'];
+		if (isset($_SERVER ['PHP_AUTH_DIGEST']))
+			$digest = $_SERVER ['PHP_AUTH_DIGEST'];
 
 		// server realm and unique id
 		$realm = $this->config->item("realm");
@@ -95,9 +95,9 @@ class Xform extends CI_Controller
 		// get user details from database
 		$user = $this->User_model->find_by_username($username);
 		$password = $user->digest_password; // digest password
-		$user_id = $user->id; // user_id
 		$db_username = $user->username; // username
 
+		$uploaded_filename = NULL;
 		// show status header if user not available in database
 		if (empty ($db_username)) {
 			// populate login form if no digest authenticate
@@ -129,20 +129,22 @@ class Xform extends CI_Controller
 				$file_name = $file ['name'];
 
 				// check file extension
-				$file_extension = end(explode('.', $file_name));
+				$value = explode('.', $file_name);
+				$file_extension = end($value);
+
+				$inserted_form_id = NULL;
 
 				if ($file_extension === 'xml') {
 					// path to store xml
+					$uploaded_filename = $file_name;
 					$path = $this->config->item("form_data_upload_dir") . $file_name;
-
 					// insert form details in database
 					$data = array(
 						'file_name' => $file_name,
-						'user_id' => $user_id
+						'user_id' => $user->id
 					);
-					//TODO Track file name
 
-					$this->Submission_model->create($data);
+					$inserted_form_id = $this->Submission_model->create($data);
 
 				} elseif ($file_extension == 'jpg' or $file_extension == 'jpeg' or $file_extension == 'png') {
 					// path to store images
@@ -161,7 +163,10 @@ class Xform extends CI_Controller
 				move_uploaded_file($file ['tmp_name'], $path);
 			}
 			// call function to insert xform data in a database
-			$this->_insert($user_id); //TODO Fix $user_id variable should be filename
+			if (!$this->_insert($uploaded_filename)) {
+				if ($this->Submission_model->delete_submission($inserted_form_id))
+					@unlink($path);
+			}
 		}
 
 		// return response
@@ -173,6 +178,7 @@ class Xform extends CI_Controller
 	 * Author : Eric Beda
 	 *
 	 * @param string $filename
+	 * @return Mixed
 	 */
 	public function _insert($filename)
 	{
@@ -187,6 +193,7 @@ class Xform extends CI_Controller
 
 		$result = $this->Xform_model->insert_data($statement);
 		log_message('debug', "insert result " . $result);
+		return $result;
 	}
 
 	/**
@@ -194,7 +201,7 @@ class Xform extends CI_Controller
 	 */
 	public function set_data_file($filename)
 	{
-		$this->xml_data = $filename;
+		$this->xml_data_filename = $filename;
 	}
 
 	/**
@@ -228,7 +235,7 @@ class Xform extends CI_Controller
 	 */
 	public function get_data_file()
 	{
-		return $this->xml_data;
+		return $this->xml_data_filename;
 	}
 
 	/**
@@ -385,7 +392,9 @@ class Xform extends CI_Controller
 	function form_list()
 	{
 		// Get the digest from the http header
-		$digest = $_SERVER['PHP_AUTH_DIGEST'];
+
+		if (isset($_SERVER['PHP_AUTH_DIGEST']))
+			$digest = $_SERVER['PHP_AUTH_DIGEST'];
 
 		//server realm and unique id
 		$realm = $this->config->item("realm");
@@ -394,7 +403,6 @@ class Xform extends CI_Controller
 
 		// If there was no digest, show login
 		if (empty($digest)) {
-
 			//populate login form if no digest authenticate
 			$this->form_auth->require_login_prompt($realm, $nonce);
 			exit;
@@ -409,7 +417,6 @@ class Xform extends CI_Controller
 		//get user details from database
 		$user = $this->User_model->find_by_username($username);
 		$password = $user->digest_password; //digest password
-		$user_id = $user->id; //user_id
 		$db_user = $user->username; //username
 
 		//show status header if user not available in database
@@ -440,7 +447,7 @@ class Xform extends CI_Controller
 		foreach ($forms as $form) {
 
 			// used to notify if anything has changed with the form, so that it may be updated on download
-			$hash = md5($form->form_id . $form->date_created . $form->filename . $form->id . $form->description . $form->title);
+			$hash = md5($form->form_id . $form->date_created . $form->filename . $form->id . $form->description . $form->title . $form->last_updated);
 
 			$xml .= '<xform>';
 			$xml .= '<formID>' . $form->form_id . '</formID>';
@@ -452,6 +459,8 @@ class Xform extends CI_Controller
 			$xml .= '</xform>';
 		}
 		$xml .= '</xforms>';
+
+		log_message("debug", "Requested forms\n" . $xml);
 
 		$content_length = sizeof($xml);
 		//set header response
@@ -466,6 +475,10 @@ class Xform extends CI_Controller
 
 	function add_new()
 	{
+		if (!$this->ion_auth->logged_in()) {
+			redirect('auth/login', 'refresh');
+		}
+
 		$data['title'] = $this->lang->line("heading_add_new_form");
 
 		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
@@ -500,6 +513,7 @@ class Xform extends CI_Controller
 					//TODO Check if file already exist and prompt user.
 
 					$form_details = array(
+						"user_id" => $this->session->userdata("user_id"),
 						"title" => $this->input->post("title"),
 						"description" => $this->input->post("description"),
 						"filename" => $filename,
@@ -562,7 +576,7 @@ class Xform extends CI_Controller
 	 */
 	public function set_defn_file($filename)
 	{
-		$this->xml_defn = $filename;
+		$this->xml_defn_filename = $filename;
 	}
 
 	/**
@@ -592,7 +606,7 @@ class Xform extends CI_Controller
 	 */
 	public function get_defn_file()
 	{
-		return $this->xml_defn;
+		return $this->xml_defn_filename;
 	}
 
 	/**
@@ -726,6 +740,11 @@ class Xform extends CI_Controller
 
 	function edit_form($xform_id)
 	{
+
+		if (!$this->ion_auth->logged_in()) {
+			redirect('auth/login', 'refresh');
+		}
+
 		if (!$xform_id) {
 			$this->session->set_flashdata("message", $this->lang->line("select_form_to_edit"));
 			redirect("xform/forms");
@@ -750,7 +769,7 @@ class Xform extends CI_Controller
 				$new_form_details = array(
 					"title" => $this->input->post("title"),
 					"description" => $this->input->post("description"),
-					"last_updated" => time()
+					"last_updated" => date("c")
 				);
 
 				if ($this->Xform_model->update_form($xform_id, $new_form_details)) {
@@ -769,6 +788,10 @@ class Xform extends CI_Controller
 
 	function delete_xform($xform_id)
 	{
+		if (!$this->ion_auth->logged_in()) {
+			redirect('auth/login', 'refresh');
+		}
+
 		if (!$xform_id) {
 			$this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
 			redirect("xform/forms");
@@ -804,5 +827,33 @@ class Xform extends CI_Controller
 			$this->session->set_flashdata("message", $this->lang->line("error_failed_to_delete_form"));
 		}
 		redirect("xform/forms");
+	}
+
+	function form_data($form_id)
+	{
+
+		if (!$form_id) {
+			$this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
+			redirect("xform/forms");
+			exit;
+		}
+
+		$form = $this->Xform_model->find_by_id($form_id);
+
+		if ($form) {
+			// check if form_id ~ form data table is not empty or null
+			$data['title'] = $form->title." form";
+			$data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
+			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id);
+
+			$this->load->view('header', $data);
+			$this->load->view("form/menu");
+			$this->load->view("form/form_data_details");
+			$this->load->view('footer');
+
+		} else {
+			// form does not exist
+		}
+
 	}
 }

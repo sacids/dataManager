@@ -33,9 +33,11 @@ class Xform_model extends CI_Model
 	 */
 	private function initialize_table()
 	{
-		self::$xform_table_name = $this->config->item("table_xform");
-		log_message("debug", "Xform table => " . $this->config->item("table_xform"));
-		self::$archive_xform_table_name = $this->config->item("table_archive_xform");
+		if ($this->config->item("table_xform"))
+			self::$xform_table_name = $this->config->item("table_xform");
+
+		if ($this->config->item("table_archive_xform"))
+			self::$archive_xform_table_name = $this->config->item("table_archive_xform");
 	}
 
 	/**
@@ -104,12 +106,15 @@ class Xform_model extends CI_Model
 	}
 
 	/**
+	 * @param null $user_id
 	 * @param int $limit
 	 * @param int $offset
 	 * @return mixed returns list of forms available.
 	 */
-	public function get_form_list($limit = 30, $offset = 0)
+	public function get_form_list($user_id = NULL, $limit = 30, $offset = 0)
 	{
+		if ($user_id != NULL)
+			$this->db->where("user_id", $user_id);
 		$this->db->limit($limit, $offset);
 		return $this->db->get(self::$xform_table_name)->result();
 	}
@@ -160,5 +165,28 @@ class Xform_model extends CI_Model
 	public function create_archive($xform_archive_data)
 	{
 		return $this->db->insert(self::$archive_xform_table_name, $xform_archive_data);
+	}
+
+
+	/**
+	 * @param $table_name
+	 * @param int $limit
+	 * @param int $offset
+	 * @return mixed returns data from tables created by uploading xform definitions files.
+	 */
+	public function find_form_data($table_name, $limit = 30, $offset = 0)
+	{
+		$this->db->limit($limit, $offset);
+		return $this->db->get($table_name)->result();
+	}
+
+
+	/**
+	 * @param $table_name
+	 * @return mixed return an object of fields of the specified table
+	 */
+	public function find_table_columns($table_name)
+	{
+		return $this->db->list_fields($table_name);
 	}
 }
