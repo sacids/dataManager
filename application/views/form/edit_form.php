@@ -33,6 +33,3 @@
 	</div>
 	<?php echo form_close(); ?>
 </div>
-<div style="clear: both;"></div>
-</div>            </div>
-</div>

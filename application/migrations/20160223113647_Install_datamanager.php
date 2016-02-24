@@ -284,6 +284,10 @@ class Migration_Install_datamanager extends CI_Migration
 					'unsigned' => TRUE,
 					'auto_increment' => TRUE
 				),
+				'user_id' => array(
+					'type' => 'INT',
+					'constraint' => 11
+				),
 				'form_id' => array(
 					'type' => 'VARCHAR',
 					'constraint' => 255
@@ -325,6 +329,10 @@ class Migration_Install_datamanager extends CI_Migration
 					'constraint' => 11,
 					'unsigned' => TRUE,
 					'auto_increment' => TRUE
+				),
+				'user_id' => array(
+					'type' => 'INT',
+					'constraint' => 11
 				),
 				'form_id' => array(
 					'type' => 'VARCHAR',
