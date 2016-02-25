@@ -390,3 +390,8 @@ div.pagination{
 div.current{
     font-weight: bold;
 }
+
+.horizontal-overflow {
+    overflow-x: auto;
+    white-space: nowrap;
+}
