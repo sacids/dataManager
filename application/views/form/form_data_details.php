@@ -15,8 +15,8 @@
 	}
 	?>
 
-	<div class="table_list">
-		<table class="table">
+	<div class=" horizontal-overflow">
+		<table class="table table_list">
 
 			<tr>
 
