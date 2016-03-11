@@ -14,7 +14,6 @@ class Migration_Install_datamanager extends CI_Migration
 	public function up()
 	{
 
-
 		// Drop table 'users_groups' if it exists
 		$this->dbforge->drop_table('users_groups', TRUE);
 
@@ -208,9 +207,10 @@ class Migration_Install_datamanager extends CI_Migration
 			'last_login' => '1268889823',
 			'active' => '1',
 			'first_name' => 'Admin',
-			'last_name' => 'istrator',
+			'last_name' => 'Demo',
 			'company' => 'SACIDS',
-			'phone' => '+2557',
+			'phone' => '255732931717 ',
+			'country_code' => '255'
 		);
 		$this->db->insert('users', $data);
 
@@ -360,7 +360,7 @@ class Migration_Install_datamanager extends CI_Migration
 		);
 
 		$this->dbforge->add_key("id", TRUE);
-		$this->dbforge->create_table("archive_xform");
+		$this->dbforge->create_table("archive_xforms");
 		$this->db->query('ALTER TABLE xforms  ADD UNIQUE INDEX (filename)');
 
 		// Drop table 'submission_form' if it exists
