@@ -60,6 +60,7 @@ $lang['create_user_lname_label']                       = 'Last Name:';
 $lang['create_user_company_label']                     = 'Company Name:';
 $lang['create_user_identity_label']                    = 'Identity:';
 $lang['create_user_email_label']                       = 'Email:';
+$lang['create_user_country_code_label']                = 'Country Code:';
 $lang['create_user_phone_label']                       = 'Phone:';
 $lang['create_user_password_label']                    = 'Password:';
 $lang['create_user_password_confirm_label']            = 'Confirm Password:';
@@ -131,7 +132,7 @@ $lang['forgot_password_subheading']              = 'Please enter your %s so we c
 $lang['forgot_password_email_label']             = '%s:';
 $lang['forgot_password_submit_btn']              = 'Submit';
 $lang['forgot_password_validation_email_label']  = 'Email Address';
-$lang['forgot_password_identity_label'] = 'Identity';
+$lang['forgot_password_identity_label']          = 'Identity';
 $lang['forgot_password_email_identity_label']    = 'Email';
 $lang['forgot_password_email_not_found']         = 'No record of that email address.';
 
