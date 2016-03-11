@@ -12,7 +12,6 @@ class Auth extends CI_Controller
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 		$this->lang->load('auth');
 		$this->load->model('User_model');
-
 	}
 
 	// redirect if needed, otherwise display the user list
@@ -501,7 +500,11 @@ class Auth extends CI_Controller
 		} else {
 			$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
 		}
-		$this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
+		$this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim|required');
+		if ($identity_column == 'phone') {
+			$this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim|required|numeric|min_length[10]');
+			$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
+		}
 		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 
@@ -516,10 +519,21 @@ class Auth extends CI_Controller
 			//digest password
 			$digest_password = md5("{$identity}:{$realm}:{$password}");
 
+
+			$country_code = $this->input->post("country_code");
+
+			if ($identity_column == "phone") {
+				// Remove zero
+				$num_array = preg_split('//', $identity, -1, PREG_SPLIT_NO_EMPTY);
+				if ($num_array[0] == 0)
+					$identity = preg_replace('/^0?/', $country_code, $identity);
+			}
+
 			$additional_data = array(
 				'first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name'),
 				'phone' => $this->input->post('phone'),
+				'country_code' => $country_code,
 				'digest_password' => $digest_password
 			);
 		}
@@ -714,6 +728,7 @@ class Auth extends CI_Controller
 			'id' => 'password_confirm',
 			'type' => 'password'
 		);
+
 		$this->load->view('header', $this->data);
 		$this->load->view('auth/menu');
 		$this->_render_page('auth/edit_user');

@@ -4,7 +4,7 @@
 	      accept-charset="utf-8">
 		<div class="formCon">
 			<div class="formConInner">
-				<h3>Create User Account</h3>
+				<h3><?php echo $this->lang->line("create_user_heading") ?> </h3>
 				<?php
 				if ($this->session->flashdata('message') != ''):
 					echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
@@ -15,40 +15,52 @@
 				<fieldset style="width: 90%;">
 					<legend>Basic User Information</legend>
 					<div class="pure-control-group">
-						<label> <label for="first_name">First Name:<span>*</span></label> </label>
+						<label for="first_name"><?php echo $this->lang->line("create_user_fname_label") ?>
+							<span>*</span></label>
 						<input type="text" name="first_name" value="<?php echo set_value('first_name'); ?>"
-						       class="pure-input-1-2" id="first_name"/></div>
+						       class="pure-input-1-2" id="first_name"/>
+					</div>
 					<div class="pure-form-message-inline"><?php echo form_error('first_name'); ?></div>
 
 					<div class="pure-control-group">
-						<label> <label for="last_name">Last Name:<span>*</span></label> </label>
+						<label for="last_name"><?php echo $this->lang->line("create_user_lname_label") ?> <span>*</span></label>
 						<input type="text" name="last_name" value="<?php echo set_value('last_name'); ?>" id="last_name"
 						       class="pure-input-1-2"/></div>
 					<div class="pure-form-message-inline"><?php echo form_error('last_name'); ?></div>
 
 					<div class="pure-control-group">
-						<label> <label for="identity">Username:<span>*</span></label> </label>
+						<label for="identity"><?php echo $this->lang->line("create_user_identity_label") ?>
+							<span>*</span></label>
 						<input type="text" name="identity" value="<?php echo set_value('identity'); ?>" id="identity"
-						       class="pure-input-1-2"/></div>
+						       placeholder="07XXXXXXXX" class="pure-input-1-2"/></div>
 					<div class="pure-form-message-inline"><?php echo form_error('identity'); ?></div>
 
 					<div class="pure-control-group">
-						<label> <label for="email">Email:</label> </label>
+						<label for="email"><?php echo $this->lang->line("create_user_email_label"); ?>
+							<span>*</span></label>
 						<input type="text" name="email" value="<?php echo set_value('email'); ?>" class="pure-input-1-2"
 						       id="email"/></div>
 					<div class="pure-form-message-inline"><?php echo form_error('email'); ?></div>
 
 					<div class="pure-control-group">
-						<label> <label for="phone">Phone:<span>*</span></label> </label>
+						<label for="Country code"><?php echo $this->lang->line("create_user_country_code_label") ?>
+							<span>*</span></label>
+						<?php echo form_dropdown("country_code", array("254" => "254", "255" => "255", "256" => "256"), set_value("country_code", "255")); ?>
+					</div>
+					<div class="pure-form-message-inline"><?php echo form_error('country_code'); ?></div>
+					<div class="pure-control-group">
+						<label for="phone"><?php echo $this->lang->line("create_user_phone_label") ?>
+							<span>*</span></label>
 						<input type="text" name="phone" value="<?php echo set_value('phone'); ?>" class="pure-input-1-2"
-						       id="phone"/></div>
+						       id="phone" placeholder=""/>
+					</div>
 					<div class="pure-form-message-inline"><?php echo form_error('phone'); ?></div>
 				</fieldset>
 
 				<fieldset style="width: 90%;">
-					<legend>Account User</legend>
+					<legend>Assign User Group</legend>
 					<div class="pure-control-group">
-						<label> <label for="group">Group:<span>*</span></label> </label>
+						<label for="group">Group: <span>*</span></label>
 						<select name="group" id="group" class="pure-input-1-2">
 							<option value="">Choose Group</option>
 							<?php
@@ -61,24 +73,26 @@
 					<div class="pure-form-message-inline"><?php echo form_error('group'); ?></div>
 
 					<div class="pure-control-group">
-						<label> <label for="password">Password:<span>*</span></label> </label>
+						<label for="password"><?php echo $this->lang->line("create_user_password_label") ?>
+							<span>*</span></label>
 						<input type="password" name="password" value="<?php echo set_value('password'); ?>"
 						       class="pure-input-1-2" id="password"/></div>
 					<div class="pure-form-message-inline"><?php echo form_error('password'); ?></div>
 
 					<div class="pure-control-group">
-						<label> <label for="password_confirm">Confirm Password:<span>*</span></label> </label>
+						<label
+							for="password_confirm"><?php echo $this->lang->line("create_user_password_confirm_label") ?>
+							<span>*</span></label>
 						<input type="password" name="password_confirm"
 						       value="<?php echo set_value('password_confirm'); ?>" id="password_confirm"
 						       class="pure-input-1-2"/></div>
 
 					<div class="pure-control-group">
 						<label>&nbsp; &nbsp; &nbsp;</label>
-						<button type="submit" class="pure-button pure-button-primary">Create User</button>
+						<button type="submit"
+						        class="pure-button pure-button-primary"><?php echo $this->lang->line("create_user_heading") ?></button>
 					</div>
 				</fieldset>
-
-
 			</div>
 		</div>
 	</form>

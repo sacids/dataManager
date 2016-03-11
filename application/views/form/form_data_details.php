@@ -17,9 +17,7 @@
 
 	<div class=" horizontal-overflow">
 		<table class="table table_list">
-
 			<tr>
-
 				<?php
 				foreach ($table_fields as $key => $column) {
 					echo "<th>" . $column . "</th>";
@@ -35,12 +33,9 @@
 					echo "<td>" . $entry . "</td>";
 				}
 				echo "</tr>";
-
 			}
 			?>
-
 		</table>
-
 	</div>
 </div>
 <?php echo form_close(); ?>

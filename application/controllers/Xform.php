@@ -304,8 +304,7 @@ class Xform extends CI_Controller
 	 * absolute path of variable, and sets its value to the data submitted by user
 	 * Author : Eric Beda
 	 *
-	 * @param string $name
-	 *            of xml element
+	 * @param string $name of xml element
 	 * @param object $obj
 	 */
 
@@ -447,7 +446,7 @@ class Xform extends CI_Controller
 		foreach ($forms as $form) {
 
 			// used to notify if anything has changed with the form, so that it may be updated on download
-			$hash = md5($form->form_id . $form->date_created . $form->filename . $form->id . $form->description . $form->title . $form->last_updated);
+			$hash = md5($form->form_id . $form->date_created . $form->filename . $form->id . $form->title . $form->last_updated);
 
 			$xml .= '<xform>';
 			$xml .= '<formID>' . $form->form_id . '</formID>';
@@ -482,6 +481,7 @@ class Xform extends CI_Controller
 		$data['title'] = $this->lang->line("heading_add_new_form");
 
 		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
+		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
 		if ($this->form_validation->run() === FALSE) {
 			$this->load->view('header', $data);
@@ -518,6 +518,7 @@ class Xform extends CI_Controller
 						"description" => $this->input->post("description"),
 						"filename" => $filename,
 						"date_created" => date("c"),
+						"access" => $this->input->post("access")
 					);
 
 					// ??? SET BLOCK in transaction ?
@@ -755,6 +756,7 @@ class Xform extends CI_Controller
 		$data['form'] = $form = $this->Xform_model->find_by_id($xform_id);
 
 		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required");
+		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
 		if ($this->form_validation->run() === FALSE) {
 
@@ -769,6 +771,7 @@ class Xform extends CI_Controller
 				$new_form_details = array(
 					"title" => $this->input->post("title"),
 					"description" => $this->input->post("description"),
+					"access" => $this->input->post("access"),
 					"last_updated" => date("c")
 				);
 
@@ -842,7 +845,7 @@ class Xform extends CI_Controller
 
 		if ($form) {
 			// check if form_id ~ form data table is not empty or null
-			$data['title'] = $form->title." form";
+			$data['title'] = $form->title . " form";
 			$data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
 			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id);
 
