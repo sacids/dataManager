@@ -1,4 +1,4 @@
-# Data Manager
+# Afyadata Manager
 
 A guide to getting started contributing on this project
 
@@ -9,7 +9,7 @@ A guide to getting started contributing on this project
 4. `php-cli` is required to execute php files on command line 
  
  
-Clone this project to your local machine from [SACIDS dataManager](https://github.com/sacids/dataManager)
+Clone this project to your local machine from [SACIDS Afyadata Manager](https://github.com/sacids/afyadata)
 
 #####Setting up your database
  - Create a MySQL database
@@ -24,6 +24,6 @@ All the tables will be created and you can start contributing on the project rig
 * Open your favorite web browser and type `http://localhost/<your-project-directory>`
 * Login with username as `admin` and password as `sacidsdemo`
 
-[Click to learn more how to contribute on this project](https://github.com/sacids/dataManager/blob/master/contributing.md)
+[Click to learn more how to contribute on this project](https://github.com/sacids/afyadata/blob/master/contributing.md)
 
 
