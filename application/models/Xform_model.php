@@ -74,11 +74,12 @@ class Xform_model extends CI_Model
 
 	/**
 	 * @param $form_details an array of form details with keys match db field names
-	 * @return mixed
+	 * @return id for the created form
 	 */
 	public function create_xform($form_details)
 	{
-		return $this->db->insert(self::$xform_table_name, $form_details);
+		$this->db->insert(self::$xform_table_name, $form_details);
+		return $this->db->insert_id();
 	}
 
 	/**
@@ -188,5 +189,30 @@ class Xform_model extends CI_Model
 	public function find_table_columns($table_name)
 	{
 		return $this->db->list_fields($table_name);
+	}
+
+	/**
+	 * @param $table_name
+	 * @return mixed returns table fields/columns with metadata object
+	 */
+	public function find_table_columns_data($table_name)
+	{
+		return $this->db->field_data($table_name);
+	}
+
+	public function get_graph_data($table_name, $x_axis_column, $y_axis_column, $y_axis_action = "COUNT")
+	{
+
+		if ($y_axis_action == "COUNT") {
+			$this->db->select("`" . $y_axis_column . "`, COUNT(" . $y_axis_column . ") AS `" . strtolower($y_axis_action) . "`");
+			$this->db->group_by($x_axis_column);
+		}
+
+		if ($y_axis_action == "SUM") {
+			$this->db->select("`" . $y_axis_column . "`, SUM(" . $y_axis_column . ") AS `" . strtolower($y_axis_action) . "`");
+			$this->db->group_by($x_axis_column);
+		}
+		$this->db->from($table_name);
+		return $this->db->get()->result();
 	}
 }

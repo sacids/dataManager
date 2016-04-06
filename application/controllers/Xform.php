@@ -20,13 +20,12 @@ class XmlElement
 
 class Xform extends CI_Controller
 {
-	// TODO recommend variable names
 
-	var $form_defn;
-	var $form_data;
-	var $xml_defn_filename;
-	var $xml_data_filename;
-	var $table_name;
+	private $form_defn;
+	private $form_data;
+	private $xml_defn_filename;
+	private $xml_data_filename;
+	private $table_name;
 
 	public function __construct()
 	{
@@ -34,11 +33,11 @@ class Xform extends CI_Controller
 
 		$this->load->model(array(
 			'Xform_model',
-			'User_model'
+			'User_model',
+			'Submission_model'
 		));
 
 		$this->load->library('form_auth');
-		$this->load->model('Submission_model');
 
 		//$this->output->enable_profiler(TRUE);
 	}
@@ -149,6 +148,7 @@ class Xform extends CI_Controller
 				} elseif ($file_extension == 'jpg' or $file_extension == 'jpeg' or $file_extension == 'png') {
 					// path to store images
 					$path = $this->config->item("images_data_upload_dir") . $file_name;
+					//TODO Resize image here
 
 				} elseif ($file_extension == '3gpp' or $file_extension == 'amr') {
 					// path to store audio
@@ -296,7 +296,11 @@ class Xform extends CI_Controller
 				$this->get_path($name, $val);
 			}
 		} else {
-			$this->form_data [substr($name, 1)] = $obj->content;
+			$column_name = substr($name, 1);
+			//shorten long column names
+			if (strlen($column_name) > 64)
+				$column_name = shorten_column_name($column_name);
+			$this->form_data [$column_name] = $obj->content;
 		}
 	}
 	/**
@@ -304,8 +308,7 @@ class Xform extends CI_Controller
 	 * absolute path of variable, and sets its value to the data submitted by user
 	 * Author : Eric Beda
 	 *
-	 * @param string $name
-	 *            of xml element
+	 * @param string $name of xml element
 	 * @param object $obj
 	 */
 
@@ -360,6 +363,7 @@ class Xform extends CI_Controller
 			return FALSE;
 		}
 
+
 		$field_names = "(`" . implode("`,`", array_keys($this->form_data)) . "`,$fn)";
 		$field_values = "('" . implode("','", array_values($this->form_data)) . "',$fd)";
 
@@ -378,8 +382,8 @@ class Xform extends CI_Controller
 	{
 		// OpenRosa Success Response
 		$response = '<OpenRosaResponse xmlns="http://openrosa.org/http/response">
-                            <message nature="submit_success">Thanks</message>
-                          </OpenRosaResponse>';
+                    <message nature="submit_success">Thanks</message>
+                    </OpenRosaResponse>';
 
 		$content_length = sizeof($response);
 		// set header response
@@ -447,7 +451,7 @@ class Xform extends CI_Controller
 		foreach ($forms as $form) {
 
 			// used to notify if anything has changed with the form, so that it may be updated on download
-			$hash = md5($form->form_id . $form->date_created . $form->filename . $form->id . $form->description . $form->title . $form->last_updated);
+			$hash = md5($form->form_id . $form->date_created . $form->filename . $form->id . $form->title . $form->last_updated);
 
 			$xml .= '<xform>';
 			$xml .= '<formID>' . $form->form_id . '</formID>';
@@ -482,6 +486,7 @@ class Xform extends CI_Controller
 		$data['title'] = $this->lang->line("heading_add_new_form");
 
 		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
+		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
 		if ($this->form_validation->run() === FALSE) {
 			$this->load->view('header', $data);
@@ -494,17 +499,17 @@ class Xform extends CI_Controller
 
 			if (!empty($_FILES['userfile']['name'])) {
 
-				$this->load->library('upload');
 
 				$config['upload_path'] = $form_definition_upload_dir;
 				$config['allowed_types'] = 'xml';
 				$config['max_size'] = '1024';
 				$config['remove_spaces'] = TRUE;
 
+				$this->load->library('upload', $config);
 				$this->upload->initialize($config);
 
-				if (!$this->upload->do_upload()) {
-					$this->session->set_flashdata("msg", "<div class='warning'>" . $this->upload->display_errors("", "") . "</div>");
+				if (!$this->upload->do_upload("userfile")) {
+					$this->session->set_flashdata("message", "<div class='warning'>" . $this->upload->display_errors("", "") . "</div>");
 					redirect("xform/add_new");
 				} else {
 					$xml_data = $this->upload->data();
@@ -518,20 +523,21 @@ class Xform extends CI_Controller
 						"description" => $this->input->post("description"),
 						"filename" => $filename,
 						"date_created" => date("c"),
+						"access" => $this->input->post("access")
 					);
 
-					// ??? SET BLOCK in transaction ?
-					if ($this->Xform_model->create_xform($form_details)) {
-						//get last insert id
-						$xform_id = $this->db->insert_id();
+					$this->db->trans_start();
+					//get last insert id
+					$xform_id = $this->Xform_model->create_xform($form_details);
+					//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
+					$this->_initialize($filename); // create form table.
+					//TODO perform error checking,
+					//set form_id to current table_name variable
+					$this->Xform_model->update_form_id($xform_id, $this->table_name);
+					log_message("debug", "Xform_id=" . $xform_id . " ODK BuildFormId=" . $this->table_name);
+					$this->db->trans_complete();
 
-						//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
-						$this->_initialize($filename); // create form table.
-
-						//TODO perform error checking, 
-						//set form_id to current table_name variable
-						$this->Xform_model->update_form_id($xform_id, $this->table_name);
-
+					if ($this->db->trans_status()) {
 						$this->session->set_flashdata("message", $this->lang->line("form_upload_successful"));
 					} else {
 						$this->session->set_flashdata("message", $this->lang->line("form_upload_failed"));
@@ -540,7 +546,7 @@ class Xform extends CI_Controller
 				}
 
 			} else {
-				$this->session->set_flashdata("msg", $this->lang->line("form_saving_failed"));
+				$this->session->set_flashdata("message", $this->lang->line("form_saving_failed"));
 				redirect("xform/add_new");
 			}
 		}
@@ -689,7 +695,12 @@ class Xform extends CI_Controller
 				continue;
 
 			$type = $val ['type'];
+
 			$field_name = $val ['field_name'];
+
+			//TODO Call helper function here to shorten column name
+			if (strlen($field_name) > 64)
+				$field_name = shorten_column_name($field_name);
 
 			// check if field is required
 			if (!empty ($val ['required'])) {
@@ -699,7 +710,7 @@ class Xform extends CI_Controller
 			}
 
 			if ($type == 'string' || $type == 'binary') {
-				$statement .= ", $field_name VARCHAR(150) $required";
+				$statement .= ", $field_name VARCHAR(300) $required";
 			}
 
 			if ($type == 'select1') {
@@ -755,6 +766,7 @@ class Xform extends CI_Controller
 		$data['form'] = $form = $this->Xform_model->find_by_id($xform_id);
 
 		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required");
+		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
 		if ($this->form_validation->run() === FALSE) {
 
@@ -769,6 +781,7 @@ class Xform extends CI_Controller
 				$new_form_details = array(
 					"title" => $this->input->post("title"),
 					"description" => $this->input->post("description"),
+					"access" => $this->input->post("access"),
 					"last_updated" => date("c")
 				);
 
@@ -805,7 +818,6 @@ class Xform extends CI_Controller
 
 		$this->db->trans_start();
 		$this->Xform_model->create_archive($archive_xform_data);
-
 		$this->Xform_model->delete_form($xform_id);
 		$this->db->trans_complete();
 
@@ -842,7 +854,7 @@ class Xform extends CI_Controller
 
 		if ($form) {
 			// check if form_id ~ form data table is not empty or null
-			$data['title'] = $form->title." form";
+			$data['title'] = $form->title . " form";
 			$data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
 			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id);
 

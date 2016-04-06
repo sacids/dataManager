@@ -10,18 +10,24 @@
 
 			<fieldset>
 				<div class="pure-control-group">
-					<label><?php echo $this->lang->line("label_form_title")?> <span>*</span></label>
+					<label><?php echo $this->lang->line("label_form_title") ?> <span>*</span></label>
 					<input type="text" name="title" placeholder="Enter Form Title" class="pure-input-1-2"
 					       value="<?php echo set_value('title', $form->title); ?>">
 				</div>
 				<div class="pure-form-message-inline"><?php echo form_error('title'); ?></div>
 
 				<div class="pure-control-group">
-					<label> <label for="campus"><?php echo $this->lang->line("label_description") ?>:</label> </label>
+					<label for="campus"><?php echo $this->lang->line("label_description") ?>:</label>
                         <textarea class="pure-input-1-2" name="description"
                                   id="description"><?php echo set_value('description', $form->description); ?></textarea>
 				</div>
 				<div class="pure-form-message-inline"><?php echo form_error('description'); ?></div>
+
+				<div class="pure-control-group">
+					<label for="campus"><?php echo $this->lang->line("label_access") ?> :</label>
+					<?php echo form_dropdown("access", array("private" => "Private", "public" => "Public"), set_value("access", $form->access), 'class="pure-input-1-2"'); ?>
+				</div>
+				<div class="pure-form-message-inline"><?php echo form_error('access'); ?></div>
 
 				<div class="pure-control-group">
 					<label>&nbsp; &nbsp; &nbsp;</label>

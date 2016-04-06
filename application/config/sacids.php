@@ -17,6 +17,12 @@ $config['table_form_submission']    = "submission_form";
 $config['table_feedback']           = "feedback";
 $config['table_users']              = "users";
 
+//OHKR Tables
+$config['table_species']            = "species";
+$config['table_diseases']           = "diseases";
+$config['table_symptoms']           = "symptoms";
+$config['table_diseases_symptoms']  = "diseases_symptoms";
+
 
 // Form uploads and Media files
 $config['form_definition_upload_dir']   = FCPATH. "assets/forms/definition/";

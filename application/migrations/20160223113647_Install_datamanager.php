@@ -14,7 +14,6 @@ class Migration_Install_datamanager extends CI_Migration
 	public function up()
 	{
 
-
 		// Drop table 'users_groups' if it exists
 		$this->dbforge->drop_table('users_groups', TRUE);
 
@@ -198,8 +197,8 @@ class Migration_Install_datamanager extends CI_Migration
 			'id' => '1',
 			'ip_address' => '127.0.0.1',
 			'username' => 'admin',
-			'password' => '$2y$08$Vrbcwo2zOjND1iHIjl8v5u95M1OByh5I.eCvEU/Y1gph81layyt1.',
-			'digest_password' => 'f148100e1483c8438ecff8873f324caa',
+			'password' => '$2y$08$3Bq1BvfiMjVXGD4jIvhrjOnowYmOrPTxHs5GMrKWwAWCuPxJ9vmi.',
+			'digest_password' => '7dd95c462a5758425177c94c8df7757d',
 			'salt' => '',
 			'email' => 'admin@sacids.org',
 			'activation_code' => '',
@@ -208,9 +207,9 @@ class Migration_Install_datamanager extends CI_Migration
 			'last_login' => '1268889823',
 			'active' => '1',
 			'first_name' => 'Admin',
-			'last_name' => 'istrator',
+			'last_name' => 'Demo',
 			'company' => 'SACIDS',
-			'phone' => '+2557',
+			'phone' => '255732931717'
 		);
 		$this->db->insert('users', $data);
 
@@ -360,7 +359,7 @@ class Migration_Install_datamanager extends CI_Migration
 		);
 
 		$this->dbforge->add_key("id", TRUE);
-		$this->dbforge->create_table("archive_xform");
+		$this->dbforge->create_table("archive_xforms");
 		$this->db->query('ALTER TABLE xforms  ADD UNIQUE INDEX (filename)');
 
 		// Drop table 'submission_form' if it exists
