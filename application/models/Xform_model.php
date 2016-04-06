@@ -215,4 +215,9 @@ class Xform_model extends CI_Model
 		$this->db->from($table_name);
 		return $this->db->get()->result();
 	}
+
+	public function insert_xform_data($xform_table_name, $data)
+	{
+		return $this->db->insert($xform_table_name, $data);
+	}
 }

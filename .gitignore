@@ -62,8 +62,8 @@ local.properties
 
 # Created by .ignore support plugin (hsz.mobi)
 application/config/database.php
-.idea/
-sql/
+.idea
+sql
 assets/forms/data/audio/*.xml
 assets/forms/data/images/*.png
 assets/forms/data/images/*.jpeg
@@ -73,3 +73,4 @@ assets/forms/data/xml/*.xml
 assets/forms/definition/*.xml
 assets/forms/definition/archive/*.xml
 assets/forms/definition/*.jpg
+/application/vendor

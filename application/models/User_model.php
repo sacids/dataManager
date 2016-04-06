@@ -15,12 +15,9 @@ class User_model extends CI_Model
 		parent::__construct();
 	}
 
-	/**
-	 * Initializes table names from configuration files
-	 */
-	private function initialize_table()
+	public function create($user)
 	{
-		self::$xform_table_name = $this->config->item("table_users");
+		return $this->db->insert(self::$table_name, $user);
 	}
 
 	/**
@@ -95,6 +92,14 @@ class User_model extends CI_Model
 	{
 		$query = $this->db->get_where(self::$table_name, array('username' => $username));
 		return $query->row();
+	}
+
+	/**
+	 * Initializes table names from configuration files
+	 */
+	private function initialize_table()
+	{
+		self::$xform_table_name = $this->config->item("table_users");
 	}
 
 

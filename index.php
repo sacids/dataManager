@@ -54,10 +54,12 @@
  * NOTE: If you change these, also change the error_reporting() code below
  */
 
-
-$path = $_SERVER['REQUEST_URI'];
-if ($path == "/afyadata/unittest") {
-	define('ENVIRONMENT', 'testing');
+if (isset($_SERVER['REQUEST_URI'])) {
+	$path = $_SERVER['REQUEST_URI'];
+	if ($path == "/afyadata/unittest") {
+		define('ENVIRONMENT', 'testing');
+	} else
+		define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 } else
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
