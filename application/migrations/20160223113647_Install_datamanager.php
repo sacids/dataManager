@@ -197,8 +197,8 @@ class Migration_Install_datamanager extends CI_Migration
 			'id' => '1',
 			'ip_address' => '127.0.0.1',
 			'username' => 'admin',
-			'password' => '$2y$08$Vrbcwo2zOjND1iHIjl8v5u95M1OByh5I.eCvEU/Y1gph81layyt1.',
-			'digest_password' => 'f148100e1483c8438ecff8873f324caa',
+			'password' => '$2y$08$3Bq1BvfiMjVXGD4jIvhrjOnowYmOrPTxHs5GMrKWwAWCuPxJ9vmi.',
+			'digest_password' => '7dd95c462a5758425177c94c8df7757d',
 			'salt' => '',
 			'email' => 'admin@sacids.org',
 			'activation_code' => '',
@@ -209,8 +209,7 @@ class Migration_Install_datamanager extends CI_Migration
 			'first_name' => 'Admin',
 			'last_name' => 'Demo',
 			'company' => 'SACIDS',
-			'phone' => '255732931717 ',
-			'country_code' => '255'
+			'phone' => '255732931717'
 		);
 		$this->db->insert('users', $data);
 

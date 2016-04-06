@@ -49,11 +49,11 @@
 	<div class="container_12">
 		<ul class="sf-menu">
 			<li><a href="<?php echo site_url('dashboard'); ?>">Dashboard</a></li>
-			<li><a href="#">Settings</a></li>
+<!--			<li><a href="#">Settings</a></li>-->
 			<li><a href="<?php echo site_url('xform/forms'); ?>">Forms</a></li>
-			<li><a href="<?php echo site_url('disease/diseases'); ?>">Diseases</a></li>
-			<li><a href="#">Feedback</a></li>
-			<li><a href="#">Reports and Analysis</a></li>
+<!--			<li><a href="--><?php //echo site_url('disease/diseases'); ?><!--">Diseases</a></li>-->
+<!--			<li><a href="#">Feedback</a></li>-->
+<!--			<li><a href="#">Reports and Analysis</a></li>-->
 			<li><a href="<?php echo site_url('auth/profile'); ?>">My Profile</a></li>
 			<li><a href="<?php echo site_url('auth/users_list'); ?>">Manage Users</a></li>
 			<li><a href="<?php echo site_url('auth/logout'); ?>">Logout</a></li>
