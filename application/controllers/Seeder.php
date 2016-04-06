@@ -6,7 +6,7 @@
  * Date: 4/6/2016
  * Time: 8:27 AM
  */
-class App extends CI_Controller
+class Seeder extends CI_Controller
 {
 	function __construct()
 	{
