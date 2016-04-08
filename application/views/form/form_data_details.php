@@ -30,7 +30,13 @@
 
 				echo "<tr>";
 				foreach ($data as $key => $entry) {
-					echo "<td>" . $entry . "</td>";
+
+					if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+						echo "<td><img src=' " . $this->config->item("images_data_upload_dir") . $entry . "' /></td>";
+					} else {
+						echo "<td>" . $entry . "</td>";
+					}
+
 				}
 				echo "</tr>";
 			}
