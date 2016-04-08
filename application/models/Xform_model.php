@@ -168,7 +168,6 @@ class Xform_model extends CI_Model
 		return $this->db->insert(self::$archive_xform_table_name, $xform_archive_data);
 	}
 
-
 	/**
 	 * @param $table_name
 	 * @param int $limit
@@ -205,13 +204,18 @@ class Xform_model extends CI_Model
 
 		if ($y_axis_action == "COUNT") {
 			$this->db->select("`" . $y_axis_column . "`, COUNT(" . $y_axis_column . ") AS `" . strtolower($y_axis_action) . "`");
+
+			//TODO Check field type before grouping
+
 			$this->db->group_by($x_axis_column);
 		}
 
 		if ($y_axis_action == "SUM") {
 			$this->db->select("`" . $y_axis_column . "`, SUM(" . $y_axis_column . ") AS `" . strtolower($y_axis_action) . "`");
+			//TODO Check field type before grouping
 			$this->db->group_by($x_axis_column);
 		}
+
 		$this->db->from($table_name);
 		return $this->db->get()->result();
 	}

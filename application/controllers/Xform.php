@@ -376,13 +376,15 @@ class Xform extends CI_Controller
 	 *
 	 * @param string $http_response_code
 	 *            Input string
+	 * @param string $response_message
+	 *            Input string
 	 * @return response
 	 */
-	function get_response($http_response_code)
+	function get_response($http_response_code, $response_message = "Thanks")
 	{
 		// OpenRosa Success Response
 		$response = '<OpenRosaResponse xmlns="http://openrosa.org/http/response">
-                    <message nature="submit_success">Thanks</message>
+                    <message nature="submit_success">' . $response_message . '</message>
                     </OpenRosaResponse>';
 
 		$content_length = sizeof($response);

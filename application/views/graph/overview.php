@@ -72,8 +72,15 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="../navbar/">Default</a></li>
-				<li><a href="../navbar-static-top/">Static top</a></li>
-				<li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+				<li class=""><a href="./" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+				                aria-expanded="false"><?php echo ucfirst($this->session->userdata("username")) ?>
+						<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">My Profile</a></li>
+						<li><a href="#">Change password</a></li>
+						<li><a href="#">Logout</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>
@@ -88,7 +95,9 @@
 
 					<ul>
 						<?php foreach ($xforms as $form) { ?>
-							<li><a href="#" id="<?php echo $form->form_id ?>"><?php echo $form->title ?></a></li>
+							<li>
+								<?php echo anchor("graph/overview/" . $form->id, $form->title); ?>
+							</li>
 						<?php } ?>
 					</ul>
 
@@ -104,24 +113,24 @@
 
 		</div>
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<h1 class="page-header" id="xform-title"><?php echo $first_record->title ?></h1>
-			<div class="col-sm-12 col-lg-12">
-				<?php echo form_open("#", 'class="form-inline" role="form"'); ?>
+			<h1 class="page-header" id="xform-title"><?php echo $form_details->title ?></h1>
+			<div class="">
+				<?php echo form_open("graph/overview/" . $form_details->id, 'class="form-inline" role="form"'); ?>
 				<?php
 				$options = array("" => "Select column to use as X-axis field");
 				foreach ($table_fields as $key => $value) {
-					$options[$value] = $value;
+					$options[$value] = ucfirst(str_replace("_", " ", $value));
 				}
 				?>
 
 				<div class="form-group">
 					<label for="X-Axis"></label>
-					<?php echo form_dropdown("x-axis", $options, $table_fields[3], 'class="form-control"'); ?>
+					<?php echo form_dropdown("xaxis", $options, $table_fields[3], 'class="form-control"'); ?>
 				</div>
 				<div class="form-group">
 					<label for="Y-Axis"></label>
 					<?php $options[""] = "Select column to use as Y-axis";
-					echo form_dropdown("y-axis", $options, $table_fields[4], 'class="form-control"'); ?>
+					echo form_dropdown("yaxis", $options, $table_fields[4], 'class="form-control"'); ?>
 				</div>
 
 				<div class="form-group">
@@ -138,7 +147,15 @@
 						<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 					</div>
 				</div>
+
+				<div class="form-group">
+					<div class="input-group">
+						<?php echo form_submit("submit", "Submit", 'class="btn btn-primary"'); ?>
+					</div>
+				</div>
 				<?php echo form_close(); ?>
+
+				<?php echo validation_errors(); ?>
 			</div>
 
 			<div id="graph-content">
@@ -146,12 +163,12 @@
 			</div>
 
 			<div class="">
-				<pre>
-					<?php print_r($table_fields_data); ?>
-				</pre>
-				<pre>
-					<?php print_r($results); ?>
-				</pre>
+				<!--				<pre>-->
+				<!--					--><?php //print_r($table_fields_data); ?>
+				<!--				</pre>-->
+				<!--<pre>
+					<?php /*print_r($results); */ ?>
+				</pre>-->
 			</div>
 		</div>
 	</div>
@@ -172,30 +189,33 @@
 
 <script type="text/javascript">
 
-	$(function() {
+	$(function () {
 		$('#graph-content').highcharts({
 				chart: {
 					type: 'column'
 				},
 				title: {
-					text: 'Views'
+					text: '<?php echo $series['name']; ?>'
 				},
 				xAxis: {
-					categories: ['Mbuzi','Ng\'ombe','Punda','Kondoo']
+					categories: <?php echo $categories; ?>
 				},
 				yAxis: {
 					title: {
-						text: 'Views Count'
+						text: 'Mifugo Count'
 					}
 				},
 				series: [{
-					name: 'Views',
-					data: [3,4,6,1]
+					name: '<?php echo $series['name']; ?>',
+					data: <?php echo str_replace('"', "", json_encode($series['data']));?>
 				}],
-				credits: {enabled: false}
+				credits: {
+					enabled: false
+				}
 			}
 		);
-	});
+	})
+	;
 
 	$(document).ready(function () {
 		//working fine
