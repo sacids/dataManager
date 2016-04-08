@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+.db_exp_left {
+	float: left;
+}
+
+.db_exp_right {
+	float: right;
+}
+.db_exp_btn{
+	padding: 1px;
+	margin: 2px;
+	border: 1px solid #666;
+	background-color: #ccc;
+	font-size: 10px;
+	cursor: pointer;
+}
+.db_exp_checkbox {
+	width: 20px;
+}
+.db_exp_links{
+	width: 40px;
+}
+.db_exp_fields{
+}
+.db_exp_label{
+	min-width: 70px;
+}
+.db_exp_sep{
+	width: 10px;
+}
+.db_exp_value{
+}
+.db_exp_row{
+	border-bottom: 1px dotted #666;
+	margin: 0px;
+	padding: 4px;
+}
+.db_exp_field_row{
+	
+}
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.db_exp_button{
+	margin-top: 10px;
+	width: 70px;
+	cursor: pointer;
+	padding: 5px;
+	color:#FFFFFF;
+	text-align: center;
+background-color:#73AD21;
+background-color:#4CAF50; 
+background-color:#CE3F38; 
+box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.db_exp_button:hover{
+	background-color:#ffffff;
+color:#73AD21;
+color:#4CAF50;  
+color: #CE3F38;
+    background-color: #000;
+	color: #ffffff;
+box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
