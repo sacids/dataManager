@@ -478,6 +478,70 @@ class Xform extends CI_Controller
 
 		echo $xml;
 	}
+	
+	function add_new_form(){
+		
+		
+		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
+		
+		if ($this->form_validation->run() === FALSE) {
+			$this->load->view("form/add_new");
+		} else {
+		
+			$form_definition_upload_dir = $this->config->item("form_definition_upload_dir");
+		
+			if (!empty($_FILES['userfile']['name'])) {
+		
+				$this->load->library('upload');
+		
+				$config['upload_path'] = $form_definition_upload_dir;
+				$config['allowed_types'] = 'xml';
+				$config['max_size'] = '1024';
+				$config['remove_spaces'] = TRUE;
+		
+				$this->upload->initialize($config);
+		
+				if (!$this->upload->do_upload()) {
+					$this->session->set_flashdata("msg", "<div class='warning'>" . $this->upload->display_errors("", "") . "</div>");
+					redirect("xform/add_new");
+				} else {
+					$xml_data = $this->upload->data();
+					$filename = $xml_data['file_name'];
+		
+					//TODO Check if file already exist and prompt user.
+		
+					$form_details = array(
+							"title" => $this->input->post("title"),
+							"description" => $this->input->post("description"),
+							"filename" => $filename,
+							"date_created" => date("c"),
+					);
+		
+					// ??? SET BLOCK in transaction ?
+					if ($this->Xform_model->create_xform($form_details)) {
+						//get last insert id
+						$xform_id = $this->db->insert_id();
+		
+						//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
+						$this->_initialize($filename); // create form table.
+		
+						//TODO perform error checking,
+						//set form_id to current table_name variable
+						$this->Xform_model->update_form_id($xform_id, $this->table_name);
+		
+						$this->session->set_flashdata("message", $this->lang->line("form_upload_successful"));
+					} else {
+						$this->session->set_flashdata("message", $this->lang->line("form_upload_failed"));
+					}
+					redirect("xform/add_new");
+				}
+		
+			} else {
+				$this->session->set_flashdata("msg", $this->lang->line("form_saving_failed"));
+				redirect("xform/add_new");
+			}
+		}
+	}
 
 	function add_new()
 	{
