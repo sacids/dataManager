@@ -11,6 +11,9 @@
 
     <title>AfyaData - Simplify data collection.</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="<?php echo base_url();?>favicon.png" />
+
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" type="text/css">
 
@@ -57,18 +60,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a class="page-scroll" href="#about">About AfyaData</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#features">Features</a>
-                </li>
+                <li><a class="page-scroll" href="#about">About AfyaData</a></li>
+                <li><a class="page-scroll" href="#features">Features</a></li>
                 <li>
                     <a class="page-scroll" href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" download>Download App</a>
                 </li>
-                <li>
-                    <a class="page-scroll" href="#contact">Contact</a>
-                </li>
+                <li><a class="page-scroll" target="_blank" href="<?php echo site_url('auth/login');?>">Go to demo</a></li>
+                <li><a class="page-scroll" href="#contact">Contact</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -77,12 +75,15 @@
 </nav>
 
 <header>
+    <div class="overlay"></div>
     <div class="header-content">
         <div class="header-content-inner">
             <h1>AfyaData</h1>
             <hr>
-            <p>SIMPLIFY DATA COLLECTION</p>
-            <a href="<?php echo site_url('auth/login'); ?>" class="btn btn-primary btn-xl page-scroll">Go to demo</a>
+            <p>Afya Data is a mobile app inspired by ODK Collect, developed by Southern African Centre for Infectious Disease.
+
+                Surveillance (SACIDS) for collecting, submitting, receiving and/or tracking feedback of submitted health data.</p>
+            <!--<a href="<?php echo site_url('auth/login'); ?>" class="btn btn-primary btn-xl page-scroll">Go to demo</a>-->
         </div>
     </div>
 </header>
@@ -100,6 +101,16 @@
                     interface for involved health stakeholders to analyze and visualizing data collected via Afyadata
                     mobile app for android.</p>
 
+                <strong>How does AfyaData Manager works?</strong>
+                <p class="text-faded">This application works together with the android AfyaData App, where you use
+                    the mobile app to collect data in the field and later on you send them to the server
+                    (Afyadata Manager application) for further processing. When the data gets into the server
+                    it is analyzed immediately using the natural intelligence build in to detect any indicators
+                    of abnormal pattern, if found an alert is sent immediately to respective health
+                    experts / respond team and sending tips back to the data collector while further actions are
+                    to be taken. </p>
+
+
             </div>
 
             <div class="col-lg-6">
@@ -110,6 +121,14 @@
                     which have best form management modules. This app works together with server side which accepts
                     data, storing to the database and analyzing the database for making decision from submitted
                     data.</p>
+
+                <strong>How does AfyaData Mobile works?</strong>
+                <p class="text-faded">The app works as a client, where by users from field can collect and submit
+                    data to the central server via Internet connection as well as receiving feedback of submitted
+                    data from the server/experts. While collecting data, phone can be offline without affecting
+                    the process also has a capability of including GPS location and photo to a collected data. </p>
+
+
             </div>
         </div>
     </div>
@@ -161,12 +180,65 @@
     </div>
 </section>
 
+<section class="no-padding" id="portfolio">
+    <div class="container-fluid">
+        <div class="row no-gutter">
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="portfolio-box">
+                    <img src="<?php echo base_url();?>assets/bootstrap/img/screenshots/afyadataone.jpg" class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                AfyaData
+                            </div>
+                            <div class="project-name">
+                                Addressing one health security at community level through technology!
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="portfolio-box">
+                    <img src="<?php echo base_url();?>assets/bootstrap/img/screenshots/afyadatatwo.jpg" class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                AfyaData
+                            </div>
+                            <div class="project-name">
+                                Addressing one health security at community level through technology!
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <a href="#" class="portfolio-box">
+                    <img src="<?php echo base_url();?>assets/bootstrap/img/screenshots/afyadatathree.jpg" class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                AfyaData
+                            </div>
+                            <div class="project-name">
+                                Addressing one health security at community level through technology!
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <aside class="bg-primary">
     <div class="container text-center">
         <div class="call-to-action">
-            <h2>Start using AfyaData Mobile to simplify data collection!</h2>
-            <a href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" class="btn btn-default btn-xl wow tada">Download App
-                Now!</a>
+            <h2>Addressing one health security at community level through technology!</h2>
+            <a href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" class="btn btn-default btn-xl wow tada">
+                <i class="fa fa-android fa-lg"></i> Download App Now!</a>
         </div>
     </div>
 </aside>
@@ -182,11 +254,11 @@
             </div>
             <div class="col-lg-4 col-lg-offset-2 text-center">
                 <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                <p>+255 ... ...</p>
+                <p>+255 783 555 386</p>
             </div>
             <div class="col-lg-4 text-center">
                 <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                <p><a href="mailto:skolls@sacids.org">skolls@sacids.org</a></p>
+                <p><a href="mailto:afyadata@sacids.org">afyadata@sacids.org</a></p>
             </div>
         </div>
     </div>
