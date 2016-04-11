@@ -7,7 +7,7 @@
 					<ul>
 						<?php foreach ($xforms as $form) { ?>
 							<li>
-								<?php echo anchor("graph/chart/" . $form->form_id, $form->title); ?>
+								<?php echo anchor("form_visualization/chart/" . $form->form_id, $form->title); ?>
 							</li>
 						<?php } ?>
 					</ul>
@@ -86,15 +86,6 @@
 				}
 				?>
 
-			</div>
-
-			<div class="">
-				<!--				<pre>-->
-				<!--					--><?php //print_r($table_fields_data); ?>
-				<!--				</pre>-->
-				<!--<pre>
-					<?php /*print_r($results); */ ?>
-				</pre>-->
 			</div>
 		</div>
 	</div>
