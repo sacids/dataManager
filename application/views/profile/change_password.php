@@ -1,41 +1,34 @@
-<div class="grid_11" id="grid_padding">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-12 main">
+			<?php echo form_open('auth/change_password', 'class="form-horizontal" role="form"') ?>
 
-<?php echo form_open('auth/change_password', 'class="pure-form pure-form-aligned"') ?>
-<div class="formCon">
-    <div class="formConInner">
-        <h3>Fill information to change password</h3>
- 
-        <fieldset > 
-    <div class="pure-control-group">
-          <label>  <?php echo lang('change_password_old_password_label', 'old_password');?></label>
-            <?php echo form_input($old_password);?>
-      </div>
-<div class="pure-form-message-inline"><?php echo form_error('old'); ?></div>
+			<h3>Fill information to change password</h3>
 
-        <div class="pure-control-group">
-          <label> <?php echo sprintf(lang('change_password_new_password_label'), $min_password_length);?></label> 
-            <?php echo form_input($new_password);?>
-        </div>
-<div class="pure-form-message-inline"><?php echo form_error('new'); ?></div>
+			<fieldset>
+				<div class="form-group">
+					<label>  <?php echo lang('change_password_old_password_label', 'old_password'); ?></label>
+					<?php echo form_input($old_password,"", 'class="form-control"'); ?>
+				</div>
+				<?php echo form_error('old'); ?>
 
-         <div class="pure-control-group">
-             <label> <?php echo lang('change_password_new_password_confirm_label', 'new_password_confirm');?> </label>
-            <?php echo form_input($new_password_confirm);?>
-         </div>
-<div class="pure-form-message-inline"><?php echo form_error('new_confirm'); ?></div>
+				<div class="form-group">
+					<label> <?php echo sprintf(lang('change_password_new_password_label'), $min_password_length); ?></label>
+					<?php echo form_input($new_password,"", 'class="form-control"'); ?>
+				</div>
+				<?php echo form_error('new'); ?>
 
-      <?php echo form_input($user_id);?>
-               <div class="pure-control-group">
-                   <label> &nbsp;</label>
-      <input type="submit" value="Change Password"  class="pure-button pure-button-primary"/>
+				<div class="form-group">
+					<label> <?php echo lang('change_password_new_password_confirm_label', 'new_password_confirm'); ?> </label>
+					<?php echo form_input($new_password_confirm,"", 'class="form-control"'); ?>
+				</div>
+				<?php echo form_error('new_confirm'); ?>
 
-
-        </fieldset>
-    </div>
+				<?php echo form_input($user_id); ?>
+				<div class="form-group">
+					<input type="submit" value="Change Password" class="btn btn-primary"/>
+			</fieldset>
+			<?php echo form_close(); ?>
+		</div>
+	</div>
 </div>
-<?php echo form_close();?>  
-
-</div>
-    <div style="clear: both;"></div>
-    </div>            </div>
-        </div>
