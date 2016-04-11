@@ -9,7 +9,8 @@ class Auth extends CI_Controller
 		$this->load->database();
 		$this->load->library(array('ion_auth', 'form_validation'));
 		$this->load->helper(array('url', 'language'));
-		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+		//$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 		$this->lang->load('auth');
 		$this->load->model('User_model');
 	}
@@ -46,7 +47,7 @@ class Auth extends CI_Controller
 		$this->data['users'] = $this->User_model->get_users();
 		$this->data['title'] = "Users List";
 		$this->load->view('header', $this->data);
-		$this->load->view('auth/menu');
+		//$this->load->view('auth/menu');
 		$this->_render_page('auth/index');
 		$this->load->view('footer');
 	}
@@ -592,7 +593,7 @@ class Auth extends CI_Controller
 			);
 			$this->data['title'] = "Create New User";
 			$this->load->view('header', $this->data);
-			$this->load->view('auth/menu');
+			//$this->load->view('auth/menu');
 			$this->_render_page('auth/create_user');
 			$this->load->view('footer');
 			//$this->_render_page('auth/create_user', $this->data);

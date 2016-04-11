@@ -39,6 +39,7 @@ class Xform extends CI_Controller
 
 		$this->load->library('form_auth');
 
+		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 		//$this->output->enable_profiler(TRUE);
 	}
 
@@ -53,7 +54,7 @@ class Xform extends CI_Controller
 		$data['forms'] = $this->Xform_model->get_form_list($this->session->userdata("user_id"));
 
 		$this->load->view('header', $data);
-		$this->load->view("form/menu");
+		//$this->load->view("form/menu");
 		$this->load->view("form/index");
 		$this->load->view('footer');
 	}
@@ -492,7 +493,7 @@ class Xform extends CI_Controller
 
 		if ($this->form_validation->run() === FALSE) {
 			$this->load->view('header', $data);
-			$this->load->view("form/menu");
+			//$this->load->view("form/menu");
 			$this->load->view("form/add_new");
 			$this->load->view('footer');
 		} else {
@@ -773,7 +774,7 @@ class Xform extends CI_Controller
 		if ($this->form_validation->run() === FALSE) {
 
 			$this->load->view('header', $data);
-			$this->load->view("form/menu");
+			//$this->load->view("form/menu");
 			$this->load->view("form/edit_form");
 			$this->load->view('footer');
 
@@ -788,9 +789,9 @@ class Xform extends CI_Controller
 				);
 
 				if ($this->Xform_model->update_form($xform_id, $new_form_details)) {
-					$this->session->set_flashdata("message", $this->lang->line("form_update_successful"));
+					$this->session->set_flashdata("message", display_message($this->lang->line("form_update_successful")));
 				} else {
-					$this->session->set_flashdata("message", $this->lang->line("form_update_failed"));
+					$this->session->set_flashdata("message", display_message($this->lang->line("form_update_failed"), "warning"));
 				}
 				redirect("xform/forms");
 
@@ -861,7 +862,7 @@ class Xform extends CI_Controller
 			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id);
 
 			$this->load->view('header', $data);
-			$this->load->view("form/menu");
+			//$this->load->view("form/menu");
 			$this->load->view("form/form_data_details");
 			$this->load->view('footer');
 

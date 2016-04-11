@@ -152,6 +152,16 @@ class Xform_model extends CI_Model
 	 * @param $xform_id
 	 * @return mixed
 	 */
+	public function find_by_xform_id($xform_id)
+	{
+		$this->db->where("form_id", $xform_id);
+		return $this->db->get(self::$xform_table_name)->row();
+	}
+
+	/**
+	 * @param $xform_id
+	 * @return mixed
+	 */
 	public function delete_form($xform_id)
 	{
 		$this->db->limit(1);
@@ -199,6 +209,13 @@ class Xform_model extends CI_Model
 		return $this->db->field_data($table_name);
 	}
 
+	/**
+	 * @param $table_name
+	 * @param $axis_column
+	 * @param string $function
+	 * @param null $group_by_column
+	 * @return mixed
+	 */
 	public function get_graph_data($table_name, $axis_column, $function = "COUNT", $group_by_column = NULL)
 	{
 
@@ -227,6 +244,11 @@ class Xform_model extends CI_Model
 		return $this->db->get()->result();
 	}
 
+	/**
+	 * @param $xform_table_name
+	 * @param $data
+	 * @return mixed
+	 */
 	public function insert_xform_data($xform_table_name, $data)
 	{
 		return $this->db->insert($xform_table_name, $data);

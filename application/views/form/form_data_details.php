@@ -7,42 +7,46 @@
  */
 
 ?>
-<div class="grid_11">
-	<h3>Uploaded form data</h3>
-	<?php
-	if ($this->session->flashdata('message') != '') {
-		echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-	}
-	?>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-12 main">
 
-	<div class=" horizontal-overflow">
-		<table class="table table_list">
-			<tr>
-				<?php
-				foreach ($table_fields as $key => $column) {
-					echo "<th>" . $column . "</th>";
-				}
-				?>
-			</tr>
-
+			<h3>Form data collected</h3>
 			<?php
-			foreach ($form_data as $data) {
-
-				echo "<tr>";
-				foreach ($data as $key => $entry) {
-
-					if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-						echo "<td><img src=' " . $this->config->item("images_data_upload_dir") . $entry . "' /></td>";
-					} else {
-						echo "<td>" . $entry . "</td>";
-					}
-
-				}
-				echo "</tr>";
+			if ($this->session->flashdata('message') != '') {
+				echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
 			}
 			?>
-		</table>
+
+			<div class=" horizontal-overflow">
+				<table class="table table_list table-bordered table-striped table-hover table-condensed">
+					<tr>
+						<?php
+						foreach ($table_fields as $key => $column) {
+							echo "<th>" . $column . "</th>";
+						}
+						?>
+					</tr>
+
+					<?php
+					foreach ($form_data as $data) {
+
+						echo "<tr>";
+						foreach ($data as $key => $entry) {
+
+							if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+								echo "<td><img src=' " . $this->config->item("images_data_upload_dir") . $entry . "' /></td>";
+							} else {
+								echo "<td>" . $entry . "</td>";
+							}
+
+						}
+						echo "</tr>";
+					}
+					?>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
-<?php echo form_close(); ?>
 </div>
