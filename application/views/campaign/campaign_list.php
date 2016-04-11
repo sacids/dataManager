@@ -27,9 +27,9 @@
                         <td><?php echo $campaign->title; ?></td>
                         <td><?php echo $campaign->form_id; ?></td>
                         <td><?php echo $campaign->description; ?></td>
-                        <td><?php echo date('d-m-Y H:i:s', strtotime($form->end_date)); ?></td>
+                        <td><?php //echo date('d-m-Y H:i:s', strtotime($form->end_date)); ?></td>
                         <td>
-                            <?php echo anchor("campaign/edit_campaign/" . $campaign->id, "Edit"); ?>
+                            <?php echo anchor("campaign/edit_campaign/" . $campaign->id, "Edit"); ?> |
                             <?php echo anchor("campaign/delete_campaign/" . $campaign->id, "Delete", "class='delete'"); ?>
                         </td>
                     </tr>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>AfyaData - Simplify data collection.</title>
+    <title>AfyaData - Addressing one health security at community level through technology!</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?php echo base_url();?>favicon.png" />
@@ -83,7 +83,6 @@
             <p>Afya Data is a mobile app inspired by ODK Collect, developed by Southern African Centre for Infectious Disease.
 
                 Surveillance (SACIDS) for collecting, submitting, receiving and/or tracking feedback of submitted health data.</p>
-            <!--<a href="<?php echo site_url('auth/login'); ?>" class="btn btn-primary btn-xl page-scroll">Go to demo</a>-->
         </div>
     </div>
 </header>
