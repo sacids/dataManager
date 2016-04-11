@@ -25,10 +25,10 @@ class Form_visualization extends CI_Controller
 
 	public function index()
 	{
-		$this->overview();
+		$this->chart();
 	}
 
-	public function overview($form_id = NULL)
+	public function chart($form_id = NULL)
 	{
 		$data['xforms'] = $xforms = $this->Xform_model->get_form_list();
 
@@ -103,7 +103,7 @@ class Form_visualization extends CI_Controller
 			$data = $this->_load_default_graph_data($data, $xforms);
 		}
 		$this->load->view("header", $data);
-		$this->load->view("graph/overview", $data);
+		$this->load->view("graph/chart", $data);
 		$this->load->view("footer", $data);
 	}
 
