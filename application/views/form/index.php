@@ -39,8 +39,7 @@
 								<td>
 									<div class="dropdown">
 										<button class="btn btn-primary dropdown-toggle" type="button"
-										        data-toggle="dropdown">View data
-											<span class="caret"></span></button>
+										        data-toggle="dropdown">View <span class="caret"></span></button>
 										<ul class="dropdown-menu">
 											<li><?php echo anchor("xform/form_data/" . $form->id, "Data list"); ?></li>
 											<li><?php echo anchor("form_visualization/chart/" . $form->form_id, "View Chart"); ?></li>
@@ -49,7 +48,6 @@
 									</div>
 								</td>
 								<td>
-
 									<?php echo anchor("xform/edit_form/" . $form->id, "Edit"); ?>
 								</td>
 								<td>

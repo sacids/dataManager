@@ -12,6 +12,7 @@
 
 <script type="text/javascript">
 
+	<?php if (isset($categories)){ ?>
 	$(function () {
 
 		Highcharts.setOptions({
@@ -44,9 +45,8 @@
 				}
 			}
 		);
-	})
-	;
-
+	});
+	<?php } ?>
 	$(document).ready(function () {
 		//working fine
 		// Ajax calls here.

@@ -731,7 +731,7 @@ class Auth extends CI_Controller
 		);
 
 		$this->load->view('header', $this->data);
-		$this->load->view('auth/menu');
+		//$this->load->view('auth/menu');
 		$this->_render_page('auth/edit_user');
 		$this->load->view('footer');
 	}
@@ -749,7 +749,7 @@ class Auth extends CI_Controller
 		$data['title'] = 'Manage Groups';
 		$data['groups'] = $this->db->get('groups')->result();
 		$this->load->view('header', $data);
-		$this->load->view('auth/menu');
+		//$this->load->view('auth/menu');
 		$this->load->view('auth/group_list');
 		$this->load->view('footer');
 	}
@@ -791,7 +791,7 @@ class Auth extends CI_Controller
 				'value' => $this->form_validation->set_value('description'),
 			);
 			$this->load->view('header', $this->data);
-			$this->load->view('auth/menu');
+			//$this->load->view('auth/menu');
 			$this->_render_page('auth/create_group');
 			$this->load->view('footer');
 		}

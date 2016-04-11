@@ -80,26 +80,25 @@
 					   aria-expanded="false">OHKR <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Manage diseases</li>
-						<li><?php echo anchor('xform/forms', "List diseases"); ?></li>
-						<li><?php echo anchor('xform/add_new', "Add new disease"); ?></li>
+						<li><?php echo anchor('disease/diseases', "List diseases"); ?></li>
+						<li><?php echo anchor('disease/add_new', "Add new disease"); ?></li>
 						<li class="dropdown-header">Manage symptoms</li>
-						<li><?php echo anchor('auth/group_list', "List symptoms"); ?></li>
-						<li><?php echo anchor('auth/create_group', "Add new symptoms"); ?></li>
+						<li><?php echo anchor('disease/symptoms', "List symptoms"); ?></li>
+						<li><?php echo anchor('disease/add_new_symptom', "Add new symptoms"); ?></li>
 						<li class="dropdown-header">Manage species</li>
-						<li><?php echo anchor('auth/group_list', "List species"); ?></li>
-						<li><?php echo anchor('auth/group_list', "Add new specie"); ?></li>
+						<li><?php echo anchor('disease/species', "List species"); ?></li>
+						<li><?php echo anchor('disease/add_new_specie', "Add new specie"); ?></li>
 					</ul>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../navbar/">Default</a></li>
-				<li class=""><a href="./" class="dropdown-toggle" data-toggle="dropdown" role="button"
-				                aria-haspopup="true"
-				                aria-expanded="false"><?php echo ucfirst($this->session->userdata("username")) ?>
+				<li class="">
+					<a href="./" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+					   aria-expanded="false"><?php echo ucfirst($this->session->userdata("username")) ?>
 						<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><?php echo anchor('auth/profile', "My Profile"); ?></li>
-						<li><a href="#">Change password</a></li>
+						<li><?php echo anchor('auth/change_password', "Change password"); ?></li>
 						<li><?php echo anchor('auth/logout', "Logout"); ?></li>
 					</ul>
 				</li>
