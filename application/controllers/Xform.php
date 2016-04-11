@@ -34,6 +34,7 @@ class Xform extends CI_Controller
 		$this->load->model(array(
 			'Xform_model',
 			'User_model',
+			'Feedback_model',
 			'Submission_model'
 		));
 
@@ -171,6 +172,9 @@ class Xform extends CI_Controller
 		}
 
 		// return response
+		
+		
+		
 		$this->get_response($http_response_code);
 	}
 
@@ -192,7 +196,24 @@ class Xform extends CI_Controller
 		$statement = $this->get_insert_form_data_query();
 		// $this->load->model('Xform_model');
 
+		
+		
+		
+		
 		$result = $this->Xform_model->insert_data($statement);
+		
+		if($result){
+			$feedback = array(
+					"user_id"=>1,
+					"form_id"=>"",
+					"message"=>"Tumepokea fomu yako",
+					"date_created"=>date("c"),
+					"instance_id"=>$this->form_data['meta_instanceID'],
+					"sender"=>"server"
+			);
+			$this->Feedback_model->create_feedback($feedback);			
+		}
+		
 		log_message('debug', "insert result " . $result);
 		return $result;
 	}
@@ -364,7 +385,7 @@ class Xform extends CI_Controller
 			return FALSE;
 		}
 
-
+		
 		$field_names = "(`" . implode("`,`", array_keys($this->form_data)) . "`,$fn)";
 		$field_values = "('" . implode("','", array_values($this->form_data)) . "',$fd)";
 
