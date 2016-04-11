@@ -30,6 +30,9 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/leaflet/dist/MarkerCluster.css" />
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/leaflet/dist/MarkerCluster.Default.css" />
 
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/afyadata.css" type="text/css">
+
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<link href="<?= base_url() ?>assets/bootstrap/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
