@@ -13,6 +13,7 @@ class Auth extends CI_Controller
 		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 		$this->lang->load('auth');
 		$this->load->model('User_model');
+
 	}
 
 	// redirect if needed, otherwise display the user list
@@ -97,6 +98,10 @@ class Auth extends CI_Controller
 
 	function login()
 	{
+		if ($this->ion_auth->logged_in()) {
+			redirect('dashboard', 'refresh');
+		}
+
 		$this->data['title'] = "Login";
 
 		//validate form input
