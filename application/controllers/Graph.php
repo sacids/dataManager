@@ -18,7 +18,7 @@ class Graph extends CI_Controller
 			'Submission_model'
 		));
 
-		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">','</div>');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 
 		//$this->output->enable_profiler(TRUE);
 	}
@@ -40,21 +40,65 @@ class Graph extends CI_Controller
 			$data['form_details'] = $form_details;
 
 			$table_name = $form_details->form_id;
-			$data['table_fields'] = $this->Xform_model->find_table_columns($table_name);
+			$data['table_fields'] = $table_fields = $this->Xform_model->find_table_columns($table_name);
 			$data['table_fields_data'] = $table_fields_data = $this->Xform_model->find_table_columns_data($table_name);
 
-			$this->form_validation->set_rules("xaxis","Column to use as x-axis","required");
-			$this->form_validation->set_rules("yaxis","Column to use as y-axis","required");
+			$this->form_validation->set_rules("axis", "Column to plot", "required");
+			$this->form_validation->set_rules("group_by", "Select column to group by", "required");
 
-			if($this->form_validation->run() === FALSE){
+			if ($this->form_validation->run() === TRUE) {
 
-			}else {
+				$axis_column = $this->input->post("axis");
+
+				$start_date = $this->input->post("startdate");
+				$end_date = $this->input->post("enddate");
+
+				$group_by_column = $this->input->post("group_by");
+				$function = $this->input->post("function");
+
+				/*
+				foreach ($table_fields as $field) {
+					if ($field->name == $axis_column) {
+						if ($field->type == "enum") {
+							$function = "COUNT";
+							$group_by_column = $field->name;
+						} elseif ($field->type == "varchar") {
+							$function = "COUNT";
+						} elseif ($field->type == "int" || $field->type == "decimal") {
+							//todo check for column where is age or something that does not need to added/summed
+							$function = "SUM";
+						}
+					}
+				}
+				*/
+
+				$categories = array();
+				$series = array("name" => ucfirst(str_replace("_", " ", $axis_column)));
+				$series_data = array();
+
+				$data['$chart_title'] = $function;
+
+				$data['results'] = $results = $this->Xform_model->get_graph_data($table_name, $axis_column, $function, $group_by_column);
+
+				$i = 0;
+				foreach ($results as $results) {
+					if ($function == "COUNT") {
+						$categories[$i] = $results->$group_by_column;
+						$series_data[$i] = $results->count;
+					}
+					if ($function == "SUM") {
+						$categories[$i] = $results->$axis_column;
+						$series_data[$i] = $results->sum;
+					}
+					$i++;
+				}
+				$series["data"] = $series_data;
+				$data['categories'] = json_encode($categories);
+				$data['series'] = $series;
 
 			}
 		} else {
-
 			$data['title'] = "Overview";
-
 
 			$xforms_array = (array)$xforms;
 			$data['form_details'] = $first_loaded_xform = $xforms_array[0];
@@ -64,14 +108,15 @@ class Graph extends CI_Controller
 			$data['table_fields_data'] = $table_fields_data = $this->Xform_model->find_table_columns_data($table_name);
 
 			// Ignore the first parts of GPS before _point
-			$x_axis_column = NULL;
-			$y_axis_column = NULL;
-			$y_axis_action = "COUNT";
+			$axis_column = NULL;
+			$group_by_column = NULL;
+			$function = "COUNT";
 
 			$gps_point_field = NULL;
 			$gps_fields_initial = NULL;
 			$enum_fields = array();
 			$i = 0;
+
 			foreach ($table_fields_data as $field) {
 				if (strpos($field->name, '_point') == TRUE) {
 					$gps_point_field = $field->name;
@@ -96,44 +141,40 @@ class Graph extends CI_Controller
 				$is_gps_field = (strpos($field->name, $gps_fields_initial == FALSE)) ? FALSE : TRUE;
 
 				if ($field->type == "enum") {
-					$x_axis_column = $field->name;
-					$y_axis_column = $field->name;
+					$axis_column = $field->name;
+					$group_by_column = $field->name;
 					$enum_field = $field->name;
-					$y_axis_action = "COUNT";
+					$function = "COUNT";
 				} elseif ($field->type == "int" && $field->name != "id") {
-					$x_axis_column = $field->name;
-					$y_axis_column = ($enum_field != NULL) ? $enum_field : $field->name;
-					$y_axis_action = "COUNT";
+					$axis_column = $field->name;
+					$group_by_column = ($enum_field != NULL) ? $enum_field : $field->name;
+					$function = "SUM";
 					break;
 				} elseif ($field->type == "varchar" && !$is_gps_field) {
 					//TODO Fix this condition here
 					//($field->name != "meta_deviceID" && $field->name != "meta_instanceID") &&
-					$x_axis_column = $field->name;
-					$y_axis_column = ($enum_field != NULL) ? $enum_field : $field->name;
-					$y_axis_action = "COUNT";
+					$axis_column = $field->name;
+					$group_by_column = ($enum_field != NULL) ? $enum_field : $field->name;
+					$function = "COUNT";
 					break;
 				}
 			}
 
-			log_message("debug", "x-axis column " . $x_axis_column . " y-axis column " . $y_axis_column);
+			log_message("debug", "x-axis column " . $axis_column . " y-axis column " . $group_by_column);
 
 
 			$categories = array();
-			$series = array("name" => ucfirst(str_replace("_", " ", $x_axis_column)));
+			$series = array("name" => ucfirst(str_replace("_", " ", $axis_column)));
 			$series_data = array();
 
-			$data['results'] = $result = $this->Xform_model->get_graph_data($table_name, $x_axis_column, $y_axis_column, $y_axis_action);
+			$data['results'] = $results = $this->Xform_model->get_graph_data($table_name, $axis_column, $function, $group_by_column);
 
 			$i = 0;
-			foreach ($result as $result) {
-				if ($y_axis_action == "COUNT") {
-					$categories[$i] = $result->$y_axis_column;
-					$series_data[$i] = $result->count;
-				}
-				if ($y_axis_action == "SUM") {
-					$categories[$i] = $result->$x_axis_column;
-					$series_data[$i] = $result->sum;
-				}
+			$function = strtolower($function);
+			foreach ($results as $result) {
+				log_message("debug", "Result " . json_encode($result));
+				$categories[$i] = $result->$group_by_column;
+				$series_data[$i] = $result->$function;
 				$i++;
 			}
 			$series["data"] = $series_data;
@@ -143,8 +184,7 @@ class Graph extends CI_Controller
 		$this->load->view("graph/overview", $data);
 	}
 
-	public
-	function layout()
+	public function layout()
 	{
 		$this->load->view("graph/welcome_message");
 	}

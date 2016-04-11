@@ -199,21 +199,28 @@ class Xform_model extends CI_Model
 		return $this->db->field_data($table_name);
 	}
 
-	public function get_graph_data($table_name, $x_axis_column, $y_axis_column, $y_axis_action = "COUNT")
+	public function get_graph_data($table_name, $axis_column, $function = "COUNT", $group_by_column = NULL)
 	{
 
-		if ($y_axis_action == "COUNT") {
-			$this->db->select("`" . $y_axis_column . "`, COUNT(" . $y_axis_column . ") AS `" . strtolower($y_axis_action) . "`");
+		if ($function == "COUNT") {
+			$this->db->select("`{$axis_column}`, `{$group_by_column}`,COUNT(" . $axis_column . ") AS `" . strtolower($function) . "`");
 
 			//TODO Check field type before grouping
-
-			$this->db->group_by($x_axis_column);
+			if ($group_by_column != NULL) {
+				$this->db->group_by($group_by_column);
+			} else {
+				$this->db->group_by($axis_column);
+			}
 		}
 
-		if ($y_axis_action == "SUM") {
-			$this->db->select("`" . $y_axis_column . "`, SUM(" . $y_axis_column . ") AS `" . strtolower($y_axis_action) . "`");
+		if ($function == "SUM") {
+			$this->db->select("`{$axis_column}`, `{$group_by_column}`, SUM(" . $axis_column . ") AS `" . strtolower($function) . "`");
 			//TODO Check field type before grouping
-			$this->db->group_by($x_axis_column);
+			if ($group_by_column != NULL) {
+				$this->db->group_by($group_by_column);
+			} else {
+				$this->db->group_by($axis_column);
+			}
 		}
 
 		$this->db->from($table_name);

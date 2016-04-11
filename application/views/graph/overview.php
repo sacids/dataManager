@@ -72,7 +72,8 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="../navbar/">Default</a></li>
-				<li class=""><a href="./" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+				<li class=""><a href="./" class="dropdown-toggle" data-toggle="dropdown" role="button"
+				                aria-haspopup="true"
 				                aria-expanded="false"><?php echo ucfirst($this->session->userdata("username")) ?>
 						<span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -114,25 +115,31 @@
 		</div>
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<h1 class="page-header" id="xform-title"><?php echo $form_details->title ?></h1>
-			<div class="">
+			<div class="" style="margin-bottom: 10px;">
 				<?php echo form_open("graph/overview/" . $form_details->id, 'class="form-inline" role="form"'); ?>
 				<?php
-				$options = array("" => "Select column to use as X-axis field");
+				$options = array("" => "Select column to plot");
 				foreach ($table_fields as $key => $value) {
 					$options[$value] = ucfirst(str_replace("_", " ", $value));
 				}
 				?>
 
 				<div class="form-group">
-					<label for="X-Axis"></label>
-					<?php echo form_dropdown("xaxis", $options, $table_fields[3], 'class="form-control"'); ?>
+					<label for="Axis Column"></label>
+					<?php echo form_dropdown("axis", $options, $table_fields[mt_rand(1, (count($table_fields) - 1))], 'class="form-control"'); ?>
 				</div>
 				<div class="form-group">
-					<label for="Y-Axis"></label>
-					<?php $options[""] = "Select column to use as Y-axis";
-					echo form_dropdown("yaxis", $options, $table_fields[4], 'class="form-control"'); ?>
+					<label for="Group by"></label>
+					<?php $options[""] = "Select column to Group by";
+					echo form_dropdown("group_by", $options, $table_fields[mt_rand(1, (count($table_fields) - 1))], 'class="form-control"'); ?>
 				</div>
 
+				<div class="form-group">
+					<label for="Operation"></label>
+					<?php echo form_dropdown("function", array("COUNT" => "Count all", "SUM" => "Find summation"), "COUNT", 'class="form-control"'); ?>
+				</div>
+
+				<!-- Todo Uncomment and implement date
 				<div class="form-group">
 					<div class="input-group date startdate" data-link-field="dtp_input1">
 						<input type="text" size="10" id="startdate" name="startdate" placeholder="Start date"
@@ -147,6 +154,8 @@
 						<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
 					</div>
 				</div>
+				-->
+
 
 				<div class="form-group">
 					<div class="input-group">
@@ -160,6 +169,13 @@
 
 			<div id="graph-content">
 				<!--TODO Insert graph code here -->
+
+				<?php if (empty($categories)) {
+					$message = "<p class='text-center'>Select <strong>columns</strong> you want to plot against a group column and function you want to use, to see a chart here</p>";
+					echo display_message($message, "info");
+				}
+				?>
+
 			</div>
 
 			<div class="">
@@ -190,6 +206,13 @@
 <script type="text/javascript">
 
 	$(function () {
+
+		Highcharts.setOptions({
+			lang: {
+				thousandsSep: ','
+			}
+		});
+
 		$('#graph-content').highcharts({
 				chart: {
 					type: 'column'
@@ -202,7 +225,7 @@
 				},
 				yAxis: {
 					title: {
-						text: 'Mifugo Count'
+						text: '<?php echo !empty($chart_title) ? $chart_title : "Count"?>'
 					}
 				},
 				series: [{
