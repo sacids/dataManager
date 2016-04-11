@@ -194,18 +194,13 @@ class Xform extends CI_Controller
 		// get mysql statement used to insert form data into corresponding table
 
 		$statement = $this->get_insert_form_data_query();
-		// $this->load->model('Xform_model');
 
-		
-		
-		
-		
 		$result = $this->Xform_model->insert_data($statement);
 		
 		if($result){
 			$feedback = array(
 					"user_id"=>1,
-					"form_id"=>"",
+					"form_id"=>$this->table_name,
 					"message"=>"Tumepokea fomu yako",
 					"date_created"=>date("c"),
 					"instance_id"=>$this->form_data['meta_instanceID'],
