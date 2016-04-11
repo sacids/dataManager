@@ -26,7 +26,7 @@ class Seeder extends CI_Controller
 		$this->faker = Faker\Factory::create();
 
 		// load any required models
-		//$this->load->model('User_model');
+		$this->load->model('Ohkr_model');
 		$this->load->model('Xform_model');
 	}
 
@@ -42,8 +42,11 @@ class Seeder extends CI_Controller
 		//$this->_seed_users(25);
 
 		// call dalili za mifugo
-		$this->_seed_dalili_za_mifugo_forms(1500);
-		$this->_seed_dalili_za_binadamu_forms(1500);
+		$this->_seed_dalili_za_mifugo_forms(2150);
+		$this->_seed_dalili_za_binadamu_forms(2150);
+		$this->_seed_diseases(100);
+		$this->_seed_species(5);
+		$this->_seed_symptoms(200);
 	}
 
 	private function _truncate_db()
@@ -51,6 +54,15 @@ class Seeder extends CI_Controller
 		//$this->User_model->truncate();
 		$this->db->truncate('build_dalili_za_mifugo_1418895355');
 		$this->db->truncate('build_dalili_za_binadamu_1418894655');
+
+		$this->db->where("id > 0", NULL);
+		$this->db->delete('diseases_symptoms');
+
+		$this->db->where("id > 0", NULL);
+		$this->db->delete('symptoms');
+
+		$this->db->where("id > 0", NULL);
+		$this->db->delete('diseases');
 		//$this->db->truncate('users');
 	}
 
@@ -233,6 +245,47 @@ class Seeder extends CI_Controller
 			$this->Xform_model->insert_xform_data($table_name, $dalili_za_binadamu_data);
 		}
 
+	}
+
+	function _seed_diseases($limit)
+	{
+		echo "Seeding {$limit} diseases\n";
+
+		for ($i = 0; $i < $limit; $i++) {
+			$disease_data = array(
+				"name" => $this->faker->sentence(mt_rand(1, 10)),
+				"description" => $this->faker->realText(mt_rand(50, 500)),
+				"date_created" => $this->faker->dateTimeBetween("-10 days", "now")->format('Y-m-d H:i:s')
+			);
+			$this->Ohkr_model->add($disease_data);
+		}
+	}
+
+	function _seed_species($limit)
+	{
+		echo "Seeding {$limit} species\n";
+
+		for ($i = 0; $i < $limit; $i++) {
+			$specie_data = array(
+				"name" => $this->_get_random_value_from_array(array("Binadamu", "Ng'ombe", "Mbuzi", "Kondoo", "Nguruwe")),
+				"date_created" => $this->faker->dateTimeBetween("-10 days", "now")->format('Y-m-d H:i:s')
+			);
+			$this->Ohkr_model->add_specie($specie_data);
+		}
+	}
+
+	function _seed_symptoms($limit)
+	{
+		echo "Seeding {$limit} symptoms\n";
+
+		for ($i = 0; $i < $limit; $i++) {
+			$symptom_data = array(
+				"name" => $this->faker->sentence(mt_rand(1, 10)),
+				"description" => $this->faker->realText(mt_rand(50, 500)),
+				"date_created" => $this->faker->dateTimeBetween("-10 days", "now")->format('Y-m-d H:i:s')
+			);
+			$this->Ohkr_model->add_symptom($symptom_data);
+		}
 	}
 
 	/**
