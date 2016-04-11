@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Created by PhpStorm.
+ * User: Renfrid-Sacids
+ * Date: 4/11/2016
+ * Time: 5:56 PM
+ */
+class Ohkr_model
+{
+
+}
