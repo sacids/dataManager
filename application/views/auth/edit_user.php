@@ -12,7 +12,7 @@
 				echo display_message($error_in, "danger");
 			endif; ?>
 
-			<fieldset style="width: 90%;">
+			<fieldset style="">
 				<legend>Basic User Information</legend>
 				<div class="form-group">
 					<label> <label for="first_name">First Name:<span>*</span></label> </label>
@@ -39,7 +39,7 @@
 				<?php echo form_error('phone'); ?>
 			</fieldset>
 
-			<fieldset style="width: 90%;">
+			<fieldset style="">
 				<legend>Account User</legend>
 
 				<div class="checkbox">

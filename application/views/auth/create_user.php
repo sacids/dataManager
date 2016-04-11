@@ -13,7 +13,7 @@
 				elseif (isset($error_in)):
 					echo '<div class="fail_message">' . $error_in . '</div>';
 				endif; ?>
-				<fieldset style="width: 90%;">
+				<fieldset style="">
 					<legend>Basic User Information</legend>
 					<div class="form-group">
 						<label for="first_name"><?php echo $this->lang->line("create_user_fname_label") ?>
@@ -63,7 +63,7 @@
 
 				</fieldset>
 
-				<fieldset style="width: 90%;">
+				<fieldset style="">
 					<legend>Assign User Group</legend>
 					<div class="form-group">
 						<label for="group">Group: <span>*</span></label>
@@ -102,4 +102,3 @@
 		</div>
 	</div>
 </div>
-
