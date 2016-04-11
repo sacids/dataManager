@@ -22,6 +22,12 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/public/js/chain.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/public/js/ajax.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/public/js/sacids.js"></script>
+	
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/public/leaflet/dist/leaflet.markercluster-src.js"></script>	
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/leaflet/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/leaflet/dist/MarkerCluster.Default.css" />
 
 
 	<script type="text/javascript">
