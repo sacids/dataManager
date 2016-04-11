@@ -9,14 +9,14 @@
 			<?php echo form_open('auth/reset_password/' . $code, 'class="form-horizontal" role="form"'); ?>
 
 			<div class="form-group">
-				<label for="new_password">
+				<label for="new password">
 					<?php echo sprintf(lang('reset_password_new_password_label'), $min_password_length); ?></label>
-				<?php echo form_input($new_password); ?>
+				<?php echo form_input($new_password,"", 'class="form-control"'); ?>
 			</div>
 
 			<div class="form-group">
 				<?php echo lang('reset_password_new_password_confirm_label', 'new_password_confirm'); ?> <br/>
-				<?php echo form_input($new_password_confirm); ?>
+				<?php echo form_input($new_password_confirm,"", 'class="form-control"'); ?>
 			</div>
 
 			<?php echo form_input($user_id); ?>

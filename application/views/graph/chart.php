@@ -26,7 +26,7 @@
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<h1 class="page-header" id="xform-title"><?php echo $form_details->title ?></h1>
 			<div class="" style="margin-bottom: 10px;">
-				<?php echo form_open("graph/chart/" . $form_details->form_id, 'class="form-inline" role="form"'); ?>
+				<?php echo form_open("form_visualization/chart/" . $form_details->form_id, 'class="form-inline" role="form"'); ?>
 				<?php
 				$options = array("" => "Select column to plot");
 				foreach ($table_fields as $key => $value) {

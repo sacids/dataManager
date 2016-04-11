@@ -88,7 +88,7 @@ class Auth extends CI_Controller
 
 		$this->data['title'] = 'User Information';
 		$this->load->view('header', $this->data);
-		$this->load->view('profile/menu');
+		//$this->load->view('profile/menu');
 		$this->load->view('profile/user_info');
 		$this->load->view('footer');
 	}
@@ -185,7 +185,7 @@ class Auth extends CI_Controller
 			// render
 			$this->data['title'] = "Change Password";
 			$this->load->view('header', $this->data);
-			$this->load->view('profile/menu');
+			//$this->load->view('profile/menu');
 			$this->_render_page('profile/change_password');
 			$this->load->view('footer');
 			//$this->_render_page('auth/change_password', $this->data);
@@ -454,7 +454,7 @@ class Auth extends CI_Controller
 
 			$this->data['title'] = "Deactivate user";
 			$this->load->view('header', $this->data);
-			$this->load->view('auth/menu');
+			//$this->load->view('auth/menu');
 			$this->_render_page('auth/deactivate_user');
 			$this->load->view('footer');
 			//$this->_render_page('auth/deactivate_user', $this->data);
@@ -852,7 +852,7 @@ class Auth extends CI_Controller
 
 		//Load View
 		$this->load->view('header', $this->data);
-		$this->load->view('auth/menu');
+		//$this->load->view('auth/menu');
 		$this->_render_page('auth/edit_group');
 		$this->load->view('footer');
 	}
