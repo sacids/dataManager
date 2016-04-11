@@ -1,7 +1,9 @@
-<div class="grid_11" style="padding-top: 20px; text-align: left;">
-    <?php echo form_open_multipart('campaign/add_new', 'class="pure-form pure-form-aligned"'); ?>
-    <div class="formCon">
-        <div class="formConInner">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 main">
+
+    <?php echo form_open_multipart('campaign/add_new', 'class="form-horizontal" role="form"'); ?>
+
             <h3>Campaign Details</h3>
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -9,48 +11,48 @@
             } ?>
 
             <fieldset>
-                <div class="pure-control-group">
+                <div class="form-group">
                     <label>Campaign Title <span>*</span></label>
-                    <input type="text" name="title" placeholder="Enter Campaign Title" class="pure-input-1-2"
+                    <input type="text" name="title" placeholder="Enter Campaign Title" class="form-control"
                            value="<?php echo set_value('title'); ?>">
                 </div>
-                <div class="pure-form-message-inline"><?php echo form_error('title'); ?></div>
+                <?php echo form_error('title'); ?>
 
-                <div class="pure-control-group">
+                <div class="form-group">
                     <label>Campaign Icon <span>*</span></label>
-                    <input type="text" name="icon" placeholder="Enter campaign icon" class="pure-input-1-2"
+                    <input type="text" name="icon" placeholder="Enter campaign icon" class="form-control"
                            value="<?php echo set_value('icon'); ?>">
                 </div>
-                <div class="pure-form-message-inline"><?php echo form_error('icon'); ?></div>
+                <?php echo form_error('icon'); ?>
 
 
-                <div class="pure-control-group">
+                <div class="form-group">
                     <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label>
-                        <textarea class="pure-input-1-2" name="description"
+                        <textarea class="form-control" name="description"
                                   id="description"><?php echo set_value('description'); ?></textarea>
                 </div>
-                <div class="pure-form-message-inline"><?php echo form_error('description'); ?></div>
+                <?php echo form_error('description'); ?>
 
-                <div class="pure-control-group">
+                <div class="form-group">
                     <label for="campus">Form Id :</label>
-                    <select name="form_id" id="form_id" class="pure-input-1-2">
+                    <select name="form_id" id="form_id" class="form-control">
                         <option value="">Choose form</option>
                         <?php foreach($forms as $form){?>
                         <option value="<?php echo $form->form_id?>"><?php echo $form->form_id?></option>
                         <?php } ?>
                     </select>
                 </div>
-                <div class="pure-form-message-inline"><?php echo form_error('form_id'); ?></div>
+                <?php echo form_error('form_id'); ?>
 
-                <div class="pure-control-group">
+                <div class="form-group">
                     <label>&nbsp; &nbsp; &nbsp;</label>
-                    <button type="submit" class="pure-button pure-button-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
 
             </fieldset>
+
+    <?php echo form_close(); ?>
         </div>
     </div>
-    <?php echo form_close(); ?>
 </div>
-<div style="clear: both;"></div>
 

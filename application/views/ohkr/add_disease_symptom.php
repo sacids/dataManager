@@ -1,49 +1,52 @@
-<div class="grid_11" style="padding-top: 20px; text-align: left;">
-    <?php echo form_open_multipart('ohkr/add_disease_symptom/'.$disease->id, 'class="pure-form pure-form-aligned"'); ?>
-    <div class="formCon">
-        <div class="formConInner">
-            <h3><?php echo $disease->name;?> Disease Symptom</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 main">
+
+            <?php echo form_open_multipart('ohkr/add_disease_symptom/' . $disease->id, 'class="form-horizontal" role="form"'); ?>
+            <h3><?php echo $disease->name; ?> Disease Symptom</h3>
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
             } ?>
-            <fieldset>
 
-                <div class="pure-control-group">
+
+                <div class="form-group">
                     <label><?php echo $this->lang->line("label_specie_name") ?> <span>*</span></label>
-                    <select name="specie" id="specie" class="pure-input-1-2">
+                    <select name="specie" id="specie" class="form-control">
                         <option value="">Choose Specie</option>
-                        <?php foreach($species as $specie){ ?>
-                            <option value="<?php echo $specie->id;?>"><?php echo $specie->name;?></option>
-                        <?php }?>
+                        <?php foreach ($species as $specie) { ?>
+                            <option value="<?php echo $specie->id; ?>"><?php echo $specie->name; ?></option>
+                        <?php } ?>
                     </select>
                 </div>
-                <div class="pure-form-message-inline"><?php echo form_error('specie'); ?></div>
+                <?php echo form_error('specie'); ?>
 
-                <div class="pure-control-group">
+                <div class="form-group">
                     <label><?php echo $this->lang->line("label_symptom_name") ?> <span>*</span></label>
-                    <select name="symptom" id="symptom" class="pure-input-1-2">
+                    <select name="symptom" id="symptom" class="form-control">
                         <option value="">Choose Symptom</option>
-                        <?php foreach($symptoms as $symptom){ ?>
-                            <option value="<?php echo $symptom->id;?>"><?php echo $symptom->name;?></option>
-                        <?php }?>
+                        <?php foreach ($symptoms as $symptom) { ?>
+                            <option value="<?php echo $symptom->id; ?>"><?php echo $symptom->name; ?></option>
+                        <?php } ?>
                     </select>
                 </div>
-                <div class="pure-form-message-inline"><?php echo form_error('symptom'); ?></div>
+                <?php echo form_error('symptom'); ?>
 
-                <div class="pure-control-group">
+                <div class="form-group">
                     <label>Importance (%) <span>*</span></label>
-                    <input type="text" name="importance" placeholder="Enter importance" class="pure-input-1-2" value="<?php echo set_value('importance'); ?>">
+                    <input type="text" name="importance" placeholder="Enter importance" class="form-control"
+                           value="<?php echo set_value('importance'); ?>">
                 </div>
-                <div class="pure-form-message-inline"><?php echo form_error('importance'); ?></div>
+                <?php echo form_error('importance'); ?>
 
 
-                <div class="pure-control-group">
+                <div class="form-group">
                     <label>&nbsp; &nbsp; &nbsp;</label>
-                    <button type="submit" class="pure-button pure-button-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
-            </fieldset>
+
+
+            <?php echo form_close(); ?>
         </div>
     </div>
-    <?php echo form_close(); ?>
 </div>

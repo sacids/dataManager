@@ -23,6 +23,11 @@ class Feedback_model extends CI_Model
 		parent::__construct();
 	}
 
+	function find_all()
+	{
+		return $this->db->get(self::$table_name)->result();
+	}
+
 	/**
 	 * @param $user_id
 	 * @param $form_id

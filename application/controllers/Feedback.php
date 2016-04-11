@@ -23,6 +23,50 @@ class Feedback extends CI_Controller
 	}
 
 
+	function feedback_list()
+	{
+
+		$data['feedback'] = $this->Feedback_model->find_all();
+
+		//render view
+		$data['title'] = "Feedback List";
+		$this->load->view('header', $data);
+		//$this->load->view("feedback/menu");
+		$this->load->view("feedback/feedback_list");
+		$this->load->view('footer');
+	}
+
+	function user_feedback($user_id, $form_id)
+	{
+		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules("message", "Message", "required");
+
+			if ($this->form_validation->run() === TRUE) {
+				$feedback_details = array(
+					'form_id' => $form_id,
+					'message' => $this->input->post('message'),
+					'date_created' => date("c"),
+					'user_id' => $user_id,
+					'sender' => 'server'
+				);
+				$this->Feedback_model->create_feedback($feedback_details);
+				//get last insert id
+				$feedback_id = $this->db->insert_id();
+				$this->session->set_flashdata("message", "Feedback successfully sent");
+				redirect("feedback/user_feedback/".$user_id."/".$form_id, "refresh");
+			}
+		}
+		$data['feedback'] = $this->Feedback_model->get_feedback($user_id, $form_id);
+
+		//render view
+		$data['title'] = "Feedback List";
+		$this->load->view('header', $data);
+		//$this->load->view("feedback/menu");
+		$this->load->view("feedback/user_feedback_list");
+		$this->load->view('footer');
+	}
+
+
 	/**
 	 * XML submission class
 	 *

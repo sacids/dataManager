@@ -1,4 +1,6 @@
-<div id="grid_padding" class="grid_11">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 main">
 
     <?php
     if ($this->session->flashdata('message') != '') {
@@ -38,5 +40,8 @@
         <?php } else { ?>
             <div class="fail_message">You don't have any campaign to display</div>
         <?php } ?>
+    </div>
+
+        </div>
     </div>
 </div>

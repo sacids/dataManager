@@ -88,18 +88,36 @@
 					   aria-expanded="false">OHKR <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">Manage diseases</li>
-						<li><?php echo anchor('disease/diseases', "List diseases"); ?></li>
-						<li><?php echo anchor('disease/add_new', "Add new disease"); ?></li>
+						<li><?php echo anchor('ohkr/disease_list', "List diseases"); ?></li>
+						<li><?php echo anchor('ohkr/add_new_disease', "Add new disease"); ?></li>
 						<li class="dropdown-header">Manage symptoms</li>
-						<li><?php echo anchor('disease/symptoms', "List symptoms"); ?></li>
-						<li><?php echo anchor('disease/add_new_symptom', "Add new symptoms"); ?></li>
+						<li><?php echo anchor('ohkr/symptoms_list', "List symptoms"); ?></li>
+						<li><?php echo anchor('ohkr/add_new_symptom', "Add new symptoms"); ?></li>
 						<li class="dropdown-header">Manage species</li>
-						<li><?php echo anchor('disease/species', "List species"); ?></li>
-						<li><?php echo anchor('disease/add_new_specie', "Add new specie"); ?></li>
+						<li><?php echo anchor('ohkr/species_list', "List species"); ?></li>
+						<li><?php echo anchor('ohkr/add_new_specie', "Add new specie"); ?></li>
+					</ul>
+				</li>
+
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+					   aria-expanded="false">Manage Campaign <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><?php echo anchor('campaign/campaign_list', "List Campaign"); ?></li>
+						<li><?php echo anchor('campaign/add_new', "Add New Campaign"); ?></li>
 					</ul>
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+					   aria-expanded="false">Chats <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><?php echo anchor('feedback/feedback_list', "Chat List"); ?></li>
+					</ul>
+				</li>
+
 				<li class="">
 					<a href="./" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 					   aria-expanded="false"><?php echo ucfirst($this->session->userdata("username")) ?>

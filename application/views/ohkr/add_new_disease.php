@@ -1,43 +1,46 @@
-<div class="grid_11" style="padding-top: 20px; text-align: left;">
-	<?php echo form_open_multipart('ohkr/add_new_disease', 'class="pure-form pure-form-aligned"'); ?>
-	<div class="formCon">
-		<div class="formConInner">
-			<h3>Disease Details</h3>
-			<?php
-			if ($this->session->flashdata('message') != '') {
-				echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-			} ?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 main">
 
-			<fieldset>
-				<div class="pure-control-group">
-					<label><?php echo $this->lang->line("label_disease_name") ?> <span>*</span></label>
-					<input type="text" name="name" placeholder="Enter disease name" class="pure-input-1-2"
-					       value="<?php echo set_value('name'); ?>">
-				</div>
-				<div class="pure-form-message-inline"><?php echo form_error('name'); ?></div>
+            <?php echo form_open_multipart('ohkr/add_new_disease', 'class="form-horizontal" role="form"'); ?>
 
-				<!--div class="pure-control-group">
+            <h3>Disease Details</h3>
+            <?php
+            if ($this->session->flashdata('message') != '') {
+                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
+            } ?>
+
+
+                <div class="form-group">
+                    <label><?php echo $this->lang->line("label_disease_name") ?> <span>*</span></label>
+                    <input type="text" name="name" placeholder="Enter disease name" class="form-control"
+                           value="<?php echo set_value('name'); ?>">
+                </div>
+                <?php echo form_error('name'); ?>
+
+                <!--div class="pure-control-group">
 					<label><?php echo $this->lang->line("label_specie") ?> <span>*</span></label>
 
 					<?php //echo form_dropdown("specie", $species, set_value('specie', ''), 'class="pure-input-1-2"'); ?>
 				</div=-->
 
-				<div class="pure-form-message-inline"><?php echo form_error('specie'); ?></div>
+                <div class="pure-form-message-inline"><?php echo form_error('specie'); ?></div>
 
-				<div class="pure-control-group">
-					<label> <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label> </label>
-                        <textarea class="pure-input-1-2" name="description"
+                <div class="form-group">
+                    <label> <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label> </label>
+                        <textarea class="form-control" name="description"
                                   id="description"><?php echo set_value('description'); ?></textarea>
-				</div>
-				<div class="pure-form-message-inline"><?php echo form_error('description'); ?></div>
+                </div>
+                <?php echo form_error('description'); ?>
 
-				<div class="pure-control-group">
-					<label>&nbsp; &nbsp; &nbsp;</label>
-					<button type="submit" class="pure-button pure-button-primary">Save</button>
-				</div>
+                <div class="form-group">
+                    <label>&nbsp; &nbsp; &nbsp;</label>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
 
-			</fieldset>
-		</div>
-	</div>
-	<?php echo form_close(); ?>
+
+
+            <?php echo form_close(); ?>
+        </div>
+    </div>
 </div>
