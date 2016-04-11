@@ -22,6 +22,14 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Leaflet, marker cluster js and css -->
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/public/leaflet/dist/leaflet.markercluster-src.js"></script>	
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/leaflet/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/leaflet/dist/MarkerCluster.Default.css" />
+
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<link href="<?= base_url() ?>assets/bootstrap/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
