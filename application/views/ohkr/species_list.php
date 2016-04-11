@@ -23,7 +23,7 @@
                         foreach ($species as $specie) { ?>
                             <tr>
                                 <td><?php echo $specie->name; ?></td>
-                                <td><?php echo date('d-m-Y H:i:s', strtotime($specie->date_created)); ?></td>
+                                <td><?php //echo date('d-m-Y H:i:s', strtotime($specie->date_created)); ?></td>
                                 <td>
                                     <?php echo anchor("#", "Edit"); ?>
                                     <?php echo anchor("#", "Delete", "class='delete'"); ?>

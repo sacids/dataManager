@@ -62,7 +62,7 @@ class Campaign extends CI_Controller
             $this->Campaign_model->create_campaign($campaign_details);
             //get last insert id
             $campaign_id = $this->db->insert_id();
-            $this->session->set_flashdata("message", "Campaign successfully added");
+            $this->session->set_flashdata("message",display_message("Campaign successfully added"));
             redirect("campaign/add_new", "refresh");
         }
     }

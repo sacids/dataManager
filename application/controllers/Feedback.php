@@ -14,24 +14,21 @@ class Feedback extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('Feedback_model', 'User_model'));
+		$this->load->model(array('Feedback_model', 'User_model','Xform_model'));
 		$this->load->library('form_auth');
 		$this->load->helper(array('url', 'string'));
 		log_message('debug', 'Feedback controller initialized');
-
 		//$this->output->enable_profiler(TRUE);
 	}
 
 
 	function feedback_list()
 	{
-
 		$data['feedback'] = $this->Feedback_model->find_all();
 
 		//render view
 		$data['title'] = "Feedback List";
 		$this->load->view('header', $data);
-		//$this->load->view("feedback/menu");
 		$this->load->view("feedback/feedback_list");
 		$this->load->view('footer');
 	}

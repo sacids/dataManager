@@ -25,6 +25,9 @@ class Feedback_model extends CI_Model
 
 	function find_all()
 	{
+		$this->db->join('users', 'users.id = feedback.user_id')
+			->order_by('date_created','ASC')
+			->group_by('feedback.user_id');
 		return $this->db->get(self::$table_name)->result();
 	}
 

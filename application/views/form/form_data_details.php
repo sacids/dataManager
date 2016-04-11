@@ -21,6 +21,7 @@
 			<div class=" horizontal-overflow">
 				<table class="table table_list table-bordered table-striped table-hover table-condensed">
 					<tr>
+
 						<?php
 						foreach ($table_fields as $key => $column) {
 							echo "<th>" . $column . "</th>";

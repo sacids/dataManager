@@ -13,7 +13,6 @@
 
                     <table class="table" cellspacing="0" cellpadding="0">
                         <tr>
-                            <th></th>
                             <th>Form Id</th>
                             <th>user</th>
                             <th>Last Message</th>
@@ -26,7 +25,7 @@
                         foreach ($feedback as $value) { ?>
                             <tr>
                                 <td><?php echo $value->form_id; ?></td>
-                                <td><?php echo $value->user_id; ?></td>
+                                <td><?php echo $value->first_name.' '.$value->last_name; ?></td>
                                 <td><?php echo $value->message; ?></td>
                                 <td><?php echo date('d-m-Y H:i:s', strtotime($value->date_created)); ?></td>
                                 <td>

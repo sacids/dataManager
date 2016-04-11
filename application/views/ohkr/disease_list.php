@@ -25,7 +25,7 @@
                             <tr>
                                 <td><?php echo $disease->name; ?></td>
                                 <td><?php echo $disease->description; ?></td>
-                                <td><?php echo date('d-m-Y H:i:s', strtotime($disease->date_created)); ?></td>
+                                <td><?php //echo date('d-m-Y H:i:s', strtotime($disease->date_created)); ?></td>
                                 <td>
                                     <?php echo anchor("ohkr/disease_symptoms/" . $disease->id, "Symptoms"); ?>
                                     <?php echo anchor("ohkr/edit_disease/" . $disease->id, "Edit"); ?>

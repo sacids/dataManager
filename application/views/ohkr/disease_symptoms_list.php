@@ -28,7 +28,7 @@
                                 <td><?php echo $symptom->specie_name; ?></td>
                                 <td><?php echo $symptom->symptom_name; ?></td>
                                 <td><?php echo $symptom->importance; ?></td>
-                                <td><?php echo date('d-m-Y H:i:s', strtotime($symptom->date_created)); ?></td>
+                                <td><?php //echo date('d-m-Y H:i:s', strtotime($symptom->date_created)); ?></td>
                                 <td>
                                 </td>
                             </tr>

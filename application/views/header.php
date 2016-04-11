@@ -112,7 +112,7 @@
 
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-					   aria-expanded="false">Chats <span class="caret"></span></a>
+					   aria-expanded="false">Chats <span class='badge'>4</span><span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><?php echo anchor('feedback/feedback_list', "Chat List"); ?></li>
 					</ul>
