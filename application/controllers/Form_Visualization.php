@@ -205,4 +205,66 @@ class Form_visualization extends CI_Controller
 	{
 		$this->load->view("graph/welcome_message");
 	}
+	
+	
+	
+	public function map($form_id = NULL){
+		
+		if ($form_id != NULL) {
+		
+			$data	= $this->_load_points($form_id);
+			
+			
+			log_message('debug', ' Batizo '.json_encode($data));
+			
+			$this->load->view("header");
+			$this->load->view("graph/map",$data);
+			$this->load->view("footer");
+						
+		}else{
+			
+			
+			// Display some error message or rather get default form
+		}
+	}
+	
+	private function _load_points($form_id){
+	
+		// TODO - enable limits/conditions for loading data
+		$point_field	= $this->Xform_model->get_point_field($form_id);
+		if(!$point_field){
+			log_message('error', 'load points Table '.$form_id.' has no location field of type POINT');
+			return false;
+		}
+		
+		$gps_prefix	= substr($point_field,0,-6);
+		
+		$data	= $this->Xform_model->get_geospatial_data($form_id);
+		
+		$addressPoints	= '<script type="text/javascript"> var addressPoints = [';
+		$first	= 0;
+		foreach($data as $val){
+				
+			$lat	= $val[$gps_prefix.'_lat'];
+			$lng	= $val[$gps_prefix.'_lng'];
+			
+			if(!$first++){
+				$addressPoints	.= '['.$lat.', '.$lng.', "a"]';
+			}else{
+				$addressPoints	.= ',['.$lat.', '.$lng.', "a"]';
+			}
+		}
+	
+	
+		$addressPoints	.= ']; </script>';
+		$latlon	=  $lat.', '.$lng;
+		
+		$holder	= array();
+		$holder['addressPoints']	= $addressPoints;
+		$holder['latlon']			= $latlon;
+		
+		return $holder;
+	}
+	
+	
 }

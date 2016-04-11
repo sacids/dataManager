@@ -43,7 +43,7 @@
 										<ul class="dropdown-menu">
 											<li><?php echo anchor("xform/form_data/" . $form->id, "Data list"); ?></li>
 											<li><?php echo anchor("form_visualization/chart/" . $form->form_id, "View Chart"); ?></li>
-											<li><?php echo anchor("form_visualization/map/" . $form->id, "View Map"); ?></li>
+											<li><?php echo anchor("form_visualization/map/" . $form->form_id, "View Map"); ?></li>
 										</ul>
 									</div>
 								</td>

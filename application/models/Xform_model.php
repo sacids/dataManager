@@ -130,10 +130,13 @@ class Xform_model extends CI_Model
 	{
 
 		$sql = " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ";
-		$sql .= " WHERE table_name = '{$table_name}' ";
+		$sql .= " WHERE table_schema = '{$this->db->database}' ";
+		$sql .= " AND table_name = '{$table_name}' ";
 		$sql .= " AND DATA_TYPE = 'point'";
 
 		$query = $this->db->query($sql);
+		
+		log_message('debug', 'get point field query '.$this->db->last_query());
 
 		return ($query->num_rows() == 1) ? $query->row(1)->COLUMN_NAME : FALSE;
 	}
@@ -209,6 +212,22 @@ class Xform_model extends CI_Model
 		return $this->db->field_data($table_name);
 	}
 
+	
+	/**
+	 * $param $table_name
+	 * $param info text to be displayer per point
+	 * $param $cond sql condition (without the where)
+	 * @return list of lat,lon,info
+	 */
+	
+	public function get_geospatial_data($table_name, $cond = true){
+		
+		//$this->db->where($cond);
+		$query	= $this->db->get($table_name);
+		if($query->num_rows() == 0) return false;
+		
+		return $query->result_array();
+	}
 	/**
 	 * @param $table_name
 	 * @param $axis_column
