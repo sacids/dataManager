@@ -852,7 +852,7 @@ class Auth extends CI_Controller
 
 		//Load View
 		$this->load->view('header', $this->data);
-		$this->load->view('auth/menu');
+		//$this->load->view('auth/menu');
 		$this->_render_page('auth/edit_group');
 		$this->load->view('footer');
 	}

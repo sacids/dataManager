@@ -1,40 +1,39 @@
-<div class="grid_11" id="grid_padding">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-12 main">
 
-      <form action=""
-            class="pure-form pure-form-aligned" method="post" accept-charset="utf-8">
-            <div class="formCon">
-                  <div class="formConInner">
-                        <h3>Edit Group</h3>
+			<form action="" class="form-horizontal" role="form" method="post" accept-charset="utf-8">
+				<h3>Edit Group</h3>
 
-                        <?php
-                        if($this->session->flashdata('message') != ''):
-                              echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-                        endif;?>
+				<?php
+				if ($this->session->flashdata('message') != '') {
+					echo display_message($this->session->flashdata('message'));
+				}
+				?>
 
-                        <fieldset style="width: 90%;">
+				<fieldset style="width: 90%;">
 
-                              <legend>Group Information</legend>
-                              <div class="pure-control-group">
-                                    <label> <label for="group_name">Group Name:<span>*</span></label> </label>
-                                    <input type="text" name="group_name" value="<?php echo $group->name; ?>" class="pure-input-1-2" id="group_name"  /> </div>
-                              <div class="pure-form-message-inline"><?php echo form_error('group_name'); ?></div>
+					<legend>Group Information</legend>
+					<div class="form-group">
+						<label> <label for="group_name">Group Name:<span>*</span></label> </label>
+						<input type="text" name="group_name" value="<?php echo $group->name; ?>"
+						       class="form-control" id="group_name"/>
+					</div>
+					<?php echo form_error('group_name'); ?>
 
-                              <div class="pure-control-group">
-                                    <label>  <label for="description">Description:</label> </label>
-                                    <textarea name="description" id="description"  class="pure-input-1-2" ><?php echo $group->description; ?></textarea>
+					<div class="form-group">
+						<label> <label for="description">Description:</label> </label>
+								<textarea name="description" id="description"
+								          class="form-control"><?php echo $group->description; ?></textarea>
+					</div>
 
-                                    <div class="pure-control-group">
-                                          <label>&nbsp; &nbsp; &nbsp;</label>
-                                          <button type="submit" class="pure-button pure-button-primary">Edit</button>
-                                    </div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Edit</button>
+					</div>
+				</fieldset>
+			</form>
 
-                        </fieldset>
-
-
-                  </div>
-            </div>
-      </form>
+		</div>
+	</div>
 </div>
-
-</div> </div> </div>
 

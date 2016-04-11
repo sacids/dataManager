@@ -22,7 +22,7 @@
 							<!--								<th>-->
 							<?php //echo $this->lang->line("label_xml"); ?><!--</th>-->
 							<th><?php echo $this->lang->line("label_date_created"); ?></th>
-							<th colspan="3" class="text-center"><?php echo $this->lang->line("label_action"); ?></th>
+							<th colspan="2" class="text-center"><?php echo $this->lang->line("label_action"); ?></th>
 						</tr>
 
 						<?php
@@ -36,7 +36,7 @@
 								<td><?php echo date('d-m-Y H:i:s', strtotime($form->date_created)); ?></td>
 								<!--									<td>-->
 								<?php //echo anchor_popup(base_url() . "assets/forms/definition/" . $form->filename, $form->filename); ?><!--</td>-->
-								<td>
+								<td class="text-center">
 									<div class="dropdown">
 										<button class="btn btn-primary dropdown-toggle" type="button"
 										        data-toggle="dropdown">View <span class="caret"></span></button>
@@ -47,10 +47,8 @@
 										</ul>
 									</div>
 								</td>
-								<td>
-									<?php echo anchor("xform/edit_form/" . $form->id, "Edit"); ?>
-								</td>
-								<td>
+								<td class="text-center">
+									<?php echo anchor("xform/edit_form/" . $form->id, "Edit"); ?> |
 									<?php echo anchor("xform/delete_xform/" . $form->id, "Delete", "class='delete'"); ?>
 								</td>
 							</tr>
