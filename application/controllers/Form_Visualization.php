@@ -62,22 +62,6 @@ class Form_visualization extends CI_Controller
 				$group_by_column = $this->input->post("group_by");
 				$function = $this->input->post("function");
 
-				/*
-				foreach ($table_fields as $field) {
-					if ($field->name == $axis_column) {
-						if ($field->type == "enum") {
-							$function = "COUNT";
-							$group_by_column = $field->name;
-						} elseif ($field->type == "varchar") {
-							$function = "COUNT";
-						} elseif ($field->type == "int" || $field->type == "decimal") {
-							//todo check for column where is age or something that does not need to added/summed
-							$function = "SUM";
-						}
-					}
-				}
-				*/
-
 				$categories = array();
 				$series = array("name" => ucfirst(str_replace("_", " ", $axis_column)));
 				$series_data = array();
@@ -139,16 +123,16 @@ class Form_visualization extends CI_Controller
 		$gps_point_field = NULL;
 		$gps_fields_initial = NULL;
 		$enum_fields = array();
-		$i = 0;
 
+		$i = 0;
 		foreach ($table_fields_data as $field) {
 			if (strpos($field->name, '_point') == TRUE) {
 				$gps_point_field = $field->name;
 				$gps_fields_initial = str_replace('_point', "", $gps_point_field);
 				log_message("debug", "GPS point field name is " . $gps_point_field);
 				log_message("debug", "GPS point fields initial is " . $gps_fields_initial);
-
 			}
+
 			if ($field->type == "enum") {
 				$enum_fields[$i] = $field->name;
 			}
@@ -160,6 +144,7 @@ class Form_visualization extends CI_Controller
 		} else {
 			$enum_field = NULL;
 		}
+
 		foreach ($table_fields_data as $field) {
 
 			$is_gps_field = (strpos($field->name, $gps_fields_initial == FALSE)) ? FALSE : TRUE;
@@ -185,7 +170,6 @@ class Form_visualization extends CI_Controller
 		}
 
 		log_message("debug", "x-axis column " . $axis_column . " y-axis column " . $group_by_column);
-
 
 		$categories = array();
 		$series = array("name" => ucfirst(str_replace("_", " ", $axis_column)));
@@ -219,17 +203,14 @@ class Form_visualization extends CI_Controller
 		if ($form_id != NULL) {
 		
 			$data	= $this->_load_points($form_id);
-			
-			
-			log_message('debug', ' Batizo '.json_encode($data));
+
+			log_message('debug', ' Tatizo '.json_encode($data));
 			
 			$this->load->view("header");
 			$this->load->view("graph/map",$data);
 			$this->load->view("footer");
 						
 		}else{
-			
-			
 			// Display some error message or rather get default form
 		}
 	}
