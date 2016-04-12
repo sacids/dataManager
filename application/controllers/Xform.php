@@ -27,6 +27,8 @@ class Xform extends CI_Controller
 	private $xml_data_filename;
 	private $table_name;
 
+	private $user_submitting_feedback_id;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -97,7 +99,7 @@ class Xform extends CI_Controller
 		$user = $this->User_model->find_by_username($username);
 		$password = $user->digest_password; // digest password
 		$db_username = $user->username; // username
-
+		$this->user_submitting_feedback_id = $user->id;
 		$uploaded_filename = NULL;
 		// show status header if user not available in database
 		if (empty ($db_username)) {
@@ -198,7 +200,7 @@ class Xform extends CI_Controller
 
 		if ($result) {
 			$feedback = array(
-				"user_id" => 1,
+				"user_id" => $this->user_submitting_feedback_id,
 				"form_id" => $this->table_name,
 				"message" => "Tumepokea fomu yako",
 				"date_created" => date("c"),
