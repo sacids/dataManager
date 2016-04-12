@@ -33,7 +33,7 @@ class Feedback extends CI_Controller
 		$this->load->view('footer');
 	}
 
-	function user_feedback($user_id, $form_id)
+	function user_feedback($user_id, $form_id, $instance_id = NULL)
 	{
 		if (isset($_POST['submit'])) {
 			$this->form_validation->set_rules("message", "Message", "required");
@@ -49,11 +49,11 @@ class Feedback extends CI_Controller
 				$this->Feedback_model->create_feedback($feedback_details);
 				//get last insert id
 				$feedback_id = $this->db->insert_id();
-				$this->session->set_flashdata("message", "Feedback successfully sent");
+				$this->session->set_flashdata("message", display_message("Feedback successfully sent"));
 				redirect("feedback/user_feedback/".$user_id."/".$form_id, "refresh");
 			}
 		}
-		$data['feedback'] = $this->Feedback_model->get_feedback($user_id, $form_id);
+		$data['feedback'] = $this->Feedback_model->get_feedback_by_instance($user_id, $form_id);
 
 		//render view
 		$data['title'] = "Feedback List";
