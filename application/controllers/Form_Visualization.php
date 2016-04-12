@@ -154,12 +154,13 @@ class Form_visualization extends CI_Controller
 				$group_by_column = $field->name;
 				$enum_field = $field->name;
 				$function = "COUNT";
+				break;
 			} elseif ($field->type == "int" && $field->name != "id") {
 				$axis_column = $field->name;
 				$group_by_column = ($enum_field != NULL) ? $enum_field : $field->name;
 				$function = "SUM";
 				break;
-			} elseif ($field->type == "varchar" && !$is_gps_field) {
+			} elseif ($field->type == "varchar"){// && !$is_gps_field) { //Todo check here causes form jamii to bring errors
 				//TODO Fix this condition here
 				//($field->name != "meta_deviceID" && $field->name != "meta_instanceID") &&
 				$axis_column = $field->name;
