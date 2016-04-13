@@ -9,7 +9,7 @@
 class Ohkr_model extends CI_Model
 {
 	//default table if not defined in conf/sacids.php
-	private static $table_name = "diseases";
+	private static $table_name_diseases = "diseases";
 	private static $table_name_species = "species";
 	private static $table_name_symptoms = "symptoms";
 	private static $table_name_disease_symptoms = "diseases_symptoms";
@@ -18,7 +18,7 @@ class Ohkr_model extends CI_Model
 	{
 		parent::__construct();
 		if ($this->config->item("table_diseases"))
-			self::$table_name = $this->config->item("table_diseases");
+			self::$table_name_diseases = $this->config->item("table_diseases");
 
 		if ($this->config->item("table_species"))
 			self::$table_name_species = $this->config->item("table_species");
@@ -29,13 +29,13 @@ class Ohkr_model extends CI_Model
 
 	public function add($disease)
 	{
-		return $this->db->insert(self::$table_name, $disease);
+		return $this->db->insert(self::$table_name_diseases, $disease);
 	}
 
 	public function find_all($limit = 10, $offset = 0)
 	{
 		$this->db->limit($limit, $offset);
-		return $this->db->get(self::$table_name)->result();
+		return $this->db->get(self::$table_name_diseases)->result();
 	}
 
 	/**
@@ -44,13 +44,13 @@ class Ohkr_model extends CI_Model
 	 */
 	public function get_disease_by_id($disease_id)
 	{
-		return $this->db->get_where(self::$table_name, array('id' => $disease_id))->row();
+		return $this->db->get_where(self::$table_name_diseases, array('id' => $disease_id))->row();
 	}
 
 	public function update($id, $disease)
 	{
 		$this->db->where("id", $id);
-		return $this->db->update(self::$table_name, $disease);
+		return $this->db->update(self::$table_name_diseases, $disease);
 	}
 
 	public function add_specie($specie)
@@ -87,5 +87,11 @@ class Ohkr_model extends CI_Model
 	public function add_disease_symptom($symptoms)
 	{
 		return $this->db->insert(self::$table_name_disease_symptoms, $symptoms);
+	}
+
+	public function count_all_diseases()
+	{
+		$this->db->from(self::$table_name_diseases);
+		return $this->db->count_all_results();
 	}
 }

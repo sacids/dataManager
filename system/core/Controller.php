@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Xform_model $Xform_model
  * @property User_model $User_model
  * @property Feedback_model $Feedback_model
- * @property Disease_model $Disease_model
+ * @property Ohkr_model $Ohkr_model
  */
 
 class CI_Controller {
