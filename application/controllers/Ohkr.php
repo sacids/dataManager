@@ -12,6 +12,11 @@ class Ohkr extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+        }
+
         $this->load->model("Ohkr_model");
     }
 
@@ -28,7 +33,6 @@ class Ohkr extends CI_Controller
 
         //render data
         $this->load->view('header', $data);
-        //$this->load->view("ohkr/menu");
         $this->load->view("ohkr/disease_list");
         $this->load->view('footer');
     }

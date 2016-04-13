@@ -53,11 +53,12 @@ class Xform extends CI_Controller
 
 	function forms()
 	{
+		$this->_is_logged_in();
+
 		$data['title'] = $this->lang->line("heading_form_list");
 		$data['forms'] = $this->Xform_model->get_form_list($this->session->userdata("user_id"));
 
 		$this->load->view('header', $data);
-		//$this->load->view("form/menu");
 		$this->load->view("form/index");
 		$this->load->view('footer');
 	}
@@ -508,7 +509,6 @@ class Xform extends CI_Controller
 
 		if ($this->form_validation->run() === FALSE) {
 			$this->load->view('header', $data);
-			//$this->load->view("form/menu");
 			$this->load->view("form/add_new");
 			$this->load->view('footer');
 		} else {
@@ -789,7 +789,6 @@ class Xform extends CI_Controller
 		if ($this->form_validation->run() === FALSE) {
 
 			$this->load->view('header', $data);
-			//$this->load->view("form/menu");
 			$this->load->view("form/edit_form");
 			$this->load->view('footer');
 
@@ -861,6 +860,7 @@ class Xform extends CI_Controller
 
 	function form_data($form_id)
 	{
+		$this->_is_logged_in();
 
 		if (!$form_id) {
 			$this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
@@ -877,13 +877,18 @@ class Xform extends CI_Controller
 			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id);
 
 			$this->load->view('header', $data);
-			//$this->load->view("form/menu");
 			$this->load->view("form/form_data_details");
 			$this->load->view('footer');
-
 		} else {
 			// form does not exist
 		}
+	}
 
+	function _is_logged_in()
+	{
+		if (!$this->ion_auth->logged_in()) {
+			// redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
 	}
 }
