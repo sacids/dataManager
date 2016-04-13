@@ -77,7 +77,8 @@ class Feedback extends CI_Controller
 		//get form_id and last_feedback_id
 		$username = $this->input->get("username");
 		$instance_id = $this->input->get('instance_id'); // todo get feedback by instance id
-		$form_id = $this->input->get('form_id');
+		//$form_id = $this->input->get('form_id');
+		$form_id = str_replace("-", "_", $this->input->get('form_id'));
 		$last_id = $this->input->get('last_id');
 
 		if (!$username) {
@@ -126,6 +127,8 @@ class Feedback extends CI_Controller
 	function post_feedback()
 	{
 		$username = $this->input->post("username");
+		//$form_id = $this->input->get('form_id');
+		$form_id = str_replace("-", "_", $this->input->get('form_id'));
 
 		log_message("debug", "User posting feedback is " . $username);
 		$user = $this->User_model->find_by_username($username);
