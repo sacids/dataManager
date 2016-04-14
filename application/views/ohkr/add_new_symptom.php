@@ -4,7 +4,7 @@
 
             <?php echo form_open_multipart('ohkr/add_new_symptom', 'class="form-horizontal" role="form"'); ?>
 
-            <h3>Symptom Details</h3>
+            <h3>Add Symptom Details</h3>
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';

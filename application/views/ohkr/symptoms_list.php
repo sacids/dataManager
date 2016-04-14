@@ -14,19 +14,19 @@
                     <table class="table" cellspacing="0" cellpadding="0">
                         <tr>
                             <th><?php echo $this->lang->line("label_symptom_name"); ?></th>
-                            <th><?php echo $this->lang->line("label_date_created"); ?></th>
+                            <th><?php echo $this->lang->line("label_description"); ?></th>
                             <th><?php echo $this->lang->line("label_action"); ?></th>
                         </tr>
 
                         <?php
                         $serial = 1;
-                        foreach ($symptoms as $specie) { ?>
+                        foreach ($symptoms as $symptom) { ?>
                             <tr>
-                                <td><?php echo $specie->name; ?></td>
-                                <td><?php //echo date('d-m-Y H:i:s', strtotime($specie->date_created)); ?></td>
+                                <td><?php echo $symptom->name; ?></td>
+                                <td><?php echo $symptom->description; ?></td>
                                 <td>
-                                    <?php echo anchor("#", "Edit"); ?> |
-                                    <?php echo anchor("#", "Delete", "class='delete'"); ?>
+                                    <?php echo anchor("ohkr/edit_symptom/".$symptom->id, "Edit"); ?> |
+                                    <?php echo anchor("ohkr/delete_symptom/".$symptom->id, "Delete", "class='delete'"); ?>
                                 </td>
                             </tr>
                             <?php $serial++;

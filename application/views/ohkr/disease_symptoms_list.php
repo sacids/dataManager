@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
+            <h3><?php echo $disease->name;?> Symptoms</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -9,6 +10,7 @@
 
             <a href="<?php echo site_url('ohkr/add_disease_symptom/' . $disease->id); ?>"
                class="btn btn-small btn-primary">Add Symptoms</a>
+            <br /><br />
             <div class="table_list">
 
                 <?php if (!empty($symptoms)) { ?>
@@ -28,7 +30,10 @@
                                 <td><?php echo $symptom->specie_name; ?></td>
                                 <td><?php echo $symptom->symptom_name; ?></td>
                                 <td><?php echo $symptom->importance; ?></td>
-                                <td><?php //echo date('d-m-Y H:i:s', strtotime($symptom->date_created)); ?></td>
+                                <td>
+                                    <?php echo anchor("ohkr/edit_disease_symptom/".$disease->id."/".$symptom->id, "Edit"); ?> |
+                                    <?php echo anchor("ohkr/delete_disease_symptom/".$disease->id."/".$symptom->id, "Delete", "class='delete'"); ?>
+                                </td>
                                 <td>
                                 </td>
                             </tr>

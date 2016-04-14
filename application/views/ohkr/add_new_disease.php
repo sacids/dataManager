@@ -4,7 +4,7 @@
 
             <?php echo form_open_multipart('ohkr/add_new_disease', 'class="form-horizontal" role="form"'); ?>
 
-            <h3>Disease Details</h3>
+            <h3>Add Disease Details</h3>
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
@@ -17,14 +17,6 @@
                            value="<?php echo set_value('name'); ?>">
                 </div>
                 <?php echo form_error('name'); ?>
-
-                <!--div class="pure-control-group">
-					<label><?php echo $this->lang->line("label_specie") ?> <span>*</span></label>
-
-					<?php //echo form_dropdown("specie", $species, set_value('specie', ''), 'class="pure-input-1-2"'); ?>
-				</div=-->
-
-                <div class="pure-form-message-inline"><?php echo form_error('specie'); ?></div>
 
                 <div class="form-group">
                     <label> <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label> </label>

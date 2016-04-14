@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-
+            <h3>Species List</h3>
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
@@ -9,12 +9,12 @@
 
             <div class="table_list">
 
+
                 <?php if (!empty($species)) { ?>
 
                     <table class="table" cellspacing="0" cellpadding="0">
                         <tr>
                             <th><?php echo $this->lang->line("label_specie_name"); ?></th>
-                            <th><?php echo $this->lang->line("label_date_created"); ?></th>
                             <th><?php echo $this->lang->line("label_action"); ?></th>
                         </tr>
 
@@ -23,10 +23,9 @@
                         foreach ($species as $specie) { ?>
                             <tr>
                                 <td><?php echo $specie->name; ?></td>
-                                <td><?php //echo date('d-m-Y H:i:s', strtotime($specie->date_created)); ?></td>
                                 <td>
-                                    <?php echo anchor("#", "Edit"); ?> |
-                                    <?php echo anchor("#", "Delete", "class='delete'"); ?>
+                                    <?php echo anchor("ohkr/edit_specie/".$specie->id, "Edit"); ?> |
+                                    <?php echo anchor("ohkr/delete_specie/".$specie->id, "Delete", "class='delete'"); ?>
                                 </td>
                             </tr>
                             <?php $serial++;

@@ -1,0 +1,10 @@
+diff a/application/config/autoload.php b/application/config/autoload.php	(rejected hunks)
+@@ -97,7 +97,7 @@
+ | config files.  Otherwise, leave it blank.
+ |
+ */
+-$autoload['config'] = array("sacids");
++$autoload['config'] = array("sacids","pagination");
+ 
+ /*
+ | -------------------------------------------------------------------

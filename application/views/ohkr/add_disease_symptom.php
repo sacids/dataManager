@@ -3,7 +3,7 @@
         <div class="col-sm-12 col-md-12 col-lg-12 main">
 
             <?php echo form_open_multipart('ohkr/add_disease_symptom/' . $disease->id, 'class="form-horizontal" role="form"'); ?>
-            <h3><?php echo $disease->name; ?> Disease Symptom</h3>
+            <h3>Add <?php echo $disease->name; ?> Disease Symptom</h3>
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
