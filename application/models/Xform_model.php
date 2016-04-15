@@ -285,4 +285,13 @@ class Xform_model extends CI_Model
 	{
 		return $this->db->insert($xform_table_name, $data);
 	}
+
+
+	/**
+	 * @return int
+	 */
+	public function count_all_xforms(){
+		$this->db->from(self::$xform_table_name);
+		return $this->db->count_all_results();
+	}
 }

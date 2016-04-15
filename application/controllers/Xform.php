@@ -56,11 +56,30 @@ class Xform extends CI_Controller
 		$this->_is_logged_in();
 
 		$data['title'] = $this->lang->line("heading_form_list");
-		$data['forms'] = $this->Xform_model->get_form_list($this->session->userdata("user_id"));
+
+		$config = array(
+			'base_url' => $this->config->base_url("xform/forms"),
+			'total_rows' => $this->Xform_model->count_all_xforms(),
+			'uri_segment' => 3,
+		);
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+		$data['forms'] = $this->Xform_model->get_form_list($this->session->userdata("user_id"), $this->pagination->per_page, $page);
+		$data["links"] = $this->pagination->create_links();
 
 		$this->load->view('header', $data);
 		$this->load->view("form/index");
 		$this->load->view('footer');
+	}
+
+	function _is_logged_in()
+	{
+		if (!$this->ion_auth->logged_in()) {
+			// redirect them to the login page
+			redirect('auth/login', 'refresh');
+		}
 	}
 
 	/**
@@ -300,6 +319,16 @@ class Xform extends CI_Controller
 
 		return $elements [0]; // the single top-level element
 	}
+	/**
+	 * Recursive function that runs through xml xform object and uses array keys as
+	 * absolute path of variable, and sets its value to the data submitted by user
+	 * Author : Eric Beda
+	 *
+	 * @param string $name of xml element
+	 * @param object $obj
+	 */
+
+	// TO DO : Change function name to be more representative
 
 	/**
 	 * @param string $name
@@ -320,16 +349,6 @@ class Xform extends CI_Controller
 			$this->form_data [$column_name] = $obj->content;
 		}
 	}
-	/**
-	 * Recursive function that runs through xml xform object and uses array keys as
-	 * absolute path of variable, and sets its value to the data submitted by user
-	 * Author : Eric Beda
-	 *
-	 * @param string $name of xml element
-	 * @param object $obj
-	 */
-
-	// TO DO : Change function name to be more representative
 
 	/**
 	 * Create query string for inserting data into table from submitted xform data
@@ -766,7 +785,6 @@ class Xform extends CI_Controller
 		return $statement;
 	}
 
-
 	function edit_form($xform_id)
 	{
 
@@ -876,7 +894,7 @@ class Xform extends CI_Controller
 			$data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
 
 			$config = array(
-				'base_url' => $this->config->base_url("xform/form_data/".$form_id),
+				'base_url' => $this->config->base_url("xform/form_data/" . $form_id),
 				'total_rows' => $this->Xform_model->count_all_records($form->form_id),
 				'uri_segment' => 4,
 			);
@@ -884,7 +902,7 @@ class Xform extends CI_Controller
 			$this->pagination->initialize($config);
 			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
 
-			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id,$this->pagination->per_page, $page);
+			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page);
 			$data["links"] = $this->pagination->create_links();
 
 			$this->load->view('header', $data);
@@ -892,14 +910,6 @@ class Xform extends CI_Controller
 			$this->load->view('footer');
 		} else {
 			// form does not exist
-		}
-	}
-
-	function _is_logged_in()
-	{
-		if (!$this->ion_auth->logged_in()) {
-			// redirect them to the login page
-			redirect('auth/login', 'refresh');
 		}
 	}
 }

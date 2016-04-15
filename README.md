@@ -14,7 +14,7 @@ Clone this project to your local machine from [SACIDS Afyadata Manager](https://
 ##### Setting up your database
  - Create a MySQL database
  - Change database username, password and database name in `database.php` file located under `application/config/database.php`
- - To initialize database base tables open terminal mac or linux or command prompt (CMD) on windows on and navigate to the root or your directory and run `php index.php migration latest`
+ - To initialize database base tables open terminal mac or linux or command prompt (CMD) on windows on and navigate to the root or your directory and run `$ php index.php migration latest`
 
 All the tables will be created and you can start contributing on the project right away.
 
@@ -30,10 +30,10 @@ All the tables will be created and you can start contributing on the project rig
 ##### Seeding data 
 * If you have successfully migrated your database follow below instructions.
 *  To run this download and install [composer](https://getcomposer.org) if you have composer installed continue to step two below
-* Then run `composer update` to get dependencies
+* Then run `$ composer update` to get dependencies
 * Open terminal or command line interface
 * Navigate to root directory of your project (`i.e afyadata`)
-* Then run `php index.php seeder seed` to get dummy data generated
+* Then run `$ php index.php seeder seed` to get dummy data generated
 * You can adjust limit at any time to fit the number of records you want at `controllers/Seeder.php`
     
 

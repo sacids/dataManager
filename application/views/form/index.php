@@ -21,6 +21,7 @@
 							<th><?php echo $this->lang->line("label_description"); ?></th>
 							<!--								<th>-->
 							<?php //echo $this->lang->line("label_xml"); ?><!--</th>-->
+							<th><?php echo $this->lang->line("label_access"); ?></th>
 							<th><?php echo $this->lang->line("label_date_created"); ?></th>
 							<th colspan="2" class="text-center"><?php echo $this->lang->line("label_action"); ?></th>
 						</tr>
@@ -33,12 +34,21 @@
 								<!--									<td>-->
 								<?php //echo anchor("xform/form_data/" . $form->id, $form->form_id); ?><!--</td>-->
 								<td><?php echo $form->description; ?></td>
+								<td>
+									<?php
+									if ($form->access == "private") {
+										echo "<span class='label label-warning'>" . ucfirst($form->access) . "</span>";
+									} else {
+										echo "<span class='label label-success'>" . ucfirst($form->access) . "</span>";
+									}
+									?>
+								</td>
 								<td><?php echo date('d-m-Y H:i:s', strtotime($form->date_created)); ?></td>
 								<!--									<td>-->
 								<?php //echo anchor_popup(base_url() . "assets/forms/definition/" . $form->filename, $form->filename); ?><!--</td>-->
 								<td class="text-center">
 									<div class="dropdown">
-										<button class="btn btn-primary dropdown-toggle" type="button"
+										<button class="btn btn-danger dropdown-toggle" type="button"
 										        data-toggle="dropdown">View <span class="caret"></span></button>
 										<ul class="dropdown-menu">
 											<li><?php echo anchor("xform/form_data/" . $form->id, "Data list"); ?></li>
@@ -55,7 +65,12 @@
 							<?php $serial++;
 						} ?>
 					</table>
-
+					<?php if (!empty($links)): ?>
+						<div class="widget-foot">
+							<?= $links ?>
+							<div class="clearfix"></div>
+						</div>
+					<?php endif; ?>
 				<?php } else { ?>
 					<div class="fail_message">You don't have any form to display</div>
 				<?php } ?>
