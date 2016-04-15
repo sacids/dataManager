@@ -135,8 +135,8 @@ class Xform_model extends CI_Model
 		$sql .= " AND DATA_TYPE = 'point'";
 
 		$query = $this->db->query($sql);
-		
-		log_message('debug', 'get point field query '.$this->db->last_query());
+
+		log_message('debug', 'get point field query ' . $this->db->last_query());
 
 		return ($query->num_rows() == 1) ? $query->row(1)->COLUMN_NAME : FALSE;
 	}
@@ -193,6 +193,16 @@ class Xform_model extends CI_Model
 		return $this->db->get($table_name)->result();
 	}
 
+	/**
+	 * @param $table_name
+	 * @return mixed
+	 */
+	public function count_all_records($table_name)
+	{
+		$this->db->from($table_name);
+		return $this->db->count_all_results();
+	}
+
 
 	/**
 	 * @param $table_name
@@ -212,22 +222,25 @@ class Xform_model extends CI_Model
 		return $this->db->field_data($table_name);
 	}
 
-	
+
 	/**
 	 * $param $table_name
 	 * $param info text to be displayer per point
 	 * $param $cond sql condition (without the where)
+	 *
 	 * @return list of lat,lon,info
 	 */
-	
-	public function get_geospatial_data($table_name, $cond = true){
-		
+
+	public function get_geospatial_data($table_name, $cond = TRUE)
+	{
+
 		//$this->db->where($cond);
-		$query	= $this->db->get($table_name);
-		if($query->num_rows() == 0) return false;
-		
+		$query = $this->db->get($table_name);
+		if ($query->num_rows() == 0) return FALSE;
+
 		return $query->result_array();
 	}
+
 	/**
 	 * @param $table_name
 	 * @param $axis_column

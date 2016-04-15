@@ -874,7 +874,18 @@ class Xform extends CI_Controller
 			// check if form_id ~ form data table is not empty or null
 			$data['title'] = $form->title . " form";
 			$data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
-			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id);
+
+			$config = array(
+				'base_url' => $this->config->base_url("xform/form_data/".$form_id),
+				'total_rows' => $this->Xform_model->count_all_records($form->form_id),
+				'uri_segment' => 4,
+			);
+
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id,$this->pagination->per_page, $page);
+			$data["links"] = $this->pagination->create_links();
 
 			$this->load->view('header', $data);
 			$this->load->view("form/form_data_details");

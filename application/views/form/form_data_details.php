@@ -44,6 +44,12 @@
 				}
 				?>
 			</table>
+			<?php if (!empty($links)): ?>
+				<div class="widget-foot">
+					<?= $links ?>
+					<div class="clearfix"></div>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
