@@ -9,11 +9,7 @@
 class Ohkr_model extends CI_Model
 {
 	//default table if not defined in conf/sacids.php
-<<<<<<< HEAD
 	private static $table_name_disease = "diseases";
-=======
-	private static $table_name_diseases = "diseases";
->>>>>>> 6b77115c7f34e34552c1b4b68434f950f3e84418
 	private static $table_name_species = "species";
 	private static $table_name_symptoms = "symptoms";
 	private static $table_name_disease_symptoms = "diseases_symptoms";
@@ -22,11 +18,7 @@ class Ohkr_model extends CI_Model
 	{
 		parent::__construct();
 		if ($this->config->item("table_diseases"))
-<<<<<<< HEAD
 			self::$table_name_disease = $this->config->item("table_diseases");
-=======
-			self::$table_name_diseases = $this->config->item("table_diseases");
->>>>>>> 6b77115c7f34e34552c1b4b68434f950f3e84418
 
 		if ($this->config->item("table_species"))
 			self::$table_name_species = $this->config->item("table_species");
@@ -37,21 +29,13 @@ class Ohkr_model extends CI_Model
 
 	public function add_disease($disease)
 	{
-<<<<<<< HEAD
 		return $this->db->insert(self::$table_name_disease, $disease);
-=======
-		return $this->db->insert(self::$table_name_diseases, $disease);
->>>>>>> 6b77115c7f34e34552c1b4b68434f950f3e84418
 	}
 
 	public function find_all_disease($limit = 10, $offset = 0)
 	{
 		$this->db->limit($limit, $offset);
-<<<<<<< HEAD
 		return $this->db->get(self::$table_name_disease)->result();
-=======
-		return $this->db->get(self::$table_name_diseases)->result();
->>>>>>> 6b77115c7f34e34552c1b4b68434f950f3e84418
 	}
 
 	/**
@@ -60,17 +44,12 @@ class Ohkr_model extends CI_Model
 	 */
 	public function get_disease_by_id($disease_id)
 	{
-<<<<<<< HEAD
 		return $this->db->get_where(self::$table_name_disease, array('id' => $disease_id))->row();
-=======
-		return $this->db->get_where(self::$table_name_diseases, array('id' => $disease_id))->row();
->>>>>>> 6b77115c7f34e34552c1b4b68434f950f3e84418
 	}
 
 	public function update_disease($id, $disease)
 	{
 		$this->db->where("id", $id);
-<<<<<<< HEAD
 		return $this->db->update(self::$table_name_disease, $disease);
 	}
 
@@ -78,9 +57,6 @@ class Ohkr_model extends CI_Model
 	{
 		$this->db->where("id", $id);
 		return $this->db->delete(self::$table_name_disease);
-=======
-		return $this->db->update(self::$table_name_diseases, $disease);
->>>>>>> 6b77115c7f34e34552c1b4b68434f950f3e84418
 	}
 
 	public function add_specie($specie)
@@ -166,7 +142,6 @@ class Ohkr_model extends CI_Model
 		return $this->db->insert(self::$table_name_disease_symptoms, $symptoms);
 	}
 
-<<<<<<< HEAD
 	public function update_disease_symptom($id, $symptom)
 	{
 		$this->db->where("id", $id);
@@ -177,11 +152,5 @@ class Ohkr_model extends CI_Model
 	{
 		$this->db->where("id", $id);
 		return $this->db->delete(self::$table_name_disease_symptoms);
-=======
-	public function count_all_diseases()
-	{
-		$this->db->from(self::$table_name_diseases);
-		return $this->db->count_all_results();
->>>>>>> 6b77115c7f34e34552c1b4b68434f950f3e84418
 	}
 }

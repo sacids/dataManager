@@ -28,7 +28,7 @@ class Feedback_model extends CI_Model
     {
         $this->db->join(self::$table_name_user . " u", 'u.id = f.user_id')
             ->order_by('f.date_created', 'DESC')
-            ->group_by('f.form_id')
+            ->group_by('f.instance_id')
             ->group_by('f.user_id');
         return $this->db->get(self::$table_name . " f")->result();
     }
@@ -39,7 +39,7 @@ class Feedback_model extends CI_Model
      * @param null $instance
      * @return mixed
      */
-    function get_feedback_by_instance($user_id, $form_id = NULL)
+    function get_feedback_by_instance($user_id, $form_id = NULL, $instance_id = NULL)
     {
 
         if ($form_id != NULL)

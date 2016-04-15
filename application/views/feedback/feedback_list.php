@@ -14,7 +14,9 @@
                     <table class="table" cellspacing="0" cellpadding="0">
                         <tr>
                             <th>Form Id</th>
-                            <th>user</th>
+                            <th>Instance Id</th>
+                            <th>From</th>
+                            <th>To</th>
                             <th>Last Message</th>
                             <th>date</th>
                             <th><?php echo $this->lang->line("label_action"); ?></th>
@@ -25,11 +27,13 @@
                         foreach ($feedback as $value) { ?>
                             <tr>
                                 <td><?php echo $value->form_id; ?></td>
+                                <td><?php echo $value->instance_id; ?></td>
+                                <td><?php echo $value->first_name.' '.$value->last_name; ?></td>
                                 <td><?php echo $value->first_name.' '.$value->last_name; ?></td>
                                 <td><?php echo $value->message; ?></td>
                                 <td><?php echo date('d-m-Y H:i:s', strtotime($value->date_created)); ?></td>
                                 <td>
-                                    <?php echo anchor("feedback/user_feedback/" . $value->user_id . "/" . $value->form_id, "Conversation"); ?>
+                                    <?php echo anchor("feedback/user_feedback/" . $value->user_id . "/" . $value->form_id ."/" . $value->instance_id, "Conversation"); ?>
                                 </td>
                             </tr>
                             <?php $serial++;
