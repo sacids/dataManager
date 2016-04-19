@@ -47,7 +47,6 @@ class Seeder extends CI_Controller
 		$this->_seed_diseases(100);
 		$this->_seed_species(5);
 		$this->_seed_symptoms(200);
-		$this->_seed_form_jamii(2150);
 	}
 
 	private function _truncate_db()
@@ -55,7 +54,6 @@ class Seeder extends CI_Controller
 		//$this->User_model->truncate();
 		$this->db->truncate('build_dalili_za_mifugo_1418895355');
 		$this->db->truncate('build_dalili_za_binadamu_1418894655');
-		$this->db->truncate('build_fomu_jamii_1459930979');
 
 		$this->db->where("id > 0", NULL);
 		$this->db->delete('diseases_symptoms');
@@ -66,57 +64,6 @@ class Seeder extends CI_Controller
 		$this->db->where("id > 0", NULL);
 		$this->db->delete('diseases');
 		//$this->db->truncate('users');
-	}
-
-	function _seed_form_jamii($limit)
-	{
-		echo "Seeding {$limit} form jamii" . PHP_EOL;
-
-		for ($i = 0; $i < $limit; $i++) {
-			$point = $this->_random_lat_and_lon();
-			$lat = $point['lat']; //$this->faker->latitude;
-			$lon = $point['lon']; //$this->faker->longitude;
-			$accuracy = $this->faker->randomFloat(10, 0, 50);
-			$altitude = $this->faker->randomFloat(10, 0, 4000);
-			$form_jamii = array(
-				'meta_instanceID' => 'uuid:' . $this->faker->unique()->uuid,
-				'FirstPage_Name' => $this->faker->firstName . " " . $this->faker->lastName,
-				'FirstPage_Area' => $this->faker->streetName,
-				'FirstPage_Date' => $this->faker->dateTimeThisYear->format('Y-m-d H:i:s'),
-				'FirstPage_Picture'=>"",
-				'FirstPage_Comments' => $this->faker->realText(mt_rand(100, 1000)),
-				'FirstPage_Location' => $lat . " " . $lon . " " . $accuracy . " " . $altitude,
-				'FirstPage_Location_lat' => $lat,
-				'FirstPage_Location_lng' => $lon,
-				'FirstPage_Location_acc' => $accuracy,
-				'FirstPage_Location_alt' => $altitude
-			);
-			$this->db->set('`FirstPage_Location_point`', "GeomFromText('POINT(" . $lat . " " . $lon . ")')", FALSE);
-			$this->Xform_model->insert_xform_data("build_fomu_jamii_1459930979", $form_jamii);
-		}
-	}
-
-	function _random_lat_and_lon($initial_longitude = 37.0720999900, $initial_latitude = -6.4287696900)
-	{
-		$longitude = (float)$initial_longitude;
-		$latitude = (float)$initial_latitude;
-		$radius = rand(1, 50); // in miles
-
-		$lng_min = $longitude - $radius / abs(cos(deg2rad($latitude)) * 69);
-		$lng_max = $longitude + $radius / abs(cos(deg2rad($latitude)) * 69);
-		$lat_min = $latitude - ($radius / 69);
-		$lat_max = $latitude + ($radius / 69);
-
-		return array(
-			'lon' => $this->_get_random_value_from_array(array($lng_min, $lng_max, $lng_min, $lng_max, $longitude)),
-			'lat' => $this->_get_random_value_from_array(array($lat_min, $lat_max, $lat_min, $lat_max, $latitude))
-		);
-	}
-
-	function _get_random_value_from_array($array = array())
-	{
-		$rand_key = array_rand($array, 1);
-		return $array[$rand_key];
 	}
 
 	function _seed_dalili_za_mifugo_forms($limit)
@@ -155,7 +102,7 @@ class Seeder extends CI_Controller
 
 		$this->db->query($sql);
 
-		echo "seeding $limit dalili za mifugo" . PHP_EOL;
+		echo "seeding $limit dalili za mifugo\n";
 
 		// create a bunch of base symptoms data
 		for ($i = 0; $i < $limit; $i++) {
@@ -193,6 +140,29 @@ class Seeder extends CI_Controller
 			$this->db->set('`GPS_picha_ugonjwa_GPS_point`', "GeomFromText('POINT(" . $lat . " " . $lon . ")')", FALSE);
 			$this->Xform_model->insert_xform_data($table_name, $build_dalili_za_mifugo_data);
 		}
+	}
+
+	function _random_lat_and_lon($initial_longitude = 37.0720999900, $initial_latitude = -6.4287696900)
+	{
+		$longitude = (float)$initial_longitude;
+		$latitude = (float)$initial_latitude;
+		$radius = rand(1, 50); // in miles
+
+		$lng_min = $longitude - $radius / abs(cos(deg2rad($latitude)) * 69);
+		$lng_max = $longitude + $radius / abs(cos(deg2rad($latitude)) * 69);
+		$lat_min = $latitude - ($radius / 69);
+		$lat_max = $latitude + ($radius / 69);
+
+		return array(
+			'lon' => $this->_get_random_value_from_array(array($lng_min, $lng_max, $lng_min, $lng_max, $longitude)),
+			'lat' => $this->_get_random_value_from_array(array($lat_min, $lat_max, $lat_min, $lat_max, $latitude))
+		);
+	}
+
+	function _get_random_value_from_array($array = array())
+	{
+		$rand_key = array_rand($array, 1);
+		return $array[$rand_key];
 	}
 
 	function _seed_dalili_za_binadamu_forms($limit)
@@ -287,7 +257,7 @@ class Seeder extends CI_Controller
 				"description" => $this->faker->realText(mt_rand(50, 500)),
 				"date_created" => $this->faker->dateTimeBetween("-10 days", "now")->format('Y-m-d H:i:s')
 			);
-			$this->Ohkr_model->add_disease($disease_data);
+			$this->Ohkr_model->add($disease_data);
 		}
 	}
 
@@ -354,4 +324,5 @@ class Seeder extends CI_Controller
 
 		echo PHP_EOL;
 	}
+
 }

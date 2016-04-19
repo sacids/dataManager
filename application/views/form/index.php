@@ -4,36 +4,9 @@
 
 			<?php
 			if ($this->session->flashdata('message') != '') {
-				echo $this->session->flashdata('message');
+				echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
 			}
 			?>
-
-			<div class="pull-right" style="margin-bottom: 10px;">
-				<?php echo form_open("xform/forms/", 'class="form-inline" role="form"'); ?>
-
-				<div class="form-group">
-					<label for="Access">Form name</label>
-					<?php echo form_input("name", '', 'class="form-control"'); ?>
-				</div>
-
-				<div class="form-group">
-					<label for="Access">Access</label>
-					<?php echo form_dropdown("access", array("" => "All", "public" => "Public", "private" => "Private"), NULL, 'class="form-control"'); ?>
-				</div>
-				<div class="form-group">
-					<label for="Status">Status</label>
-					<?php echo form_dropdown("status", array("" => "All", "published" => "Published", "archived" => "Archived"), NULL, 'class="form-control"'); ?>
-				</div>
-
-				<div class="form-group">
-					<div class="input-group">
-						<?php echo form_submit("search", "Search", 'class="btn btn-primary"'); ?>
-					</div>
-				</div>
-				<?php echo form_close(); ?>
-
-				<?php echo validation_errors(); ?>
-			</div>
 
 			<div class="">
 
@@ -86,12 +59,7 @@
 								</td>
 								<td class="text-center">
 									<?php echo anchor("xform/edit_form/" . $form->id, "Edit"); ?> |
-									<?php if ($form->status == "archived") {
-										echo anchor("xform/restore_from_archive/" . $form->id, "Restore", "class='unarchive'");
-									} else {
-										echo anchor("xform/archive_xform/" . $form->id, "Archive", "class='archive'");
-									} ?>
-									<!--TODO Implement dynamic js prompt -->
+									<?php echo anchor("xform/delete_xform/" . $form->id, "Delete", "class='delete'"); ?>
 								</td>
 							</tr>
 							<?php $serial++;
