@@ -27,6 +27,7 @@ class Xform extends CI_Controller
 	private $xml_data_filename;
 	private $table_name;
 
+	private $user_id;
 	private $user_submitting_feedback_id;
 
 	public function __construct()
@@ -42,7 +43,9 @@ class Xform extends CI_Controller
 
 		$this->load->library('form_auth');
 
+		$this->user_id = $this->session->userdata("user_id");
 		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
+
 		//$this->output->enable_profiler(TRUE);
 	}
 
@@ -57,17 +60,32 @@ class Xform extends CI_Controller
 
 		$data['title'] = $this->lang->line("heading_form_list");
 
-		$config = array(
-			'base_url' => $this->config->base_url("xform/forms"),
-			'total_rows' => $this->Xform_model->count_all_xforms(),
-			'uri_segment' => 3,
-		);
+		if (!$this->input->post("search")) {
+			$config = array(
+				'base_url' => $this->config->base_url("xform/forms"),
+				'total_rows' => $this->Xform_model->count_all_xforms("published"),
+				'uri_segment' => 3,
+			);
 
-		$this->pagination->initialize($config);
-		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-		$data['forms'] = $this->Xform_model->get_form_list($this->session->userdata("user_id"), $this->pagination->per_page, $page);
-		$data["links"] = $this->pagination->create_links();
+			$data['forms'] = $this->Xform_model->get_form_list($this->user_id,
+				$this->pagination->per_page, $page, "published");
+			$data["links"] = $this->pagination->create_links();
+
+		} else {
+			$form_name = $this->input->post("name", NULL);
+			$access = $this->input->post("access", NULL);
+			$status = $this->input->post("status", NULL);
+
+			$forms = $this->Xform_model->search_forms($this->user_id, $form_name, $access, $status);
+
+			if ($forms) {
+				$this->session->set_flashdata("message", display_message("Found " . count($forms) . " matching forms"));
+				$data['forms'] = $forms;
+			}
+		}
 
 		$this->load->view('header', $data);
 		$this->load->view("form/index");
@@ -258,7 +276,9 @@ class Xform extends CI_Controller
 
 		// array to hold values and field names;
 		$this->form_data = array(); // TODO move to constructor
-		$this->table_name = str_replace("-", "_", $rxml->attributes ['id']);
+		$prefix = $this->config->item("xform_tables_prefix");
+		log_message("debug", "Table prefix " . $prefix);
+		$this->table_name = $prefix . str_replace("-", "_", $rxml->attributes ['id']);
 
 		// loop through object
 		foreach ($rxml->children as $val) {
@@ -552,38 +572,44 @@ class Xform extends CI_Controller
 					$xml_data = $this->upload->data();
 					$filename = $xml_data['file_name'];
 
-					//TODO Check if file already exist and prompt user.
+					$create_table_statement = $this->_initialize($filename);
 
-					$form_details = array(
-						"user_id" => $this->session->userdata("user_id"),
-						"title" => $this->input->post("title"),
-						"description" => $this->input->post("description"),
-						"filename" => $filename,
-						"date_created" => date("c"),
-						"access" => $this->input->post("access")
-					);
-
-					$this->db->trans_start();
-					//get last insert id
-					$xform_id = $this->Xform_model->create_xform($form_details);
-					//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
-					$this->_initialize($filename); // create form table.
-					//TODO perform error checking,
-					//set form_id to current table_name variable
-					$this->Xform_model->update_form_id($xform_id, $this->table_name);
-					log_message("debug", "Xform_id=" . $xform_id . " ODK BuildFormId=" . $this->table_name);
-					$this->db->trans_complete();
-
-					if ($this->db->trans_status()) {
-						$this->session->set_flashdata("message", $this->lang->line("form_upload_successful"));
+					if ($this->Xform_model->find_by_xform_id($this->table_name)) {
+						@unlink($form_definition_upload_dir . $filename);
+						$this->session->set_flashdata("message", display_message("Form ID is already used, try a different one", "danger"));
+						redirect("xform/add_new");
 					} else {
-						$this->session->set_flashdata("message", $this->lang->line("form_upload_failed"));
-					}
-					redirect("xform/add_new");
-				}
+						$create_table_result = $this->Xform_model->create_table($create_table_statement);
+						log_message("debug", "Create table result " . $create_table_result);
 
+						if ($create_table_result) {
+
+							$form_details = array(
+								"user_id" => $this->session->userdata("user_id"),
+								"form_id" => $this->table_name,
+								"title" => $this->input->post("title"),
+								"description" => $this->input->post("description"),
+								"filename" => $filename,
+								"date_created" => date("c"),
+								"access" => $this->input->post("access")
+							);
+
+							//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
+
+							if ($this->Xform_model->create_xform($form_details)) {
+								$this->session->set_flashdata("message", display_message($this->lang->line("form_upload_successful")));
+							} else {
+								$this->session->set_flashdata("message", display_message($this->lang->line("form_upload_failed"), "danger"));
+							}
+						} else {
+							$this->session->set_flashdata("message", display_message($this->lang->line("form_saving_failed"), "danger"));
+						}
+
+						redirect("xform/add_new");
+					}
+				}
 			} else {
-				$this->session->set_flashdata("message", $this->lang->line("form_saving_failed"));
+				$this->session->set_flashdata("message", display_message($this->lang->line("form_saving_failed"), "danger"));
 				redirect("xform/add_new");
 			}
 		}
@@ -595,7 +621,7 @@ class Xform extends CI_Controller
 	 *
 	 * @param string $file_name
 	 *            definition file
-	 * @return bool
+	 * @return string with create table statement
 	 */
 	public function _initialize($file_name)
 	{
@@ -605,13 +631,7 @@ class Xform extends CI_Controller
 		$this->load_xml_definition();
 
 		// TODO: change function name to get_something suggested get_form_table_definition
-		$statement = $this->get_create_table_sql_query();
-
-		$result = $this->Xform_model->create_table($statement);
-
-		// return result TRUE on success
-		log_message("debug", "Create table result " . $result);
-		return $result;
+		return $this->get_create_table_sql_query();
 	}
 
 	/**
@@ -635,7 +655,9 @@ class Xform extends CI_Controller
 		// TODO reference by names instead of integer keys
 		$instance = $rxml->children [0]->children [1]->children [0]->children [0];
 
-		$table_name = str_replace("-", "_", $instance->attributes ['id']);
+		$prefix = $this->config->item("xform_tables_prefix");
+		log_message("debug", "Table prefix during creation " . $prefix);
+		$table_name = $prefix . str_replace("-", "_", $instance->attributes ['id']);
 
 		// get array rep of xform
 		$this->form_defn = $this->get_form_definition();
@@ -834,7 +856,7 @@ class Xform extends CI_Controller
 		}
 	}
 
-	function delete_xform($xform_id)
+	function archive_xform($xform_id)
 	{
 		if (!$this->ion_auth->logged_in()) {
 			redirect('auth/login', 'refresh');
@@ -846,35 +868,34 @@ class Xform extends CI_Controller
 			exit;
 		}
 
-		$xform = $this->Xform_model->find_by_id($xform_id);
-		$archive_xform_data = (array)$xform;
-		$archive_xform_data['filename'] = time() . "_" . $xform->filename; //appended timestamp to avoid overriding existing files
-		$archive_xform_data['last_updated'] = date("c"); //todo time form deleted
-
-		$this->db->trans_start();
-		$this->Xform_model->create_archive($archive_xform_data);
-		$this->Xform_model->delete_form($xform_id);
-		$this->db->trans_complete();
-
-		if ($this->db->trans_status()) {
-
-			$file_to_move = $this->config->item("form_definition_upload_dir") . $xform->filename;
-			$file_destination = $this->config->item("form_definition_archive_dir") . $archive_xform_data['filename'];
-
-			if (file_exists($file_to_move)) {
-
-				if (rename($file_to_move, $file_destination))
-					log_message("debug", "Move form definition file " . $xform->filename . " to " . $file_destination);
-				else
-					log_message("debug", "Failed to move form definition file " . $xform->filename);
-			}
-
-			$this->session->set_flashdata("message", $this->lang->line("form_delete_successful"));
+		if ($this->Xform_model->archive_form($xform_id)) {
+			$this->session->set_flashdata("message", display_message($this->lang->line("form_archived_successful")));
 		} else {
-			$this->session->set_flashdata("message", $this->lang->line("error_failed_to_delete_form"));
+			$this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_form"), "danger"));
 		}
 		redirect("xform/forms");
 	}
+
+
+	function restore_from_archive($xform_id){
+		if (!$this->ion_auth->logged_in()) {
+			redirect('auth/login', 'refresh');
+		}
+
+		if (!$xform_id) {
+			$this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
+			redirect("xform/forms");
+			exit;
+		}
+
+		if ($this->Xform_model->restore_xform_from_archive($xform_id)) {
+			$this->session->set_flashdata("message", display_message($this->lang->line("form_restored_successful")));
+		} else {
+			$this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_restore_form"), "danger"));
+		}
+		redirect("xform/forms");
+	}
+
 
 	function form_data($form_id)
 	{

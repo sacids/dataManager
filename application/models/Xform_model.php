@@ -107,15 +107,38 @@ class Xform_model extends CI_Model
 	}
 
 	/**
-	 * @param null $user_id
+	 * @param null int $user_id
 	 * @param int $limit
 	 * @param int $offset
+	 * @param null string $status
 	 * @return mixed returns list of forms available.
 	 */
-	public function get_form_list($user_id = NULL, $limit = 30, $offset = 0)
+	public function get_form_list($user_id = NULL, $limit = 30, $offset = 0, $status = NULL)
 	{
 		if ($user_id != NULL)
 			$this->db->where("user_id", $user_id);
+
+		if ($status != NULL)
+			$this->db->where("status", $status);
+		$this->db->limit($limit, $offset);
+		return $this->db->get(self::$xform_table_name)->result();
+	}
+
+	public function search_forms($user_id = NULL, $name = NULL, $access = NULL, $status = NULL, $limit = 30, $offset = 0)
+	{
+		if ($user_id != NULL)
+			$this->db->where("user_id", $user_id);
+
+		if ($name != NULL)
+			$this->db->like("title", $name);
+
+		if ($access != NULL)
+			$this->db->where("access", $access);
+
+		if ($status == NULL)
+			$this->db->where("status!=", "archived");
+		else
+			$this->db->where("status", $status);
 		$this->db->limit($limit, $offset);
 		return $this->db->get(self::$xform_table_name)->result();
 	}
@@ -170,6 +193,32 @@ class Xform_model extends CI_Model
 		$this->db->limit(1);
 		$this->db->where("id", $xform_id);
 		return $this->db->delete(self::$xform_table_name);
+	}
+
+	/**
+	 * @param $xform_id
+	 * @return mixed
+	 */
+	public function archive_form($xform_id)
+	{
+		$this->db->limit(1);
+		$this->db->where("id", $xform_id);
+		$this->db->set("last_updated", "NOW()", FALSE);
+		$this->db->set("status", "archived");
+		return $this->db->update(self::$xform_table_name);
+	}
+
+	/**
+	 * @param $xform_id
+	 * @return mixed
+	 */
+	public function restore_xform_from_archive($xform_id)
+	{
+		$this->db->limit(1);
+		$this->db->where("id", $xform_id);
+		$this->db->set("last_updated", "NOW()", FALSE);
+		$this->db->set("status", "published");
+		return $this->db->update(self::$xform_table_name);
 	}
 
 	/**
@@ -290,7 +339,10 @@ class Xform_model extends CI_Model
 	/**
 	 * @return int
 	 */
-	public function count_all_xforms(){
+	public function count_all_xforms($status = NULL)
+	{
+		if ($status != NULL)
+			$this->db->where("status", $status);
 		$this->db->from(self::$xform_table_name);
 		return $this->db->count_all_results();
 	}
