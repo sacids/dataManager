@@ -21,11 +21,46 @@ class Feedback extends CI_Controller
         //$this->output->enable_profiler(TRUE);
     }
 
+    /**
+     * Check login
+     *
+     * @return response
+     */
+    function _is_logged_in()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+    }
 
+
+    /**
+     * input null
+     *
+     * @return array
+     */
     function feedback_list()
     {
-        $data['feedback'] = $this->Feedback_model->find_all();
+        //check if logged in
+        $this->_is_logged_in();
 
+        if (isset($_POST['search'])) {
+            //TODO searching here
+            $form_name = $this->input->post("name", NULL);
+            $from = $this->input->post("from", NULL);
+            $to = $this->input->post("to", NULL);
+
+            $feedback = $this->Feedback_model->search_feedback($form_name, $from, $to);
+
+            if ($feedback) {
+                $data['feedback'] = $feedback;
+            }
+        } else {
+            $data['feedback'] = $this->Feedback_model->find_all();
+        }
+
+        $data['user'] = $this->User_model->get_users();
         //render view
         $data['title'] = "Feedback List";
         $this->load->view('header', $data);
@@ -33,33 +68,39 @@ class Feedback extends CI_Controller
         $this->load->view('footer');
     }
 
-    function user_feedback($user_id, $form_id, $instance_id = NULL)
-    {
-        if (isset($_POST['submit'])) {
-            $this->form_validation->set_rules("message", "Message", "required");
 
-            if ($this->form_validation->run() === TRUE) {
-                $feedback_details = array(
-                    'form_id' => $form_id,
-                    'message' => $this->input->post('message'),
-                    'date_created' => date("c"),
-                    'instance_id' => $instance_id,
-                    'user_id' => $user_id,
-                    'sender' => 'server'
-                );
-                $this->Feedback_model->create_feedback($feedback_details);
-                //get last insert id
-                $feedback_id = $this->db->insert_id();
-                $this->session->set_flashdata("message", display_message("Feedback successfully sent"));
-                redirect("feedback/user_feedback/" . $user_id . "/" . $form_id . "" . $instance_id, "refresh");
-            }
+    /**
+     * input instance_id
+     *
+     * @return array
+     */
+    function user_feedback($instance_id)
+    {
+        //check if logged in
+        $this->_is_logged_in();
+
+        if ($_POST) {
+            $message = $this->input->post('message');
+            $user_id = $this->session->userdata('user_id');
+            $feedback = $this->Feedback_model->get_feedback_details_by_instance($instance_id);
+            //Insert data from ajax
+            $feedback_details = array(
+                'form_id' => $feedback->form_id,
+                'message' => $message,
+                'date_created' => date("c"),
+                'instance_id' => $instance_id,
+                'user_from' => $user_id,
+                'user_to' => $feedback->user_to,
+                'sender' => 'server'
+            );
+            $query = $this->Feedback_model->create_feedback($feedback_details);
         }
-        $data['feedback'] = $this->Feedback_model->get_feedback_by_instance($user_id, $form_id, $instance_id);
 
         //render view
+        $data['feedback'] = $this->Feedback_model->get_feedback_by_instance($instance_id);
+        $data['instance_id'] = $instance_id;
         $data['title'] = "Feedback List";
         $this->load->view('header', $data);
-        //$this->load->view("feedback/menu");
         $this->load->view("feedback/user_feedback_list");
         $this->load->view('footer');
     }

@@ -1,44 +1,30 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/public/css/chat.css">
+<script src="<?php echo base_url(); ?>assets/public/js/chat.js"></script>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-
-            <?php echo form_open(uri_string(), 'class="form-horizontal" role="form"'); ?>
             <h3>Feedback</h3>
-            <?php
-            if ($this->session->flashdata('message') != '') {
-                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-            } ?>
+            <div class="table_list">
+                <ol class="chat">
+                    <?php foreach ($feedback as $values) {
+                        if ($values->sender == "user") $class = "self"; else $class = "other"; ?>
+                        <li class="<?php echo $class; ?>">
+                            <div class="msg">
+                                <p><?= $values->message ?></p>
+                                <span><?= $values->fname. ' '. $values->lname; ?></span>
+                                <time><?= date('H:i:s', strtotime($values->date_created)) ?></time>
+                                <!--<span class="glyphicon glyphicon-ok"></span>-->
+                            </div>
+                        </li>
+                    <?php } ?>
+                </ol>
+            </div>
 
-            <fieldset>
-                <div class="form-group">
-                    <label for="campus">Message :</label>
-                        <textarea class="form-control" name="message"
-                                  id="message"><?php echo set_value('message'); ?></textarea>
-                </div>
-                <?php echo form_error('message'); ?>
-
-                <div class="form-group">
-                    <label>&nbsp; &nbsp; &nbsp;</label>
-                    <button type="submit" name="submit" class="btn btn-primary">Send</button>
-                </div>
-
-            </fieldset>
-            <?php echo form_close(); ?>
-
-            <ol class="chat">
-                <?php foreach ($feedback as $values) {
-                    if ($values->sender == 'user') $class = "other"; else $class = "self"; ?>
-                    <li class="<?php echo $class; ?>">
-                        <div class="avatar"><img src="<?php echo base_url(); ?>assets/public/images/profile.png"
-                                                 draggable="false"/></div>
-                        <div class="msg">
-                            <p><?php echo $values->message; ?></p>
-                            <time><?php echo $values->date_created; ?></time>
-                        </div>
-                    </li>
-                <?php } ?>
-            </ol>
+            <form method="post" id="form" class="feedback_form">
+                <input class="textarea" type="text" name="message" id="message" placeholder="Type feedback here!"/>
+                <input type="hidden" name="instance_id" id="instance_id" value="<?= $instance_id ?>"/>
+                <button type="submit" name="submit" class="submit btn btn-primary" onClick="submitdata();">Send</button>
+            </form>
 
         </div>
     </div>

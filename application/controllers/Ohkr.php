@@ -20,6 +20,19 @@ class Ohkr extends CI_Controller
         $this->load->model("Ohkr_model");
     }
 
+    /**
+     * Check login
+     *
+     * @return response
+     */
+    function _is_logged_in()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+    }
+
 
     public function index()
     {
@@ -28,10 +41,23 @@ class Ohkr extends CI_Controller
 
     public function disease_list()
     {
-        $data['title'] = "Diseases List";
-        $data['diseases'] = $this->Ohkr_model->find_all_disease(30, 0);
+        //check login
+        $this->_is_logged_in();
+
+        $config = array(
+            'base_url' => $this->config->base_url("ohkr/disease_list"),
+            'total_rows' => $this->Ohkr_model->count_disease(),
+            'uri_segment' => 3,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data['diseases'] = $this->Ohkr_model->find_all_disease($this->pagination->per_page, $page);
+        $data["links"] = $this->pagination->create_links();
 
         //render data
+        $data['title'] = "Diseases List";
         $this->load->view('header', $data);
         $this->load->view("ohkr/disease_list");
         $this->load->view('footer');
@@ -39,9 +65,8 @@ class Ohkr extends CI_Controller
 
     public function add_new_disease()
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         $data['title'] = "Add new";
 
@@ -71,9 +96,8 @@ class Ohkr extends CI_Controller
 
     public function edit_disease($disease_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         if (!$disease_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_edit")));
@@ -111,9 +135,8 @@ class Ohkr extends CI_Controller
 
     function delete_disease($disease_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         if (!$disease_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_delete")));
@@ -131,11 +154,24 @@ class Ohkr extends CI_Controller
 
     public function species_list()
     {
-        $data['title'] = "Species List";
-        $data['species'] = $this->Ohkr_model->find_all_species(30, 0);
+        //check login
+        $this->_is_logged_in();
 
+        $config = array(
+            'base_url' => $this->config->base_url("ohkr/species_list"),
+            'total_rows' => $this->Ohkr_model->count_species(),
+            'uri_segment' => 3,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data['species'] = $this->Ohkr_model->find_all_species($this->pagination->per_page, $page);
+        $data["links"] = $this->pagination->create_links();
+
+        //render view
+        $data['title'] = "Species List";
         $this->load->view('header', $data);
-        //$this->load->view("ohkr/menu");
         $this->load->view("ohkr/species_list", $data);
         $this->load->view('footer');
     }
@@ -226,15 +262,24 @@ class Ohkr extends CI_Controller
 
     public function symptoms_list()
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
+        $config = array(
+            'base_url' => $this->config->base_url("ohkr/symptoms_list"),
+            'total_rows' => $this->Ohkr_model->count_symptoms(),
+            'uri_segment' => 3,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $data['symptoms'] = $this->Ohkr_model->find_all_symptoms($this->pagination->per_page, $page);
+        $data["links"] = $this->pagination->create_links();
+
+        //render view
         $data['title'] = "Symptoms List";
-        $data['symptoms'] = $this->Ohkr_model->find_all_symptoms(30, 0);
-
         $this->load->view('header', $data);
-        //$this->load->view("ohkr/menu");
         $this->load->view("ohkr/symptoms_list");
         $this->load->view('footer');
     }
@@ -251,7 +296,6 @@ class Ohkr extends CI_Controller
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('header', $data);
-            //$this->load->view("ohkr/menu");
             $this->load->view("ohkr/add_new_symptom", $data);
             $this->load->view('footer');
         } else {

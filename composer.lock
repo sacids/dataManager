@@ -14,16 +14,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "8deb6343c80c4edf546a6fff01a2b05c7dc59ac4"
+                "reference": "1c33e894fbbad6cf65bd42871719cd33227ed6a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/8deb6343c80c4edf546a6fff01a2b05c7dc59ac4",
-                "reference": "8deb6343c80c4edf546a6fff01a2b05c7dc59ac4",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/1c33e894fbbad6cf65bd42871719cd33227ed6a7",
+                "reference": "1c33e894fbbad6cf65bd42871719cd33227ed6a7",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^5.3.3|^7.0"
             },
             "require-dev": {
                 "ext-intl": "*",
@@ -56,7 +56,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-03-29 16:49:43"
+            "time": "2016-04-13 06:45:05"
         },
         {
             "name": "mikey179/vfsStream",

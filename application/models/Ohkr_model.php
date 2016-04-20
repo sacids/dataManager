@@ -47,6 +47,15 @@ class Ohkr_model extends CI_Model
 		return $this->db->get_where(self::$table_name_disease, array('id' => $disease_id))->row();
 	}
 
+	/**
+	 * @return int
+	 */
+	public function count_disease()
+	{
+		$this->db->from(self::$table_name_disease);
+		return $this->db->count_all_results();
+	}
+
 	public function update_disease($id, $disease)
 	{
 		$this->db->where("id", $id);
@@ -79,6 +88,15 @@ class Ohkr_model extends CI_Model
 		return $this->db->get_where(self::$table_name_species, array('id' => $specie_id))->row();
 	}
 
+	/**
+	 * @return int
+	 */
+	public function count_species()
+	{
+		$this->db->from(self::$table_name_species);
+		return $this->db->count_all_results();
+	}
+
 	public function update_specie($id, $specie)
 	{
 		$this->db->where("id", $id);
@@ -109,6 +127,15 @@ class Ohkr_model extends CI_Model
 	public function get_symptom_by_id($symptom_id)
 	{
 		return $this->db->get_where(self::$table_name_symptoms, array('id' => $symptom_id))->row();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function count_symptoms()
+	{
+		$this->db->from(self::$table_name_symptoms);
+		return $this->db->count_all_results();
 	}
 
 	public function update_symptom($id, $symptom)

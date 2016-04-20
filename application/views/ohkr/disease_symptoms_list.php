@@ -1,21 +1,24 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3><?php echo $disease->name;?> Symptoms</h3>
+
 
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
             } ?>
 
-            <a href="<?php echo site_url('ohkr/add_disease_symptom/' . $disease->id); ?>"
-               class="btn btn-small btn-primary">Add Symptoms</a>
-            <br /><br />
-            <div class="table_list">
+
+
+            <div class="col-sm-8">
+                <h3><?php echo $disease->name;?> Symptoms</h3>
+                <a href="<?php echo site_url('ohkr/add_disease_symptom/' . $disease->id); ?>"
+                   class="btn btn-small btn-primary">Add Symptoms</a>
+                <br /><br />
 
                 <?php if (!empty($symptoms)) { ?>
 
-                    <table class="table" cellspacing="0" cellpadding="0">
+                    <table class="table table-striped table-responsive table-hover table-bordered">
                         <tr>
                             <th>Species</th>
                             <th><?php echo $this->lang->line("label_symptom_name"); ?></th>
@@ -33,8 +36,6 @@
                                 <td>
                                     <?php echo anchor("ohkr/edit_disease_symptom/".$disease->id."/".$symptom->id, "Edit"); ?> |
                                     <?php echo anchor("ohkr/delete_disease_symptom/".$disease->id."/".$symptom->id, "Delete", "class='delete'"); ?>
-                                </td>
-                                <td>
                                 </td>
                             </tr>
                             <?php $serial++;

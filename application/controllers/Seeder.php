@@ -42,20 +42,20 @@ class Seeder extends CI_Controller
 		//$this->_seed_users(25);
 
 		// call dalili za mifugo
-		$this->_seed_dalili_za_mifugo_forms(2150);
-		$this->_seed_dalili_za_binadamu_forms(2150);
+		//$this->_seed_dalili_za_mifugo_forms(2150);
+		//$this->_seed_dalili_za_binadamu_forms(2150);
 		$this->_seed_diseases(100);
 		$this->_seed_species(5);
 		$this->_seed_symptoms(200);
-		$this->_seed_form_jamii(2150);
+		//$this->_seed_form_jamii(2150);
 	}
 
 	private function _truncate_db()
 	{
 		//$this->User_model->truncate();
-		$this->db->truncate('build_dalili_za_mifugo_1418895355');
-		$this->db->truncate('build_dalili_za_binadamu_1418894655');
-		$this->db->truncate('build_fomu_jamii_1459930979');
+		//$this->db->truncate('build_dalili_za_mifugo_1418895355');
+		//$this->db->truncate('build_dalili_za_binadamu_1418894655');
+		//$this->db->truncate('build_fomu_jamii_1459930979');
 
 		$this->db->where("id > 0", NULL);
 		$this->db->delete('diseases_symptoms');

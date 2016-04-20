@@ -37,6 +37,11 @@ $lang['label_action']                   = "Action";
 $lang['nav_item_form_list']             = "Form List";
 $lang['nav_item_form_add_new']          = "Add new form";
 
+$lang['label_instance_id']              = "Instance Id";
+$lang['label_from']                     = "From";
+$lang['label_to']                       = "To";
+$lang['label_feedback_date']            = "Feedback Date";
+
 
 // Form management
 $lang['form_archived_successful']       = "Form was archived successful";
