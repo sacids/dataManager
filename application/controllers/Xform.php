@@ -87,9 +87,13 @@ class Xform extends CI_Controller
 			}
 		}
 
-		$this->load->view('header', $data);
-		$this->load->view("form/index");
-		$this->load->view('footer');
+		if ($this->input->is_ajax_request()) {
+			$this->load->view('header', $data);
+			$this->load->view("form/index");
+			$this->load->view('footer');
+		} else {
+			$this->load->view("form/index");
+		}
 	}
 
 	function _is_logged_in()
