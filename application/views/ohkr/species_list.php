@@ -1,18 +1,18 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Species List</h3>
+
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
             } ?>
 
-            <div class="table_list">
-
+            <div class="col-sm-6">
+                <h3>Species List</h3>
 
                 <?php if (!empty($species)) { ?>
 
-                    <table class="table" cellspacing="0" cellpadding="0">
+                    <table class="table table-striped table-responsive table-hover table-bordered">
                         <tr>
                             <th><?php echo $this->lang->line("label_specie_name"); ?></th>
                             <th><?php echo $this->lang->line("label_action"); ?></th>
@@ -24,14 +24,19 @@
                             <tr>
                                 <td><?php echo $specie->name; ?></td>
                                 <td>
-                                    <?php echo anchor("ohkr/edit_specie/".$specie->id, "Edit"); ?> |
-                                    <?php echo anchor("ohkr/delete_specie/".$specie->id, "Delete", "class='delete'"); ?>
+                                    <?php echo anchor("ohkr/edit_specie/" . $specie->id, "Edit"); ?> |
+                                    <?php echo anchor("ohkr/delete_specie/" . $specie->id, "Delete", "class='delete'"); ?>
                                 </td>
                             </tr>
                             <?php $serial++;
                         } ?>
                     </table>
-
+                    <?php if (!empty($links)): ?>
+                        <div class="widget-foot">
+                            <?= $links ?>
+                            <div class="clearfix"></div>
+                        </div>
+                    <?php endif; ?>
                 <?php } else { ?>
                     <div class="fail_message">No species has been added</div>
                 <?php } ?>

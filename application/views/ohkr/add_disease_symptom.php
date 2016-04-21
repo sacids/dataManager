@@ -1,15 +1,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
+            <div class="col-sm-8">
+                <h3>Add <?php echo $disease->name; ?> Disease Symptom</h3>
+                <?php
+                if ($this->session->flashdata('message') != '') {
+                    echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
+                } ?>
 
-            <?php echo form_open_multipart('ohkr/add_disease_symptom/' . $disease->id, 'class="form-horizontal" role="form"'); ?>
-            <h3>Add <?php echo $disease->name; ?> Disease Symptom</h3>
-            <?php
-            if ($this->session->flashdata('message') != '') {
-                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-            } ?>
-
-
+                <?php echo form_open_multipart('ohkr/add_disease_symptom/' . $disease->id, 'class="form-horizontal" role="form"'); ?>
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_specie_name") ?> <span>*</span></label>
                     <select name="specie" id="specie" class="form-control">
@@ -46,7 +45,8 @@
                 </div>
 
 
-            <?php echo form_close(); ?>
+                <?php echo form_close(); ?>
+            </div>
         </div>
     </div>
 </div>

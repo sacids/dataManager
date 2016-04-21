@@ -18,19 +18,47 @@ class Feedback_model extends CI_Model
      */
     private static $table_name = "feedback";
     private static $table_name_user = "users";
+    private static $table_name_xform = "xforms";
 
     function __construct()
     {
         parent::__construct();
     }
 
+
     function find_all()
     {
-        $this->db->join(self::$table_name_user . " u", 'u.id = f.user_id')
-            ->order_by('f.date_created', 'DESC')
-            ->group_by('f.instance_id')
-            ->group_by('f.user_id');
-        return $this->db->get(self::$table_name . " f")->result();
+        $this->db->select('fb.id, fb.instance_id, fb.message, fb.date_created, xf.title, uf.first_name as uf_fname,
+         uf.last_name as uf_lname, ut.first_name as ut_fname, ut.last_name as ut_lname')
+            ->join(self::$table_name_xform . " xf", 'xf.form_id = fb.form_id')
+            ->join(self::$table_name_user . " uf", 'uf.id = fb.user_from')
+            ->join(self::$table_name_user . " ut", 'ut.id = fb.user_to')
+            ->group_by('fb.instance_id')
+            ->select_max('fb.id')
+            ->order_by('fb.date_created', 'DESC');
+        return $this->db->get(self::$table_name . " fb")->result();
+    }
+
+    function search_feedback($name = NULL, $from = NULL, $to = NULL)
+    {
+        if ($name != NULL)
+            $this->db->like("xf.title", $name);
+
+        if ($from != NULL)
+            $this->db->where("fb.user_from", $from);
+
+        if ($to != NULL)
+            $this->db->where("fb.user_to", $to);
+
+        $this->db->select('fb.id, fb.instance_id, fb.message, fb.date_created, xf.title, uf.first_name as uf_fname,
+         uf.last_name as uf_lname, ut.first_name as ut_fname, ut.last_name as ut_lname')
+            ->join(self::$table_name_xform . " xf", 'xf.form_id = fb.form_id')
+            ->join(self::$table_name_user . " uf", 'uf.id = fb.user_from')
+            ->join(self::$table_name_user . " ut", 'ut.id = fb.user_to')
+            //->group_by('fb.instance_id')
+            //->select_max('fb.id')
+            ->order_by('fb.date_created', 'DESC');
+        return $this->db->get(self::$table_name . " fb")->result();
     }
 
     /**
@@ -39,14 +67,26 @@ class Feedback_model extends CI_Model
      * @param null $instance
      * @return mixed
      */
-    function get_feedback_by_instance($user_id, $form_id = NULL, $instance_id = NULL)
+    function get_feedback_details_by_instance($instance_id)
     {
+        return $this->db->limit(1)
+            ->get_where(self::$table_name, array('instance_id' => $instance_id))->row();
+    }
 
-        if ($form_id != NULL)
-            $this->db->where('form_id', $form_id);
+    /**
+     * @param $user_id
+     * @param $form_id
+     * @param null $instance
+     * @return mixed
+     */
+    function get_feedback_by_instance($instance_id)
+    {
+        $this->db->select('fb.message, fb.date_created, fb.sender, uf.first_name as fname, uf.last_name as lname')
+            ->join(self::$table_name_user . " uf", 'uf.id = fb.user_from');
+        //->order_by('fb.date_created', 'DESC');
+        return $this->db->get_where(self::$table_name . " fb", array('instance_id' => $instance_id))->result();
 
-        $this->db->where('user_id', $user_id);
-        return $this->db->get(self::$table_name)->result();
+
     }
 
     /**
