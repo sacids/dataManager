@@ -28,9 +28,6 @@ class Whatsapp extends CI_Controller
 			if ($handle) {
 				while (($line = fgets($handle)) !== FALSE) {
 					$message = $this->_extract_line_message($line);
-
-					echo "<pre>";
-					print_r($message);
 					$this->Whatsapp_model->create($message);
 				}
 				fclose($handle);
@@ -57,12 +54,14 @@ class Whatsapp extends CI_Controller
 		$username = $second_split[0];
 		$message = $second_split[1];
 
-		$date_obj = date_create_from_format('d/m/Y, H:i A',trim($date_sent_received));
+		$date_obj = strtotime(str_replace("/","-", trim($date_sent_received)));
+		//$date_obj = date_create_from_format('d/m/Y, H:i A',trim($date_sent_received));
 
 		$chat = array(
 			"fullname" => trim($username),
 			"message" => trim($message),
-			"date_sent_received" => $date_obj->format('Y-m-d h:i:s'),
+			//"date_sent_received" => $date_obj->format('Y-m-d h:i'),
+			"date_sent_received" => date('Y-m-d H:i:s', $date_obj),
 			"date_created" => date("c")
 		);
 

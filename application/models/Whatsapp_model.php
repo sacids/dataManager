@@ -27,6 +27,7 @@ class Whatsapp_model extends CI_Model
 	public function find_all_message($limit = 30, $offset = 0)
 	{
 		$this->db->limit($limit, $offset);
+		$this->db->order_by('date_sent_received', 'DESC');
 		return $this->db->get(self::$table_name)->result();
 	}
 
