@@ -28,6 +28,9 @@ class Whatsapp extends CI_Controller
 			if ($handle) {
 				while (($line = fgets($handle)) !== FALSE) {
 					$message = $this->_extract_line_message($line);
+
+					echo "<pre>";
+					print_r($message);
 					$this->Whatsapp_model->create($message);
 				}
 				fclose($handle);
@@ -54,12 +57,12 @@ class Whatsapp extends CI_Controller
 		$username = $second_split[0];
 		$message = $second_split[1];
 
-		$date_obj = date_create_from_format('d/m/Y, h:i A',trim($date_sent_received));
+		$date_obj = date_create_from_format('d/m/Y, H:i A',trim($date_sent_received));
 
 		$chat = array(
 			"fullname" => trim($username),
 			"message" => trim($message),
-			"date_sent_received" => $date_obj->format("Y-m-d H:i:s"),
+			"date_sent_received" => $date_obj->format('Y-m-d h:i:s'),
 			"date_created" => date("c")
 		);
 
@@ -68,10 +71,35 @@ class Whatsapp extends CI_Controller
 	}
 
 	function test(){
-		echo strtotime(str_replace("/","-","25/02/2016, 3:07 PM"));
+		//echo strtotime(str_replace("/","-","25/02/2016, 3:07 PM"));
 		$date = date_create_from_format('d/m/Y, H:i A', "25/02/2016, 3:07 PM");
 		echo "<pre>";
 		print_r($date);
-		echo $date->date;
+		echo $date->format('Y-m-d h:i:s');
+	}
+
+
+	public function message_list()
+	{
+		//check login
+		//$this->_is_logged_in();
+
+		$config = array(
+			'base_url' => $this->config->base_url("whatsapp/message_list"),
+			'total_rows' => $this->Whatsapp_model->count_message(),
+			'uri_segment' => 3,
+		);
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+		$data['messages'] = $this->Whatsapp_model->find_all_message($this->pagination->per_page, $page);
+		$data["links"] = $this->pagination->create_links();
+
+		//render view
+		$data['title'] = "Message List";
+		$this->load->view('header', $data);
+		$this->load->view("whatsapp/message_list", $data);
+		$this->load->view('footer');
 	}
 }
