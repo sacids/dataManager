@@ -20,4 +20,23 @@ class Whatsapp_model extends CI_Model
 	{
 		return $this->db->insert(self::$table_name, $message);
 	}
+
+	/**
+	 * @return int
+	 */
+	public function find_all_message($limit = 30, $offset = 0)
+	{
+		$this->db->limit($limit, $offset);
+		return $this->db->get(self::$table_name)->result();
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function count_message()
+	{
+		$this->db->from(self::$table_name);
+		return $this->db->count_all_results();
+	}
 }
