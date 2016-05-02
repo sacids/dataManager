@@ -11,19 +11,18 @@ body {
 }
 
 body {
-    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
-.navbar-default .nav > li>a,
-.navbar-default .nav>li>a:focus {
+.navbar-default .nav > li > a,
+.navbar-default .nav > li > a:focus {
     font-size: 14px;
     color: #FFFFFF;
 }
 
-
-@media(min-width:768px) {
+@media (min-width: 768px) {
     .navbar-default {
-        border-color: rgba(255,255,255,.3);
+        border-color: rgba(255, 255, 255, .3);
         background-color: transparent;
         background-color: #781E14;
     }
@@ -33,6 +32,25 @@ body {
     webkit-tap-highlight-color: #222;
 }
 
-.form-control{
+.form-control {
     max-width: 400px;
 }
+
+.navbar .nav a.dropdown-toggle:hover {
+    background-color: #781E14;
+}
+
+.navbar .nav .dropdown-menu, .navbar .nav .dropdown-toggle {
+    background-color: #781E14;
+    color: #FFFFFF;
+}
+
+li.dropdown-header {
+    color: #781E14;
+    background-color: #FFFFFF;
+}
+
+.navbar .nav .dropdown-menu a {
+    color: #FFFFFF;
+}
+
