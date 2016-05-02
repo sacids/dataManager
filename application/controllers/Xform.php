@@ -20,7 +20,6 @@ class XmlElement
 
 class Xform extends CI_Controller
 {
-
 	private $form_defn;
 	private $form_data;
 	private $xml_defn_filename;
@@ -87,13 +86,13 @@ class Xform extends CI_Controller
 			}
 		}
 
-		if ($this->input->is_ajax_request()) {
-			$this->load->view('header', $data);
-			$this->load->view("form/index");
-			$this->load->view('footer');
-		} else {
-			$this->load->view("form/index");
-		}
+		//if (!$this->input->is_ajax_request()) {
+		$this->load->view('header', $data);
+		$this->load->view("form/index");
+		$this->load->view('footer');
+		//} else {
+		//	$this->load->view("form/index");
+		//}
 	}
 
 	function _is_logged_in()
@@ -216,8 +215,6 @@ class Xform extends CI_Controller
 		}
 
 		// return response
-
-
 		$this->get_response($http_response_code);
 	}
 
@@ -560,7 +557,6 @@ class Xform extends CI_Controller
 
 			if (!empty($_FILES['userfile']['name'])) {
 
-
 				$config['upload_path'] = $form_definition_upload_dir;
 				$config['allowed_types'] = 'xml';
 				$config['max_size'] = '1024';
@@ -881,7 +877,8 @@ class Xform extends CI_Controller
 	}
 
 
-	function restore_from_archive($xform_id){
+	function restore_from_archive($xform_id)
+	{
 		if (!$this->ion_auth->logged_in()) {
 			redirect('auth/login', 'refresh');
 		}
@@ -926,7 +923,7 @@ class Xform extends CI_Controller
 
 			$this->pagination->initialize($config);
 			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-
+			$data['form_id'] = $form->form_id;
 			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page);
 			$data["links"] = $this->pagination->create_links();
 
@@ -936,5 +933,54 @@ class Xform extends CI_Controller
 		} else {
 			// form does not exist
 		}
+	}
+
+	function csv_export_form_data($xform_id = NULL)
+	{
+		if ($xform_id == NULL) {
+			$this->session->set_flashdata("message", display_message("You must select a form", "danger"));
+			redirect("xform/forms");
+		}
+		$table_name = $xform_id;
+		$query = $this->db->query("select * from {$table_name} order by id ASC ");
+		$this->_force_csv_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".csv");
+	}
+
+	function _force_csv_download($query, $filename = '.csv')
+	{
+		$this->load->dbutil();
+		$this->load->helper('file');
+		$this->load->helper('download');
+		$delimiter = ",";
+		$newline = "\r\n";
+		$data = $this->dbutil->csv_from_result($query, $delimiter, $newline);
+		force_download($filename, $data);
+	}
+
+	function xml_export_form_data($xform_id = NULL)
+	{
+		if ($xform_id == NULL) {
+			$this->session->set_flashdata("message", display_message("You must select a form", "danger"));
+			redirect("xform/forms");
+		}
+
+		$table_name = $xform_id;
+		$query = $this->db->query("select * from {$table_name} order by id ASC ");
+		$this->_force_xml_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".xml");
+	}
+
+	function _force_xml_download($query, $filename = '.xml')
+	{
+		$this->load->dbutil();
+		$this->load->helper('file');
+		$this->load->helper('download');
+		$config = array(
+			'root' => 'afyadata',
+			'element' => 'form_data',
+			'newline' => "\n",
+			'tab' => "\t"
+		);
+		$data = $this->dbutil->xml_from_result($query, $config);
+		force_download($filename, $data);
 	}
 }

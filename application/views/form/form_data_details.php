@@ -10,8 +10,13 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-lg-12 main">
-
-			<h3>Form data collected</h3>
+			<div class="row" style="margin-bottom: 10px;">
+				<h3>Form data collected</h3>
+			<span class="pull-right">
+				<?php echo anchor("xform/csv_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/csv-export.png" height="30px"/>') ?>
+				<?php echo anchor("xform/xml_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/xml-export.png" height="30px"/>') ?>
+			</span>
+			</div>
 			<?php
 			if ($this->session->flashdata('message') != '') {
 				echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
