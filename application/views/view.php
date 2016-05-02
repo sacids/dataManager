@@ -65,7 +65,7 @@
                 <li>
                     <a class="page-scroll" href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" download>Download App</a>
                 </li>
-                <li><a class="page-scroll" target="_blank" href="<?php echo site_url('auth/login');?>">Go to demo</a></li>
+                <li><a class="page-scroll" href="<?php echo site_url('auth/login');?>">Go to demo</a></li>
                 <li><a class="page-scroll" href="#contact">Contact</a></li>
             </ul>
         </div>

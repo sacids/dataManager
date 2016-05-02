@@ -186,8 +186,8 @@ header {
 }
 
 header .overlay{
-    background-color: #000000;
-    opacity: 0.7;
+    background-color: #3F3F3F;
+    opacity: 0.5;
     position: absolute;
     top: 0;
     left: 0;
