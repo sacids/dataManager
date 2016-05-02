@@ -93,9 +93,11 @@
 						<li class="dropdown-header">Manage diseases</li>
 						<li><?php echo anchor('ohkr/disease_list', "List diseases"); ?></li>
 						<li><?php echo anchor('ohkr/add_new_disease', "Add new disease"); ?></li>
+						<li class="divider"></li>
 						<li class="dropdown-header">Manage symptoms</li>
 						<li><?php echo anchor('ohkr/symptoms_list', "List symptoms"); ?></li>
 						<li><?php echo anchor('ohkr/add_new_symptom', "Add new symptoms"); ?></li>
+						<li class="divider"></li>
 						<li class="dropdown-header">Manage species</li>
 						<li><?php echo anchor('ohkr/species_list', "List species"); ?></li>
 						<li><?php echo anchor('ohkr/add_new_specie', "Add new specie"); ?></li>
@@ -112,6 +114,7 @@
 				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+
 				<li><?php echo anchor('feedback/feedback_list', "Chats"); ?></li>
 
 				<li class="">
