@@ -6,7 +6,7 @@
  * Date: 5/2/2016
  * Time: 5:47 PM
  */
-class Feedback_Table_modifications extends CI_Migration
+class Migration_feedback_Table_modifications extends CI_Migration
 {
 
     public function up()
