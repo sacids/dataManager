@@ -597,10 +597,15 @@ class Auth extends CI_Controller
 				'value' => $this->form_validation->set_value('password_confirm'),
 			);
 			$this->data['title'] = "Create New User";
-			$this->load->view('header', $this->data);
-			//$this->load->view('auth/menu');
-			$this->_render_page('auth/create_user');
-			$this->load->view('footer');
+			
+			if(!$this->input->is_ajax_request()){
+				$this->load->view('header');
+				//$this->load->view('auth/menu');
+				$this->_render_page('auth/create_user', $this->data);
+				$this->load->view('footer');
+			}else{
+				$this->_render_page('auth/create_user', $this->data);
+			}
 			//$this->_render_page('auth/create_user', $this->data);
 		}
 	}

@@ -26,12 +26,15 @@
 
 </head>
 <body>
-<div id="header_wrp" class="header_wrp group box_shadow topnav">
-		&nbsp;
+<div id="header_wrp" class="header_wrp box_shadow"><div class="topnav group">
 		<?php 
 		
 			//echo '<pre>'; print_r($this->data);
 			foreach($this->data['modules'] as $val){
+				
+
+				$icon	= $val['icon_font'];
+				if(empty($icon)) $icon = 'open_in_new';
 				
 				if($this->session->userdata('module_id') == $val['id']){
 					$class = 'active';
@@ -39,11 +42,14 @@
 					$class = 'inactive';
 				}
 				
-				echo '<a class="'.$class.'" href="'. site_url('perm').'/'.$val['title'].'/'.$val['id'].'">'.$val['title'].'</a>';
+				echo '<div class="'.$class.' left">
+						<i class="material-icons md-light" style="font-size:12px">'.$icon.'</i>
+						<a href="'. site_url('perm').'/'.$val['title'].'/'.$val['id'].'">'.$val['title'].'</a>
+					</div>';
 			}
 		?>
-		<a class="right" href="<?php echo site_url('auth/logout'); ?>">Logout</a>
-		&nbsp;&nbsp;
+		<div class="right"><a href="<?php echo site_url('auth/logout'); ?>">Logout</a></div>
+		</div>
 </div>
 
  </body>

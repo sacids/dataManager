@@ -372,9 +372,10 @@ class Perm extends CI_Controller {
 
 	public function manage_table($table_id = false) {
 		$post = $this->input->post ();
+		
+		//print_r($post);
 		$p_id = $post ['perm_id'];
 		$this->perm_id = $p_id;
-		// print_r($post);
 		// echo 'jembe';
 		$table_id = $this->input->post ( 'table_id' );
 		
@@ -388,7 +389,8 @@ class Perm extends CI_Controller {
 		$res = $this->Perm_model->get_field_data ( 'table_name', 'perm_tables', $table_id );
 		$table_name = $res ['table_name'];
 		
-		// get filters
+		// set table title
+		echo '<div class="perm_list_title">'.$post['title'].'</div>';
 		
 		// jquery to load initial results
 		
@@ -409,9 +411,16 @@ class Perm extends CI_Controller {
 		// check if has permissions to add
 		if ($this->check_add_perm ()) {
 			
+			$add	= @$post['add_controller'];
+			if(empty($add)){
+				$url	= 'perm/new_table_data';
+			}else{
+				$url	= $add;
+			}
+			
 			// new icon
 			echo '	<div 	target="detail_wrp"
-							action="' . site_url ( 'perm/new_table_data' ) . '"
+							action="' . site_url ( $url ) . '"
 							args="table_id=' . $table_id . '"
 							class="perm_btn right m_link" >
 								<i class="material-icons md-dark">add_box</i>
@@ -735,6 +744,7 @@ class Perm extends CI_Controller {
 			case 'list' :
 				$rend = 'row_list';
 				$this->db_exp->set_search_condition ( "`" . $to . "` " . $oper . " '" . $match_val . "'" );
+				$this->db_exp->set_hidden($to,$match_val);
 				$this->db_exp->render ( $rend );
 				break;
 			case 'flush table' :
@@ -761,6 +771,11 @@ class Perm extends CI_Controller {
 		foreach ( $fields as $field ) {
 			
 			parse_str ( $field ['field_value'], $args );
+			// check if requires validation
+			$validation	= $field['field_validation'];
+			if(!empty($validation)){
+				$this->db_exp->set_validation_rules($field['field_name'],$validation,$field['field_name']);
+			}
 			
 			switch ($field ['field_property']) {
 				
@@ -795,6 +810,9 @@ class Perm extends CI_Controller {
 					break;
 				case 'hidden' :
 					$this->db_exp->set_hidden ( $field ['field_name'], $field ['field_value'] );
+					break;
+				case 'view':
+					$this->db_exp->set_view( $field['field_name']);
 					break;
 			}
 		}

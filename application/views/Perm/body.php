@@ -4,14 +4,19 @@
 		<div id='option_wrp'>
 		<?php
 		// check if is admin
-		if ($this->session->userdata ( "user_id" ) == 1) {
+		if ($this->session->userdata ( "user_id" ) == 1 && $this->session->userdata ( "module_id" ) == 1 ) {
 			
 			?>
 				<div class="label_sec">
+				
+					<div class="icon_wrp">
+						<i class="material-icons md-dark bt">fast_forward</i>
+					</div>
+					
 					<div 	class="link group" 
 							target="list_wrp" 
 							label="Manage Permission"
-							args="table_id=1&perm_id=1"
+							args="table_id=1&perm_id=1&title=Manage+Permission"
 							action="<?php echo site_url("perm/manage_table") ?>">
 								<div class="left">
 									<i class="material-icons md-dark">domain</i>
@@ -20,7 +25,7 @@
 					<div 	class="link group" 
 							target="list_wrp" 
 							label="Manage Filters"
-							args="table_id=7&perm_id=1"
+							args="table_id=7&perm_id=1&title=Manage+Filters"
 							action="<?php echo site_url("perm/manage_table") ?>">
 								<div class="left">
 									<i class="material-icons md-dark">filter_list</i>
@@ -29,16 +34,16 @@
 					<div 	class="link group" 
 							target="list_wrp" 
 							label="Manage Tables"
-							args="table_id=3&perm_id=1"
+							args="table_id=3&perm_id=1&title=Manage+Tables"
 							action="<?php echo site_url("perm/manage_table") ?>">
 								<div class="left">
-									<i class="material-icons md-light">view_list</i>
+									<i class="material-icons md-dark">view_list</i>
 								</div>
 					</div>
 					<div 	class="link group" 
 							target="list_wrp" 
 							label="Manage Users"
-							args="table_id=5&perm_id=1"
+							args="table_id=5&perm_id=1&title=Manage+Users"
 							action="<?php echo site_url("perm/manage_table") ?>">
 								<div class="left">
 									<i class="material-icons md-light">account_circle</i>
@@ -47,7 +52,7 @@
 					<div 	class="link group" 
 							target="list_wrp" 
 							label="Manage Groups"
-							args="table_id=6&perm_id=1"
+							args="table_id=6&perm_id=1&title=Manage+Groups"
 							action="<?php echo site_url("perm/manage_table") ?>">
 								<div class="left">
 									<i class="material-icons md-light">group</i>
@@ -56,7 +61,7 @@
 					<div 	class="link group" 
 							target="list_wrp" 
 							label="Manage Modules"
-							args="table_id=4&perm_id=1"
+							args="table_id=4&perm_id=1&title=Manage+Modules"
 							action="<?php echo site_url("perm/manage_table") ?>">
 								<div class="left">
 									<i class="material-icons md-light">dashboard</i>
@@ -88,6 +93,8 @@
 					
 					$json	= json_decode($v['perm_data'],true);
 					$json['perm_id']	= $v['id'];
+					$json['title']		= $v['title'];
+					$json['icon_font']	= $v['icon_font'];
 					
 					//parse_str($args,$parts);
 					
@@ -118,15 +125,10 @@
 			echo '</div>';
 			
 			?>
-				<?php
-		
-		echo $this->session->userdata ( "user_id" );
-		?>
 		</div>
 	</div>
 
-	<div class='list_wrp'>
-		<div class='icon_wrp'>[-]</div>
+	<div class='list_wrp list_min'>
 		<div id='list_wrp' class='perm_target_divs'></div>
 	</div>
 

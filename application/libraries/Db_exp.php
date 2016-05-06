@@ -11,7 +11,9 @@ class Db_exp {
 	public $form_action;
 	public $form_attributes;
 	public $form_id;
+	public $readonly; 
 	public $form_hidden	= array();
+	public $validate	= array();
 	
 	public function __construct() {
 		
@@ -21,10 +23,12 @@ class Db_exp {
 		$this->form_action = uri_string();
 		$this->default_action = 'edit';
 		$this->search_condition = false;
+		$this->readonly	= false;
 		$this->actions['link']  = array();
 		$this->fields = array();
 		$this->form_attributes = array('id' => $this->form_id);
 		$this->form_hidden['db_exp_submit_engaged'] = 1;
+		$this->validate		= array();
 	}
 	public function render($action = "default") {
 		$CI = & get_instance ();
@@ -56,8 +60,8 @@ class Db_exp {
 				$this->_render_edit ();
 				break;
 			case 'view':
+				$this->set_readonly();
 				$this->_render_edit();
-				$this->_set_readonly();
 				break;
 			case 'col_list':
 				$this->_render_list_col ();
@@ -106,7 +110,17 @@ class Db_exp {
 		
 		$this->search_condition = $where;
 	}
-	public function set_hidden($index, $value = ''){
+	public function set_validation_rules($index,$rule,$label = ''){
+		$tmp	= array();
+		$tmp['field'] = $index;
+		$tmp['rules'] = $rule;
+		$tmp['label'] = $label;		
+		array_push($this->validate,$tmp);
+	}
+	public function set_view($index){
+		$this->fields[$index]['view'] = 1;
+	}
+	public function set_hidden($index, $value = '', $rules = false){
 		
 		if(is_array($index)){
 			foreach($index as $key => $val){
@@ -190,12 +204,17 @@ class Db_exp {
 		$row = $query->result_array();
 		return $row[$field];
 	}
+	
+	
+	
 	private function _process_submit($posts) {
 		
 		$CI = & get_instance ();
 		
 		//print_r($posts);
 		//print_r($this->fields);
+		
+		
 		$post_to_db	= array();
 		$del_keys	= array();
 		
@@ -214,7 +233,8 @@ class Db_exp {
 			if($key == 'db_exp_submit_engaged'){
 				continue;
 			}
-				
+			
+			
 			if(array_key_exists($key,$this->fields) && array_key_exists('json',$this->fields[$key])){
 				// json variable
 				$catch	= $this->fields[$key]['json'];
@@ -237,7 +257,21 @@ class Db_exp {
 			
 		}
 		
+		
+		// start of validation
+		foreach ($post_to_db as $key => $value) {
+			$_POST[$key] = $value;
+		}		
+		
+		if (!empty($this->validate)) {
+			$CI->load->library('form_validation');
+			$CI->form_validation->set_rules($this->validate);
 	
+			if(!$CI->form_validation->run()){
+				echo 'Failed to submit data';
+				return;
+			}
+		}
 		
 		if (array_key_exists('id', $post_to_db)) {
 			$where = "id = " . $post_to_db['id'];
@@ -317,7 +351,9 @@ class Db_exp {
 			$this->_edit_field ( $row, $val );
 		}
 		
-		echo '<tr><td></td><td></td><td>' . form_submit ( 'submit', 'submit' ) . '</td></tr>';
+		if(!$this->readonly){
+			echo '<tr><td></td><td></td><td>' . form_submit ( 'submit', 'submit' ) . '</td><td></td></tr>';
+		}
 		echo '</table>';
 		echo form_close ();
 	}
@@ -382,6 +418,9 @@ class Db_exp {
 						$type	= 'label';
 						$label	= $val;
 						break;
+					case 'view':
+						$type	= 'view';
+						break;
 				}
 				
 				$data['class']	= 'db_exp_'.$type;
@@ -390,10 +429,25 @@ class Db_exp {
 		// print_r ( $field );
 	
 		$pre	= '<tr><td>'.$label.'</td><td> : </td><td>';
-		$end	= '</td></tr>';
+		$end	= '</td><td>'.form_error($name).'</td></tr>';
+		
+		// check if view all is enabled
+		if($this->readonly){
+			if(is_array($value)){
+				$value	= implode(',',$value);
+			}
+			echo $pre.$value.$end;
+			return;
+		}
 		
 		switch ($type) {
-			
+
+			case 'view':
+				if(is_array($value)){
+					$value	= implode(',',$value);
+				}
+				echo $pre.'<td>'.$value.'</td>'.$end;
+				break;
 			case 'int' :
 				echo $pre.form_input ( $data, $value ).$end;
 				break;
@@ -428,6 +482,8 @@ class Db_exp {
 				echo $pre.form_input ( $name, $value ).$end;
 				break;
 		}
+		
+		
 	}
 	private function _render_list_col() {
 		$CI = & get_instance ();
@@ -613,7 +669,11 @@ class Db_exp {
 		return $val;
 	}
 	
-	private function _set_readonly($field_name = false){
+	public function set_readonly(){
+		
+		$this->readonly	= true;
+		return;
+		
 		
 		echo '<script  type="text/javascript">';
 		if($field_name){

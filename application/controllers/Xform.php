@@ -527,9 +527,14 @@ class Xform extends CI_Controller
 		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
 		if ($this->form_validation->run() === FALSE) {
-			$this->load->view('header', $data);
-			$this->load->view("form/add_new");
-			$this->load->view('footer');
+			
+			if(!$this->input->is_ajax_request()){
+				$this->load->view('header', $data);
+				$this->load->view("form/add_new");
+				$this->load->view('footer');
+			}else{
+				$this->load->view("form/add_new", $data);
+			}
 		} else {
 
 			$form_definition_upload_dir = $this->config->item("form_definition_upload_dir");

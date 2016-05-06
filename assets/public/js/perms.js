@@ -10,6 +10,16 @@ $(document).ready(
 
 			$('.list_wrp').hide();
 			$('.hidden').hide();
+			$('.list_wrp').resizable({
+		        handles: "e",
+		        minWidth: 20,
+		        maxWidth: 620,
+		        create: function( event, ui ) {
+		            // Prefers an another cursor with two arrows
+		            $(".ui-resizable-e").css("cursor","ew-resize");
+		        }
+		    });
+			
 			
 			$(".link").on({
 			    mouseenter: function () {
@@ -48,16 +58,12 @@ $(document).ready(
 						$(this).addClass('link_sel');
 
 						if (target == 'detail_wrp') {
-							//$('.list_wrp').addClass('min_list_wrp', 1000,"easeOutQuart");
-							//$('.list_wrp .icon_wrp').html('[+]');
-							//$('.list_wrp').hide();
+							$('.icon_wrp .bt').html('fast_forward');
 							$('.list_wrp').hide('slide', { direction: 'left', easing: 'easeOutQuart' },800);
 							$('#detail_wrp').show();
 						} else {
-							//$('.list_wrp').show();
+							$('.icon_wrp .bt').html('fast_rewind');
 							$('.list_wrp').show('slide', { direction: 'left', easing: 'easeOutQuart' },800);
-							//$('.list_wrp').removeClass('min_list_wrp', 1000,"easeOutQuart");
-							//$('.list_wrp .icon_wrp').html('[-]');
 						}
 
 						// put loader
@@ -117,19 +123,21 @@ $(document).ready(
 
 			$(document).on(
 					'click',
-					'.list_wrp .icon_wrp',
+					'.icon_wrp .bt',
 					function(event) {
-
-						if ($('.list_wrp').hasClass('min_list_wrp')) {
-							$('#list_wrp').show()
-							$('.list_wrp').removeClass('min_list_wrp', 1000,
-									"easeOutQuart");
-							$('.list_wrp .icon_wrp').html('[-]');
+						
+						if ($('.list_wrp').hasClass('list_min')) {	
+						//if($('.list_wrp').is(":visible")){
+						
+							
+							$('.list_wrp').show('slide', { direction: 'left', easing: 'easeOutQuart' },800);
+							$('.list_wrp').removeClass('list_min');
+							$(this).html('fast_rewind');
 						} else {
-							$('#list_wrp').hide()
-							$('.list_wrp').addClass('min_list_wrp', 1000,
-									"easeOutQuart");
-							$('.list_wrp .icon_wrp').html('[+]');
+							
+							$('.list_wrp').hide('slide', { direction: 'left', easing: 'easeOutQuart' },800);
+							$('.list_wrp').addClass('list_min');
+							$(this).html('fast_forward');
 						}
 					});
 
@@ -138,23 +146,6 @@ $(document).ready(
 					'.label',
 					function(event) {
 						$(this).next().slideToggle();
-					});
-			$(document).on(
-					'click',
-					'.option_wrp .icon_wrp',
-					function(event) {
-
-						if ($('.option_wrp').hasClass('min_list_wrp')) {
-							$('#option_wrp').show();
-							$('.option_wrp').removeClass('min_list_wrp', 1000,
-									"easeOutQuart");
-							$('.option_wrp .icon_wrp').html('[-]');
-						} else {
-							$('#option_wrp').hide();
-							$('.option_wrp').addClass('min_list_wrp', 1000,
-									"easeOutQuart");
-							$('.option_wrp .icon_wrp').html('[+]');
-						}
 					});
 
 			$(document).on('click', '.perm_list_link', function(event) {
@@ -203,7 +194,7 @@ $(document).ready(
 			});
 
 			// capture all submit elements
-			$(document).on('click', 'input[type=submit]', function(event) {
+			$(document).on('click', 'input[type=submit], button[type=submit]', function(event) {
 
 				//alert('submit');
 				// get the form
