@@ -565,22 +565,22 @@ class Migration_base_perm extends CI_Migration {
 	 }
 
 	public function down()	{
-		### Drop table perm_config ##
-		$this->dbforge->drop_table("perm_config", TRUE);
-		### Drop table perm_filter ##
-		$this->dbforge->drop_table("perm_filter", TRUE);
-		### Drop table perm_filter_config ##
-		$this->dbforge->drop_table("perm_filter_config", TRUE);
-		### Drop table perm_module ##
-		$this->dbforge->drop_table("perm_module", TRUE);
-		### Drop table perm_tables ##
-		$this->dbforge->drop_table("perm_tables", TRUE);
-		### Drop table perm_tables_conf ##
-		$this->dbforge->drop_table("perm_tables_conf", TRUE);
-		### Drop table perm_tabs ##
-		$this->dbforge->drop_table("perm_tabs", TRUE);
 		### Drop table perm_tree ##
 		$this->dbforge->drop_table("perm_tree", TRUE);
+		### Drop table perm_module ##
+		$this->dbforge->drop_table("perm_module", TRUE);
+		### Drop table perm_tabs ##
+		$this->dbforge->drop_table("perm_tabs", TRUE);
+		### Drop table perm_tables_conf ##
+		$this->dbforge->drop_table("perm_tables_conf", TRUE);
+		### Drop table perm_tables ##
+		$this->dbforge->drop_table("perm_tables", TRUE);
+		### Drop table perm_config ##
+		$this->dbforge->drop_table("perm_config", TRUE);
+		### Drop table perm_filter_config ##
+		$this->dbforge->drop_table("perm_filter_config", TRUE);
+		### Drop table perm_filter ##
+		$this->dbforge->drop_table("perm_filter", TRUE);
 
 	}
 }

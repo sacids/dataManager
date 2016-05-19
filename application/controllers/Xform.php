@@ -250,6 +250,20 @@ class Xform extends CI_Controller
 		}
 		return $result;
 	}
+	
+	
+	public function test_insert(){
+		
+		// call forms
+		$filename	= 'Dalili_za_Binadamu_2016-02-03_16-43-55.xml';
+		$this->set_data_file($this->config->item("form_data_upload_dir") . $filename);
+		$this->load_xml_data();
+		
+		// 
+		$statement = $this->get_insert_form_data_query();
+		
+		echo $statement;
+	}
 
 	/**
 	 * @param $filename
@@ -358,6 +372,7 @@ class Xform extends CI_Controller
 	private function get_path($name, $obj)
 	{
 		$name .= "_" . $obj->name;
+		
 		if (is_array($obj->children)) {
 			foreach ($obj->children as $val) {
 				$this->get_path($name, $val);
@@ -365,8 +380,9 @@ class Xform extends CI_Controller
 		} else {
 			$column_name = substr($name, 1);
 			//shorten long column names
-			if (strlen($column_name) > 64)
+			if (strlen($column_name) > 64){
 				$column_name = shorten_column_name($column_name);
+			}
 			$this->form_data [$column_name] = $obj->content;
 		}
 	}
@@ -378,7 +394,7 @@ class Xform extends CI_Controller
 	 *
 	 * @return boolean|string
 	 */
-	private function get_insert_form_data_query()
+	private function get_insert_form_data_query1()
 	{
 
 		$table_name = $this->table_name;
@@ -425,6 +441,100 @@ class Xform extends CI_Controller
 		$field_values = "('" . implode("','", array_values($this->form_data)) . "',$fd)";
 
 		$query = "INSERT INTO {$table_name} {$field_names} VALUES {$field_values}";
+		return $query;
+	}
+	
+	private function get_fieldname_map(){
+		$tmp	= $this->Xform_model->get_fieldname_map($this->table_name);
+		$map	= array();
+		foreach($tmp as $part){
+			$key	= $part['field_name'];
+			$map[$key]	= $part;
+		}	
+		return $map;	
+	}
+	/**
+	 * Create query string for inserting data into table from submitted xform data
+	 * file
+	 * Author : Eric Beda
+	 *
+	 * @return boolean|string
+	 */
+	private function get_insert_form_data_query()
+	{
+	
+		$table_name = $this->table_name;
+		$form_data = $this->form_data;
+		
+		echo '<pre>';
+		print_r($form_data);
+		$structure		= $this->get_fieldname_map();
+		$col_names		= array();
+		$col_values		= array();
+		$points_v		= array();
+		$points_n		= array();
+		
+		foreach($form_data as $key => $val){
+			
+			$type	= $structure[$key]['type'];
+			$cn		= $structure[$key]['col_name'];
+			
+			array_push($col_names,$cn);
+			array_push($col_values,$val);
+			
+			
+			if($type == 'select'){
+				$options	= explode(' ',$val);
+				
+				foreach($options as $opt){
+					$opt	= trim($opt);
+					
+					$sanitized			= sanitize_col_name($opt);
+					$first_letters		= condense_col_name($sanitized);
+					$sum_up				= ascii_val($sanitized);
+					$fn					= $cn.'_'.$first_letters.'_'.$sum_up;
+					
+					$coln				= $structure[$fn]['col_name'];
+					
+					array_push($col_values,1);
+					array_push($col_names,$coln);
+				}
+			}
+			
+			if($type == 'geopoint'){
+				
+				$geopoints = explode(" ", $val);
+				
+				$lat = $geopoints [0];
+				array_push($col_values,$lat);
+				array_push($col_names,$cn.'_lat');
+				
+				$lng = $geopoints [1];
+				array_push($col_values,$lng);
+				array_push($col_names,$cn.'_lng');
+				
+				$alt = $geopoints [2];
+				array_push($col_values,$alt);
+				array_push($col_names,$cn.'_alt');
+				
+				$acc = $geopoints [3];
+				array_push($col_values,$acc);
+				array_push($col_names,$cn.'_acc');
+				
+				$point = "GeomFromText('POINT($lat $lng)')";
+				array_push($points_v,$point);
+				array_push($points_n,$cn.'_point');
+			}
+			
+			
+		}
+		
+		
+		$field_names = "(`" . implode("`,`", $col_names) . "`,`".implode("`,`", $points_n)."`)";
+		$field_values = "('" . implode("','", $col_values) . "',".implode("`,`", $points_v).")";
+	
+		$query = "INSERT INTO {$table_name} {$field_names} VALUES {$field_values}";
+		
 		return $query;
 	}
 
@@ -548,13 +658,19 @@ class Xform extends CI_Controller
 		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
 		if ($this->form_validation->run() === FALSE) {
-			$this->load->view('header', $data);
-			$this->load->view("form/add_new");
-			$this->load->view('footer');
+			
+			if ($this->input->is_ajax_request()) {
+				$this->load->view("form/add_new", $data);
+			}else{
+				$this->load->view('header', $data);
+				$this->load->view("form/add_new");
+				$this->load->view('footer');
+			}
 		} else {
 
 			$form_definition_upload_dir = $this->config->item("form_definition_upload_dir");
-
+			
+			//print_r($_FILES['userfile']['name']);
 			if (!empty($_FILES['userfile']['name'])) {
 
 				$config['upload_path'] = $form_definition_upload_dir;
@@ -602,7 +718,7 @@ class Xform extends CI_Controller
 								$this->session->set_flashdata("message", display_message($this->lang->line("form_upload_failed"), "danger"));
 							}
 						} else {
-							$this->session->set_flashdata("message", display_message($this->lang->line("form_saving_failed"), "danger"));
+							$this->session->set_flashdata("message", display_message($create_table_statement, "danger"));
 						}
 
 						redirect("xform/add_new");
@@ -625,6 +741,7 @@ class Xform extends CI_Controller
 	 */
 	public function _initialize($file_name)
 	{
+		$file_name	= 'Dalili_za_Binadamu.xml';
 		log_message("debug", "File to load " . $file_name);
 		// create table structure
 		$this->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
@@ -745,22 +862,37 @@ class Xform extends CI_Controller
 
 		// initiate statement, set id as primary key, autoincrement
 		$statement = "CREATE TABLE $tbl_name ( id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY ";
-
+		
 		// loop through xform definition array
+		$counter	= 0;
+		$holder	= array();
 		foreach ($structure as $key => $val) {
-
+	
 			// check if type is empty
 			if (empty ($val ['type']))
 				continue;
 
-			$type = $val ['type'];
-
-			$field_name = $val ['field_name'];
-
-			//TODO Call helper function here to shorten column name
-			if (strlen($field_name) > 64)
-				$field_name = shorten_column_name($field_name);
-
+			
+			$field_name		= $val['field_name'];
+			$col_name		= condense_col_name($field_name).$counter++;
+			
+			if(array_key_exists('label', $val)){
+				$field_label	= $val['label'];
+			}else{
+				$tmp	= explode('/', $val['nodeset']);
+				$field_label = array_pop($tmp);
+			}
+			$type 			= $val ['type'];
+			$tmp			= array(
+					'col_name' => $col_name,
+					'type' => $type,
+					'table_name' => $this->table_name,
+					'field_name' => $field_name,
+					'field_label' => $field_label );
+			
+			array_push($holder,$tmp);
+			//print_r($holder);
+			
 			// check if field is required
 			if (!empty ($val ['required'])) {
 				$required = 'NOT NULL';
@@ -769,42 +901,112 @@ class Xform extends CI_Controller
 			}
 
 			if ($type == 'string' || $type == 'binary') {
-				$statement .= ", $field_name VARCHAR(300) $required";
+				$statement .= ", $col_name VARCHAR(300) $required";
 			}
 
 			if ($type == 'select1') {
 				// Mysql recommended way of handling single quotes for queries is by using two single quotes at once.
-				$statement .= ", $field_name ENUM('" . implode("','", str_replace("'", "''", $val ['option'])) . "') $required";
+				$statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $val ['option'])) . "') $required";
 			}
 
-			if ($type == 'select' || $type == 'text') {
-				$statement .= ", $field_name TEXT $required ";
+			if ($type == 'select' ) {
+				$statement .= ", $col_name TEXT $required ";
+				
+				foreach($val['option'] as $key => $select_opts){
+				
+					$tmp	= array();
+					$tmp['col_name']	= $col_name.'_'.$key;
+					$tmp['type']	= 'option';
+					$tmp['table_name']	= $this->table_name;
+					
+					$sanitized			= sanitize_col_name($select_opts);
+					$first_letters		= condense_col_name($sanitized);
+					$sum_up				= ascii_val($sanitized);
+					
+					$tmp['field_name']	= $col_name.'_'.$first_letters.'_'.$sum_up;
+					$tmp['field_label']	= $select_opts;
+				
+					array_push($holder,$tmp);
+					
+					$statement .= ", ".$tmp['col_name']." ENUM('1','0') ";
+				}
+			}
+			
+			if ($type == 'text') {
+				$statement .= ", $col_name TEXT $required ";
 			}
 
 			if ($type == 'date') {
-				$statement .= ", $field_name DATE $required ";
+				$statement .= ", $col_name DATE $required ";
 			}
 
 			if ($type == 'int') {
-				$statement .= ", $field_name INT(20) $required ";
+				$statement .= ", $col_name INT(20) $required ";
 			}
 
 			if ($type == 'geopoint') {
 
-				$statement .= "," . $field_name . " VARCHAR(150) $required ";
-				$statement .= "," . $field_name . "_point POINT $required ";
-				$statement .= "," . $field_name . "_lat DECIMAL(38,10) $required ";
-				$statement .= "," . $field_name . "_lng DECIMAL(38,10) $required ";
-				$statement .= "," . $field_name . "_acc DECIMAL(38,10) $required ";
-				$statement .= "," . $field_name . "_alt DECIMAL(38,10) $required ";
+				$statement .= "," . $col_name . " VARCHAR(150) $required ";
+				$statement .= "," . $col_name . "_point POINT $required ";
+				$statement .= "," . $col_name . "_lat DECIMAL(38,10) $required ";
+				$statement .= "," . $col_name . "_lng DECIMAL(38,10) $required ";
+				$statement .= "," . $col_name . "_acc DECIMAL(38,10) $required ";
+				$statement .= "," . $col_name . "_alt DECIMAL(38,10) $required ";
+				
+				$tmp			= array('col_name' => $col_name.'_point','type' => 'point','table_name' => $this->table_name,'field_name' => $field_name.'_point','field_label' => $field_label.' point' );
+				array_push($holder,$tmp);
+				$tmp			= array('col_name' => $col_name.'_lat','type' => 'point_lat','table_name' => $this->table_name,'field_name' => $field_name.'_lat','field_label' => $field_label.' latitude' );
+				array_push($holder,$tmp);
+				$tmp			= array('col_name' => $col_name.'_lng','type' => 'point_lng','table_name' => $this->table_name,'field_name' => $field_name.'_lng','field_label' => $field_label.' longitude' );
+				array_push($holder,$tmp);
+				$tmp			= array('col_name' => $col_name.'_acc','type' => 'point_acc','table_name' => $this->table_name,'field_name' => $field_name.'_acc','field_label' => $field_label.' accuracy' );
+				array_push($holder,$tmp);
+				$tmp			= array('col_name' => $col_name.'_alt','type' => 'point_alt','table_name' => $this->table_name,'field_name' => $field_name.'_alt','field_label' => $field_label.' altitude' );
+				array_push($holder,$tmp);
 			}
 
 			$statement .= "\n";
 		}
 
 		$statement .= ")";
+		
+		if($this->Xform_model->insert_into_map($holder)){
+			return $statement;
+		}else{
+			return false;
+		}
+	}
+	
+	private function _add_to_fieldname_map($arr){
+				
+		$ut		= microtime();
+		$pre	= '';
+		$prefix	= explode("_",$field_name);
+		foreach($prefix as $parts){
+			$pre	.= substr($value, 0, 1);
+		}
+		
+		$pre	= $pre.'_'.$ut;
+		
+		if($this->Xform_model->set_field_name($pre,$field_name)){
+			return $pre;
+		}else{
+			return false;
+		}
+	}
+	
+	private function get_field_map(){
 
-		return $statement;
+		$arr	= $this->Xform_model->get_field_map($this->table_name);
+		$map	= array();
+		foreach($arr as $val){
+			$key 	= $val['field_name'];
+			$label	= $val['field_label'];
+			
+			$map[$key]	= $label;
+		}
+		
+		return $map;		
 	}
 
 	function edit_form($xform_id)
