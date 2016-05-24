@@ -48,10 +48,9 @@ class Feedback extends CI_Controller
         if (isset($_POST['search'])) {
             //TODO searching here
             $form_name = $this->input->post("name", NULL);
-            $from = $this->input->post("from", NULL);
-            $to = $this->input->post("to", NULL);
+            $user_id = $this->input->post("user", NULL);
 
-            $feedback = $this->Feedback_model->search_feedback($form_name, $from, $to);
+            $feedback = $this->Feedback_model->search_feedback($form_name, $user_id);
 
             if ($feedback) {
                 $data['feedback'] = $feedback;
@@ -81,7 +80,7 @@ class Feedback extends CI_Controller
 
         if ($_POST) {
             $message = $this->input->post('message');
-            $user_id = $this->session->userdata('user_id');
+            //$user_id = $this->session->userdata('user_id');
             $feedback = $this->Feedback_model->get_feedback_details_by_instance($instance_id);
             //Insert data from ajax
             $feedback_details = array(
@@ -89,8 +88,7 @@ class Feedback extends CI_Controller
                 'message' => $message,
                 'date_created' => date("c"),
                 'instance_id' => $instance_id,
-                'user_from' => $user_id,
-                'user_to' => $feedback->user_to,
+                'user_id' => $feedback->user_id,
                 'sender' => 'server'
             );
             $query = $this->Feedback_model->create_feedback($feedback_details);
@@ -107,6 +105,46 @@ class Feedback extends CI_Controller
 
 
     /**
+     * Feedback forms
+     */
+    function feedback_forms()
+    {
+        $username = $this->input->get("username");
+
+        //check if no username
+        if (!$username) {
+            $response = array("status" => "failed", "message" => "Required username");
+            echo json_encode($response);
+            exit;
+        }
+
+        $user = $this->User_model->find_by_username($username);
+        log_message("debug", "username getting forms feedback is " . $username);
+
+        if ($user) {
+            $forms = $this->Feedback_model->get_forms_feedback($user->id);
+
+            //print_r($forms);
+
+            foreach ($forms as $values) {
+                $form [] = array(
+                    'form_id' => $values->form_id,
+                    'instance_id' => $values->instance_id,
+                    'title' => $this->Feedback_model->get_form_name($values->form_id),
+                    'date_created' => date('j F, Y H:i:s', strtotime($values->date_created))
+                );
+            }
+
+            $response = array("forms" => $form, "status" => "success");
+
+        } else {
+            $response = array("status" => "failed", "message" => "User does not exist");
+        }
+        echo json_encode($response);
+    }
+
+
+    /**
      * XML submission class
      *
      * @return response
@@ -114,63 +152,48 @@ class Feedback extends CI_Controller
 
     function get_feedback()
     {
-
         //TODO Returning feedback instance_id
         //get form_id and last_feedback_id
         $username = $this->input->get("username");
-        $instance_id = $this->input->get('instance_id'); // todo get feedback by instance id
-        //$form_id = $this->input->get('form_id');
+        $instance_id = $this->input->get('instance_id');
         $form_id = str_replace("-", "_", $this->input->get('form_id'));
         $last_id = $this->input->get('last_id');
 
         if (!$username) {
             $response = array("status" => "failed", "message" => "Required username");
-            $this->output
-                ->set_status_header(400)
-                ->set_content_type('application/json', 'utf-8')
-                ->set_output(json_encode($response))
-                ->_display();
+            echo json_encode($response);
+            exit;
         }
 
         $user = $this->User_model->find_by_username($username);
         log_message("debug", "username getting feedback is " . $username);
+
         if ($user) {
-            if ($form_id)
-                $feedback = $this->Feedback_model->get_feedback($user->id, $form_id, $last_id);
+            if ($instance_id)
+                $feedback = $this->Feedback_model->get_feedback($user->id, $instance_id);
             else
-                $feedback = $this->Feedback_model->get_feedback($user->id); //Todo add last id later
+                $feedback = $this->Feedback_model->get_feedback_notification($user->id, $last_id);
 
             if ($feedback) {
                 $response = array("feedback" => $feedback, "status" => "success");
-                $this->output
-                    ->set_status_header(200)
-                    ->set_content_type('application/json', 'utf-8')
-                    ->set_output(json_encode($response))
-                    ->_display();
+
             } else {
-                $response = array("status" => "success", "message" => "No content");
-                $this->output
-                    ->set_status_header(204)
-                    ->set_content_type('application/json', 'utf-8')
-                    ->set_output(json_encode($response))
-                    ->_display();
+                $response = array("status" => "success", "message" => "No feedback content");
+
             }
         } else {
             $response = array("status" => "failed", "message" => "User does not exist");
-            $this->output
-                ->set_status_header(400)
-                ->set_content_type('application/json', 'utf-8')
-                ->set_output(json_encode($response))
-                ->_display();
+
         }
+        echo json_encode($response);
 
     }
 
     function post_feedback()
     {
         $username = $this->input->post("username");
-        //$form_id = $this->input->get('form_id');
         $form_id = str_replace("-", "_", $this->input->get('form_id'));
+        $instance_id = $this->input->post("instance_id");
 
         log_message("debug", "User posting feedback is " . $username);
         $user = $this->User_model->find_by_username($username);
@@ -178,8 +201,8 @@ class Feedback extends CI_Controller
         if ($user) {
             $feedback = array(
                 "user_id" => $user->id,
-                "instance_id" => $this->input->post("instance_id"),
-                "form_id" => $this->input->post("form_id"),
+                "instance_id" => $instance_id,
+                "form_id" => $form_id,
                 "message" => $this->input->post("message"),
                 'sender' => $this->input->post("sender"),
                 "date_created" => date("c")
@@ -187,32 +210,17 @@ class Feedback extends CI_Controller
 
             if ($this->Feedback_model->create_feedback($feedback)) {
                 $response = array("message" => "Feedback was received successfully", "status" => "success");
-                $this->output
-                    ->set_status_header(200)
-                    ->set_content_type('application/json', 'utf-8')
-                    ->set_output(json_encode($response))
-                    ->_display();
+
             } else {
-                $response = array(
-                    "status" => "failed",
-                    "message" => "Unknown error occured"
-                );
-                $this->output
-                    ->set_status_header(400)
-                    ->set_content_type('application/json', 'utf-8')
-                    ->set_output(json_encode($response))
-                    ->_display();
+                $response = array("status" => "failed", "message" => "Unknown error occured");
+
             }
         } else {
-            $response = array(
-                "status" => "failed",
-                "message" => "user does not exist"
-            );
-            $this->output
-                ->set_status_header(400)
-                ->set_content_type('application/json', 'utf-8')
-                ->set_output(json_encode($response))
-                ->_display();
+            $response = array("status" => "failed", "message" => "user does not exist");
+
         }
+        echo json_encode($response);
+
     }
+
 }

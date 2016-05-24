@@ -10,6 +10,31 @@
             <div class="col-sm-12">
                 <h3>Messsage List</h3>
 
+                <div class="pull-right" style="margin-bottom: 10px;">
+                    <?php echo form_open("whatsapp/message_list", 'class="form-inline" role="form"'); ?>
+
+                    <div class="form-group">
+                        <input name="start_date" id="start_date" class="form-control" placeholder="Start Date"/>
+                    </div>
+
+                    <div class="form-group">
+                        <input name="end_date" id="end_date" class="form-control" placeholder="End Date"/>
+                    </div>
+
+                    <div class="form-group">
+                        <input name="keyword" id="keyword" class="form-control" placeholder="Enter Keyword"/>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <?php echo form_submit("search", "Search", 'class="btn btn-primary"'); ?>
+                        </div>
+                    </div>
+                    <?php echo form_close(); ?>
+
+                    <?php echo validation_errors(); ?>
+                </div>
+
                 <?php if (!empty($messages)) { ?>
 
                     <table class="table table-striped table-responsive table-hover table-bordered">

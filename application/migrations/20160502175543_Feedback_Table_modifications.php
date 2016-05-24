@@ -13,33 +13,27 @@ class Migration_feedback_Table_modifications extends CI_Migration
     {
 
         $fields = array(
-            'user_id' => array(
-                'name' => 'user_from',
-                'type' => 'INT',
-                'constraint' => 11
-            ),
-        );
-        $this->dbforge->modify_column('feedback', $fields);
-
-        $field = array(
-            'user_to' => array(
-                'type' => 'INT',
-                'constraint' => 11
-            ),
-        );
-        $this->dbforge->add_column('feedback', $field);
-    }
-
-    public function down()
-    {
-        $fields = array(
             'user_from' => array(
                 'name' => 'user_id',
                 'type' => 'INT',
                 'constraint' => 11
             ),
         );
+        $this->dbforge->modify_column('feedback', $fields);
+
+    }
+
+    public function down()
+    {
+        $fields = array(
+            'user_id' => array(
+                'name' => 'user_from',
+                'type' => 'INT',
+                'constraint' => 11
+            ),
+        );
 
         $this->dbforge->modify_column('feedback', $fields);
+        $this->dbforge->drop_column('feedback', 'user_to');
     }
 }

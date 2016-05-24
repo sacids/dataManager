@@ -20,23 +20,15 @@
                     </div>
 
                     <div class="form-group">
-                        <select class="form-control" id="from" name="from">
-                            <option value="">Choose user from</option>
+                        <select class="form-control" id="user" name="user">
+                            <option value="">Choose user</option>
                             <?php foreach ($user as $value) { ?>
                                 <option
                                     value="<?= $value->id ?>"><?= $value->first_name . ' ' . $value->last_name ?></option>
                             <?php } ?>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <select class="form-control" id="to" name="to">
-                            <option value="">Choose user to</option>
-                            <?php foreach ($user as $value) { ?>
-                                <option
-                                    value="<?= $value->id ?>"><?= $value->first_name . ' ' . $value->last_name ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
+
 
                     <div class="form-group">
                         <div class="input-group">
@@ -54,8 +46,7 @@
                         <tr>
                             <th><?php echo $this->lang->line("label_form_name"); ?></th>
                             <th><?php echo $this->lang->line("label_instance_id"); ?></th>
-                            <th><?php echo $this->lang->line("label_from"); ?></th>
-                            <th><?php echo $this->lang->line("label_to"); ?></th>
+                            <th>User</th>
                             <th><?php echo $this->lang->line("label_feedback_date"); ?></th>
                             <th><?php echo $this->lang->line("label_action"); ?></th>
                         </tr>
@@ -67,7 +58,6 @@
                                 <td><?php echo $value->title; ?></td>
                                 <td><?php echo $value->instance_id; ?></td>
                                 <td><?php echo $value->uf_fname . ' ' . $value->uf_lname; ?></td>
-                                <td><?php echo $value->ut_fname . ' ' . $value->uf_lname; ?></td>
                                 <td><?php echo date('d-m-Y H:i:s', strtotime($value->date_created)); ?></td>
                                 <td>
                                     <?php echo anchor("feedback/user_feedback/" . $value->instance_id, "Conversation", 'class = "btn btn-primary btn-xs"'); ?>
