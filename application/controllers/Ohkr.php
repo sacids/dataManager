@@ -18,6 +18,8 @@ class Ohkr extends CI_Controller
         }
 
         $this->load->model("Ohkr_model");
+        $this->load->model("Perm_model");
+        $this->load->library("Db_exp");
     }
 
     /**
@@ -502,4 +504,65 @@ class Ohkr extends CI_Controller
         }
         redirect("ohkr/disease_symptoms/".$disease_id);
     }
+    
+    
+    public function manage_specie_disease(){
+    	
+    	$this->save_dbexp_post_vars();
+    	
+    	$ele_id	= $this->session->userdata['post']['ele_id'];
+    	$arr	= $this->Perm_model->get_field_data('specie_id,disease_id', 'diseases_symptoms', $ele_id);
+   		
+    	$available_symptoms	= $this->get_available_symptoms($arr);
+    	
+    	$this->db_exp->set_table('diseases_symptoms');
+    	$this->db_exp->set_hidden($arr);
+    	$this->db_exp->set_hidden('date_created');
+    	
+    	$action = $this->input->post ( 'action' );
+    	if($action == 'insert' || $action == 'edit'){
+    		$this->db_exp->set_select('symptom_id', $available_symptoms);
+    	$this->db_exp->set_hidden('id');
+    	}else{
+    		$this->db_exp->set_db_select('symptom_id', 'symptoms', 'id', 'name');
+    	}
+    	$this->db_exp->render('row_list'); 	
+    	
+    }
+    
+    private function get_available_symptoms($arr){
+    	
+    	$s_arr	= array();
+    	$submitted_symptoms	= $this->Ohkr_model->get_submitted_symptoms($arr);
+    	foreach($submitted_symptoms as $val){
+    		
+    		$id		= $val['symptom_id'];
+    		$s_arr[$id]	= '';
+    	}
+	
+    	$a_arr	= array();
+    	$available_symptoms	= $this->Ohkr_model->get_all_symptoms();
+    	foreach($available_symptoms as $val){
+
+    		if($val['id'] == 0) continue;
+    		
+    		$id		= $val['id'];
+    		$name	= $val['name'];
+    		$a_arr[$id]	= $name;
+    	}
+    	
+    	$tmp	= array_diff_key($a_arr, $s_arr);
+    	//print_r($tmp);
+    	return $tmp;
+    }
+    
+    public function save_dbexp_post_vars() {
+    	$post = $this->input->post ();
+    	$db_exp_submit = $this->input->post ( 'db_exp_submit_engaged' );
+    	if (! empty ( $db_exp_submit ) || @$post ['action'] == 'insert' || @$post ['action'] == 'edit') {
+    	} else {
+    		$this->session->set_userdata ( 'post', $post );
+    	}
+    }
+    
 }

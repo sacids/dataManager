@@ -180,4 +180,13 @@ class Ohkr_model extends CI_Model
 		$this->db->where("id", $id);
 		return $this->db->delete(self::$table_name_disease_symptoms);
 	}
+	
+	public function get_submitted_symptoms($arr){
+		
+		return $this->db->select('symptom_id')->get_where('diseases_symptoms',$arr)->result_array();
+	}
+	
+	public function get_all_symptoms(){
+		return $this->db->select('id,name')->get('symptoms')->result_array();
+	}
 }
