@@ -28,7 +28,6 @@ class Campaign extends CI_Controller
         //render view
         $data['title'] = "Campaign List";
         $this->load->view('header', $data);
-       // $this->load->view("campaign/menu");
         $this->load->view("campaign/campaign_list");
         $this->load->view('footer');
     }
@@ -48,7 +47,6 @@ class Campaign extends CI_Controller
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('header', $data);
-            //$this->load->view("campaign/menu");
             $this->load->view("campaign/add_new", $data);
             $this->load->view('footer');
         } else {
