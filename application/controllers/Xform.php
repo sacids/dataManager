@@ -458,8 +458,8 @@ class Xform extends CI_Controller
 		$table_name = $this->table_name;
 		$form_data = $this->form_data;
 		
-		echo '<pre>';
-		print_r($form_data);
+		//echo '<pre>';
+		//print_r($form_data);
 		$structure		= $this->get_fieldname_map();
 		$col_names		= array();
 		$col_values		= array();
