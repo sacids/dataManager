@@ -41,11 +41,8 @@ class Xform extends CI_Controller
 		));
 
 		$this->load->library('form_auth');
-
 		$this->user_id = $this->session->userdata("user_id");
 		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
-
-		//$this->output->enable_profiler(TRUE);
 	}
 
 	public function index()
@@ -61,8 +58,8 @@ class Xform extends CI_Controller
 
 		if (!$this->input->post("search")) {
 			$config = array(
-				'base_url' => $this->config->base_url("xform/forms"),
-				'total_rows' => $this->Xform_model->count_all_xforms("published"),
+				'base_url'    => $this->config->base_url("xform/forms"),
+				'total_rows'  => $this->Xform_model->count_all_xforms("published"),
 				'uri_segment' => 3,
 			);
 
@@ -86,19 +83,14 @@ class Xform extends CI_Controller
 			}
 		}
 
-		//if (!$this->input->is_ajax_request()) {
 		$this->load->view('header', $data);
 		$this->load->view("form/index");
 		$this->load->view('footer');
-		//} else {
-		//	$this->load->view("form/index");
-		//}
 	}
 
 	function _is_logged_in()
 	{
 		if (!$this->ion_auth->logged_in()) {
-			// redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
 	}
@@ -185,7 +177,7 @@ class Xform extends CI_Controller
 					// insert form details in database
 					$data = array(
 						'file_name' => $file_name,
-						'user_id' => $user->id
+						'user_id'   => $user->id
 					);
 
 					$inserted_form_id = $this->Submission_model->create($data);
@@ -239,12 +231,12 @@ class Xform extends CI_Controller
 
 		if ($result) {
 			$feedback = array(
-				"user_id" => $this->user_submitting_feedback_id,
-				"form_id" => $this->table_name,
-				"message" => "Tumepokea fomu yako",
+				"user_id"      => $this->user_submitting_feedback_id,
+				"form_id"      => $this->table_name,
+				"message"      => "Tumepokea fomu yako",
 				"date_created" => date("c"),
-				"instance_id" => $this->form_data['meta_instanceID'],
-				"sender" => "server"
+				"instance_id"  => $this->form_data['meta_instanceID'],
+				"sender"       => "server"
 			);
 			$this->Feedback_model->create_feedback($feedback);
 		}
@@ -701,13 +693,13 @@ class Xform extends CI_Controller
 						if ($create_table_result) {
 
 							$form_details = array(
-								"user_id" => $this->session->userdata("user_id"),
-								"form_id" => $this->table_name,
-								"title" => $this->input->post("title"),
-								"description" => $this->input->post("description"),
-								"filename" => $filename,
+								"user_id"      => $this->session->userdata("user_id"),
+								"form_id"      => $this->table_name,
+								"title"        => $this->input->post("title"),
+								"description"  => $this->input->post("description"),
+								"filename"     => $filename,
 								"date_created" => date("c"),
-								"access" => $this->input->post("access")
+								"access"       => $this->input->post("access")
 							);
 
 							//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
@@ -1037,9 +1029,9 @@ class Xform extends CI_Controller
 
 			if ($form) {
 				$new_form_details = array(
-					"title" => $this->input->post("title"),
-					"description" => $this->input->post("description"),
-					"access" => $this->input->post("access"),
+					"title"        => $this->input->post("title"),
+					"description"  => $this->input->post("description"),
+					"access"       => $this->input->post("access"),
 					"last_updated" => date("c")
 				);
 
@@ -1117,8 +1109,8 @@ class Xform extends CI_Controller
 			$data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
 
 			$config = array(
-				'base_url' => $this->config->base_url("xform/form_data/" . $form_id),
-				'total_rows' => $this->Xform_model->count_all_records($form->form_id),
+				'base_url'    => $this->config->base_url("xform/form_data/" . $form_id),
+				'total_rows'  => $this->Xform_model->count_all_records($form->form_id),
 				'uri_segment' => 4,
 			);
 
@@ -1176,12 +1168,55 @@ class Xform extends CI_Controller
 		$this->load->helper('file');
 		$this->load->helper('download');
 		$config = array(
-			'root' => 'afyadata',
+			'root'    => 'afyadata',
 			'element' => 'form_data',
 			'newline' => "\n",
-			'tab' => "\t"
+			'tab'     => "\t"
 		);
 		$data = $this->dbutil->xml_from_result($query, $config);
 		force_download($filename, $data);
+	}
+
+	function testFormList()
+	{
+		if (empty($_SERVER['PHP_AUTH_DIGEST'])) {
+			http_response_code(401);
+			header("HTTP/1.1 401 Unauthorized");
+			header('Content-Type: text/xml; charset=utf-8');
+			header('WWW-Authenticate: Digest realm="' . $this->config->item("realm") . '",qop="auth",nonce="' . uniqid() . '",opaque="' . md5($this->config->item("realm")) . '"');
+			header('"HTTP_X_OPENROSA_VERSION": "1.0"');
+			header('X-OpenRosa-Version:1.0');
+		} else {
+
+			header('Content-Type: text/xml; charset=utf-8');
+			header('"HTTP_X_OPENROSA_VERSION": "1.0"');
+			header('X-OpenRosa-Version:1.0');
+
+			$data = $this->form_auth->http_digest_parse ($_SERVER['PHP_AUTH_DIGEST']);
+			$name = $data['username'];
+			log_message("debug", "received username -> " . $name);
+
+			$forms = $this->Xform_model->get_form_list();
+
+			$xml = '<xforms xmlns="http://openrosa.org/xforms/xformsList">';
+
+			foreach ($forms as $form) {
+
+				// used to notify if anything has changed with the form, so that it may be updated on download
+				$hash = md5($form->form_id . $form->date_created . $form->filename . $form->id . $form->title . $form->last_updated);
+
+				$xml .= '<xform>';
+				$xml .= '<formID>' . $form->form_id . '</formID>';
+				$xml .= '<name>' . $form->title . '</name>';
+				$xml .= '<version>1.1</version>';
+				$xml .= '<hash>md5:' . $hash . '</hash>';
+				$xml .= '<descriptionText>' . $form->description . '</descriptionText>';
+				$xml .= '<downloadUrl>' . base_url() . 'assets/forms/definition/' . $form->filename . '</downloadUrl>';
+				$xml .= '</xform>';
+			}
+			$xml .= '</xforms>';
+
+			echo $xml;
+		}
 	}
 }
