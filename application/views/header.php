@@ -112,6 +112,9 @@
 						<li><?php echo anchor('campaign/add_new', "Add New Campaign"); ?></li>
 					</ul>
 				</li>
+
+				<li><?php echo anchor('whatsapp/message_list', "WhatsApp db"); ?></li>
+
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 

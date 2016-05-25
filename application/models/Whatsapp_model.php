@@ -22,11 +22,31 @@ class Whatsapp_model extends CI_Model
 	}
 
 	/**
-	 * @return int
+	 * @param $limit
+	 * @param $offset
+	 * @return mixed
 	 */
 	public function find_all_message($limit = 30, $offset = 0)
 	{
 		$this->db->limit($limit, $offset);
+		$this->db->order_by('date_sent_received', 'DESC');
+		return $this->db->get(self::$table_name)->result();
+	}
+
+	/**
+	 * @param $start_date
+	 * @param $end_date
+	 * @param $keyword
+	 * @return mixed
+	 */
+	public function search_message($start_date = NULL, $end_date = NULL, $keyword = NULL)
+	{
+		if($start_date != NULL && $end_date != NULL)
+			$this->db->where("date_sent_received BETWEEN '%$start_date`' AND '$end_date%'", NULL, FALSE);
+
+		if ($keyword != NULL)
+			$this->db->like("message", $keyword);
+
 		$this->db->order_by('date_sent_received', 'DESC');
 		return $this->db->get(self::$table_name)->result();
 	}
