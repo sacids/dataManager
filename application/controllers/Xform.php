@@ -741,7 +741,6 @@ class Xform extends CI_Controller
 	 */
 	public function _initialize($file_name)
 	{
-		$file_name	= 'Dalili_za_Binadamu.xml';
 		log_message("debug", "File to load " . $file_name);
 		// create table structure
 		$this->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
