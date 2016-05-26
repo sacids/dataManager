@@ -513,11 +513,14 @@ class Ohkr extends CI_Controller
     	$ele_id	= $this->session->userdata['post']['ele_id'];
     	$arr	= $this->Perm_model->get_field_data('specie_id,disease_id', 'diseases_symptoms', $ele_id);
    		
+		$cond	= " specie_id = '".$arr['specie_id']."' AND disease_id = '".$arr['disease_id']."'";
+    	
     	$available_symptoms	= $this->get_available_symptoms($arr);
     	
     	$this->db_exp->set_table('diseases_symptoms');
     	$this->db_exp->set_hidden($arr);
     	$this->db_exp->set_hidden('date_created');
+    	$this->db_exp->set_search_condition($cond);
     	
     	$action = $this->input->post ( 'action' );
     	if($action == 'insert' || $action == 'edit'){

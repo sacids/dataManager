@@ -26,6 +26,7 @@ class Db_exp {
 		$this->form_attributes = array('id' => $this->form_id);
 		$this->form_hidden['db_exp_submit_engaged'] = 1;
 		$this->show_form_after_submit = true;
+		$this->show_submit_button = true;
 	}
 	public function render($action = "default") {
 		$CI = & get_instance ();
@@ -132,6 +133,9 @@ class Db_exp {
 	public function set_json_field($index,$options){
 		$this->fields[$index]['json'] = $options;
 	}
+	public function set_readonly($index){
+		$this->fields[$index]['view'] = true;
+	}
 	public function set_db_select($index, $table, $val, $label, $condition = false) {
 
 		// get array values
@@ -173,7 +177,14 @@ class Db_exp {
 	public function set_textarea($index, $options = ''){
 		$this->fields[$index]['textarea']		= $options;
 	}
-	public function set_list($index,$options){
+	public function set_list($index,$options,$values_as_keys = false){
+		if($values_as_keys){
+			$opt	= array();
+			foreach($options as $val){
+				$opt[$val]	= $val;
+			}
+			$options = $opt;
+		}
 		$this->fields[$index]['list']		= $options;
 	}
 	public function set_label($index,$options){
@@ -261,7 +272,7 @@ class Db_exp {
 			echo "Success!";
 			return 1;
 		} else {
-			echo "Query failed!";
+			echo "Query failed! ".$str;
 			return 0;
 		}
 		
@@ -331,7 +342,9 @@ class Db_exp {
 			
 		}
 		
-		echo '<tr><td></td><td></td><td>' . form_submit ( 'submit', 'submit' ) . '</td></tr>';
+		if($this->show_submit_button){
+			echo '<tr><td></td><td></td><td>' . form_submit ( 'submit', 'submit' ) . '</td></tr>';
+		}
 		
 		echo '</table>';
 		echo form_close ();
@@ -343,8 +356,6 @@ class Db_exp {
 		
 		// check if its primary key
 		if ($field ['Key'] === 'PRI' && $value == '') {
-			echo 'jojo '.$name;
-			
 			return;
 		}
 		
@@ -579,7 +590,7 @@ class Db_exp {
 			}
 		}
 		if(sizeof($show) != 0){
-			$CI->db->select(implode(",",$show));
+			$CI->db->select('id,'.implode(",",$show));
 		}
 	
 		if ($this->search_condition) {
@@ -588,13 +599,13 @@ class Db_exp {
 		} else {
 			$query = $CI->db->get ( $this->table );
 		}
-	
+
 		// get row count for rowspan
 		$rowspan	= $query->num_rows();
 	
 		echo '<div class="db_exp_wrapper">';
 		foreach ( $query->result_array() as $row) {
-			
+
 			echo '<div class="group db_exp_row">';
 			echo '<div class="db_exp_left db_exp_checkbox">'.form_checkbox('checkbox_'.$row['id'], 'accept').'</div>';
 				
@@ -655,12 +666,15 @@ class Db_exp {
 		return $val;
 	}
 	
-	private function _set_readonly($field_name = false){
-		
+	private function _set_readonly(){
+
+		$this->show_submit_button = false;
+
 		$CI = & get_instance ();
 		
 		$q = 'describe ' . $this->table;	
 		$query = $CI->db->query ( $q );
+
 		foreach ( $query->result_array () as $row ) {
 				
 			$fn = $row ['Field'];

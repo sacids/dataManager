@@ -4,6 +4,7 @@
 		<div id='option_wrp'>
 		<?php
 		// check if is admin
+		
 		if ($this->session->userdata ( "user_id" ) == 1) {
 			
 			?>

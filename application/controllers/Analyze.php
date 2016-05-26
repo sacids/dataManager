@@ -39,6 +39,13 @@ class Analyze extends CI_Controller {
 			
 			echo $this->_analyze();
 		}
+		
+		/*
+		 * SELECT disease_id, sum(importance) as sum,count(disease_id) as count 
+		 * FROM diseases_symptoms 
+		 * WHERE specie_id = 1 and symptom_id in (4,3) 
+		 * group by disease_id'
+		 */
 	}
 	
 	public function set_symptom($symptoms){
