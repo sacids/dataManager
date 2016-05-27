@@ -25,6 +25,7 @@ class Db_exp {
 		$this->fields = array();
 		$this->form_attributes = array('id' => $this->form_id);
 		$this->form_hidden['db_exp_submit_engaged'] = 1;
+		$this->show_form_after_submit = true;
 	}
 	public function render($action = "default") {
 		$CI = & get_instance ();
@@ -45,7 +46,12 @@ class Db_exp {
 		
 		if( array_key_exists('db_exp_submit_engaged', $post)){
 			// Execute submit			
-			$this->_process_submit ( $CI->input->post () );
+			$ret = $this->_process_submit ( $CI->input->post () );
+			
+			// what to do after submit
+			if(!$this->show_form_after_submit){
+				return $ret;
+			}
 		}
 		
 		
@@ -56,8 +62,8 @@ class Db_exp {
 				$this->_render_edit ();
 				break;
 			case 'view':
-				$this->_render_edit();
 				$this->_set_readonly();
+				$this->_render_edit();
 				break;
 			case 'col_list':
 				$this->_render_list_col ();
@@ -66,7 +72,8 @@ class Db_exp {
 				$this->_render_list_row ();
 				break;
 		}
-			
+		
+		return 2;
 		
 	}
 	public function set_table($table) {
@@ -178,6 +185,9 @@ class Db_exp {
 	public function set_default_action($act){
 		$this->default_action 	= $act;
 	}
+	public function set_view($index){
+		$this->fields[$index]['view']	= true;
+	}
 	
 	
 	
@@ -249,8 +259,10 @@ class Db_exp {
 		
 		if ($CI->db->simple_query ( $str )) {
 			echo "Success!";
+			return 1;
 		} else {
 			echo "Query failed!";
+			return 0;
 		}
 		
 	}
@@ -264,6 +276,7 @@ class Db_exp {
 		if(!empty($id)){
 			$this->set_pri_id($id);
 			$hidden['id'] = $id;
+			
 		}
 		
 		$vals = '';
@@ -315,9 +328,11 @@ class Db_exp {
 			
 			
 			$this->_edit_field ( $row, $val );
+			
 		}
 		
 		echo '<tr><td></td><td></td><td>' . form_submit ( 'submit', 'submit' ) . '</td></tr>';
+		
 		echo '</table>';
 		echo form_close ();
 	}
@@ -328,15 +343,17 @@ class Db_exp {
 		
 		// check if its primary key
 		if ($field ['Key'] === 'PRI' && $value == '') {
-			//echo 'jojo '.$name;
+			echo 'jojo '.$name;
 			
 			return;
 		}
 		
 		$data	= array();
 		$data['name']	= $name;
+		$options		= false;
 		
 		if(array_key_exists($name, $this->fields)){
+			
 			foreach($this->fields[$name] as $key => $val){
 				switch($key){
 					case 'db_select':
@@ -379,8 +396,11 @@ class Db_exp {
 						$type	= 'date';
 						break;
 					case 'label':
-						$type	= 'label';
+						//$type	= 'label';
 						$label	= $val;
+						break;
+					case 'view';
+						$type	= 'view';
 						break;
 				}
 				
@@ -391,6 +411,12 @@ class Db_exp {
 	
 		$pre	= '<tr><td>'.$label.'</td><td> : </td><td>';
 		$end	= '</td></tr>';
+		
+		// check if field is set to view
+		//if(array_key_exists('view', $this->fields[$name]) && $this->fields[$name]['view']){
+			//echo $pre.$value.$end;
+			//return;
+		//}
 		
 		switch ($type) {
 			
@@ -422,7 +448,23 @@ class Db_exp {
 				break;
 			case 'json':
 			case 'hidden':
-				echo '<tr colspan"3"><td>'.form_hidden($name,$value).$end;
+				echo form_hidden($name,$value);
+				break;
+			case 'view':
+				if(array_key_exists('hidden', $this->fields[$name])){
+					echo form_hidden($name,$value);
+				}else{
+					$s	= '';
+					if(is_array($options)){
+						$v 	= explode(',', $value);
+						foreach($v as $kk){
+							$s .= $options[$kk].',';
+						}
+					}else{
+						$s	= $value;
+					}
+					echo $pre.$s.$end;
+				}
 				break;
 			default :
 				echo $pre.form_input ( $name, $value ).$end;
@@ -615,15 +657,18 @@ class Db_exp {
 	
 	private function _set_readonly($field_name = false){
 		
-		echo '<script  type="text/javascript">';
-		if($field_name){
-			// only set field name
-		}else{
-			// for all elements
-			echo "$(document).ready(function() {";
-			echo "$('#".$this->form_id." *').attr('disabled', true);";
-			echo "});";
+		$CI = & get_instance ();
+		
+		$q = 'describe ' . $this->table;	
+		$query = $CI->db->query ( $q );
+		foreach ( $query->result_array () as $row ) {
+				
+			$fn = $row ['Field'];
+			if(array_key_exists($fn, $this->fields)){
+				$this->fields[$fn]['view']	= true;
+			}else{
+				$this->fields[$fn]	= array('view' => true);
+			}
 		}
-		echo '</script>';
 	}
 }

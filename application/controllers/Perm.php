@@ -19,6 +19,7 @@ class Perm extends CI_Controller {
 	var $module_id;
 	var $perm_id;
 	public function __construct() {
+		
 		parent::__construct ();
 		
 		$this->load->model ( array (
@@ -34,16 +35,10 @@ class Perm extends CI_Controller {
 		} else {
 			$this->{$method_name} ();
 		}
+		
+		
 	}
-	function _get_perm_query_condition_xxx($field) {
-		$perms = $this->Perm_model->get_user_perms ( $this->session->userdata ( 'user_id' ) );
-		$cond = ' ( false ';
-		foreach ( $perms as $val ) {
-			$cond .= " OR `" . $field . "` LIKE '%" . $val . "%'";
-		}
-		$cond .= " )";
-		return $cond;
-	}
+	
 	public function index() {
 		
 		// set module id
@@ -67,7 +62,7 @@ class Perm extends CI_Controller {
 		}
 	}
 	
-	private function save_dbexp_post_vars() {
+	public function save_dbexp_post_vars() {
 		$post = $this->input->post ();
 		$db_exp_submit = $this->input->post ( 'db_exp_submit_engaged' );
 		if (! empty ( $db_exp_submit ) || @$post ['action'] == 'insert' || @$post ['action'] == 'edit') {
@@ -180,6 +175,7 @@ class Perm extends CI_Controller {
 				'input',
 				'hidden',
 				'password',
+				'label',
 				'upload',
 				'textarea',
 				'dropdown',
@@ -258,6 +254,7 @@ class Perm extends CI_Controller {
 			
 			echo 'table name not known';
 		}
+		
 	}
 	private function new_table_data() {
 		
@@ -268,8 +265,10 @@ class Perm extends CI_Controller {
 		$table_id = $this->session->userdata ( 'table_id' );		
 		$this->db_table_render ( $table_id );		
 		$this->db_exp->render ( 'insert' );
+		
+		
+		
 	}
-	
 	private function set_table_actions() {
 		$post = $this->input->post ();
 		
@@ -408,6 +407,8 @@ class Perm extends CI_Controller {
 		
 		// check if has permissions to add
 		if ($this->check_add_perm ()) {
+			
+			// check filters
 			
 			// new icon
 			echo '	<div 	target="detail_wrp"
@@ -752,6 +753,7 @@ class Perm extends CI_Controller {
 		
 		$fields = $this->Perm_model->get_table_data ( 'perm_tables_conf', 'table_id', $table_id );
 		
+		//echo '<pre>'; print_r($fields);
 		$this->db_exp->set_table ( $table_name );
 		if (! $fields) {
 			log_message ( 'debug', 'in db_table_render: table has no configs' );
@@ -782,6 +784,9 @@ class Perm extends CI_Controller {
 				case 'password' :
 					$this->db_exp->set_password ( $field ['field_name'] );
 					break;
+				case 'label' :
+					$this->db_exp->set_label( $field ['field_name'], $field ['field_value']);
+					break;
 				case 'dropdown' :
 					$options = explode ( ",", $field ['field_value'] );
 					$this->db_exp->set_select ( $field ['field_name'], $options, true );
@@ -792,6 +797,9 @@ class Perm extends CI_Controller {
 					if (array_key_exists ( 3, $options ))
 						$cond = $options [3];
 					$this->db_exp->set_db_select ( $field ['field_name'], $options [0], $options [1], $options [2], $cond );
+					break;
+				case 'textarea' :
+					$this->db_exp->set_textarea ( $field ['field_name'], $field ['field_value'] );
 					break;
 				case 'hidden' :
 					$this->db_exp->set_hidden ( $field ['field_name'], $field ['field_value'] );
@@ -977,6 +985,20 @@ class Perm extends CI_Controller {
 		echo 'manage perms';
 		$post = $this->input->post ();
 		print_r ( $post );
+	}
+	
+	
+	
+	
+	
+	private function css_demo(){
+		
+		$post = $this->input->post ();
+		// get css
+		$data	= $this->Perm_model->get_field_data('title,css', 'ob_css', $post['ele_id']);
+		echo '<style>.'.$data['title'].'{ background-color: #999;'.$data['css'].'}</style>';
+		echo '<div class="'.$data['title'].'"> .. </div>';
+		
 	}
 }
 
