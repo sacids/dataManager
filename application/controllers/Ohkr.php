@@ -502,4 +502,9 @@ class Ohkr extends CI_Controller
         }
         redirect("ohkr/disease_symptoms/".$disease_id);
     }
+
+
+    function get_diseases(){
+
+    }
 }

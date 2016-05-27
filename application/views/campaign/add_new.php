@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
 
-    <?php echo form_open_multipart('campaign/add_new', 'class="form-horizontal" role="form"'); ?>
+            <?php echo form_open_multipart('campaign/add_new', 'class="form-horizontal" role="form"'); ?>
 
             <h3>Campaign Details</h3>
             <?php
@@ -25,6 +25,27 @@
                 </div>
                 <?php echo form_error('icon'); ?>
 
+                <div class="form-group">
+                    <label>Campaign Type <span>*</span></label>
+                    <select name="type" id="type" class="form-control">
+                        <option value="">Choose type</option>
+                        <option value="general">General Campaign</option>
+                        <option value="form">Form Campaign</option>
+                    </select>
+                </div>
+                <?php echo form_error('type'); ?>
+
+                <div class="form-group">
+                    <label>Form Id </label>
+                    <select name="form_id" id="form_id" class="form-control">
+                        <option value="">Choose form</option>
+                        <?php foreach ($forms as $form) { ?>
+                            <option value="<?php echo $form->form_id ?>"><?php echo $form->form_id ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <?php echo form_error('form_id'); ?>
+
 
                 <div class="form-group">
                     <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label>
@@ -33,16 +54,6 @@
                 </div>
                 <?php echo form_error('description'); ?>
 
-                <div class="form-group">
-                    <label for="campus">Form Id :</label>
-                    <select name="form_id" id="form_id" class="form-control">
-                        <option value="">Choose form</option>
-                        <?php foreach($forms as $form){?>
-                        <option value="<?php echo $form->form_id?>"><?php echo $form->form_id?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <?php echo form_error('form_id'); ?>
 
                 <div class="form-group">
                     <label>&nbsp; &nbsp; &nbsp;</label>
@@ -51,7 +62,7 @@
 
             </fieldset>
 
-    <?php echo form_close(); ?>
+            <?php echo form_close(); ?>
         </div>
     </div>
 </div>
