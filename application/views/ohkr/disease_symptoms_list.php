@@ -1,20 +1,18 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
 
+            <h3><?php echo $disease->d_title; ?> Symptoms</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
             } ?>
 
-
-
             <div class="col-sm-8">
-                <h3><?php echo $disease->name;?> Symptoms</h3>
-                <a href="<?php echo site_url('ohkr/add_disease_symptom/' . $disease->id); ?>"
-                   class="btn btn-small btn-primary">Add Symptoms</a>
-                <br /><br />
+                <a href="<?php echo site_url('ohkr/add_scd/' . $disease->id); ?>" class="btn btn-small btn-primary">Add
+                    Symptoms</a>
+                <br/><br/>
 
                 <?php if (!empty($symptoms)) { ?>
 
@@ -30,12 +28,13 @@
                         $serial = 1;
                         foreach ($symptoms as $symptom) { ?>
                             <tr>
-                                <td><?php echo $symptom->specie_name; ?></td>
-                                <td><?php echo $symptom->symptom_name; ?></td>
+                                <td><?php echo $disease->s_title; ?></td>
+                                <td><?php echo $symptom->symptom_title; ?></td>
                                 <td><?php echo $symptom->importance; ?></td>
                                 <td>
-                                    <?php echo anchor("ohkr/edit_disease_symptom/".$disease->id."/".$symptom->id, "Edit"); ?> |
-                                    <?php echo anchor("ohkr/delete_disease_symptom/".$disease->id."/".$symptom->id, "Delete", "class='delete'"); ?>
+                                    <?php echo anchor("ohkr/edit_scd/" . $disease->id . "/" . $symptom->id, "Edit"); ?>
+                                    |
+                                    <?php echo anchor("ohkr/delete_scd/" . $disease->id . "/" . $symptom->id, "Delete", "class='delete'"); ?>
                                 </td>
                             </tr>
                             <?php $serial++;

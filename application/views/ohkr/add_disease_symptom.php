@@ -1,46 +1,36 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <div class="col-sm-8">
-                <h3>Add <?php echo $disease->name; ?> Disease Symptom</h3>
-                <?php
-                if ($this->session->flashdata('message') != '') {
-                    echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-                } ?>
+            <h3>Add <?php echo $disease->d_title; ?> Disease Symptom</h3>
 
-                <?php echo form_open_multipart('ohkr/add_disease_symptom/' . $disease->id, 'class="form-horizontal" role="form"'); ?>
-                <div class="form-group">
-                    <label><?php echo $this->lang->line("label_specie_name") ?> <span>*</span></label>
-                    <select name="specie" id="specie" class="form-control">
-                        <option value="">Choose Specie</option>
-                        <?php foreach ($species as $specie) { ?>
-                            <option value="<?php echo $specie->id; ?>"><?php echo $specie->name; ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <?php echo form_error('specie'); ?>
+            <?php
+            if ($this->session->flashdata('message') != '') {
+                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
+            } ?>
+
+            <div class="col-sm-8">
+                <?php echo form_open('ohkr/add_scd/' . $disease->id, 'class="form-horizontal" role="form"'); ?>
 
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_symptom_name") ?> <span>*</span></label>
                     <select name="symptom" id="symptom" class="form-control">
                         <option value="">Choose Symptom</option>
                         <?php foreach ($symptoms as $symptom) { ?>
-                            <option value="<?php echo $symptom->id; ?>"><?php echo $symptom->name; ?></option>
+                            <option value="<?php echo $symptom->id; ?>"><?php echo $symptom->title; ?></option>
                         <?php } ?>
                     </select>
                 </div>
-                <?php echo form_error('symptom'); ?>
+                <div class="error" style="color: red"> <?php echo form_error('symptom'); ?></div>
 
                 <div class="form-group">
                     <label>Importance (%) <span>*</span></label>
                     <input type="text" name="importance" placeholder="Enter importance" class="form-control"
                            value="<?php echo set_value('importance'); ?>">
                 </div>
-                <?php echo form_error('importance'); ?>
+                <div class="error" style="color: red"><?php echo form_error('importance'); ?></div>
 
 
                 <div class="form-group">
-                    <label>&nbsp; &nbsp; &nbsp;</label>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
 

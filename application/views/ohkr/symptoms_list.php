@@ -1,19 +1,21 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
+            <h3>Symptoms List</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
             } ?>
 
-            <div class="col-sm-12">
-                <h3>Symptoms List</h3>
+            <div class="col-sm-8">
+
                 <?php if (!empty($symptoms)) { ?>
 
                     <table class="table table-striped table-responsive table-hover table-bordered">
                         <tr>
                             <th><?php echo $this->lang->line("label_symptom_name"); ?></th>
+                            <th><?php echo $this->lang->line("label_symptom_code"); ?></th>
                             <th><?php echo $this->lang->line("label_description"); ?></th>
                             <th><?php echo $this->lang->line("label_action"); ?></th>
                         </tr>
@@ -22,7 +24,8 @@
                         $serial = 1;
                         foreach ($symptoms as $symptom) { ?>
                             <tr>
-                                <td><?php echo $symptom->name; ?></td>
+                                <td><?php echo $symptom->title; ?></td>
+                                <td><?php echo $symptom->code; ?></td>
                                 <td><?php echo $symptom->description; ?></td>
                                 <td>
                                     <?php echo anchor("ohkr/edit_symptom/" . $symptom->id, "Edit"); ?> |

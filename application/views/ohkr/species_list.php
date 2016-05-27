@@ -1,6 +1,7 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
+            <h3>Species List</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -8,7 +9,6 @@
             } ?>
 
             <div class="col-sm-6">
-                <h3>Species List</h3>
 
                 <?php if (!empty($species)) { ?>
 
@@ -22,7 +22,7 @@
                         $serial = 1;
                         foreach ($species as $specie) { ?>
                             <tr>
-                                <td><?php echo $specie->name; ?></td>
+                                <td><?php echo $specie->title; ?></td>
                                 <td>
                                     <?php echo anchor("ohkr/edit_specie/" . $specie->id, "Edit"); ?> |
                                     <?php echo anchor("ohkr/delete_specie/" . $specie->id, "Delete", "class='delete'"); ?>

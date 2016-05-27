@@ -18,9 +18,9 @@ $config['table_feedback']           = "feedback";
 $config['table_users']              = "users";
 
 //OHKR Tables
-$config['table_species']            = "species";
-$config['table_diseases']           = "diseases";
-$config['table_symptoms']           = "symptoms";
+$config['table_species']            = "ohkr_species";
+$config['table_diseases']           = "ohkr_diseases";
+$config['table_symptoms']           = "ohkr_symptoms";
 $config['table_diseases_symptoms']  = "diseases_symptoms";
 
 

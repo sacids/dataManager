@@ -53,9 +53,10 @@ $lang['select_form_to_delete']          = "You must select a form to delete";
 $lang['error_failed_to_delete_form']    = "Failed to delete form";
 
 //Disease
-$lang['label_disease_name']             = "Disease name";
-$lang['label_specie_name']              = "Specie name";
-$lang['label_symptom_name']             = "Symptom name";
+$lang['label_disease_name']             = "Disease title";
+$lang['label_specie_name']              = "Specie title";
+$lang['label_symptom_name']             = "Symptom title";
+$lang['label_symptom_code']             = "Symptom code";
 $lang['label_specie']                   = "Specie";
 
 $lang['select_disease_to_edit']         = "You must select a disease to edit";
