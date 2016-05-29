@@ -326,7 +326,11 @@ class Db_exp {
 				
 				// check if its a multiselct field
 				if(array_key_exists($fn, $this->fields) && array_key_exists('list',$this->fields[$fn])){
-					$val = explode(",", $vals [$fn]);
+					if(trim($vals[$fn]) != ''){
+						$val = explode(",", $vals [$fn]);
+					}else{
+						$val = array();
+					}
 				}else{
 					$val = $vals [$fn];
 				}
@@ -467,7 +471,12 @@ class Db_exp {
 				}else{
 					$s	= '';
 					if(is_array($options)){
-						$v 	= explode(',', $value);
+						if(is_array($value)){
+							$v = $value;
+						}else{
+							$v 	= explode(',', $value);
+						}
+
 						foreach($v as $kk){
 							$s .= $options[$kk].',';
 						}

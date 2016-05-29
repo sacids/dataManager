@@ -28,6 +28,8 @@ class Perm extends CI_Controller {
 		) );
 		// $this->load->model ( 'Perm_model' );
 		$this->load->library ( 'db_exp' );
+
+
 	}
 	function _remap($method_name = 'index') {
 		if (! method_exists ( $this, $method_name )) {
@@ -40,7 +42,10 @@ class Perm extends CI_Controller {
 	}
 	
 	public function index() {
-		
+
+		if (!$this->ion_auth->logged_in()) {
+			redirect('auth/login', 'refresh');
+		}
 		// set module id
 		$this->session->set_userdata ( 'module_id', $this->uri->segment ( 3, 0 ) );
 		
@@ -847,7 +852,7 @@ class Perm extends CI_Controller {
 					$func_name = $args ['name'];
 					if ($func_name == 'list_tables') {
 						$options = $this->db->list_tables ();
-						$this->db_exp->set_list ( $field ['field_name'], $options );
+						$this->db_exp->set_list ( $field ['field_name'], $options,TRUE );
 					}
 					if ($func_name == 'select_tables') {
 						$options = $this->db->list_tables ();
