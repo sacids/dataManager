@@ -57,6 +57,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Feedback_model $Feedback_model
  * @property Ohkr_model $Ohkr_model
  * @property Whatsapp_model $Whatsapp_model
+ * @property Perm_model $Perm_model
+ * @property db_exp $db_exp
+ * @property Analyze_model $Analyze_model
  */
 
 class CI_Controller {

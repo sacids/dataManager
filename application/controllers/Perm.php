@@ -28,6 +28,8 @@ class Perm extends CI_Controller {
 		) );
 		// $this->load->model ( 'Perm_model' );
 		$this->load->library ( 'db_exp' );
+
+
 	}
 	function _remap($method_name = 'index') {
 		if (! method_exists ( $this, $method_name )) {
@@ -40,7 +42,10 @@ class Perm extends CI_Controller {
 	}
 	
 	public function index() {
-		
+
+		if (!$this->ion_auth->logged_in()) {
+			redirect('auth/login', 'refresh');
+		}
 		// set module id
 		$this->session->set_userdata ( 'module_id', $this->uri->segment ( 3, 0 ) );
 		
@@ -174,6 +179,7 @@ class Perm extends CI_Controller {
 		$field_property = array (
 				'input',
 				'hidden',
+				'view',
 				'password',
 				'label',
 				'upload',
@@ -262,7 +268,8 @@ class Perm extends CI_Controller {
 		if (! empty ( $table_id )) {
 			$this->session->set_userdata ( 'table_id', $table_id );
 		}		
-		$table_id = $this->session->userdata ( 'table_id' );		
+		$table_id = $this->session->userdata ( 'table_id' );
+		$this->db_exp->set_form_attribute('class','view_table_row');
 		$this->db_table_render ( $table_id );		
 		$this->db_exp->render ( 'insert' );
 		
@@ -373,8 +380,9 @@ class Perm extends CI_Controller {
 		$post = $this->input->post ();
 		$p_id = $post ['perm_id'];
 		$this->perm_id = $p_id;
-		// print_r($post);
-		// echo 'jembe';
+
+		//print_r($post);
+
 		$table_id = $this->input->post ( 'table_id' );
 		
 		if (NULL !== $this->input->post ( 'table_id' )) {
@@ -408,11 +416,14 @@ class Perm extends CI_Controller {
 		// check if has permissions to add
 		if ($this->check_add_perm ()) {
 			
-			// check filters
-			
+			// check if add is via controller
+			$add_controller	= trim(@$post['add_controller']);
+			if(!$add_controller){
+				$add_controller	= 'perm/new_table_data';
+			}
 			// new icon
 			echo '	<div 	target="detail_wrp"
-							action="' . site_url ( 'perm/new_table_data' ) . '"
+							action="' . site_url ( $add_controller ) . '"
 							args="table_id=' . $table_id . '"
 							class="perm_btn right m_link" >
 								<i class="material-icons md-dark">add_box</i>
@@ -594,6 +605,9 @@ class Perm extends CI_Controller {
 		$results = $this->Perm_model->paginate_table ( $table_name, $page_pos, $items_per_page, $cond );
 		
 		$start = true;
+		
+		//$this->get_table_field_value($table_id, 'specie', '1');
+		
 		echo '<table class="table_wrp" table_id="' . $table_id . '" table_name="' . $table_name . '" action="' . site_url ( 'perm/table_data_detail' ) . '">';
 		foreach ( $results->result_array () as $row ) {
 			
@@ -609,20 +623,24 @@ class Perm extends CI_Controller {
 				if (array_key_exists ( $key, $field_configs ) && $field_configs [$key] ['field_property'] == 'hidden') {
 					continue; // do not show
 				}
+				
+				$val	= $this->display_field($table_id, $key, $val);
+				
 				if ($start) {
 					$label = str_replace ( "_", " ", str_replace ( "_id", "", $key ) );
-					$hd .= '<td class="left table_res_header cell_' . $key . '" tag="' . $key . '">' . $label . '</td>';
+					$hd .= '<td class="table_res_header cell_' . $key . '" tag="' . $key . '">' . $label . '</td>';
 				}
 				
-				$bd .= '<td class="left table_res_cell cell_' . $key . '" tag="' . $key . '">' . $val . '</td>';
+				
+				$bd .= '<td class="table_res_cell cell_' . $key . '" tag="' . $key . '">' . $val . '</td>';
 			}
 			
 			if ($start) {
 				
-				echo '<thead><tr class="group table_res_row">' . $hd . '</tr></thead><tbody>';
+				echo '<thead><tr class="table_res_row">' . $hd . '</tr></thead><tbody>';
 				$start = false;
 			}
-			echo '<tr class="group table_res_row row_' . $row ['id'] . '" id="' . $row ['id'] . '">' . $bd . '</tr>';
+			echo '<tr class="table_res_row row_' . $row ['id'] . '" id="' . $row ['id'] . '">' . $bd . '</tr>';
 		}
 		echo '</tbody></table></div>';
 	}
@@ -656,6 +674,64 @@ class Perm extends CI_Controller {
 		
 		$this->table_results ( $table_id, 5, $str );
 	}
+	
+	private function display_field($table_id, $field_name, $field_val){
+		
+		if(!$map	= $this->get_field_value_map($table_id)){
+			return $field_val;
+		};
+		//echo '<pre>'; print_r($map);
+		if(array_key_exists($field_name,$map) && array_key_exists($field_val,$map[$field_name])){
+			return $map[$field_name][$field_val];
+		}else{
+			return $field_val;
+		}
+		
+		
+	}
+	private function get_field_value_map($table_id = 14){
+		
+		unset($this->session->userdata['table_map'][$table_id]);
+		if(isset($this->session->userdata['table_map'][$table_id])){
+			return $this->session->userdata['table_map'][$table_id];
+		}
+		
+		// set the array
+		$holder	= array();
+		if(!$table_conf	= $this->Perm_model->get_table_data('perm_tables_conf','table_id',$table_id)){
+			return false;
+		}
+
+		foreach($table_conf as $row){
+			$field_property	= $row['field_property'];
+			$field_name		= $row['field_name'];
+			if($field_property == 'db_dropdown'){
+				
+				
+				$tmp	= explode(":",$row['field_value']);
+				$tbl	= $tmp[0];
+				$key	= $tmp[1];
+				$lbl	= $tmp[2];
+				
+				// get all results
+				$res	= $this->Perm_model->get_data_from_table($tbl);
+				foreach($res as $v){
+					$k	= $v[$key];
+					$l	= $v[$lbl];
+					$holder[$field_name][$k]	= $l;
+				}
+			}else{
+				$holder[$field_name]	= array();
+			}
+		}
+		
+		//print_r($holder);
+		$this->session->userdata['table_map'][$table_id]	= $holder;
+		
+		return $this->session->userdata['table_map'][$table_id];
+		
+	}
+	
 	public function table_data_detail() {
 		$post = $this->input->post ();
 		
@@ -677,6 +753,7 @@ class Perm extends CI_Controller {
 	}
 	public function view_table_row($table_id, $row_id) {
 		$this->db_table_render ( $table_id );
+		$this->db_exp->set_form_attribute('class','view_table_row');
 		$this->db_exp->set_pri_id ( $row_id );
 		$this->db_exp->render ( 'view' );
 	}
@@ -715,7 +792,7 @@ class Perm extends CI_Controller {
 		$ele_id = $this->session->userdata ['post'] ['ele_id'];
 		$table_id = $this->session->userdata ['post'] ['table_action_id'];
 		$table_name = $this->session->userdata ['post'] ['ele_table_name'];
-		
+
 		$args = json_decode ( $args, true );
 		$to = $args ['to'];
 		$oper = $args ['oper'];
@@ -725,7 +802,7 @@ class Perm extends CI_Controller {
 		$match_val = $res [0] [$match];
 		
 		$rend = $args ['rend'];
-		
+
 		$this->db_table_render ( $table_id );
 		
 		switch ($rend) {
@@ -735,6 +812,8 @@ class Perm extends CI_Controller {
 				break;
 			case 'list' :
 				$rend = 'row_list';
+
+				$this->db_exp->set_hidden($to,$match_val);
 				$this->db_exp->set_search_condition ( "`" . $to . "` " . $oper . " '" . $match_val . "'" );
 				$this->db_exp->render ( $rend );
 				break;
@@ -773,7 +852,7 @@ class Perm extends CI_Controller {
 					$func_name = $args ['name'];
 					if ($func_name == 'list_tables') {
 						$options = $this->db->list_tables ();
-						$this->db_exp->set_list ( $field ['field_name'], $options );
+						$this->db_exp->set_list ( $field ['field_name'], $options,TRUE );
 					}
 					if ($func_name == 'select_tables') {
 						$options = $this->db->list_tables ();
@@ -786,6 +865,9 @@ class Perm extends CI_Controller {
 					break;
 				case 'label' :
 					$this->db_exp->set_label( $field ['field_name'], $field ['field_value']);
+					break;
+				case 'view' :
+					$this->db_exp->set_readonly( $field ['field_name']);
 					break;
 				case 'dropdown' :
 					$options = explode ( ",", $field ['field_value'] );
