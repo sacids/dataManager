@@ -22,6 +22,9 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Google fonts - witch you want to use - (rest you can just remove) -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
 	
 	<!-- Leaflet, marker cluster js and css -->
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
