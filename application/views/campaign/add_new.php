@@ -1,29 +1,30 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
 
-            <?php echo form_open_multipart('campaign/add_new', 'class="form-horizontal" role="form"'); ?>
-
             <h3>Campaign Details</h3>
+
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
             } ?>
 
-            <fieldset>
+
+            <div class="col-sm-8">
+                <?php echo form_open('campaign/add_new', 'class="form-horizontal" role="form"'); ?>
                 <div class="form-group">
                     <label>Campaign Title <span>*</span></label>
                     <input type="text" name="title" placeholder="Enter Campaign Title" class="form-control"
                            value="<?php echo set_value('title'); ?>">
                 </div>
-                <?php echo form_error('title'); ?>
+                <div class="error" style="color: red"> <?php echo form_error('title'); ?></div>
 
                 <div class="form-group">
                     <label>Campaign Icon <span>*</span></label>
                     <input type="text" name="icon" placeholder="Enter campaign icon" class="form-control"
                            value="<?php echo set_value('icon'); ?>">
                 </div>
-                <?php echo form_error('icon'); ?>
+                <div class="error" style="color: red"><?php echo form_error('icon'); ?></div>
 
                 <div class="form-group">
                     <label>Campaign Type <span>*</span></label>
@@ -33,7 +34,7 @@
                         <option value="form">Form Campaign</option>
                     </select>
                 </div>
-                <?php echo form_error('type'); ?>
+                <div class="error" style="color: red"><?php echo form_error('type'); ?></div>
 
                 <div class="form-group">
                     <label>Form Id </label>
@@ -44,7 +45,7 @@
                         <?php } ?>
                     </select>
                 </div>
-                <?php echo form_error('form_id'); ?>
+                <div class="error" style="color: red"><?php echo form_error('form_id'); ?></div>
 
 
                 <div class="form-group">
@@ -52,17 +53,17 @@
                         <textarea class="form-control" name="description"
                                   id="description"><?php echo set_value('description'); ?></textarea>
                 </div>
-                <?php echo form_error('description'); ?>
-
+                <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
 
                 <div class="form-group">
-                    <label>&nbsp; &nbsp; &nbsp;</label>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
 
-            </fieldset>
 
-            <?php echo form_close(); ?>
+                <?php echo form_close(); ?>
+
+            </div>
+
         </div>
     </div>
 </div>

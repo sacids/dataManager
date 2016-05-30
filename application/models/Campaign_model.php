@@ -16,6 +16,7 @@ class Campaign_model extends CI_Model
      * @var string
      */
     private static $table_name = "campaign";
+    private static $xform_table_name = "xforms"; //default value
 
     public function __construct()
     {
@@ -49,6 +50,24 @@ class Campaign_model extends CI_Model
     public function get_campaign_by_id($campaign_id)
     {
         return $this->db->get_where(self::$table_name, array('id' => $campaign_id))->row();
+    }
+
+
+    /**
+     * @param $xform_id
+     * @return mixed
+     */
+    public function find_by_xform_id($xform_id)
+    {
+        $this->db->where("form_id", $xform_id);
+        $query = $this->db->get(self::$xform_table_name)->row();
+
+        if (!empty($query->title)) {
+            return $query->title;
+        } else {
+            return "";
+        }
+
     }
 
 }

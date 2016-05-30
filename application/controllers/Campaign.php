@@ -55,7 +55,6 @@ class Campaign extends CI_Controller
         $this->form_validation->set_rules("title", "Campaign Title", "required");
         $this->form_validation->set_rules("icon", "Campaign Icon", "required");
         $this->form_validation->set_rules("type", "Campaign Type", "required");
-        //$this->form_validation->set_rules("form_id", "Form Id", "required");
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('header', $data);
