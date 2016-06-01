@@ -495,8 +495,6 @@ class Ohkr extends CI_Controller
         }
         redirect("ohkr/scd_list/" . $disease_id);
     }
-<<<<<<< HEAD
-
 
     //OHKR API
     function get_diseases()
@@ -538,9 +536,6 @@ class Ohkr extends CI_Controller
         echo json_encode($response);
     }
 
-=======
-    
-    
     public function manage_specie_disease(){
     	
     	$this->save_dbexp_post_vars();
@@ -603,5 +598,4 @@ class Ohkr extends CI_Controller
     	}
     }
     
->>>>>>> feature/diagnosis
 }

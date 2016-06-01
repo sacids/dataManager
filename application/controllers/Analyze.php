@@ -39,9 +39,6 @@ class Analyze extends CI_Controller {
 		}else {
 			$this->set_specie($specie);
 			$this->set_symptom($symptoms);
-
-			echo '<pre>';
-			print_r($this->_analyze());
 		}
 	}
 	
