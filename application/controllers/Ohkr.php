@@ -13,13 +13,9 @@ class Ohkr extends CI_Controller
     {
         parent::__construct();
 
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
-
         $this->load->model("Ohkr_model");
         $this->load->model("Perm_model");
-        $this->load->library("Db_exp");
+        //$this->load->library("Db_exp");
     }
 
     /**
