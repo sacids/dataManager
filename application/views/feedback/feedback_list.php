@@ -1,10 +1,12 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <h3>Feedback List</h3>
-            <div class="table_list">
+
+            <div class="col-sm-12">
 
                 <div class="pull-right" style="margin-bottom: 10px;">
+
                     <?php echo form_open("feedback/feedback_list", 'class="form-inline" role="form"'); ?>
 
                     <div class="form-group">

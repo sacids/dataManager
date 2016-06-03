@@ -11,6 +11,7 @@
             <div class="col-sm-8">
 
                 <?php echo form_open('ohkr/add_new_disease', 'class="form-horizontal" role="form"'); ?>
+
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_disease_name") ?> <span>*</span></label>
                     <input type="text" name="name" placeholder="Enter disease name" class="form-control"
@@ -28,6 +29,13 @@
                     </select>
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('specie'); ?></div>
+
+                <div class="form-group">
+                    <label><?php echo $this->lang->line("label_scd") ?> :</label>
+                        <textarea class="form-control" name="scd"
+                                  id="scd"><?php echo set_value('scd'); ?></textarea>
+                </div>
+                <div class="error" style="color: red"><?php echo form_error('scd'); ?></div>
 
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_description") ?> :</label>

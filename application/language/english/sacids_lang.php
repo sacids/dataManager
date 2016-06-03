@@ -29,6 +29,9 @@ $lang['label_form_title']               = "Form title";
 $lang['label_form_id']                  = "Form Id";
 $lang['label_date_created']             = "Created on";
 $lang['label_description']              = "Description";
+$lang['label_scd']                      = "Standard Case Definition";
+$lang['label_question']                 = "Question";
+$lang['label_answer']                   = "Answer";
 $lang['label_access']                   = "Access";
 $lang['label_xml']                      = "XML file";
 $lang['label_form_xml_file']            = "Form XML file";
@@ -82,6 +85,15 @@ $lang['error_failed_to_edit_specie']    = "Failed to edit new specie";
 $lang['error_failed_to_edit_symptom']   = "Failed to edit new Symptom";
 
 
+$lang['select_faq_to_edit']         = "You must select a faq to edit";
+$lang['select_faq_to_delete']       = "You must select a faq to delete";
+$lang['add_faq_successful']         = "Faq was added successfully";
+$lang['error_failed_to_add_faq']    = "Failed to add new faq";
+$lang['edit_faq_successful']        = "Faq was edit successfully";
+$lang['error_failed_to_edit_faq']   = "Failed to edit faq";
+$lang['delete_faq_successful']      = "Faq was deleted successfully";
+$lang['error_failed_to_delete_faq']   = "Failed to delete faq";
+
 
 
 //Feedback
@@ -89,3 +101,9 @@ $lang['feedback_received_successful']   = 'Feedback was received successfully';
 $lang['no_content']                     = 'No content';
 $lang['unknown_error_occurred']         = 'Unknown error occurred';
 $lang['user_does_not_exist']            = 'user does not exist';
+
+//Campaign
+$lang['label_campaign_title']             = "Title";
+$lang['label_campaign_type']              = "Type";
+$lang['label_campaign_icon']              = "Icon";
+$lang['label_campaign_created_date']      = "Created date";

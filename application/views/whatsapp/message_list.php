@@ -1,6 +1,8 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
+
+            <h3>Messsage List</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -8,8 +10,9 @@
             } ?>
 
             <div class="col-sm-12">
-                <h3>Messsage List</h3>
-
+                <div class="pull-left" style="margin-bottom: 10px;">
+                    <?php echo anchor("whatsapp/csv_export_data/", '<img src="' . base_url() . 'assets/public/images/csv-export.png" height="30px"/>') ?>
+                </div>
                 <div class="pull-right" style="margin-bottom: 10px;">
                     <?php echo form_open("whatsapp/message_list", 'class="form-inline" role="form"'); ?>
 
@@ -67,3 +70,4 @@
             </div>
         </div>
     </div>
+</div>

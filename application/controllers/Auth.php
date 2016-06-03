@@ -429,7 +429,7 @@ class Auth extends CI_Controller
         if ($activation) {
             // redirect them to the auth page
             $this->session->set_flashdata('message', $this->ion_auth->messages());
-            redirect("auth", 'refresh');
+            redirect("auth/users_list", 'refresh');
         } else {
             // redirect them to the forgot password page
             $this->session->set_flashdata('message', $this->ion_auth->errors());
@@ -459,10 +459,9 @@ class Auth extends CI_Controller
 
             $this->data['title'] = "Deactivate user";
             $this->load->view('header', $this->data);
-            //$this->load->view('auth/menu');
             $this->_render_page('auth/deactivate_user');
             $this->load->view('footer');
-            //$this->_render_page('auth/deactivate_user', $this->data);
+
         } else {
             // do we really want to deactivate?
             if ($this->input->post('confirm') == 'yes') {
@@ -478,7 +477,7 @@ class Auth extends CI_Controller
             }
 
             // redirect them back to the auth page
-            redirect('auth', 'refresh');
+            redirect('auth/users_list', 'refresh');
         }
     }
 

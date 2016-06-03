@@ -9,7 +9,7 @@
             } ?>
 
             <div class="col-sm-8">
-                <?php echo form_open('ohkr/add_scd/' . $disease->id, 'class="form-horizontal" role="form"'); ?>
+                <?php echo form_open('ohkr/add_disease_symptom/' . $disease->id, 'class="form-horizontal" role="form"'); ?>
 
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_symptom_name") ?> <span>*</span></label>

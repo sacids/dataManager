@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <h3>Edit Disease Details</h3>
@@ -28,6 +28,13 @@
                     </select>
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('specie'); ?></div>
+
+                <div class="form-group">
+                    <label> <label for="campus"><?php echo $this->lang->line("label_scd") ?> :</label> </label>
+                        <textarea class="form-control" name="scd"
+                                  id="scd"><?php echo $disease->scd; ?></textarea>
+                </div>
+                <div class="error" style="color: red"><?php echo form_error('scd'); ?></div>
 
                 <div class="form-group">
                     <label> <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label> </label>

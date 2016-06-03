@@ -24,3 +24,4 @@ $config['next_tag_close'] = '</li>';
 
 $config['prev_link'] = 'Prev';
 $config['next_link'] = 'Next';
+$config['last_link'] = 'Last &raquo;';

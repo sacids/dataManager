@@ -16,7 +16,9 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="../../favicon.ico">
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="<?php echo base_url();?>favicon.png" />
 
 	<title><?php if (!empty($title)) echo $title; else "AfyaData Manager"; ?></title>
 
@@ -35,6 +37,7 @@
 
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/afyadata.css" type="text/css">
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/bootstrap/js/afyadata.js"></script>
 
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

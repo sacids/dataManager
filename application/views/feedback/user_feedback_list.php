@@ -1,19 +1,20 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/public/css/chat.css">
 <script src="<?php echo base_url(); ?>assets/public/js/chat.js"></script>
-<div class="container-fluid">
+
+
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <h3>Feedback</h3>
-            <div class="table_list">
+            <div class="col-sm-12">
                 <ol class="chat">
                     <?php foreach ($feedback as $values) {
                         if ($values->sender == "user") $class = "self"; else $class = "other"; ?>
                         <li class="<?php echo $class; ?>">
                             <div class="msg">
                                 <p><?= $values->message ?></p>
-                                <span><?= $values->fname. ' '. $values->lname; ?></span>
+                                <span><?= $values->fname . ' ' . $values->lname; ?></span>
                                 <time><?= date('H:i:s', strtotime($values->date_created)) ?></time>
-                                <!--<span class="glyphicon glyphicon-ok"></span>-->
                             </div>
                         </li>
                     <?php } ?>

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-
+            <h3>Diseases List</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -9,14 +9,13 @@
             } ?>
 
             <div class="col-sm-8">
-                <h3>Diseases List</h3>
+
                 <?php if (!empty($diseases)) { ?>
 
                     <table class="table table-striped table-responsive table-hover table-bordered">
                         <tr>
                             <th><?php echo $this->lang->line("label_disease_name"); ?></th>
                             <th><?php echo $this->lang->line("label_specie_name"); ?></th>
-                            <th><?php echo $this->lang->line("label_description"); ?></th>
                             <th><?php echo $this->lang->line("label_action"); ?></th>
                         </tr>
 
@@ -26,12 +25,13 @@
                             <tr>
                                 <td><?php echo $disease->disease_title; ?></td>
                                 <td><?php echo $disease->specie_title; ?></td>
-                                <td><?php echo $disease->description; ?></td>
                                 <td>
 
                                     <?php echo anchor("ohkr/edit_disease/" . $disease->id, "Edit"); ?> |
                                     <?php echo anchor("ohkr/delete_disease/" . $disease->id, "Delete", "class='delete'"); ?> |
-                                    <?php echo anchor("ohkr/scd_list/" . $disease->id, "SCD"); ?>
+                                    <?php echo anchor("ohkr/disease_faq/" . $disease->id, "FAQ"); ?> |
+                                    <?php echo anchor("ohkr/disease_symptoms_list/" . $disease->id, "Symptoms"); ?>
+
                                 </td>
                             </tr>
                             <?php $serial++;

@@ -16,12 +16,11 @@
 
                     <table class="table table-striped table-responsive table-hover table-bordered">
                         <tr>
-                            <th>S/n</th>
-                            <th>Title</th>
-                            <th>Type</th>
-                            <th>Form Id</th>
-                            <th>Icon</th>
-                            <th>Created date</th>
+                            <th><?php echo $this->lang->line("label_campaign_title"); ?></th>
+                            <th><?php echo $this->lang->line("label_campaign_type"); ?></th>
+                            <th><?php echo $this->lang->line("label_form_name"); ?></th>
+                            <th><?php echo $this->lang->line("label_campaign_icon"); ?></th>
+                            <th><?php echo $this->lang->line("label_campaign_created_date"); ?></th>
                             <th><?php echo $this->lang->line("label_action"); ?></th>
                         </tr>
 
@@ -29,15 +28,14 @@
                         $serial = 1;
                         foreach ($campaigns as $campaign) { ?>
                             <tr>
-                                <td><?php echo $serial;?></td>
-                                <td><?php echo $campaign->title; ?></td>
+                                <td><?php echo $campaign->c_title; ?></td>
                                 <td><?php echo $campaign->type; ?></td>
-                                <td><?php echo $campaign->form_id; ?></td>
+                                <td><?php echo $campaign->x_title; ?></td>
                                 <td><?php echo $campaign->icon; ?></td>
                                 <td><?php echo date('d-m-Y H:i:s', strtotime($campaign->date_created)); ?></td>
                                 <td>
-                                    <?php echo anchor("campaign/edit_campaign/" . $campaign->id, "Edit"); ?> |
-                                    <?php echo anchor("campaign/delete_campaign/" . $campaign->id, "Delete", "class='delete'"); ?>
+                                    <?php echo anchor("campaign/edit/" . $campaign->id, "Edit"); ?> |
+                                    <?php echo anchor("campaign/delete/" . $campaign->id, "Delete", "class='delete'"); ?>
                                 </td>
                             </tr>
                             <?php $serial++;

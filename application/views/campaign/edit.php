@@ -11,25 +11,27 @@
 
 
             <div class="col-sm-8">
-                <?php echo form_open('campaign/add_new', 'class="form-horizontal" role="form"'); ?>
+                <?php echo form_open('campaign/edit/' . $campaign->id, 'class="form-horizontal" role="form"'); ?>
+
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_campaign_title"); ?> <span>*</span></label>
                     <input type="text" name="title" placeholder="Enter Campaign Title" class="form-control"
-                           value="<?php echo set_value('title'); ?>">
+                           value="<?php echo $campaign->c_title; ?>">
                 </div>
                 <div class="error" style="color: red"> <?php echo form_error('title'); ?></div>
 
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_campaign_icon"); ?> <span>*</span></label>
                     <input type="text" name="icon" placeholder="Enter campaign icon" class="form-control"
-                           value="<?php echo set_value('icon'); ?>">
+                           value="<?php echo $campaign->icon; ?>">
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('icon'); ?></div>
 
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_campaign_type"); ?> <span>*</span></label>
                     <select name="type" id="type" class="form-control">
-                        <option value="">Choose type</option>
+                        <option
+                            value="<?php echo $campaign->type; ?>"><?php echo ($campaign->type == "general") ? "General Campaign" : "Form Campaign"; ?></option>
                         <option value="general">General Campaign</option>
                         <option value="form">Form Campaign</option>
                     </select>
@@ -39,7 +41,7 @@
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_form_name"); ?> </label>
                     <select name="form_id" id="form_id" class="form-control">
-                        <option value="">Choose form</option>
+                        <option value="<?php echo $campaign->form_id;?>"><?php echo $campaign->x_title;?></option>
                         <?php foreach ($forms as $form) { ?>
                             <option value="<?php echo $form->form_id ?>"><?php echo $form->title; ?></option>
                         <?php } ?>
@@ -51,12 +53,12 @@
                 <div class="form-group">
                     <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label>
                         <textarea class="form-control" name="description"
-                                  id="description"><?php echo set_value('description'); ?></textarea>
+                                  id="description"><?php echo $campaign->description; ?></textarea>
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
                 </div>
 
 

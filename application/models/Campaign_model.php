@@ -16,7 +16,7 @@ class Campaign_model extends CI_Model
      * @var string
      */
     private static $table_name = "campaign";
-    private static $xform_table_name = "xforms"; //default value
+    private static $xform_table_name = "xforms";
 
     public function __construct()
     {
@@ -40,7 +40,9 @@ class Campaign_model extends CI_Model
      */
     public function get_campaign()
     {
-        return $this->db->get(self::$table_name)->result();
+        return $this->db->select('cmp.id, cmp.title as c_title, cmp.icon, cmp.type, cmp.date_created, xform.title as x_title')
+            ->join(self::$xform_table_name . " xform", "xform.form_id = cmp.form_id", "left")
+            ->get(self::$table_name . " cmp")->result();
     }
 
     /**
@@ -49,9 +51,25 @@ class Campaign_model extends CI_Model
      */
     public function get_campaign_by_id($campaign_id)
     {
-        return $this->db->get_where(self::$table_name, array('id' => $campaign_id))->row();
+        return $this->db->select('cmp.id, cmp.title as c_title, cmp.icon, cmp.type, cmp.date_created,
+        cmp.form_id, cmp.description, xform.title as x_title')
+            ->join(self::$xform_table_name . " xform", "xform.form_id = cmp.form_id", "left")
+            ->get_where(self::$table_name . " cmp", array('cmp.id' => $campaign_id))
+            ->row();
     }
 
+
+    public function update_campaign($id, $campaign)
+    {
+        $this->db->where("id", $id);
+        return $this->db->update(self::$table_name, $campaign);
+    }
+
+    public function delete_campaign($id)
+    {
+        $this->db->where("id", $id);
+        return $this->db->delete(self::$table_name);
+    }
 
     /**
      * @param $xform_id

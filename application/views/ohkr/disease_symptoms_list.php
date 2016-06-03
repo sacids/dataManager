@@ -10,8 +10,8 @@
             } ?>
 
             <div class="col-sm-8">
-                <a href="<?php echo site_url('ohkr/add_scd/' . $disease->id); ?>" class="btn btn-small btn-primary">Add
-                    Symptoms</a>
+                <a href="<?php echo site_url('ohkr/add_disease_symptom/' . $disease->id); ?>"
+                   class="btn btn-small btn-primary">Add Symptom</a>
                 <br/><br/>
 
                 <?php if (!empty($symptoms)) { ?>
@@ -32,9 +32,9 @@
                                 <td><?php echo $symptom->symptom_title; ?></td>
                                 <td><?php echo $symptom->importance; ?></td>
                                 <td>
-                                    <?php echo anchor("ohkr/edit_scd/" . $disease->id . "/" . $symptom->id, "Edit"); ?>
+                                    <?php echo anchor("ohkr/edit_disease_symptom/" . $disease->id . "/" . $symptom->id, "Edit"); ?>
                                     |
-                                    <?php echo anchor("ohkr/delete_scd/" . $disease->id . "/" . $symptom->id, "Delete", "class='delete'"); ?>
+                                    <?php echo anchor("ohkr/delete_disease_symptom/" . $disease->id . "/" . $symptom->id, "Delete", "class='delete'"); ?>
                                 </td>
                             </tr>
                             <?php $serial++;

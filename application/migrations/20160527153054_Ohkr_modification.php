@@ -34,6 +34,9 @@ class Migration_Ohkr_modification extends CI_Migration
                 'type' => 'INT',
                 'constraint' => 11,
             ),
+            'scd' => array(
+                'type' => 'TEXT'
+            )
         );
         $this->dbforge->add_column('ohkr_diseases', $disease_add_field);
 
@@ -66,6 +69,28 @@ class Migration_Ohkr_modification extends CI_Migration
         $this->dbforge->modify_column('ohkr_symptoms', $symptom_modify_field);
 
 
+        $this->dbforge->add_field(array(
+            'id' => array(
+                'type' => 'INT',
+                'constraint' => '11',
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
+            ),
+            'disease_id' => array(
+                'type' => 'INT',
+                'constraint' => '11',
+                'null' => FALSE
+            ),
+            'question' => array(
+                'type' => 'TEXT'
+            ),
+            'answer' => array(
+                'type' => 'TEXT'
+            )
+
+        ));
+        $this->dbforge->add_key('id', TRUE);
+        $this->dbforge->create_table('ohkr_faq');
     }
 
     public function down()
@@ -76,6 +101,9 @@ class Migration_Ohkr_modification extends CI_Migration
         $this->dbforge->drop_column("ohkr_symptoms","date_created");
         $this->dbforge->drop_column("ohkr_scd","specie_id");
         $this->dbforge->drop_column("ohkr_scd","date_created");
+
+        //drop created table
+        $this->dbforge->drop_table('ohkr_faq', TRUE);
     }
 
 }

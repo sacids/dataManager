@@ -81,6 +81,43 @@ class Campaign extends CI_Controller
     }
 
 
+    function edit($campaign_id)
+    {
+        //check if logged in
+        $this->_is_logged_in();
+
+        $data['title'] = "Edit Campaign";
+        $data['forms'] = $this->Xform_model->get_form_list();
+        $data['campaign'] = $campaign = $this->Campaign_model->get_campaign_by_id($campaign_id);
+
+        $this->form_validation->set_rules("title", $this->lang->line("label_campaign_title"), "required");
+        $this->form_validation->set_rules("icon", $this->lang->line("label_campaign_icon"), "required");
+        $this->form_validation->set_rules("type", $this->lang->line("label_campaign_type"), "required");
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('header', $data);
+            $this->load->view("campaign/edit", $data);
+            $this->load->view('footer');
+        } else {
+
+            //TODO Check if file already exist and prompt user.
+            $campaign_details = array(
+                "title" => $this->input->post("title"),
+                "description" => $this->input->post("description"),
+                "type" => $this->input->post("type"),
+                "form_id" => $this->input->post("form_id"),
+                "icon" => $this->input->post("icon")
+            );
+
+            $this->Campaign_model->update_campaign($campaign_id, $campaign_details);
+
+
+            $this->session->set_flashdata("message", display_message("Campaign successfully edited"));
+            redirect("campaign/edit/". $campaign_id, "refresh");
+        }
+    }
+
+
     /**
      * get_campaign function
      *

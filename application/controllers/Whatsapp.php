@@ -126,4 +126,22 @@ class Whatsapp extends CI_Controller
         $this->load->view("whatsapp/message_list", $data);
         $this->load->view('footer');
     }
+
+    function csv_export_data()
+    {
+        $table_name = "whatsapp";
+        $query = $this->db->query("select * from {$table_name} order by id ASC ");
+        $this->_force_csv_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".csv");
+    }
+
+    function _force_csv_download($query, $filename = '.csv')
+    {
+        $this->load->dbutil();
+        $this->load->helper('file');
+        $this->load->helper('download');
+        $delimiter = ",";
+        $newline = "\r\n";
+        $data = $this->dbutil->csv_from_result($query, $delimiter, $newline);
+        force_download($filename, $data);
+    }
 }

@@ -15,7 +15,7 @@ class Ohkr extends CI_Controller
 
         $this->load->model("Ohkr_model");
         $this->load->model("Perm_model");
-        //$this->load->library("Db_exp");
+        $this->load->library("Db_exp");
     }
 
     /**
@@ -67,7 +67,7 @@ class Ohkr extends CI_Controller
         $this->_is_logged_in();
 
         $data['title'] = "Add new";
-        $data['species'] = $this->Ohkr_model->find_all_species(30, 0);
+        $data['species'] = $this->Ohkr_model->find_all_species(100, 0);
 
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
         $this->form_validation->set_rules("specie", $this->lang->line("label_specie_name"), "required");
@@ -77,10 +77,12 @@ class Ohkr extends CI_Controller
             $this->load->view('header', $data);
             $this->load->view("ohkr/add_new_disease", $data);
             $this->load->view('footer');
+
         } else {
             $disease = array(
                 "title" => $this->input->post("name"),
                 "specie_id" => $this->input->post("specie"),
+                "scd" => $this->input->post("scd"),
                 "description" => $this->input->post("description")
             );
 
@@ -120,6 +122,7 @@ class Ohkr extends CI_Controller
             $disease = array(
                 "title" => $this->input->post("name"),
                 "specie_id" => $this->input->post("specie"),
+                "scd" => $this->input->post("scd"),
                 "description" => $this->input->post("description")
             );
 
@@ -178,6 +181,9 @@ class Ohkr extends CI_Controller
 
     public function add_new_specie()
     {
+        //check login
+        $this->_is_logged_in();
+
         $data['title'] = "Add new specie";
 
         $this->form_validation->set_rules("specie", $this->lang->line("label_specie"),
@@ -203,9 +209,8 @@ class Ohkr extends CI_Controller
 
     public function edit_specie($specie_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         if (!$specie_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_specie_to_edit")));
@@ -238,9 +243,8 @@ class Ohkr extends CI_Controller
 
     function delete_specie($specie_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         if (!$specie_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_specie_to_delete")));
@@ -283,9 +287,8 @@ class Ohkr extends CI_Controller
 
     public function add_new_symptom()
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         $data['title'] = "Add new symptom";
 
@@ -314,9 +317,8 @@ class Ohkr extends CI_Controller
 
     public function edit_symptom($symptom_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         if (!$symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_edit")));
@@ -351,9 +353,8 @@ class Ohkr extends CI_Controller
 
     function delete_symptom($symptom_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         if (!$symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_delete")));
@@ -371,11 +372,10 @@ class Ohkr extends CI_Controller
 
 
     //disease symptoms
-    public function scd_list($disease_id)
+    public function disease_symptoms_list($disease_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         $data['title'] = "Disease Symptoms";
         $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
@@ -386,15 +386,14 @@ class Ohkr extends CI_Controller
         $this->load->view('footer');
     }
 
-    public function add_scd($disease_id)
+    public function add_disease_symptom($disease_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         if (!$disease_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_add")));
-            redirect("ohkr/disease_symptoms/" . $disease_id);
+            redirect("ohkr/disease_symptoms_list/" . $disease_id);
             exit;
         }
 
@@ -421,19 +420,18 @@ class Ohkr extends CI_Controller
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_symptom")));
             }
-            redirect("ohkr/scd_list/" . $disease_id, "refresh");
+            redirect("ohkr/disease_symptoms_list/" . $disease_id, "refresh");
         }
     }
 
-    public function edit_scd($disease_id, $disease_symptom_id)
+    public function edit_disease_symptom($disease_id, $disease_symptom_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         if (!$disease_symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_edit")));
-            redirect("ohkr/disease_symptoms/" . $disease_id);
+            redirect("ohkr/disease_symptoms_list/" . $disease_id);
             exit;
         }
 
@@ -466,20 +464,19 @@ class Ohkr extends CI_Controller
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_symptom")));
             }
-            redirect("ohkr/scd_list/" . $disease_id, "refresh");
+            redirect("ohkr/disease_symptoms_list/" . $disease_id, "refresh");
         }
     }
 
 
-    function delete_scd($disease_id, $disease_symptom_id)
+    function delete_disease_symptom($disease_id, $disease_symptom_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        //check login
+        $this->_is_logged_in();
 
         if (!$disease_symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_delete")));
-            redirect("ohkr/scd_list/" . $disease_id);
+            redirect("ohkr/disease_symptoms_list/" . $disease_id);
             exit;
         }
 
@@ -489,8 +486,124 @@ class Ohkr extends CI_Controller
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_symptom")));
         }
-        redirect("ohkr/scd_list/" . $disease_id);
+        redirect("ohkr/disease_symptoms_list/" . $disease_id);
     }
+
+
+    //disease symptoms
+    public function disease_faq($disease_id)
+    {
+        //check login
+        $this->_is_logged_in();
+
+        $data['title'] = "Disease FAQ";
+        $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
+        $data['faq'] = $this->Ohkr_model->find_disease_faq($disease_id);
+
+        $this->load->view('header', $data);
+        $this->load->view("ohkr/disease_faq");
+        $this->load->view('footer');
+    }
+
+
+    public function add_disease_faq($disease_id)
+    {
+        //check login
+        $this->_is_logged_in();
+
+        if (!$disease_id) {
+            $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_add")));
+            redirect("ohkr/disease_faq/" . $disease_id);
+            exit;
+        }
+
+        $data['title'] = "Add Disease FAQ";
+        $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
+
+        $this->form_validation->set_rules("question",  $this->lang->line("label_question"), "required");
+        $this->form_validation->set_rules("answer", $this->lang->line("label_answer"), "required");
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('header', $data);
+            $this->load->view("ohkr/add_disease_faq");
+            $this->load->view('footer');
+        } else {
+            $faq = array(
+                "disease_id" => $disease_id,
+                "question" => $this->input->post("question"),
+                "answer" => $this->input->post("answer")
+            );
+
+            if ($this->Ohkr_model->add_disease_faq($faq)) {
+                $this->session->set_flashdata("message", display_message($this->lang->line("add_faq_successful")));
+            } else {
+                $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_faq")));
+            }
+            redirect("ohkr/disease_faq/" . $disease_id, "refresh");
+        }
+    }
+
+
+    public function edit_disease_faq($disease_id, $faq_id)
+    {
+        //check login
+        $this->_is_logged_in();
+
+        if (!$faq_id) {
+            $this->session->set_flashdata("message", display_message($this->lang->line("select_faq_to_edit")));
+            redirect("ohkr/disease_faq/" . $disease_id);
+            exit;
+        }
+
+        $data['title'] = "Edit Disease Faq";
+        $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
+
+        $data['faq'] = $this->Ohkr_model->get_disease_faq_by_id($faq_id);
+
+        //form validation
+        $this->form_validation->set_rules("question", $this->lang->line("label_question"), "required");
+        $this->form_validation->set_rules("answer", $this->lang->line("label_answer"), "required");
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('header', $data);
+            $this->load->view("ohkr/edit_disease_faq");
+            $this->load->view('footer');
+        } else {
+            $faq = array(
+                "question" => $this->input->post("question"),
+                "answer" => $this->input->post("answer")
+            );
+
+            if ($this->Ohkr_model->update_disease_faq($faq_id, $faq)) {
+                $this->session->set_flashdata("message", display_message($this->lang->line("edit_faq_successful")));
+            } else {
+                $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_faq")));
+            }
+            redirect("ohkr/disease_faq/" . $disease_id, "refresh");
+        }
+    }
+
+
+    function delete_disease_faq($disease_id, $faq_id)
+    {
+        //check login
+        $this->_is_logged_in();
+
+        if (!$faq_id) {
+            $this->session->set_flashdata("message", display_message($this->lang->line("select_faq_to_delete")));
+            redirect("ohkr/disease_faq/" . $disease_id);
+            exit;
+        }
+
+
+        if ($this->Ohkr_model->delete_disease_faq($faq_id)) {
+            $this->session->set_flashdata("message", display_message($this->lang->line("delete_faq_successful")));
+        } else {
+            $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_faq")));
+        }
+        redirect("ohkr/disease_faq/" . $disease_id);
+    }
+
 
     //OHKR API
     function get_diseases()
@@ -533,67 +646,69 @@ class Ohkr extends CI_Controller
     }
 
 
+    public function manage_specie_disease()
+    {
 
-    public function manage_specie_disease(){
-    	
-    	$this->save_dbexp_post_vars();
-    	
-    	$ele_id	= $this->session->userdata['post']['ele_id'];
-    	$arr	= $this->Perm_model->get_field_data('specie_id,disease_id', 'diseases_symptoms', $ele_id);
-   		
-		$cond	= " specie_id = '".$arr['specie_id']."' AND disease_id = '".$arr['disease_id']."'";
-    	
-    	$available_symptoms	= $this->get_available_symptoms($arr);
-    	
-    	$this->db_exp->set_table('diseases_symptoms');
-    	$this->db_exp->set_hidden($arr);
-    	$this->db_exp->set_hidden('date_created');
-    	$this->db_exp->set_search_condition($cond);
-    	
-    	$action = $this->input->post ( 'action' );
-    	if($action == 'insert' || $action == 'edit'){
-    		$this->db_exp->set_select('symptom_id', $available_symptoms);
-    	$this->db_exp->set_hidden('id');
-    	}else{
-    		$this->db_exp->set_db_select('symptom_id', 'symptoms', 'id', 'name');
-    	}
-    	$this->db_exp->render('row_list'); 	
-    	
-    }
-    
-    private function get_available_symptoms($arr){
-    	
-    	$s_arr	= array();
-    	$submitted_symptoms	= $this->Ohkr_model->get_submitted_symptoms($arr);
-    	foreach($submitted_symptoms as $val){
-    		
-    		$id		= $val['symptom_id'];
-    		$s_arr[$id]	= '';
-    	}
-	
-    	$a_arr	= array();
-    	$available_symptoms	= $this->Ohkr_model->get_all_symptoms();
-    	foreach($available_symptoms as $val){
+        $this->save_dbexp_post_vars();
 
-    		if($val['id'] == 0) continue;
-    		
-    		$id		= $val['id'];
-    		$name	= $val['name'];
-    		$a_arr[$id]	= $name;
-    	}
-    	
-    	$tmp	= array_diff_key($a_arr, $s_arr);
-    	//print_r($tmp);
-    	return $tmp;
+        $ele_id = $this->session->userdata['post']['ele_id'];
+        $arr = $this->Perm_model->get_field_data('specie_id,disease_id', 'diseases_symptoms', $ele_id);
+
+        $cond = " specie_id = '" . $arr['specie_id'] . "' AND disease_id = '" . $arr['disease_id'] . "'";
+
+        $available_symptoms = $this->get_available_symptoms($arr);
+
+        $this->db_exp->set_table('diseases_symptoms');
+        $this->db_exp->set_hidden($arr);
+        $this->db_exp->set_hidden('date_created');
+        $this->db_exp->set_search_condition($cond);
+
+        $action = $this->input->post('action');
+        if ($action == 'insert' || $action == 'edit') {
+            $this->db_exp->set_select('symptom_id', $available_symptoms);
+            $this->db_exp->set_hidden('id');
+        } else {
+            $this->db_exp->set_db_select('symptom_id', 'symptoms', 'id', 'name');
+        }
+        $this->db_exp->render('row_list');
+
     }
-    
-    public function save_dbexp_post_vars() {
-    	$post = $this->input->post ();
-    	$db_exp_submit = $this->input->post ( 'db_exp_submit_engaged' );
-    	if (! empty ( $db_exp_submit ) || @$post ['action'] == 'insert' || @$post ['action'] == 'edit') {
-    	} else {
-    		$this->session->set_userdata ( 'post', $post );
-    	}
+
+    private function get_available_symptoms($arr)
+    {
+
+        $s_arr = array();
+        $submitted_symptoms = $this->Ohkr_model->get_submitted_symptoms($arr);
+        foreach ($submitted_symptoms as $val) {
+
+            $id = $val['symptom_id'];
+            $s_arr[$id] = '';
+        }
+
+        $a_arr = array();
+        $available_symptoms = $this->Ohkr_model->get_all_symptoms();
+        foreach ($available_symptoms as $val) {
+
+            if ($val['id'] == 0) continue;
+
+            $id = $val['id'];
+            $name = $val['name'];
+            $a_arr[$id] = $name;
+        }
+
+        $tmp = array_diff_key($a_arr, $s_arr);
+        //print_r($tmp);
+        return $tmp;
+    }
+
+    public function save_dbexp_post_vars()
+    {
+        $post = $this->input->post();
+        $db_exp_submit = $this->input->post('db_exp_submit_engaged');
+        if (!empty ($db_exp_submit) || @$post ['action'] == 'insert' || @$post ['action'] == 'edit') {
+        } else {
+            $this->session->set_userdata('post', $post);
+        }
     }
 
 }
