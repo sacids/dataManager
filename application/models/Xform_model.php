@@ -124,6 +124,27 @@ class Xform_model extends CI_Model
 		return $this->db->get(self::$xform_table_name)->result();
 	}
 
+	/**
+	 * @param array $perms
+	 * @param int $limit
+	 * @param int $offset
+	 * @param null $status
+	 */
+	public function get_form_list_by_perms($perms, $limit = 30, $offset = 0, $status = NULL)
+	{
+		if (is_array($perms)) {
+			foreach ($perms as $key => $value) {
+				$this->db->or_like("perms", $value);
+			}
+		} else {
+			$this->db->where("perms", $perms);
+		}
+		if ($status != NULL)
+			$this->db->where("status", $status);
+		$this->db->limit($limit, $offset);
+		return $this->db->get(self::$xform_table_name)->result();
+	}
+
 	public function search_forms($user_id = NULL, $name = NULL, $access = NULL, $status = NULL, $limit = 30, $offset = 0)
 	{
 		if ($user_id != NULL)
@@ -163,7 +184,7 @@ class Xform_model extends CI_Model
 
 		return ($query->num_rows() == 1) ? $query->row(1)->COLUMN_NAME : FALSE;
 	}
-	
+
 	/**
 	 * Inserts field name and corresponding label into field name map
 	 *
@@ -174,16 +195,16 @@ class Xform_model extends CI_Model
 	public function insert_into_map($data)
 	{
 		return $this->db->insert_batch('xform_fieldname_map', $data);
-		
+
 	}
-	
+
 	/**
 	 * Returns result array for all fields of particular table
 	 *
 	 * @param $table_name
 	 * @return result array
 	 */
-	
+
 
 	/**
 	 * @param $form_id
@@ -356,14 +377,14 @@ class Xform_model extends CI_Model
 		return $this->db->insert($xform_table_name, $data);
 	}
 
-	
+
 	/**
 	 * @param $table_name
 	 * @return mixed
 	 */
 	public function get_fieldname_map($table_name)
 	{
-		$this->db->where('table_name',$table_name);
+		$this->db->where('table_name', $table_name);
 		$this->db->from('xform_fieldname_map');
 		return $this->db->get()->result_array();
 	}

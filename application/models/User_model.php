@@ -10,6 +10,7 @@ class User_model extends CI_Model
 
 	private static $table_name = "users";
 	private static $groups_table_name = "groups";
+	private static $users_groups_table_name = "users_groups";
 
 	function __construct()
 	{
@@ -106,6 +107,16 @@ class User_model extends CI_Model
 	public function find_user_groups()
 	{
 		return $this->db->get(self::$groups_table_name)->result();
+	}
+
+	public function get_user_groups_by_id($user_id)
+	{
+		$this->db->select("ug.*,g.*");
+		$this->db->from(self::$users_groups_table_name . " ug");
+		$this->db->join(self::$table_name . " u", "u.id = ug.user_id");
+		$this->db->join(self::$groups_table_name . " g", "g.id = ug.group_id");
+		$this->db->where("ug.user_id", $user_id);
+		return $this->db->get()->result();
 	}
 }
 

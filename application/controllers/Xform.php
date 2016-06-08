@@ -365,7 +365,7 @@ class Xform extends CI_Controller
 	private function get_path($name, $obj)
 	{
 		$name .= "_" . $obj->name;
-		
+
 		if (is_array($obj->children)) {
 			foreach ($obj->children as $val) {
 				$this->get_path($name, $val);
@@ -373,7 +373,7 @@ class Xform extends CI_Controller
 		} else {
 			$column_name = substr($name, 1);
 			//shorten long column names
-			if (strlen($column_name) > 64){
+			if (strlen($column_name) > 64) {
 				$column_name = shorten_column_name($column_name);
 			}
 			$this->form_data [$column_name] = $obj->content;
@@ -606,9 +606,15 @@ class Xform extends CI_Controller
 			exit;
 		}
 
-
-		//TODO Add access control here
-		$forms = $this->Xform_model->get_form_list();
+		$user_groups = $this->User_model->get_user_groups_by_id($user->id);
+		$user_perms = array(0 => "P" . $user->id . "P");
+		$i = 1;
+		foreach ($user_groups as $ug) {
+			$user_perms[$i] = "G" . $ug->id . "G";
+			$i++;
+		}
+		
+		$forms = $this->Xform_model->get_form_list_by_perms($user_perms);
 
 		$xml = '<xforms xmlns="http://openrosa.org/xforms/xformsList">';
 
@@ -1226,48 +1232,5 @@ class Xform extends CI_Controller
 		);
 		$data = $this->dbutil->xml_from_result($query, $config);
 		force_download($filename, $data);
-	}
-
-	function testFormList()
-	{
-		if (empty($_SERVER['PHP_AUTH_DIGEST'])) {
-			http_response_code(401);
-			header("HTTP/1.1 401 Unauthorized");
-			header('Content-Type: text/xml; charset=utf-8');
-			header('WWW-Authenticate: Digest realm="' . $this->config->item("realm") . '",qop="auth",nonce="' . uniqid() . '",opaque="' . md5($this->config->item("realm")) . '"');
-			header('"HTTP_X_OPENROSA_VERSION": "1.0"');
-			header('X-OpenRosa-Version:1.0');
-		} else {
-
-			header('Content-Type: text/xml; charset=utf-8');
-			header('"HTTP_X_OPENROSA_VERSION": "1.0"');
-			header('X-OpenRosa-Version:1.0');
-
-			$data = $this->form_auth->http_digest_parse($_SERVER['PHP_AUTH_DIGEST']);
-			$name = $data['username'];
-			log_message("debug", "received username -> " . $name);
-
-			$forms = $this->Xform_model->get_form_list();
-
-			$xml = '<xforms xmlns="http://openrosa.org/xforms/xformsList">';
-
-			foreach ($forms as $form) {
-
-				// used to notify if anything has changed with the form, so that it may be updated on download
-				$hash = md5($form->form_id . $form->date_created . $form->filename . $form->id . $form->title . $form->last_updated);
-
-				$xml .= '<xform>';
-				$xml .= '<formID>' . $form->form_id . '</formID>';
-				$xml .= '<name>' . $form->title . '</name>';
-				$xml .= '<version>1.1</version>';
-				$xml .= '<hash>md5:' . $hash . '</hash>';
-				$xml .= '<descriptionText>' . $form->description . '</descriptionText>';
-				$xml .= '<downloadUrl>' . base_url() . 'assets/forms/definition/' . $form->filename . '</downloadUrl>';
-				$xml .= '</xform>';
-			}
-			$xml .= '</xforms>';
-
-			echo $xml;
-		}
 	}
 }
