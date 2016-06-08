@@ -242,18 +242,19 @@ class Xform extends CI_Controller
 		}
 		return $result;
 	}
-	
-	
-	public function test_insert(){
-		
+
+
+	public function test_insert()
+	{
+
 		// call forms
-		$filename	= 'Dalili_za_Binadamu_2016-02-03_16-43-55.xml';
+		$filename = 'Dalili_za_Binadamu_2016-02-03_16-43-55.xml';
 		$this->set_data_file($this->config->item("form_data_upload_dir") . $filename);
 		$this->load_xml_data();
-		
+
 		// 
 		$statement = $this->get_insert_form_data_query();
-		
+
 		echo $statement;
 	}
 
@@ -435,16 +436,18 @@ class Xform extends CI_Controller
 		$query = "INSERT INTO {$table_name} {$field_names} VALUES {$field_values}";
 		return $query;
 	}
-	
-	private function get_fieldname_map(){
-		$tmp	= $this->Xform_model->get_fieldname_map($this->table_name);
-		$map	= array();
-		foreach($tmp as $part){
-			$key	= $part['field_name'];
-			$map[$key]	= $part;
-		}	
-		return $map;	
+
+	private function get_fieldname_map()
+	{
+		$tmp = $this->Xform_model->get_fieldname_map($this->table_name);
+		$map = array();
+		foreach ($tmp as $part) {
+			$key = $part['field_name'];
+			$map[$key] = $part;
+		}
+		return $map;
 	}
+
 	/**
 	 * Create query string for inserting data into table from submitted xform data
 	 * file
@@ -454,79 +457,79 @@ class Xform extends CI_Controller
 	 */
 	private function get_insert_form_data_query()
 	{
-	
+
 		$table_name = $this->table_name;
 		$form_data = $this->form_data;
-		
+
 		//echo '<pre>';
 		//print_r($form_data);
-		$structure		= $this->get_fieldname_map();
-		$col_names		= array();
-		$col_values		= array();
-		$points_v		= array();
-		$points_n		= array();
-		
-		foreach($form_data as $key => $val){
-			
-			$type	= $structure[$key]['type'];
-			$cn		= $structure[$key]['col_name'];
-			
-			array_push($col_names,$cn);
-			array_push($col_values,$val);
-			
-			
-			if($type == 'select'){
-				$options	= explode(' ',$val);
-				
-				foreach($options as $opt){
-					$opt	= trim($opt);
-					
-					$sanitized			= sanitize_col_name($opt);
-					$first_letters		= condense_col_name($sanitized);
-					$sum_up				= ascii_val($sanitized);
-					$fn					= $cn.'_'.$first_letters.'_'.$sum_up;
-					
-					$coln				= $structure[$fn]['col_name'];
-					
-					array_push($col_values,1);
-					array_push($col_names,$coln);
+		$structure = $this->get_fieldname_map();
+		$col_names = array();
+		$col_values = array();
+		$points_v = array();
+		$points_n = array();
+
+		foreach ($form_data as $key => $val) {
+
+			$type = $structure[$key]['type'];
+			$cn = $structure[$key]['col_name'];
+
+			array_push($col_names, $cn);
+			array_push($col_values, $val);
+
+
+			if ($type == 'select') {
+				$options = explode(' ', $val);
+
+				foreach ($options as $opt) {
+					$opt = trim($opt);
+
+					$sanitized = sanitize_col_name($opt);
+					$first_letters = condense_col_name($sanitized);
+					$sum_up = ascii_val($sanitized);
+					$fn = $cn . '_' . $first_letters . '_' . $sum_up;
+
+					$coln = $structure[$fn]['col_name'];
+
+					array_push($col_values, 1);
+					array_push($col_names, $coln);
 				}
 			}
-			
-			if($type == 'geopoint'){
-				
+
+			if ($type == 'geopoint') {
+
 				$geopoints = explode(" ", $val);
-				
+
 				$lat = $geopoints [0];
-				array_push($col_values,$lat);
-				array_push($col_names,$cn.'_lat');
-				
+				array_push($col_values, $lat);
+				array_push($col_names, $cn . '_lat');
+
 				$lng = $geopoints [1];
-				array_push($col_values,$lng);
-				array_push($col_names,$cn.'_lng');
-				
+				array_push($col_values, $lng);
+				array_push($col_names, $cn . '_lng');
+
 				$alt = $geopoints [2];
-				array_push($col_values,$alt);
-				array_push($col_names,$cn.'_alt');
-				
+				array_push($col_values, $alt);
+				array_push($col_names, $cn . '_alt');
+
 				$acc = $geopoints [3];
-				array_push($col_values,$acc);
-				array_push($col_names,$cn.'_acc');
-				
+				array_push($col_values, $acc);
+				array_push($col_names, $cn . '_acc');
+
 				$point = "GeomFromText('POINT($lat $lng)')";
-				array_push($points_v,$point);
-				array_push($points_n,$cn.'_point');
+				array_push($points_v, $point);
+				array_push($points_n, $cn . '_point');
 			}
-			
-			
+
+
 		}
-		
-		
-		$field_names = "(`" . implode("`,`", $col_names) . "`,`".implode("`,`", $points_n)."`)";
-		$field_values = "('" . implode("','", $col_values) . "',".implode("`,`", $points_v).")";
-	
+
+
+		$field_names = "(`" . implode("`,`", $col_names) . "`,`" . implode("`,`", $points_n) . "`)";
+		$field_values = "('" . implode("','", $col_values) . "'," . implode("`,`", $points_v) . ")";
+
 		$query = "INSERT INTO {$table_name} {$field_names} VALUES {$field_values}";
-		
+
 		return $query;
 	}
 
@@ -650,10 +653,25 @@ class Xform extends CI_Controller
 		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
 		if ($this->form_validation->run() === FALSE) {
-			
+
+			$users = $this->User_model->get_users();
+			$groups = $this->User_model->find_user_groups();
+
+			$permission_options = array();
+
+			foreach ($groups as $group) {
+				$permission_options['G' . $group->id . 'G'] = $group->name;
+			}
+
+			foreach ($users as $user) {
+				$permission_options['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
+			}
+
+			$data['perms'] = $permission_options;
+
 			if ($this->input->is_ajax_request()) {
 				$this->load->view("form/add_new", $data);
-			}else{
+			} else {
 				$this->load->view('header', $data);
 				$this->load->view("form/add_new");
 				$this->load->view('footer');
@@ -661,7 +679,7 @@ class Xform extends CI_Controller
 		} else {
 
 			$form_definition_upload_dir = $this->config->item("form_definition_upload_dir");
-			
+
 			//print_r($_FILES['userfile']['name']);
 			if (!empty($_FILES['userfile']['name'])) {
 
@@ -679,6 +697,13 @@ class Xform extends CI_Controller
 				} else {
 					$xml_data = $this->upload->data();
 					$filename = $xml_data['file_name'];
+
+					$perms = $this->input->post("perms");
+
+					$all_permissions = "";
+					if (count($perms) > 0) {
+						$all_permissions = join(",", $perms);
+					}
 
 					$create_table_statement = $this->_initialize($filename);
 
@@ -699,7 +724,8 @@ class Xform extends CI_Controller
 								"description"  => $this->input->post("description"),
 								"filename"     => $filename,
 								"date_created" => date("c"),
-								"access"       => $this->input->post("access")
+								"access"       => $this->input->post("access"),
+								"perms"        => $all_permissions
 							);
 
 							//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
@@ -853,37 +879,37 @@ class Xform extends CI_Controller
 
 		// initiate statement, set id as primary key, autoincrement
 		$statement = "CREATE TABLE $tbl_name ( id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY ";
-		
+
 		// loop through xform definition array
-		$counter	= 0;
-		$holder	= array();
+		$counter = 0;
+		$holder = array();
 		foreach ($structure as $key => $val) {
-	
+
 			// check if type is empty
 			if (empty ($val ['type']))
 				continue;
 
-			
-			$field_name		= $val['field_name'];
-			$col_name		= condense_col_name($field_name).$counter++;
-			
-			if(array_key_exists('label', $val)){
-				$field_label	= $val['label'];
-			}else{
-				$tmp	= explode('/', $val['nodeset']);
+
+			$field_name = $val['field_name'];
+			$col_name = condense_col_name($field_name) . $counter++;
+
+			if (array_key_exists('label', $val)) {
+				$field_label = $val['label'];
+			} else {
+				$tmp = explode('/', $val['nodeset']);
 				$field_label = array_pop($tmp);
 			}
-			$type 			= $val ['type'];
-			$tmp			= array(
-					'col_name' => $col_name,
-					'type' => $type,
-					'table_name' => $this->table_name,
-					'field_name' => $field_name,
-					'field_label' => $field_label );
-			
-			array_push($holder,$tmp);
+			$type = $val ['type'];
+			$tmp = array(
+				'col_name'    => $col_name,
+				'type'        => $type,
+				'table_name'  => $this->table_name,
+				'field_name'  => $field_name,
+				'field_label' => $field_label);
+
+			array_push($holder, $tmp);
 			//print_r($holder);
-			
+
 			// check if field is required
 			if (!empty ($val ['required'])) {
 				$required = 'NOT NULL';
@@ -900,29 +926,29 @@ class Xform extends CI_Controller
 				$statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $val ['option'])) . "') $required";
 			}
 
-			if ($type == 'select' ) {
+			if ($type == 'select') {
 				$statement .= ", $col_name TEXT $required ";
-				
-				foreach($val['option'] as $key => $select_opts){
-				
-					$tmp	= array();
-					$tmp['col_name']	= $col_name.'_'.$key;
-					$tmp['type']	= 'option';
-					$tmp['table_name']	= $this->table_name;
-					
-					$sanitized			= sanitize_col_name($select_opts);
-					$first_letters		= condense_col_name($sanitized);
-					$sum_up				= ascii_val($sanitized);
-					
-					$tmp['field_name']	= $col_name.'_'.$first_letters.'_'.$sum_up;
-					$tmp['field_label']	= $select_opts;
-				
-					array_push($holder,$tmp);
-					
-					$statement .= ", ".$tmp['col_name']." ENUM('1','0') ";
+
+				foreach ($val['option'] as $key => $select_opts) {
+
+					$tmp = array();
+					$tmp['col_name'] = $col_name . '_' . $key;
+					$tmp['type'] = 'option';
+					$tmp['table_name'] = $this->table_name;
+
+					$sanitized = sanitize_col_name($select_opts);
+					$first_letters = condense_col_name($sanitized);
+					$sum_up = ascii_val($sanitized);
+
+					$tmp['field_name'] = $col_name . '_' . $first_letters . '_' . $sum_up;
+					$tmp['field_label'] = $select_opts;
+
+					array_push($holder, $tmp);
+
+					$statement .= ", " . $tmp['col_name'] . " ENUM('1','0') ";
 				}
 			}
-			
+
 			if ($type == 'text') {
 				$statement .= ", $col_name TEXT $required ";
 			}
@@ -943,61 +969,63 @@ class Xform extends CI_Controller
 				$statement .= "," . $col_name . "_lng DECIMAL(38,10) $required ";
 				$statement .= "," . $col_name . "_acc DECIMAL(38,10) $required ";
 				$statement .= "," . $col_name . "_alt DECIMAL(38,10) $required ";
-				
-				$tmp			= array('col_name' => $col_name.'_point','type' => 'point','table_name' => $this->table_name,'field_name' => $field_name.'_point','field_label' => $field_label.' point' );
-				array_push($holder,$tmp);
-				$tmp			= array('col_name' => $col_name.'_lat','type' => 'point_lat','table_name' => $this->table_name,'field_name' => $field_name.'_lat','field_label' => $field_label.' latitude' );
-				array_push($holder,$tmp);
-				$tmp			= array('col_name' => $col_name.'_lng','type' => 'point_lng','table_name' => $this->table_name,'field_name' => $field_name.'_lng','field_label' => $field_label.' longitude' );
-				array_push($holder,$tmp);
-				$tmp			= array('col_name' => $col_name.'_acc','type' => 'point_acc','table_name' => $this->table_name,'field_name' => $field_name.'_acc','field_label' => $field_label.' accuracy' );
-				array_push($holder,$tmp);
-				$tmp			= array('col_name' => $col_name.'_alt','type' => 'point_alt','table_name' => $this->table_name,'field_name' => $field_name.'_alt','field_label' => $field_label.' altitude' );
-				array_push($holder,$tmp);
+
+				$tmp = array('col_name' => $col_name . '_point', 'type' => 'point', 'table_name' => $this->table_name, 'field_name' => $field_name . '_point', 'field_label' => $field_label . ' point');
+				array_push($holder, $tmp);
+				$tmp = array('col_name' => $col_name . '_lat', 'type' => 'point_lat', 'table_name' => $this->table_name, 'field_name' => $field_name . '_lat', 'field_label' => $field_label . ' latitude');
+				array_push($holder, $tmp);
+				$tmp = array('col_name' => $col_name . '_lng', 'type' => 'point_lng', 'table_name' => $this->table_name, 'field_name' => $field_name . '_lng', 'field_label' => $field_label . ' longitude');
+				array_push($holder, $tmp);
+				$tmp = array('col_name' => $col_name . '_acc', 'type' => 'point_acc', 'table_name' => $this->table_name, 'field_name' => $field_name . '_acc', 'field_label' => $field_label . ' accuracy');
+				array_push($holder, $tmp);
+				$tmp = array('col_name' => $col_name . '_alt', 'type' => 'point_alt', 'table_name' => $this->table_name, 'field_name' => $field_name . '_alt', 'field_label' => $field_label . ' altitude');
+				array_push($holder, $tmp);
 			}
 
 			$statement .= "\n";
 		}
 
 		$statement .= ")";
-		
-		if($this->Xform_model->insert_into_map($holder)){
-			return $statement;
-		}else{
-			return false;
-		}
-	}
-	
-	private function _add_to_fieldname_map($arr){
-				
-		$ut		= microtime();
-		$pre	= '';
-		$prefix	= explode("_",$field_name);
-		foreach($prefix as $parts){
-			$pre	.= substr($value, 0, 1);
-		}
-		
-		$pre	= $pre.'_'.$ut;
-		
-		if($this->Xform_model->set_field_name($pre,$field_name)){
-			return $pre;
-		}else{
-			return false;
-		}
-	}
-	
-	private function get_field_map(){
 
-		$arr	= $this->Xform_model->get_field_map($this->table_name);
-		$map	= array();
-		foreach($arr as $val){
-			$key 	= $val['field_name'];
-			$label	= $val['field_label'];
-			
-			$map[$key]	= $label;
+		if ($this->Xform_model->insert_into_map($holder)) {
+			return $statement;
+		} else {
+			return FALSE;
 		}
-		
-		return $map;		
+	}
+
+	private function _add_to_fieldname_map($arr)
+	{
+
+		$ut = microtime();
+		$pre = '';
+		$prefix = explode("_", $field_name);
+		foreach ($prefix as $parts) {
+			$pre .= substr($value, 0, 1);
+		}
+
+		$pre = $pre . '_' . $ut;
+
+		if ($this->Xform_model->set_field_name($pre, $field_name)) {
+			return $pre;
+		} else {
+			return FALSE;
+		}
+	}
+
+	private function get_field_map()
+	{
+
+		$arr = $this->Xform_model->get_field_map($this->table_name);
+		$map = array();
+		foreach ($arr as $val) {
+			$key = $val['field_name'];
+			$label = $val['field_label'];
+
+			$map[$key] = $label;
+		}
+
+		return $map;
 	}
 
 	function edit_form($xform_id)
@@ -1020,6 +1048,22 @@ class Xform extends CI_Controller
 		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
 		if ($this->form_validation->run() === FALSE) {
+			$users = $this->User_model->get_users();
+			$groups = $this->User_model->find_user_groups();
+
+			$available_permissions = array();
+
+			foreach ($groups as $group) {
+				$available_permissions['G' . $group->id . 'G'] = $group->name;
+			}
+
+			foreach ($users as $user) {
+				$available_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
+			}
+			$current_permissions = explode(",", $form->perms);
+
+			$data['perms'] = $available_permissions;
+			$data['current_perms'] = $current_permissions;
 
 			$this->load->view('header', $data);
 			$this->load->view("form/edit_form");
@@ -1028,10 +1072,17 @@ class Xform extends CI_Controller
 		} else {
 
 			if ($form) {
+				$new_perms = $this->input->post("perms");
+
+				$new_perms_string = "";
+				if (count($new_perms) > 0) {
+					$new_perms_string = join(",", $new_perms);
+				}
 				$new_form_details = array(
 					"title"        => $this->input->post("title"),
 					"description"  => $this->input->post("description"),
 					"access"       => $this->input->post("access"),
+					"perms"        => $new_perms_string,
 					"last_updated" => date("c")
 				);
 
@@ -1192,7 +1243,7 @@ class Xform extends CI_Controller
 			header('"HTTP_X_OPENROSA_VERSION": "1.0"');
 			header('X-OpenRosa-Version:1.0');
 
-			$data = $this->form_auth->http_digest_parse ($_SERVER['PHP_AUTH_DIGEST']);
+			$data = $this->form_auth->http_digest_parse($_SERVER['PHP_AUTH_DIGEST']);
 			$name = $data['username'];
 			log_message("debug", "received username -> " . $name);
 

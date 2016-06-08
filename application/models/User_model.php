@@ -9,6 +9,7 @@ class User_model extends CI_Model
 {
 
 	private static $table_name = "users";
+	private static $groups_table_name = "groups";
 
 	function __construct()
 	{
@@ -102,7 +103,10 @@ class User_model extends CI_Model
 		self::$xform_table_name = $this->config->item("table_users");
 	}
 
-
+	public function find_user_groups()
+	{
+		return $this->db->get(self::$groups_table_name)->result();
+	}
 }
 
 /* End of file users_model.php */

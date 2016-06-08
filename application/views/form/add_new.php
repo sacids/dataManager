@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 main">
+        <?php echo form_open_multipart('xform/add_new', 'class="form-horizontal" role="form"'); ?>
+        <div class="col-sm-12 col-md-6 col-lg-6">
 
             <h3>Form Details</h3>
 
-            <?php echo form_open_multipart('xform/add_new', 'class="form-horizontal" role="form"'); ?>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -40,8 +40,22 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
-                <?php echo form_close(); ?>
             </div>
         </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <h3>Permissions</h3>
+            <p class="alert alert-info"> Select who can access the forms </p>
+            <div>
+                <?php
+                foreach ($perms as $key => $value) {
+
+                    echo form_checkbox("perms[]", $key, FALSE);
+                    echo $value . "</br>";
+                } ?>
+            </div>
+
+        </div>
+        <?php echo form_close(); ?>
     </div>
 </div>
