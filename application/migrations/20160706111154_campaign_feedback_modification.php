@@ -12,14 +12,14 @@ class Migration_Campaign_feedback_modification extends CI_Migration
     public function up()
     {
         //modify column end_date in campaign
-        $add_field = array(
+        $field = array(
             'end_date' => array(
                 'name' => 'date_created',
                 'type' => 'DATETIME',
                 'null' => FALSE
             ),
         );
-        $this->dbforge->modify_column('campaign', $add_field);
+        $this->dbforge->modify_column('campaign', $field);
 
         //add column type field
         $field['type'] = array(
@@ -30,8 +30,7 @@ class Migration_Campaign_feedback_modification extends CI_Migration
 
         $this->dbforge->add_column('campaign', $field);
 
-
-        // Add status column in feedback table
+        // Add status column
         $feedback_new_column = array(
             'status' => array(
                 'type' => 'VARCHAR',
@@ -39,6 +38,7 @@ class Migration_Campaign_feedback_modification extends CI_Migration
                 'default' => 'pending'
             )
         );
+
         $this->dbforge->add_column("feedback", $feedback_new_column);
 
     }
