@@ -25,39 +25,54 @@ class Feedback_model extends CI_Model
         parent::__construct();
     }
 
-
-    function find_all()
+    /**
+     * @param $feedback array of feedback information.
+     * @return mixed
+     * @author Godluck Akyoo
+     */
+    function create_feedback($feedback)
     {
-        $this->db->select('fb.id, fb.instance_id, fb.message, fb.date_created, xf.title, user.first_name as uf_fname,
-         user.last_name as uf_lname')
-            ->join(self::$table_name_xform . " xf", 'xf.form_id = fb.form_id')
-            ->join(self::$table_name_user . " user", 'user.id = fb.user_id')
-            ->where("fb.message", "Tumepokea fomu yako")
-            ->order_by('fb.date_created', 'DESC');
-        return $this->db->get(self::$table_name . " fb")->result();
+        return $this->db->insert(self::$table_name, $feedback);
     }
 
-    function search_feedback($name = NULL, $user_id = NULL)
+
+    /**
+     * @param null
+     * @return mixed
+     */
+    function find_all()
+    {
+        return $this->db->query("SELECT feedback.id, feedback.instance_id,feedback.message,
+                                      feedback.date_created,users.username,xforms.title FROM feedback
+              join xforms on xforms.form_id=feedback.form_id
+              join users on users.id=feedback.user_id
+              where feedback.id in (SELECT max(id) FROM feedback GROUP BY instance_id ) order by feedback.id desc ")->result();
+    }
+
+
+    /**
+     * @param form_name
+     * @param $username
+     * @return mixed
+     */
+    function search_feedback($name = NULL, $username = NULL)
     {
         if ($name != NULL)
-            $this->db->like("xf.title", $name);
+            $this->db->like("xforms.title", $name);
 
-        if ($user_id != NULL)
-            $this->db->where("fb.user_id", $user_id);
+        if ($username != NULL)
+            $this->db->like("users.username", $username);
 
-        $this->db->select('fb.id, fb.instance_id, fb.message, fb.date_created, xf.title, user.first_name as uf_fname,
-         user.last_name as uf_lname')
-            ->join(self::$table_name_xform . " xf", 'xf.form_id = fb.form_id')
-            ->join(self::$table_name_user . " user", 'user.id = fb.user_id')
-            ->where("fb.message", "Tumepokea fomu yako")
-            ->order_by('fb.date_created', 'DESC');
-        return $this->db->get(self::$table_name . " fb")->result();
+        return $this->db->query("SELECT feedback.id, feedback.instance_id,feedback.message,feedback.date_created,users.username,xforms.title
+              FROM feedback
+              join xforms on xforms.form_id=feedback.form_id
+              join users on users.id=feedback.user_id
+              where feedback.id in (SELECT max(id) FROM feedback GROUP BY instance_id )
+              order by feedback.id desc ")->result();
     }
 
     /**
-     * @param $user_id
-     * @param $form_id
-     * @param null $instance
+     * @param  $instance_id
      * @return mixed
      */
     function get_feedback_details_by_instance($instance_id)
@@ -67,33 +82,27 @@ class Feedback_model extends CI_Model
     }
 
     /**
-     * @param $user_id
-     * @param $form_id
-     * @param null $instance
+     * @param $instance_id
      * @return mixed
      */
     function get_feedback_by_instance($instance_id)
     {
-        $this->db->select('fb.message, fb.date_created, fb.sender, user.first_name as fname, user.last_name as lname')
-            ->join(self::$table_name_user . " user", 'user.id = fb.user_id')
-            ->order_by('fb.date_created', 'ASC');
-        return $this->db->get_where(self::$table_name . " fb", array('instance_id' => $instance_id))->result();
+        $this->db->select('feedback.message, feedback.date_created, feedback.sender,
+                                user.first_name as fname, user.last_name as lname')
+            ->join(self::$table_name_user . " user", 'user.id = feedback.user_id')
+            ->order_by('feedback.date_created', 'ASC');
+        return $this->db->get_where(self::$table_name . " feedback", array('instance_id' => $instance_id))->result();
 
 
     }
 
+
     /**
-     * @param $user_id
-     * @param $form_id
-     * @param $instance_id
+     * @param null
      * @return mixed
      */
-    function get_feedback($user_id, $instance_id = NULL)
+    function get_feedback_list()
     {
-        if ($instance_id != NULL)
-            $this->db->where('instance_id', $instance_id);
-
-        $this->db->where('user_id', $user_id);
         return $this->db->get(self::$table_name)->result();
     }
 
@@ -109,29 +118,5 @@ class Feedback_model extends CI_Model
 
         $this->db->where('user_id', $user_id);
         return $this->db->get(self::$table_name)->result();
-    }
-
-    /**
-     * @param $feedback array of feedback information.
-     * @return mixed
-     * @author Godluck Akyoo
-     */
-    function create_feedback($feedback)
-    {
-        return $this->db->insert(self::$table_name, $feedback);
-    }
-
-
-    //forms feedback
-    function get_forms_feedback($user_id)
-    {
-        return $this->db->order_by('date_created', 'DESC')
-            ->get_where(self::$table_name, array('user_id' => $user_id, 'message' => "Tumepokea fomu yako"))->result();
-    }
-
-    function get_form_name($form_id)
-    {
-        $query = $this->db->get_where(self::$table_name_xform, array('form_id' => $form_id))->row();
-        return $query->title;
     }
 }

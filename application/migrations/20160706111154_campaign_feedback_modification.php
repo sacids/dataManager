@@ -6,20 +6,20 @@
  * Date: 5/27/2016
  * Time: 3:32 PM
  */
-class Migration_Campaign_modification extends CI_Migration
+class Migration_Campaign_feedback_modification extends CI_Migration
 {
 
     public function up()
     {
         //modify column end_date in campaign
-        $field = array(
+        $add_field = array(
             'end_date' => array(
                 'name' => 'date_created',
                 'type' => 'DATETIME',
                 'null' => FALSE
             ),
         );
-        $this->dbforge->modify_column('campaign', $field);
+        $this->dbforge->modify_column('campaign', $add_field);
 
         //add column type field
         $field['type'] = array(
@@ -29,6 +29,18 @@ class Migration_Campaign_modification extends CI_Migration
         );
 
         $this->dbforge->add_column('campaign', $field);
+
+
+        // Add status column in feedback table
+        $feedback_new_column = array(
+            'status' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 10,
+                'default' => 'pending'
+            )
+        );
+        $this->dbforge->add_column("feedback", $feedback_new_column);
+
     }
 
     public function down()

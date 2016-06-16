@@ -35,7 +35,7 @@
                                 <td><?php echo date('d-m-Y H:i:s', strtotime($campaign->date_created)); ?></td>
                                 <td>
                                     <?php echo anchor("campaign/edit/" . $campaign->id, "Edit"); ?> |
-                                    <?php echo anchor("campaign/delete/" . $campaign->id, "Delete", "class='delete'"); ?>
+                                    <?php echo anchor("campaign/campaign_list", "Delete", "class='delete'"); ?>
                                 </td>
                             </tr>
                             <?php $serial++;

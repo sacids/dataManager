@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
 
-            <h3>Messsage List</h3>
+            <h3>Message List</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
