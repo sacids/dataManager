@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/public/css/chat.css">
-<script src="<?php echo base_url(); ?>assets/public/js/chat.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo site_url(); ?>assets/public/css/chat.css">
+<script src="<?php echo site_url(); ?>assets/public/js/chat.js"></script>
 
 
 <div class="container">
@@ -23,7 +23,7 @@
 
             <form method="post" id="form" class="feedback_form">
                 <input class="textarea" type="text" name="message" id="message" placeholder="Type feedback here!"/>
-                <input type="hidden" name="instance_id" id="instance_id" value="<?= $instance_id ?>"/>
+                <input type="hidden" name="instance_id" id="instance_id" value=""/>
                 <button type="submit" name="submit" class="submit btn btn-primary" onClick="submitdata();">Send</button>
             </form>
 

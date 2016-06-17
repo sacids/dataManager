@@ -48,9 +48,10 @@ class Feedback extends CI_Controller
         if (isset($_POST['search'])) {
             //TODO searching here
             $form_name = $this->input->post("name", NULL);
-            $user_id = $this->input->post("user", NULL);
+            $username = $this->input->post("username", NULL);
 
-            $feedback = $this->Feedback_model->search_feedback($form_name, $user_id);
+            //search feedback
+            $feedback = $this->Feedback_model->search_feedback($form_name, $username);
 
             if ($feedback) {
                 $data['feedback'] = $feedback;
@@ -59,7 +60,6 @@ class Feedback extends CI_Controller
             $data['feedback'] = $this->Feedback_model->find_all();
         }
 
-        $data['user'] = $this->User_model->get_users();
         //render view
         $data['title'] = "Feedback List";
         $this->load->view('header', $data);
@@ -91,7 +91,7 @@ class Feedback extends CI_Controller
                 'user_id' => $feedback->user_id,
                 'sender' => 'server'
             );
-            $query = $this->Feedback_model->create_feedback($feedback_details);
+            $this->Feedback_model->create_feedback($feedback_details);
         }
 
         //render view
@@ -104,10 +104,12 @@ class Feedback extends CI_Controller
     }
 
 
+
+
     /**
-     * Feedback forms
+     * get Feedback Api
      */
-    function feedback_forms()
+    function get_feedback()
     {
         $username = $this->input->get("username");
 
@@ -118,24 +120,33 @@ class Feedback extends CI_Controller
             exit;
         }
 
+        //TODO: call function for permission, return chat user (form_id) needed to see
+
+
         $user = $this->User_model->find_by_username($username);
         log_message("debug", "username getting forms feedback is " . $username);
 
         if ($user) {
-            $forms = $this->Feedback_model->get_forms_feedback($user->id);
+            $feedback_list = $this->Feedback_model->get_feedback_list();
 
-            //print_r($forms);
+            foreach($feedback_list as $value){
+                $username = $this->User_model->find_by_id($value->user_id)->username;
+                $form_name = $this->Xform_model->find_by_xform_id($value->form_id)->title;
 
-            foreach ($forms as $values) {
-                $form [] = array(
-                    'form_id' => $values->form_id,
-                    'instance_id' => $values->instance_id,
-                    'title' => $this->Feedback_model->get_form_name($values->form_id),
-                    'date_created' => date('j F, Y H:i:s', strtotime($values->date_created))
+                $feedback[] = array(
+                    'id' => $value->id,
+                    'form_id' => $value->form_id,
+                    'instance_id' => $value->instance_id,
+                    'title' => $form_name,
+                    'message' =>$value->message,
+                    'sender' => $value->sender,
+                    'user' => $username,
+                    'date_created' => date("m-Y, H:i", strtotime($value->date_created)),
+                    'status' => $value->status
                 );
             }
 
-            $response = array("forms" => $form, "status" => "success");
+            $response = array("feedback" => $feedback, "status" => "success");
 
         } else {
             $response = array("status" => "failed", "message" => "User does not exist");
@@ -145,67 +156,27 @@ class Feedback extends CI_Controller
 
 
     /**
-     * XML submission class
-     *
-     * @return response
+     * post Feedback Api
      */
-
-    function get_feedback()
-    {
-        //TODO Returning feedback instance_id
-        //get form_id and last_feedback_id
-        $username = $this->input->get("username");
-        $instance_id = $this->input->get('instance_id');
-        $form_id = str_replace("-", "_", $this->input->get('form_id'));
-        $last_id = $this->input->get('last_id');
-
-        if (!$username) {
-            $response = array("status" => "failed", "message" => "Required username");
-            echo json_encode($response);
-            exit;
-        }
-
-        $user = $this->User_model->find_by_username($username);
-        log_message("debug", "username getting feedback is " . $username);
-
-        if ($user) {
-            if ($instance_id)
-                $feedback = $this->Feedback_model->get_feedback($user->id, $instance_id);
-            else
-                $feedback = $this->Feedback_model->get_feedback_notification($user->id, $last_id);
-
-            if ($feedback) {
-                $response = array("feedback" => $feedback, "status" => "success");
-
-            } else {
-                $response = array("status" => "success", "message" => "No feedback content");
-
-            }
-        } else {
-            $response = array("status" => "failed", "message" => "User does not exist");
-
-        }
-        echo json_encode($response);
-
-    }
-
     function post_feedback()
     {
         $username = $this->input->post("username");
-        $form_id = str_replace("-", "_", $this->input->get('form_id'));
-        $instance_id = $this->input->post("instance_id");
+        //$form_id = str_replace("-", "_", $this->input->get('form_id'));
 
         log_message("debug", "User posting feedback is " . $username);
+
+        //get user details
         $user = $this->User_model->find_by_username($username);
 
         if ($user) {
             $feedback = array(
                 "user_id" => $user->id,
-                "instance_id" => $instance_id,
-                "form_id" => $form_id,
+                "instance_id" => $this->input->post("instance_id"),
+                "form_id" => $this->input->post('form_id'),
                 "message" => $this->input->post("message"),
                 'sender' => $this->input->post("sender"),
-                "date_created" => date("c")
+                "date_created" => date("c"),
+                "status" => $this->input->post("status")
             );
 
             if ($this->Feedback_model->create_feedback($feedback)) {
@@ -219,6 +190,7 @@ class Feedback extends CI_Controller
             $response = array("status" => "failed", "message" => "user does not exist");
 
         }
+
         echo json_encode($response);
 
     }

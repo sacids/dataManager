@@ -16,19 +16,20 @@
                             'name' => 'name',
                             'id' => 'name',
                             'class' => "form-control",
-                            'placeholder' => "Form Name"
+                            'placeholder' => "Search by form title"
                         );
                         echo form_input($data_name); ?>
                     </div>
 
                     <div class="form-group">
-                        <select class="form-control" id="user" name="user">
-                            <option value="">Choose user</option>
-                            <?php foreach ($user as $value) { ?>
-                                <option
-                                    value="<?= $value->id ?>"><?= $value->first_name . ' ' . $value->last_name ?></option>
-                            <?php } ?>
-                        </select>
+                        <?php
+                        $username = array(
+                            'name' => 'username',
+                            'id' => 'username',
+                            'class' => "form-control",
+                            'placeholder' => "Search by username"
+                        );
+                        echo form_input($username); ?>
                     </div>
 
 
@@ -59,7 +60,7 @@
                             <tr>
                                 <td><?php echo $value->title; ?></td>
                                 <td><?php echo $value->instance_id; ?></td>
-                                <td><?php echo $value->uf_fname . ' ' . $value->uf_lname; ?></td>
+                                <td><?php echo $value->username; ?></td>
                                 <td><?php echo date('d-m-Y H:i:s', strtotime($value->date_created)); ?></td>
                                 <td>
                                     <?php echo anchor("feedback/user_feedback/" . $value->instance_id, "Conversation", 'class = "btn btn-primary btn-xs"'); ?>

@@ -605,47 +605,6 @@ class Ohkr extends CI_Controller
     }
 
 
-    //OHKR API
-    function get_diseases()
-    {
-        $diseases = $this->Ohkr_model->find_all_disease();
-
-        if ($diseases) {
-            $response = array("disease" => $diseases, "status" => "success");
-
-        } else {
-            $response = array("status" => "failed", "message" => "No disease found");
-        }
-        echo json_encode($response);
-    }
-
-    function get_symptoms()
-    {
-        $symptoms = $this->Ohkr_model->find_all_symptoms();
-
-        if ($symptoms) {
-            $response = array("symptom" => $symptoms, "status" => "success");
-
-        } else {
-            $response = array("status" => "failed", "message" => "No symptom found");
-        }
-        echo json_encode($response);
-    }
-
-    function get_species()
-    {
-        $species = $this->Ohkr_model->find_all_species();
-
-        if ($species) {
-            $response = array("species" => $species, "status" => "success");
-
-        } else {
-            $response = array("status" => "failed", "message" => "No species found");
-        }
-        echo json_encode($response);
-    }
-
-
     public function manage_specie_disease()
     {
 
@@ -710,5 +669,52 @@ class Ohkr extends CI_Controller
             $this->session->set_userdata('post', $post);
         }
     }
+
+
+
+    /*OHKR API
+    -get disease
+    -get disease disease sysmptoms
+    -get disease faq
+    */
+    function get_diseases()
+    {
+        $diseases = $this->Ohkr_model->find_all_disease();
+
+        if ($diseases) {
+            $response = array("disease" => $diseases, "status" => "success");
+
+        } else {
+            $response = array("status" => "failed", "message" => "No disease found");
+        }
+        echo json_encode($response);
+    }
+
+    function get_symptoms()
+    {
+        $symptoms = $this->Ohkr_model->find_all_symptoms();
+
+        if ($symptoms) {
+            $response = array("symptom" => $symptoms, "status" => "success");
+
+        } else {
+            $response = array("status" => "failed", "message" => "No symptom found");
+        }
+        echo json_encode($response);
+    }
+
+    function get_species()
+    {
+        $species = $this->Ohkr_model->find_all_species();
+
+        if ($species) {
+            $response = array("species" => $species, "status" => "success");
+
+        } else {
+            $response = array("status" => "failed", "message" => "No species found");
+        }
+        echo json_encode($response);
+    }
+
 
 }

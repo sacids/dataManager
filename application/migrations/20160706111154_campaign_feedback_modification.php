@@ -6,7 +6,7 @@
  * Date: 5/27/2016
  * Time: 3:32 PM
  */
-class Migration_Campaign_modification extends CI_Migration
+class Migration_Campaign_feedback_modification extends CI_Migration
 {
 
     public function up()
@@ -29,6 +29,18 @@ class Migration_Campaign_modification extends CI_Migration
         );
 
         $this->dbforge->add_column('campaign', $field);
+
+        // Add status column
+        $feedback_new_column = array(
+            'status' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 10,
+                'default' => 'pending'
+            )
+        );
+
+        $this->dbforge->add_column("feedback", $feedback_new_column);
+
     }
 
     public function down()

@@ -71,6 +71,16 @@ class Campaign_model extends CI_Model
         return $this->db->delete(self::$table_name);
     }
 
+
+    /**
+     * @param null
+     * @return mixed
+     */
+    public function get_campaign_list()
+    {
+        return $this->db->get(self::$table_name)->result();
+    }
+
     /**
      * @param $xform_id
      * @return mixed
