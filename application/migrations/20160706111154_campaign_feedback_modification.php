@@ -11,24 +11,27 @@ class Migration_Campaign_feedback_modification extends CI_Migration
 
     public function up()
     {
+        //rename table
+        $this->dbforge->rename_table('ohkr_scd', 'ohkr_disease_symptoms');
+
         //modify column end_date in campaign
-        $field = array(
+        $field_modify = array(
             'end_date' => array(
                 'name' => 'date_created',
                 'type' => 'DATETIME',
                 'null' => FALSE
             ),
         );
-        $this->dbforge->modify_column('campaign', $field);
+        $this->dbforge->modify_column('campaign', $field_modify);
 
         //add column type field
-        $field['type'] = array(
+        $add_field['type'] = array(
             'type' => 'ENUM("general","form")',
             'default' => 'general',
             'null' => FALSE,
         );
 
-        $this->dbforge->add_column('campaign', $field);
+        $this->dbforge->add_column('campaign', $add_field);
 
         // Add status column
         $feedback_new_column = array(
@@ -46,7 +49,9 @@ class Migration_Campaign_feedback_modification extends CI_Migration
     public function down()
     {
         //drop created table
-        //$this->dbforge->drop_table('campaign', TRUE);
+        $this->dbforge->drop_table('feedback', TRUE);
+        $this->dbforge->drop_table('campaign', TRUE);
+        $this->dbforge->drop_table('ohkr_disease_symptoms', TRUE);
     }
 
 }
