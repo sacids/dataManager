@@ -11,9 +11,6 @@ class Migration_Campaign_feedback_modification extends CI_Migration
 
     public function up()
     {
-        //rename table
-        $this->dbforge->rename_table('ohkr_scd', 'ohkr_disease_symptoms');
-
         //modify column end_date in campaign
         $field_modify = array(
             'end_date' => array(
@@ -51,7 +48,6 @@ class Migration_Campaign_feedback_modification extends CI_Migration
         //drop created table
         $this->dbforge->drop_table('feedback', TRUE);
         $this->dbforge->drop_table('campaign', TRUE);
-        $this->dbforge->drop_table('ohkr_disease_symptoms', TRUE);
     }
 
 }
