@@ -116,25 +116,4 @@ class Campaign extends CI_Controller
         }
     }
 
-
-    /**
-     * get_campaign function
-     *
-     * @return response
-     */
-    function get_campaign()
-    {
-        //campaign result
-        $campaign = $this->Campaign_model->get_campaign();
-
-        if ($campaign) {
-            $response = array("campaign" => $campaign, "status" => "success");
-
-        } else {
-            $response = array("status" => "success", "message" => "No content");
-
-        }
-        echo json_encode($response);
-    }
-
 }

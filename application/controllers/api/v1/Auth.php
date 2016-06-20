@@ -77,6 +77,7 @@ class Auth extends CI_Controller
             //Register member to the database
             $additional_data = array(
                 'first_name' => $full_name,
+                'phone' => $username
             );
             $email = "afyadata@sacids.org";
 
