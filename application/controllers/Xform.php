@@ -613,7 +613,7 @@ class Xform extends CI_Controller
 			$user_perms[$i] = "G" . $ug->id . "G";
 			$i++;
 		}
-		
+
 		$forms = $this->Xform_model->get_form_list_by_perms($user_perms);
 
 		$xml = '<xforms xmlns="http://openrosa.org/xforms/xformsList">';
@@ -633,8 +633,6 @@ class Xform extends CI_Controller
 			$xml .= '</xform>';
 		}
 		$xml .= '</xforms>';
-
-		log_message("debug", "Requested forms\n" . $xml);
 
 		$content_length = sizeof($xml);
 		//set header response
