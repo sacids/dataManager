@@ -8,11 +8,14 @@
  */
 class Auth extends CI_Controller
 {
+    var $realm;
+
     function __construct()
     {
         parent::__construct();
         $this->lang->load('auth');
         $this->load->model('User_model');
+        $this->realm = 'Authorized users of Sacids Openrosa';
     }
 
 
@@ -74,10 +77,16 @@ class Auth extends CI_Controller
             $response["error_msg"] = "Password does not match";
 
         } else {
-            //Register member to the database
+
+            //digest password
+            $digest_password = md5("{$username}:{$this->realm}:{$password}");
+
+
+            //Register user
             $additional_data = array(
                 'first_name' => $full_name,
-                'phone' => $username
+                'phone' => $username,
+                'digest_password' => $digest_password
             );
             $email = "afyadata@sacids.org";
 
