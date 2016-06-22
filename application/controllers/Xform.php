@@ -484,15 +484,8 @@ class Xform extends CI_Controller
 				foreach ($options as $opt) {
 					$opt = trim($opt);
 
-					$sanitized = sanitize_col_name($opt);
-					$first_letters = condense_col_name($sanitized);
-					$sum_up = ascii_val($sanitized);
-					$fn = $cn . '_' . $first_letters . '_' . $sum_up;
-
-					$coln = $structure[$fn]['col_name'];
-
 					array_push($col_values, 1);
-					array_push($col_names, $coln);
+					array_push($col_names, $opt);
 				}
 			}
 
@@ -895,7 +888,6 @@ class Xform extends CI_Controller
 
 
 			$field_name = $val['field_name'];
-			$col_name = condense_col_name($field_name) . $counter++;
 
 			if (array_key_exists('label', $val)) {
 				$field_label = $val['label'];
@@ -935,21 +927,7 @@ class Xform extends CI_Controller
 
 				foreach ($val['option'] as $key => $select_opts) {
 
-					$tmp = array();
-					$tmp['col_name'] = $col_name . '_' . $key;
-					$tmp['type'] = 'option';
-					$tmp['table_name'] = $this->table_name;
-
-					$sanitized = sanitize_col_name($select_opts);
-					$first_letters = condense_col_name($sanitized);
-					$sum_up = ascii_val($sanitized);
-
-					$tmp['field_name'] = $col_name . '_' . $first_letters . '_' . $sum_up;
-					$tmp['field_label'] = $select_opts;
-
-					array_push($holder, $tmp);
-
-					$statement .= ", " . $tmp['col_name'] . " ENUM('1','0') ";
+					$statement .= ", " . $key . " ENUM('1','0') ";
 				}
 			}
 
