@@ -25,6 +25,7 @@ class Xform extends CI_Controller
 	private $xml_defn_filename;
 	private $xml_data_filename;
 	private $table_name;
+	private $xarray;
 
 	private $user_id;
 	private $user_submitting_feedback_id;
@@ -756,9 +757,14 @@ class Xform extends CI_Controller
 	 */
 	public function _initialize($file_name)
 	{
+		//$file_name = 'Dalili_za_Binadamu.xml';
+		//$file_name = "Dalili_Binadamu_Skolls.xml";
+		//$file_name = 'Binadamu.xml';
 		log_message("debug", "File to load " . $file_name);
+
 		// create table structure
 		$this->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
+
 		$this->load_xml_definition();
 
 		// TODO: change function name to get_something suggested get_form_table_definition
@@ -818,12 +824,13 @@ class Xform extends CI_Controller
 		// retrieve object describing definition file
 		$rxml = $this->xml_to_object(file_get_contents($this->get_defn_file()));
 
+
 		// get the binds compononent of xform
 		$binds = $rxml->children [0]->children [1]->children;
-
+		//echo '<pre>'; print_r($rxml->children [1]->children);
 		// get the body section of xform
 		$tmp2 = $rxml->children [0]->children [1]->children [1]->children [0]->children;
-
+		$tmp2 = $rxml->children [1]->children;
 		// container
 		$xarray = array();
 
@@ -844,23 +851,38 @@ class Xform extends CI_Controller
 				}
 			}
 		}
+		$this->xarray	= $xarray;
+		$this->_iterate_defn_file($tmp2,false);
+		return $this->xarray;
+	}
 
-		foreach ($tmp2 as $val) {
+	function _iterate_defn_file($arr,$ref = false){
 
-			$att = $val->attributes ['id'];
-			$id = explode(":", $att);
-			$nodeset = $id [0];
-			$label = $id [1];
-			$detail = $val->children [0]->content;
+		$i = 0;
+		foreach($arr as $val){
 
-			// if its an option for select/select1
-			if (substr($label, 0, 6) == 'option') {
-				$xarray [$nodeset] ['option'] [substr($label, 6)] = $detail;
-			} else {
-				$xarray [$nodeset] [$label] = $detail;
+			switch($val->name){
+
+				case 'group':
+					$this->_iterate_defn_file($val->children);
+					break;
+				case 'input':
+					$nodeset	= $val->attributes['ref'];
+					$this->xarray[$nodeset]['label'] = '0';
+					break;
+				case 'select':
+				case 'select1':
+					$nodeset	= $val->attributes['ref'];
+					$this->_iterate_defn_file($val->children,$nodeset);
+					break;
+				case 'item':
+					$l 	= $val->children[0]->content;
+					$v		= $val->children[1]->content;
+					$this->xarray[$ref]['option'][$v]	= $l;
+					break;
 			}
 		}
-		return $xarray;
+
 	}
 
 	/**
@@ -879,7 +901,6 @@ class Xform extends CI_Controller
 
 		// loop through xform definition array
 		$counter = 0;
-		$holder = array();
 		foreach ($structure as $key => $val) {
 
 			// check if type is empty
@@ -888,6 +909,7 @@ class Xform extends CI_Controller
 
 
 			$field_name = $val['field_name'];
+			$col_name	= $field_name;
 
 			if (array_key_exists('label', $val)) {
 				$field_label = $val['label'];
@@ -896,15 +918,6 @@ class Xform extends CI_Controller
 				$field_label = array_pop($tmp);
 			}
 			$type = $val ['type'];
-			$tmp = array(
-				'col_name'    => $col_name,
-				'type'        => $type,
-				'table_name'  => $this->table_name,
-				'field_name'  => $field_name,
-				'field_label' => $field_label);
-
-			array_push($holder, $tmp);
-			//print_r($holder);
 
 			// check if field is required
 			if (!empty ($val ['required'])) {
@@ -919,7 +932,8 @@ class Xform extends CI_Controller
 
 			if ($type == 'select1') {
 				// Mysql recommended way of handling single quotes for queries is by using two single quotes at once.
-				$statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $val ['option'])) . "') $required";
+				$tmp3	= array_keys($val ['option']);
+				$statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $tmp3)) . "') $required";
 			}
 
 			if ($type == 'select') {
@@ -951,29 +965,13 @@ class Xform extends CI_Controller
 				$statement .= "," . $col_name . "_lng DECIMAL(38,10) $required ";
 				$statement .= "," . $col_name . "_acc DECIMAL(38,10) $required ";
 				$statement .= "," . $col_name . "_alt DECIMAL(38,10) $required ";
-
-				$tmp = array('col_name' => $col_name . '_point', 'type' => 'point', 'table_name' => $this->table_name, 'field_name' => $field_name . '_point', 'field_label' => $field_label . ' point');
-				array_push($holder, $tmp);
-				$tmp = array('col_name' => $col_name . '_lat', 'type' => 'point_lat', 'table_name' => $this->table_name, 'field_name' => $field_name . '_lat', 'field_label' => $field_label . ' latitude');
-				array_push($holder, $tmp);
-				$tmp = array('col_name' => $col_name . '_lng', 'type' => 'point_lng', 'table_name' => $this->table_name, 'field_name' => $field_name . '_lng', 'field_label' => $field_label . ' longitude');
-				array_push($holder, $tmp);
-				$tmp = array('col_name' => $col_name . '_acc', 'type' => 'point_acc', 'table_name' => $this->table_name, 'field_name' => $field_name . '_acc', 'field_label' => $field_label . ' accuracy');
-				array_push($holder, $tmp);
-				$tmp = array('col_name' => $col_name . '_alt', 'type' => 'point_alt', 'table_name' => $this->table_name, 'field_name' => $field_name . '_alt', 'field_label' => $field_label . ' altitude');
-				array_push($holder, $tmp);
 			}
 
 			$statement .= "\n";
 		}
 
 		$statement .= ")";
-
-		if ($this->Xform_model->insert_into_map($holder)) {
-			return $statement;
-		} else {
-			return FALSE;
-		}
+		return $statement;
 	}
 
 	private function _add_to_fieldname_map($arr)
