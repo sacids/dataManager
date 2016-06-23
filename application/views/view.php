@@ -12,18 +12,18 @@
     <title>AfyaData - Addressing one health security at community level through technology!</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="<?php echo base_url();?>favicon.png" />
+    <link rel="icon" type="image/png" href="<?php echo base_url(); ?>favicon.png"/>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" type="text/css">
 
     <!-- Custom Fonts -->
     <link
-        href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-        rel='stylesheet' type='text/css'>
+            href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+            rel='stylesheet' type='text/css'>
     <link
-        href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
-        rel='stylesheet' type='text/css'>
+            href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+            rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="assets/bootstrap/font-awesome/css/font-awesome.min.css" type="text/css">
 
     <!-- Plugin CSS -->
@@ -62,10 +62,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="page-scroll" href="#about">About AfyaData</a></li>
                 <li><a class="page-scroll" href="#features">Features</a></li>
+                <li><a class="page-scroll" href="<?php echo base_url(); ?>blog/post">Blog</a></li>
                 <li>
                     <a class="page-scroll" href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" download>Download App</a>
                 </li>
-                <li><a class="page-scroll" href="<?php echo site_url('auth/login');?>">Go to demo</a></li>
+                <li><a class="page-scroll" href="<?php echo site_url('auth/login'); ?>">Go to demo</a></li>
                 <li><a class="page-scroll" href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -80,9 +81,11 @@
         <div class="header-content-inner">
             <h1>AfyaData</h1>
             <hr>
-            <p>Afya Data is a mobile app inspired by ODK Collect, developed by Southern African Centre for Infectious Disease.
+            <p>Afya Data is a mobile app inspired by ODK Collect, developed by Southern African Centre for Infectious
+                Disease.
 
-                Surveillance (SACIDS) for collecting, submitting, receiving and/or tracking feedback of submitted health data.</p>
+                Surveillance (SACIDS) for collecting, submitting, receiving and/or tracking feedback of submitted health
+                data.</p>
         </div>
     </div>
 </header>
@@ -184,7 +187,8 @@
         <div class="row no-gutter">
             <div class="col-lg-4 col-sm-6">
                 <a href="#" class="portfolio-box">
-                    <img src="<?php echo base_url();?>assets/bootstrap/img/screenshots/afyadataone.jpg" class="img-responsive" alt="">
+                    <img src="<?php echo base_url(); ?>assets/bootstrap/img/screenshots/afyadataone.jpg"
+                         class="img-responsive" alt="">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
                             <div class="project-category text-faded">
@@ -199,7 +203,8 @@
             </div>
             <div class="col-lg-4 col-sm-6">
                 <a href="#" class="portfolio-box">
-                    <img src="<?php echo base_url();?>assets/bootstrap/img/screenshots/afyadatatwo.jpg" class="img-responsive" alt="">
+                    <img src="<?php echo base_url(); ?>assets/bootstrap/img/screenshots/afyadatatwo.jpg"
+                         class="img-responsive" alt="">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
                             <div class="project-category text-faded">
@@ -214,7 +219,8 @@
             </div>
             <div class="col-lg-4 col-sm-6">
                 <a href="#" class="portfolio-box">
-                    <img src="<?php echo base_url();?>assets/bootstrap/img/screenshots/afyadatathree.jpg" class="img-responsive" alt="">
+                    <img src="<?php echo base_url(); ?>assets/bootstrap/img/screenshots/afyadatathree.jpg"
+                         class="img-responsive" alt="">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
                             <div class="project-category text-faded">

@@ -901,7 +901,8 @@ class Xform extends CI_Controller
 				'type'        => $type,
 				'table_name'  => $this->table_name,
 				'field_name'  => $field_name,
-				'field_label' => $field_label);
+				'field_label' => $field_label
+			);
 
 			array_push($holder, $tmp);
 			//print_r($holder);

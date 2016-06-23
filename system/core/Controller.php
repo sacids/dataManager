@@ -60,6 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Perm_model $Perm_model
  * @property db_exp $db_exp
  * @property Analyze_model $Analyze_model
+ * @property Post_model $Post_model
  */
 
 class CI_Controller {
