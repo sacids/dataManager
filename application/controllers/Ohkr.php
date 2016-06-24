@@ -71,6 +71,7 @@ class Ohkr extends CI_Controller
 
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
         $this->form_validation->set_rules("specie", $this->lang->line("label_specie_name"), "required");
+        $this->form_validation->set_rules("description", $this->lang->line("label_description"), "required");
 
         if ($this->form_validation->run() === FALSE) {
 
@@ -82,8 +83,11 @@ class Ohkr extends CI_Controller
             $disease = array(
                 "title" => $this->input->post("name"),
                 "specie_id" => $this->input->post("specie"),
-                "scd" => $this->input->post("scd"),
-                "description" => $this->input->post("description")
+                "description" => $this->input->post("description"),
+                "cause" => $this->input->post("cause"),
+                "symptoms" => $this->input->post("symptoms"),
+                "diagnosis" => $this->input->post("diagnosis"),
+                "treatment" => $this->input->post("treatment")
             );
 
             if ($this->Ohkr_model->add_disease($disease)) {
@@ -112,6 +116,7 @@ class Ohkr extends CI_Controller
 
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
         $this->form_validation->set_rules("specie", $this->lang->line("label_specie_name"), "required");
+        $this->form_validation->set_rules("description", $this->lang->line("label_description"), "required");
 
         if ($this->form_validation->run() === FALSE) {
 
@@ -122,8 +127,11 @@ class Ohkr extends CI_Controller
             $disease = array(
                 "title" => $this->input->post("name"),
                 "specie_id" => $this->input->post("specie"),
-                "scd" => $this->input->post("scd"),
-                "description" => $this->input->post("description")
+                "description" => $this->input->post("description"),
+                "cause" => $this->input->post("cause"),
+                "symptoms" => $this->input->post("symptoms"),
+                "diagnosis" => $this->input->post("diagnosis"),
+                "treatment" => $this->input->post("treatment")
             );
 
             if ($this->Ohkr_model->update_disease($disease_id, $disease)) {
@@ -672,49 +680,6 @@ class Ohkr extends CI_Controller
 
 
 
-    /*OHKR API
-    -get disease
-    -get disease disease sysmptoms
-    -get disease faq
-    */
-    function get_diseases()
-    {
-        $diseases = $this->Ohkr_model->find_all_disease();
-
-        if ($diseases) {
-            $response = array("disease" => $diseases, "status" => "success");
-
-        } else {
-            $response = array("status" => "failed", "message" => "No disease found");
-        }
-        echo json_encode($response);
-    }
-
-    function get_symptoms()
-    {
-        $symptoms = $this->Ohkr_model->find_all_symptoms();
-
-        if ($symptoms) {
-            $response = array("symptom" => $symptoms, "status" => "success");
-
-        } else {
-            $response = array("status" => "failed", "message" => "No symptom found");
-        }
-        echo json_encode($response);
-    }
-
-    function get_species()
-    {
-        $species = $this->Ohkr_model->find_all_species();
-
-        if ($species) {
-            $response = array("species" => $species, "status" => "success");
-
-        } else {
-            $response = array("status" => "failed", "message" => "No species found");
-        }
-        echo json_encode($response);
-    }
 
 
 }

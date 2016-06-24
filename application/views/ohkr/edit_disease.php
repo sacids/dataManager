@@ -1,3 +1,4 @@
+<script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
@@ -30,18 +31,64 @@
                 <div class="error" style="color: red"><?php echo form_error('specie'); ?></div>
 
                 <div class="form-group">
-                    <label> <label for="campus"><?php echo $this->lang->line("label_scd") ?> :</label> </label>
-                        <textarea class="form-control" name="scd"
-                                  id="scd"><?php echo $disease->scd; ?></textarea>
-                </div>
-                <div class="error" style="color: red"><?php echo form_error('scd'); ?></div>
-
-                <div class="form-group">
-                    <label> <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label> </label>
+                    <label><?php echo $this->lang->line("label_description") ?> :</label>
                         <textarea class="form-control" name="description"
                                   id="description"><?php echo $disease->description; ?></textarea>
+                    <script>
+                        // Replace the <textarea id="editor1"> with a CKEditor
+                        // instance, using default configuration.
+                        CKEDITOR.replace('description');
+                    </script>
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
+
+                <div class="form-group">
+                    <label><?php echo $this->lang->line("label_cause") ?> :</label>
+                        <textarea class="form-control" name="cause"
+                                  id="cause"><?php echo $disease->cause; ?></textarea>
+                    <script>
+                        // Replace the <textarea id="editor1"> with a CKEditor
+                        // instance, using default configuration.
+                        CKEDITOR.replace('cause');
+                    </script>
+                </div>
+                <div class="error" style="color: red"><?php echo form_error('cause'); ?></div>
+
+                <div class="form-group">
+                    <label><?php echo $this->lang->line("label_symptoms") ?> :</label>
+                        <textarea class="form-control" name="symptoms"
+                                  id="symptoms"><?php echo $disease->symptoms; ?></textarea>
+                    <script>
+                        // Replace the <textarea id="editor1"> with a CKEditor
+                        // instance, using default configuration.
+                        CKEDITOR.replace('symptoms');
+                    </script>
+                </div>
+                <div class="error" style="color: red"><?php echo form_error('symptoms'); ?></div>
+
+                <div class="form-group">
+                    <label><?php echo $this->lang->line("label_diagnosis") ?> :</label>
+                        <textarea class="form-control" name="diagnosis"
+                                  id="diagnosis"><?php echo $disease->diagnosis; ?></textarea>
+                    <script>
+                        // Replace the <textarea id="editor1"> with a CKEditor
+                        // instance, using default configuration.
+                        CKEDITOR.replace('diagnosis');
+                    </script>
+                </div>
+                <div class="error" style="color: red"><?php echo form_error('diagnosis'); ?></div>
+
+                <div class="form-group">
+                    <label><?php echo $this->lang->line("label_treatment") ?> :</label>
+                        <textarea class="form-control" name="treatment"
+                                  id="treatment"><?php echo $disease->treatment; ?></textarea>
+                    <script>
+                        // Replace the <textarea id="editor1"> with a CKEditor
+                        // instance, using default configuration.
+                        CKEDITOR.replace('treatment');
+                    </script>
+                </div>
+                <div class="error" style="color: red"><?php echo form_error('treatment'); ?></div>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Edit</button>
