@@ -16,7 +16,6 @@ class Ohkr extends CI_Controller
     }
 
 
-
     function get_diseases()
     {
         $diseases = $this->Ohkr_model->find_all_disease();
@@ -31,7 +30,6 @@ class Ohkr extends CI_Controller
     }
 
 
-
     function get_symptoms()
     {
         $symptoms = $this->Ohkr_model->find_all_symptoms();
@@ -44,5 +42,6 @@ class Ohkr extends CI_Controller
         }
         echo json_encode($response);
     }
+
 
 }

@@ -1,3 +1,4 @@
+<script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
@@ -54,6 +55,11 @@
                     <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label>
                         <textarea class="form-control" name="description"
                                   id="description"><?php echo $campaign->description; ?></textarea>
+                    <script>
+                        // Replace the <textarea id="editor1"> with a CKEditor
+                        // instance, using default configuration.
+                        CKEDITOR.replace('description');
+                    </script>
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
 
