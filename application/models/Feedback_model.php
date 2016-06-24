@@ -101,9 +101,9 @@ class Feedback_model extends CI_Model
      * @param null
      * @return mixed
      */
-    function get_feedback_list()
+    function get_feedback_list($user_id)
     {
-        return $this->db->get(self::$table_name)->result();
+        return $this->db->get_where(self::$table_name, array('user_id' => $user_id))->result();
     }
 
     /**
@@ -111,12 +111,11 @@ class Feedback_model extends CI_Model
      * @param $last_id
      * @return mixed
      */
-    function get_feedback_notification($user_id, $last_id = NULL)
+    function get_feedback_notification($user_id)
     {
-        if ($last_id != NULL)
-            $this->db->where('id > ', $last_id);
-
         $this->db->where('user_id', $user_id);
+        $this->db->where('status', 'pending');
+        $this->db->or_where('status','');
         return $this->db->get(self::$table_name)->result();
     }
 }

@@ -23,7 +23,7 @@ class Campaign extends CI_Controller
     function get_campaign()
     {
         //campaign result
-        $campaign = $this->Campaign_model->get_campaign();
+        $campaign = $this->Campaign_model->get_campaign_list();
 
         if ($campaign) {
             $response = array("campaign" => $campaign, "status" => "success");
