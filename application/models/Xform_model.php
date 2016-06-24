@@ -399,4 +399,9 @@ class Xform_model extends CI_Model
 		$this->db->from(self::$xform_table_name);
 		return $this->db->count_all_results();
 	}
+
+	public function get_form_definition_filename($form_id){
+		$this->db->select('filename')->where('form_id',$form_id)->from('xforms');
+		return $this->db->get()->row(1)->filename;
+	}
 }

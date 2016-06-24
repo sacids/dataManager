@@ -249,7 +249,7 @@ class Xform extends CI_Controller
 	{
 
 		// call forms
-		$filename = 'Dalili_za_Binadamu_2016-02-03_16-43-55.xml';
+		$filename = 'Dalili_za_binadamu_fomu_Skolls_2016-06-24_14-07-29.xml';
 		$this->set_data_file($this->config->item("form_data_upload_dir") . $filename);
 		$this->load_xml_data();
 
@@ -273,7 +273,6 @@ class Xform extends CI_Controller
 	 */
 	private function load_xml_data()
 	{
-
 		// get submitted file
 		$file_name = $this->get_data_file();
 
@@ -287,9 +286,18 @@ class Xform extends CI_Controller
 		$this->form_data = array(); // TODO move to constructor
 		$prefix = $this->config->item("xform_tables_prefix");
 		log_message("debug", "Table prefix " . $prefix);
+
+
+
+		// set table name
 		$this->table_name = $prefix . str_replace("-", "_", $rxml->attributes ['id']);
 
-		// loop through object
+		// set form definition structure
+		$file_name 	= $this->Xform_model->get_form_definition_filename($this->table_name);
+		$this->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
+		$this->load_xml_definition();
+
+		// set form data
 		foreach ($rxml->children as $val) {
 			$this->get_path('', $val);
 		}
@@ -463,28 +471,28 @@ class Xform extends CI_Controller
 		$form_data = $this->form_data;
 
 		//echo '<pre>';
-		//print_r($form_data);
-		$structure = $this->get_fieldname_map();
+		//print_r($this->form_data);
+		//print_r($this->form_defn);
+
+
 		$col_names = array();
 		$col_values = array();
 		$points_v = array();
 		$points_n = array();
 
-		foreach ($form_data as $key => $val) {
+		foreach ($this->form_defn as $str){
 
-			$type = $structure[$key]['type'];
-			$cn = $structure[$key]['col_name'];
+			$type	= $str['type'];
+			$cn 	= $str['field_name'];
+			$cv		= $this->form_data[$cn];
 
 			array_push($col_names, $cn);
-			array_push($col_values, $val);
-
+			array_push($col_values, $cv);
 
 			if ($type == 'select') {
-				$options = explode(' ', $val);
-
+				$options = explode(' ', $cv);
 				foreach ($options as $opt) {
 					$opt = trim($opt);
-
 					array_push($col_values, 1);
 					array_push($col_names, $opt);
 				}
@@ -492,7 +500,7 @@ class Xform extends CI_Controller
 
 			if ($type == 'geopoint') {
 
-				$geopoints = explode(" ", $val);
+				$geopoints = explode(" ", $cv);
 
 				$lat = $geopoints [0];
 				array_push($col_values, $lat);
@@ -514,10 +522,7 @@ class Xform extends CI_Controller
 				array_push($points_v, $point);
 				array_push($points_n, $cn . '_point');
 			}
-
-
 		}
-
 
 		$field_names = "(`" . implode("`,`", $col_names) . "`,`" . implode("`,`", $points_n) . "`)";
 		$field_values = "('" . implode("','", $col_values) . "'," . implode("`,`", $points_v) . ")";
@@ -757,9 +762,6 @@ class Xform extends CI_Controller
 	 */
 	public function _initialize($file_name)
 	{
-		//$file_name = 'Dalili_za_Binadamu.xml';
-		//$file_name = "Dalili_Binadamu_Skolls.xml";
-		//$file_name = 'Binadamu.xml';
 		log_message("debug", "File to load " . $file_name);
 
 		// create table structure
@@ -769,6 +771,12 @@ class Xform extends CI_Controller
 
 		// TODO: change function name to get_something suggested get_form_table_definition
 		return $this->get_create_table_sql_query();
+	}
+
+	public function test_init(){
+
+		$fn	= 'Dalili_Binadamu_Skolls-with-codes.xml';
+		echo $this->_initialize($fn);
 	}
 
 	/**
@@ -951,6 +959,14 @@ class Xform extends CI_Controller
 
 			if ($type == 'date') {
 				$statement .= ", $col_name DATE $required ";
+			}
+
+			if ($type == 'dateTime'){
+				$statement .= ", $col_name datetime $required";
+			}
+
+			if ($type == 'time'){
+				$statement .= ", $col_name TIME $required";
 			}
 
 			if ($type == 'int') {
