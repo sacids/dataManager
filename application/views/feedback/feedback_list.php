@@ -49,7 +49,7 @@
                         <tr>
                             <th><?php echo $this->lang->line("label_form_name"); ?></th>
                             <th><?php echo $this->lang->line("label_instance_id"); ?></th>
-                            <th>User</th>
+                            <th><?php echo $this->lang->line("label_user"); ?></th>
                             <th><?php echo $this->lang->line("label_feedback_date"); ?></th>
                             <th><?php echo $this->lang->line("label_action"); ?></th>
                         </tr>

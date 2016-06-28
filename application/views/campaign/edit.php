@@ -44,7 +44,7 @@
                     <select name="form_id" id="form_id" class="form-control">
                         <option value="<?php echo $campaign->form_id;?>"><?php echo $campaign->x_title;?></option>
                         <?php foreach ($forms as $form) { ?>
-                            <option value="<?php echo $form->form_id ?>"><?php echo $form->title; ?></option>
+                            <option value="<?php echo $form->jr_form_id ?>"><?php echo $form->title; ?></option>
                         <?php } ?>
                     </select>
                 </div>

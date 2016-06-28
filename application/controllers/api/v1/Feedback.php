@@ -39,6 +39,7 @@ class Feedback extends CI_Controller
 
             foreach($feedback_list as $value){
                 $username = $this->User_model->find_by_id($value->user_id)->username;
+                $reply_user = $this->User_model->find_by_id($value->reply_by)->username;
                 $form_name = $this->Xform_model->find_by_xform_id($value->form_id)->title;
 
                 $feedback[] = array(
@@ -50,7 +51,8 @@ class Feedback extends CI_Controller
                     'sender' => $value->sender,
                     'user' => $username,
                     'date_created' => date("m-Y, H:i", strtotime($value->date_created)),
-                    'status' => $value->status
+                    'status' => $value->status,
+                    'reply_by' => $reply_user
                 );
             }
 
@@ -88,6 +90,7 @@ class Feedback extends CI_Controller
 
             foreach($feedback_list as $value){
                 $username = $this->User_model->find_by_id($value->user_id)->username;
+                $reply_user = $this->User_model->find_by_id($value->reply_by)->first_name;
                 $form_name = $this->Xform_model->find_by_xform_id($value->form_id)->title;
 
                 $feedback[] = array(
@@ -99,7 +102,8 @@ class Feedback extends CI_Controller
                     'sender' => $value->sender,
                     'user' => $username,
                     'date_created' => date("m-Y, H:i", strtotime($value->date_created)),
-                    'status' => $value->status
+                    'status' => $value->status,
+                    'reply_by' => $reply_user
                 );
             }
 
@@ -131,9 +135,13 @@ class Feedback extends CI_Controller
         log_message("debug", "User posting feedback is " . $username);
 
         if ($user) {
+            $instance_id = $this->input->post("instance_id");
+            //update all feedback from this user
+            $this->Feedback_model->update_user_feedback($instance_id, 'server');
+
             $feedback = array(
                 "user_id" => $user->id,
-                "instance_id" => $this->input->post("instance_id"),
+                "instance_id" => $instance_id,
                 "form_id" => $this->input->post('form_id'),
                 "message" => $this->input->post("message"),
                 'sender' => $this->input->post("sender"),

@@ -44,8 +44,7 @@ $lang['nav_item_form_list']             = "Form List";
 $lang['nav_item_form_add_new']          = "Add new form";
 
 $lang['label_instance_id']              = "Instance Id";
-$lang['label_from']                     = "From";
-$lang['label_to']                       = "To";
+$lang['label_user']                     = "Chat user";
 $lang['label_feedback_date']            = "Feedback Date";
 
 
