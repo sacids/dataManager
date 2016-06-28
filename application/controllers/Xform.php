@@ -25,6 +25,7 @@ class Xform extends CI_Controller
 	private $xml_defn_filename;
 	private $xml_data_filename;
 	private $table_name;
+	private $jr_form_id;
 	private $xarray;
 
 	private $user_id;
@@ -723,6 +724,7 @@ class Xform extends CI_Controller
 							$form_details = array(
 								"user_id"      => $this->session->userdata("user_id"),
 								"form_id"      => $this->table_name,
+								"jr_form_id"   => $this->form_id,
 								"title"        => $this->input->post("title"),
 								"description"  => $this->input->post("description"),
 								"filename"     => $filename,
@@ -802,13 +804,15 @@ class Xform extends CI_Controller
 
 		$prefix = $this->config->item("xform_tables_prefix");
 		log_message("debug", "Table prefix during creation " . $prefix);
-		$table_name = $prefix . str_replace("-", "_", $instance->attributes ['id']);
+		$jr_form_id	= $instance->attributes ['id'];
+		$table_name = $prefix . str_replace("-", "_", $jr_form_id);
 
 		// get array rep of xform
 		$this->form_defn = $this->get_form_definition();
 
 		log_message("debug", "Table name " . $table_name);
 		$this->table_name = $table_name;
+		$this->jr_form_id = $jr_form_id;
 	}
 
 	/**
