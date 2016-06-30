@@ -91,7 +91,7 @@ class Feedback extends CI_Controller
             $feedback_details = array(
                 'form_id' => $feedback->form_id,
                 'message' => $message,
-                'date_created' => date("c"),
+                'date_created' => date('Y-m-d H:i:s'),
                 'instance_id' => $instance_id,
                 'user_id' => $feedback->user_id,
                 'sender' => 'server',

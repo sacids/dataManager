@@ -236,9 +236,10 @@ class Xform extends CI_Controller
 				"user_id"      => $this->user_submitting_feedback_id,
 				"form_id"      => $this->table_name,
 				"message"      => "Tumepokea fomu yako",
-				"date_created" => date("c"),
+				"date_created" => date('Y-m-d H:i:s'),
 				"instance_id"  => $this->form_data['meta_instanceID'],
-				"sender"       => "server"
+				"sender"       => "server",
+				"status"       => "pending"
 			);
 			$this->Feedback_model->create_feedback($feedback);
 		}

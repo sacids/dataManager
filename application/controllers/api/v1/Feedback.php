@@ -13,6 +13,7 @@ class Feedback extends CI_Controller
         parent::__construct();
         $this->load->model(array('Feedback_model', 'User_model', 'Xform_model'));
         log_message('debug', 'Feedback Api controller initialized');
+        //$this->output->enable_profiler(TRUE);
     }
 
     /**
@@ -21,15 +22,11 @@ class Feedback extends CI_Controller
     function get_feedback()
     {
         $username = $this->input->get("username");
-
-        //check if no username
-        if (!$username) {
-            $response = array("status" => "failed", "message" => "Required username");
-            echo json_encode($response);
-            exit;
-        }
+        $last_id = $this->input->post("last_id");
+        $date_created = $this->input->post("date_created");
 
         //TODO: call function for permission, return chat user (form_id) needed to see
+
 
         $user = $this->User_model->find_by_username($username);
         log_message("debug", "username getting forms feedback is " . $username);
@@ -37,7 +34,7 @@ class Feedback extends CI_Controller
         if ($user) {
             $feedback_list = $this->Feedback_model->get_feedback_list($user->id);
 
-            foreach($feedback_list as $value){
+            foreach ($feedback_list as $value) {
                 $username = $this->User_model->find_by_id($value->user_id)->username;
                 $reply_user = $this->User_model->find_by_id($value->reply_by)->username;
                 $form_name = $this->Xform_model->find_by_xform_id($value->form_id)->title;
@@ -47,10 +44,10 @@ class Feedback extends CI_Controller
                     'form_id' => $value->form_id,
                     'instance_id' => $value->instance_id,
                     'title' => $form_name,
-                    'message' =>$value->message,
+                    'message' => $value->message,
                     'sender' => $value->sender,
                     'user' => $username,
-                    'date_created' => date("m-Y, H:i", strtotime($value->date_created)),
+                    'date_created' => $value->date_created,
                     'status' => $value->status,
                     'reply_by' => $reply_user
                 );
@@ -60,6 +57,32 @@ class Feedback extends CI_Controller
 
         } else {
             $response = array("status" => "failed", "message" => "User does not exist");
+        }
+        echo json_encode($response);
+    }
+
+
+    /**
+     * Form Feedback Api
+     */
+    function get_form_details()
+    {
+        $table_name = "ad_build_dalili_mifugo_skolls_1467009856";
+        $instance_id = "uuid:b6d28c82-b9d9-4d16-a8c1-3ac142ac1c92";
+
+        $form_details = $this->Feedback_model->get_feedback_form_details($table_name, $instance_id);
+
+        echo "<pre>";
+        print_r($form_details);
+        //exit;
+
+        if ($form_details) {
+
+            $response = array("form_details" => $form_details, "status" => "success");
+
+        } else {
+            $response = array("status" => "failed", "message" => "Nothing found");
+
         }
         echo json_encode($response);
     }
@@ -88,7 +111,7 @@ class Feedback extends CI_Controller
         if ($user) {
             $feedback_list = $this->Feedback_model->get_feedback_notification($user->id);
 
-            foreach($feedback_list as $value){
+            foreach ($feedback_list as $value) {
                 $username = $this->User_model->find_by_id($value->user_id)->username;
                 $reply_user = $this->User_model->find_by_id($value->reply_by)->first_name;
                 $form_name = $this->Xform_model->find_by_xform_id($value->form_id)->title;
@@ -98,7 +121,7 @@ class Feedback extends CI_Controller
                     'form_id' => $value->form_id,
                     'instance_id' => $value->instance_id,
                     'title' => $form_name,
-                    'message' =>$value->message,
+                    'message' => $value->message,
                     'sender' => $value->sender,
                     'user' => $username,
                     'date_created' => date("m-Y, H:i", strtotime($value->date_created)),
@@ -145,7 +168,7 @@ class Feedback extends CI_Controller
                 "form_id" => $this->input->post('form_id'),
                 "message" => $this->input->post("message"),
                 'sender' => $this->input->post("sender"),
-                "date_created" => date("c"),
+                "date_created" => date('Y-m-d H:i:s'),
                 "status" => $this->input->post("status")
             );
 

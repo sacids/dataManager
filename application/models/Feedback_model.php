@@ -133,4 +133,10 @@ class Feedback_model extends CI_Model
         $this->db->where('status', 'pending');
         return $this->db->get(self::$table_name)->result();
     }
+
+
+    function get_feedback_form_details($table_name, $instance_id){
+        return $this->db->limit(1)
+            ->get_where($table_name, array('meta_instanceID' => $instance_id))->row();
+    }
 }
