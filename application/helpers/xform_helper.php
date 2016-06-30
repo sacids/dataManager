@@ -41,6 +41,29 @@ if (!function_exists('shorten_column_name')) {
 	}
 
 
+	function ascii_val($string){
+
+		$string	= strtolower($string);
+		$leters	= $letters = preg_replace('~[^a-z]~i', '', $string); // remove non alpha
+		$sum = 0;
+		for ($i = 0; $i < strlen($letters); $i++){
+			$sum += ord($letters[$i]) - 96; // 96 == ord('a') - 1
+		}
+
+		return $sum;
+	}
+
+	function condense_col_name($string){
+
+		$tmp	= explode('_',$string);
+		$pre	= '';
+		foreach($tmp as $parts){
+			$pre	.= substr($parts,0,1);
+		}
+
+		return $pre;
+	}
+	
 	/* NOT NEEDED NOW AS SYMPTOMS NAMES ARE CODED
 
 

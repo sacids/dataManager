@@ -404,4 +404,10 @@ class Xform_model extends CI_Model
 		$this->db->select('filename')->where('form_id',$form_id)->from('xforms');
 		return $this->db->get()->row(1)->filename;
 	}
+
+	public function add_to_field_name_map($data){
+		$q 	= $this->db->insert_string('xform_fieldname_map',$data);
+		$q 	= str_replace('INSERT INTO','INSERT IGNORE INTO',$q);
+		return $this->db->query($q);
+	}
 }
