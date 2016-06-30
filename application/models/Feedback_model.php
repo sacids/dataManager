@@ -96,6 +96,21 @@ class Feedback_model extends CI_Model
 
     }
 
+    //function to update user feedback
+    function update_user_feedback($instance_id, $sender)
+    {
+        $query = $this->db->get_where('feedback',
+            array('instance_id' => $instance_id, 'sender' => $sender, 'status' => 'pending'))->result();
+
+        foreach ($query as $value) {
+            if (!empty($value->id)) {
+                $this->db->update('feedback', array('status' => 'delivered'), array('id' => $value->id));
+            } else {
+                //Do nothing
+            }
+        }
+    }
+
 
     /**
      * @param null
@@ -114,8 +129,8 @@ class Feedback_model extends CI_Model
     function get_feedback_notification($user_id)
     {
         $this->db->where('user_id', $user_id);
+        $this->db->where('sender', 'server');
         $this->db->where('status', 'pending');
-        $this->db->or_where('status','');
         return $this->db->get(self::$table_name)->result();
     }
 }
