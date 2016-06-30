@@ -250,7 +250,7 @@ class Xform extends CI_Controller
 	{
 
 		// call forms
-		$filename = 'Dalili_za_binadamu_fomu_Skolls_2016-06-24_14-07-29.xml';
+		$filename = 'Skolls_2016-06-28_18-46-23.xml';
 		$this->set_data_file($this->config->item("form_data_upload_dir") . $filename);
 		$this->load_xml_data();
 
@@ -397,7 +397,7 @@ class Xform extends CI_Controller
 	 *
 	 * @return boolean|string
 	 */
-	private function get_insert_form_data_query1()
+	private function get_insert_form_data_query1bbbbb()
 	{
 
 		$table_name = $this->table_name;
@@ -469,23 +469,32 @@ class Xform extends CI_Controller
 	{
 
 		$table_name = $this->table_name;
-		$form_data = $this->form_data;
+		$form_data  = $this->form_data;
+        $map        = $this->get_field_map();
 
 		//echo '<pre>';
 		//print_r($this->form_data);
 		//print_r($this->form_defn);
 
-
+        $has_geopoint = false;
 		$col_names = array();
 		$col_values = array();
 		$points_v = array();
 		$points_n = array();
 
+       // echo '<pre>'; print_r($this->form_defn);
 		foreach ($this->form_defn as $str){
 
 			$type	= $str['type'];
 			$cn 	= $str['field_name'];
 			$cv		= $this->form_data[$cn];
+
+            if($cv == '' || $cn == '') continue;
+
+            // check if colume name was mapped to fieldmap table
+            if(array_key_exists($cn,$map)){
+                $cn = $map[$cn];
+            }
 
 			array_push($col_names, $cn);
 			array_push($col_values, $cv);
@@ -494,6 +503,11 @@ class Xform extends CI_Controller
 				$options = explode(' ', $cv);
 				foreach ($options as $opt) {
 					$opt = trim($opt);
+
+                    if(array_key_exists($opt,$map)){
+                        $opt = $map[$opt];
+                    }
+
 					array_push($col_values, 1);
 					array_push($col_names, $opt);
 				}
@@ -501,6 +515,7 @@ class Xform extends CI_Controller
 
 			if ($type == 'geopoint') {
 
+                $has_geopoint   = true;
 				$geopoints = explode(" ", $cv);
 
 				$lat = $geopoints [0];
@@ -525,8 +540,13 @@ class Xform extends CI_Controller
 			}
 		}
 
-		$field_names = "(`" . implode("`,`", $col_names) . "`,`" . implode("`,`", $points_n) . "`)";
-		$field_values = "('" . implode("','", $col_values) . "'," . implode("`,`", $points_v) . ")";
+        if($has_geopoint){
+            $field_names = "(`" . implode("`,`", $col_names) . "`,`" . implode("`,`", $points_n) . "`)";
+            $field_values = "('" . implode("','", $col_values) . "'," . implode("`,`", $points_v) . ")";
+        }else{
+            $field_names = "(`" . implode("`,`", $col_names) . "`)";
+            $field_values = "('" . implode("','", $col_values) . "')";
+        }
 
 		$query = "INSERT INTO {$table_name} {$field_names} VALUES {$field_values}";
 
@@ -711,6 +731,7 @@ class Xform extends CI_Controller
 
 					$create_table_statement = $this->_initialize($filename);
 
+
 					if ($this->Xform_model->find_by_xform_id($this->table_name)) {
 						@unlink($form_definition_upload_dir . $filename);
 						$this->session->set_flashdata("message", display_message("Form ID is already used, try a different one", "danger"));
@@ -724,7 +745,7 @@ class Xform extends CI_Controller
 							$form_details = array(
 								"user_id"      => $this->session->userdata("user_id"),
 								"form_id"      => $this->table_name,
-								"jr_form_id"   => $this->form_id,
+								"jr_form_id"   => $this->jr_form_id,
 								"title"        => $this->input->post("title"),
 								"description"  => $this->input->post("description"),
 								"filename"     => $filename,
@@ -777,7 +798,7 @@ class Xform extends CI_Controller
 
 	public function test_init(){
 
-		$fn	= 'Dalili_Binadamu_Skolls-with-codes.xml';
+		$fn	= 'Weekly_report_Skolls.xml';
 		echo $this->_initialize($fn);
 	}
 
@@ -921,7 +942,7 @@ class Xform extends CI_Controller
 
 
 			$field_name = $val['field_name'];
-			$col_name	= $field_name;
+			$col_name	= $this->_map_field($field_name);
 
 			if (array_key_exists('label', $val)) {
 				$field_label = $val['label'];
@@ -953,6 +974,10 @@ class Xform extends CI_Controller
 
 				foreach ($val['option'] as $key => $select_opts) {
 
+					$key	= $this->_map_field($key);
+					if(!$key){
+						// failed need to exit
+					}
 					$statement .= ", " . $key . " ENUM('1','0') ";
 				}
 			}
@@ -994,6 +1019,30 @@ class Xform extends CI_Controller
 		return $statement;
 	}
 
+	private function _map_field($field_name){
+		
+		// check length
+		//if(strlen($field_name) < 30){
+		//	return $field_name;
+		//}
+		
+		$tmp	= sanitize_col_name($field_name);
+		$asc	= ascii_val($tmp);
+		$fn 	= '_xf_'.condense_col_name($field_name).'_'.$asc;
+
+		$data	= array();
+		$data['table_name']	= $this->table_name;
+		$data['col_name']	= $fn;
+		$data['field_name']	= $field_name;
+
+		if($this->Xform_model->add_to_field_name_map($data)){
+			return $fn;
+		}
+
+		log_message('error','failed to map field');
+		return false;
+	}
+
 	private function _add_to_fieldname_map($arr)
 	{
 
@@ -1016,15 +1065,13 @@ class Xform extends CI_Controller
 	private function get_field_map()
 	{
 
-		$arr = $this->Xform_model->get_field_map($this->table_name);
+		$arr = $this->Xform_model->get_fieldname_map($this->table_name);
 		$map = array();
 		foreach ($arr as $val) {
 			$key = $val['field_name'];
-			$label = $val['field_label'];
-
+			$label = $val['col_name'];
 			$map[$key] = $label;
 		}
-
 		return $map;
 	}
 
