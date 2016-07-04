@@ -164,8 +164,11 @@ class Feedback extends CI_Controller
      */
     function get_form_details()
     {
-        $table_name     = "ad_build_Dalili_Binadamu_Skolls_7";
-        $instance_id    = "uuid:bdde9461-fccb-49ae-a099-284389a9bf7d";
+        $table_name     = $this->input->post('table_name'); //"ad_build_Dalili_Binadamu_Skolls_7";
+        $instance_id    = $this->input->post('instance_id');
+        $lang           = $this->input->post('language'); //"uuid:bdde9461-fccb-49ae-a099-284389a9bf7d";
+
+
 
         $this->table_name   = $table_name;
         $this->instance_id  = $instance_id;
