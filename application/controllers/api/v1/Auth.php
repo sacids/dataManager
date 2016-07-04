@@ -37,7 +37,7 @@ class Auth extends CI_Controller
         // invalid login create array
         if (!$login_status) {
             $response["error"] = TRUE;
-            $response["error_msg"] = "Incorrect Login";
+            $response["error_msg"] = "Incorrect username or password";
 
         } else if ($login_status) {
             $user = $this->User_model->find_by_username($username);
@@ -81,14 +81,16 @@ class Auth extends CI_Controller
             //digest password
             $digest_password = md5("{$username}:{$this->realm}:{$password}");
 
+            $arrayName = explode(" ", $full_name);
 
             //Register user
             $additional_data = array(
-                'first_name' => $full_name,
+                'first_name' => $arrayName[0],
+                'last_name' => $arrayName[1],
                 'phone' => $username,
                 'digest_password' => $digest_password
             );
-            $email = "afyadata@sacids.org";
+            $email = "";
 
             $this->ion_auth->register($username, $password, $email, $additional_data);
             $response["error"] = FALSE;

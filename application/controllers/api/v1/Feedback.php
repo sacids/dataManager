@@ -22,8 +22,14 @@ class Feedback extends CI_Controller
     function get_feedback()
     {
         $username = $this->input->get("username");
-        $last_id = $this->input->post("last_id");
         $date_created = $this->input->post("date_created");
+
+        //check if no username
+        if (!$username) {
+            $response = array("status" => "failed", "message" => "Required username");
+            echo json_encode($response);
+            exit;
+        }
 
         //TODO: call function for permission, return chat user (form_id) needed to see
 
@@ -32,7 +38,7 @@ class Feedback extends CI_Controller
         log_message("debug", "username getting forms feedback is " . $username);
 
         if ($user) {
-            $feedback_list = $this->Feedback_model->get_feedback_list($user->id);
+            $feedback_list = $this->Feedback_model->get_feedback_list($user->id, $date_created);
 
             foreach ($feedback_list as $value) {
                 $username = $this->User_model->find_by_id($value->user_id)->username;
@@ -72,10 +78,6 @@ class Feedback extends CI_Controller
 
         $form_details = $this->Feedback_model->get_feedback_form_details($table_name, $instance_id);
 
-        echo "<pre>";
-        print_r($form_details);
-        //exit;
-
         if ($form_details) {
 
             $response = array("form_details" => $form_details, "status" => "success");
@@ -94,7 +96,7 @@ class Feedback extends CI_Controller
     function get_notification_feedback()
     {
         $username = $this->input->get("username");
-        $last_id = $this->input->post("last_id");
+        $date_created = $this->input->post("date_created");
 
         //check if no username
         if (!$username) {
@@ -103,13 +105,11 @@ class Feedback extends CI_Controller
             exit;
         }
 
-        //TODO: call function for permission, return chat user (form_id) needed to see
-
         $user = $this->User_model->find_by_username($username);
         log_message("debug", "username getting forms feedback is " . $username);
 
         if ($user) {
-            $feedback_list = $this->Feedback_model->get_feedback_notification($user->id);
+            $feedback_list = $this->Feedback_model->get_feedback_notification($user->id, $date_created);
 
             foreach ($feedback_list as $value) {
                 $username = $this->User_model->find_by_id($value->user_id)->username;

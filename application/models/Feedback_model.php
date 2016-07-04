@@ -113,29 +113,35 @@ class Feedback_model extends CI_Model
 
 
     /**
-     * @param null
+     * @param $user_id
+     * @param $date_created
      * @return mixed
      */
-    function get_feedback_list($user_id)
+    function get_feedback_list($user_id, $date_created = NULL)
     {
+        if ($date_created != null)
+            $this->db->where('date_created >', $date_created);
+
         return $this->db->get_where(self::$table_name, array('user_id' => $user_id))->result();
     }
 
     /**
      * @param $user_id
-     * @param $last_id
+     * @param $date_created
      * @return mixed
      */
-    function get_feedback_notification($user_id)
+    function get_feedback_notification($user_id, $date_created = NULL)
     {
-        $this->db->where('user_id', $user_id);
-        $this->db->where('sender', 'server');
-        $this->db->where('status', 'pending');
-        return $this->db->get(self::$table_name)->result();
+        if ($date_created != null)
+            $this->db->where('date_created >', $date_created);
+
+        return $this->db
+            ->get_where(self::$table_name, array('user_id' => $user_id, 'sender' => 'server', 'status' => 'pending'))->result();
     }
 
 
-    function get_feedback_form_details($table_name, $instance_id){
+    function get_feedback_form_details($table_name, $instance_id)
+    {
         return $this->db->limit(1)
             ->get_where($table_name, array('meta_instanceID' => $instance_id))->row();
     }
