@@ -44,10 +44,10 @@ if (!function_exists('shorten_column_name')) {
 	function ascii_val($string){
 
 		$string	= strtolower($string);
-		$leters	= $letters = preg_replace('~[^a-z]~i', '', $string); // remove non alpha
+		$letters = $string;// preg_replace('~[^a-z][0-9]~i', '', $string); // remove non alpha
 		$sum = 0;
 		for ($i = 0; $i < strlen($letters); $i++){
-			$sum += ord($letters[$i]) - 96; // 96 == ord('a') - 1
+			$sum += ord($letters[$i]); // 96 == ord('a') - 1
 		}
 
 		return $sum;

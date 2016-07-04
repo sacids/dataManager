@@ -1,6 +1,14 @@
 <?php
 
 defined('BASEPATH') or exit ('No direct script access allowed');
+class XmlElement
+{
+	var $name;
+	var $attributes;
+	var $content;
+	var $children;
+}
+
 
 /**
  * XForm Class
@@ -10,13 +18,6 @@ defined('BASEPATH') or exit ('No direct script access allowed');
  * @author   Eric Beda
  * @link     http://sacids.org
  */
-class XmlElement
-{
-	var $name;
-	var $attributes;
-	var $content;
-	var $children;
-}
 
 class Xform extends CI_Controller
 {
@@ -251,7 +252,7 @@ class Xform extends CI_Controller
 	{
 
 		// call forms
-		$filename = 'Skolls_2016-06-28_18-46-23.xml';
+		$filename = 'Dalili za binadamu_2016-07-02_10-01-21.xml';
 		$this->set_data_file($this->config->item("form_data_upload_dir") . $filename);
 		$this->load_xml_data();
 
@@ -391,62 +392,7 @@ class Xform extends CI_Controller
 		}
 	}
 
-	/**
-	 * Create query string for inserting data into table from submitted xform data
-	 * file
-	 * Author : Eric Beda
-	 *
-	 * @return boolean|string
-	 */
-	private function get_insert_form_data_query1bbbbb()
-	{
-
-		$table_name = $this->table_name;
-		$form_data = $this->form_data;
-
-		// check to see if there was a point (spatial) field in table definition
-		// TODO get_point field assumes there is only one spatial field created
-		if ($field_name = $this->Xform_model->get_point_field($table_name)) {
-
-			log_message("debug", "Form data " . json_encode($form_data));
-			// spatial field detected
-			// extract spatial field components
-
-			// Removed _point because it was appended during table creation, it's part of the form definition
-			$field_name = str_replace("_point", "", $field_name);
-
-			$geopoints = explode(" ", $form_data [$field_name]);
-			$lat = $geopoints [0];
-			$lon = $geopoints [1];
-			$acc = $geopoints [3];
-			$alt = $geopoints [2];
-			$point = "GeomFromText('POINT($lat $lon)')";
-
-			// build up query field names for spatial data
-			$fn = '`' . $field_name . '_lat`,`';
-			$fn .= $field_name . '_lng`,`';
-			$fn .= $field_name . '_acc`,`';
-			$fn .= $field_name . '_alt`,`';
-			$fn .= $field_name . '_point`';
-
-			// build up query data values for spatial data
-			$fd = "'" . $lat . "',";
-			$fd .= "'" . $lon . "',";
-			$fd .= "'" . $acc . "',";
-			$fd .= "'" . $alt . "',";
-			$fd .= $point;
-		} else {
-			log_message("debug", 'error getting point field');
-			return FALSE;
-		}
-
-
-		$field_names = "(`" . implode("`,`", array_keys($this->form_data)) . "`,$fn)";
-		$field_values = "('" . implode("','", array_values($this->form_data)) . "',$fd)";
-
-		$query = "INSERT INTO {$table_name} {$field_names} VALUES {$field_values}";
-		return $query;
-	}
+	
 
 	private function get_fieldname_map()
 	{
@@ -483,11 +429,12 @@ class Xform extends CI_Controller
 		$points_v = array();
 		$points_n = array();
 
-       // echo '<pre>'; print_r($this->form_defn);
+        //echo '<pre>'; print_r($this->form_defn);
 		foreach ($this->form_defn as $str){
 
 			$type	= $str['type'];
 			$cn 	= $str['field_name'];
+
 			$cv		= $this->form_data[$cn];
 
             if($cv == '' || $cn == '') continue;
@@ -799,7 +746,7 @@ class Xform extends CI_Controller
 
 	public function test_init(){
 
-		$fn	= 'Weekly_report_Skolls.xml';
+		$fn	= 'Dalili_Binadamu_Skolls.xml';
 		echo $this->_initialize($fn);
 	}
 
@@ -1023,9 +970,9 @@ class Xform extends CI_Controller
 	private function _map_field($field_name){
 		
 		// check length
-		//if(strlen($field_name) < 30){
-		//	return $field_name;
-		//}
+		if(strlen($field_name) < 10){
+			return $field_name;
+		}
 		
 		$tmp	= sanitize_col_name($field_name);
 		$asc	= ascii_val($tmp);

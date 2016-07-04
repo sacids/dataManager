@@ -139,4 +139,12 @@ class Feedback_model extends CI_Model
         return $this->db->limit(1)
             ->get_where($table_name, array('meta_instanceID' => $instance_id))->row();
     }
+
+
+
+    function get_form_details($table_name){
+        return $this->db->get_where('xforms',array('form_id' => $table_name))->row();
+    }
+
+
 }
