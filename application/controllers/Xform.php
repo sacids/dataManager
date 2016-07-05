@@ -926,7 +926,7 @@ class Xform extends CI_Controller
 					if(!$key){
 						// failed need to exit
 					}
-					$statement .= ", " . $key . " ENUM('1','0') DEFAULT '0' ";
+					$statement .= ", " . $key . " ENUM('1','0') DEFAULT '0' NOT NULL ";
 				}
 			}
 
