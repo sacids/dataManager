@@ -266,6 +266,7 @@ class Feedback extends CI_Controller
 
             if(substr($label,0,5) == 'meta_') continue;
 
+            $tmp['id']      = $c++;
             $tmp['label']   = $label;
             $tmp['type']    = $type;
             $tmp['value']   = $l;
