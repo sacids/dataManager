@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 
@@ -143,7 +142,11 @@ class Feedback_model extends CI_Model
 
     function get_feedback_form_details($table_name, $instance_id)
     {
-        return $this->db->limit(1)
-            ->get_where($table_name, array('meta_instanceID' => $instance_id))->row();
+        return $this->db->limit(1)->get_where($table_name, array('meta_instanceID' => $instance_id))->row();
+    }
+
+    function get_form_details($table_name)
+    {
+        return $this->db->get_where('xforms', array('form_id' => $table_name))->row();
     }
 }

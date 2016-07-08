@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 /**
@@ -13,6 +12,7 @@ class Feedback extends CI_Controller
     {
         parent::__construct();
         $this->load->model(array('Feedback_model', 'User_model', 'Xform_model'));
+        $this->load->library('Xform_comm');
         log_message('debug', 'Feedback Api controller initialized');
         //$this->output->enable_profiler(TRUE);
     }
@@ -23,7 +23,8 @@ class Feedback extends CI_Controller
     function get_feedback()
     {
         $username = $this->input->get("username");
-        $date_created = $this->input->post("date_created");
+        $date_created = $this->input->get("date_created");
+        $lang = $this->input->get('language');
 
         //check if no username
         if (!$username) {
@@ -70,34 +71,13 @@ class Feedback extends CI_Controller
 
 
     /**
-     * Form Feedback Api
-     */
-    function get_form_details()
-    {
-        $table_name = "ad_build_dalili_mifugo_skolls_1467009856";
-        $instance_id = "uuid:b6d28c82-b9d9-4d16-a8c1-3ac142ac1c92";
-
-        $form_details = $this->Feedback_model->get_feedback_form_details($table_name, $instance_id);
-
-        if ($form_details) {
-
-            $response = array("form_details" => $form_details, "status" => "success");
-
-        } else {
-            $response = array("status" => "failed", "message" => "Nothing found");
-
-        }
-        echo json_encode($response);
-    }
-
-
-    /**
      * get Feedback Api
      */
     function get_notification_feedback()
     {
         $username = $this->input->get("username");
-        $date_created = $this->input->post("date_created");
+        $date_created = $this->input->get("date_created");
+        $lang = $this->input->get('language');
 
         //check if no username
         if (!$username) {
@@ -146,6 +126,7 @@ class Feedback extends CI_Controller
     function post_feedback()
     {
         $username = $this->input->post("username");
+        $lang = $this->input->post('language');
 
         //check if no username
         if (!$username) {
@@ -185,6 +166,112 @@ class Feedback extends CI_Controller
 
         }
         echo json_encode($response);
+    }
+
+    /**
+     * Form Feedback Api
+     */
+    function get_form_details()
+    {
+        $table_name = $this->input->get('table_name');
+        $instance_id = $this->input->get('instance_id');
+        $lang = $this->input->get('language');
+
+        if ($table_name == null || $instance_id == NULL) {
+            $response = array("status" => "failed", "message" => "Invalid table name or instance Id");
+
+        } else {
+            $this->table_name = $table_name;
+            $this->instance_id = $instance_id;
+
+            // get definition file name
+            $form_details = $this->Feedback_model->get_form_details($table_name);
+            $file_name = $form_details->filename;
+            $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
+            $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+            $form_definition = $this->xform_comm->get_defn();
+            $form_data = $this->get_form_data($form_definition, $this->get_fieldname_map($table_name));
+            if ($form_data) {
+                $response = array("form_details" => $form_data, "status" => "success");
+            } else {
+                $response = array("status" => "failed", "message" => "Nothing found");
+            }
+        }
+
+        echo json_encode($response);
+    }
+
+    function get_form_data($structure, $map)
+    {
+        $data = $this->Feedback_model->get_feedback_form_details($this->table_name, $this->instance_id);
+        if (!$data) return false;
+        $holder = array();
+        // print_r($map);
+        //print_r($structure);
+        $ext_dirs = array(
+            'jpg' => "images",
+            'jpeg' => "images",
+            'png' => "images",
+            '3gpp' => 'audio',
+            'amr' => 'audio',
+            '3gp' => 'video',
+            'mp4' => 'video');
+
+        $c = 1;
+        $id = $data->id;
+
+        foreach ($structure as $val) {
+            $tmp = array();
+            $field_name = $val['field_name'];
+            $type = $val['type'];
+            if (!array_key_exists('label', $val)) {
+                $label = $field_name;
+            } else {
+                $label = $val['label'];
+            }
+            if (array_key_exists($field_name, $map)) {
+                $field_name = $map[$field_name]['col_name'];
+            }
+            $l = $data->$field_name;
+            if ($type == 'select1') {
+                $l = $val['option'][$l];
+            }
+            if ($type == 'binary') {
+                // check file extension
+                $value = explode('.', $l);
+                $file_extension = end($value);
+                if (array_key_exists($file_extension, $ext_dirs)) {
+                    $l = site_url('assets/forms/data') . '/' . $ext_dirs[$file_extension] . '/' . $l;
+                }
+            }
+            if ($type == 'select') {
+                $tmp1 = explode(" ", $l);
+                $arr = array();
+                foreach ($tmp1 as $item) {
+                    $item = trim($item);
+                    array_push($arr, $val['option'][$item]);
+                }
+                $l = implode(",", $arr);
+            }
+            if (substr($label, 0, 5) == 'meta_') continue;
+            $tmp['id'] = $id . $c++;
+            $tmp['label'] = $label;
+            $tmp['type'] = $type;
+            $tmp['value'] = $l;
+            array_push($holder, $tmp);
+        }
+        return $holder;
+    }
+
+    private function get_fieldname_map($table_name)
+    {
+        $tmp = $this->Xform_model->get_fieldname_map($table_name);
+        $map = array();
+        foreach ($tmp as $part) {
+            $key = $part['field_name'];
+            $map[$key] = $part;
+        }
+        return $map;
     }
 
 }

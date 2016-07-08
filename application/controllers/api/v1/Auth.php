@@ -18,6 +18,37 @@ class Auth extends CI_Controller
         $this->realm = 'Authorized users of Sacids Openrosa';
     }
 
+    /**
+     * @param $username
+     * @param $password
+     * @return digest_password
+     */
+    function digest($username, $password)
+    {
+        $response = array();
+
+        //check if username and password exist
+        if (!$username || !$password) {
+            $response = array("status" => "failed", "message" => "Required username and password");
+            echo json_encode($response);
+            exit;
+        }
+
+        //digest password {if username and password exist}
+        $digest_password = md5("{$username}:{$this->realm}:{$password}");
+
+        if ($digest_password) {
+            $response = array("status" => "success", "digest_password" => $digest_password);
+
+        } else {
+            $response = array("status" => "failed", "message" => "failed to create digest password");
+
+        }
+
+        echo json_encode($response);
+
+    }
+
 
     /**
      * @param type
