@@ -2,6 +2,8 @@
 if (!defined('BASEPATH'))
     exit ('No direct script access allowed');
 
+echo '<script src="'.base_url().'assets/public/ckeditor/ckeditor.js"></script>';
+
 class Db_exp
 {
     public $table;
@@ -200,9 +202,16 @@ class Db_exp
         $this->fields[$index]['input'] = $options;
     }
 
-    public function set_password($index)
+    public function set_password($index, $validation = 'md5')
     {
         $this->fields[$index]['password'] = 1;
+        $this->fields[$index]['validation'] = $validation;
+    }
+
+    public function set_password_dblcheck($index, $validation = 'md5')
+    {
+        $this->fields[$index]['password_dblcheck'] = 1;
+        $this->fields[$index]['validation'] = $validation;
     }
 
     public function set_textarea($index, $options = '')
@@ -257,8 +266,12 @@ class Db_exp
     {
 
         $CI = &get_instance();
+        echo '<pre>';
+        print_r($posts);
+        //print_r($this);
 
-        //print_r($posts);
+
+        return;
         //print_r($this->fields);
         $post_to_db = array();
         $del_keys = array();
@@ -411,6 +424,7 @@ class Db_exp
 
         $data = array();
         $data['name'] = $name;
+        $data['id'] = $name;
         $options = false;
 
         if (array_key_exists($name, $this->fields)) {
@@ -449,6 +463,9 @@ class Db_exp
                     case 'password':
                         $type = 'password';
                         break;
+                    case 'password_dblcheck':
+                        $type = 'password_dblcheck';
+                        break;
                     case 'hidden':
                         $type = 'hidden';
                         if ($val != '') $value = $val;
@@ -486,12 +503,16 @@ class Db_exp
                 break;
             case 'password' :
                 echo $pre . form_password($data, $value) . $end;
+                break;
+            case 'password_dblcheck' :
+                echo $pre . form_password($data, $value) . $end;
                 $data['name'] = $data['name'] . '_repeat';
                 $pre = '<tr><td>Repeat ' . $label . '</td><td> : </td><td>';
                 echo $pre . form_password($data, $value) . $end;
                 break;
             case 'textarea':
                 echo $pre . form_textarea($data, $value) . $end;
+                echo '<script> CKEDITOR.replace('.$data['id'].')</script>';
                 break;
             case 'date':
                 echo $pre . form_input($data, $value) . $end;

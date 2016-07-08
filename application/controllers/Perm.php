@@ -181,6 +181,7 @@ class Perm extends CI_Controller {
 				'hidden',
 				'view',
 				'password',
+				'password_dblcheck',
 				'label',
 				'upload',
 				'textarea',
@@ -862,6 +863,9 @@ class Perm extends CI_Controller {
 					break;
 				case 'password' :
 					$this->db_exp->set_password ( $field ['field_name'] );
+					break;
+				case 'password_dblcheck' :
+					$this->db_exp->set_password_dblcheck ( $field ['field_name'] );
 					break;
 				case 'label' :
 					$this->db_exp->set_label( $field ['field_name'], $field ['field_value']);
