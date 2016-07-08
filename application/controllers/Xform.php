@@ -926,7 +926,7 @@ class Xform extends CI_Controller
 					if(!$key){
 						// failed need to exit
 					}
-					$statement .= ", " . $key . " ENUM('1','0') ";
+					$statement .= ", " . $key . " ENUM('1','0') DEFAULT '0' NOT NULL ";
 				}
 			}
 
@@ -970,7 +970,7 @@ class Xform extends CI_Controller
 	private function _map_field($field_name){
 		
 		// check length
-		if(strlen($field_name) < 10){
+		if(strlen($field_name) < 20){
 			return $field_name;
 		}
 		
