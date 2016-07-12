@@ -315,21 +315,17 @@ class Xform_model extends CI_Model
 
 
 	/**
-	 * $param $table_name
-	 * $param info text to be displayer per point
-	 * $param $cond sql condition (without the where)
-	 *
+	 * @param $table_name
+	 * @param bool $cond
+	 *        sql condition (without the where)
 	 * @return list of lat,lon,info
 	 */
 
 	public function get_geospatial_data($table_name, $cond = TRUE)
 	{
-
 		//$this->db->where($cond);
 		$query = $this->db->get($table_name);
-		if ($query->num_rows() == 0) return FALSE;
-
-		return $query->result_array();
+		return ($query->num_rows() == 0) ? FALSE : $query->result_array();
 	}
 
 	/**
@@ -400,14 +396,16 @@ class Xform_model extends CI_Model
 		return $this->db->count_all_results();
 	}
 
-	public function get_form_definition_filename($form_id){
-		$this->db->select('filename')->where('form_id',$form_id)->from('xforms');
+	public function get_form_definition_filename($form_id)
+	{
+		$this->db->select('filename')->where('form_id', $form_id)->from('xforms');
 		return $this->db->get()->row(1)->filename;
 	}
 
-	public function add_to_field_name_map($data){
-		$q 	= $this->db->insert_string('xform_fieldname_map',$data);
-		$q 	= str_replace('INSERT INTO','INSERT IGNORE INTO',$q);
+	public function add_to_field_name_map($data)
+	{
+		$q = $this->db->insert_string('xform_fieldname_map', $data);
+		$q = str_replace('INSERT INTO', 'INSERT IGNORE INTO', $q);
 		return $this->db->query($q);
 	}
 }
