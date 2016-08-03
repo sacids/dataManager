@@ -1,13 +1,14 @@
 <?php
 
 defined('BASEPATH') or exit ('No direct script access allowed');
-class XmlElement
-{
-	var $name;
-	var $attributes;
-	var $content;
-	var $children;
-}
+
+//class XmlElement
+//{
+//	var $name;
+//	var $attributes;
+//	var $content;
+//	var $children;
+//}
 
 
 /**
@@ -18,7 +19,6 @@ class XmlElement
  * @author   Eric Beda
  * @link     http://sacids.org
  */
-
 class Xform extends CI_Controller
 {
 	private $form_defn;
@@ -291,12 +291,11 @@ class Xform extends CI_Controller
 		log_message("debug", "Table prefix " . $prefix);
 
 
-
 		// set table name
 		$this->table_name = $prefix . str_replace("-", "_", $rxml->attributes ['id']);
 
 		// set form definition structure
-		$file_name 	= $this->Xform_model->get_form_definition_filename($this->table_name);
+		$file_name = $this->Xform_model->get_form_definition_filename($this->table_name);
 		$this->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
 		$this->load_xml_definition();
 
@@ -392,7 +391,6 @@ class Xform extends CI_Controller
 		}
 	}
 
-	
 
 	private function get_fieldname_map()
 	{
@@ -416,33 +414,33 @@ class Xform extends CI_Controller
 	{
 
 		$table_name = $this->table_name;
-		$form_data  = $this->form_data;
-        $map        = $this->get_field_map();
+		$form_data = $this->form_data;
+		$map = $this->get_field_map();
 
 		//echo '<pre>';
 		//print_r($this->form_data);
 		//print_r($this->form_defn);
 
-        $has_geopoint = false;
+		$has_geopoint = FALSE;
 		$col_names = array();
 		$col_values = array();
 		$points_v = array();
 		$points_n = array();
 
-        //echo '<pre>'; print_r($this->form_defn);
-		foreach ($this->form_defn as $str){
+		//echo '<pre>'; print_r($this->form_defn);
+		foreach ($this->form_defn as $str) {
 
-			$type	= $str['type'];
-			$cn 	= $str['field_name'];
+			$type = $str['type'];
+			$cn = $str['field_name'];
 
-			$cv		= $this->form_data[$cn];
+			$cv = $this->form_data[$cn];
 
-            if($cv == '' || $cn == '') continue;
+			if ($cv == '' || $cn == '') continue;
 
-            // check if colume name was mapped to fieldmap table
-            if(array_key_exists($cn,$map)){
-                $cn = $map[$cn];
-            }
+			// check if column name was mapped to fieldmap table
+			if (array_key_exists($cn, $map)) {
+				$cn = $map[$cn];
+			}
 
 			array_push($col_names, $cn);
 			array_push($col_values, $cv);
@@ -452,9 +450,9 @@ class Xform extends CI_Controller
 				foreach ($options as $opt) {
 					$opt = trim($opt);
 
-                    if(array_key_exists($opt,$map)){
-                        $opt = $map[$opt];
-                    }
+					if (array_key_exists($opt, $map)) {
+						$opt = $map[$opt];
+					}
 
 					array_push($col_values, 1);
 					array_push($col_names, $opt);
@@ -463,7 +461,7 @@ class Xform extends CI_Controller
 
 			if ($type == 'geopoint') {
 
-                $has_geopoint   = true;
+				$has_geopoint = TRUE;
 				$geopoints = explode(" ", $cv);
 
 				$lat = $geopoints [0];
@@ -488,13 +486,13 @@ class Xform extends CI_Controller
 			}
 		}
 
-        if($has_geopoint){
-            $field_names = "(`" . implode("`,`", $col_names) . "`,`" . implode("`,`", $points_n) . "`)";
-            $field_values = "('" . implode("','", $col_values) . "'," . implode("`,`", $points_v) . ")";
-        }else{
-            $field_names = "(`" . implode("`,`", $col_names) . "`)";
-            $field_values = "('" . implode("','", $col_values) . "')";
-        }
+		if ($has_geopoint) {
+			$field_names = "(`" . implode("`,`", $col_names) . "`,`" . implode("`,`", $points_n) . "`)";
+			$field_values = "('" . implode("','", $col_values) . "'," . implode("`,`", $points_v) . ")";
+		} else {
+			$field_names = "(`" . implode("`,`", $col_names) . "`)";
+			$field_values = "('" . implode("','", $col_values) . "')";
+		}
 
 		$query = "INSERT INTO {$table_name} {$field_names} VALUES {$field_values}";
 
@@ -744,9 +742,10 @@ class Xform extends CI_Controller
 		return $this->get_create_table_sql_query();
 	}
 
-	public function test_init(){
+	public function test_init()
+	{
 
-		$fn	= 'Dalili_Binadamu_Skolls.xml';
+		$fn = 'Dalili_Binadamu_Skolls.xml';
 		echo $this->_initialize($fn);
 	}
 
@@ -773,7 +772,7 @@ class Xform extends CI_Controller
 
 		$prefix = $this->config->item("xform_tables_prefix");
 		log_message("debug", "Table prefix during creation " . $prefix);
-		$jr_form_id	= $instance->attributes ['id'];
+		$jr_form_id = $instance->attributes ['id'];
 		$table_name = $prefix . str_replace("-", "_", $jr_form_id);
 
 		// get array rep of xform
@@ -832,34 +831,35 @@ class Xform extends CI_Controller
 				}
 			}
 		}
-		$this->xarray	= $xarray;
-		$this->_iterate_defn_file($tmp2,false);
+		$this->xarray = $xarray;
+		$this->_iterate_defn_file($tmp2, FALSE);
 		return $this->xarray;
 	}
 
-	function _iterate_defn_file($arr,$ref = false){
+	function _iterate_defn_file($arr, $ref = FALSE)
+	{
 
 		$i = 0;
-		foreach($arr as $val){
+		foreach ($arr as $val) {
 
-			switch($val->name){
+			switch ($val->name) {
 
 				case 'group':
 					$this->_iterate_defn_file($val->children);
 					break;
 				case 'input':
-					$nodeset	= $val->attributes['ref'];
+					$nodeset = $val->attributes['ref'];
 					$this->xarray[$nodeset]['label'] = '0';
 					break;
 				case 'select':
 				case 'select1':
-					$nodeset	= $val->attributes['ref'];
-					$this->_iterate_defn_file($val->children,$nodeset);
+					$nodeset = $val->attributes['ref'];
+					$this->_iterate_defn_file($val->children, $nodeset);
 					break;
 				case 'item':
-					$l 	= $val->children[0]->content;
-					$v		= $val->children[1]->content;
-					$this->xarray[$ref]['option'][$v]	= $l;
+					$l = $val->children[0]->content;
+					$v = $val->children[1]->content;
+					$this->xarray[$ref]['option'][$v] = $l;
 					break;
 			}
 		}
@@ -890,7 +890,7 @@ class Xform extends CI_Controller
 
 
 			$field_name = $val['field_name'];
-			$col_name	= $this->_map_field($field_name);
+			$col_name = $this->_map_field($field_name);
 
 			if (array_key_exists('label', $val)) {
 				$field_label = $val['label'];
@@ -913,7 +913,7 @@ class Xform extends CI_Controller
 
 			if ($type == 'select1') {
 				// Mysql recommended way of handling single quotes for queries is by using two single quotes at once.
-				$tmp3	= array_keys($val ['option']);
+				$tmp3 = array_keys($val ['option']);
 				$statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $tmp3)) . "') $required";
 			}
 
@@ -922,8 +922,8 @@ class Xform extends CI_Controller
 
 				foreach ($val['option'] as $key => $select_opts) {
 
-					$key	= $this->_map_field($key);
-					if(!$key){
+					$key = $this->_map_field($key);
+					if (!$key) {
 						// failed need to exit
 					}
 					$statement .= ", " . $key . " ENUM('1','0') DEFAULT '0' NOT NULL ";
@@ -938,11 +938,11 @@ class Xform extends CI_Controller
 				$statement .= ", $col_name DATE $required ";
 			}
 
-			if ($type == 'dateTime'){
+			if ($type == 'dateTime') {
 				$statement .= ", $col_name datetime $required";
 			}
 
-			if ($type == 'time'){
+			if ($type == 'time') {
 				$statement .= ", $col_name TIME $required";
 			}
 
@@ -967,28 +967,29 @@ class Xform extends CI_Controller
 		return $statement;
 	}
 
-	private function _map_field($field_name){
-		
+	private function _map_field($field_name)
+	{
+
 		// check length
-		if(strlen($field_name) < 20){
+		if (strlen($field_name) < 20) {
 			return $field_name;
 		}
-		
-		$tmp	= sanitize_col_name($field_name);
-		$asc	= ascii_val($tmp);
-		$fn 	= '_xf_'.condense_col_name($field_name).'_'.$asc;
 
-		$data	= array();
-		$data['table_name']	= $this->table_name;
-		$data['col_name']	= $fn;
-		$data['field_name']	= $field_name;
+		$tmp = sanitize_col_name($field_name);
+		$asc = ascii_val($tmp);
+		$fn = '_xf_' . condense_col_name($field_name) . '_' . $asc;
 
-		if($this->Xform_model->add_to_field_name_map($data)){
+		$data = array();
+		$data['table_name'] = $this->table_name;
+		$data['col_name'] = $fn;
+		$data['field_name'] = $field_name;
+
+		if ($this->Xform_model->add_to_field_name_map($data)) {
 			return $fn;
 		}
 
-		log_message('error','failed to map field');
-		return false;
+		log_message('error', 'failed to map field');
+		return FALSE;
 	}
 
 	private function _add_to_fieldname_map($arr)
@@ -1153,6 +1154,7 @@ class Xform extends CI_Controller
 			// check if form_id ~ form data table is not empty or null
 			$data['title'] = $form->title . " form";
 			$data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
+			$data['field_maps'] = $this->_get_mapped_table_column_name($form->form_id);
 
 			$config = array(
 				'base_url'    => $this->config->base_url("xform/form_data/" . $form_id),
@@ -1221,5 +1223,83 @@ class Xform extends CI_Controller
 		);
 		$data = $this->dbutil->xml_from_result($query, $config);
 		force_download($filename, $data);
+	}
+
+	function map_fields($form_id)
+	{
+		if (!$form_id) {
+			$this->session->set_flashdata("message", display_message("You must select a form", "danger"));
+			redirect("xform/forms");
+		}
+
+		$this->form_validation->set_rules("save", "Save changes", "required");
+
+		if ($this->form_validation->run() == FALSE) {
+			$data['form_id'] = $form_id;
+			$data['field_maps'] = $field_maps = $this->Xform_model->get_fieldname_map($form_id);
+
+			$this->load->view('header', $data);
+			$this->load->view("form/map_form_fields");
+			$this->load->view('footer');
+		} else {
+			$fields = $this->input->post();
+			unset($fields['save']);
+			$this->Xform_model->update_field_map_labels($form_id, $fields);
+			$this->session->set_flashdata("message", display_message("Field mapping successfully updated"));
+			redirect("xform/map_fields/" . $form_id, "refresh");
+		}
+	}
+
+	function _get_mapped_table_column_name($form_id)
+	{
+		if (!$form_id)
+			$form_id = "ad_build_Dalili_Binadamu_Skolls_A_1467712626";
+
+
+		$this->table_name = $form_id;
+		$map = $this->get_field_map();
+
+		//print_r($map);
+
+		$this->load->library("Xform_comm");
+		$form_details = $this->Feedback_model->get_form_details($form_id);
+		$file_name = $form_details->filename;
+		$this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
+		$this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+		$form_definition = $this->xform_comm->get_defn();
+
+		$table_field_names = array();
+
+		foreach ($form_definition as $fdfn) {
+
+			$kk = $fdfn['field_name'];
+
+			// check if column name was mapped to fieldmap table
+			if (array_key_exists($kk, $map)) {
+				$kk = $map[$kk];
+			}
+
+
+			if (array_key_exists("label", $fdfn)) {
+				if ($fdfn['type'] == "select") {
+					$options = $fdfn['option'];
+					foreach ($options as $key => $value) {
+
+						// check if column name was mapped to fieldmap table
+						if (array_key_exists($key, $map)) {
+							$key = $map[$key];
+						}
+
+						$table_field_names[$key] = $value;
+					}
+				} else {
+					$table_field_names[$kk] = $fdfn['label'];
+				}
+			} else {
+				$table_field_names[$kk] = $fdfn['field_name'];
+			}
+		}
+
+		return $table_field_names;
 	}
 }

@@ -408,4 +408,17 @@ class Xform_model extends CI_Model
 		$q = str_replace('INSERT INTO', 'INSERT IGNORE INTO', $q);
 		return $this->db->query($q);
 	}
+
+	public function update_field_map_labels($xform_id, $fields)
+	{
+		$this->db->trans_start();
+		foreach ($fields as $key => $value) {
+			$this->db->where("table_name", $xform_id);
+			$this->db->where("col_name", $key);
+			$this->db->set("field_label", $value);
+			$this->db->update("xform_fieldname_map");
+		}
+		$this->db->trans_complete();
+		return $this->db->trans_status();
+	}
 }
