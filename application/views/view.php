@@ -62,10 +62,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="page-scroll" href="#about">About AfyaData</a></li>
                 <li><a class="page-scroll" href="#features">Features</a></li>
+                <li><a class="page-scroll" href="#involved">Get Involved</a></li>
                 <li>
                     <a class="page-scroll" href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" download>Download App</a>
                 </li>
-                <li><a class="page-scroll" href="<?php echo site_url('auth/login');?>">Go to demo</a></li>
+                <li><a class="page-scroll" href="<?php echo site_url('auth/login');?>">Dashboard</a></li>
                 <li><a class="page-scroll" href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -231,6 +232,8 @@
         </div>
     </div>
 </section>
+
+
 
 <aside class="bg-primary">
     <div class="container text-center">

@@ -34,7 +34,7 @@ class Ohkr_model extends CI_Model
         return $this->db->insert(self::$table_name_disease, $disease);
     }
 
-    public function find_all_disease($limit = 10, $offset = 0)
+    public function find_all_disease($limit = 30, $offset = 0)
     {
         $this->db->select('disease.id, disease.description, disease.cause, disease.symptoms, disease.diagnosis,
         disease.treatment, disease.title as disease_title, specie.title as specie_title')

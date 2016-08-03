@@ -9,6 +9,7 @@
 class Auth extends CI_Controller
 {
     var $realm;
+    var $initial;
 
     function __construct()
     {
@@ -16,6 +17,7 @@ class Auth extends CI_Controller
         $this->lang->load('auth');
         $this->load->model('User_model');
         $this->realm = 'Authorized users of Sacids Openrosa';
+        $this->initial = 255;
     }
 
     /**
@@ -59,8 +61,11 @@ class Auth extends CI_Controller
         //define response
         $response = array();
 
-        $username = $this->input->post('username');
+        $phone = $this->input->post('username');
         $password = $this->input->post('password');
+
+        //substring last 9 character
+        $username = $this->initial . substr($phone, -9);
 
         //login process validation
         $login_status = $this->ion_auth->login($username, $password);
@@ -91,10 +96,13 @@ class Auth extends CI_Controller
         $response = array();
 
         //post variable
-        $username = $this->input->post('username');
+        $phone = $this->input->post('username');
         $full_name = $this->input->post('full_name');
         $password = $this->input->post('password');
         $password_confirm = $this->input->post('password_confirm');
+
+        //substring last 9 character
+        $username = $this->initial . substr($phone, -9);
 
         //check username if exist
         $check_username = $this->check_username($username);

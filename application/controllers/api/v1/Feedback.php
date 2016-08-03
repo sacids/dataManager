@@ -11,10 +11,9 @@ class Feedback extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Feedback_model', 'User_model', 'Xform_model'));
+        $this->load->model(array('Feedback_model', 'User_model', 'Xform_model', 'Perm_model'));
         $this->load->library('Xform_comm');
         log_message('debug', 'Feedback Api controller initialized');
-        //$this->output->enable_profiler(TRUE);
     }
 
     /**
@@ -22,6 +21,8 @@ class Feedback extends CI_Controller
      */
     function get_feedback()
     {
+        //$this->output->enable_profiler(TRUE);
+
         $username = $this->input->get("username");
         $date_created = $this->input->get("date_created");
         $lang = $this->input->get('language');
@@ -33,19 +34,54 @@ class Feedback extends CI_Controller
             exit;
         }
 
-        //TODO: call function for permission, return chat user (form_id) needed to see
-
 
         $user = $this->User_model->find_by_username($username);
         log_message("debug", "username getting forms feedback is " . $username);
 
         if ($user) {
-            $feedback_list = $this->Feedback_model->get_feedback_list($user->id, $date_created);
+            //TODO: call function for permission, return chat user (form_id) needed to see
+            $my_perms = $this->Perm_model->get_my_perms($user->id);
+            $cond = "FALSE OR (`perms` LIKE '%" . implode("%' OR `perms` LIKE '%", $my_perms) . "%')";
+
+            $where = ' where ' . $cond;
+            $table_name = 'xforms';
+
+            //Perms module
+            $perms = $this->db->query('SELECT * FROM ' . $table_name . ' ' . $where)->result();
+
+
+            $i = 1;
+            foreach ($perms as $perm) {
+                $where_perm[$i] = $perm->form_id;
+                $i++;
+            }
+
+            //Feedback Mapping
+            $feedback_mapping = $this->Feedback_model->get_feedback_mapping($user->id);
+
+            //check if mapping is not empty
+            if ($feedback_mapping) {
+                $where_array = explode(',', $feedback_mapping->users);
+            } else {
+                $where_array = $user->id;
+            }
+
+            //feedback List
+            $feedback_list = $this->Feedback_model->get_feedback_list($where_perm, $where_array, $date_created);
 
             foreach ($feedback_list as $value) {
-                $username = $this->User_model->find_by_id($value->user_id)->username;
-                $reply_user = $this->User_model->find_by_id($value->reply_by)->username;
+                $first_name = $this->User_model->find_by_id($value->user_id)->first_name;
+                $last_name = $this->User_model->find_by_id($value->user_id)->last_name;
+                $chr_name = $first_name . ' ' . $last_name;
+                $username = $this->User_model->find_by_id($user->id)->username;
                 $form_name = $this->Xform_model->find_by_xform_id($value->form_id)->title;
+
+                //get reply user
+                if ($value->reply_by != 0) {
+                    $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
+                } else {
+                    $reply_user = $value->reply_by;
+                }
 
                 $feedback[] = array(
                     'id' => $value->id,
@@ -55,6 +91,7 @@ class Feedback extends CI_Controller
                     'message' => $value->message,
                     'sender' => $value->sender,
                     'user' => $username,
+                    'chr_name' => $chr_name,
                     'date_created' => $value->date_created,
                     'status' => $value->status,
                     'reply_by' => $reply_user
@@ -90,11 +127,37 @@ class Feedback extends CI_Controller
         log_message("debug", "username getting forms feedback is " . $username);
 
         if ($user) {
-            $feedback_list = $this->Feedback_model->get_feedback_notification($user->id, $date_created);
+            //TODO: call function for permission, return chat user (form_id) needed to see
+            $my_perms = $this->Perm_model->get_my_perms($user->id);
+            $cond = "FALSE OR (`perms` LIKE '%" . implode("%' OR `perms` LIKE '%", $my_perms) . "%')";
+
+            $where = ' where ' . $cond;
+            $table_name = 'xforms';
+
+            //Perms module
+            $perms = $this->db->query('SELECT * FROM ' . $table_name . ' ' . $where)->result();
+
+            $i = 1;
+            foreach ($perms as $perm) {
+                $where_perm[$i] = $perm->form_id;
+                $i++;
+            }
+
+            //Feedback Mapping
+            $feedback_mapping = $this->Feedback_model->get_feedback_mapping($user->id);
+
+            //check if mapping is not empty
+            if ($feedback_mapping) {
+                $where_array = explode(',', $feedback_mapping->users);
+            } else {
+                $where_array = $user->id;
+            }
+            //feedback list
+            $feedback_list = $this->Feedback_model->get_feedback_notification($where_perm, $where_array, $date_created);
 
             foreach ($feedback_list as $value) {
-                $username = $this->User_model->find_by_id($value->user_id)->username;
-                $reply_user = $this->User_model->find_by_id($value->reply_by)->first_name;
+                $username = $this->User_model->find_by_id($value->user_id)->first_name;
+                $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
                 $form_name = $this->Xform_model->find_by_xform_id($value->form_id)->title;
 
                 $feedback[] = array(
@@ -105,7 +168,7 @@ class Feedback extends CI_Controller
                     'message' => $value->message,
                     'sender' => $value->sender,
                     'user' => $username,
-                    'date_created' => date("m-Y, H:i", strtotime($value->date_created)),
+                    'date_created' => $value->date_created,
                     'status' => $value->status,
                     'reply_by' => $reply_user
                 );
@@ -126,6 +189,7 @@ class Feedback extends CI_Controller
     function post_feedback()
     {
         $username = $this->input->post("username");
+        $instance_id = $this->input->post("instance_id");
         $lang = $this->input->post('language');
 
         //check if no username
@@ -140,18 +204,21 @@ class Feedback extends CI_Controller
         log_message("debug", "User posting feedback is " . $username);
 
         if ($user) {
-            $instance_id = $this->input->post("instance_id");
+            //query details from feedback
+            $query = $this->db->get_where('feedback', array('instance_id' => $instance_id))->row();
+
             //update all feedback from this user
             $this->Feedback_model->update_user_feedback($instance_id, 'server');
 
             $feedback = array(
-                "user_id" => $user->id,
+                "user_id" => $query->user_id,
                 "instance_id" => $instance_id,
                 "form_id" => $this->input->post('form_id'),
                 "message" => $this->input->post("message"),
                 'sender' => $this->input->post("sender"),
                 "date_created" => date('Y-m-d H:i:s'),
-                "status" => $this->input->post("status")
+                "status" => $this->input->post("status"),
+                "reply_by" => 0
             );
 
             if ($this->Feedback_model->create_feedback($feedback)) {

@@ -111,21 +111,65 @@ class Feedback_model extends CI_Model
         }
     }
 
+    /**
+     * @param $user_id
+     * @return mixed
+     */
+    function get_reply_user($user_id)
+    {
+        $query = $this->db->get_where('users', array('id' => $user_id))->row();
+        if (!empty($query->id)) {
+            return $query->last_name;
+        } else {
+            return 'admin';
+        }
+    }
+
 
     /**
      * @param $user_id
+     * @return mixed
+     */
+    function get_feedback_mapping($user_id)
+    {
+        return $this->db->get_where('feedback_user_map', array('user_id' => $user_id))->row();
+    }
+
+
+    /**
+     * @param $where_array
+     * @param $where_perm
      * @param $date_created
      * @return mixed
      */
-    function get_feedback_list($user_id, $date_created = NULL)
+    function get_feedback_list($where_perm, $where_array, $date_created = NULL)
     {
+
+        if (is_array($where_perm)) {
+            $this->db->group_start();
+            foreach ($where_perm as $key => $value) {
+                $this->db->or_like("form_id", $value);
+                //$this->db->like("(form_id LIKE '$value' OR form_id LIKE '$value')");
+            }
+            $this->db->group_end();
+        } else {
+            $this->db->where("form_id", $where_perm);
+        }
+
+
         if ($date_created != null)
             $this->db->where('date_created >', $date_created);
 
-        return $this->db->get_where(self::$table_name, array('user_id' => $user_id))->result();
+
+        $query = $this->db
+            ->where_in('user_id', $where_array)
+            ->get(self::$table_name)
+            ->result();
+
+        return $query;
     }
 
-    /**
+   /**
      * @param $user_id
      * @param $date_created
      * @return mixed
@@ -136,15 +180,24 @@ class Feedback_model extends CI_Model
             $this->db->where('date_created >', $date_created);
 
         return $this->db
-            ->get_where(self::$table_name, array('user_id' => $user_id, 'sender' => 'server', 'status' => 'pending'))->result();
+            ->get_where(self::$table_name, array('user_id' => $user_id, 'sender' => 'server'))->result();
     }
 
 
+    /**
+     * @param $table_name
+     * @param $instance_id
+     * @return mixed
+     */
     function get_feedback_form_details($table_name, $instance_id)
     {
         return $this->db->limit(1)->get_where($table_name, array('meta_instanceID' => $instance_id))->row();
     }
 
+    /**
+     * @param $table_name
+     * @return mixed
+     */
     function get_form_details($table_name)
     {
         return $this->db->get_where('xforms', array('form_id' => $table_name))->row();
