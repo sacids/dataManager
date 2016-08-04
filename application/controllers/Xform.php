@@ -2,13 +2,13 @@
 
 defined('BASEPATH') or exit ('No direct script access allowed');
 
-//class XmlElement
-//{
-//	var $name;
-//	var $attributes;
-//	var $content;
-//	var $children;
-//}
+class XmlElement
+{
+	var $name;
+	var $attributes;
+	var $content;
+	var $children;
+}
 
 
 /**
@@ -45,7 +45,7 @@ class Xform extends CI_Controller
 
 		$this->load->library('form_auth');
 		$this->user_id = $this->session->userdata("user_id");
-		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 	}
 
 	public function index()
@@ -1153,6 +1153,7 @@ class Xform extends CI_Controller
 		if ($form) {
 			// check if form_id ~ form data table is not empty or null
 			$data['title'] = $form->title . " form";
+			$data['form'] = $form;
 			$data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
 			$data['field_maps'] = $this->_get_mapped_table_column_name($form->form_id);
 
@@ -1301,5 +1302,30 @@ class Xform extends CI_Controller
 		}
 
 		return $table_field_names;
+	}
+
+	function delete_entry($xform_id)
+	{
+
+		$this->form_validation->set_rules("entry_id[]", "Entry ID", "required");
+
+		if ($this->form_validation->run() === FALSE) {
+			$this->form_data($xform_id);
+		} else {
+
+			$table_name = $this->input->post("table_name");
+			$entry_ids = $this->input->post("entry_id");
+
+			$deleted_entry_count = 0;
+			foreach ($entry_ids as $entry_id) {
+				//TODO Delete media files too.
+				if ($this->Xform_model->delete_form_data($table_name, $entry_id)) {
+					$deleted_entry_count++;
+				}
+			}
+			$message = ($deleted_entry_count == 1) ? "entry" : "entries";
+			$this->session->set_flashdata("message", display_message($deleted_entry_count . " " . $message . " deleted successfully"));
+			redirect("xform/form_data/" . $xform_id, "refresh");
+		}
 	}
 }

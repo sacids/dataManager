@@ -421,4 +421,11 @@ class Xform_model extends CI_Model
 		$this->db->trans_complete();
 		return $this->db->trans_status();
 	}
+
+	public function delete_form_data($table_name, $entry_id)
+	{
+		$this->db->where("id", $entry_id);
+		$this->db->limit(1);
+		return $this->db->delete($table_name);
+	}
 }

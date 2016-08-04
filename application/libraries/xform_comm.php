@@ -8,14 +8,14 @@
  * @author      Eric Beda
  * @link        http://sacids.org
  */
-
-class XmlElement
-{
-	var $name;
-	var $attributes;
-	var $content;
-	var $children;
-}
+//
+//class XmlElement
+//{
+//	var $name;
+//	var $attributes;
+//	var $content;
+//	var $children;
+//}
 
 class Xform_comm
 {

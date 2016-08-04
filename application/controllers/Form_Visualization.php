@@ -240,7 +240,7 @@ class Form_visualization extends CI_Controller
 			foreach ($val as $key => $value) {
 				if (!strpos($key, '_point')) {
 					if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) {
-						$data_string .= "<img src=\"" . base_url() . "assets/forms/data/images/" . $value . "\" style=\"max-width:100px;\" /><br/>";
+						$data_string .= str_replace('"', '\'', '<img src = "' . base_url() . 'assets/forms/data/images/' . $value . '" width="350" /><br/>');
 					} else {
 						$data_string .= $key . " : " . str_replace('"', '', str_replace("'", "\'", $value)) . "<br/>";
 					}
