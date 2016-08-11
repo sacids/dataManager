@@ -21,6 +21,23 @@ class Auth extends CI_Controller
     }
 
     /**
+     * app version
+     */
+    function version()
+    {
+        $app_version = $this->db->get_where('app_version', array('status' => 'current'))->row();
+
+        if ($app_version) {
+            $response = array("app_version" => $app_version, "status" => "success");
+
+        } else {
+            $response = array("status" => "success", "message" => "No content available");
+
+        }
+        echo json_encode($response);
+    }
+
+    /**
      * @param $username
      * @param $password
      * @return digest_password
