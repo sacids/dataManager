@@ -1185,6 +1185,8 @@ class Xform extends CI_Controller
 		}
 		$table_name = $xform_id;
 		$query = $this->db->query("select * from {$table_name} order by id ASC ");
+
+
 		$this->_force_csv_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".csv");
 	}
 
