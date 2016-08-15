@@ -1,0 +1,2841 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>IDSR Weekly Report</h:title>
+    <model>
+      <instance>
+        <data id="build_week-report-Skolls-B_1467716176">
+          <meta>
+            <instanceID/>
+            <username/>
+            <instanceName/>
+            <start/>
+            <end/>
+          </meta>
+          <Initial_details>
+            <District/>
+            <health_facility_name/>
+            <Number_of_healt_faci>
+              0
+            </Number_of_healt_faci>
+            <Week/>
+          </Initial_details>
+          <AFP>
+            <m_Less_5yrs_with_AFP>
+              0
+            </m_Less_5yrs_with_AFP>
+            <f_less_5yrs_with_AFP>
+              0
+            </f_less_5yrs_with_AFP>
+            <m_Less_5yrs_died_from_AFP>
+              0
+            </m_Less_5yrs_died_from_AFP>
+            <f_Less_5yrs_died_from_AFP>
+              0
+            </f_Less_5yrs_died_from_AFP>
+            <m_more_5yrs_with_AFP>
+              0
+            </m_more_5yrs_with_AFP>
+            <f_more_5yrs_with_AFP>
+              0
+            </f_more_5yrs_with_AFP>
+            <m_more_5yrs_died_from_AFP>
+              0
+            </m_more_5yrs_died_from_AFP>
+            <f_more_5yrs_died_from_AFP>
+              0
+            </f_more_5yrs_died_from_AFP>
+          </AFP>
+          <Anthrax>
+            <m_less_5yrs_with_anthrax>
+              0
+            </m_less_5yrs_with_anthrax>
+            <f_less_5yrs_with_anthrax>
+              0
+            </f_less_5yrs_with_anthrax>
+            <m_less_5yrs_died_from_anthrax>
+              0
+            </m_less_5yrs_died_from_anthrax>
+            <f_less_5yrs_died_from_anthrax>
+              0
+            </f_less_5yrs_died_from_anthrax>
+            <m_more_5yrs_with_anthrax>
+              0
+            </m_more_5yrs_with_anthrax>
+            <f_more_5yrs_with_anthrax>
+              0
+            </f_more_5yrs_with_anthrax>
+            <m_more_5yrs_died_from_anthrax>
+              0
+            </m_more_5yrs_died_from_anthrax>
+            <f_more_5yrs_died_from_anthrax>
+              0
+            </f_more_5yrs_died_from_anthrax>
+          </Anthrax>
+          <blood_diarhhea>
+            <m_Less_5yrs_with_blood_diarrh>
+              0
+            </m_Less_5yrs_with_blood_diarrh>
+            <f_less_5yrs_with_blood_diarrh>
+              0
+            </f_less_5yrs_with_blood_diarrh>
+            <m_less_5yrs_died_from_blood_diarrh>
+              0
+            </m_less_5yrs_died_from_blood_diarrh>
+            <f_less_5yrs_died_from_blood_diarrh>
+              0
+            </f_less_5yrs_died_from_blood_diarrh>
+            <m_more_5yrs_with_blood_diarrh>
+              0
+            </m_more_5yrs_with_blood_diarrh>
+            <f_more_5yrs_with_blood_diarrh>
+              0
+            </f_more_5yrs_with_blood_diarrh>
+            <m_more_5yrs_died_from_blood_diarrh>
+              0
+            </m_more_5yrs_died_from_blood_diarrh>
+            <f_more_5yrs_died_from_blood_diarrh>
+              0
+            </f_more_5yrs_died_from_blood_diarrh>
+          </blood_diarhhea>
+          <Cholera>
+            <m_Less_5yrs_with_cholera>
+              0
+            </m_Less_5yrs_with_cholera>
+            <f_Less_5yrs_with_cholera>
+              0
+            </f_Less_5yrs_with_cholera>
+            <m_Less_5yrs_died_from_cholera>
+              0
+            </m_Less_5yrs_died_from_cholera>
+            <f_less_5yrs_died_from_cholera>
+              0
+            </f_less_5yrs_died_from_cholera>
+            <m_more_5yrs_with_cholera>
+              0
+            </m_more_5yrs_with_cholera>
+            <f_more_5yrs_with_cholera>
+              0
+            </f_more_5yrs_with_cholera>
+            <m_more_5yrs_died_from_cholera>
+              0
+            </m_more_5yrs_died_from_cholera>
+            <f_more_5yrs_died_from_cholera>
+              0
+            </f_more_5yrs_died_from_cholera>
+          </Cholera>
+          <CS_meningitis>
+            <m_less_5yrs_with_CS_Meningitis>
+              0
+            </m_less_5yrs_with_CS_Meningitis>
+            <f_less_5yrs_with_CS_Meningitis>
+              0
+            </f_less_5yrs_with_CS_Meningitis>
+            <m_less_5yrs_died_from_CS_Meningitis>
+              0
+            </m_less_5yrs_died_from_CS_Meningitis>
+            <f_less_5yrs_died_from_CS_Meningitis>
+              0
+            </f_less_5yrs_died_from_CS_Meningitis>
+            <m_more_5yrs_with_CS_Meningitis>
+              0
+            </m_more_5yrs_with_CS_Meningitis>
+            <f_more_5yrs_with_CS_Meningitis>
+              0
+            </f_more_5yrs_with_CS_Meningitis>
+            <m_more_5yrs_died_from_CS_Meningitis>
+              0
+            </m_more_5yrs_died_from_CS_Meningitis>
+            <f_more_5yrs_died_from_CS_Meningitis>
+              0
+            </f_more_5yrs_died_from_CS_Meningitis>
+          </CS_meningitis>
+          <Human_influenza_SARI>
+            <m_less_5yrs_with_human_influenza>
+              0
+            </m_less_5yrs_with_human_influenza>
+            <f_less_5yrs_with_human_influenza>
+              0
+            </f_less_5yrs_with_human_influenza>
+            <m_less_5yrs_died_from_human_influenza>
+              0
+            </m_less_5yrs_died_from_human_influenza>
+            <f_less_5yrs_died_from_human_influenza>
+              0
+            </f_less_5yrs_died_from_human_influenza>
+            <m_more_5yrs_with_human_influenza>
+              0
+            </m_more_5yrs_with_human_influenza>
+            <f_more_5yrs_with_human_influenza>
+              0
+            </f_more_5yrs_with_human_influenza>
+            <m_more_5yrs_died_from_human_influenza>
+              0
+            </m_more_5yrs_died_from_human_influenza>
+            <f_more_5yrs_died_from_human_influenza>
+              0
+            </f_more_5yrs_died_from_human_influenza>
+          </Human_influenza_SARI>
+          <Viral_Keratoconjuctivitis>
+            <m_less_5yrs_with_v_keratoconjuctivitis>
+              0
+            </m_less_5yrs_with_v_keratoconjuctivitis>
+            <f_less_5yrs_with_v_keratoconjuctivitis>
+              0
+            </f_less_5yrs_with_v_keratoconjuctivitis>
+            <m_less_5yrs_died_from_v_keratoconjuctivitis>
+              0
+            </m_less_5yrs_died_from_v_keratoconjuctivitis>
+            <f_less_5yrs_died_from_v_keratoconjuctivitis>
+              0
+            </f_less_5yrs_died_from_v_keratoconjuctivitis>
+            <m_more_5yrs_with_v_keratoconjuctivitis>
+              0
+            </m_more_5yrs_with_v_keratoconjuctivitis>
+            <f_more_5yrs_with_v_keratoconjuctivitis>
+              0
+            </f_more_5yrs_with_v_keratoconjuctivitis>
+            <m_more_5yrs_died_from_v_keratoconjuctivitis>
+              0
+            </m_more_5yrs_died_from_v_keratoconjuctivitis>
+            <f_more_5yrs_died_from_v_keratoconjuctivitis>
+              0
+            </f_more_5yrs_died_from_v_keratoconjuctivitis>
+          </Viral_Keratoconjuctivitis>
+          <Measles>
+            <m_Less_5yrs_with_measles>
+              0
+            </m_Less_5yrs_with_measles>
+            <f_Less_5yrs_with_measles>
+              0
+            </f_Less_5yrs_with_measles>
+            <m_Less_5yrs_died_from_measles>
+              0
+            </m_Less_5yrs_died_from_measles>
+            <f_Less_5yrs_died_from_measles>
+              0
+            </f_Less_5yrs_died_from_measles>
+            <m_more_5yrs_with_measles>
+              0
+            </m_more_5yrs_with_measles>
+            <f_more_5yrs_with_measles>
+              0
+            </f_more_5yrs_with_measles>
+            <m_more_5yrs_died_from_measles>
+              0
+            </m_more_5yrs_died_from_measles>
+            <f_more_5yrs_died_died_from_measles>
+              0
+            </f_more_5yrs_died_died_from_measles>
+          </Measles>
+          <neonatal_tetanus>
+            <m_Less_28days_with_NNT>
+              0
+            </m_Less_28days_with_NNT>
+            <f_less_28days_with_NNT>
+              0
+            </f_less_28days_with_NNT>
+            <m_less_28days_died_from_NNT>
+              0
+            </m_less_28days_died_from_NNT>
+            <f_less_28days_died_from_NNT>
+              0
+            </f_less_28days_died_from_NNT>
+          </neonatal_tetanus>
+          <pneumonia>
+            <m_less_5yrs_with_pneumonia>
+              0
+            </m_less_5yrs_with_pneumonia>
+            <f_less_5yrs_with_pneumonia>
+              0
+            </f_less_5yrs_with_pneumonia>
+            <m_less_5yrs_died_from_pneumonia>
+              0
+            </m_less_5yrs_died_from_pneumonia>
+            <f_less_5yrs_died_from_pneumonia>
+              0
+            </f_less_5yrs_died_from_pneumonia>
+          </pneumonia>
+          <Plague>
+            <m_Less_5yrs_with_plague>
+              0
+            </m_Less_5yrs_with_plague>
+            <f_Less_5yrs_with_plague>
+              0
+            </f_Less_5yrs_with_plague>
+            <m_Less_5yrs_died_from_plague>
+              0
+            </m_Less_5yrs_died_from_plague>
+            <f_Less_5yrs_died_from_plague>
+              0
+            </f_Less_5yrs_died_from_plague>
+            <m_more_5yrs_with_plague>
+              0
+            </m_more_5yrs_with_plague>
+            <f_more_5yrs_with_plague>
+              0
+            </f_more_5yrs_with_plague>
+            <m_more_5yrs_died_from_plague>
+              0
+            </m_more_5yrs_died_from_plague>
+            <f_more_5yrs_died_from_plague>
+              0
+            </f_more_5yrs_died_from_plague>
+          </Plague>
+          <Rabies>
+            <m_Less_5yrs_with_rabies>
+              0
+            </m_Less_5yrs_with_rabies>
+            <f_Less_5yrs_with_rabies>
+              0
+            </f_Less_5yrs_with_rabies>
+            <m_Less_5yrs_died_from_rabies>
+              0
+            </m_Less_5yrs_died_from_rabies>
+            <f_Less_5yrs_died_from_rabies>
+              0
+            </f_Less_5yrs_died_from_rabies>
+            <m_more_5yrs_with_rabies>
+              0
+            </m_more_5yrs_with_rabies>
+            <f_more_5yrs_with_rabies>
+              0
+            </f_more_5yrs_with_rabies>
+            <m_more_5yrs_died_from_rabies>
+              0
+            </m_more_5yrs_died_from_rabies>
+            <f_more_5yrs_died_from_rabies>
+              0
+            </f_more_5yrs_died_from_rabies>
+          </Rabies>
+          <Animal_Bites>
+            <m_Less_5yrs_with_animal_bites>
+              0
+            </m_Less_5yrs_with_animal_bites>
+            <f_Less_5yrs_with_animal_bites>
+              0
+            </f_Less_5yrs_with_animal_bites>
+            <m_Less_5yrs_died_from_animal_bites>
+              0
+            </m_Less_5yrs_died_from_animal_bites>
+            <f_Less_5yrs_died_from_animal_bites>
+              0
+            </f_Less_5yrs_died_from_animal_bites>
+            <m_more_5yrs_with_animal_bites>
+              0
+            </m_more_5yrs_with_animal_bites>
+            <f_more_5yrs_with_animal_bites>
+              0
+            </f_more_5yrs_with_animal_bites>
+            <m_more_5yrs_died_from_animal_bites>
+              0
+            </m_more_5yrs_died_from_animal_bites>
+            <f_more_5yrs_died_from_animal_bites>
+              0
+            </f_more_5yrs_died_from_animal_bites>
+          </Animal_Bites>
+          <Small_pox>
+            <m_less_5yrs_with_small_pox>
+              0
+            </m_less_5yrs_with_small_pox>
+            <f_less_5yrs_with_small_pox>
+              0
+            </f_less_5yrs_with_small_pox>
+            <m_less_5yrs_died_from_small_pox>
+              0
+            </m_less_5yrs_died_from_small_pox>
+            <f_less_5yrs_died_from_small_pox>
+              0
+            </f_less_5yrs_died_from_small_pox>
+            <m_more_5yrs_with_small_pox>
+              0
+            </m_more_5yrs_with_small_pox>
+            <f_more_5yrs_with_small_pox>
+              0
+            </f_more_5yrs_with_small_pox>
+            <m_more_5yrs_died_from_small_pox>
+              0
+            </m_more_5yrs_died_from_small_pox>
+            <f_more_5yrs_died_from_small_pox>
+              0
+            </f_more_5yrs_died_from_small_pox>
+          </Small_pox>
+          <Trypanosomiasis>
+            <m_less_5yrs_with_Trypanosomiasis>
+              0
+            </m_less_5yrs_with_Trypanosomiasis>
+            <f_less_5yrs_with_Trypanosomiasis>
+              0
+            </f_less_5yrs_with_Trypanosomiasis>
+            <m_less_5yrs_died_from_Trypanosomiasis>
+              0
+            </m_less_5yrs_died_from_Trypanosomiasis>
+            <f_less_5yrs_died_from_Trypanosomiasis>
+              0
+            </f_less_5yrs_died_from_Trypanosomiasis>
+            <m_more_5yrs_with_Trypanosomiasis>
+              0
+            </m_more_5yrs_with_Trypanosomiasis>
+            <f_more_5yrs_with_Trypanosomiasis>
+              0
+            </f_more_5yrs_with_Trypanosomiasis>
+            <m_more_5yrs_died_from_Trypanosomiasis>
+              0
+            </m_more_5yrs_died_from_Trypanosomiasis>
+            <f_more_5yrs_died_from_Trypanosomiasis>
+              0
+            </f_more_5yrs_died_from_Trypanosomiasis>
+          </Trypanosomiasis>
+          <viral_haemorrhagic_fevers>
+            <m_less_5yrs_with_VHF>
+              0
+            </m_less_5yrs_with_VHF>
+            <f_less_5yrs_with_VHF>
+              0
+            </f_less_5yrs_with_VHF>
+            <m_less_5yrs_died_fromVHF>
+              0
+            </m_less_5yrs_died_fromVHF>
+            <f_less_5yrs_died_from_VHF>
+              0
+            </f_less_5yrs_died_from_VHF>
+            <m_more_5yrs_with_VHF>
+              0
+            </m_more_5yrs_with_VHF>
+            <f_more_5yrs_with_VHF>
+              0
+            </f_more_5yrs_with_VHF>
+            <m_more_5yrs_died_from_VHF>
+              0
+            </m_more_5yrs_died_from_VHF>
+            <f_more_5yrs_died_from_VHF>
+              0
+            </f_more_5yrs_died_from_VHF>
+          </viral_haemorrhagic_fevers>
+          <diarrhoea_under_five>
+            <m_less_5yrs_with_diarrhoea>
+              0
+            </m_less_5yrs_with_diarrhoea>
+            <f_less_5yrs_with_diarrhoea>
+              0
+            </f_less_5yrs_with_diarrhoea>
+            <m_less_5yrs_died_from_diarrhoea>
+              0
+            </m_less_5yrs_died_from_diarrhoea>
+            <f_less_5yrs_died_from_diarrhoea>
+              0
+            </f_less_5yrs_died_from_diarrhoea>
+          </diarrhoea_under_five>
+          <malaria>
+            <total_number_less_five_yrs_tested_with_RDT_microscope>
+              0
+            </total_number_less_five_yrs_tested_with_RDT_microscope>
+            <total_number_more_five_yrs_tested_with_RDT_microscope>
+              0
+            </total_number_more_five_yrs_tested_with_RDT_microscope>
+            <total_tested_less_five_yrs_positive_with_RDT_Microscope>
+              0
+            </total_tested_less_five_yrs_positive_with_RDT_Microscope>
+            <total_tested_more_five_yrs_positive_with_RDT_Microscope>
+              0
+            </total_tested_more_five_yrs_positive_with_RDT_Microscope>
+            <total_clinical_less_five_years_malaria_case>
+              0
+            </total_clinical_less_five_years_malaria_case>
+            <total_clinical_more_five_years_malaria_case>
+              0
+            </total_clinical_more_five_years_malaria_case>
+          </malaria>
+          <Tick_borne_relapsing_fever>
+            <m_less_5yrs_with_TB_relapsing_fever>
+              0
+            </m_less_5yrs_with_TB_relapsing_fever>
+            <f_less_5yrs_with_TB_relapsing_fever>
+              0
+            </f_less_5yrs_with_TB_relapsing_fever>
+            <m_less_5yrs_died_from_TB_relapsing_fever>
+              0
+            </m_less_5yrs_died_from_TB_relapsing_fever>
+            <f_less_5yrs_died_from_TB_relapsing_fever>
+              0
+            </f_less_5yrs_died_from_TB_relapsing_fever>
+            <m_more_5yrs_with_TB_relapsing_fever>
+              0
+            </m_more_5yrs_with_TB_relapsing_fever>
+            <f_more_5yrs_with_TB_relapsing_fever>
+              0
+            </f_more_5yrs_with_TB_relapsing_fever>
+            <m_more_5yrs_died_from_TB_relapsing_fever>
+              0
+            </m_more_5yrs_died_from_TB_relapsing_fever>
+            <f_more_5yrs_died_from_TB_relapsing_fever>
+              0
+            </f_more_5yrs_died_from_TB_relapsing_fever>
+          </Tick_borne_relapsing_fever>
+          <yellow_fever>
+            <m_less_5yrs_with_yellow_fever>
+              0
+            </m_less_5yrs_with_yellow_fever>
+            <f_less_5yrs_with_yellow_fever>
+              0
+            </f_less_5yrs_with_yellow_fever>
+            <m_less_5yrs_died_from_yellow_fever>
+              0
+            </m_less_5yrs_died_from_yellow_fever>
+            <f_less_5yrs_died_from_yellow_fever>
+              0
+            </f_less_5yrs_died_from_yellow_fever>
+            <m_more_5yrs_with_yellow_fever>
+              0
+            </m_more_5yrs_with_yellow_fever>
+            <f_more_5yrs_with_yellow_fever>
+              0
+            </f_more_5yrs_with_yellow_fever>
+            <m_more_5yrs_died_from_yellow_fever>
+              0
+            </m_more_5yrs_died_from_yellow_fever>
+            <f_more_5yrs_died_from_yellow_fever>
+              0
+            </f_more_5yrs_died_from_yellow_fever>
+          </yellow_fever>
+          <malnutrition>
+            <m_less_5yrs_with_malnutrition>
+              0
+            </m_less_5yrs_with_malnutrition>
+            <f_less_5yrs_with_malnutrition>
+              0
+            </f_less_5yrs_with_malnutrition>
+            <m_less_5yrs_died_from_malnutrition>
+              0
+            </m_less_5yrs_died_from_malnutrition>
+            <f_less_5yrs_died_from_malnutrition>
+              0
+            </f_less_5yrs_died_from_malnutrition>
+            <m_more_5yrs_with_malnutrition>
+              0
+            </m_more_5yrs_with_malnutrition>
+            <f_more_5yrs_with_malnutrition>
+              0
+            </f_more_5yrs_with_malnutrition>
+            <m_more_5yrs_died_from_malnutrition>
+              0
+            </m_more_5yrs_died_from_malnutrition>
+            <f_more_5yrs_died_from_malnutrition>
+              0
+            </f_more_5yrs_died_from_malnutrition>
+          </malnutrition>
+          <Onchocerciasis>
+            <m_less_5yrs_with_Onchocerciasis>
+              0
+            </m_less_5yrs_with_Onchocerciasis>
+            <f_less_5yrs_with_Onchocerciasis>
+              0
+            </f_less_5yrs_with_Onchocerciasis>
+            <m_less_5yrs_died_Onchocerciasis>
+              0
+            </m_less_5yrs_died_Onchocerciasis>
+            <f_less_5yrs_died_from_Onchocerciasis>
+              0
+            </f_less_5yrs_died_from_Onchocerciasis>
+            <m_more_5yrs_with_Onchocerciasis>
+              0
+            </m_more_5yrs_with_Onchocerciasis>
+            <f_more_5yrs_with_Onchocerciasis>
+              0
+            </f_more_5yrs_with_Onchocerciasis>
+            <m_more_5yrs_died_from_Onchocerciasis>
+              0
+            </m_more_5yrs_died_from_Onchocerciasis>
+            <f_more_5yrs_died_from_Onchocerciasis>
+              0
+            </f_more_5yrs_died_from_Onchocerciasis>
+          </Onchocerciasis>
+          <Trachoma>
+            <m_less_5yrs_with_trachoma>
+              0
+            </m_less_5yrs_with_trachoma>
+            <f_less_5yrs_with_trachoma>
+              0
+            </f_less_5yrs_with_trachoma>
+            <m_less_5yrs_died_from_trachoma>
+              0
+            </m_less_5yrs_died_from_trachoma>
+            <f_less_5yrs_died_from_trachoma>
+              0
+            </f_less_5yrs_died_from_trachoma>
+            <m_more_5yrs_with_trachoma>
+              0
+            </m_more_5yrs_with_trachoma>
+            <f_more_5yrs_with_trachoma>
+              0
+            </f_more_5yrs_with_trachoma>
+            <m_more_5yrs_died_from_trachoma>
+              0
+            </m_more_5yrs_died_from_trachoma>
+            <f_more_5yrs_died_from_trachoma/>
+          </Trachoma>
+          <Typhoid>
+            <m_less_5yrs_with_typhoid>
+              0
+            </m_less_5yrs_with_typhoid>
+            <f_less_5yrs_with_typhoid>
+              0
+            </f_less_5yrs_with_typhoid>
+            <m_less_5yrs_died_from_typhoid>
+              0
+            </m_less_5yrs_died_from_typhoid>
+            <f_less_5yrs_died_from_typhoid>
+              0
+            </f_less_5yrs_died_from_typhoid>
+            <m_more_than_5yrs_with_typhoid>
+              0
+            </m_more_than_5yrs_with_typhoid>
+            <f_more_than_5yrs_with_typhoid>
+              0
+            </f_more_than_5yrs_with_typhoid>
+            <m_more_than_5yrs_died_from_typhoid>
+              0
+            </m_more_than_5yrs_died_from_typhoid>
+            <f_more_than_5yrs_died_from_typhoid>
+              0
+            </f_more_than_5yrs_died_from_typhoid>
+          </Typhoid>
+          <Final_details>
+            <name_of_health_facility_incharge/>
+            <Designation/>
+          </Final_details>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="eng">
+          <text id="/data/Initial_details:label">
+            <value>Initial details</value>
+          </text>
+          <text id="/data/Initial_details/District:label">
+            <value>District</value>
+          </text>
+          <text id="/data/Initial_details/District:option0">
+            <value>Kibaha</value>
+          </text>
+          <text id="/data/Initial_details/District:option1">
+            <value>Morogoro Mijini</value>
+          </text>
+          <text id="/data/Initial_details/District:option2">
+            <value>Ngorongoro</value>
+          </text>
+          <text id="/data/Initial_details/health_facility_name:label">
+            <value>Name of Health Facility</value>
+          </text>
+          <text id="/data/Initial_details/Number_of_healt_faci:label">
+            <value>Number of Health Facilities</value>
+          </text>
+          <text id="/data/Initial_details/Week:label">
+            <value>Week Number</value>
+          </text>
+          <text id="/data/Initial_details/Week:hint">
+            <value></value>
+          </text>
+          <text id="/data/AFP:label">
+            <value>AFP</value>
+          </text>
+          <text id="/data/AFP/m_Less_5yrs_with_AFP:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/AFP/m_Less_5yrs_with_AFP:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/AFP/f_less_5yrs_with_AFP:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/AFP/f_less_5yrs_with_AFP:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/AFP/m_Less_5yrs_died_from_AFP:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/AFP/m_Less_5yrs_died_from_AFP:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/AFP/f_Less_5yrs_died_from_AFP:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/AFP/f_Less_5yrs_died_from_AFP:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/AFP/m_more_5yrs_with_AFP:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/AFP/m_more_5yrs_with_AFP:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/AFP/f_more_5yrs_with_AFP:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/AFP/f_more_5yrs_with_AFP:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/AFP/m_more_5yrs_died_from_AFP:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/AFP/m_more_5yrs_died_from_AFP:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/AFP/f_more_5yrs_died_from_AFP:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/AFP/f_more_5yrs_died_from_AFP:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Anthrax:label">
+            <value>Anthrax</value>
+          </text>
+          <text id="/data/Anthrax/m_less_5yrs_with_anthrax:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Anthrax/m_less_5yrs_with_anthrax:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Anthrax/f_less_5yrs_with_anthrax:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Anthrax/f_less_5yrs_with_anthrax:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Anthrax/m_less_5yrs_died_from_anthrax:label">
+            <value>Male </value>
+          </text>
+          <text id="/data/Anthrax/m_less_5yrs_died_from_anthrax:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Anthrax/f_less_5yrs_died_from_anthrax:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Anthrax/f_less_5yrs_died_from_anthrax:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Anthrax/m_more_5yrs_with_anthrax:label">
+            <value>Male </value>
+          </text>
+          <text id="/data/Anthrax/m_more_5yrs_with_anthrax:hint">
+            <value>more than 5 years </value>
+          </text>
+          <text id="/data/Anthrax/f_more_5yrs_with_anthrax:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Anthrax/f_more_5yrs_with_anthrax:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Anthrax/m_more_5yrs_died_from_anthrax:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Anthrax/m_more_5yrs_died_from_anthrax:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Anthrax/f_more_5yrs_died_from_anthrax:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Anthrax/f_more_5yrs_died_from_anthrax:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/blood_diarhhea:label">
+            <value>Blood Diarrhes</value>
+          </text>
+          <text id="/data/blood_diarhhea/m_Less_5yrs_with_blood_diarrh:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/blood_diarhhea/m_Less_5yrs_with_blood_diarrh:hint">
+            <value>less than 5 years </value>
+          </text>
+          <text id="/data/blood_diarhhea/f_less_5yrs_with_blood_diarrh:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/blood_diarhhea/f_less_5yrs_with_blood_diarrh:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/blood_diarhhea/m_less_5yrs_died_from_blood_diarrh:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/blood_diarhhea/m_less_5yrs_died_from_blood_diarrh:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/blood_diarhhea/f_less_5yrs_died_from_blood_diarrh:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/blood_diarhhea/f_less_5yrs_died_from_blood_diarrh:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/blood_diarhhea/m_more_5yrs_with_blood_diarrh:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/blood_diarhhea/m_more_5yrs_with_blood_diarrh:hint">
+            <value>more than 5 years </value>
+          </text>
+          <text id="/data/blood_diarhhea/f_more_5yrs_with_blood_diarrh:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/blood_diarhhea/f_more_5yrs_with_blood_diarrh:hint">
+            <value>more than 5 years </value>
+          </text>
+          <text id="/data/blood_diarhhea/m_more_5yrs_died_from_blood_diarrh:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/blood_diarhhea/m_more_5yrs_died_from_blood_diarrh:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/blood_diarhhea/f_more_5yrs_died_from_blood_diarrh:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/blood_diarhhea/f_more_5yrs_died_from_blood_diarrh:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Cholera:label">
+            <value>Cholera</value>
+          </text>
+          <text id="/data/Cholera/m_Less_5yrs_with_cholera:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Cholera/m_Less_5yrs_with_cholera:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Cholera/f_Less_5yrs_with_cholera:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Cholera/f_Less_5yrs_with_cholera:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Cholera/m_Less_5yrs_died_from_cholera:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Cholera/m_Less_5yrs_died_from_cholera:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Cholera/f_less_5yrs_died_from_cholera:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Cholera/f_less_5yrs_died_from_cholera:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Cholera/m_more_5yrs_with_cholera:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Cholera/m_more_5yrs_with_cholera:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Cholera/f_more_5yrs_with_cholera:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Cholera/f_more_5yrs_with_cholera:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Cholera/m_more_5yrs_died_from_cholera:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Cholera/m_more_5yrs_died_from_cholera:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Cholera/f_more_5yrs_died_from_cholera:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Cholera/f_more_5yrs_died_from_cholera:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/CS_meningitis:label">
+            <value>Celebral Spinal Meningitis (CSM)</value>
+          </text>
+          <text id="/data/CS_meningitis/m_less_5yrs_with_CS_Meningitis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/CS_meningitis/m_less_5yrs_with_CS_Meningitis:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/CS_meningitis/f_less_5yrs_with_CS_Meningitis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/CS_meningitis/f_less_5yrs_with_CS_Meningitis:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/CS_meningitis/m_less_5yrs_died_from_CS_Meningitis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/CS_meningitis/m_less_5yrs_died_from_CS_Meningitis:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/CS_meningitis/f_less_5yrs_died_from_CS_Meningitis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/CS_meningitis/f_less_5yrs_died_from_CS_Meningitis:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/CS_meningitis/m_more_5yrs_with_CS_Meningitis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/CS_meningitis/m_more_5yrs_with_CS_Meningitis:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/CS_meningitis/f_more_5yrs_with_CS_Meningitis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/CS_meningitis/f_more_5yrs_with_CS_Meningitis:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/CS_meningitis/m_more_5yrs_died_from_CS_Meningitis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/CS_meningitis/m_more_5yrs_died_from_CS_Meningitis:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/CS_meningitis/f_more_5yrs_died_from_CS_Meningitis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/CS_meningitis/f_more_5yrs_died_from_CS_Meningitis:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Human_influenza_SARI:label">
+            <value>Human Influenza / SARI</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/m_less_5yrs_with_human_influenza:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/m_less_5yrs_with_human_influenza:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/f_less_5yrs_with_human_influenza:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/f_less_5yrs_with_human_influenza:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/m_less_5yrs_died_from_human_influenza:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/m_less_5yrs_died_from_human_influenza:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/f_less_5yrs_died_from_human_influenza:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/f_less_5yrs_died_from_human_influenza:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/m_more_5yrs_with_human_influenza:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/m_more_5yrs_with_human_influenza:hint">
+            <value>more than 5 years </value>
+          </text>
+          <text id="/data/Human_influenza_SARI/f_more_5yrs_with_human_influenza:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/f_more_5yrs_with_human_influenza:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/m_more_5yrs_died_from_human_influenza:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/m_more_5yrs_died_from_human_influenza:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/f_more_5yrs_died_from_human_influenza:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Human_influenza_SARI/f_more_5yrs_died_from_human_influenza:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis:label">
+            <value>Viral Keratoconjuctivitis</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/m_less_5yrs_with_v_keratoconjuctivitis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/m_less_5yrs_with_v_keratoconjuctivitis:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/f_less_5yrs_with_v_keratoconjuctivitis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/f_less_5yrs_with_v_keratoconjuctivitis:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/m_less_5yrs_died_from_v_keratoconjuctivitis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/m_less_5yrs_died_from_v_keratoconjuctivitis:hint">
+            <value>less than 5 years daied</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/f_less_5yrs_died_from_v_keratoconjuctivitis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/f_less_5yrs_died_from_v_keratoconjuctivitis:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/m_more_5yrs_with_v_keratoconjuctivitis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/m_more_5yrs_with_v_keratoconjuctivitis:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/f_more_5yrs_with_v_keratoconjuctivitis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/f_more_5yrs_with_v_keratoconjuctivitis:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/m_more_5yrs_died_from_v_keratoconjuctivitis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/m_more_5yrs_died_from_v_keratoconjuctivitis:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/f_more_5yrs_died_from_v_keratoconjuctivitis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Viral_Keratoconjuctivitis/f_more_5yrs_died_from_v_keratoconjuctivitis:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Measles:label">
+            <value>Measles</value>
+          </text>
+          <text id="/data/Measles/m_Less_5yrs_with_measles:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Measles/m_Less_5yrs_with_measles:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Measles/f_Less_5yrs_with_measles:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Measles/f_Less_5yrs_with_measles:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Measles/m_Less_5yrs_died_from_measles:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Measles/m_Less_5yrs_died_from_measles:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Measles/f_Less_5yrs_died_from_measles:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Measles/f_Less_5yrs_died_from_measles:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Measles/m_more_5yrs_with_measles:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Measles/m_more_5yrs_with_measles:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Measles/f_more_5yrs_with_measles:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Measles/f_more_5yrs_with_measles:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Measles/m_more_5yrs_died_from_measles:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Measles/m_more_5yrs_died_from_measles:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Measles/f_more_5yrs_died_died_from_measles:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Measles/f_more_5yrs_died_died_from_measles:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/neonatal_tetanus:label">
+            <value>Neonatal Tetanus</value>
+          </text>
+          <text id="/data/neonatal_tetanus/m_Less_28days_with_NNT:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/neonatal_tetanus/m_Less_28days_with_NNT:hint">
+            <value>less than 28 days</value>
+          </text>
+          <text id="/data/neonatal_tetanus/f_less_28days_with_NNT:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/neonatal_tetanus/f_less_28days_with_NNT:hint">
+            <value>less than 28 days</value>
+          </text>
+          <text id="/data/neonatal_tetanus/m_less_28days_died_from_NNT:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/neonatal_tetanus/m_less_28days_died_from_NNT:hint">
+            <value>less than 28 days died</value>
+          </text>
+          <text id="/data/neonatal_tetanus/f_less_28days_died_from_NNT:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/neonatal_tetanus/f_less_28days_died_from_NNT:hint">
+            <value>less than 28 days died</value>
+          </text>
+          <text id="/data/pneumonia:label">
+            <value>Pneumonia</value>
+          </text>
+          <text id="/data/pneumonia/m_less_5yrs_with_pneumonia:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/pneumonia/m_less_5yrs_with_pneumonia:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/pneumonia/f_less_5yrs_with_pneumonia:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/pneumonia/f_less_5yrs_with_pneumonia:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/pneumonia/m_less_5yrs_died_from_pneumonia:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/pneumonia/m_less_5yrs_died_from_pneumonia:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/pneumonia/f_less_5yrs_died_from_pneumonia:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/pneumonia/f_less_5yrs_died_from_pneumonia:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Plague:label">
+            <value>Plague</value>
+          </text>
+          <text id="/data/Plague/m_Less_5yrs_with_plague:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Plague/m_Less_5yrs_with_plague:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Plague/f_Less_5yrs_with_plague:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Plague/f_Less_5yrs_with_plague:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Plague/m_Less_5yrs_died_from_plague:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Plague/m_Less_5yrs_died_from_plague:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Plague/f_Less_5yrs_died_from_plague:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Plague/f_Less_5yrs_died_from_plague:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Plague/m_more_5yrs_with_plague:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Plague/m_more_5yrs_with_plague:hint">
+            <value>More than 5 years</value>
+          </text>
+          <text id="/data/Plague/f_more_5yrs_with_plague:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Plague/f_more_5yrs_with_plague:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Plague/m_more_5yrs_died_from_plague:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Plague/m_more_5yrs_died_from_plague:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Plague/f_more_5yrs_died_from_plague:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Plague/f_more_5yrs_died_from_plague:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Rabies:label">
+            <value>Rabies</value>
+          </text>
+          <text id="/data/Rabies/m_Less_5yrs_with_rabies:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Rabies/m_Less_5yrs_with_rabies:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Rabies/f_Less_5yrs_with_rabies:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Rabies/f_Less_5yrs_with_rabies:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Rabies/m_Less_5yrs_died_from_rabies:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Rabies/m_Less_5yrs_died_from_rabies:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Rabies/f_Less_5yrs_died_from_rabies:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Rabies/f_Less_5yrs_died_from_rabies:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Rabies/m_more_5yrs_with_rabies:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Rabies/m_more_5yrs_with_rabies:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Rabies/f_more_5yrs_with_rabies:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Rabies/f_more_5yrs_with_rabies:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Rabies/m_more_5yrs_died_from_rabies:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Rabies/m_more_5yrs_died_from_rabies:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Rabies/f_more_5yrs_died_from_rabies:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Rabies/f_more_5yrs_died_from_rabies:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Animal_Bites:label">
+            <value>Animal Bites</value>
+          </text>
+          <text id="/data/Animal_Bites/m_Less_5yrs_with_animal_bites:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Animal_Bites/m_Less_5yrs_with_animal_bites:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Animal_Bites/f_Less_5yrs_with_animal_bites:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Animal_Bites/f_Less_5yrs_with_animal_bites:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Animal_Bites/m_Less_5yrs_died_from_animal_bites:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Animal_Bites/m_Less_5yrs_died_from_animal_bites:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Animal_Bites/f_Less_5yrs_died_from_animal_bites:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Animal_Bites/f_Less_5yrs_died_from_animal_bites:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Animal_Bites/m_more_5yrs_with_animal_bites:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Animal_Bites/m_more_5yrs_with_animal_bites:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Animal_Bites/f_more_5yrs_with_animal_bites:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Animal_Bites/f_more_5yrs_with_animal_bites:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Animal_Bites/m_more_5yrs_died_from_animal_bites:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Animal_Bites/m_more_5yrs_died_from_animal_bites:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Animal_Bites/f_more_5yrs_died_from_animal_bites:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Animal_Bites/f_more_5yrs_died_from_animal_bites:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Small_pox:label">
+            <value>Small Pox</value>
+          </text>
+          <text id="/data/Small_pox/m_less_5yrs_with_small_pox:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Small_pox/m_less_5yrs_with_small_pox:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Small_pox/f_less_5yrs_with_small_pox:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Small_pox/f_less_5yrs_with_small_pox:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Small_pox/m_less_5yrs_died_from_small_pox:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Small_pox/m_less_5yrs_died_from_small_pox:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Small_pox/f_less_5yrs_died_from_small_pox:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Small_pox/f_less_5yrs_died_from_small_pox:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Small_pox/m_more_5yrs_with_small_pox:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Small_pox/m_more_5yrs_with_small_pox:hint">
+            <value>more than 5 yreas</value>
+          </text>
+          <text id="/data/Small_pox/f_more_5yrs_with_small_pox:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Small_pox/f_more_5yrs_with_small_pox:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Small_pox/m_more_5yrs_died_from_small_pox:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Small_pox/m_more_5yrs_died_from_small_pox:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Small_pox/f_more_5yrs_died_from_small_pox:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Small_pox/f_more_5yrs_died_from_small_pox:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Trypanosomiasis:label">
+            <value>Trypanosomiasis</value>
+          </text>
+          <text id="/data/Trypanosomiasis/m_less_5yrs_with_Trypanosomiasis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Trypanosomiasis/m_less_5yrs_with_Trypanosomiasis:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Trypanosomiasis/f_less_5yrs_with_Trypanosomiasis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Trypanosomiasis/f_less_5yrs_with_Trypanosomiasis:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Trypanosomiasis/m_less_5yrs_died_from_Trypanosomiasis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Trypanosomiasis/m_less_5yrs_died_from_Trypanosomiasis:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Trypanosomiasis/f_less_5yrs_died_from_Trypanosomiasis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Trypanosomiasis/f_less_5yrs_died_from_Trypanosomiasis:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Trypanosomiasis/m_more_5yrs_with_Trypanosomiasis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Trypanosomiasis/m_more_5yrs_with_Trypanosomiasis:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Trypanosomiasis/f_more_5yrs_with_Trypanosomiasis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Trypanosomiasis/f_more_5yrs_with_Trypanosomiasis:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Trypanosomiasis/m_more_5yrs_died_from_Trypanosomiasis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Trypanosomiasis/m_more_5yrs_died_from_Trypanosomiasis:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Trypanosomiasis/f_more_5yrs_died_from_Trypanosomiasis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Trypanosomiasis/f_more_5yrs_died_from_Trypanosomiasis:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers:label">
+            <value>Viral haemorrhagic fevers</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/m_less_5yrs_with_VHF:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/m_less_5yrs_with_VHF:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/f_less_5yrs_with_VHF:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/f_less_5yrs_with_VHF:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/m_less_5yrs_died_fromVHF:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/m_less_5yrs_died_fromVHF:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/f_less_5yrs_died_from_VHF:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/f_less_5yrs_died_from_VHF:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/m_more_5yrs_with_VHF:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/m_more_5yrs_with_VHF:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/f_more_5yrs_with_VHF:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/f_more_5yrs_with_VHF:hint">
+            <value>more than 5 years </value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/m_more_5yrs_died_from_VHF:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/m_more_5yrs_died_from_VHF:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/f_more_5yrs_died_from_VHF:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/viral_haemorrhagic_fevers/f_more_5yrs_died_from_VHF:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/diarrhoea_under_five:label">
+            <value>Diarrhoea &lt;5</value>
+          </text>
+          <text id="/data/diarrhoea_under_five/m_less_5yrs_with_diarrhoea:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/diarrhoea_under_five/m_less_5yrs_with_diarrhoea:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/diarrhoea_under_five/f_less_5yrs_with_diarrhoea:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/diarrhoea_under_five/f_less_5yrs_with_diarrhoea:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/diarrhoea_under_five/m_less_5yrs_died_from_diarrhoea:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/diarrhoea_under_five/m_less_5yrs_died_from_diarrhoea:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/diarrhoea_under_five/f_less_5yrs_died_from_diarrhoea:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/diarrhoea_under_five/f_less_5yrs_died_from_diarrhoea:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/malaria:label">
+            <value>Confirmed Malaria</value>
+          </text>
+          <text id="/data/malaria/total_number_less_five_yrs_tested_with_RDT_microscope:label">
+            <value>Total number tested with RDT/Microscope</value>
+          </text>
+          <text id="/data/malaria/total_number_less_five_yrs_tested_with_RDT_microscope:hint">
+            <value>less than 5 years (Cases)</value>
+          </text>
+          <text id="/data/malaria/total_number_more_five_yrs_tested_with_RDT_microscope:label">
+            <value>Total number tested with RDT/Microscope</value>
+          </text>
+          <text id="/data/malaria/total_number_more_five_yrs_tested_with_RDT_microscope:hint">
+            <value>more than 5 years (Cases)</value>
+          </text>
+          <text id="/data/malaria/total_tested_less_five_yrs_positive_with_RDT_Microscope:label">
+            <value>Total tested positive with RDT/Microscope</value>
+          </text>
+          <text id="/data/malaria/total_tested_less_five_yrs_positive_with_RDT_Microscope:hint">
+            <value>less than 5 years (Cases)</value>
+          </text>
+          <text id="/data/malaria/total_tested_more_five_yrs_positive_with_RDT_Microscope:label">
+            <value>Total tested positive with RDT/Microscope</value>
+          </text>
+          <text id="/data/malaria/total_tested_more_five_yrs_positive_with_RDT_Microscope:hint">
+            <value>more than 5 years (Cases)</value>
+          </text>
+          <text id="/data/malaria/total_clinical_less_five_years_malaria_case:label">
+            <value>Total Clinical malaria case</value>
+          </text>
+          <text id="/data/malaria/total_clinical_less_five_years_malaria_case:hint">
+            <value>less than 5 years </value>
+          </text>
+          <text id="/data/malaria/total_clinical_more_five_years_malaria_case:label">
+            <value>Total Clinical malaria case</value>
+          </text>
+          <text id="/data/malaria/total_clinical_more_five_years_malaria_case:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever:label">
+            <value>Tick Borne Relapsing Fever</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/m_less_5yrs_with_TB_relapsing_fever:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/m_less_5yrs_with_TB_relapsing_fever:hint">
+            <value>less than 5 years </value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/f_less_5yrs_with_TB_relapsing_fever:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/f_less_5yrs_with_TB_relapsing_fever:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/m_less_5yrs_died_from_TB_relapsing_fever:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/m_less_5yrs_died_from_TB_relapsing_fever:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/f_less_5yrs_died_from_TB_relapsing_fever:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/f_less_5yrs_died_from_TB_relapsing_fever:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/m_more_5yrs_with_TB_relapsing_fever:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/m_more_5yrs_with_TB_relapsing_fever:hint">
+            <value>more than 5 years </value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/f_more_5yrs_with_TB_relapsing_fever:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/f_more_5yrs_with_TB_relapsing_fever:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/m_more_5yrs_died_from_TB_relapsing_fever:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/m_more_5yrs_died_from_TB_relapsing_fever:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/f_more_5yrs_died_from_TB_relapsing_fever:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Tick_borne_relapsing_fever/f_more_5yrs_died_from_TB_relapsing_fever:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/yellow_fever:label">
+            <value>Yellow Fever</value>
+          </text>
+          <text id="/data/yellow_fever/m_less_5yrs_with_yellow_fever:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/yellow_fever/m_less_5yrs_with_yellow_fever:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/yellow_fever/f_less_5yrs_with_yellow_fever:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/yellow_fever/f_less_5yrs_with_yellow_fever:hint">
+            <value>less than 5 years </value>
+          </text>
+          <text id="/data/yellow_fever/m_less_5yrs_died_from_yellow_fever:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/yellow_fever/m_less_5yrs_died_from_yellow_fever:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/yellow_fever/f_less_5yrs_died_from_yellow_fever:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/yellow_fever/f_less_5yrs_died_from_yellow_fever:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/yellow_fever/m_more_5yrs_with_yellow_fever:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/yellow_fever/m_more_5yrs_with_yellow_fever:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/yellow_fever/f_more_5yrs_with_yellow_fever:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/yellow_fever/f_more_5yrs_with_yellow_fever:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/yellow_fever/m_more_5yrs_died_from_yellow_fever:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/yellow_fever/m_more_5yrs_died_from_yellow_fever:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/yellow_fever/f_more_5yrs_died_from_yellow_fever:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/yellow_fever/f_more_5yrs_died_from_yellow_fever:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/malnutrition:label">
+            <value>Malnutrition</value>
+          </text>
+          <text id="/data/malnutrition/m_less_5yrs_with_malnutrition:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/malnutrition/m_less_5yrs_with_malnutrition:hint">
+            <value>less tthan 5 years</value>
+          </text>
+          <text id="/data/malnutrition/f_less_5yrs_with_malnutrition:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/malnutrition/f_less_5yrs_with_malnutrition:hint">
+            <value>less than 5 years</value>
+          </text>
+          <text id="/data/malnutrition/m_less_5yrs_died_from_malnutrition:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/malnutrition/m_less_5yrs_died_from_malnutrition:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/malnutrition/f_less_5yrs_died_from_malnutrition:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/malnutrition/f_less_5yrs_died_from_malnutrition:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/malnutrition/m_more_5yrs_with_malnutrition:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/malnutrition/m_more_5yrs_with_malnutrition:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/malnutrition/f_more_5yrs_with_malnutrition:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/malnutrition/f_more_5yrs_with_malnutrition:hint">
+            <value>more than 5 years</value>
+          </text>
+          <text id="/data/malnutrition/m_more_5yrs_died_from_malnutrition:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/malnutrition/m_more_5yrs_died_from_malnutrition:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/malnutrition/f_more_5yrs_died_from_malnutrition:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/malnutrition/f_more_5yrs_died_from_malnutrition:hint">
+            <value>more than 5 years died</value>
+          </text>
+          <text id="/data/Onchocerciasis:label">
+            <value>Onchocerciasis</value>
+          </text>
+          <text id="/data/Onchocerciasis/m_less_5yrs_with_Onchocerciasis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Onchocerciasis/m_less_5yrs_with_Onchocerciasis:hint">
+            <value>less than 5 </value>
+          </text>
+          <text id="/data/Onchocerciasis/f_less_5yrs_with_Onchocerciasis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Onchocerciasis/f_less_5yrs_with_Onchocerciasis:hint">
+            <value>less than 5</value>
+          </text>
+          <text id="/data/Onchocerciasis/m_less_5yrs_died_Onchocerciasis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Onchocerciasis/m_less_5yrs_died_Onchocerciasis:hint">
+            <value>less than 5 years died</value>
+          </text>
+          <text id="/data/Onchocerciasis/f_less_5yrs_died_from_Onchocerciasis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Onchocerciasis/f_less_5yrs_died_from_Onchocerciasis:hint">
+            <value>less than 5 died</value>
+          </text>
+          <text id="/data/Onchocerciasis/m_more_5yrs_with_Onchocerciasis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Onchocerciasis/m_more_5yrs_with_Onchocerciasis:hint">
+            <value>more than 5</value>
+          </text>
+          <text id="/data/Onchocerciasis/f_more_5yrs_with_Onchocerciasis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Onchocerciasis/f_more_5yrs_with_Onchocerciasis:hint">
+            <value>more than 5</value>
+          </text>
+          <text id="/data/Onchocerciasis/m_more_5yrs_died_from_Onchocerciasis:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Onchocerciasis/m_more_5yrs_died_from_Onchocerciasis:hint">
+            <value>more than 5 died</value>
+          </text>
+          <text id="/data/Onchocerciasis/f_more_5yrs_died_from_Onchocerciasis:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Onchocerciasis/f_more_5yrs_died_from_Onchocerciasis:hint">
+            <value>more than 5 died</value>
+          </text>
+          <text id="/data/Trachoma:label">
+            <value>Trachoma</value>
+          </text>
+          <text id="/data/Trachoma/m_less_5yrs_with_trachoma:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Trachoma/m_less_5yrs_with_trachoma:hint">
+            <value>less than 5</value>
+          </text>
+          <text id="/data/Trachoma/f_less_5yrs_with_trachoma:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Trachoma/f_less_5yrs_with_trachoma:hint">
+            <value>less than 5</value>
+          </text>
+          <text id="/data/Trachoma/m_less_5yrs_died_from_trachoma:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Trachoma/m_less_5yrs_died_from_trachoma:hint">
+            <value>less than 5 died</value>
+          </text>
+          <text id="/data/Trachoma/f_less_5yrs_died_from_trachoma:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Trachoma/f_less_5yrs_died_from_trachoma:hint">
+            <value>less than 5 died</value>
+          </text>
+          <text id="/data/Trachoma/m_more_5yrs_with_trachoma:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Trachoma/m_more_5yrs_with_trachoma:hint">
+            <value>more than 5</value>
+          </text>
+          <text id="/data/Trachoma/f_more_5yrs_with_trachoma:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Trachoma/f_more_5yrs_with_trachoma:hint">
+            <value>more than 5</value>
+          </text>
+          <text id="/data/Trachoma/m_more_5yrs_died_from_trachoma:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Trachoma/m_more_5yrs_died_from_trachoma:hint">
+            <value>more than 5 died</value>
+          </text>
+          <text id="/data/Trachoma/f_more_5yrs_died_from_trachoma:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Trachoma/f_more_5yrs_died_from_trachoma:hint">
+            <value>more than 5 died</value>
+          </text>
+          <text id="/data/Typhoid:label">
+            <value>Typhoid</value>
+          </text>
+          <text id="/data/Typhoid/m_less_5yrs_with_typhoid:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Typhoid/m_less_5yrs_with_typhoid:hint">
+            <value>less than 5</value>
+          </text>
+          <text id="/data/Typhoid/f_less_5yrs_with_typhoid:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Typhoid/f_less_5yrs_with_typhoid:hint">
+            <value>less than 5</value>
+          </text>
+          <text id="/data/Typhoid/m_less_5yrs_died_from_typhoid:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Typhoid/m_less_5yrs_died_from_typhoid:hint">
+            <value>less than 5 died</value>
+          </text>
+          <text id="/data/Typhoid/f_less_5yrs_died_from_typhoid:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Typhoid/f_less_5yrs_died_from_typhoid:hint">
+            <value>less than 5 died</value>
+          </text>
+          <text id="/data/Typhoid/m_more_than_5yrs_with_typhoid:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Typhoid/m_more_than_5yrs_with_typhoid:hint">
+            <value>more than 5</value>
+          </text>
+          <text id="/data/Typhoid/f_more_than_5yrs_with_typhoid:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Typhoid/f_more_than_5yrs_with_typhoid:hint">
+            <value>more than 5</value>
+          </text>
+          <text id="/data/Typhoid/m_more_than_5yrs_died_from_typhoid:label">
+            <value>Male</value>
+          </text>
+          <text id="/data/Typhoid/m_more_than_5yrs_died_from_typhoid:hint">
+            <value>more than 5 died</value>
+          </text>
+          <text id="/data/Typhoid/f_more_than_5yrs_died_from_typhoid:label">
+            <value>Female</value>
+          </text>
+          <text id="/data/Typhoid/f_more_than_5yrs_died_from_typhoid:hint">
+            <value>more than 5 died</value>
+          </text>
+          <text id="/data/Final_details:label">
+            <value>Final details</value>
+          </text>
+          <text id="/data/Final_details/name_of_health_facility_incharge:label">
+            <value>Name</value>
+          </text>
+          <text id="/data/Final_details/name_of_health_facility_incharge:hint">
+            <value>Health Facility incharge / District Officer</value>
+          </text>
+          <text id="/data/Final_details/Designation:label">
+            <value>Designation</value>
+          </text>
+          <text id="/data/Final_details/Designation:option0">
+            <value>Clinical Officer</value>
+          </text>
+          <text id="/data/Final_details/Designation:option1">
+            <value>Nurse Attendant</value>
+          </text>
+          <text id="/data/Final_details/Designation:option2">
+            <value>Medical Officer</value>
+          </text>
+          <text id="/data/Final_details/Designation:option3">
+            <value>Nurse Midwife</value>
+          </text>
+          <text id="/data/Final_details/Designation:option4">
+            <value>Nurse Officer</value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <bind nodeset="/data/Initial_details/District" type="select1" required="true()"/>
+      <bind nodeset="/data/Initial_details/health_facility_name" type="string" required="true()"/>
+      <bind nodeset="/data/Initial_details/Number_of_healt_faci" type="int" required="true()"/>
+      <bind nodeset="/data/Initial_details/Week" type="int" required="true()"/>
+      <bind nodeset="/data/AFP/m_Less_5yrs_with_AFP" type="int" required="true()"/>
+      <bind nodeset="/data/AFP/f_less_5yrs_with_AFP" type="int" required="true()"/>
+      <bind nodeset="/data/AFP/m_Less_5yrs_died_from_AFP" type="int" required="true()"/>
+      <bind nodeset="/data/AFP/f_Less_5yrs_died_from_AFP" type="int" required="true()"/>
+      <bind nodeset="/data/AFP/m_more_5yrs_with_AFP" type="int" required="true()"/>
+      <bind nodeset="/data/AFP/f_more_5yrs_with_AFP" type="int" required="true()"/>
+      <bind nodeset="/data/AFP/m_more_5yrs_died_from_AFP" type="int" required="true()"/>
+      <bind nodeset="/data/AFP/f_more_5yrs_died_from_AFP" type="int" required="true()"/>
+      <bind nodeset="/data/Anthrax/m_less_5yrs_with_anthrax" type="int" required="true()"/>
+      <bind nodeset="/data/Anthrax/f_less_5yrs_with_anthrax" type="int" required="true()"/>
+      <bind nodeset="/data/Anthrax/m_less_5yrs_died_from_anthrax" type="int" required="true()"/>
+      <bind nodeset="/data/Anthrax/f_less_5yrs_died_from_anthrax" type="int" required="true()"/>
+      <bind nodeset="/data/Anthrax/m_more_5yrs_with_anthrax" type="int" required="true()"/>
+      <bind nodeset="/data/Anthrax/f_more_5yrs_with_anthrax" type="int" required="true()"/>
+      <bind nodeset="/data/Anthrax/m_more_5yrs_died_from_anthrax" type="int" required="true()"/>
+      <bind nodeset="/data/Anthrax/f_more_5yrs_died_from_anthrax" type="int" required="true()"/>
+      <bind nodeset="/data/blood_diarhhea/m_Less_5yrs_with_blood_diarrh" type="int" required="true()"/>
+      <bind nodeset="/data/blood_diarhhea/f_less_5yrs_with_blood_diarrh" type="int" required="true()"/>
+      <bind nodeset="/data/blood_diarhhea/m_less_5yrs_died_from_blood_diarrh" type="int" required="true()"/>
+      <bind nodeset="/data/blood_diarhhea/f_less_5yrs_died_from_blood_diarrh" type="int"/>
+      <bind nodeset="/data/blood_diarhhea/m_more_5yrs_with_blood_diarrh" type="int" required="true()"/>
+      <bind nodeset="/data/blood_diarhhea/f_more_5yrs_with_blood_diarrh" type="int" required="true()"/>
+      <bind nodeset="/data/blood_diarhhea/m_more_5yrs_died_from_blood_diarrh" type="int" required="true()"/>
+      <bind nodeset="/data/blood_diarhhea/f_more_5yrs_died_from_blood_diarrh" type="int" required="true()"/>
+      <bind nodeset="/data/Cholera/m_Less_5yrs_with_cholera" type="int" required="true()"/>
+      <bind nodeset="/data/Cholera/f_Less_5yrs_with_cholera" type="int" required="true()"/>
+      <bind nodeset="/data/Cholera/m_Less_5yrs_died_from_cholera" type="int" required="true()"/>
+      <bind nodeset="/data/Cholera/f_less_5yrs_died_from_cholera" type="int" required="true()"/>
+      <bind nodeset="/data/Cholera/m_more_5yrs_with_cholera" type="int" required="true()"/>
+      <bind nodeset="/data/Cholera/f_more_5yrs_with_cholera" type="int" required="true()"/>
+      <bind nodeset="/data/Cholera/m_more_5yrs_died_from_cholera" type="int" required="true()"/>
+      <bind nodeset="/data/Cholera/f_more_5yrs_died_from_cholera" type="int" required="true()"/>
+      <bind nodeset="/data/CS_meningitis/m_less_5yrs_with_CS_Meningitis" type="int" required="true()"/>
+      <bind nodeset="/data/CS_meningitis/f_less_5yrs_with_CS_Meningitis" type="int" required="true()"/>
+      <bind nodeset="/data/CS_meningitis/m_less_5yrs_died_from_CS_Meningitis" type="int" required="true()"/>
+      <bind nodeset="/data/CS_meningitis/f_less_5yrs_died_from_CS_Meningitis" type="int" required="true()"/>
+      <bind nodeset="/data/CS_meningitis/m_more_5yrs_with_CS_Meningitis" type="int" required="true()"/>
+      <bind nodeset="/data/CS_meningitis/f_more_5yrs_with_CS_Meningitis" type="int" required="true()"/>
+      <bind nodeset="/data/CS_meningitis/m_more_5yrs_died_from_CS_Meningitis" type="int" required="true()"/>
+      <bind nodeset="/data/CS_meningitis/f_more_5yrs_died_from_CS_Meningitis" type="int" required="true()"/>
+      <bind nodeset="/data/Human_influenza_SARI/m_less_5yrs_with_human_influenza" type="int" required="true()"/>
+      <bind nodeset="/data/Human_influenza_SARI/f_less_5yrs_with_human_influenza" type="int" required="true()"/>
+      <bind nodeset="/data/Human_influenza_SARI/m_less_5yrs_died_from_human_influenza" type="int"/>
+      <bind nodeset="/data/Human_influenza_SARI/f_less_5yrs_died_from_human_influenza" type="int" required="true()"/>
+      <bind nodeset="/data/Human_influenza_SARI/m_more_5yrs_with_human_influenza" type="int" required="true()"/>
+      <bind nodeset="/data/Human_influenza_SARI/f_more_5yrs_with_human_influenza" type="int" required="true()"/>
+      <bind nodeset="/data/Human_influenza_SARI/m_more_5yrs_died_from_human_influenza" type="int" required="true()"/>
+      <bind nodeset="/data/Human_influenza_SARI/f_more_5yrs_died_from_human_influenza" type="int" required="true()"/>
+      <bind nodeset="/data/Viral_Keratoconjuctivitis/m_less_5yrs_with_v_keratoconjuctivitis" type="int" required="true()"/>
+      <bind nodeset="/data/Viral_Keratoconjuctivitis/f_less_5yrs_with_v_keratoconjuctivitis" type="int" required="true()"/>
+      <bind nodeset="/data/Viral_Keratoconjuctivitis/m_less_5yrs_died_from_v_keratoconjuctivitis" type="int" required="true()"/>
+      <bind nodeset="/data/Viral_Keratoconjuctivitis/f_less_5yrs_died_from_v_keratoconjuctivitis" type="int" required="true()"/>
+      <bind nodeset="/data/Viral_Keratoconjuctivitis/m_more_5yrs_with_v_keratoconjuctivitis" type="int" required="true()"/>
+      <bind nodeset="/data/Viral_Keratoconjuctivitis/f_more_5yrs_with_v_keratoconjuctivitis" type="int" required="true()"/>
+      <bind nodeset="/data/Viral_Keratoconjuctivitis/m_more_5yrs_died_from_v_keratoconjuctivitis" type="int" required="true()"/>
+      <bind nodeset="/data/Viral_Keratoconjuctivitis/f_more_5yrs_died_from_v_keratoconjuctivitis" type="int" required="true()"/>
+      <bind nodeset="/data/Measles/m_Less_5yrs_with_measles" type="int" required="true()"/>
+      <bind nodeset="/data/Measles/f_Less_5yrs_with_measles" type="int" required="true()"/>
+      <bind nodeset="/data/Measles/m_Less_5yrs_died_from_measles" type="int" required="true()"/>
+      <bind nodeset="/data/Measles/f_Less_5yrs_died_from_measles" type="int" required="true()"/>
+      <bind nodeset="/data/Measles/m_more_5yrs_with_measles" type="int" required="true()"/>
+      <bind nodeset="/data/Measles/f_more_5yrs_with_measles" type="int" required="true()"/>
+      <bind nodeset="/data/Measles/m_more_5yrs_died_from_measles" type="int" required="true()"/>
+      <bind nodeset="/data/Measles/f_more_5yrs_died_died_from_measles" type="int" required="true()"/>
+      <bind nodeset="/data/neonatal_tetanus/m_Less_28days_with_NNT" type="int" required="true()"/>
+      <bind nodeset="/data/neonatal_tetanus/f_less_28days_with_NNT" type="int" required="true()"/>
+      <bind nodeset="/data/neonatal_tetanus/m_less_28days_died_from_NNT" type="int" required="true()"/>
+      <bind nodeset="/data/neonatal_tetanus/f_less_28days_died_from_NNT" type="int" required="true()"/>
+      <bind nodeset="/data/pneumonia/m_less_5yrs_with_pneumonia" type="int" required="true()"/>
+      <bind nodeset="/data/pneumonia/f_less_5yrs_with_pneumonia" type="int" required="true()"/>
+      <bind nodeset="/data/pneumonia/m_less_5yrs_died_from_pneumonia" type="int" required="true()"/>
+      <bind nodeset="/data/pneumonia/f_less_5yrs_died_from_pneumonia" type="int" required="true()"/>
+      <bind nodeset="/data/Plague/m_Less_5yrs_with_plague" type="int" required="true()"/>
+      <bind nodeset="/data/Plague/f_Less_5yrs_with_plague" type="int" required="true()"/>
+      <bind nodeset="/data/Plague/m_Less_5yrs_died_from_plague" type="int" required="true()"/>
+      <bind nodeset="/data/Plague/f_Less_5yrs_died_from_plague" type="int" required="true()"/>
+      <bind nodeset="/data/Plague/m_more_5yrs_with_plague" type="int" required="true()"/>
+      <bind nodeset="/data/Plague/f_more_5yrs_with_plague" type="int" required="true()"/>
+      <bind nodeset="/data/Plague/m_more_5yrs_died_from_plague" type="int" required="true()"/>
+      <bind nodeset="/data/Plague/f_more_5yrs_died_from_plague" type="int" required="true()"/>
+      <bind nodeset="/data/Rabies/m_Less_5yrs_with_rabies" type="int" required="true()"/>
+      <bind nodeset="/data/Rabies/f_Less_5yrs_with_rabies" type="int" required="true()"/>
+      <bind nodeset="/data/Rabies/m_Less_5yrs_died_from_rabies" type="int" required="true()"/>
+      <bind nodeset="/data/Rabies/f_Less_5yrs_died_from_rabies" type="int" required="true()"/>
+      <bind nodeset="/data/Rabies/m_more_5yrs_with_rabies" type="int" required="true()"/>
+      <bind nodeset="/data/Rabies/f_more_5yrs_with_rabies" type="int" required="true()"/>
+      <bind nodeset="/data/Rabies/m_more_5yrs_died_from_rabies" type="int" required="true()"/>
+      <bind nodeset="/data/Rabies/f_more_5yrs_died_from_rabies" type="int" required="true()"/>
+      <bind nodeset="/data/Animal_Bites/m_Less_5yrs_with_animal_bites" type="int" required="true()"/>
+      <bind nodeset="/data/Animal_Bites/f_Less_5yrs_with_animal_bites" type="int" required="true()"/>
+      <bind nodeset="/data/Animal_Bites/m_Less_5yrs_died_from_animal_bites" type="int" required="true()"/>
+      <bind nodeset="/data/Animal_Bites/f_Less_5yrs_died_from_animal_bites" type="int" required="true()"/>
+      <bind nodeset="/data/Animal_Bites/m_more_5yrs_with_animal_bites" type="int" required="true()"/>
+      <bind nodeset="/data/Animal_Bites/f_more_5yrs_with_animal_bites" type="int" required="true()"/>
+      <bind nodeset="/data/Animal_Bites/m_more_5yrs_died_from_animal_bites" type="int" required="true()"/>
+      <bind nodeset="/data/Animal_Bites/f_more_5yrs_died_from_animal_bites" type="int" required="true()"/>
+      <bind nodeset="/data/Small_pox/m_less_5yrs_with_small_pox" type="int" required="true()"/>
+      <bind nodeset="/data/Small_pox/f_less_5yrs_with_small_pox" type="int" required="true()"/>
+      <bind nodeset="/data/Small_pox/m_less_5yrs_died_from_small_pox" type="int" required="true()"/>
+      <bind nodeset="/data/Small_pox/f_less_5yrs_died_from_small_pox" type="int" required="true()"/>
+      <bind nodeset="/data/Small_pox/m_more_5yrs_with_small_pox" type="int"/>
+      <bind nodeset="/data/Small_pox/f_more_5yrs_with_small_pox" type="int" required="true()"/>
+      <bind nodeset="/data/Small_pox/m_more_5yrs_died_from_small_pox" type="int" required="true()"/>
+      <bind nodeset="/data/Small_pox/f_more_5yrs_died_from_small_pox" type="int" required="true()"/>
+      <bind nodeset="/data/Trypanosomiasis/m_less_5yrs_with_Trypanosomiasis" type="int" required="true()"/>
+      <bind nodeset="/data/Trypanosomiasis/f_less_5yrs_with_Trypanosomiasis" type="int" required="true()"/>
+      <bind nodeset="/data/Trypanosomiasis/m_less_5yrs_died_from_Trypanosomiasis" type="int" required="true()"/>
+      <bind nodeset="/data/Trypanosomiasis/f_less_5yrs_died_from_Trypanosomiasis" type="int" required="true()"/>
+      <bind nodeset="/data/Trypanosomiasis/m_more_5yrs_with_Trypanosomiasis" type="int" required="true()"/>
+      <bind nodeset="/data/Trypanosomiasis/f_more_5yrs_with_Trypanosomiasis" type="int" required="true()"/>
+      <bind nodeset="/data/Trypanosomiasis/m_more_5yrs_died_from_Trypanosomiasis" type="int" required="true()"/>
+      <bind nodeset="/data/Trypanosomiasis/f_more_5yrs_died_from_Trypanosomiasis" type="int" required="true()"/>
+      <bind nodeset="/data/viral_haemorrhagic_fevers/m_less_5yrs_with_VHF" type="int" required="true()"/>
+      <bind nodeset="/data/viral_haemorrhagic_fevers/f_less_5yrs_with_VHF" type="int" required="true()"/>
+      <bind nodeset="/data/viral_haemorrhagic_fevers/m_less_5yrs_died_fromVHF" type="int" required="true()"/>
+      <bind nodeset="/data/viral_haemorrhagic_fevers/f_less_5yrs_died_from_VHF" type="int" required="true()"/>
+      <bind nodeset="/data/viral_haemorrhagic_fevers/m_more_5yrs_with_VHF" type="int" required="true()"/>
+      <bind nodeset="/data/viral_haemorrhagic_fevers/f_more_5yrs_with_VHF" type="int" required="true()"/>
+      <bind nodeset="/data/viral_haemorrhagic_fevers/m_more_5yrs_died_from_VHF" type="int" required="true()"/>
+      <bind nodeset="/data/viral_haemorrhagic_fevers/f_more_5yrs_died_from_VHF" type="int" required="true()"/>
+      <bind nodeset="/data/diarrhoea_under_five/m_less_5yrs_with_diarrhoea" type="int" required="true()"/>
+      <bind nodeset="/data/diarrhoea_under_five/f_less_5yrs_with_diarrhoea" type="int" required="true()"/>
+      <bind nodeset="/data/diarrhoea_under_five/m_less_5yrs_died_from_diarrhoea" type="int" required="true()"/>
+      <bind nodeset="/data/diarrhoea_under_five/f_less_5yrs_died_from_diarrhoea" type="int" required="true()"/>
+      <bind nodeset="/data/malaria/total_number_less_five_yrs_tested_with_RDT_microscope" type="int" required="true()"/>
+      <bind nodeset="/data/malaria/total_number_more_five_yrs_tested_with_RDT_microscope" type="int" required="true()"/>
+      <bind nodeset="/data/malaria/total_tested_less_five_yrs_positive_with_RDT_Microscope" type="int" required="true()"/>
+      <bind nodeset="/data/malaria/total_tested_more_five_yrs_positive_with_RDT_Microscope" type="int" required="true()"/>
+      <bind nodeset="/data/malaria/total_clinical_less_five_years_malaria_case" type="int" required="true()"/>
+      <bind nodeset="/data/malaria/total_clinical_more_five_years_malaria_case" type="int" required="true()"/>
+      <bind nodeset="/data/Tick_borne_relapsing_fever/m_less_5yrs_with_TB_relapsing_fever" type="int" required="true()"/>
+      <bind nodeset="/data/Tick_borne_relapsing_fever/f_less_5yrs_with_TB_relapsing_fever" type="int" required="true()"/>
+      <bind nodeset="/data/Tick_borne_relapsing_fever/m_less_5yrs_died_from_TB_relapsing_fever" type="int" required="true()"/>
+      <bind nodeset="/data/Tick_borne_relapsing_fever/f_less_5yrs_died_from_TB_relapsing_fever" type="int" required="true()"/>
+      <bind nodeset="/data/Tick_borne_relapsing_fever/m_more_5yrs_with_TB_relapsing_fever" type="int" required="true()"/>
+      <bind nodeset="/data/Tick_borne_relapsing_fever/f_more_5yrs_with_TB_relapsing_fever" type="int" required="true()"/>
+      <bind nodeset="/data/Tick_borne_relapsing_fever/m_more_5yrs_died_from_TB_relapsing_fever" type="int" required="true()"/>
+      <bind nodeset="/data/Tick_borne_relapsing_fever/f_more_5yrs_died_from_TB_relapsing_fever" type="int" required="true()"/>
+      <bind nodeset="/data/yellow_fever/m_less_5yrs_with_yellow_fever" type="int" required="true()"/>
+      <bind nodeset="/data/yellow_fever/f_less_5yrs_with_yellow_fever" type="int" required="true()"/>
+      <bind nodeset="/data/yellow_fever/m_less_5yrs_died_from_yellow_fever" type="int" required="true()"/>
+      <bind nodeset="/data/yellow_fever/f_less_5yrs_died_from_yellow_fever" type="int" required="true()"/>
+      <bind nodeset="/data/yellow_fever/m_more_5yrs_with_yellow_fever" type="int" required="true()"/>
+      <bind nodeset="/data/yellow_fever/f_more_5yrs_with_yellow_fever" type="int" required="true()"/>
+      <bind nodeset="/data/yellow_fever/m_more_5yrs_died_from_yellow_fever" type="int" required="true()"/>
+      <bind nodeset="/data/yellow_fever/f_more_5yrs_died_from_yellow_fever" type="int" required="true()"/>
+      <bind nodeset="/data/malnutrition/m_less_5yrs_with_malnutrition" type="int" required="true()"/>
+      <bind nodeset="/data/malnutrition/f_less_5yrs_with_malnutrition" type="int" required="true()"/>
+      <bind nodeset="/data/malnutrition/m_less_5yrs_died_from_malnutrition" type="int" required="true()"/>
+      <bind nodeset="/data/malnutrition/f_less_5yrs_died_from_malnutrition" type="int" required="true()"/>
+      <bind nodeset="/data/malnutrition/m_more_5yrs_with_malnutrition" type="int" required="true()"/>
+      <bind nodeset="/data/malnutrition/f_more_5yrs_with_malnutrition" type="int" required="true()"/>
+      <bind nodeset="/data/malnutrition/m_more_5yrs_died_from_malnutrition" type="int" required="true()"/>
+      <bind nodeset="/data/malnutrition/f_more_5yrs_died_from_malnutrition" type="int" required="true()"/>
+      <bind nodeset="/data/Onchocerciasis/m_less_5yrs_with_Onchocerciasis" type="int"/>
+      <bind nodeset="/data/Onchocerciasis/f_less_5yrs_with_Onchocerciasis" type="int" required="true()"/>
+      <bind nodeset="/data/Onchocerciasis/m_less_5yrs_died_Onchocerciasis" type="int" required="true()"/>
+      <bind nodeset="/data/Onchocerciasis/f_less_5yrs_died_from_Onchocerciasis" type="int" required="true()"/>
+      <bind nodeset="/data/Onchocerciasis/m_more_5yrs_with_Onchocerciasis" type="int" required="true()"/>
+      <bind nodeset="/data/Onchocerciasis/f_more_5yrs_with_Onchocerciasis" type="int"/>
+      <bind nodeset="/data/Onchocerciasis/m_more_5yrs_died_from_Onchocerciasis" type="int" required="true()"/>
+      <bind nodeset="/data/Onchocerciasis/f_more_5yrs_died_from_Onchocerciasis" type="int" required="true()"/>
+      <bind nodeset="/data/Trachoma/m_less_5yrs_with_trachoma" type="int" required="true()"/>
+      <bind nodeset="/data/Trachoma/f_less_5yrs_with_trachoma" type="int" required="true()"/>
+      <bind nodeset="/data/Trachoma/m_less_5yrs_died_from_trachoma" type="int" required="true()"/>
+      <bind nodeset="/data/Trachoma/f_less_5yrs_died_from_trachoma" type="int" required="true()"/>
+      <bind nodeset="/data/Trachoma/m_more_5yrs_with_trachoma" type="int" required="true()"/>
+      <bind nodeset="/data/Trachoma/f_more_5yrs_with_trachoma" type="int" required="true()"/>
+      <bind nodeset="/data/Trachoma/m_more_5yrs_died_from_trachoma" type="int" required="true()"/>
+      <bind nodeset="/data/Trachoma/f_more_5yrs_died_from_trachoma" type="int"/>
+      <bind nodeset="/data/Typhoid/m_less_5yrs_with_typhoid" type="int" required="true()"/>
+      <bind nodeset="/data/Typhoid/f_less_5yrs_with_typhoid" type="int" required="true()"/>
+      <bind nodeset="/data/Typhoid/m_less_5yrs_died_from_typhoid" type="int" required="true()"/>
+      <bind nodeset="/data/Typhoid/f_less_5yrs_died_from_typhoid" type="int" required="true()"/>
+      <bind nodeset="/data/Typhoid/m_more_than_5yrs_with_typhoid" type="int" required="true()"/>
+      <bind nodeset="/data/Typhoid/f_more_than_5yrs_with_typhoid" type="int" required="true()"/>
+      <bind nodeset="/data/Typhoid/m_more_than_5yrs_died_from_typhoid" type="int" required="true()"/>
+      <bind nodeset="/data/Typhoid/f_more_than_5yrs_died_from_typhoid" type="int" required="true()"/>
+      <bind nodeset="/data/Final_details/name_of_health_facility_incharge" type="string" required="true()"/>
+      <bind nodeset="/data/Final_details/Designation" type="select1" required="true()"/>
+      <bind nodeset="/data/meta/instanceName" calculate="concat('Weekly Report',': ',/data/Initial_details/Week)" readonly="true()" type="string"/>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/data/meta/start" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/data/meta/end" type="dateTime"/>
+      <bind nodeset="/data/meta/username" type="string" jr:preload="property" jr:preloadParams="username"/>
+    </model>
+  </h:head>
+  <h:body>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Initial_details:label')"/>
+      <select1 appearance="minimal" ref="/data/Initial_details/District">
+        <label ref="jr:itext('/data/Initial_details/District:label')"/>
+        <item>
+          <label ref="jr:itext('/data/Initial_details/District:option0')"/>
+          <value>Kibaha</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Initial_details/District:option1')"/>
+          <value>morogoro_mjini</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Initial_details/District:option2')"/>
+          <value>ngorongoro</value>
+        </item>
+      </select1>
+      <input ref="/data/Initial_details/health_facility_name">
+        <label ref="jr:itext('/data/Initial_details/health_facility_name:label')"/>
+      </input>
+      <input ref="/data/Initial_details/Number_of_healt_faci">
+        <label ref="jr:itext('/data/Initial_details/Number_of_healt_faci:label')"/>
+      </input>
+      <input ref="/data/Initial_details/Week">
+        <label ref="jr:itext('/data/Initial_details/Week:label')"/>
+        <hint ref="jr:itext('/data/Initial_details/Week:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/AFP:label')"/>
+      <input ref="/data/AFP/m_Less_5yrs_with_AFP">
+        <label ref="jr:itext('/data/AFP/m_Less_5yrs_with_AFP:label')"/>
+        <hint ref="jr:itext('/data/AFP/m_Less_5yrs_with_AFP:hint')"/>
+      </input>
+      <input ref="/data/AFP/f_less_5yrs_with_AFP">
+        <label ref="jr:itext('/data/AFP/f_less_5yrs_with_AFP:label')"/>
+        <hint ref="jr:itext('/data/AFP/f_less_5yrs_with_AFP:hint')"/>
+      </input>
+      <input ref="/data/AFP/m_Less_5yrs_died_from_AFP">
+        <label ref="jr:itext('/data/AFP/m_Less_5yrs_died_from_AFP:label')"/>
+        <hint ref="jr:itext('/data/AFP/m_Less_5yrs_died_from_AFP:hint')"/>
+      </input>
+      <input ref="/data/AFP/f_Less_5yrs_died_from_AFP">
+        <label ref="jr:itext('/data/AFP/f_Less_5yrs_died_from_AFP:label')"/>
+        <hint ref="jr:itext('/data/AFP/f_Less_5yrs_died_from_AFP:hint')"/>
+      </input>
+      <input ref="/data/AFP/m_more_5yrs_with_AFP">
+        <label ref="jr:itext('/data/AFP/m_more_5yrs_with_AFP:label')"/>
+        <hint ref="jr:itext('/data/AFP/m_more_5yrs_with_AFP:hint')"/>
+      </input>
+      <input ref="/data/AFP/f_more_5yrs_with_AFP">
+        <label ref="jr:itext('/data/AFP/f_more_5yrs_with_AFP:label')"/>
+        <hint ref="jr:itext('/data/AFP/f_more_5yrs_with_AFP:hint')"/>
+      </input>
+      <input ref="/data/AFP/m_more_5yrs_died_from_AFP">
+        <label ref="jr:itext('/data/AFP/m_more_5yrs_died_from_AFP:label')"/>
+        <hint ref="jr:itext('/data/AFP/m_more_5yrs_died_from_AFP:hint')"/>
+      </input>
+      <input ref="/data/AFP/f_more_5yrs_died_from_AFP">
+        <label ref="jr:itext('/data/AFP/f_more_5yrs_died_from_AFP:label')"/>
+        <hint ref="jr:itext('/data/AFP/f_more_5yrs_died_from_AFP:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Anthrax:label')"/>
+      <input ref="/data/Anthrax/m_less_5yrs_with_anthrax">
+        <label ref="jr:itext('/data/Anthrax/m_less_5yrs_with_anthrax:label')"/>
+        <hint ref="jr:itext('/data/Anthrax/m_less_5yrs_with_anthrax:hint')"/>
+      </input>
+      <input ref="/data/Anthrax/f_less_5yrs_with_anthrax">
+        <label ref="jr:itext('/data/Anthrax/f_less_5yrs_with_anthrax:label')"/>
+        <hint ref="jr:itext('/data/Anthrax/f_less_5yrs_with_anthrax:hint')"/>
+      </input>
+      <input ref="/data/Anthrax/m_less_5yrs_died_from_anthrax">
+        <label ref="jr:itext('/data/Anthrax/m_less_5yrs_died_from_anthrax:label')"/>
+        <hint ref="jr:itext('/data/Anthrax/m_less_5yrs_died_from_anthrax:hint')"/>
+      </input>
+      <input ref="/data/Anthrax/f_less_5yrs_died_from_anthrax">
+        <label ref="jr:itext('/data/Anthrax/f_less_5yrs_died_from_anthrax:label')"/>
+        <hint ref="jr:itext('/data/Anthrax/f_less_5yrs_died_from_anthrax:hint')"/>
+      </input>
+      <input ref="/data/Anthrax/m_more_5yrs_with_anthrax">
+        <label ref="jr:itext('/data/Anthrax/m_more_5yrs_with_anthrax:label')"/>
+        <hint ref="jr:itext('/data/Anthrax/m_more_5yrs_with_anthrax:hint')"/>
+      </input>
+      <input ref="/data/Anthrax/f_more_5yrs_with_anthrax">
+        <label ref="jr:itext('/data/Anthrax/f_more_5yrs_with_anthrax:label')"/>
+        <hint ref="jr:itext('/data/Anthrax/f_more_5yrs_with_anthrax:hint')"/>
+      </input>
+      <input ref="/data/Anthrax/m_more_5yrs_died_from_anthrax">
+        <label ref="jr:itext('/data/Anthrax/m_more_5yrs_died_from_anthrax:label')"/>
+        <hint ref="jr:itext('/data/Anthrax/m_more_5yrs_died_from_anthrax:hint')"/>
+      </input>
+      <input ref="/data/Anthrax/f_more_5yrs_died_from_anthrax">
+        <label ref="jr:itext('/data/Anthrax/f_more_5yrs_died_from_anthrax:label')"/>
+        <hint ref="jr:itext('/data/Anthrax/f_more_5yrs_died_from_anthrax:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/blood_diarhhea:label')"/>
+      <input ref="/data/blood_diarhhea/m_Less_5yrs_with_blood_diarrh">
+        <label ref="jr:itext('/data/blood_diarhhea/m_Less_5yrs_with_blood_diarrh:label')"/>
+        <hint ref="jr:itext('/data/blood_diarhhea/m_Less_5yrs_with_blood_diarrh:hint')"/>
+      </input>
+      <input ref="/data/blood_diarhhea/f_less_5yrs_with_blood_diarrh">
+        <label ref="jr:itext('/data/blood_diarhhea/f_less_5yrs_with_blood_diarrh:label')"/>
+        <hint ref="jr:itext('/data/blood_diarhhea/f_less_5yrs_with_blood_diarrh:hint')"/>
+      </input>
+      <input ref="/data/blood_diarhhea/m_less_5yrs_died_from_blood_diarrh">
+        <label ref="jr:itext('/data/blood_diarhhea/m_less_5yrs_died_from_blood_diarrh:label')"/>
+        <hint ref="jr:itext('/data/blood_diarhhea/m_less_5yrs_died_from_blood_diarrh:hint')"/>
+      </input>
+      <input ref="/data/blood_diarhhea/f_less_5yrs_died_from_blood_diarrh">
+        <label ref="jr:itext('/data/blood_diarhhea/f_less_5yrs_died_from_blood_diarrh:label')"/>
+        <hint ref="jr:itext('/data/blood_diarhhea/f_less_5yrs_died_from_blood_diarrh:hint')"/>
+      </input>
+      <input ref="/data/blood_diarhhea/m_more_5yrs_with_blood_diarrh">
+        <label ref="jr:itext('/data/blood_diarhhea/m_more_5yrs_with_blood_diarrh:label')"/>
+        <hint ref="jr:itext('/data/blood_diarhhea/m_more_5yrs_with_blood_diarrh:hint')"/>
+      </input>
+      <input ref="/data/blood_diarhhea/f_more_5yrs_with_blood_diarrh">
+        <label ref="jr:itext('/data/blood_diarhhea/f_more_5yrs_with_blood_diarrh:label')"/>
+        <hint ref="jr:itext('/data/blood_diarhhea/f_more_5yrs_with_blood_diarrh:hint')"/>
+      </input>
+      <input ref="/data/blood_diarhhea/m_more_5yrs_died_from_blood_diarrh">
+        <label ref="jr:itext('/data/blood_diarhhea/m_more_5yrs_died_from_blood_diarrh:label')"/>
+        <hint ref="jr:itext('/data/blood_diarhhea/m_more_5yrs_died_from_blood_diarrh:hint')"/>
+      </input>
+      <input ref="/data/blood_diarhhea/f_more_5yrs_died_from_blood_diarrh">
+        <label ref="jr:itext('/data/blood_diarhhea/f_more_5yrs_died_from_blood_diarrh:label')"/>
+        <hint ref="jr:itext('/data/blood_diarhhea/f_more_5yrs_died_from_blood_diarrh:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Cholera:label')"/>
+      <input ref="/data/Cholera/m_Less_5yrs_with_cholera">
+        <label ref="jr:itext('/data/Cholera/m_Less_5yrs_with_cholera:label')"/>
+        <hint ref="jr:itext('/data/Cholera/m_Less_5yrs_with_cholera:hint')"/>
+      </input>
+      <input ref="/data/Cholera/f_Less_5yrs_with_cholera">
+        <label ref="jr:itext('/data/Cholera/f_Less_5yrs_with_cholera:label')"/>
+        <hint ref="jr:itext('/data/Cholera/f_Less_5yrs_with_cholera:hint')"/>
+      </input>
+      <input ref="/data/Cholera/m_Less_5yrs_died_from_cholera">
+        <label ref="jr:itext('/data/Cholera/m_Less_5yrs_died_from_cholera:label')"/>
+        <hint ref="jr:itext('/data/Cholera/m_Less_5yrs_died_from_cholera:hint')"/>
+      </input>
+      <input ref="/data/Cholera/f_less_5yrs_died_from_cholera">
+        <label ref="jr:itext('/data/Cholera/f_less_5yrs_died_from_cholera:label')"/>
+        <hint ref="jr:itext('/data/Cholera/f_less_5yrs_died_from_cholera:hint')"/>
+      </input>
+      <input ref="/data/Cholera/m_more_5yrs_with_cholera">
+        <label ref="jr:itext('/data/Cholera/m_more_5yrs_with_cholera:label')"/>
+        <hint ref="jr:itext('/data/Cholera/m_more_5yrs_with_cholera:hint')"/>
+      </input>
+      <input ref="/data/Cholera/f_more_5yrs_with_cholera">
+        <label ref="jr:itext('/data/Cholera/f_more_5yrs_with_cholera:label')"/>
+        <hint ref="jr:itext('/data/Cholera/f_more_5yrs_with_cholera:hint')"/>
+      </input>
+      <input ref="/data/Cholera/m_more_5yrs_died_from_cholera">
+        <label ref="jr:itext('/data/Cholera/m_more_5yrs_died_from_cholera:label')"/>
+        <hint ref="jr:itext('/data/Cholera/m_more_5yrs_died_from_cholera:hint')"/>
+      </input>
+      <input ref="/data/Cholera/f_more_5yrs_died_from_cholera">
+        <label ref="jr:itext('/data/Cholera/f_more_5yrs_died_from_cholera:label')"/>
+        <hint ref="jr:itext('/data/Cholera/f_more_5yrs_died_from_cholera:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/CS_meningitis:label')"/>
+      <input ref="/data/CS_meningitis/m_less_5yrs_with_CS_Meningitis">
+        <label ref="jr:itext('/data/CS_meningitis/m_less_5yrs_with_CS_Meningitis:label')"/>
+        <hint ref="jr:itext('/data/CS_meningitis/m_less_5yrs_with_CS_Meningitis:hint')"/>
+      </input>
+      <input ref="/data/CS_meningitis/f_less_5yrs_with_CS_Meningitis">
+        <label ref="jr:itext('/data/CS_meningitis/f_less_5yrs_with_CS_Meningitis:label')"/>
+        <hint ref="jr:itext('/data/CS_meningitis/f_less_5yrs_with_CS_Meningitis:hint')"/>
+      </input>
+      <input ref="/data/CS_meningitis/m_less_5yrs_died_from_CS_Meningitis">
+        <label ref="jr:itext('/data/CS_meningitis/m_less_5yrs_died_from_CS_Meningitis:label')"/>
+        <hint ref="jr:itext('/data/CS_meningitis/m_less_5yrs_died_from_CS_Meningitis:hint')"/>
+      </input>
+      <input ref="/data/CS_meningitis/f_less_5yrs_died_from_CS_Meningitis">
+        <label ref="jr:itext('/data/CS_meningitis/f_less_5yrs_died_from_CS_Meningitis:label')"/>
+        <hint ref="jr:itext('/data/CS_meningitis/f_less_5yrs_died_from_CS_Meningitis:hint')"/>
+      </input>
+      <input ref="/data/CS_meningitis/m_more_5yrs_with_CS_Meningitis">
+        <label ref="jr:itext('/data/CS_meningitis/m_more_5yrs_with_CS_Meningitis:label')"/>
+        <hint ref="jr:itext('/data/CS_meningitis/m_more_5yrs_with_CS_Meningitis:hint')"/>
+      </input>
+      <input ref="/data/CS_meningitis/f_more_5yrs_with_CS_Meningitis">
+        <label ref="jr:itext('/data/CS_meningitis/f_more_5yrs_with_CS_Meningitis:label')"/>
+        <hint ref="jr:itext('/data/CS_meningitis/f_more_5yrs_with_CS_Meningitis:hint')"/>
+      </input>
+      <input ref="/data/CS_meningitis/m_more_5yrs_died_from_CS_Meningitis">
+        <label ref="jr:itext('/data/CS_meningitis/m_more_5yrs_died_from_CS_Meningitis:label')"/>
+        <hint ref="jr:itext('/data/CS_meningitis/m_more_5yrs_died_from_CS_Meningitis:hint')"/>
+      </input>
+      <input ref="/data/CS_meningitis/f_more_5yrs_died_from_CS_Meningitis">
+        <label ref="jr:itext('/data/CS_meningitis/f_more_5yrs_died_from_CS_Meningitis:label')"/>
+        <hint ref="jr:itext('/data/CS_meningitis/f_more_5yrs_died_from_CS_Meningitis:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Human_influenza_SARI:label')"/>
+      <input ref="/data/Human_influenza_SARI/m_less_5yrs_with_human_influenza">
+        <label ref="jr:itext('/data/Human_influenza_SARI/m_less_5yrs_with_human_influenza:label')"/>
+        <hint ref="jr:itext('/data/Human_influenza_SARI/m_less_5yrs_with_human_influenza:hint')"/>
+      </input>
+      <input ref="/data/Human_influenza_SARI/f_less_5yrs_with_human_influenza">
+        <label ref="jr:itext('/data/Human_influenza_SARI/f_less_5yrs_with_human_influenza:label')"/>
+        <hint ref="jr:itext('/data/Human_influenza_SARI/f_less_5yrs_with_human_influenza:hint')"/>
+      </input>
+      <input ref="/data/Human_influenza_SARI/m_less_5yrs_died_from_human_influenza">
+        <label ref="jr:itext('/data/Human_influenza_SARI/m_less_5yrs_died_from_human_influenza:label')"/>
+        <hint ref="jr:itext('/data/Human_influenza_SARI/m_less_5yrs_died_from_human_influenza:hint')"/>
+      </input>
+      <input ref="/data/Human_influenza_SARI/f_less_5yrs_died_from_human_influenza">
+        <label ref="jr:itext('/data/Human_influenza_SARI/f_less_5yrs_died_from_human_influenza:label')"/>
+        <hint ref="jr:itext('/data/Human_influenza_SARI/f_less_5yrs_died_from_human_influenza:hint')"/>
+      </input>
+      <input ref="/data/Human_influenza_SARI/m_more_5yrs_with_human_influenza">
+        <label ref="jr:itext('/data/Human_influenza_SARI/m_more_5yrs_with_human_influenza:label')"/>
+        <hint ref="jr:itext('/data/Human_influenza_SARI/m_more_5yrs_with_human_influenza:hint')"/>
+      </input>
+      <input ref="/data/Human_influenza_SARI/f_more_5yrs_with_human_influenza">
+        <label ref="jr:itext('/data/Human_influenza_SARI/f_more_5yrs_with_human_influenza:label')"/>
+        <hint ref="jr:itext('/data/Human_influenza_SARI/f_more_5yrs_with_human_influenza:hint')"/>
+      </input>
+      <input ref="/data/Human_influenza_SARI/m_more_5yrs_died_from_human_influenza">
+        <label ref="jr:itext('/data/Human_influenza_SARI/m_more_5yrs_died_from_human_influenza:label')"/>
+        <hint ref="jr:itext('/data/Human_influenza_SARI/m_more_5yrs_died_from_human_influenza:hint')"/>
+      </input>
+      <input ref="/data/Human_influenza_SARI/f_more_5yrs_died_from_human_influenza">
+        <label ref="jr:itext('/data/Human_influenza_SARI/f_more_5yrs_died_from_human_influenza:label')"/>
+        <hint ref="jr:itext('/data/Human_influenza_SARI/f_more_5yrs_died_from_human_influenza:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Viral_Keratoconjuctivitis:label')"/>
+      <input ref="/data/Viral_Keratoconjuctivitis/m_less_5yrs_with_v_keratoconjuctivitis">
+        <label ref="jr:itext('/data/Viral_Keratoconjuctivitis/m_less_5yrs_with_v_keratoconjuctivitis:label')"/>
+        <hint ref="jr:itext('/data/Viral_Keratoconjuctivitis/m_less_5yrs_with_v_keratoconjuctivitis:hint')"/>
+      </input>
+      <input ref="/data/Viral_Keratoconjuctivitis/f_less_5yrs_with_v_keratoconjuctivitis">
+        <label ref="jr:itext('/data/Viral_Keratoconjuctivitis/f_less_5yrs_with_v_keratoconjuctivitis:label')"/>
+        <hint ref="jr:itext('/data/Viral_Keratoconjuctivitis/f_less_5yrs_with_v_keratoconjuctivitis:hint')"/>
+      </input>
+      <input ref="/data/Viral_Keratoconjuctivitis/m_less_5yrs_died_from_v_keratoconjuctivitis">
+        <label ref="jr:itext('/data/Viral_Keratoconjuctivitis/m_less_5yrs_died_from_v_keratoconjuctivitis:label')"/>
+        <hint ref="jr:itext('/data/Viral_Keratoconjuctivitis/m_less_5yrs_died_from_v_keratoconjuctivitis:hint')"/>
+      </input>
+      <input ref="/data/Viral_Keratoconjuctivitis/f_less_5yrs_died_from_v_keratoconjuctivitis">
+        <label ref="jr:itext('/data/Viral_Keratoconjuctivitis/f_less_5yrs_died_from_v_keratoconjuctivitis:label')"/>
+        <hint ref="jr:itext('/data/Viral_Keratoconjuctivitis/f_less_5yrs_died_from_v_keratoconjuctivitis:hint')"/>
+      </input>
+      <input ref="/data/Viral_Keratoconjuctivitis/m_more_5yrs_with_v_keratoconjuctivitis">
+        <label ref="jr:itext('/data/Viral_Keratoconjuctivitis/m_more_5yrs_with_v_keratoconjuctivitis:label')"/>
+        <hint ref="jr:itext('/data/Viral_Keratoconjuctivitis/m_more_5yrs_with_v_keratoconjuctivitis:hint')"/>
+      </input>
+      <input ref="/data/Viral_Keratoconjuctivitis/f_more_5yrs_with_v_keratoconjuctivitis">
+        <label ref="jr:itext('/data/Viral_Keratoconjuctivitis/f_more_5yrs_with_v_keratoconjuctivitis:label')"/>
+        <hint ref="jr:itext('/data/Viral_Keratoconjuctivitis/f_more_5yrs_with_v_keratoconjuctivitis:hint')"/>
+      </input>
+      <input ref="/data/Viral_Keratoconjuctivitis/m_more_5yrs_died_from_v_keratoconjuctivitis">
+        <label ref="jr:itext('/data/Viral_Keratoconjuctivitis/m_more_5yrs_died_from_v_keratoconjuctivitis:label')"/>
+        <hint ref="jr:itext('/data/Viral_Keratoconjuctivitis/m_more_5yrs_died_from_v_keratoconjuctivitis:hint')"/>
+      </input>
+      <input ref="/data/Viral_Keratoconjuctivitis/f_more_5yrs_died_from_v_keratoconjuctivitis">
+        <label ref="jr:itext('/data/Viral_Keratoconjuctivitis/f_more_5yrs_died_from_v_keratoconjuctivitis:label')"/>
+        <hint ref="jr:itext('/data/Viral_Keratoconjuctivitis/f_more_5yrs_died_from_v_keratoconjuctivitis:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Measles:label')"/>
+      <input ref="/data/Measles/m_Less_5yrs_with_measles">
+        <label ref="jr:itext('/data/Measles/m_Less_5yrs_with_measles:label')"/>
+        <hint ref="jr:itext('/data/Measles/m_Less_5yrs_with_measles:hint')"/>
+      </input>
+      <input ref="/data/Measles/f_Less_5yrs_with_measles">
+        <label ref="jr:itext('/data/Measles/f_Less_5yrs_with_measles:label')"/>
+        <hint ref="jr:itext('/data/Measles/f_Less_5yrs_with_measles:hint')"/>
+      </input>
+      <input ref="/data/Measles/m_Less_5yrs_died_from_measles">
+        <label ref="jr:itext('/data/Measles/m_Less_5yrs_died_from_measles:label')"/>
+        <hint ref="jr:itext('/data/Measles/m_Less_5yrs_died_from_measles:hint')"/>
+      </input>
+      <input ref="/data/Measles/f_Less_5yrs_died_from_measles">
+        <label ref="jr:itext('/data/Measles/f_Less_5yrs_died_from_measles:label')"/>
+        <hint ref="jr:itext('/data/Measles/f_Less_5yrs_died_from_measles:hint')"/>
+      </input>
+      <input ref="/data/Measles/m_more_5yrs_with_measles">
+        <label ref="jr:itext('/data/Measles/m_more_5yrs_with_measles:label')"/>
+        <hint ref="jr:itext('/data/Measles/m_more_5yrs_with_measles:hint')"/>
+      </input>
+      <input ref="/data/Measles/f_more_5yrs_with_measles">
+        <label ref="jr:itext('/data/Measles/f_more_5yrs_with_measles:label')"/>
+        <hint ref="jr:itext('/data/Measles/f_more_5yrs_with_measles:hint')"/>
+      </input>
+      <input ref="/data/Measles/m_more_5yrs_died_from_measles">
+        <label ref="jr:itext('/data/Measles/m_more_5yrs_died_from_measles:label')"/>
+        <hint ref="jr:itext('/data/Measles/m_more_5yrs_died_from_measles:hint')"/>
+      </input>
+      <input ref="/data/Measles/f_more_5yrs_died_died_from_measles">
+        <label ref="jr:itext('/data/Measles/f_more_5yrs_died_died_from_measles:label')"/>
+        <hint ref="jr:itext('/data/Measles/f_more_5yrs_died_died_from_measles:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/neonatal_tetanus:label')"/>
+      <input ref="/data/neonatal_tetanus/m_Less_28days_with_NNT">
+        <label ref="jr:itext('/data/neonatal_tetanus/m_Less_28days_with_NNT:label')"/>
+        <hint ref="jr:itext('/data/neonatal_tetanus/m_Less_28days_with_NNT:hint')"/>
+      </input>
+      <input ref="/data/neonatal_tetanus/f_less_28days_with_NNT">
+        <label ref="jr:itext('/data/neonatal_tetanus/f_less_28days_with_NNT:label')"/>
+        <hint ref="jr:itext('/data/neonatal_tetanus/f_less_28days_with_NNT:hint')"/>
+      </input>
+      <input ref="/data/neonatal_tetanus/m_less_28days_died_from_NNT">
+        <label ref="jr:itext('/data/neonatal_tetanus/m_less_28days_died_from_NNT:label')"/>
+        <hint ref="jr:itext('/data/neonatal_tetanus/m_less_28days_died_from_NNT:hint')"/>
+      </input>
+      <input ref="/data/neonatal_tetanus/f_less_28days_died_from_NNT">
+        <label ref="jr:itext('/data/neonatal_tetanus/f_less_28days_died_from_NNT:label')"/>
+        <hint ref="jr:itext('/data/neonatal_tetanus/f_less_28days_died_from_NNT:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/pneumonia:label')"/>
+      <input ref="/data/pneumonia/m_less_5yrs_with_pneumonia">
+        <label ref="jr:itext('/data/pneumonia/m_less_5yrs_with_pneumonia:label')"/>
+        <hint ref="jr:itext('/data/pneumonia/m_less_5yrs_with_pneumonia:hint')"/>
+      </input>
+      <input ref="/data/pneumonia/f_less_5yrs_with_pneumonia">
+        <label ref="jr:itext('/data/pneumonia/f_less_5yrs_with_pneumonia:label')"/>
+        <hint ref="jr:itext('/data/pneumonia/f_less_5yrs_with_pneumonia:hint')"/>
+      </input>
+      <input ref="/data/pneumonia/m_less_5yrs_died_from_pneumonia">
+        <label ref="jr:itext('/data/pneumonia/m_less_5yrs_died_from_pneumonia:label')"/>
+        <hint ref="jr:itext('/data/pneumonia/m_less_5yrs_died_from_pneumonia:hint')"/>
+      </input>
+      <input ref="/data/pneumonia/f_less_5yrs_died_from_pneumonia">
+        <label ref="jr:itext('/data/pneumonia/f_less_5yrs_died_from_pneumonia:label')"/>
+        <hint ref="jr:itext('/data/pneumonia/f_less_5yrs_died_from_pneumonia:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Plague:label')"/>
+      <input ref="/data/Plague/m_Less_5yrs_with_plague">
+        <label ref="jr:itext('/data/Plague/m_Less_5yrs_with_plague:label')"/>
+        <hint ref="jr:itext('/data/Plague/m_Less_5yrs_with_plague:hint')"/>
+      </input>
+      <input ref="/data/Plague/f_Less_5yrs_with_plague">
+        <label ref="jr:itext('/data/Plague/f_Less_5yrs_with_plague:label')"/>
+        <hint ref="jr:itext('/data/Plague/f_Less_5yrs_with_plague:hint')"/>
+      </input>
+      <input ref="/data/Plague/m_Less_5yrs_died_from_plague">
+        <label ref="jr:itext('/data/Plague/m_Less_5yrs_died_from_plague:label')"/>
+        <hint ref="jr:itext('/data/Plague/m_Less_5yrs_died_from_plague:hint')"/>
+      </input>
+      <input ref="/data/Plague/f_Less_5yrs_died_from_plague">
+        <label ref="jr:itext('/data/Plague/f_Less_5yrs_died_from_plague:label')"/>
+        <hint ref="jr:itext('/data/Plague/f_Less_5yrs_died_from_plague:hint')"/>
+      </input>
+      <input ref="/data/Plague/m_more_5yrs_with_plague">
+        <label ref="jr:itext('/data/Plague/m_more_5yrs_with_plague:label')"/>
+        <hint ref="jr:itext('/data/Plague/m_more_5yrs_with_plague:hint')"/>
+      </input>
+      <input ref="/data/Plague/f_more_5yrs_with_plague">
+        <label ref="jr:itext('/data/Plague/f_more_5yrs_with_plague:label')"/>
+        <hint ref="jr:itext('/data/Plague/f_more_5yrs_with_plague:hint')"/>
+      </input>
+      <input ref="/data/Plague/m_more_5yrs_died_from_plague">
+        <label ref="jr:itext('/data/Plague/m_more_5yrs_died_from_plague:label')"/>
+        <hint ref="jr:itext('/data/Plague/m_more_5yrs_died_from_plague:hint')"/>
+      </input>
+      <input ref="/data/Plague/f_more_5yrs_died_from_plague">
+        <label ref="jr:itext('/data/Plague/f_more_5yrs_died_from_plague:label')"/>
+        <hint ref="jr:itext('/data/Plague/f_more_5yrs_died_from_plague:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Rabies:label')"/>
+      <input ref="/data/Rabies/m_Less_5yrs_with_rabies">
+        <label ref="jr:itext('/data/Rabies/m_Less_5yrs_with_rabies:label')"/>
+        <hint ref="jr:itext('/data/Rabies/m_Less_5yrs_with_rabies:hint')"/>
+      </input>
+      <input ref="/data/Rabies/f_Less_5yrs_with_rabies">
+        <label ref="jr:itext('/data/Rabies/f_Less_5yrs_with_rabies:label')"/>
+        <hint ref="jr:itext('/data/Rabies/f_Less_5yrs_with_rabies:hint')"/>
+      </input>
+      <input ref="/data/Rabies/m_Less_5yrs_died_from_rabies">
+        <label ref="jr:itext('/data/Rabies/m_Less_5yrs_died_from_rabies:label')"/>
+        <hint ref="jr:itext('/data/Rabies/m_Less_5yrs_died_from_rabies:hint')"/>
+      </input>
+      <input ref="/data/Rabies/f_Less_5yrs_died_from_rabies">
+        <label ref="jr:itext('/data/Rabies/f_Less_5yrs_died_from_rabies:label')"/>
+        <hint ref="jr:itext('/data/Rabies/f_Less_5yrs_died_from_rabies:hint')"/>
+      </input>
+      <input ref="/data/Rabies/m_more_5yrs_with_rabies">
+        <label ref="jr:itext('/data/Rabies/m_more_5yrs_with_rabies:label')"/>
+        <hint ref="jr:itext('/data/Rabies/m_more_5yrs_with_rabies:hint')"/>
+      </input>
+      <input ref="/data/Rabies/f_more_5yrs_with_rabies">
+        <label ref="jr:itext('/data/Rabies/f_more_5yrs_with_rabies:label')"/>
+        <hint ref="jr:itext('/data/Rabies/f_more_5yrs_with_rabies:hint')"/>
+      </input>
+      <input ref="/data/Rabies/m_more_5yrs_died_from_rabies">
+        <label ref="jr:itext('/data/Rabies/m_more_5yrs_died_from_rabies:label')"/>
+        <hint ref="jr:itext('/data/Rabies/m_more_5yrs_died_from_rabies:hint')"/>
+      </input>
+      <input ref="/data/Rabies/f_more_5yrs_died_from_rabies">
+        <label ref="jr:itext('/data/Rabies/f_more_5yrs_died_from_rabies:label')"/>
+        <hint ref="jr:itext('/data/Rabies/f_more_5yrs_died_from_rabies:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Animal_Bites:label')"/>
+      <input ref="/data/Animal_Bites/m_Less_5yrs_with_animal_bites">
+        <label ref="jr:itext('/data/Animal_Bites/m_Less_5yrs_with_animal_bites:label')"/>
+        <hint ref="jr:itext('/data/Animal_Bites/m_Less_5yrs_with_animal_bites:hint')"/>
+      </input>
+      <input ref="/data/Animal_Bites/f_Less_5yrs_with_animal_bites">
+        <label ref="jr:itext('/data/Animal_Bites/f_Less_5yrs_with_animal_bites:label')"/>
+        <hint ref="jr:itext('/data/Animal_Bites/f_Less_5yrs_with_animal_bites:hint')"/>
+      </input>
+      <input ref="/data/Animal_Bites/m_Less_5yrs_died_from_animal_bites">
+        <label ref="jr:itext('/data/Animal_Bites/m_Less_5yrs_died_from_animal_bites:label')"/>
+        <hint ref="jr:itext('/data/Animal_Bites/m_Less_5yrs_died_from_animal_bites:hint')"/>
+      </input>
+      <input ref="/data/Animal_Bites/f_Less_5yrs_died_from_animal_bites">
+        <label ref="jr:itext('/data/Animal_Bites/f_Less_5yrs_died_from_animal_bites:label')"/>
+        <hint ref="jr:itext('/data/Animal_Bites/f_Less_5yrs_died_from_animal_bites:hint')"/>
+      </input>
+      <input ref="/data/Animal_Bites/m_more_5yrs_with_animal_bites">
+        <label ref="jr:itext('/data/Animal_Bites/m_more_5yrs_with_animal_bites:label')"/>
+        <hint ref="jr:itext('/data/Animal_Bites/m_more_5yrs_with_animal_bites:hint')"/>
+      </input>
+      <input ref="/data/Animal_Bites/f_more_5yrs_with_animal_bites">
+        <label ref="jr:itext('/data/Animal_Bites/f_more_5yrs_with_animal_bites:label')"/>
+        <hint ref="jr:itext('/data/Animal_Bites/f_more_5yrs_with_animal_bites:hint')"/>
+      </input>
+      <input ref="/data/Animal_Bites/m_more_5yrs_died_from_animal_bites">
+        <label ref="jr:itext('/data/Animal_Bites/m_more_5yrs_died_from_animal_bites:label')"/>
+        <hint ref="jr:itext('/data/Animal_Bites/m_more_5yrs_died_from_animal_bites:hint')"/>
+      </input>
+      <input ref="/data/Animal_Bites/f_more_5yrs_died_from_animal_bites">
+        <label ref="jr:itext('/data/Animal_Bites/f_more_5yrs_died_from_animal_bites:label')"/>
+        <hint ref="jr:itext('/data/Animal_Bites/f_more_5yrs_died_from_animal_bites:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Small_pox:label')"/>
+      <input ref="/data/Small_pox/m_less_5yrs_with_small_pox">
+        <label ref="jr:itext('/data/Small_pox/m_less_5yrs_with_small_pox:label')"/>
+        <hint ref="jr:itext('/data/Small_pox/m_less_5yrs_with_small_pox:hint')"/>
+      </input>
+      <input ref="/data/Small_pox/f_less_5yrs_with_small_pox">
+        <label ref="jr:itext('/data/Small_pox/f_less_5yrs_with_small_pox:label')"/>
+        <hint ref="jr:itext('/data/Small_pox/f_less_5yrs_with_small_pox:hint')"/>
+      </input>
+      <input ref="/data/Small_pox/m_less_5yrs_died_from_small_pox">
+        <label ref="jr:itext('/data/Small_pox/m_less_5yrs_died_from_small_pox:label')"/>
+        <hint ref="jr:itext('/data/Small_pox/m_less_5yrs_died_from_small_pox:hint')"/>
+      </input>
+      <input ref="/data/Small_pox/f_less_5yrs_died_from_small_pox">
+        <label ref="jr:itext('/data/Small_pox/f_less_5yrs_died_from_small_pox:label')"/>
+        <hint ref="jr:itext('/data/Small_pox/f_less_5yrs_died_from_small_pox:hint')"/>
+      </input>
+      <input ref="/data/Small_pox/m_more_5yrs_with_small_pox">
+        <label ref="jr:itext('/data/Small_pox/m_more_5yrs_with_small_pox:label')"/>
+        <hint ref="jr:itext('/data/Small_pox/m_more_5yrs_with_small_pox:hint')"/>
+      </input>
+      <input ref="/data/Small_pox/f_more_5yrs_with_small_pox">
+        <label ref="jr:itext('/data/Small_pox/f_more_5yrs_with_small_pox:label')"/>
+        <hint ref="jr:itext('/data/Small_pox/f_more_5yrs_with_small_pox:hint')"/>
+      </input>
+      <input ref="/data/Small_pox/m_more_5yrs_died_from_small_pox">
+        <label ref="jr:itext('/data/Small_pox/m_more_5yrs_died_from_small_pox:label')"/>
+        <hint ref="jr:itext('/data/Small_pox/m_more_5yrs_died_from_small_pox:hint')"/>
+      </input>
+      <input ref="/data/Small_pox/f_more_5yrs_died_from_small_pox">
+        <label ref="jr:itext('/data/Small_pox/f_more_5yrs_died_from_small_pox:label')"/>
+        <hint ref="jr:itext('/data/Small_pox/f_more_5yrs_died_from_small_pox:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Trypanosomiasis:label')"/>
+      <input ref="/data/Trypanosomiasis/m_less_5yrs_with_Trypanosomiasis">
+        <label ref="jr:itext('/data/Trypanosomiasis/m_less_5yrs_with_Trypanosomiasis:label')"/>
+        <hint ref="jr:itext('/data/Trypanosomiasis/m_less_5yrs_with_Trypanosomiasis:hint')"/>
+      </input>
+      <input ref="/data/Trypanosomiasis/f_less_5yrs_with_Trypanosomiasis">
+        <label ref="jr:itext('/data/Trypanosomiasis/f_less_5yrs_with_Trypanosomiasis:label')"/>
+        <hint ref="jr:itext('/data/Trypanosomiasis/f_less_5yrs_with_Trypanosomiasis:hint')"/>
+      </input>
+      <input ref="/data/Trypanosomiasis/m_less_5yrs_died_from_Trypanosomiasis">
+        <label ref="jr:itext('/data/Trypanosomiasis/m_less_5yrs_died_from_Trypanosomiasis:label')"/>
+        <hint ref="jr:itext('/data/Trypanosomiasis/m_less_5yrs_died_from_Trypanosomiasis:hint')"/>
+      </input>
+      <input ref="/data/Trypanosomiasis/f_less_5yrs_died_from_Trypanosomiasis">
+        <label ref="jr:itext('/data/Trypanosomiasis/f_less_5yrs_died_from_Trypanosomiasis:label')"/>
+        <hint ref="jr:itext('/data/Trypanosomiasis/f_less_5yrs_died_from_Trypanosomiasis:hint')"/>
+      </input>
+      <input ref="/data/Trypanosomiasis/m_more_5yrs_with_Trypanosomiasis">
+        <label ref="jr:itext('/data/Trypanosomiasis/m_more_5yrs_with_Trypanosomiasis:label')"/>
+        <hint ref="jr:itext('/data/Trypanosomiasis/m_more_5yrs_with_Trypanosomiasis:hint')"/>
+      </input>
+      <input ref="/data/Trypanosomiasis/f_more_5yrs_with_Trypanosomiasis">
+        <label ref="jr:itext('/data/Trypanosomiasis/f_more_5yrs_with_Trypanosomiasis:label')"/>
+        <hint ref="jr:itext('/data/Trypanosomiasis/f_more_5yrs_with_Trypanosomiasis:hint')"/>
+      </input>
+      <input ref="/data/Trypanosomiasis/m_more_5yrs_died_from_Trypanosomiasis">
+        <label ref="jr:itext('/data/Trypanosomiasis/m_more_5yrs_died_from_Trypanosomiasis:label')"/>
+        <hint ref="jr:itext('/data/Trypanosomiasis/m_more_5yrs_died_from_Trypanosomiasis:hint')"/>
+      </input>
+      <input ref="/data/Trypanosomiasis/f_more_5yrs_died_from_Trypanosomiasis">
+        <label ref="jr:itext('/data/Trypanosomiasis/f_more_5yrs_died_from_Trypanosomiasis:label')"/>
+        <hint ref="jr:itext('/data/Trypanosomiasis/f_more_5yrs_died_from_Trypanosomiasis:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/viral_haemorrhagic_fevers:label')"/>
+      <input ref="/data/viral_haemorrhagic_fevers/m_less_5yrs_with_VHF">
+        <label ref="jr:itext('/data/viral_haemorrhagic_fevers/m_less_5yrs_with_VHF:label')"/>
+        <hint ref="jr:itext('/data/viral_haemorrhagic_fevers/m_less_5yrs_with_VHF:hint')"/>
+      </input>
+      <input ref="/data/viral_haemorrhagic_fevers/f_less_5yrs_with_VHF">
+        <label ref="jr:itext('/data/viral_haemorrhagic_fevers/f_less_5yrs_with_VHF:label')"/>
+        <hint ref="jr:itext('/data/viral_haemorrhagic_fevers/f_less_5yrs_with_VHF:hint')"/>
+      </input>
+      <input ref="/data/viral_haemorrhagic_fevers/m_less_5yrs_died_fromVHF">
+        <label ref="jr:itext('/data/viral_haemorrhagic_fevers/m_less_5yrs_died_fromVHF:label')"/>
+        <hint ref="jr:itext('/data/viral_haemorrhagic_fevers/m_less_5yrs_died_fromVHF:hint')"/>
+      </input>
+      <input ref="/data/viral_haemorrhagic_fevers/f_less_5yrs_died_from_VHF">
+        <label ref="jr:itext('/data/viral_haemorrhagic_fevers/f_less_5yrs_died_from_VHF:label')"/>
+        <hint ref="jr:itext('/data/viral_haemorrhagic_fevers/f_less_5yrs_died_from_VHF:hint')"/>
+      </input>
+      <input ref="/data/viral_haemorrhagic_fevers/m_more_5yrs_with_VHF">
+        <label ref="jr:itext('/data/viral_haemorrhagic_fevers/m_more_5yrs_with_VHF:label')"/>
+        <hint ref="jr:itext('/data/viral_haemorrhagic_fevers/m_more_5yrs_with_VHF:hint')"/>
+      </input>
+      <input ref="/data/viral_haemorrhagic_fevers/f_more_5yrs_with_VHF">
+        <label ref="jr:itext('/data/viral_haemorrhagic_fevers/f_more_5yrs_with_VHF:label')"/>
+        <hint ref="jr:itext('/data/viral_haemorrhagic_fevers/f_more_5yrs_with_VHF:hint')"/>
+      </input>
+      <input ref="/data/viral_haemorrhagic_fevers/m_more_5yrs_died_from_VHF">
+        <label ref="jr:itext('/data/viral_haemorrhagic_fevers/m_more_5yrs_died_from_VHF:label')"/>
+        <hint ref="jr:itext('/data/viral_haemorrhagic_fevers/m_more_5yrs_died_from_VHF:hint')"/>
+      </input>
+      <input ref="/data/viral_haemorrhagic_fevers/f_more_5yrs_died_from_VHF">
+        <label ref="jr:itext('/data/viral_haemorrhagic_fevers/f_more_5yrs_died_from_VHF:label')"/>
+        <hint ref="jr:itext('/data/viral_haemorrhagic_fevers/f_more_5yrs_died_from_VHF:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/diarrhoea_under_five:label')"/>
+      <input ref="/data/diarrhoea_under_five/m_less_5yrs_with_diarrhoea">
+        <label ref="jr:itext('/data/diarrhoea_under_five/m_less_5yrs_with_diarrhoea:label')"/>
+        <hint ref="jr:itext('/data/diarrhoea_under_five/m_less_5yrs_with_diarrhoea:hint')"/>
+      </input>
+      <input ref="/data/diarrhoea_under_five/f_less_5yrs_with_diarrhoea">
+        <label ref="jr:itext('/data/diarrhoea_under_five/f_less_5yrs_with_diarrhoea:label')"/>
+        <hint ref="jr:itext('/data/diarrhoea_under_five/f_less_5yrs_with_diarrhoea:hint')"/>
+      </input>
+      <input ref="/data/diarrhoea_under_five/m_less_5yrs_died_from_diarrhoea">
+        <label ref="jr:itext('/data/diarrhoea_under_five/m_less_5yrs_died_from_diarrhoea:label')"/>
+        <hint ref="jr:itext('/data/diarrhoea_under_five/m_less_5yrs_died_from_diarrhoea:hint')"/>
+      </input>
+      <input ref="/data/diarrhoea_under_five/f_less_5yrs_died_from_diarrhoea">
+        <label ref="jr:itext('/data/diarrhoea_under_five/f_less_5yrs_died_from_diarrhoea:label')"/>
+        <hint ref="jr:itext('/data/diarrhoea_under_five/f_less_5yrs_died_from_diarrhoea:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/malaria:label')"/>
+      <input ref="/data/malaria/total_number_less_five_yrs_tested_with_RDT_microscope">
+        <label ref="jr:itext('/data/malaria/total_number_less_five_yrs_tested_with_RDT_microscope:label')"/>
+        <hint ref="jr:itext('/data/malaria/total_number_less_five_yrs_tested_with_RDT_microscope:hint')"/>
+      </input>
+      <input ref="/data/malaria/total_number_more_five_yrs_tested_with_RDT_microscope">
+        <label ref="jr:itext('/data/malaria/total_number_more_five_yrs_tested_with_RDT_microscope:label')"/>
+        <hint ref="jr:itext('/data/malaria/total_number_more_five_yrs_tested_with_RDT_microscope:hint')"/>
+      </input>
+      <input ref="/data/malaria/total_tested_less_five_yrs_positive_with_RDT_Microscope">
+        <label ref="jr:itext('/data/malaria/total_tested_less_five_yrs_positive_with_RDT_Microscope:label')"/>
+        <hint ref="jr:itext('/data/malaria/total_tested_less_five_yrs_positive_with_RDT_Microscope:hint')"/>
+      </input>
+      <input ref="/data/malaria/total_tested_more_five_yrs_positive_with_RDT_Microscope">
+        <label ref="jr:itext('/data/malaria/total_tested_more_five_yrs_positive_with_RDT_Microscope:label')"/>
+        <hint ref="jr:itext('/data/malaria/total_tested_more_five_yrs_positive_with_RDT_Microscope:hint')"/>
+      </input>
+      <input ref="/data/malaria/total_clinical_less_five_years_malaria_case">
+        <label ref="jr:itext('/data/malaria/total_clinical_less_five_years_malaria_case:label')"/>
+        <hint ref="jr:itext('/data/malaria/total_clinical_less_five_years_malaria_case:hint')"/>
+      </input>
+      <input ref="/data/malaria/total_clinical_more_five_years_malaria_case">
+        <label ref="jr:itext('/data/malaria/total_clinical_more_five_years_malaria_case:label')"/>
+        <hint ref="jr:itext('/data/malaria/total_clinical_more_five_years_malaria_case:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Tick_borne_relapsing_fever:label')"/>
+      <input ref="/data/Tick_borne_relapsing_fever/m_less_5yrs_with_TB_relapsing_fever">
+        <label ref="jr:itext('/data/Tick_borne_relapsing_fever/m_less_5yrs_with_TB_relapsing_fever:label')"/>
+        <hint ref="jr:itext('/data/Tick_borne_relapsing_fever/m_less_5yrs_with_TB_relapsing_fever:hint')"/>
+      </input>
+      <input ref="/data/Tick_borne_relapsing_fever/f_less_5yrs_with_TB_relapsing_fever">
+        <label ref="jr:itext('/data/Tick_borne_relapsing_fever/f_less_5yrs_with_TB_relapsing_fever:label')"/>
+        <hint ref="jr:itext('/data/Tick_borne_relapsing_fever/f_less_5yrs_with_TB_relapsing_fever:hint')"/>
+      </input>
+      <input ref="/data/Tick_borne_relapsing_fever/m_less_5yrs_died_from_TB_relapsing_fever">
+        <label ref="jr:itext('/data/Tick_borne_relapsing_fever/m_less_5yrs_died_from_TB_relapsing_fever:label')"/>
+        <hint ref="jr:itext('/data/Tick_borne_relapsing_fever/m_less_5yrs_died_from_TB_relapsing_fever:hint')"/>
+      </input>
+      <input ref="/data/Tick_borne_relapsing_fever/f_less_5yrs_died_from_TB_relapsing_fever">
+        <label ref="jr:itext('/data/Tick_borne_relapsing_fever/f_less_5yrs_died_from_TB_relapsing_fever:label')"/>
+        <hint ref="jr:itext('/data/Tick_borne_relapsing_fever/f_less_5yrs_died_from_TB_relapsing_fever:hint')"/>
+      </input>
+      <input ref="/data/Tick_borne_relapsing_fever/m_more_5yrs_with_TB_relapsing_fever">
+        <label ref="jr:itext('/data/Tick_borne_relapsing_fever/m_more_5yrs_with_TB_relapsing_fever:label')"/>
+        <hint ref="jr:itext('/data/Tick_borne_relapsing_fever/m_more_5yrs_with_TB_relapsing_fever:hint')"/>
+      </input>
+      <input ref="/data/Tick_borne_relapsing_fever/f_more_5yrs_with_TB_relapsing_fever">
+        <label ref="jr:itext('/data/Tick_borne_relapsing_fever/f_more_5yrs_with_TB_relapsing_fever:label')"/>
+        <hint ref="jr:itext('/data/Tick_borne_relapsing_fever/f_more_5yrs_with_TB_relapsing_fever:hint')"/>
+      </input>
+      <input ref="/data/Tick_borne_relapsing_fever/m_more_5yrs_died_from_TB_relapsing_fever">
+        <label ref="jr:itext('/data/Tick_borne_relapsing_fever/m_more_5yrs_died_from_TB_relapsing_fever:label')"/>
+        <hint ref="jr:itext('/data/Tick_borne_relapsing_fever/m_more_5yrs_died_from_TB_relapsing_fever:hint')"/>
+      </input>
+      <input ref="/data/Tick_borne_relapsing_fever/f_more_5yrs_died_from_TB_relapsing_fever">
+        <label ref="jr:itext('/data/Tick_borne_relapsing_fever/f_more_5yrs_died_from_TB_relapsing_fever:label')"/>
+        <hint ref="jr:itext('/data/Tick_borne_relapsing_fever/f_more_5yrs_died_from_TB_relapsing_fever:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/yellow_fever:label')"/>
+      <input ref="/data/yellow_fever/m_less_5yrs_with_yellow_fever">
+        <label ref="jr:itext('/data/yellow_fever/m_less_5yrs_with_yellow_fever:label')"/>
+        <hint ref="jr:itext('/data/yellow_fever/m_less_5yrs_with_yellow_fever:hint')"/>
+      </input>
+      <input ref="/data/yellow_fever/f_less_5yrs_with_yellow_fever">
+        <label ref="jr:itext('/data/yellow_fever/f_less_5yrs_with_yellow_fever:label')"/>
+        <hint ref="jr:itext('/data/yellow_fever/f_less_5yrs_with_yellow_fever:hint')"/>
+      </input>
+      <input ref="/data/yellow_fever/m_less_5yrs_died_from_yellow_fever">
+        <label ref="jr:itext('/data/yellow_fever/m_less_5yrs_died_from_yellow_fever:label')"/>
+        <hint ref="jr:itext('/data/yellow_fever/m_less_5yrs_died_from_yellow_fever:hint')"/>
+      </input>
+      <input ref="/data/yellow_fever/f_less_5yrs_died_from_yellow_fever">
+        <label ref="jr:itext('/data/yellow_fever/f_less_5yrs_died_from_yellow_fever:label')"/>
+        <hint ref="jr:itext('/data/yellow_fever/f_less_5yrs_died_from_yellow_fever:hint')"/>
+      </input>
+      <input ref="/data/yellow_fever/m_more_5yrs_with_yellow_fever">
+        <label ref="jr:itext('/data/yellow_fever/m_more_5yrs_with_yellow_fever:label')"/>
+        <hint ref="jr:itext('/data/yellow_fever/m_more_5yrs_with_yellow_fever:hint')"/>
+      </input>
+      <input ref="/data/yellow_fever/f_more_5yrs_with_yellow_fever">
+        <label ref="jr:itext('/data/yellow_fever/f_more_5yrs_with_yellow_fever:label')"/>
+        <hint ref="jr:itext('/data/yellow_fever/f_more_5yrs_with_yellow_fever:hint')"/>
+      </input>
+      <input ref="/data/yellow_fever/m_more_5yrs_died_from_yellow_fever">
+        <label ref="jr:itext('/data/yellow_fever/m_more_5yrs_died_from_yellow_fever:label')"/>
+        <hint ref="jr:itext('/data/yellow_fever/m_more_5yrs_died_from_yellow_fever:hint')"/>
+      </input>
+      <input ref="/data/yellow_fever/f_more_5yrs_died_from_yellow_fever">
+        <label ref="jr:itext('/data/yellow_fever/f_more_5yrs_died_from_yellow_fever:label')"/>
+        <hint ref="jr:itext('/data/yellow_fever/f_more_5yrs_died_from_yellow_fever:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/malnutrition:label')"/>
+      <input ref="/data/malnutrition/m_less_5yrs_with_malnutrition">
+        <label ref="jr:itext('/data/malnutrition/m_less_5yrs_with_malnutrition:label')"/>
+        <hint ref="jr:itext('/data/malnutrition/m_less_5yrs_with_malnutrition:hint')"/>
+      </input>
+      <input ref="/data/malnutrition/f_less_5yrs_with_malnutrition">
+        <label ref="jr:itext('/data/malnutrition/f_less_5yrs_with_malnutrition:label')"/>
+        <hint ref="jr:itext('/data/malnutrition/f_less_5yrs_with_malnutrition:hint')"/>
+      </input>
+      <input ref="/data/malnutrition/m_less_5yrs_died_from_malnutrition">
+        <label ref="jr:itext('/data/malnutrition/m_less_5yrs_died_from_malnutrition:label')"/>
+        <hint ref="jr:itext('/data/malnutrition/m_less_5yrs_died_from_malnutrition:hint')"/>
+      </input>
+      <input ref="/data/malnutrition/f_less_5yrs_died_from_malnutrition">
+        <label ref="jr:itext('/data/malnutrition/f_less_5yrs_died_from_malnutrition:label')"/>
+        <hint ref="jr:itext('/data/malnutrition/f_less_5yrs_died_from_malnutrition:hint')"/>
+      </input>
+      <input ref="/data/malnutrition/m_more_5yrs_with_malnutrition">
+        <label ref="jr:itext('/data/malnutrition/m_more_5yrs_with_malnutrition:label')"/>
+        <hint ref="jr:itext('/data/malnutrition/m_more_5yrs_with_malnutrition:hint')"/>
+      </input>
+      <input ref="/data/malnutrition/f_more_5yrs_with_malnutrition">
+        <label ref="jr:itext('/data/malnutrition/f_more_5yrs_with_malnutrition:label')"/>
+        <hint ref="jr:itext('/data/malnutrition/f_more_5yrs_with_malnutrition:hint')"/>
+      </input>
+      <input ref="/data/malnutrition/m_more_5yrs_died_from_malnutrition">
+        <label ref="jr:itext('/data/malnutrition/m_more_5yrs_died_from_malnutrition:label')"/>
+        <hint ref="jr:itext('/data/malnutrition/m_more_5yrs_died_from_malnutrition:hint')"/>
+      </input>
+      <input ref="/data/malnutrition/f_more_5yrs_died_from_malnutrition">
+        <label ref="jr:itext('/data/malnutrition/f_more_5yrs_died_from_malnutrition:label')"/>
+        <hint ref="jr:itext('/data/malnutrition/f_more_5yrs_died_from_malnutrition:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Onchocerciasis:label')"/>
+      <input ref="/data/Onchocerciasis/m_less_5yrs_with_Onchocerciasis">
+        <label ref="jr:itext('/data/Onchocerciasis/m_less_5yrs_with_Onchocerciasis:label')"/>
+        <hint ref="jr:itext('/data/Onchocerciasis/m_less_5yrs_with_Onchocerciasis:hint')"/>
+      </input>
+      <input ref="/data/Onchocerciasis/f_less_5yrs_with_Onchocerciasis">
+        <label ref="jr:itext('/data/Onchocerciasis/f_less_5yrs_with_Onchocerciasis:label')"/>
+        <hint ref="jr:itext('/data/Onchocerciasis/f_less_5yrs_with_Onchocerciasis:hint')"/>
+      </input>
+      <input ref="/data/Onchocerciasis/m_less_5yrs_died_Onchocerciasis">
+        <label ref="jr:itext('/data/Onchocerciasis/m_less_5yrs_died_Onchocerciasis:label')"/>
+        <hint ref="jr:itext('/data/Onchocerciasis/m_less_5yrs_died_Onchocerciasis:hint')"/>
+      </input>
+      <input ref="/data/Onchocerciasis/f_less_5yrs_died_from_Onchocerciasis">
+        <label ref="jr:itext('/data/Onchocerciasis/f_less_5yrs_died_from_Onchocerciasis:label')"/>
+        <hint ref="jr:itext('/data/Onchocerciasis/f_less_5yrs_died_from_Onchocerciasis:hint')"/>
+      </input>
+      <input ref="/data/Onchocerciasis/m_more_5yrs_with_Onchocerciasis">
+        <label ref="jr:itext('/data/Onchocerciasis/m_more_5yrs_with_Onchocerciasis:label')"/>
+        <hint ref="jr:itext('/data/Onchocerciasis/m_more_5yrs_with_Onchocerciasis:hint')"/>
+      </input>
+      <input ref="/data/Onchocerciasis/f_more_5yrs_with_Onchocerciasis">
+        <label ref="jr:itext('/data/Onchocerciasis/f_more_5yrs_with_Onchocerciasis:label')"/>
+        <hint ref="jr:itext('/data/Onchocerciasis/f_more_5yrs_with_Onchocerciasis:hint')"/>
+      </input>
+      <input ref="/data/Onchocerciasis/m_more_5yrs_died_from_Onchocerciasis">
+        <label ref="jr:itext('/data/Onchocerciasis/m_more_5yrs_died_from_Onchocerciasis:label')"/>
+        <hint ref="jr:itext('/data/Onchocerciasis/m_more_5yrs_died_from_Onchocerciasis:hint')"/>
+      </input>
+      <input ref="/data/Onchocerciasis/f_more_5yrs_died_from_Onchocerciasis">
+        <label ref="jr:itext('/data/Onchocerciasis/f_more_5yrs_died_from_Onchocerciasis:label')"/>
+        <hint ref="jr:itext('/data/Onchocerciasis/f_more_5yrs_died_from_Onchocerciasis:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Trachoma:label')"/>
+      <input ref="/data/Trachoma/m_less_5yrs_with_trachoma">
+        <label ref="jr:itext('/data/Trachoma/m_less_5yrs_with_trachoma:label')"/>
+        <hint ref="jr:itext('/data/Trachoma/m_less_5yrs_with_trachoma:hint')"/>
+      </input>
+      <input ref="/data/Trachoma/f_less_5yrs_with_trachoma">
+        <label ref="jr:itext('/data/Trachoma/f_less_5yrs_with_trachoma:label')"/>
+        <hint ref="jr:itext('/data/Trachoma/f_less_5yrs_with_trachoma:hint')"/>
+      </input>
+      <input ref="/data/Trachoma/m_less_5yrs_died_from_trachoma">
+        <label ref="jr:itext('/data/Trachoma/m_less_5yrs_died_from_trachoma:label')"/>
+        <hint ref="jr:itext('/data/Trachoma/m_less_5yrs_died_from_trachoma:hint')"/>
+      </input>
+      <input ref="/data/Trachoma/f_less_5yrs_died_from_trachoma">
+        <label ref="jr:itext('/data/Trachoma/f_less_5yrs_died_from_trachoma:label')"/>
+        <hint ref="jr:itext('/data/Trachoma/f_less_5yrs_died_from_trachoma:hint')"/>
+      </input>
+      <input ref="/data/Trachoma/m_more_5yrs_with_trachoma">
+        <label ref="jr:itext('/data/Trachoma/m_more_5yrs_with_trachoma:label')"/>
+        <hint ref="jr:itext('/data/Trachoma/m_more_5yrs_with_trachoma:hint')"/>
+      </input>
+      <input ref="/data/Trachoma/f_more_5yrs_with_trachoma">
+        <label ref="jr:itext('/data/Trachoma/f_more_5yrs_with_trachoma:label')"/>
+        <hint ref="jr:itext('/data/Trachoma/f_more_5yrs_with_trachoma:hint')"/>
+      </input>
+      <input ref="/data/Trachoma/m_more_5yrs_died_from_trachoma">
+        <label ref="jr:itext('/data/Trachoma/m_more_5yrs_died_from_trachoma:label')"/>
+        <hint ref="jr:itext('/data/Trachoma/m_more_5yrs_died_from_trachoma:hint')"/>
+      </input>
+      <input ref="/data/Trachoma/f_more_5yrs_died_from_trachoma">
+        <label ref="jr:itext('/data/Trachoma/f_more_5yrs_died_from_trachoma:label')"/>
+        <hint ref="jr:itext('/data/Trachoma/f_more_5yrs_died_from_trachoma:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Typhoid:label')"/>
+      <input ref="/data/Typhoid/m_less_5yrs_with_typhoid">
+        <label ref="jr:itext('/data/Typhoid/m_less_5yrs_with_typhoid:label')"/>
+        <hint ref="jr:itext('/data/Typhoid/m_less_5yrs_with_typhoid:hint')"/>
+      </input>
+      <input ref="/data/Typhoid/f_less_5yrs_with_typhoid">
+        <label ref="jr:itext('/data/Typhoid/f_less_5yrs_with_typhoid:label')"/>
+        <hint ref="jr:itext('/data/Typhoid/f_less_5yrs_with_typhoid:hint')"/>
+      </input>
+      <input ref="/data/Typhoid/m_less_5yrs_died_from_typhoid">
+        <label ref="jr:itext('/data/Typhoid/m_less_5yrs_died_from_typhoid:label')"/>
+        <hint ref="jr:itext('/data/Typhoid/m_less_5yrs_died_from_typhoid:hint')"/>
+      </input>
+      <input ref="/data/Typhoid/f_less_5yrs_died_from_typhoid">
+        <label ref="jr:itext('/data/Typhoid/f_less_5yrs_died_from_typhoid:label')"/>
+        <hint ref="jr:itext('/data/Typhoid/f_less_5yrs_died_from_typhoid:hint')"/>
+      </input>
+      <input ref="/data/Typhoid/m_more_than_5yrs_with_typhoid">
+        <label ref="jr:itext('/data/Typhoid/m_more_than_5yrs_with_typhoid:label')"/>
+        <hint ref="jr:itext('/data/Typhoid/m_more_than_5yrs_with_typhoid:hint')"/>
+      </input>
+      <input ref="/data/Typhoid/f_more_than_5yrs_with_typhoid">
+        <label ref="jr:itext('/data/Typhoid/f_more_than_5yrs_with_typhoid:label')"/>
+        <hint ref="jr:itext('/data/Typhoid/f_more_than_5yrs_with_typhoid:hint')"/>
+      </input>
+      <input ref="/data/Typhoid/m_more_than_5yrs_died_from_typhoid">
+        <label ref="jr:itext('/data/Typhoid/m_more_than_5yrs_died_from_typhoid:label')"/>
+        <hint ref="jr:itext('/data/Typhoid/m_more_than_5yrs_died_from_typhoid:hint')"/>
+      </input>
+      <input ref="/data/Typhoid/f_more_than_5yrs_died_from_typhoid">
+        <label ref="jr:itext('/data/Typhoid/f_more_than_5yrs_died_from_typhoid:label')"/>
+        <hint ref="jr:itext('/data/Typhoid/f_more_than_5yrs_died_from_typhoid:hint')"/>
+      </input>
+    </group>
+    <group appearance="field-list">
+      <label ref="jr:itext('/data/Final_details:label')"/>
+      <input ref="/data/Final_details/name_of_health_facility_incharge">
+        <label ref="jr:itext('/data/Final_details/name_of_health_facility_incharge:label')"/>
+        <hint ref="jr:itext('/data/Final_details/name_of_health_facility_incharge:hint')"/>
+      </input>
+      <select1 appearance="minimal" ref="/data/Final_details/Designation">
+        <label ref="jr:itext('/data/Final_details/Designation:label')"/>
+        <item>
+          <label ref="jr:itext('/data/Final_details/Designation:option0')"/>
+          <value>Clinical Officer</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Final_details/Designation:option1')"/>
+          <value>Nurse Attendant</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Final_details/Designation:option2')"/>
+          <value>Medical Officer</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Final_details/Designation:option3')"/>
+          <value>Nurse Midwife</value>
+        </item>
+        <item>
+          <label ref="jr:itext('/data/Final_details/Designation:option4')"/>
+          <value>Nurse Officer</value>
+        </item>
+      </select1>
+    </group>
+  </h:body>
+</h:html>

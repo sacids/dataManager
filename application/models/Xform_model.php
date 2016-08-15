@@ -278,7 +278,7 @@ class Xform_model extends CI_Model
 	 * @param int $offset
 	 * @return mixed returns data from tables created by uploading xform definitions files.
 	 */
-	public function find_form_data($table_name, $limit = 30, $offset = 0)
+	public function find_form_data($table_name, $limit, $offset)
 	{
 		$this->db->limit($limit, $offset);
 		return $this->db->get($table_name)->result();

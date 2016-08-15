@@ -1,15 +1,16 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/** PHPExcel */
-/**
-*   Load phpExcle library to mutch with Codeigniter
-*/
-class Excel
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+/*
+ *  =======================================
+ *  Author     : Renfrid Ngolongolo
+ *
+ *  =======================================
+ */
+require_once APPPATH . "/third_party/PHPExcel.php";
+
+class Excel extends PHPExcel
 {
-    
-    function __construct()
+    public function __construct()
     {
-        require_once APPPATH.'/libraries/excel/PHPExcel.php';
-        require_once APPPATH.'/libraries/excel/PHPExcel/IOFactory.php';
+        parent::__construct();
     }
-} 
-?>
+}
