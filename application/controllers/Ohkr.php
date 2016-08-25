@@ -13,8 +13,7 @@ class Ohkr extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model("Ohkr_model");
-        $this->load->model("Perm_model");
+        $this->load->model(array("Ohkr_model", "Perm_model"));
         $this->load->library("Db_exp");
     }
 
@@ -37,6 +36,9 @@ class Ohkr extends CI_Controller
         $this->disease_list();
     }
 
+    /**
+     * disease list
+     */
     public function disease_list()
     {
         //check login
@@ -61,6 +63,9 @@ class Ohkr extends CI_Controller
         $this->load->view('footer');
     }
 
+    /**
+     * add new disease
+     */
     public function add_new_disease()
     {
         //check login
@@ -83,11 +88,7 @@ class Ohkr extends CI_Controller
             $disease = array(
                 "title" => $this->input->post("name"),
                 "specie_id" => $this->input->post("specie"),
-                "description" => $this->input->post("description"),
-                "cause" => $this->input->post("cause"),
-                "symptoms" => $this->input->post("symptoms"),
-                "diagnosis" => $this->input->post("diagnosis"),
-                "treatment" => $this->input->post("treatment")
+                "description" => $this->input->post("description")
             );
 
             if ($this->Ohkr_model->add_disease($disease)) {
@@ -99,6 +100,10 @@ class Ohkr extends CI_Controller
         }
     }
 
+    /**
+     * edit disease
+     * @param $disease_id
+     */
     public function edit_disease($disease_id)
     {
         //check login
@@ -111,7 +116,7 @@ class Ohkr extends CI_Controller
         }
 
         $data['title'] = "Edit Disease";
-        $data['species'] = $this->Ohkr_model->find_all_species(30, 0);
+        $data['species'] = $this->Ohkr_model->find_all_species(100, 0);
         $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
 
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
@@ -127,11 +132,7 @@ class Ohkr extends CI_Controller
             $disease = array(
                 "title" => $this->input->post("name"),
                 "specie_id" => $this->input->post("specie"),
-                "description" => $this->input->post("description"),
-                "cause" => $this->input->post("cause"),
-                "symptoms" => $this->input->post("symptoms"),
-                "diagnosis" => $this->input->post("diagnosis"),
-                "treatment" => $this->input->post("treatment")
+                "description" => $this->input->post("description")
             );
 
             if ($this->Ohkr_model->update_disease($disease_id, $disease)) {
@@ -144,6 +145,9 @@ class Ohkr extends CI_Controller
 
     }
 
+    /**
+     * @param $disease_id
+     */
     function delete_disease($disease_id)
     {
         //check login
@@ -162,6 +166,8 @@ class Ohkr extends CI_Controller
         }
         redirect("ohkr/disease_list", "refresh");
     }
+
+
 
     public function species_list()
     {
@@ -269,6 +275,9 @@ class Ohkr extends CI_Controller
     }
 
 
+    /**
+     * symptom lists
+     */
     public function symptoms_list()
     {
         //check login
@@ -293,6 +302,9 @@ class Ohkr extends CI_Controller
         $this->load->view('footer');
     }
 
+    /**
+     * add new symptom
+     */
     public function add_new_symptom()
     {
         //check login
@@ -323,6 +335,10 @@ class Ohkr extends CI_Controller
         }
     }
 
+
+    /*edit symptom
+     * @param $symptom_id
+     */
     public function edit_symptom($symptom_id)
     {
         //check login

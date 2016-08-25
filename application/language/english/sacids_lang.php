@@ -58,33 +58,33 @@ $lang['select_form_to_delete']          = "You must select a form to delete";
 $lang['error_failed_to_delete_form']    = "Failed to delete form";
 
 //Disease
-$lang['label_disease_name']             = "Disease title";
-$lang['label_specie_name']              = "Specie title";
-$lang['label_symptom_name']             = "Symptom title";
-$lang['label_symptom_code']             = "Symptom code";
-$lang['label_specie']                   = "Specie";
+$lang['label_disease_name']             = "Disease name";
+$lang['label_specie_name']              = "Specie affected";
+$lang['label_symptom_name']             = "Clinical manifestation";
+$lang['label_symptom_code']             = "Clinical manifestation code";
+$lang['label_specie']                   = "Species";
 
 $lang['select_disease_to_edit']         = "You must select a disease to edit";
 $lang['select_disease_to_delete']       = "You must select a disease to delete";
-$lang['select_symptom_to_edit']         = "You must select a symptom to edit";
-$lang['select_symptom_to_delete']       = "You must select a symptom to delete";
-$lang['select_specie_to_edit']          = "You must select a specie to edit";
-$lang['select_specie_to_delete']        = "You must select a specie to delete";
+$lang['select_symptom_to_edit']         = "You must select a clinical manifestation to edit";
+$lang['select_symptom_to_delete']       = "You must select a clinical manifestation to delete";
+$lang['select_specie_to_edit']          = "You must select a species to edit";
+$lang['select_specie_to_delete']        = "You must select a species to delete";
 $lang['add_disease_successful']         = "Disease was added successfully";
 $lang['add_specie_successful']          = "Specie was added successfully";
-$lang['add_symptom_successful']         = "Symptom was added successfully";
+$lang['add_symptom_successful']         = "Clinical manifestation was added successfully";
 $lang['edit_disease_successful']        = "Disease was edited successfully";
 $lang['edit_specie_successful']         = "Specie was edited successfully";
-$lang['edit_symptom_successful']        = "Symptom was edit successfully";
+$lang['edit_symptom_successful']        = "Clinical manifestation was edit successfully";
 $lang['delete_disease_successful']      = "Disease was deleted successfully";
 $lang['delete_specie_successful']       = "Specie was deleted successfully";
-$lang['delete_symptom_successful']      = "Symptom was deleted successfully";
+$lang['delete_symptom_successful']      = "Clinical manifestation was deleted successfully";
 $lang['error_failed_to_add_disease']    = "Failed to add new disease";
-$lang['error_failed_to_add_specie']     = "Failed to add new specie";
-$lang['error_failed_to_add_symptom']    = "Failed to add new Symptom";
+$lang['error_failed_to_add_specie']     = "Failed to add new species";
+$lang['error_failed_to_add_symptom']    = "Failed to add clinical manifestation";
 $lang['error_failed_to_edit_disease']   = "Failed to edit new disease";
-$lang['error_failed_to_edit_specie']    = "Failed to edit new specie";
-$lang['error_failed_to_edit_symptom']   = "Failed to edit new Symptom";
+$lang['error_failed_to_edit_specie']    = "Failed to edit new species";
+$lang['error_failed_to_edit_symptom']   = "Failed to edit new clinical manifestation";
 
 
 $lang['select_faq_to_edit']         = "You must select a faq to edit";

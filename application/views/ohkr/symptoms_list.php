@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Symptoms List</h3>
+            <h3>Clinical Manifestation List</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -9,7 +9,6 @@
             } ?>
 
             <div class="col-sm-12">
-
                 <?php if (!empty($symptoms)) { ?>
 
                     <table class="table table-striped table-responsive table-hover table-bordered">
@@ -40,7 +39,7 @@
                         </div>
                     <?php endif; ?>
                 <?php } else { ?>
-                    <div class="fail_message">No symptom has been added</div>
+                    <div class="fail_message">No clinical manifestation has been found</div>
                 <?php } ?>
             </div>
         </div>

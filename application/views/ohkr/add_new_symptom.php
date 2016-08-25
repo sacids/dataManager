@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Add Symptom Details</h3>
+            <h3>Add Clinical manifestation Details</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -15,14 +15,14 @@
 
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_symptom_name") ?> <span>*</span></label>
-                    <input type="text" name="name" placeholder="Enter symptom title" class="form-control"
+                    <input type="text" name="name" placeholder="Enter title" class="form-control"
                            value="<?php echo set_value('name'); ?>">
                 </div>
                 <div class="error" style="color: red"> <?php echo form_error('name'); ?></div>
 
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_symptom_code") ?> <span>*</span></label>
-                    <input type="text" name="code" placeholder="Enter symptom code" class="form-control"
+                    <input type="text" name="code" placeholder="Enter code" class="form-control"
                            value="<?php echo set_value('code'); ?>">
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('code'); ?></div>
@@ -32,8 +32,6 @@
                     <textarea class="form-control" name="description"
                               id="description"><?php echo set_value('description'); ?></textarea>
                     <script>
-                        // Replace the <textarea id="editor1"> with a CKEditor
-                        // instance, using default configuration.
                         CKEDITOR.replace('description');
                     </script>
                 </div>

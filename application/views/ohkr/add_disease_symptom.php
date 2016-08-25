@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Add <?php echo $disease->d_title; ?> Disease Symptom</h3>
+            <h3>Add <?php echo $disease->d_title; ?> clinical manifestation</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_symptom_name") ?> <span>*</span></label>
                     <select name="symptom" id="symptom" class="form-control">
-                        <option value="">Choose Symptom</option>
+                        <option value="">Choose clinical manifestation</option>
                         <?php foreach ($symptoms as $symptom) { ?>
                             <option value="<?php echo $symptom->id; ?>"><?php echo $symptom->title; ?></option>
                         <?php } ?>
