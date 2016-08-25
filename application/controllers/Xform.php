@@ -1236,7 +1236,7 @@ class Xform extends CI_Controller
         //name the worksheet
         $this->excel->getActiveSheet()->setTitle("Form Data");
 
-        $filename = "Exported_" . $form_id . "_" . date("Y-m-d"); //save our workbook as this file name
+        $filename = "Exported_" . $form_id . "_" . date("Y-m-d").".xlsx"; //save our workbook as this file name
 
         //header
         header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");

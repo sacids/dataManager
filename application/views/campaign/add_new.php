@@ -12,9 +12,10 @@
 
 
             <div class="col-sm-8">
-                <?php echo form_open('campaign/add_new', 'class="form-horizontal" role="form"'); ?>
+                <?php echo form_open_multipart('campaign/add_new', 'class="form-horizontal" role="form"'); ?>
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_campaign_title"); ?> <span>*</span></label>
+
                     <input type="text" name="title" placeholder="Enter Campaign Title" class="form-control"
                            value="<?php echo set_value('title'); ?>">
                 </div>
@@ -22,8 +23,7 @@
 
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_campaign_icon"); ?> <span>*</span></label>
-                    <input type="text" name="icon" placeholder="Enter campaign icon" class="form-control"
-                           value="<?php echo set_value('icon'); ?>">
+                    <input type="file" name="icon">
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('icon'); ?></div>
 

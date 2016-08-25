@@ -30,6 +30,9 @@ class Campaign extends CI_Controller
         }
     }
 
+    /**
+     * Campaign List
+     */
     function campaign_list()
     {
         //check if logged in
@@ -44,6 +47,10 @@ class Campaign extends CI_Controller
         $this->load->view('footer');
     }
 
+
+    /**
+     * Add new campaign
+     */
     function add_new()
     {
         //check if logged in
@@ -53,7 +60,7 @@ class Campaign extends CI_Controller
         $data['forms'] = $this->Xform_model->get_form_list();
 
         $this->form_validation->set_rules("title", "Campaign Title", "required");
-        $this->form_validation->set_rules("icon", "Campaign Icon", "required");
+        $this->form_validation->set_rules("icon", "Campaign Icon", "callback_upload_campaign_image");
         $this->form_validation->set_rules("type", "Campaign Type", "required");
 
         if ($this->form_validation->run() === FALSE) {
@@ -62,14 +69,13 @@ class Campaign extends CI_Controller
             $this->load->view('footer');
         } else {
 
-            //TODO Check if file already exist and prompt user.
             $campaign_details = array(
                 "title" => $this->input->post("title"),
                 "description" => $this->input->post("description"),
                 "type" => $this->input->post("type"),
                 "form_id" => $this->input->post("form_id"),
                 "date_created" => date("c"),
-                "icon" => $this->input->post("icon")
+                "icon" => $_POST['icon']
             );
 
             $this->Campaign_model->create_campaign($campaign_details);
@@ -80,6 +86,10 @@ class Campaign extends CI_Controller
     }
 
 
+    /**
+     * Edit campaign
+     * @param $campaign_id
+     */
     function edit($campaign_id)
     {
         //check if logged in
@@ -90,7 +100,6 @@ class Campaign extends CI_Controller
         $data['campaign'] = $campaign = $this->Campaign_model->get_campaign_by_id($campaign_id);
 
         $this->form_validation->set_rules("title", $this->lang->line("label_campaign_title"), "required");
-        $this->form_validation->set_rules("icon", $this->lang->line("label_campaign_icon"), "required");
         $this->form_validation->set_rules("type", $this->lang->line("label_campaign_type"), "required");
 
         if ($this->form_validation->run() === FALSE) {
@@ -99,20 +108,52 @@ class Campaign extends CI_Controller
             $this->load->view('footer');
         } else {
 
-            //TODO Check if file already exist and prompt user.
             $campaign_details = array(
                 "title" => $this->input->post("title"),
                 "description" => $this->input->post("description"),
                 "type" => $this->input->post("type"),
-                "form_id" => $this->input->post("form_id"),
-                "icon" => $this->input->post("icon")
+                "form_id" => $this->input->post("form_id")
             );
 
             $this->Campaign_model->update_campaign($campaign_id, $campaign_details);
 
 
             $this->session->set_flashdata("message", display_message("Campaign successfully edited"));
-            redirect("campaign/edit/". $campaign_id, "refresh");
+            redirect("campaign/edit/" . $campaign_id, "refresh");
+        }
+    }
+
+
+    /**
+     * upload campaign image
+     * @return bool
+     */
+    function upload_campaign_image()
+    {
+        $config['upload_path'] = './assets/forms/data/images/';
+        $config['allowed_types'] = 'png|jpg|jpeg|gif';
+        $config['max_size'] = '1024';
+        $config['remove_spaces'] = TRUE;
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (isset($_FILES['icon']) && !empty($_FILES['icon']['name'])) {
+
+            if ($this->upload->do_upload('icon')) {
+                // set a $_POST value for 'image' that we can use later
+                $upload_data = $this->upload->data();
+                $_POST['icon'] = $upload_data['file_name'];
+                return true;
+            } else {
+                // possibly do some clean up ... then throw an error
+                $this->form_validation->set_message('upload_campaign_image', $this->upload->display_errors());
+                return false;
+            }
+        } else {
+            // throw an error because nothing was uploaded
+            $this->form_validation->set_message('upload_campaign_image', "Upload campaign icon");
+            return false;
         }
     }
 

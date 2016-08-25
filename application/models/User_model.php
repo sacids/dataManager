@@ -32,7 +32,7 @@ class User_model extends CI_Model
      * @param $limit
      * @param $offset
      */
-    function get_users($limit = 30, $offset = 0)
+    function get_users($limit = 100, $offset = 0)
     {
         $users = $this->db
             ->limit($limit, $offset)
