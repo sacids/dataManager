@@ -38,26 +38,24 @@ class Ohkr_model extends CI_Model
 
 	}
 
-	public function find_all_disease($limit = 30, $offset = 0)
-	{
-		$this->db->select('disease.id, disease.description, disease.cause, disease.symptoms, disease.diagnosis,
-        disease.treatment, disease.title as disease_title, specie.title as specie_title')
-			->join(self::$table_name_species . " specie ", "disease.specie_id = specie.id")
-			->limit($limit, $offset);
-		return $this->db->get(self::$table_name_disease . " disease")->result();
-	}
+    public function find_all_disease($limit = 30, $offset = 0)
+    {
+        $this->db->select('disease.id, disease.description, disease.title as disease_title, specie.title as specie_title')
+            ->join(self::$table_name_species . " specie ", "disease.specie_id = specie.id")
+            ->limit($limit, $offset);
+        return $this->db->get(self::$table_name_disease . " disease")->result();
+    }
 
-	/**
-	 * @param $disease_id
-	 * @return mixed
-	 */
-	public function get_disease_by_id($disease_id)
-	{
-		$this->db->select('disease.id, disease.description, disease.cause, disease.symptoms, disease.diagnosis,
-        disease.treatment, disease.title as d_title, specie.id as s_id, specie.title as s_title')
-			->join(self::$table_name_species . " specie ", "disease.specie_id = specie.id");
-		return $this->db->get_where(self::$table_name_disease . " disease", array('disease.id' => $disease_id))->row();
-	}
+    /**
+     * @param $disease_id
+     * @return mixed
+     */
+    public function get_disease_by_id($disease_id)
+    {
+        $this->db->select('disease.id, disease.description, disease.title as d_title, specie.id as s_id, specie.title as s_title')
+            ->join(self::$table_name_species . " specie ", "disease.specie_id = specie.id");
+        return $this->db->get_where(self::$table_name_disease . " disease", array('disease.id' => $disease_id))->row();
+    }
 
 	/**
 	 * @return int
