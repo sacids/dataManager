@@ -17,6 +17,7 @@ class Ohkr_model extends CI_Model
 	private static $table_name_faq = "ohkr_faq";
 	private static $table_name_response_sms = "ohkr_response_sms";
 	private static $table_name_sent_sms = "ohkr_sent_sms";
+	private static $table_name_user_groups = "groups";
 
 	public function __construct()
 	{
@@ -38,24 +39,24 @@ class Ohkr_model extends CI_Model
 
 	}
 
-    public function find_all_disease($limit = 30, $offset = 0)
-    {
-        $this->db->select('disease.id, disease.description, disease.title as disease_title, specie.title as specie_title')
-            ->join(self::$table_name_species . " specie ", "disease.specie_id = specie.id")
-            ->limit($limit, $offset);
-        return $this->db->get(self::$table_name_disease . " disease")->result();
-    }
+	public function find_all_disease($limit = 30, $offset = 0)
+	{
+		$this->db->select('disease.id, disease.description, disease.title as disease_title, specie.title as specie_title')
+			->join(self::$table_name_species . " specie ", "disease.specie_id = specie.id")
+			->limit($limit, $offset);
+		return $this->db->get(self::$table_name_disease . " disease")->result();
+	}
 
-    /**
-     * @param $disease_id
-     * @return mixed
-     */
-    public function get_disease_by_id($disease_id)
-    {
-        $this->db->select('disease.id, disease.description, disease.title as d_title, specie.id as s_id, specie.title as s_title')
-            ->join(self::$table_name_species . " specie ", "disease.specie_id = specie.id");
-        return $this->db->get_where(self::$table_name_disease . " disease", array('disease.id' => $disease_id))->row();
-    }
+	/**
+	 * @param $disease_id
+	 * @return mixed
+	 */
+	public function get_disease_by_id($disease_id)
+	{
+		$this->db->select('disease.id, disease.description, disease.title as d_title, specie.id as s_id, specie.title as s_title')
+			->join(self::$table_name_species . " specie ", "disease.specie_id = specie.id");
+		return $this->db->get_where(self::$table_name_disease . " disease", array('disease.id' => $disease_id))->row();
+	}
 
 	/**
 	 * @return int
@@ -236,9 +237,38 @@ class Ohkr_model extends CI_Model
 		return $this->db->insert_id();
 	}
 
+	public function find_response_sms_by_id($sms_id)
+	{
+		$this->db->from(self::$table_name_response_sms);
+		$this->db->where("id", $sms_id);
+		return $this->db->get()->row();
+	}
+
+	public function find_response_sms_by_disease_id($disease_id)
+	{
+		$this->db->select("u.*, rs.*, rs.id as id");
+		$this->db->from(self::$table_name_response_sms . " rs");
+		$this->db->where("disease_id", $disease_id);
+		$this->db->join(self::$table_name_user_groups . " u", "u.id = rs.group_id");
+		return $this->db->get()->result();
+	}
+
+	public function update_response_sms($sms_id, $sms)
+	{
+		$this->db->where("id", $sms_id);
+		return $this->db->update(self::$table_name_response_sms, $sms);
+	}
+
+	public function delete_response_sms($sms_id)
+	{
+		$this->db->where("id", $sms_id);
+		return $this->db->delete(self::$table_name_response_sms);
+	}
+
 	public function create_send_sms($sms_to_send)
 	{
 		$this->db->insert(self::$table_name_sent_sms, $sms_to_send);
 		return $this->db->insert_id();
 	}
+
 }

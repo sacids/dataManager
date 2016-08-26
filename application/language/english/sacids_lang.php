@@ -46,6 +46,7 @@ $lang['nav_item_form_add_new']          = "Add new form";
 $lang['label_instance_id']              = "Instance Id";
 $lang['label_user']                     = "Chat user";
 $lang['label_feedback_date']            = "Feedback Date";
+$lang['label_status']                   = "Status";
 
 
 // Form management

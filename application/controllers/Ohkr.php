@@ -89,10 +89,10 @@ class Ohkr extends CI_Controller
 
 		} else {
 			$disease = array(
-				"title"       => $this->input->post("name"),
-				"specie_id"   => $this->input->post("specie"),
-				"description" => $this->input->post("description"),
-				"date_created"=>date("Y-m-d H:i:s")
+				"title"        => $this->input->post("name"),
+				"specie_id"    => $this->input->post("specie"),
+				"description"  => $this->input->post("description"),
+				"date_created" => date("Y-m-d H:i:s")
 			);
 
 			$alert_groups = $this->input->post("group");
@@ -142,6 +142,7 @@ class Ohkr extends CI_Controller
 		$data['title'] = "Edit Disease";
 		$data['species'] = $this->Ohkr_model->find_all_species(100, 0);
 		$data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
+		$data['messages'] = $this->Ohkr_model->find_response_sms_by_disease_id($disease_id);
 
 		$this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
 		$this->form_validation->set_rules("specie", $this->lang->line("label_specie_name"), "required");
@@ -717,5 +718,101 @@ class Ohkr extends CI_Controller
 		} else {
 			$this->session->set_userdata('post', $post);
 		}
+	}
+
+	public function add_new_response_sms($disease_id)
+	{
+
+		$this->_is_logged_in();
+
+		if (!$disease_id) {
+			$this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_edit")));
+			redirect("ohkr/disease_list");
+			exit;
+		}
+
+		$data['title'] = "Add New Disease Alert SMS";
+		$data['disease_id'] = $disease_id;
+
+		$data['groups'] = $this->User_model->find_user_groups();
+
+		$this->form_validation->set_rules("group", $this->lang->line("label_recipient_group"), "required");
+		$this->form_validation->set_rules("message", $this->lang->line("label_alert_message"), "required");
+		$this->form_validation->set_rules("status", $this->lang->line("label_status"), "required");
+
+		if ($this->form_validation->run() === FALSE) {
+
+			$this->load->view('header', $data);
+			$this->load->view("ohkr/add_response_sms", $data);
+			$this->load->view('footer');
+		} else {
+			$message = array(
+				"disease_id"   => $disease_id,
+				"group_id"     => $this->input->post("group"),
+				"message"      => $this->input->post("message"),
+				"type"         => "TEXT",
+				"status"       => "Enabled",
+				"date_created" => date("Y-m-d H:i:s")
+			);
+
+			if ($this->Ohkr_model->create_response_sms($message)) {
+				$this->session->set_flashdata("message", display_message("Alert SMS was successfully created"));
+			} else {
+				$this->session->set_flashdata("message", display_message("warning", "Failed to add new alert SMS"));
+			}
+			redirect("ohkr/add_new_response_sms/" . $disease_id);
+		}
+	}
+
+	public function edit_response_sms($sms_id)
+	{
+
+		$this->_is_logged_in();
+
+		if (!$sms_id) {
+			$this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_edit")));
+			redirect("ohkr/disease_list");
+			exit;
+		}
+
+		$data['title'] = "Edit Disease Response SMS";
+		$data['message'] = $this->Ohkr_model->find_response_sms_by_id($sms_id);
+		$data['groups'] = $this->User_model->find_user_groups();
+
+		$this->form_validation->set_rules("group", $this->lang->line("label_recipient_group"), "required");
+		$this->form_validation->set_rules("message", $this->lang->line("label_alert_message"), "required");
+
+		if ($this->form_validation->run() === FALSE) {
+
+			$this->load->view('header', $data);
+			$this->load->view("ohkr/edit_response_sms", $data);
+			$this->load->view('footer');
+		} else {
+			$message = array(
+				"group_id"      => $this->input->post("group"),
+				"message"       => $this->input->post("message"),
+				"status"        => "Enabled",
+				"date_modified" => date("Y-m-d H:i:s")
+			);
+
+			if ($this->Ohkr_model->update_response_sms($sms_id, $message)) {
+				$this->session->set_flashdata("message", display_message("Alert SMS was successfully updated"));
+			} else {
+				$this->session->set_flashdata("message", display_message("warning", "Failed to update alert SMS"));
+			}
+			redirect("ohkr/edit_response_sms/" . $sms_id);
+		}
+	}
+
+	public function delete_response_sms($sms_id)
+	{
+		$message = $this->Ohkr_model->find_response_sms_by_id($sms_id);
+
+		if ($this->Ohkr_model->delete_response_sms($sms_id)) {
+			$this->session->set_flashdata("message", display_message("Alert SMS was successfully deleted"));
+		} else {
+			$this->session->set_flashdata("message", display_message("warning", "Failed to delete alert SMS"));
+		}
+		redirect("ohkr/edit_disease/" . $message->disease_id);
 	}
 }

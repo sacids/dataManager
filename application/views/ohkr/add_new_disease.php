@@ -1,14 +1,14 @@
 <script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 main">
+        <div class="col-sm-12 col-md-12 col-lg-12">
 
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
             } ?>
 
-            <div class="col-sm-8">
+            <div class="col-sm-12">
 
                 <?php echo form_open('ohkr/add_new_disease', 'class="form-horizontal" role="form"'); ?>
                 <div>
