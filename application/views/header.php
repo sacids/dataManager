@@ -36,8 +36,10 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/leaflet/dist/MarkerCluster.Default.css" />
 
 	<!-- Custom CSS -->
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/afyadata.css" type="text/css">
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets/bootstrap/js/afyadata.js"></script>
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/css/afyadata.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="<?=base_url()?>assets/bootstrap/js/vendor/jquery.min.js"><\/script>')</script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/public/js/afyadata.js"></script>
 
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
