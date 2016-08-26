@@ -37,60 +37,10 @@
                                   id="description"><?php echo set_value('description'); ?></textarea>
 
                     <script>
-                        // Replace the <textarea id="editor1"> with a CKEditor
-                        // instance, using default configuration.
                         CKEDITOR.replace('description');
                     </script>
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
-
-                <div class="form-group">
-                    <label><?php echo $this->lang->line("label_cause") ?> :</label>
-                        <textarea class="form-control" name="cause"
-                                  id="cause"><?php echo set_value('cause'); ?></textarea>
-                    <script>
-                        // Replace the <textarea id="editor1"> with a CKEditor
-                        // instance, using default configuration.
-                        CKEDITOR.replace('cause');
-                    </script>
-                </div>
-                <div class="error" style="color: red"><?php echo form_error('cause'); ?></div>
-
-                <div class="form-group">
-                    <label><?php echo $this->lang->line("label_symptoms") ?> :</label>
-                        <textarea class="form-control" name="symptoms"
-                                  id="symptoms"><?php echo set_value('symptoms'); ?></textarea>
-                    <script>
-                        // Replace the <textarea id="editor1"> with a CKEditor
-                        // instance, using default configuration.
-                        CKEDITOR.replace('symptoms');
-                    </script>
-                </div>
-                <div class="error" style="color: red"><?php echo form_error('symptoms'); ?></div>
-
-                <div class="form-group">
-                    <label><?php echo $this->lang->line("label_diagnosis") ?> :</label>
-                        <textarea class="form-control" name="diagnosis"
-                                  id="scd"><?php echo set_value('diagnosis'); ?></textarea>
-                    <script>
-                        // Replace the <textarea id="editor1"> with a CKEditor
-                        // instance, using default configuration.
-                        CKEDITOR.replace('diagnosis');
-                    </script>
-                </div>
-                <div class="error" style="color: red"><?php echo form_error('diagnosis'); ?></div>
-
-                <div class="form-group">
-                    <label><?php echo $this->lang->line("label_treatment") ?> :</label>
-                        <textarea class="form-control" name="treatment"
-                                  id="treatment"><?php echo set_value('treatment'); ?></textarea>
-                    <script>
-                        // Replace the <textarea id="editor1"> with a CKEditor
-                        // instance, using default configuration.
-                        CKEDITOR.replace('treatment');
-                    </script>
-                </div>
-                <div class="error" style="color: red"><?php echo form_error('treatment'); ?></div>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save</button>
