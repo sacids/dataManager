@@ -13,7 +13,7 @@ class Ohkr_model extends CI_Model
 	private static $table_name_disease = "ohkr_diseases";
 	private static $table_name_species = "ohkr_species";
 	private static $table_name_symptoms = "ohkr_symptoms";
-	private static $table_name_scd = "ohkr_disease_symptoms";
+	private static $table_disease_symptoms = "ohkr_disease_symptoms";
 	private static $table_name_faq = "ohkr_faq";
 	private static $table_name_response_sms = "ohkr_response_sms";
 	private static $table_name_sent_sms = "ohkr_sent_sms";
@@ -162,34 +162,34 @@ class Ohkr_model extends CI_Model
 	}
 
 
-	public function find_disease_symptoms($disease_id)
-	{
-		$this->db->select("scd.id, scd. disease_id, scd.importance, symptom.title as symptom_title")
-			->join(self::$table_name_symptoms . " symptom", "scd.symptom_id = symptom.id");
-		return $this->db->get_where(self::$table_name_scd . " scd", array("disease_id" => $disease_id))->result();
-	}
+    public function find_disease_symptoms($disease_id)
+    {
+        $this->db->select("ds.id, ds. disease_id, ds.importance, symptom.title as symptom_title")
+            ->join(self::$table_name_symptoms . " symptom", "ds.symptom_id = symptom.id");
+        return $this->db->get_where(self::$table_disease_symptoms . " ds", array("disease_id" => $disease_id))->result();
+    }
 
-	public function get_disease_symptom_by_id($disease_symptom_id)
-	{
-		return $this->db->get_where(self::$table_name_scd, array('id' => $disease_symptom_id))->row();
-	}
+    public function get_disease_symptom_by_id($disease_symptom_id)
+    {
+        return $this->db->get_where(self::$table_disease_symptoms, array('id' => $disease_symptom_id))->row();
+    }
 
-	public function add_disease_symptom($symptoms)
-	{
-		return $this->db->insert(self::$table_name_scd, $symptoms);
-	}
+    public function add_disease_symptom($symptoms)
+    {
+        return $this->db->insert(self::$table_disease_symptoms, $symptoms);
+    }
 
-	public function update_disease_symptom($id, $symptom)
-	{
-		$this->db->where("id", $id);
-		return $this->db->update(self::$table_name_scd, $symptom);
-	}
+    public function update_disease_symptom($id, $symptom)
+    {
+        $this->db->where("id", $id);
+        return $this->db->update(self::$table_disease_symptoms, $symptom);
+    }
 
-	public function delete_disease_symptom($id)
-	{
-		$this->db->where("id", $id);
-		return $this->db->delete(self::$table_name_scd);
-	}
+    public function delete_disease_symptom($id)
+    {
+        $this->db->where("id", $id);
+        return $this->db->delete(self::$table_disease_symptoms);
+    }
 
 
 	public function get_submitted_symptoms($arr)
