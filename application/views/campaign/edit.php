@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
 
-            <h3>Campaign Details</h3>
+            <h3>Edit Campaign Details</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {

@@ -31,7 +31,7 @@
                                 <td><?php echo $campaign->c_title; ?></td>
                                 <td><?php echo $campaign->type; ?></td>
                                 <td><?php echo $campaign->x_title; ?></td>
-                                <td><?php echo $campaign->icon; ?></td>
+                                <td><?php echo anchor('campaign/change_icon/' . $campaign->id, $campaign->icon); ?></td>
                                 <td><?php echo date('d-m-Y H:i:s', strtotime($campaign->date_created)); ?></td>
                                 <td>
                                     <?php echo anchor("campaign/edit/" . $campaign->id, "Edit"); ?> |

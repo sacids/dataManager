@@ -10,11 +10,14 @@
  */
 class Campaign extends CI_Controller
 {
+    private $imageUrl;
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model(array('Campaign_model', 'Xform_model'));
+
+        $this->imageUrl = base_url() . 'assets/forms/data/images/';
     }
 
     /**
@@ -121,6 +124,41 @@ class Campaign extends CI_Controller
             $this->session->set_flashdata("message", display_message("Campaign successfully edited"));
             redirect("campaign/edit/" . $campaign_id, "refresh");
         }
+    }
+
+
+    /**
+     * @param $campaign_id
+     */
+    function change_icon($campaign_id)
+    {
+        //check if logged in
+        $this->_is_logged_in();
+
+        $this->data['campaign'] = $campaign = $this->Campaign_model->get_campaign_by_id($campaign_id);
+
+        //form validation
+        $this->form_validation->set_rules("icon", "Campaign Icon", "callback_upload_campaign_image");
+
+        if ($this->form_validation->run() == true) {
+            $data = array(
+                "icon" => $_POST['icon']
+            );
+            $this->Campaign_model->update_campaign($campaign_id, $data);
+
+            //delete icon path
+            $icon_path = $this->imageUrl . $campaign->icon;
+            delete_files($icon_path);
+
+            //redirect with message
+            $this->session->set_flashdata('message', display_message('Campaign icon successfully changed'));
+            redirect('campaign/campaign_list', 'refresh');
+        }
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("campaign/change_icon");
+        $this->load->view('footer');
     }
 
 
