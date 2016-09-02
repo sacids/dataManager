@@ -25,6 +25,11 @@ class Feedback_model extends CI_Model
         parent::__construct();
     }
 
+    function count_new_feedback()
+    {
+        return $this->db->get_where('feedback', array('status' => ''))->num_rows();
+    }
+
     /**
      * @param $feedback array of feedback information.
      * @return mixed
@@ -169,7 +174,7 @@ class Feedback_model extends CI_Model
         return $query;
     }
 
-   /**
+    /**
      * @param $user_id
      * @param $date_created
      * @return mixed

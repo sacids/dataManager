@@ -23,6 +23,10 @@ class Campaign_model extends CI_Model
         parent::__construct();
     }
 
+    function count_active_campaign()
+    {
+        return $this->db->get('campaign')->num_rows();
+    }
 
     /**
      * @param $campaign_details

@@ -55,6 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Xform_model $Xform_model
  * @property User_model $User_model
  * @property Feedback_model $Feedback_model
+ * @property Campaign_model $Campaign_model
  * @property Ohkr_model $Ohkr_model
  * @property Whatsapp_model $Whatsapp_model
  * @property Perm_model $Perm_model
