@@ -103,6 +103,15 @@ class Migration_Ohkr_sms_alerts extends CI_Migration
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('ohkr_sent_sms');
 		$this->db->query('ALTER TABLE ohkr_sent_sms ADD CONSTRAINT fk_respons_msg_id FOREIGN KEY(response_msg_id) REFERENCES ohkr_response_sms(id) ON DELETE CASCADE ON UPDATE CASCADE;');
+
+
+		$field = array(
+			'district' => array(
+				'type' => 'VARCHAR',
+				'constraint' => 45,
+			),
+		);
+		$this->dbforge->add_column('users', $field);
 	}
 
 

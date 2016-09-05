@@ -10,13 +10,15 @@ class Alert_model extends CI_Model
 {
 
 	private static $info_bip_base_url = "https://api.infobip.com/";
-	private $user_agent = "curl/7.35.0 (AfyaData Alerts; Ubuntu 14.04.2 LTS;) Gecko/20100101 TTSMS/1";
+	private $user_agent = "curl/7.35.0 (AfyaData Alerts; Ubuntu 14.04.2 LTS;) Gecko/20100101 adSMS/1";
 	private $headers = array(
 		'accept:application/json',
 		'content-Type:application/json',
 		'authorization: Basic QWZ5YURhdGE=',
 		'accept-encoding:gzip'
 	);
+
+	private static $table_name_sent_sms = "ohkr_sent_sms";
 
 	public function __construct()
 	{
@@ -67,5 +69,12 @@ class Alert_model extends CI_Model
 		$response = curl_exec($ch);
 		curl_close($ch);
 		return $response;
+	}
+
+	public function update_sms_status($id, $sms)
+	{
+		$this->db->where("id", $id);
+		$this->db->limit(1);
+		return $this->db->update(self::$table_name_sent_sms, $sms);
 	}
 }
