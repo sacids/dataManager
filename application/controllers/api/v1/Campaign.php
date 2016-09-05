@@ -17,7 +17,7 @@ class Campaign extends CI_Controller
         $this->load->model(array('Campaign_model'));
 
         //variables
-        $this->imageUrl = base_url() . 'assets/forms/data/images/';
+        $this->imageUrl = base_url() . 'assets/forms/data/images/thumb_';
     }
 
     /**
@@ -36,6 +36,7 @@ class Campaign extends CI_Controller
                     'title' => $value->title,
                     'type' => $value->type,
                     'form_id' => $value->form_id,
+                    'featured' => $value->featured,
                     'icon' => $this->imageUrl . $value->icon,
                     'description' => $value->description,
                     'date_created' => $value->date_created

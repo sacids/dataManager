@@ -2,7 +2,6 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-
             <h3>Change Campaign Icon</h3>
 
             <?php
@@ -10,8 +9,11 @@
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
             } ?>
 
-
             <div class="col-sm-8">
+                <img src="<?= base_url() ?>assets/forms/data/images/<?= $campaign->icon ?>" width="400" height="300"/>
+                <br>
+                <br>
+
                 <?php echo form_open_multipart('campaign/change_icon/' . $campaign->id, 'class="form-horizontal" role="form"'); ?>
 
                 <div class="form-group">
@@ -20,11 +22,9 @@
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('icon'); ?></div>
 
-
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Change</button>
                 </div>
-
 
                 <?php echo form_close(); ?>
 

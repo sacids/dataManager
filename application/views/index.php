@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="col-xs-7 pl35 prn text-center">
                                         <h2><?php echo $new_feedback; ?></h2>
-                                        <h6>New chats</h6>
+                                        <h6>User chats</h6>
                                     </div>
                                 </div>
                             </div>

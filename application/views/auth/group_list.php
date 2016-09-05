@@ -5,8 +5,7 @@
             <h3>Group List</h3>
 
             <div class="col-sm-8">
-
-                <table class="table table-responsive tab-content table-bordered table-condensed">
+                <table class="table table-striped table-responsive table-hover">
                     <tr>
                         <th>S/n</th>
                         <th>Group Name</th>

@@ -20,7 +20,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?php echo base_url(); ?>favicon.png"/>
 
-    <title><?php if (!empty($title)) echo $title; else "AfyaData Manager"; ?></title>
+    <title>AfyaData | <?php if (!empty($title)) echo $title; else "AfyaData Manager"; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php echo site_url('dashboard') ?>">AfyaData Manager</a>
+            <?= anchor("dashboard", '<img src="' . base_url() . 'assets/public/images/logo.png" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -92,8 +92,8 @@
                         <li><?php echo anchor('auth/create_user', "Create User"); ?></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Manage user groups</li>
-                        <li><?php echo anchor('auth/create_group', "Create Group"); ?></li>
                         <li><?php echo anchor('auth/group_list', "List Groups"); ?></li>
+                        <li><?php echo anchor('auth/create_group', "Create Group"); ?></li>
                     </ul>
                 </li>
 
@@ -119,7 +119,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Manage Campaign <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo anchor('campaign/campaign_list', "List Campaign"); ?></li>
+                        <li><?php echo anchor('campaign/lists', "List Campaign"); ?></li>
                         <li><?php echo anchor('campaign/add_new', "Add New Campaign"); ?></li>
                     </ul>
                 </li>
@@ -129,7 +129,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
-                <li><?php echo anchor('feedback/feedback_list', "Chats"); ?></li>
+                <li><?php echo anchor('feedback/lists', "Chats"); ?></li>
 
                 <li class="">
                     <a href="./" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

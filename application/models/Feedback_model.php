@@ -27,7 +27,7 @@ class Feedback_model extends CI_Model
 
     function count_new_feedback()
     {
-        return $this->db->get_where('feedback', array('status' => ''))->num_rows();
+        return $this->db->get('feedback')->num_rows();
     }
 
     /**
@@ -40,18 +40,34 @@ class Feedback_model extends CI_Model
         return $this->db->insert(self::$table_name, $feedback);
     }
 
-
     /**
-     * @param null
      * @return mixed
      */
-    function find_all()
+    function count_feedback()
     {
-        return $this->db->query("SELECT feedback.id, feedback.instance_id,feedback.message,
-                                      feedback.date_created,users.username,xforms.title FROM feedback
-              join xforms on xforms.form_id=feedback.form_id
-              join users on users.id=feedback.user_id
-              where feedback.id in (SELECT max(id) FROM feedback GROUP BY instance_id ) order by feedback.id desc ")->result();
+        return $this->db
+            ->where_in("(SELECT max(id) FROM feedback GROUP BY instance_id)")
+            ->get('feedback')->num_rows();
+    }
+
+
+    /**
+     * @param $num
+     * @param $start
+     * @return mixed
+     */
+    function find_all($num, $start)
+    {
+        return $this->db
+            ->select('feedback.id, feedback.instance_id, feedback.message, feedback.date_created,
+                    users.first_name, users.last_name, users.username, xforms.title')
+            ->limit($num, $start)
+            ->order_by('feedback.id', 'DESC')
+            ->where_in("(SELECT MAX(feedback.id) FROM feedback GROUP BY instance_id)")
+            ->join('users', 'users.id = feedback.user_id')
+            ->join('xforms', 'xforms.form_id = feedback.form_id')
+            ->get(self::$table_name)
+            ->result();
     }
 
 
@@ -68,12 +84,15 @@ class Feedback_model extends CI_Model
         if ($username != NULL)
             $this->db->like("users.username", $username);
 
-        return $this->db->query("SELECT feedback.id, feedback.instance_id,feedback.message,feedback.date_created,users.username,xforms.title
-              FROM feedback
-              join xforms on xforms.form_id=feedback.form_id
-              join users on users.id=feedback.user_id
-              where feedback.id in (SELECT max(id) FROM feedback GROUP BY instance_id )
-              order by feedback.id desc ")->result();
+        return $this->db
+            ->select('feedback.id, feedback.instance_id, feedback.message, feedback.date_created,
+                    users.first_name, users.last_name, users.username, xforms.title')
+            ->order_by('feedback.id', 'DESC')
+            ->where_in("(SELECT MAX(feedback.id) FROM feedback GROUP BY instance_id)")
+            ->join('users', 'users.id = feedback.user_id')
+            ->join('xforms', 'xforms.form_id = feedback.form_id')
+            ->get(self::$table_name)
+            ->result();
     }
 
     /**

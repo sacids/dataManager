@@ -44,7 +44,9 @@ $lang['nav_item_form_list']             = "Form List";
 $lang['nav_item_form_add_new']          = "Add new form";
 
 $lang['label_instance_id']              = "Instance Id";
-$lang['label_user']                     = "Chat user";
+$lang['label_message']                  = "Chat Message";
+$lang['label_user']                     = "Chat User";
+$lang['label_username']                 = "Username";
 $lang['label_feedback_date']            = "Feedback Date";
 
 
@@ -108,4 +110,5 @@ $lang['user_does_not_exist']            = 'user does not exist';
 $lang['label_campaign_title']             = "Title";
 $lang['label_campaign_type']              = "Type";
 $lang['label_campaign_icon']              = "Icon";
+$lang['label_campaign_featured']          = "Featured";
 $lang['label_campaign_created_date']      = "Created date";

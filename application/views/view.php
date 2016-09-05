@@ -54,7 +54,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">AfyaData</a>
+            <?= anchor("dashboard", '<img src="' . base_url() . 'assets/public/images/logo.png" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

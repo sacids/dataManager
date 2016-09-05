@@ -2,8 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-
-            <h3>Campaign Details</h3>
+            <h3>Add Campaign Details</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -50,12 +49,21 @@
 
 
                 <div class="form-group">
+                    <label><?php echo $this->lang->line("label_campaign_featured"); ?> </label>
+                    <select name="featured" id="featured" class="form-control">
+                        <option value="">Choose option</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="error" style="color: red"><?php echo form_error('featured'); ?></div>
+
+
+                <div class="form-group">
                     <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label>
                         <textarea class="form-control" name="description"
                                   id="description"><?php echo set_value('description'); ?></textarea>
                     <script>
-                        // Replace the <textarea id="editor1"> with a CKEditor
-                        // instance, using default configuration.
                         CKEDITOR.replace('description');
                     </script>
                 </div>

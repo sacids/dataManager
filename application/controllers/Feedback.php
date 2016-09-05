@@ -42,7 +42,7 @@ class Feedback extends CI_Controller
      *
      * @return array
      */
-    function feedback_list()
+    function lists()
     {
         //check if logged in
         $this->_is_logged_in();
@@ -56,15 +56,25 @@ class Feedback extends CI_Controller
             $feedback = $this->Feedback_model->search_feedback($form_name, $username);
 
             if ($feedback) {
-                $data['feedback'] = $feedback;
+                $this->data['feedback'] = $feedback;
             }
         } else {
-            $data['feedback'] = $this->Feedback_model->find_all();
+            $config = array(
+                'base_url'    => $this->config->base_url("feedback/lists"),
+                'total_rows'  => $this->Feedback_model->count_feedback(),
+                'uri_segment' => 3,
+            );
+
+            $this->pagination->initialize($config);
+            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+            $this->data['feedback'] = $this->Feedback_model->find_all($this->pagination->per_page, $page);
+            $this->data["links"] = $this->pagination->create_links();
         }
 
         //render view
-        $data['title'] = "Feedback List";
-        $this->load->view('header', $data);
+        $this->data['title'] = "Feedback List";
+        $this->load->view('header', $this->data);
         $this->load->view("feedback/feedback_list");
         $this->load->view('footer');
     }

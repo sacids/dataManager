@@ -18,6 +18,8 @@ class Campaign extends CI_Controller
         $this->load->model(array('Campaign_model', 'Xform_model'));
 
         $this->imageUrl = base_url() . 'assets/forms/data/images/';
+
+        //$this->output->enable_profiler(TRUE);
     }
 
     /**
@@ -36,7 +38,7 @@ class Campaign extends CI_Controller
     /**
      * Campaign List
      */
-    function campaign_list()
+    function lists()
     {
         //check if logged in
         $this->_is_logged_in();
@@ -77,6 +79,7 @@ class Campaign extends CI_Controller
                 "description" => $this->input->post("description"),
                 "type" => $this->input->post("type"),
                 "form_id" => $this->input->post("form_id"),
+                "featured" => $this->input->post("featured"),
                 "date_created" => date("c"),
                 "icon" => $_POST['icon']
             );
@@ -84,7 +87,7 @@ class Campaign extends CI_Controller
             $this->Campaign_model->create_campaign($campaign_details);
 
             $this->session->set_flashdata("message", display_message("Campaign successfully added"));
-            redirect("campaign/add_new", "refresh");
+            redirect("campaign/lists", "refresh");
         }
     }
 
@@ -115,6 +118,7 @@ class Campaign extends CI_Controller
                 "title" => $this->input->post("title"),
                 "description" => $this->input->post("description"),
                 "type" => $this->input->post("type"),
+                "featured" => $this->input->post("featured"),
                 "form_id" => $this->input->post("form_id")
             );
 
@@ -122,7 +126,7 @@ class Campaign extends CI_Controller
 
 
             $this->session->set_flashdata("message", display_message("Campaign successfully edited"));
-            redirect("campaign/edit/" . $campaign_id, "refresh");
+            redirect("campaign/lists", "refresh");
         }
     }
 
@@ -152,10 +156,11 @@ class Campaign extends CI_Controller
 
             //redirect with message
             $this->session->set_flashdata('message', display_message('Campaign icon successfully changed'));
-            redirect('campaign/campaign_list', 'refresh');
+            redirect('campaign/lists', 'refresh');
         }
 
         //render view
+        $this->data['title'] = "Change campaign icon";
         $this->load->view('header', $this->data);
         $this->load->view("campaign/change_icon");
         $this->load->view('footer');
@@ -170,7 +175,10 @@ class Campaign extends CI_Controller
     {
         $config['upload_path'] = './assets/forms/data/images/';
         $config['allowed_types'] = 'png|jpg|jpeg|gif';
-        $config['max_size'] = '1024';
+        $config['max_size'] = '4000';
+        $config['max_width'] = '';
+        $config['max_height'] = '';
+        $config['overwrite'] = TRUE;
         $config['remove_spaces'] = TRUE;
 
         $this->load->library('upload', $config);
@@ -182,6 +190,18 @@ class Campaign extends CI_Controller
                 // set a $_POST value for 'image' that we can use later
                 $upload_data = $this->upload->data();
                 $_POST['icon'] = $upload_data['file_name'];
+
+                //Image Resizing
+                $resize_conf['source_image'] = $this->upload->upload_path . $this->upload->file_name;
+                $resize_conf['new_image'] = $this->upload->upload_path . 'thumb_' . $this->upload->file_name;
+                $resize_conf['maintain_ratio'] = FALSE;
+                $resize_conf['width'] = 800;
+                $resize_conf['height'] = 600;
+
+                // initializing image_lib
+                $this->image_lib->initialize($resize_conf);
+                $this->image_lib->resize();
+
                 return true;
             } else {
                 // possibly do some clean up ... then throw an error
