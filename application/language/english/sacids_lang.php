@@ -48,6 +48,7 @@ $lang['label_message']                  = "Chat Message";
 $lang['label_user']                     = "Chat User";
 $lang['label_username']                 = "Username";
 $lang['label_feedback_date']            = "Feedback Date";
+$lang['label_status']                   = "Status";
 
 
 // Form management
@@ -65,6 +66,8 @@ $lang['label_specie_name']              = "Specie affected";
 $lang['label_symptom_name']             = "Clinical manifestation";
 $lang['label_symptom_code']             = "Clinical manifestation code";
 $lang['label_specie']                   = "Species";
+$lang['label_recipient_group']          = "Group to receive alerts";
+$lang['label_alert_message']            = "Alert message";
 
 $lang['select_disease_to_edit']         = "You must select a disease to edit";
 $lang['select_disease_to_delete']       = "You must select a disease to delete";
@@ -73,13 +76,13 @@ $lang['select_symptom_to_delete']       = "You must select a clinical manifestat
 $lang['select_specie_to_edit']          = "You must select a species to edit";
 $lang['select_specie_to_delete']        = "You must select a species to delete";
 $lang['add_disease_successful']         = "Disease was added successfully";
-$lang['add_specie_successful']          = "Specie was added successfully";
+$lang['add_specie_successful']          = "Species was added successfully";
 $lang['add_symptom_successful']         = "Clinical manifestation was added successfully";
 $lang['edit_disease_successful']        = "Disease was edited successfully";
-$lang['edit_specie_successful']         = "Specie was edited successfully";
+$lang['edit_specie_successful']         = "Species was edited successfully";
 $lang['edit_symptom_successful']        = "Clinical manifestation was edit successfully";
 $lang['delete_disease_successful']      = "Disease was deleted successfully";
-$lang['delete_specie_successful']       = "Specie was deleted successfully";
+$lang['delete_specie_successful']       = "Species was deleted successfully";
 $lang['delete_symptom_successful']      = "Clinical manifestation was deleted successfully";
 $lang['error_failed_to_add_disease']    = "Failed to add new disease";
 $lang['error_failed_to_add_specie']     = "Failed to add new species";
@@ -112,3 +115,7 @@ $lang['label_campaign_type']              = "Type";
 $lang['label_campaign_icon']              = "Icon";
 $lang['label_campaign_featured']          = "Featured";
 $lang['label_campaign_created_date']      = "Created date";
+$lang['label_campaign_title']           = "Title";
+$lang['label_campaign_type']            = "Type";
+$lang['label_campaign_icon']            = "Icon";
+$lang['label_campaign_created_date']    = "Created date";

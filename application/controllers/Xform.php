@@ -40,7 +40,9 @@ class Xform extends CI_Controller
 			'Xform_model',
 			'User_model',
 			'Feedback_model',
-			'Submission_model'
+			'Submission_model',
+			'Ohkr_model',
+			'Alert_model'
 		));
 
 		$this->load->library('form_auth');
@@ -186,8 +188,9 @@ class Xform extends CI_Controller
 					$path = $this->config->item("form_data_upload_dir") . $file_name;
 					// insert form details in database
 					$data = array(
-						'file_name' => $file_name,
-						'user_id'   => $user->id
+						'file_name'    => $file_name,
+						'user_id'      => $user->id,
+						"submitted_on" => date("Y-m-d h:i:s")
 					);
 
 					$inserted_form_id = $this->Submission_model->create($data);
@@ -250,6 +253,89 @@ class Xform extends CI_Controller
 				"status"       => "pending"
 			);
 			$this->Feedback_model->create_feedback($feedback);
+
+			// TODO Try to detect disease and alert required people.
+			// get all symptoms field,
+			// get suspected diseases in order of priority
+			// get DVO, DMO by Location and Epidemiologists
+			// send alert messages from a specific disease.
+
+
+			$symptoms_reported = explode(" ", $this->form_data['Dalili_Dalili']);
+			$district = $this->form_data['taarifa_awali_Wilaya']; // taarifa_awali_Wilaya is the database field name in the mean time
+
+			log_message("debug", "District " . $district);
+
+			if (count($symptoms_reported) > 0) {
+
+				log_message("debug", "========= Ohkr alert start =========");
+
+				//log_message("debug", "Symptoms JSON " . json_encode($symptoms_reported));
+
+				$suspected_diseases = $this->Ohkr_model->find_diseases_by_symptoms_code($symptoms_reported);
+				log_message("debug", "Disease by symptoms code query =>\n\n" . $this->db->last_query() . "\n");
+
+				if ($suspected_diseases) {
+					//log_message("debug", "Suspected diseases are " . json_encode($suspected_diseases));
+
+					$i = 1;
+					foreach ($suspected_diseases as $disease) {
+						//compose response/feedback message for chr via App
+						// Send sms to chrs, dvo/dmo, Epidemiologists
+
+						//Find response messages by disease id
+						$response_messages = $this->Ohkr_model->find_response_messages_and_groups($disease->disease_id, $district);
+						log_message("debug", "Response messages Query ==>\n\n" . $this->db->last_query() . "\n");
+
+						if ($response_messages) {
+							foreach ($response_messages as $sms) {
+								$sms_to_send = array(
+									"response_msg_id" => $sms->rsms_id,
+									"phone_number"    => $sms->phone,
+									"date_sent"       => date("Y-m-d h:i:s"),
+									"status"          => "PENDING"
+								);
+
+								$sender_name = "AfyaData";
+								if ($msg_id = $this->Ohkr_model->create_send_sms($sms_to_send)) {
+									$sms_info = array(
+										"from" => $sender_name,
+										"to"   => $sms->phone,
+										"text" => $sms->message
+									);
+
+									$request_url = "sms/1/text/single";
+
+									if ($send_result = $this->Alert_model->send_alert_sms($request_url, $sms_info)) {
+										$infobip_response = json_decode($send_result);
+										$message = (array)$infobip_response->messages;
+										$message = array_shift($message);
+										$sms_updates = array(
+											"status"           => "SENT", "date_sent" => date("c"),
+											"infobip_msg_id"   => $message->messageId,
+											"infobip_response" => $send_result
+										);
+										//$this->db->reconnect();
+										$this->Alert_model->update_sms_status($msg_id, $sms_updates);
+										log_message("debug", "From:" . $sender_name . " To:" . $sms->phone . " Text: " . $sms->message);
+									}
+								}
+							}
+						}
+
+						log_message("debug", $i . ". Response\n " . json_encode($response_messages) . "\n");
+						$i++;
+					}
+				} else {
+					//do something else here
+					log_message("debug", "Could not find disease with the specified symptoms");
+				}
+
+				log_message("debug", "========= Ohkr alert end =========");
+			} else {
+				log_message("debug", "No symptom reported");
+			}
+
 		}
 		return $result;
 	}
@@ -295,7 +381,7 @@ class Xform extends CI_Controller
 		// array to hold values and field names;
 		$this->form_data = array(); // TODO move to constructor
 		$prefix = $this->config->item("xform_tables_prefix");
-		log_message("debug", "Table prefix " . $prefix);
+		//log_message("debug", "Table prefix " . $prefix);
 
 
 		// set table name
@@ -332,7 +418,7 @@ class Xform extends CI_Controller
 		xml_parse_into_struct($parser, $xml, $tags);
 		xml_parser_free($parser);
 
-		log_message("debug", "Tags => " . json_encode($tags));
+		//log_message("debug", "Tags => " . json_encode($tags));
 		$elements = array(); // the currently filling [child] XmlElement array
 		$stack = array();
 		foreach ($tags as $tag) {
@@ -691,7 +777,7 @@ class Xform extends CI_Controller
 						redirect("xform/add_new");
 					} else {
 						$create_table_result = $this->Xform_model->create_table($create_table_statement);
-						log_message("debug", "Create table result " . $create_table_result);
+						//log_message("debug", "Create table result " . $create_table_result);
 
 						if ($create_table_result) {
 
@@ -738,7 +824,7 @@ class Xform extends CI_Controller
 	 */
 	public function _initialize($file_name)
 	{
-		log_message("debug", "File to load " . $file_name);
+		//log_message("debug", "File to load " . $file_name);
 
 		// create table structure
 		$this->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
@@ -778,14 +864,14 @@ class Xform extends CI_Controller
 		$instance = $rxml->children [0]->children [1]->children [0]->children [0];
 
 		$prefix = $this->config->item("xform_tables_prefix");
-		log_message("debug", "Table prefix during creation " . $prefix);
+		//log_message("debug", "Table prefix during creation " . $prefix);
 		$jr_form_id = $instance->attributes ['id'];
 		$table_name = $prefix . str_replace("-", "_", $jr_form_id);
 
 		// get array rep of xform
 		$this->form_defn = $this->get_form_definition();
 
-		log_message("debug", "Table name " . $table_name);
+		//log_message("debug", "Table name " . $table_name);
 		$this->table_name = $table_name;
 		$this->jr_form_id = $jr_form_id;
 	}
@@ -995,7 +1081,7 @@ class Xform extends CI_Controller
 			return $fn;
 		}
 
-		log_message('error', 'failed to map field');
+		//log_message('error', 'failed to map field');
 		return FALSE;
 	}
 

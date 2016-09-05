@@ -62,6 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property db_exp $db_exp
  * @property Analyze_model $Analyze_model
  * @property xform_comm $xform_comm
+ * @property Alert_model $Alert_model
  */
 
 class CI_Controller {
