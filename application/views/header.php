@@ -37,8 +37,8 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/leaflet/dist/MarkerCluster.Default.css"/>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/afyadata.css" type="text/css">
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/bootstrap/js/afyadata.js"></script>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/css/afyadata.css" type="text/css">
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/public/js/afyadata.js"></script>
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -50,6 +50,8 @@
     <!-- Font awesome css -->
     <link href="<?php echo base_url(); ?>assets/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
