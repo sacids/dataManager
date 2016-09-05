@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="col-sm-3 col-xl-3">
-                    <a href="<?php echo site_url('campaign/campaign_list') ?>">
+                    <a href="<?php echo site_url('campaign/lists') ?>">
                         <div class="panel panel-tile info-block info-block-bg-info">
                             <div class="panel-body">
                                 <div class="row">
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="col-sm-3 col-xl-3">
-                    <a href="<?php echo site_url('feedback/feedback_list') ?>">
+                    <a href="<?php echo site_url('feedback/lists') ?>">
                         <div class="panel panel-tile info-block info-block-bg-warning">
                             <div class="panel-body">
                                 <div class="row">
