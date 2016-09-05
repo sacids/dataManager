@@ -14,7 +14,7 @@ class Ohkr extends CI_Controller
         parent::__construct();
 
         $this->load->model(array("Ohkr_model", "Perm_model"));
-        $this->load->library("Db_exp");
+        //$this->load->library("Db_exp");
     }
 
     /**

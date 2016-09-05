@@ -11,7 +11,7 @@
             <div class="col-sm-12">
                 <?php if (!empty($diseases)) { ?>
 
-                    <table class="table table-striped table-responsive table-hover table-bordered">
+                    <table class="table table-striped table-responsive table-hover">
                         <tr>
                             <th><?php echo $this->lang->line("label_disease_name"); ?></th>
                             <th><?php echo $this->lang->line("label_specie_name"); ?></th>

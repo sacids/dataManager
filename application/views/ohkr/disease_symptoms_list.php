@@ -16,7 +16,7 @@
 
                 <?php if (!empty($symptoms)) { ?>
 
-                    <table class="table table-striped table-responsive table-hover table-bordered">
+                    <table class="table table-striped table-responsive table-hover">
                         <tr>
                             <th>Species</th>
                             <th><?php echo $this->lang->line("label_symptom_name"); ?></th>
