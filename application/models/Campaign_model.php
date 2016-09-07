@@ -45,8 +45,8 @@ class Campaign_model extends CI_Model
     public function get_campaign()
     {
         return $this->db->select('campaign.id, campaign.title as campaign_title, campaign.icon, campaign.featured, campaign.type,
-                        campaign.date_created, campaign.form_id, campaign.description, xform.title as xform_title')
-            ->join(self::$xform_table_name . " xform", "xform.jr_form_id = campaign.form_id", "left")
+                        campaign.date_created, campaign.jr_form_id, campaign.description, xform.title as xform_title')
+            ->join(self::$xform_table_name . " xform", "xform.jr_form_id = campaign.jr_form_id", "left")
             ->get(self::$table_name . " campaign")
             ->result();
     }
@@ -59,8 +59,8 @@ class Campaign_model extends CI_Model
     {
         return $this->db
             ->select('campaign.id, campaign.title as campaign_title, campaign.icon, campaign.featured, campaign.type,
-                        campaign.date_created, campaign.form_id, campaign.description, xform.title as xform_title')
-            ->join(self::$xform_table_name . " xform", "xform.jr_form_id = campaign.form_id", "left")
+                        campaign.date_created, campaign.jr_form_id, campaign.description, xform.title as xform_title')
+            ->join(self::$xform_table_name . " xform", "xform.jr_form_id = campaign.jr_form_id", "left")
             ->get_where(self::$table_name . " campaign", array('campaign.id' => $campaign_id))
             ->row();
     }

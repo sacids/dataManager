@@ -1,3 +1,14 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#general').click(function () {
+            $('#div1').hide('fast');
+        });
+        $('#form').click(function () {
+            $('#div1').show('fast');
+        });
+    });
+</script>
+
 <script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
 <div class="container">
     <div class="row">
@@ -28,15 +39,18 @@
 
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_campaign_type"); ?> <span>*</span></label>
-                    <select name="type" id="type" class="form-control">
-                        <option value="">Choose type</option>
-                        <option value="general">General Campaign</option>
-                        <option value="form">Form Campaign</option>
-                    </select>
+
+                    <div class="radio">
+                        <label><input id="general" type="radio" name="type" value="general"/>General
+                            Campaign</label>
+                    </div>
+                    <div class="radio">
+                        <label><input id="form" type="radio" name="type" value="form"/>Form Campaign</label>
+                    </div>
                 </div>
                 <div class="error" style="color: red"><?php echo form_error('type'); ?></div>
 
-                <div class="form-group">
+                <div id="div1" style="display: none" class="form-group">
                     <label><?php echo $this->lang->line("label_form_name"); ?> </label>
                     <select name="form_id" id="form_id" class="form-control">
                         <option value="">Choose form</option>

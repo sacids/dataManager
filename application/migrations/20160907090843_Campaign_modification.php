@@ -20,14 +20,22 @@ class Migration_Campaign_modification extends CI_Migration
 
         $this->dbforge->add_column('campaign', $add_field);
 
+        //modify column
+        $modify_field = array(
+            'form_id' => array(
+                'name' => 'jr_form_id',
+                'type' => 'VARCHAR',
+                'constraint' => 255
+            ),
+        );
 
+        $this->dbforge->modify_column('campaign', $modify_field);
 
     }
 
     public function down()
     {
         $this->dbforge->drop_table('campaign', TRUE);
-        
     }
 
 }
