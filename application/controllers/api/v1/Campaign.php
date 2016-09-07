@@ -35,7 +35,7 @@ class Campaign extends CI_Controller
                     'id' => $value->id,
                     'title' => $value->title,
                     'type' => $value->type,
-                    'form_id' => $value->form_id,
+                    'jr_form_id' => $value->jr_form_id,
                     'featured' => $value->featured,
                     'icon' => $this->imageUrl . $value->icon,
                     'description' => $value->description,
