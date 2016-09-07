@@ -51,9 +51,9 @@ class Perm extends CI_Controller {
 		
 		$modules = $this->Perm_model->get_modules ();
 		$this->data['modules'] = $modules;
-		$this->load->view ( 'perm/header', $this->data );
+		$this->load->view ( 'Perm/header', $this->data );
 		// get all users options
-		$this->load->view ( 'perm/body', $this->data );
+		$this->load->view ( 'Perm/body', $this->data );
 	}
 	
 	public function delete_row() {
@@ -104,7 +104,7 @@ class Perm extends CI_Controller {
 						'add_controller' 
 				) );
 				$this->db_exp->set_db_select ( 'table_id', 'perm_tables', 'id', 'label', 'module_id = "' . $this->session->userdata ( 'module_id' ) . '"' );
-				$this->db_exp->set_hidden ( 'controller', 'perm/manage_table' );
+				$this->db_exp->set_hidden ( 'controller', 'Perm/manage_table' );
 				$this->db_exp->set_input ( 'add_controller' );
 				$this->db_exp->set_hidden ( array (
 						'id',
@@ -119,7 +119,7 @@ class Perm extends CI_Controller {
 				) );
 				$this->db_exp->set_db_select ( 'table_id', 'perm_tables', 'id', 'label', 'module_id = "' . $this->session->userdata ( 'module_id' ) . '"' );
 				$this->db_exp->set_input ( 'show' );
-				$this->db_exp->set_hidden ( 'controller', 'perm/list_table_data' );
+				$this->db_exp->set_hidden ( 'controller', 'Perm/list_table_data' );
 				break;
 			case 'db_select' :
 				$this->db_exp->set_json_field ( 'perm_data', array (
@@ -181,6 +181,7 @@ class Perm extends CI_Controller {
 				'hidden',
 				'view',
 				'password',
+				'password_dblcheck',
 				'label',
 				'upload',
 				'textarea',
@@ -249,7 +250,7 @@ class Perm extends CI_Controller {
 			echo '<div class="db_exp_list_wrp">';
 			foreach ( $data as $row ) {
 				$args = http_build_query ( $row );
-				echo '<div class="perm_list_row group perm_list_link" action="' . site_url ( 'perm/view_table' ) . '" target="detail_wrp" args="' . $args . '">';
+				echo '<div class="perm_list_row group perm_list_link" action="' . site_url ( 'Perm/view_table' ) . '" target="detail_wrp" args="' . $args . '">';
 				foreach ( $fields as $val ) {
 					echo '<div class="left perm_list_row_field">' . $row [$val] . '</div>';
 				}
@@ -419,7 +420,7 @@ class Perm extends CI_Controller {
 			// check if add is via controller
 			$add_controller	= trim(@$post['add_controller']);
 			if(!$add_controller){
-				$add_controller	= 'perm/new_table_data';
+				$add_controller	= 'Perm/new_table_data';
 			}
 			// new icon
 			echo '	<div 	target="detail_wrp"
@@ -447,7 +448,7 @@ class Perm extends CI_Controller {
 				'table_id' => $table_id,
 				'_COND_' => $cond 
 		) );
-		$this->db_exp->set_form_action ( 'perm/do_advance_search' );
+		$this->db_exp->set_form_action ( 'Perm/do_advance_search' );
 		$this->db_exp->set_form_attribute ( 'target', 'manage_table_search_results' );
 		$this->db_exp->render ( 'edit' );
 		echo '</div>';
@@ -608,12 +609,12 @@ class Perm extends CI_Controller {
 		
 		//$this->get_table_field_value($table_id, 'specie', '1');
 		
-		echo '<table class="table_wrp" table_id="' . $table_id . '" table_name="' . $table_name . '" action="' . site_url ( 'perm/table_data_detail' ) . '">';
+		echo '<table class="table_wrp" table_id="' . $table_id . '" table_name="' . $table_name . '" action="' . site_url ( 'Perm/table_data_detail' ) . '">';
 		foreach ( $results->result_array () as $row ) {
 			
 			if ($this->check_del_perm ()) {
 				$hd = '<td class="cell_del_hd" style="width: 16px"> </td>';
-				$bd = '<td class="cell_del" tbl_id="' . $row ['id'] . '" tbl_name="' . $table_name . '" action="' . site_url ( 'perm/delete_row' ) . '"><i class="material-icons md-light" style="font-size:14px">delete</i></td>';
+				$bd = '<td class="cell_del" tbl_id="' . $row ['id'] . '" tbl_name="' . $table_name . '" action="' . site_url ( 'Perm/delete_row' ) . '"><i class="material-icons md-light" style="font-size:14px">delete</i></td>';
 			}
 			foreach ( $row as $key => $val ) {
 				
@@ -749,7 +750,7 @@ class Perm extends CI_Controller {
 		
 		$this->data ['tabs'] = $this->Perm_model->get_tabs ( $post, $cond );
 		
-		$this->load->view ( 'perm/show_tabs' );
+		$this->load->view ( 'Perm/show_tabs' );
 	}
 	public function view_table_row($table_id, $row_id) {
 		$this->db_table_render ( $table_id );
@@ -862,6 +863,9 @@ class Perm extends CI_Controller {
 					break;
 				case 'password' :
 					$this->db_exp->set_password ( $field ['field_name'] );
+					break;
+				case 'password_dblcheck' :
+					$this->db_exp->set_password_dblcheck ( $field ['field_name'] );
 					break;
 				case 'label' :
 					$this->db_exp->set_label( $field ['field_name'], $field ['field_value']);

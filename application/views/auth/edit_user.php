@@ -32,10 +32,11 @@
             <?php echo form_error('email'); ?>
 
             <div class="form-group">
-                <label> <label for="phone">Phone:<span>*</span></label> </label>
-                <?php echo form_input($phone, "", "class='form-control'"); ?>
+                <label for="identity"><?php echo $this->lang->line("create_user_identity_label") ?>
+                    <span>*</span></label>
+                <?php echo form_input($identity, "", "class='form-control'"); ?>
             </div>
-            <?php echo form_error('phone'); ?>
+            <?php echo form_error('identity'); ?>
 
             <div class="checkbox">
                 <label> <label for="group">Group:<span>*</span></label> </label>

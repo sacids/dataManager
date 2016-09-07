@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php if (!empty($title)) echo $title; else "AfyaData Manager"; ?></title>
+    <title>AfyaData | <?php if (!empty($title)) echo $title; else "AfyaData Manager"; ?></title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?php echo base_url(); ?>favicon.png"/>
@@ -49,7 +49,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?= anchor("", 'AfyaData', 'class="navbar-brand"') ?>
+            <?= anchor("dashboard", '<img src="' . base_url() . 'assets/public/images/logo.png" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
         </div>
 
 

@@ -55,12 +55,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Xform_model $Xform_model
  * @property User_model $User_model
  * @property Feedback_model $Feedback_model
+ * @property Campaign_model $Campaign_model
  * @property Ohkr_model $Ohkr_model
  * @property Whatsapp_model $Whatsapp_model
  * @property Perm_model $Perm_model
  * @property db_exp $db_exp
  * @property Analyze_model $Analyze_model
- * @property Post_model $Post_model
+ * @property xform_comm $xform_comm
+ * @property Alert_model $Alert_model
  */
 
 class CI_Controller {

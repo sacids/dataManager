@@ -7,7 +7,7 @@
 
                 <div class="pull-right" style="margin-bottom: 10px;">
 
-                    <?php echo form_open("feedback/feedback_list", 'class="form-inline" role="form"'); ?>
+                    <?php echo form_open("feedback/lists", 'class="form-inline" role="form"'); ?>
 
                     <div class="form-group">
 
@@ -45,13 +45,14 @@
 
                 <?php if (!empty($feedback)) { ?>
 
-                    <table class="table table-striped table-responsive table-hover table-bordered">
+                    <table class="table table-striped table-responsive table-hover">
                         <tr>
                             <th><?php echo $this->lang->line("label_form_name"); ?></th>
-                            <th><?php echo $this->lang->line("label_instance_id"); ?></th>
-                            <th>User</th>
+                            <th><?php echo $this->lang->line("label_message"); ?></th>
+                            <th><?php echo $this->lang->line("label_user"); ?></th>
+                            <th><?php echo $this->lang->line("label_username"); ?></th>
                             <th><?php echo $this->lang->line("label_feedback_date"); ?></th>
-                            <th><?php echo $this->lang->line("label_action"); ?></th>
+                            <th></th>
                         </tr>
 
                         <?php
@@ -59,7 +60,8 @@
                         foreach ($feedback as $value) { ?>
                             <tr>
                                 <td><?php echo $value->title; ?></td>
-                                <td><?php echo $value->instance_id; ?></td>
+                                <td><?php echo ucfirst($value->message); ?></td>
+                                <td><?php echo strtoupper($value->first_name.' '.$value->last_name); ?></td>
                                 <td><?php echo $value->username; ?></td>
                                 <td><?php echo date('d-m-Y H:i:s', strtotime($value->date_created)); ?></td>
                                 <td>
@@ -69,6 +71,12 @@
                             <?php $serial++;
                         } ?>
                     </table>
+                    <?php if (!empty($links)): ?>
+                        <div class="widget-foot">
+                            <?= $links ?>
+                            <div class="clearfix"></div>
+                        </div>
+                    <?php endif; ?>
 
                 <?php } else { ?>
                     <div class="fail_message">You don't have any recent chat to display</div>

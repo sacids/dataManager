@@ -53,6 +53,7 @@ $route['default_controller'] = 'welcome';
 $route['formList'] = 'xform/form_list';
 $route['testFormList'] = 'xform/testFormList';
 $route['submission'] = 'xform/submission';
+$route['blog'] = 'blog/post';
 
 //Forms controller
 //$route['xform/formList'] = 'xform/form_list';

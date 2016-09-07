@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
 
-            <h3><?php echo $disease->d_title; ?> Symptoms</h3>
+            <h3><?php echo $disease->d_title; ?> clinical manifestation</h3>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -11,12 +11,12 @@
 
             <div class="col-sm-8">
                 <a href="<?php echo site_url('ohkr/add_disease_symptom/' . $disease->id); ?>"
-                   class="btn btn-small btn-primary">Add Symptom</a>
+                   class="btn btn-small btn-primary">Add clinical manifestation</a>
                 <br/><br/>
 
                 <?php if (!empty($symptoms)) { ?>
 
-                    <table class="table table-striped table-responsive table-hover table-bordered">
+                    <table class="table table-striped table-responsive table-hover">
                         <tr>
                             <th>Species</th>
                             <th><?php echo $this->lang->line("label_symptom_name"); ?></th>
@@ -42,7 +42,7 @@
                     </table>
 
                 <?php } else { ?>
-                    <div class="fail_message">No symptom has been added</div>
+                    <div class="fail_message">No clinical manifestation has been added</div>
                 <?php } ?>
             </div>
         </div>

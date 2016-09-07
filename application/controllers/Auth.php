@@ -2,18 +2,19 @@
 
 class Auth extends CI_Controller
 {
+    private $realm;
 
     function __construct()
     {
         parent::__construct();
         $this->load->database();
-        ///$this->load->library(array('ion_auth', 'form_validation'));
         $this->load->helper(array('url', 'language'));
-        //$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
         $this->lang->load('auth');
         $this->load->model('User_model');
 
+        //variable
+        $this->realm = 'Authorized users of Sacids Openrosa';
     }
 
     // redirect if needed, otherwise display the user list
@@ -44,11 +45,21 @@ class Auth extends CI_Controller
             redirect('auth/login', 'refresh');
         }
 
-        //Displaying List of registered users/IF ADMIN
-        $this->data['users'] = $this->User_model->get_users();
+        $config = array(
+            'base_url' => $this->config->base_url("auth/users_list"),
+            'total_rows' => $this->User_model->count_users(),
+            'uri_segment' => 3,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $this->data['users'] = $this->User_model->get_users($this->pagination->per_page, $page);
+        $this->data["links"] = $this->pagination->create_links();
+
+        //render view
         $this->data['title'] = "Users List";
         $this->load->view('header', $this->data);
-        //$this->load->view('auth/menu');
         $this->_render_page('auth/index');
         $this->load->view('footer');
     }
@@ -481,8 +492,9 @@ class Auth extends CI_Controller
         }
     }
 
-    // create a new group
-
+    /**
+     * create new user
+     */
     function create_user()
     {
         $this->data['title'] = "Create User";
@@ -497,47 +509,32 @@ class Auth extends CI_Controller
 
         // validate form input
         $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
-        //$this->form_validation->set_rules('username', 'Username', 'required|is_unique[' . $tables['users'] . '.username]');
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
+
         if ($identity_column !== 'email') {
-            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required|is_unique[' . $tables['users'] . '.' . $identity_column . ']');
+            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required|numeric');
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
         } else {
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
         }
-        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim|required');
-        if ($identity_column == 'phone') {
-            $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim|required|numeric|min_length[10]');
-            $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
-        }
+
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 
         if ($this->form_validation->run() == TRUE) {
+            $country_code = $this->input->post("country_code");
             $email = strtolower($this->input->post('email'));
-            $identity = ($identity_column === 'email') ? $email : $this->input->post('identity');
+            $identity = $country_code . substr($this->input->post('identity'), -9);
             $password = $this->input->post('password');
             $groups = array($this->input->post('group'));
-            //server realm and unique id
-            $realm = 'Authorized users of Sacids Openrosa';
 
             //digest password
-            $digest_password = md5("{$identity}:{$realm}:{$password}");
-
-
-            $country_code = $this->input->post("country_code");
-
-            if ($identity_column == "phone") {
-                // Remove zero
-                $num_array = preg_split('//', $identity, -1, PREG_SPLIT_NO_EMPTY);
-                if ($num_array[0] == 0)
-                    $identity = preg_replace('/^0?/', $country_code, $identity);
-            }
+            $digest_password = md5("{$identity}:{$this->realm}:{$password}");
 
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
                 'last_name' => $this->input->post('last_name'),
-                'phone' => $this->input->post('phone'),
+                'phone' => $identity,
                 'country_code' => $country_code,
                 'digest_password' => $digest_password
             );
@@ -577,12 +574,7 @@ class Auth extends CI_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('email'),
             );
-            $this->data['phone'] = array(
-                'name' => 'phone',
-                'id' => 'phone',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('phone'),
-            );
+
             $this->data['password'] = array(
                 'name' => 'password',
                 'id' => 'password',
@@ -595,17 +587,19 @@ class Auth extends CI_Controller
                 'type' => 'password',
                 'value' => $this->form_validation->set_value('password_confirm'),
             );
+
+            //render view
             $this->data['title'] = "Create New User";
             $this->load->view('header', $this->data);
-            //$this->load->view('auth/menu');
             $this->_render_page('auth/create_user');
             $this->load->view('footer');
-            //$this->_render_page('auth/create_user', $this->data);
         }
     }
 
-    // edit a group
-
+    /**
+     * edit user details
+     * @param $id
+     */
     function edit_user($id)
     {
         $this->data['title'] = "Edit User";
@@ -621,7 +615,7 @@ class Auth extends CI_Controller
         // validate form input
         $this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'required');
         $this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'required');
-        $this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'required');
+        $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required|numeric');
         $this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'required|valid_email');
 
         if (isset($_POST) && !empty($_POST)) {
@@ -637,10 +631,11 @@ class Auth extends CI_Controller
             }
 
             if ($this->form_validation->run() === TRUE) {
+                $identity = $this->input->post('identity');
+
                 $data = array(
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
-                    'phone' => $this->input->post('phone'),
                     'email' => $this->input->post('email')
                 );
 
@@ -649,14 +644,8 @@ class Auth extends CI_Controller
                     $password = $this->input->post('password');
                     $data['password'] = $password;
 
-                    //unchanged database
-                    $identity = $user->username;
-
-                    //server realm and unique id
-                    $realm = 'Authorized users of Sacids Openrosa';
-
                     //digest password
-                    $data['digest_password'] = md5("{$identity}:{$realm}:{$password}");
+                    $data['digest_password'] = md5("{$identity}:{$this->realm}:{$password}");
                 }
 
 
@@ -679,7 +668,6 @@ class Auth extends CI_Controller
                 // check to see if we are updating the user
                 if ($this->ion_auth->update($user->id, $data)) {
                     // redirect them back to the admin page if admin, or to the base url if non admin
-                    //$this->session->set_flashdata('message', $this->ion_auth->messages() );
                     $this->session->set_flashdata('message', "User Saved");
                     redirect('auth/edit_user/' . $id, 'refresh');
 
@@ -717,11 +705,11 @@ class Auth extends CI_Controller
             'type' => 'text',
             'value' => $this->form_validation->set_value('email', $user->email),
         );
-        $this->data['phone'] = array(
-            'name' => 'phone',
-            'id' => 'phone',
+        $this->data['identity'] = array(
+            'name' => 'identity',
+            'id' => 'identity',
             'type' => 'text',
-            'value' => $this->form_validation->set_value('phone', $user->phone),
+            'value' => $this->form_validation->set_value('identity', $user->username),
         );
         $this->data['password'] = array(
             'name' => 'password',
@@ -734,8 +722,8 @@ class Auth extends CI_Controller
             'type' => 'password'
         );
 
+        //render view
         $this->load->view('header', $this->data);
-        //$this->load->view('auth/menu');
         $this->_render_page('auth/edit_user');
         $this->load->view('footer');
     }

@@ -37,7 +37,7 @@
 
                 <?php if (!empty($forms)) { ?>
 
-                    <table class="table table-striped table-responsive table-hover table-bordered" cellspacing="0"
+                    <table class="table table-striped table-responsive table-hover" cellspacing="0"
                            cellpadding="0">
                         <tr>
                             <th><?php echo $this->lang->line("label_form_name"); ?></th>

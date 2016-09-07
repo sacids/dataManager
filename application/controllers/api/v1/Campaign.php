@@ -9,10 +9,15 @@
 class Campaign extends CI_Controller
 {
 
+    private $imageUrl;
+
     public function __construct()
     {
         parent::__construct();
         $this->load->model(array('Campaign_model'));
+
+        //variables
+        $this->imageUrl = base_url() . 'assets/forms/data/images/thumb_';
     }
 
     /**
@@ -22,14 +27,25 @@ class Campaign extends CI_Controller
      */
     function get_campaign()
     {
-        //campaign result
-        $campaign = $this->Campaign_model->get_campaign();
+        $query = $this->Campaign_model->get_campaign_list();
 
-        if ($campaign) {
+        if ($query) {
+            foreach ($query as $value) {
+                $campaign[] = array(
+                    'id' => $value->id,
+                    'title' => $value->title,
+                    'type' => $value->type,
+                    'form_id' => $value->form_id,
+                    'featured' => $value->featured,
+                    'icon' => $this->imageUrl . $value->icon,
+                    'description' => $value->description,
+                    'date_created' => $value->date_created
+                );
+            }
             $response = array("campaign" => $campaign, "status" => "success");
 
         } else {
-            $response = array("status" => "success", "message" => "No content");
+            $response = array("status" => "success", "message" => "No campaign found");
 
         }
         echo json_encode($response);

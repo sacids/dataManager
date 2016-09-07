@@ -23,6 +23,10 @@ class Campaign_model extends CI_Model
         parent::__construct();
     }
 
+    function count_active_campaign()
+    {
+        return $this->db->get('campaign')->num_rows();
+    }
 
     /**
      * @param $campaign_details
@@ -40,9 +44,11 @@ class Campaign_model extends CI_Model
      */
     public function get_campaign()
     {
-        return $this->db->select('cmp.id, cmp.title as c_title, cmp.icon, cmp.type, cmp.date_created, xform.title as x_title')
-            ->join(self::$xform_table_name . " xform", "xform.form_id = cmp.form_id", "left")
-            ->get(self::$table_name . " cmp")->result();
+        return $this->db->select('campaign.id, campaign.title as campaign_title, campaign.icon, campaign.featured, campaign.type,
+                        campaign.date_created, campaign.form_id, campaign.description, xform.title as xform_title')
+            ->join(self::$xform_table_name . " xform", "xform.jr_form_id = campaign.form_id", "left")
+            ->get(self::$table_name . " campaign")
+            ->result();
     }
 
     /**
@@ -51,10 +57,11 @@ class Campaign_model extends CI_Model
      */
     public function get_campaign_by_id($campaign_id)
     {
-        return $this->db->select('cmp.id, cmp.title as c_title, cmp.icon, cmp.type, cmp.date_created,
-        cmp.form_id, cmp.description, xform.title as x_title')
-            ->join(self::$xform_table_name . " xform", "xform.form_id = cmp.form_id", "left")
-            ->get_where(self::$table_name . " cmp", array('cmp.id' => $campaign_id))
+        return $this->db
+            ->select('campaign.id, campaign.title as campaign_title, campaign.icon, campaign.featured, campaign.type,
+                        campaign.date_created, campaign.form_id, campaign.description, xform.title as xform_title')
+            ->join(self::$xform_table_name . " xform", "xform.jr_form_id = campaign.form_id", "left")
+            ->get_where(self::$table_name . " campaign", array('campaign.id' => $campaign_id))
             ->row();
     }
 

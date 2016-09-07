@@ -278,7 +278,7 @@ class Xform_model extends CI_Model
 	 * @param int $offset
 	 * @return mixed returns data from tables created by uploading xform definitions files.
 	 */
-	public function find_form_data($table_name, $limit = 30, $offset = 0)
+	public function find_form_data($table_name, $limit, $offset)
 	{
 		$this->db->limit($limit, $offset);
 		return $this->db->get($table_name)->result();
@@ -315,21 +315,17 @@ class Xform_model extends CI_Model
 
 
 	/**
-	 * $param $table_name
-	 * $param info text to be displayer per point
-	 * $param $cond sql condition (without the where)
-	 *
+	 * @param $table_name
+	 * @param bool $cond
+	 *        sql condition (without the where)
 	 * @return list of lat,lon,info
 	 */
 
 	public function get_geospatial_data($table_name, $cond = TRUE)
 	{
-
 		//$this->db->where($cond);
 		$query = $this->db->get($table_name);
-		if ($query->num_rows() == 0) return FALSE;
-
-		return $query->result_array();
+		return ($query->num_rows() == 0) ? FALSE : $query->result_array();
 	}
 
 	/**
@@ -398,5 +394,38 @@ class Xform_model extends CI_Model
 			$this->db->where("status", $status);
 		$this->db->from(self::$xform_table_name);
 		return $this->db->count_all_results();
+	}
+
+	public function get_form_definition_filename($form_id)
+	{
+		$this->db->select('filename')->where('form_id', $form_id)->from('xforms');
+		return $this->db->get()->row(1)->filename;
+	}
+
+	public function add_to_field_name_map($data)
+	{
+		$q = $this->db->insert_string('xform_fieldname_map', $data);
+		$q = str_replace('INSERT INTO', 'INSERT IGNORE INTO', $q);
+		return $this->db->query($q);
+	}
+
+	public function update_field_map_labels($xform_id, $fields)
+	{
+		$this->db->trans_start();
+		foreach ($fields as $key => $value) {
+			$this->db->where("table_name", $xform_id);
+			$this->db->where("col_name", $key);
+			$this->db->set("field_label", $value);
+			$this->db->update("xform_fieldname_map");
+		}
+		$this->db->trans_complete();
+		return $this->db->trans_status();
+	}
+
+	public function delete_form_data($table_name, $entry_id)
+	{
+		$this->db->where("id", $entry_id);
+		$this->db->limit(1);
+		return $this->db->delete($table_name);
 	}
 }

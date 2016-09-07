@@ -32,13 +32,6 @@
                     <?php echo form_error('last_name'); ?>
 
                     <div class="form-group">
-                        <label for="identity"><?php echo $this->lang->line("create_user_identity_label") ?>
-                            <span>*</span></label>
-                        <input type="text" name="identity" value="<?php echo set_value('identity'); ?>"
-                               id="identity" placeholder="07XXXXXXXX" class="form-control"/></div>
-                    <?php echo form_error('identity'); ?>
-
-                    <div class="form-group">
                         <label for="email"><?php echo $this->lang->line("create_user_email_label"); ?>
                             <span>*</span></label>
                         <input type="text" name="email" value="<?php echo set_value('email'); ?>"
@@ -55,12 +48,11 @@
                     <?php echo form_error('country_code'); ?>
 
                     <div class="form-group">
-                        <label for="phone"><?php echo $this->lang->line("create_user_phone_label") ?>
+                        <label for="identity"><?php echo $this->lang->line("create_user_identity_label") ?>
                             <span>*</span></label>
-                        <input type="text" name="phone" value="<?php echo set_value('phone'); ?>"
-                               class="form-control" id="phone" placeholder=""/>
-                    </div>
-                    <?php echo form_error('phone'); ?>
+                        <input type="text" name="identity" value="<?php echo set_value('identity'); ?>"
+                               id="identity" placeholder="phone number" class="form-control"/></div>
+                    <?php echo form_error('identity'); ?>
 
                     <div class="form-group">
                         <label for="group">Group: <span>*</span></label>

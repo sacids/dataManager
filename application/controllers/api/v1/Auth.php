@@ -9,6 +9,7 @@
 class Auth extends CI_Controller
 {
     var $realm;
+    var $initial;
 
     function __construct()
     {
@@ -16,6 +17,55 @@ class Auth extends CI_Controller
         $this->lang->load('auth');
         $this->load->model('User_model');
         $this->realm = 'Authorized users of Sacids Openrosa';
+        $this->initial = 255;
+    }
+
+    /**
+     * app version
+     */
+    function version()
+    {
+        $app_version = $this->db->get_where('app_version', array('status' => 'current'))->row();
+
+        if ($app_version) {
+            $response = array("app_version" => $app_version, "status" => "success");
+
+        } else {
+            $response = array("status" => "success", "message" => "No content available");
+
+        }
+        echo json_encode($response);
+    }
+
+    /**
+     * @param $username
+     * @param $password
+     * @return digest_password
+     */
+    function digest($username, $password)
+    {
+        $response = array();
+
+        //check if username and password exist
+        if (!$username || !$password) {
+            $response = array("status" => "failed", "message" => "Required username and password");
+            echo json_encode($response);
+            exit;
+        }
+
+        //digest password {if username and password exist}
+        $digest_password = md5("{$username}:{$this->realm}:{$password}");
+
+        if ($digest_password) {
+            $response = array("status" => "success", "digest_password" => $digest_password);
+
+        } else {
+            $response = array("status" => "failed", "message" => "failed to create digest password");
+
+        }
+
+        echo json_encode($response);
+
     }
 
 
@@ -28,8 +78,11 @@ class Auth extends CI_Controller
         //define response
         $response = array();
 
-        $username = $this->input->post('username');
+        $phone = $this->input->post('username');
         $password = $this->input->post('password');
+
+        //substring last 9 character
+        $username = $this->initial . substr($phone, -9);
 
         //login process validation
         $login_status = $this->ion_auth->login($username, $password);
@@ -37,7 +90,7 @@ class Auth extends CI_Controller
         // invalid login create array
         if (!$login_status) {
             $response["error"] = TRUE;
-            $response["error_msg"] = "Incorrect Login";
+            $response["error_msg"] = "Incorrect username or password";
 
         } else if ($login_status) {
             $user = $this->User_model->find_by_username($username);
@@ -60,10 +113,13 @@ class Auth extends CI_Controller
         $response = array();
 
         //post variable
-        $username = $this->input->post('username');
+        $phone = $this->input->post('username');
         $full_name = $this->input->post('full_name');
         $password = $this->input->post('password');
         $password_confirm = $this->input->post('password_confirm');
+
+        //substring last 9 character
+        $username = $this->initial . substr($phone, -9);
 
         //check username if exist
         $check_username = $this->check_username($username);
@@ -81,14 +137,16 @@ class Auth extends CI_Controller
             //digest password
             $digest_password = md5("{$username}:{$this->realm}:{$password}");
 
+            $arrayName = explode(" ", $full_name);
 
             //Register user
             $additional_data = array(
-                'first_name' => $full_name,
+                'first_name' => $arrayName[0],
+                'last_name' => $arrayName[1],
                 'phone' => $username,
                 'digest_password' => $digest_password
             );
-            $email = "afyadata@sacids.org";
+            $email = "";
 
             $this->ion_auth->register($username, $password, $email, $additional_data);
             $response["error"] = FALSE;

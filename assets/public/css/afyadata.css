@@ -1,0 +1,168 @@
+/*!
+ * Start Bootstrap - Creative Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+    font-size: 12px;
+}
+
+.navbar-default .nav > li>a,
+.navbar-default .nav>li>a:focus {
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+
+@media(min-width:768px) {
+    .navbar-default {
+        background-color: transparent;
+        background-color: #781E14;
+        font-size: 12px;
+    }
+
+    .navbar-default .nav > li>a,
+    .navbar-default .nav>li>a:hover {
+        font-size: 12px;
+        color: #FFFFFF;
+    }
+
+    .navbar .nav .dropdown-menu a {
+        font-size: 12px;
+    }
+}
+
+
+
+body {
+    webkit-tap-highlight-color: #222;
+}
+
+.form-control{
+    max-width: 400px;
+}
+
+h3 {
+    color: #444;
+    background-color: transparent;
+    border-bottom: 1px solid #D0D0D0;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0 0 14px 0;
+    padding: 10px 15px 10px 0px;
+}
+
+
+/*
+---------------------
+Info block
+--------------------*/
+.info-block {
+    color: #fff;
+}
+.info-block a{
+ color: #ffffff;
+}
+
+.info-block i {
+    font-size: 39px;
+    padding: 13px;
+    margin-top: 7px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+
+.info-block h2,
+.info-block h6 {
+    color: #fff;
+    font-weight: 400;
+}
+.info-block h2 {
+    margin-top: 3px;
+    margin-bottom: 0;
+    font-size: 60px;
+}
+.info-block h6 {
+    font-size: 16px;
+    margin-top: -7px;
+    margin-bottom: 13px;
+}
+.info-block .info-block-stat {
+    position: absolute;
+    top: -8px;
+    left: -11px;
+    font-size: 13px;
+    padding: 0 14px;
+    width: 192px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.info-block .info-block-stat span {
+    float: left;
+    display: block;
+    max-width: 133px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.info-block .info-block-stat span + span {
+    float: right;
+    text-align: right;
+}
+
+@media (min-width: 1440px) and (max-width: 1755px) {
+    .info-block .panel-body > div > div:nth-child(2) {
+        padding-left: 0!important;
+        padding-right: 0;
+    }
+    .info-block h6 {
+        margin-top: -5px;
+    }
+}
+@media (min-width: 1400px) and (max-width: 1439px) {
+    .info-block .panel-body > div > div:nth-child(2) {
+        padding-left: 0!important;
+        padding-right: 0;
+    }
+    .info-block h6 {
+        margin-top: -5px;
+        font-size: 15px;
+    }
+}
+@media (min-width: 746px) and (max-width: 847px) {
+    .info-block .panel-body > div > div:nth-child(2) {
+        padding-left: 10px!important;
+    }
+}
+.bg-success {
+    background-color: #73cd61;
+}
+.bg-info {
+    background-color: #12c7b7;
+}
+.bg-warning {
+    background-color: #ff7444;
+}
+.bg-system {
+    background-color: #6852b2;
+}
+/* Info block background */
+.info-block-bg-success {
+    background-color: #009688;
+}
+.info-block-bg-info {
+    background-color: #1976D2;
+}
+.info-block-bg-warning {
+    background-color: #781E14;
+}
+.info-block-bg-system {
+    background-color: #512DA8;
+}

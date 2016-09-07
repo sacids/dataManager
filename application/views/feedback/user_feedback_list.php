@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Feedback</h3>
+            <h3>Feedback Conversation</h3>
             <div class="col-sm-12">
                 <ol class="chat">
                     <?php foreach ($feedback as $values) {
@@ -13,7 +13,7 @@
                         <li class="<?php echo $class; ?>">
                             <div class="msg">
                                 <p><?= $values->message ?></p>
-                                <span><?= $values->fname . ' ' . $values->lname; ?></span>
+                                <span><?php //echo $values->fname . ' ' . $values->lname; ?></span>
                                 <time><?= date('H:i:s', strtotime($values->date_created)) ?></time>
                             </div>
                         </li>
