@@ -78,7 +78,7 @@ class Campaign extends CI_Controller
                 "title" => $this->input->post("title"),
                 "description" => $this->input->post("description"),
                 "type" => $this->input->post("type"),
-                "form_id" => $this->input->post("form_id"),
+                "jr_form_id" => $this->input->post("form_id"),
                 "featured" => $this->input->post("featured"),
                 "date_created" => date("c"),
                 "icon" => $_POST['icon']
@@ -119,7 +119,7 @@ class Campaign extends CI_Controller
                 "description" => $this->input->post("description"),
                 "type" => $this->input->post("type"),
                 "featured" => $this->input->post("featured"),
-                "form_id" => $this->input->post("form_id")
+                "jr_form_id" => $this->input->post("form_id")
             );
 
             $this->Campaign_model->update_campaign($campaign_id, $campaign_details);

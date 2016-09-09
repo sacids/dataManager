@@ -10,21 +10,24 @@ class Dashboard extends CI_Controller
     }
 
     /**
-     * Index Page for this controller.
+     * Check login
      *
-     * Maps to the following URL
-     *        http://sacids.com/index.php/dashboard
-     *    - or -
-     *        http://example.com/index.php/welcome/index
-     *    - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/dashboard/<method_name>
+     * @return response
      */
+    function _is_logged_in()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+    }
+
+
     public function index()
     {
+        //check if logged in
+        $this->_is_logged_in();
+
         //statistics
         $this->data['active_users'] = $this->User_model->count_users();
         $this->data['published_forms'] = $this->Submission_model->count_published_forms();
@@ -38,6 +41,7 @@ class Dashboard extends CI_Controller
             $this->data['submitted_forms'][$k]->overall_form = $this->Submission_model->count_overall_submitted_forms($form->form_id);
             $this->data['submitted_forms'][$k]->monthly_form = $this->Submission_model->count_monthly_submitted_forms($form->form_id);
             $this->data['submitted_forms'][$k]->weekly_form = $this->Submission_model->count_weekly_submitted_forms($form->form_id);
+            $this->data['submitted_forms'][$k]->daily_form = $this->Submission_model->count_daily_submitted_forms($form->form_id);
         }
 
         $this->data['title'] = "Sacids Research Portal";

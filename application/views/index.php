@@ -84,7 +84,7 @@
                 <div class="col-sm-12">
                     <h3>Submitted Forms</h3>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Overall</h3>
@@ -100,10 +100,10 @@
                     </div>
 
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Monthly (<?= date('M Y'); ?>)
+                                <h3 class="panel-title"><?= date('F Y'); ?>
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -116,21 +116,37 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <?php
                                 $today = date('Y-m-d');
                                 $last = date('Y-m-d', strtotime("-7 day", strtotime($today)));
                                 ?>
-                                <h3 class="panel-title">Weekly
-                                    (<?= date('M j', strtotime($last)) . ' - ' . date('M j, Y', strtotime($today)) ?>)
+                                <h3 class="panel-title">
+                                    <?= date('M j', strtotime($last)) . ' - ' . date('M j, Y', strtotime($today)) ?>
                                 </h3>
                             </div>
                             <div class="panel-body">
                                 <?php
                                 foreach ($submitted_forms as $form) {
                                     echo '<p>' . $form->title . ' - <b>' . $form->weekly_form . '</b></p>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <?php $today = date('Y-m-d'); ?>
+                                <h3 class="panel-title"><?= date('F j, Y', strtotime($today)) ?></h3>
+                            </div>
+                            <div class="panel-body">
+                                <?php
+                                foreach ($submitted_forms as $form) {
+                                    echo '<p>' . $form->title . ' - <b>' . $form->daily_form . '</b></p>';
                                 }
                                 ?>
                             </div>
