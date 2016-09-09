@@ -40,6 +40,10 @@ $lang['label_xml']                      = "XML file";
 $lang['label_form_xml_file']            = "Form XML file";
 $lang['label_action']                   = "Action";
 
+$lang['label_post_title']               = "Title";
+$lang['label_content']                  = "Content";
+$lang['label_status']                   = "Status";
+
 $lang['nav_item_form_list']             = "Form List";
 $lang['nav_item_form_add_new']          = "Add new form";
 
