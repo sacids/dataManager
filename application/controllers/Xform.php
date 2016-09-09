@@ -243,7 +243,7 @@ class Xform extends CI_Controller
 		$result = $this->Xform_model->insert_data($statement);
 
 		if ($result) {
-			$feedback = array(
+			/*$feedback = array(
 				"user_id"      => $this->user_submitting_feedback_id,
 				"form_id"      => $this->table_name,
 				"message"      => "Tumepokea fomu yako",
@@ -252,7 +252,7 @@ class Xform extends CI_Controller
 				"sender"       => "server",
 				"status"       => "pending"
 			);
-			$this->Feedback_model->create_feedback($feedback);
+			$this->Feedback_model->create_feedback($feedback);*/
 
 			// TODO Try to detect disease and alert required people.
 			// get all symptoms field,
@@ -263,6 +263,8 @@ class Xform extends CI_Controller
 
 			$symptoms_reported = explode(" ", $this->form_data['Dalili_Dalili']);
 			$district = $this->form_data['taarifa_awali_Wilaya']; // taarifa_awali_Wilaya is the database field name in the mean time
+
+			$data_collector_phone = $this->form_data['meta_username'];
 
 			log_message("debug", "District " . $district);
 
@@ -275,20 +277,31 @@ class Xform extends CI_Controller
 				$suspected_diseases = $this->Ohkr_model->find_diseases_by_symptoms_code($symptoms_reported);
 				log_message("debug", "Disease by symptoms code query =>\n\n" . $this->db->last_query() . "\n");
 
+				$suspected_diseases_list = "Tumepokea fomu yako, kutokana na taarifa ulizotuma haya ndiyo magonjwa yanayodhaniwa ni:\n<br/>";
+
 				if ($suspected_diseases) {
-					//log_message("debug", "Suspected diseases are " . json_encode($suspected_diseases));
 
 					$i = 1;
 					foreach ($suspected_diseases as $disease) {
 						//compose response/feedback message for chr via App
 						// Send sms to chrs, dvo/dmo, Epidemiologists
 
+						$suspected_diseases_list .= $i . "." . $disease->disease_name . "\n<br/>";
+
 						//Find response messages by disease id
 						$response_messages = $this->Ohkr_model->find_response_messages_and_groups($disease->disease_id, $district);
 						log_message("debug", "Response messages Query ==>\n\n" . $this->db->last_query() . "\n");
 
+						$message_sender_name = "AfyaData";
+						$messages_to_send['messages'][0] = array(
+							"from" => $message_sender_name,
+							"to"   => $data_collector_phone,
+							"text" => "Majibu kwa CHR"
+						);
+						$counter = 1;
 						if ($response_messages) {
 							foreach ($response_messages as $sms) {
+
 								$sms_to_send = array(
 									"response_msg_id" => $sms->rsms_id,
 									"phone_number"    => $sms->phone,
@@ -296,17 +309,22 @@ class Xform extends CI_Controller
 									"status"          => "PENDING"
 								);
 
-								$sender_name = "AfyaData";
+								$messages_to_send["messages"][$counter] = array(
+									"from" => $message_sender_name,
+									"to"   => $sms->phone,
+									"text" => $sms->message
+								);
+
 								if ($msg_id = $this->Ohkr_model->create_send_sms($sms_to_send)) {
 									$sms_info = array(
-										"from" => $sender_name,
+										"from" => $message_sender_name,
 										"to"   => $sms->phone,
 										"text" => $sms->message
 									);
 
 									$request_url = "sms/1/text/single";
 
-									if ($send_result = $this->Alert_model->send_alert_sms($request_url, $sms_info)) {
+									/*if ($send_result = $this->Alert_model->send_alert_sms($request_url, $sms_info)) {
 										$infobip_response = json_decode($send_result);
 										$message = (array)$infobip_response->messages;
 										$message = array_shift($message);
@@ -317,11 +335,14 @@ class Xform extends CI_Controller
 										);
 										//$this->db->reconnect();
 										$this->Alert_model->update_sms_status($msg_id, $sms_updates);
-										log_message("debug", "From:" . $sender_name . " To:" . $sms->phone . " Text: " . $sms->message);
-									}
+										log_message("debug", "From:" . $message_sender_name . " To:" . $sms->phone . " Text: " . $sms->message);
+									}*/
 								}
+								$counter++;
 							}
 						}
+
+						log_message("debug", $i . ". Infobip messages to send batch \n " . json_encode($messages_to_send) . "\n");
 
 						log_message("debug", $i . ". Response\n " . json_encode($response_messages) . "\n");
 						$i++;
@@ -330,6 +351,18 @@ class Xform extends CI_Controller
 					//do something else here
 					log_message("debug", "Could not find disease with the specified symptoms");
 				}
+
+				$feedback = array(
+					"user_id"      => $this->user_submitting_feedback_id,
+					"form_id"      => $this->table_name,
+					"message"      => $suspected_diseases_list,
+					"date_created" => date('Y-m-d H:i:s'),
+					"instance_id"  => $this->form_data['meta_instanceID'],
+					"sender"       => "server",
+					"status"       => "pending"
+				);
+				$this->Feedback_model->create_feedback($feedback);
+				log_message("debug", "Suspected diseases are \n" . $suspected_diseases_list);
 
 				log_message("debug", "========= Ohkr alert end =========");
 			} else {

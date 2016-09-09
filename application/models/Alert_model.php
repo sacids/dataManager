@@ -14,7 +14,7 @@ class Alert_model extends CI_Model
 	private $headers = array(
 		'accept:application/json',
 		'content-Type:application/json',
-		'authorization: Basic QWZ5YURhdGE=',
+		'authorization: Basic base64pwd',
 		'accept-encoding:gzip'
 	);
 
@@ -28,9 +28,10 @@ class Alert_model extends CI_Model
 	/**
 	 * @param $url
 	 * @param $sms_details
+	 * @param $mode String SINGLE/MULTIPLE
 	 * @return mixed
 	 */
-	public function send_alert_sms($url, $sms_details)
+	public function send_alert_sms($url, $sms_details, $mode = "SINGLE")
 	{
 		$post_fields = json_encode($sms_details);
 
@@ -71,6 +72,11 @@ class Alert_model extends CI_Model
 		return $response;
 	}
 
+	/**
+	 * @param $id
+	 * @param $sms
+	 * @return mixed
+	 */
 	public function update_sms_status($id, $sms)
 	{
 		$this->db->where("id", $id);

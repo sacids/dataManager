@@ -44,7 +44,7 @@ class Migration_Ohkr_modification extends CI_Migration
             'name' => array(
                 'name' => 'title',
                 'type' => 'VARCHAR',
-                'constraint' => 25
+                'constraint' => 100
             ),
         );
         $this->dbforge->modify_column('ohkr_diseases', $disease_modify_field);
