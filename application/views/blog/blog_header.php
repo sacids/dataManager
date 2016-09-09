@@ -44,8 +44,9 @@
     <!--    <link rel="stylesheet" href="-->
     <?php //echo base_url(); ?><!--assets/bootstrap/css/creative.css" type="text/css">-->
 
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/css/afyadata.css" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/css/blog-style.css" type="text/css">
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -68,7 +69,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand page-scroll" href="<?php echo base_url(); ?>#page-top">AfyaData</a>
+            <?= anchor("", '<img src="' . base_url() . 'assets/public/images/logo.png" alt="AfyaData" height="30"/>', 'class="navbar-brand page-scroll"') ?>
+
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

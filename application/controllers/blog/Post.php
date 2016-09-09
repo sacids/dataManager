@@ -40,6 +40,7 @@ class Post extends CI_Controller
 
 		$data['title'] = "Afyadata Blog";
 		$data['post'] = $this->Post_model->find_by_id($post_id);
+		$data['recent_posts'] = $this->Post_model->find_all(5);
 
 		$this->load->view("blog/blog_header", $data);
 		$this->load->view("blog/single_post_view", $data);

@@ -23,6 +23,11 @@ class Migration_Blog extends CI_Migration
 				'unsigned'       => TRUE,
 				'auto_increment' => TRUE
 			),
+			'user_id'       => array(
+				'type'       => 'mediumint',
+				'constraint' => '8',
+				'unsigned'   => TRUE
+			),
 			'alias'         => array(
 				'type'       => 'VARCHAR',
 				'constraint' => '255',
@@ -35,10 +40,6 @@ class Migration_Blog extends CI_Migration
 			),
 			'content'       => array(
 				'type' => 'TEXT'
-			),
-			'user_id'       => array(
-				'type' => 'INT',
-				'null' => FALSE
 			),
 			'status'        => array(
 				'type'       => 'VARCHAR',
@@ -57,6 +58,8 @@ class Migration_Blog extends CI_Migration
 
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('blog_posts');
+		$this->db->query('ALTER TABLE blog_posts ADD CONSTRAINT fk_blog_user_id FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE;');
+
 	}
 
 	public function down()
