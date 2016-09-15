@@ -292,7 +292,8 @@ class Ohkr_model extends CI_Model
 	public function find_response_messages_and_groups($disease_id, $district)
 	{
 		$this->db->distinct();
-		$this->db->select("username, u.first_name, u.last_name, u.phone, g.name as group_name,rsms.id as rsms_id, rsms.message", FALSE);
+		$this->db->select("username, u.first_name, u.last_name, u.phone, g.name as group_name,
+		rsms.id as rsms_id, rsms.message", FALSE);
 		$this->db->from(self::$table_name_response_sms . " rsms");
 		$this->db->join(self::$table_name_users_groups . " ug", "ug.group_id = rsms.group_id");
 		$this->db->join(self::$table_name_users . " u", "u.id = ug.user_id");

@@ -23,50 +23,51 @@
             }
             echo validation_errors();
             ?>
+            <div style="overflow-x: scroll;">
+                <?php echo form_open("xform/delete_entry/" . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>
+                <?php echo form_hidden("table_name", $form_id); ?>
 
-            <?php echo form_open("xform/delete_entry/" . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>
-            <?php echo form_hidden("table_name", $form_id); ?>
-
-            <table class="table table_list table-bordered table-striped table-hover table-condensed">
-                <tr>
-                    <?php
-                    echo "<th class='text-center'>Select All<br/>" . form_checkbox("all", "") . "</th>";
-                    foreach ($table_fields as $key => $column) {
-                        if (array_key_exists($column, $field_maps)) {
-                            echo "<th>" . $field_maps[$column] . "</th>";
-                        } else {
-                            echo "<th>" . $column . "</th>";
+                <table class="table table_list table-bordered table-striped table-hover table-condensed">
+                    <tr>
+                        <?php
+                        echo "<th class='text-center'>Select All<br/>" . form_checkbox(array("id" => "selectAll")) . "</th>";
+                        foreach ($table_fields as $key => $column) {
+                            if (array_key_exists($column, $field_maps)) {
+                                echo "<th>" . $field_maps[$column] . "</th>";
+                            } else {
+                                echo "<th>" . $column . "</th>";
+                            }
                         }
+                        ?>
+                    </tr>
+
+                    <?php
+                    foreach ($form_data as $data) {
+
+                        echo "<tr>";
+                        foreach ($data as $key => $entry) {
+
+                            if ($key == "id") {
+                                echo "<td class='text-center'>" . form_checkbox("entry_id[]", $entry) . "</td>";
+                            }
+
+                            if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                                echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                            } else {
+                                echo "<td>" . $entry . "</td>";
+                            }
+                        }
+                        echo "</tr>";
                     }
                     ?>
-                </tr>
-
-                <?php
-                foreach ($form_data as $data) {
-
-                    echo "<tr>";
-                    foreach ($data as $key => $entry) {
-
-                        if ($key == "id") {
-                            echo "<td class='text-center'>" . form_checkbox("entry_id[]", $entry) . "</td>";
-                        }
-
-                        if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                            echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
-                        } else {
-                            echo "<td>" . $entry . "</td>";
-                        }
-                    }
-                    echo "</tr>";
-                }
-                ?>
-            </table>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <input type="submit" name="delete" value="Delete Selected" class="btn btn-danger delete">
+                </table>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <input type="submit" name="delete" value="Delete Selected" class="btn btn-danger delete">
+                    </div>
                 </div>
+                <?php echo form_close(); ?>
             </div>
-            <?php echo form_close(); ?>
 
             <?php if (!empty($links)): ?>
                 <div class="widget-foot">
@@ -77,3 +78,9 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $("#selectAll").change(function () {
+        $("input:checkbox").prop('checked', $(this).prop("checked"));
+    });
+</script>
