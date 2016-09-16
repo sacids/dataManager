@@ -130,13 +130,11 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
                 <li><?php echo anchor('feedback/lists', "Chats"); ?></li>
 
                 <li class="">
                     <a href="./" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><?php echo ucfirst($this->session->userdata("username")) ?>
-                        <span class="caret"></span></a>
+                       aria-expanded="false"><?php display_full_name(); ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><?php echo anchor('auth/profile', "My Profile"); ?></li>
                         <li><?php echo anchor('auth/change_password', "Change password"); ?></li>

@@ -126,4 +126,4 @@ $autoload['language'] = array("sacids");
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array('User_model');

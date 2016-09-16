@@ -18,11 +18,10 @@
                     foreach ($groups as $values):?>
                         <tr>
                             <td><?php echo $serial; ?></td>
-                            <td><?php echo $values->name; ?></td>
+                            <td><?php echo ucfirst($values->name); ?></td>
                             <td><?php echo $values->description; ?></td>
                             <td>
-                                <a href="<?php echo base_url(); ?>index.php/auth/edit_group/<?php echo $values->id; ?>"
-                                   title="Edit">Edit</a>
+                                <?php echo anchor("auth/edit_group/" . $values->id, lang('edit_group_heading'), array("class" => 'btn btn-primary btn-xs')); ?>
                             </td>
                         </tr>
                         <?php

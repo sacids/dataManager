@@ -38,25 +38,29 @@
             </div>
             <?php echo form_error('identity'); ?>
 
-            <div class="checkbox">
-                <label> <label for="group">Group:<span>*</span></label> </label>
-                <?php foreach ($groups as $group): ?>
-						<?php
-						$gID = $group['id'];
-						$checked = NULL;
-						$item = NULL;
-						foreach ($currentGroups as $grp) {
-							if ($gID == $grp->id) {
-								$checked = ' checked="checked"';
-								break;
-							}
-						}
-						?>
-						<label></label><input type="checkbox" name="groups[]" value="<?php echo $group['id']; ?>"<?php echo $checked; ?> >
-						<?php echo $group['name']; ?></label>
-					<?php endforeach ?>
+            <div class="form-group">
+                <label for="group">Group:<span>*</span></label>
+
+                <div class="checkbox">
+                    <?php foreach ($groups as $group): ?>
+                        <?php
+                        $gID = $group['id'];
+                        $checked = NULL;
+                        $item = NULL;
+                        foreach ($currentGroups as $grp) {
+                            if ($gID == $grp->id) {
+                                $checked = ' checked="checked"';
+                                break;
+                            }
+                        }
+                        ?>
+                        <label class="checkbox-inline"><input type="checkbox" name="groups[]"
+                                                              value="<?php echo $group['id']; ?>"<?php echo $checked; ?> >
+                            <?php echo $group['name']; ?></label>
+                    <?php endforeach ?>
+                </div>
+                <?php echo form_error('group'); ?>
             </div>
-            <?php echo form_error('group'); ?>
 
             <div class="form-group">
                 <label> <label for="password">Password:<br/>

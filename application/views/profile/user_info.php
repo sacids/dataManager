@@ -7,16 +7,13 @@
 				<div id="header-title" style="" class="text-center">
 					<div style="width: auto; float: left; display: inline-block;">
 						<img src="<?php echo base_url(); ?>assets/public/images/profile.png"/>
-						<h1><?php echo $fname; ?></h1>
 					</div>
-					<?php //$this->load->view('subheader'); ?>
-					<div style="clear: both;"></div>
 				</div>
 			</div>
 			<div class="col-sm-9 col-md-9 col-lg-9">
 				<div class="table table-responsive">
 
-					<table class="table" cellspacing="0" cellpadding="0">
+					<table class="table table-striped table-responsive table-hover">
 						<tr>
 							<td>Name</td>
 							<td><?php echo $fname; ?></td>

@@ -3,6 +3,7 @@
 class Auth extends CI_Controller
 {
     private $realm;
+    private $user_id;
 
     function __construct()
     {
@@ -15,12 +16,12 @@ class Auth extends CI_Controller
 
         //variable
         $this->realm = 'Authorized users of Sacids Openrosa';
+        $this->user_id = $this->session->userdata('user_id');
     }
 
     // redirect if needed, otherwise display the user list
     function index()
     {
-
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect('auth/login', 'refresh');
@@ -37,7 +38,6 @@ class Auth extends CI_Controller
      *
      * @load view
      */
-
     function users_list()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -74,9 +74,6 @@ class Auth extends CI_Controller
         if ($returnhtml) return $view_html;//This will return html on 3rd argument being true
     }
 
-
-    // log the user in
-
     /**
      * Logged user profile
      *
@@ -85,10 +82,9 @@ class Auth extends CI_Controller
     function profile()
     {
         //Specific user id of login in user
-        $user_id = $this->session->userdata('user_id');
+        $user_id =
 
-        //Displaying Profile of registered user
-        $User = $this->User_model->find_by_id($user_id);
+        $User = $this->User_model->find_by_id($this->user_id);
         $this->data['fname'] = $User->first_name . ' ' . $User->last_name;
         $this->data['username'] = $User->username;
         $this->data['status'] = $User->active;
@@ -98,15 +94,13 @@ class Auth extends CI_Controller
         $this->data['created'] = mdate($date_string, $User->created_on);
         $this->data['last_login'] = mdate($date_string, $User->last_login);
 
-        $this->data['title'] = 'User Information';
+        $this->data['title'] = 'My profile';
         $this->load->view('header', $this->data);
-        //$this->load->view('profile/menu');
         $this->load->view('profile/user_info');
         $this->load->view('footer');
     }
 
     // log the user out
-
     function login()
     {
         if ($this->ion_auth->logged_in()) {
@@ -155,7 +149,6 @@ class Auth extends CI_Controller
     }
 
     // change password
-
     function change_password()
     {
         $this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
@@ -201,7 +194,6 @@ class Auth extends CI_Controller
             // render
             $this->data['title'] = "Change Password";
             $this->load->view('header', $this->data);
-            //$this->load->view('profile/menu');
             $this->_render_page('profile/change_password');
             $this->load->view('footer');
             //$this->_render_page('auth/change_password', $this->data);
