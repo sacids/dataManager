@@ -2,20 +2,18 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>AfyaData - Addressing one health security at community level through technology!</title>
+    <title>AfyaData | Taarifa kwa wakati!</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?php echo base_url();?>favicon.png" />
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" type="text/css">
+    <!-- Bootstrap core CSS -->
+    <link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link
@@ -24,13 +22,14 @@
     <link
         href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
         rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="assets/bootstrap/font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/font-awesome/css/font-awesome.min.css" type="text/css">
 
     <!-- Plugin CSS -->
-    <link rel="stylesheet" href="assets/bootstrap/css/animate.min.css" type="text/css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/animate.min.css" type="text/css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/bootstrap/css/creative.css" type="text/css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/creative.css" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,7 +43,7 @@
 <body id="page-top">
 
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
+    <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -267,18 +266,18 @@
 </section>
 
 <!-- jQuery -->
-<script src="assets/bootstrap/js/jquery.js"></script>
+<script src="<?= base_url() ?>assets/bootstrap/js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="assets/bootstrap/js/jquery.easing.min.js"></script>
-<script src="assets/bootstrap/js/jquery.fittext.js"></script>
-<script src="assets/bootstrap/js/wow.min.js"></script>
+<script src="<?= base_url() ?>assets/bootstrap/js/jquery.easing.min.js"></script>
+<script src="<?= base_url() ?>assets/bootstrap/js/jquery.fittext.js"></script>
+<script src="<?= base_url() ?>assets/bootstrap/js/wow.min.js"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="assets/bootstrap/js/creative.js"></script>
+<script src="<?= base_url() ?>assets/bootstrap/js/creative.js"></script>
 
 </body>
 

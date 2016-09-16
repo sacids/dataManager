@@ -77,19 +77,17 @@ aside {
 }
 
 .navbar-default {
-    border-color: rgba(34,34,34,.05);
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
-    background-color: #fff;
-    -webkit-transition: all .35s;
-    -moz-transition: all .35s;
-    transition: all .35s;
+    font-size: 12px;
+    background-color: transparent;
+    background-color: #781E14;
+    color: #ffffff;
 }
 
 .navbar-default .navbar-header .navbar-brand {
     text-transform: uppercase;
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
-    font-weight: 700;
-    color: #3F3F3F;
+    font-weight: 600;
 }
 
 .navbar-default .navbar-header .navbar-brand:hover,
@@ -100,9 +98,9 @@ aside {
 .navbar-default .nav > li>a,
 .navbar-default .nav>li>a:focus {
     text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 700;
-    color: #222;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
 }
 
 .navbar-default .nav > li>a:hover,
@@ -123,12 +121,12 @@ aside {
 
 @media(min-width:768px) {
     .navbar-default {
-        border-color: rgba(255,255,255,.3);
         background-color: transparent;
+        background-color: #781E14;
     }
 
     .navbar-default .navbar-header .navbar-brand {
-        color: rgba(255,255,255,.7);
+        color: #ffffff;
     }
 
     .navbar-default .navbar-header .navbar-brand:hover,
@@ -138,7 +136,7 @@ aside {
 
     .navbar-default .nav > li>a,
     .navbar-default .nav>li>a:focus {
-        color: rgba(255,255,255,.7);
+        color: #ffffff;
     }
 
     .navbar-default .nav > li>a:hover,
@@ -175,7 +173,7 @@ aside {
 header {
     position: relative;
     width: 100%;
-    min-height: auto;
+    min-height: 200px;
     text-align: center;
     color: #fff;
     background-image: url(../img/header.jpg);
@@ -187,7 +185,7 @@ header {
 
 header .overlay{
     background-color: #3F3F3F;
-    opacity: 0.5;
+    opacity: 0.3;
     position: absolute;
     top: 0;
     left: 0;

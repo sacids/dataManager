@@ -41,6 +41,14 @@ class Migration_Campaign_feedback_modification extends CI_Migration
 
         $this->dbforge->add_column("feedback", $feedback_new_column);
 
+        $feedback_new_column = array(
+            'reply_by' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => TRUE
+            )
+        );
+        $this->dbforge->add_column("feedback", $feedback_new_column);
     }
 
     public function down()

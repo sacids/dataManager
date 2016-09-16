@@ -16,9 +16,7 @@
     <link
         href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
         rel='stylesheet' type='text/css'>
-    <link
-        href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
-        rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="assets/bootstrap/font-awesome/css/font-awesome.min.css" type="text/css">
 
     <!-- Custom CSS -->
@@ -38,7 +36,6 @@
 
 </head>
 <body>
-<div class="overlay"></div>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -56,7 +53,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" download>
-                        <button class="btn btn-danger">Download App</button>
+                        <button class="btn btn-warning">Download App</button>
                     </a></li>
             </ul>
         </div>
@@ -69,7 +66,7 @@
         <div class="col-sm-offset-2 col-sm-8 col-sm-offset-2">
 
             <div class="col-sm-7">
-                <h2 class="title">AFYADATA Manager</h2>
+                <h2 class="title">AFYADATA | Taarifa kwa wakati!</h2>
 
                 <p class="text-faded">Afyadata Manager is a tool that analyzes all the data collected from the field
                     and intelligently sends feedback to the data collector and sends an alert to higher authority

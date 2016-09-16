@@ -44,7 +44,7 @@ class Dashboard extends CI_Controller
             $this->data['submitted_forms'][$k]->daily_form = $this->Submission_model->count_daily_submitted_forms($form->form_id);
         }
 
-        $this->data['title'] = "Sacids Research Portal";
+        $this->data['title'] = "Taarifa kwa wakati!";
         $this->load->view('header', $this->data);
         $this->load->view('index');
         $this->load->view('footer');
