@@ -10,7 +10,7 @@
     <title>AfyaData | Taarifa kwa wakati!</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="<?php echo base_url();?>favicon.png" />
+    <link rel="icon" type="image/png" href="<?php echo base_url(); ?>favicon.png"/>
 
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,11 +19,9 @@
     <link
         href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
         rel='stylesheet' type='text/css'>
-    <link
-        href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
-        rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/font-awesome/css/font-awesome.min.css"
+          type="text/css">
 
     <!-- Plugin CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/animate.min.css" type="text/css">
@@ -53,7 +51,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?= anchor("", '<img src="' . base_url() . 'assets/public/images/logo.png" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
+            <?= anchor("", '<img src="' . base_url() . 'assets/public/images/logo_default.png" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,7 +63,7 @@
                 <li>
                     <a class="page-scroll" href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" download>Download App</a>
                 </li>
-                <li><a class="page-scroll" href="<?php echo site_url('auth/login');?>">Dashboard</a></li>
+                <li><a class="page-scroll" href="<?php echo site_url('auth/login'); ?>">Dashboard</a></li>
                 <li><a class="page-scroll" href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -79,10 +77,10 @@
     <div class="header-content">
         <div class="header-content-inner">
             <h1>AfyaData</h1>
-            <hr>
-            <p>Afya Data is a mobile app inspired by ODK Collect, developed by Southern African Centre for Infectious Disease.
-
-                Surveillance (SACIDS) for collecting, submitting, receiving and/or tracking feedback of submitted health data.</p>
+            <p>Afya Data is a mobile app inspired by ODK Collect, developed by Southern African Centre for Infectious
+                Disease. Surveillance (SACIDS) for collecting, submitting, receiving and/or tracking feedback of
+                submitted health
+                data.</p>
         </div>
     </div>
 </header>
@@ -179,66 +177,11 @@
     </div>
 </section>
 
-<section class="no-padding" id="portfolio">
-    <div class="container-fluid">
-        <div class="row no-gutter">
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img src="<?php echo base_url();?>assets/bootstrap/img/screenshots/afyadataone.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                AfyaData
-                            </div>
-                            <div class="project-name">
-                                Addressing one health security at community level through technology!
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img src="<?php echo base_url();?>assets/bootstrap/img/screenshots/afyadatatwo.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                AfyaData
-                            </div>
-                            <div class="project-name">
-                                Addressing one health security at community level through technology!
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img src="<?php echo base_url();?>assets/bootstrap/img/screenshots/afyadatathree.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                AfyaData
-                            </div>
-                            <div class="project-name">
-                                Addressing one health security at community level through technology!
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-
 <aside class="bg-primary">
     <div class="container text-center">
         <div class="call-to-action">
             <h2>Addressing one health security at community level through technology!</h2>
-            <a href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" class="btn btn-default btn-xl wow tada">
+            <a href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" class="btn btn-warning btn-xl">
                 <i class="fa fa-android fa-lg"></i> Download App Now!</a>
         </div>
     </div>

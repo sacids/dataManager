@@ -17,7 +17,8 @@
         href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
         rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="assets/bootstrap/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/font-awesome/css/font-awesome.min.css"
+          type="text/css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap/css/login.css" type="text/css">
@@ -46,14 +47,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?= anchor("", '<img src="' . base_url() . 'assets/public/images/logo.png" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
+            <?= anchor("", '<img src="' . base_url() . 'assets/public/images/logo_default.png" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
         </div>
 
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" download>
-                        <button class="btn btn-warning">Download App</button>
+                        <button class="btn btn-warning">
+                            <i class="fa fa-android fa-lg"></i> Download App
+                        </button>
                     </a></li>
             </ul>
         </div>

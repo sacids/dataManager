@@ -4,8 +4,7 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-html,
-body {
+html {
     width: 100%;
     height: 100%;
 }
@@ -13,21 +12,110 @@ body {
 body {
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     padding-top: 150px;
-    overflow-x: hidden;
 }
 
-.navbar-header a {
-    font-size: 20px;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #FFFFFF !important;
+hr {
+    max-width: 50px;
+    border-color: #781E14;
+    border-width: 3px;
+}
+
+a {
+    color: #781E14;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
+
+a:hover,
+a:focus {
+    color: #eb3812;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+p {
+    margin-bottom: 50px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.bg-primary {
+    background-color: #781E14;
+}
+
+.bg-dark {
+    color: #fff;
+    background-color: #222;
+}
+
+.text-faded {
+    color: rgba(255, 255, 255, .7);
+}
+
+section {
+    padding: 30px 0;
+}
+
+aside {
+    padding: 30px 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.navbar-default {
+    background-color: transparent;
+    background-color: #ffffff;
+}
+
+.navbar-default .navbar-header .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-default .navbar-header .navbar-brand:hover,
+.navbar-default .navbar-header .navbar-brand:focus {
+    color: #fff;
+}
+
+.navbar-default .nav > li > a,
+.navbar-default .nav > li > a:focus {
+    font-size: 12px;
+    font-weight: 600;
+    color: #3F3F3F;
+}
+
+.navbar-default .nav > li > a:hover,
+.navbar-default .nav > li > a:focus:hover {
+    background-color: transparent;
 }
 
 @media (min-width: 768px) {
     .navbar-default {
-        border-color: #781E14;
         background-color: transparent;
-        background-color: #781E14;
+        background-color: #ffffff;
+    }
+
+    .navbar-default .navbar-header .navbar-brand {
+        color: #ffffff;
+    }
+
+    .navbar-default .navbar-header .navbar-brand:hover,
+    .navbar-default .navbar-header .navbar-brand:focus {
+        color: #fff;
+    }
+
+    .navbar-default .nav > li > a,
+    .navbar-default .nav > li > a:focus {
+        color: #3F3F3F;
     }
 }
 
