@@ -11,7 +11,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?php echo base_url(); ?>favicon.png"/>
 
-    <title>AfyaData | <?php if (!empty($title)) echo $title; else "Taarifa kwa wakati!"; ?></title>
+    <title>AfyaData - <?php if (!empty($title)) echo $title; else "Taarifa kwa wakati!"; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -116,7 +116,6 @@
                         <li><?php echo anchor('campaign/add_new', "Add New Campaign"); ?></li>
                     </ul>
                 </li>
-
                 <li><?php echo anchor('whatsapp/message_list', "WhatsApp db"); ?></li>
 
                 <li class="dropdown">
@@ -133,7 +132,7 @@
                 <li><?php echo anchor('feedback/lists', "Chats"); ?></li>
 
                 <li class="">
-                    <a href="./" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><?php display_full_name(); ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><?php echo anchor('auth/profile', "My Profile"); ?></li>

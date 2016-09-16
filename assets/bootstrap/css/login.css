@@ -47,25 +47,8 @@ p {
     line-height: 1.5;
 }
 
-.bg-primary {
-    background-color: #781E14;
-}
-
-.bg-dark {
-    color: #fff;
-    background-color: #222;
-}
-
 .text-faded {
     color: rgba(255, 255, 255, .7);
-}
-
-section {
-    padding: 30px 0;
-}
-
-aside {
-    padding: 30px 0;
 }
 
 .no-padding {

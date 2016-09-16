@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AfyaData | <?php if (!empty($title)) echo $title; else "AfyaData Manager"; ?></title>
+    <title>AfyaData - <?php if (!empty($title)) echo $title; else "AfyaData Manager"; ?></title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?php echo base_url(); ?>favicon.png"/>
@@ -50,16 +50,6 @@
             <?= anchor("", '<img src="' . base_url() . 'assets/public/images/logo_default.png" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
         </div>
 
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" download>
-                        <button class="btn btn-warning">
-                            <i class="fa fa-android fa-lg"></i> Download App
-                        </button>
-                    </a></li>
-            </ul>
-        </div>
 
     </div>
 </nav>
