@@ -48,10 +48,10 @@ $lang['nav_item_form_list']             = "Form List";
 $lang['nav_item_form_add_new']          = "Add new form";
 
 $lang['label_instance_id']              = "Instance Id";
-$lang['label_message']                  = "Chat Message";
+$lang['label_message']                  = "Last Message";
 $lang['label_user']                     = "Chat User";
 $lang['label_username']                 = "Username";
-$lang['label_feedback_date']            = "Feedback Date";
+$lang['label_feedback_date']            = "Last Chat Date";
 $lang['label_status']                   = "Status";
 
 

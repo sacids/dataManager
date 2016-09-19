@@ -45,9 +45,7 @@ class Feedback_model extends CI_Model
      */
     function count_feedback()
     {
-        return $this->db
-            ->where_in("(SELECT max(id) FROM feedback GROUP BY instance_id)")
-            ->get('feedback')->num_rows();
+        return $this->db->query('SELECT max(id) FROM feedback GROUP BY instance_id')->num_rows();
     }
 
 
@@ -58,16 +56,14 @@ class Feedback_model extends CI_Model
      */
     function find_all($num, $start)
     {
-        return $this->db
-            ->select('feedback.id, feedback.instance_id, feedback.message, feedback.date_created,
-                    users.first_name, users.last_name, users.username, xforms.title')
-            ->limit($num, $start)
-            ->order_by('feedback.id', 'DESC')
-            ->where_in("(SELECT MAX(feedback.id) FROM feedback GROUP BY instance_id)")
-            ->join('users', 'users.id = feedback.user_id')
-            ->join('xforms', 'xforms.form_id = feedback.form_id')
-            ->get(self::$table_name)
-            ->result();
+        return $this->db->query("
+             SELECT feedback.id, feedback.instance_id, feedback.message, feedback.date_created,xforms.title,
+             users.first_name, users.last_name, users.username
+             FROM feedback
+             JOIN xforms ON feedback.form_id = xforms.form_id
+             JOIN users ON feedback.user_id = users.id
+             WHERE feedback.id IN ( SELECT MAX(feedback.id) FROM feedback GROUP BY instance_id)
+             ORDER BY feedback.id DESC LIMIT $num OFFSET $start")->result();
     }
 
 
@@ -111,10 +107,7 @@ class Feedback_model extends CI_Model
      */
     function get_feedback_by_instance($instance_id)
     {
-        $this->db->select('feedback.message, feedback.date_created, feedback.sender,
-                                user.first_name as fname, user.last_name as lname')
-            ->join(self::$table_name_user . " user", 'user.id = feedback.user_id')
-            ->order_by('feedback.date_created', 'ASC');
+        $this->db->order_by('feedback.date_created', 'ASC');
         return $this->db->get_where(self::$table_name . " feedback", array('instance_id' => $instance_id))->result();
 
 

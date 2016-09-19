@@ -68,6 +68,16 @@ class User_model extends CI_Model
     }
 
     /**
+     * @param $user_id
+     * @return string
+     */
+    function _user_details($user_id)
+    {
+        $query = $this->db->get_where(self::$table_name, array('id' => $user_id))->row();
+        return $query->first_name . ' ' . $query->last_name;
+    }
+
+    /**
      * @param $username
      * @return mixed
      */

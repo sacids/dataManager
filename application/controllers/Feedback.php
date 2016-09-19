@@ -21,6 +21,8 @@ class Feedback extends CI_Controller
         log_message('debug', 'Feedback controller initialized');
 
         $this->user_id = $this->session->userdata("user_id");
+
+        //$this->output->enable_profiler(TRUE);
     }
 
     /**
@@ -60,8 +62,8 @@ class Feedback extends CI_Controller
             }
         } else {
             $config = array(
-                'base_url'    => $this->config->base_url("feedback/lists"),
-                'total_rows'  => $this->Feedback_model->count_feedback(),
+                'base_url' => $this->config->base_url("feedback/lists"),
+                'total_rows' => $this->Feedback_model->count_feedback(),
                 'uri_segment' => 3,
             );
 
@@ -111,8 +113,17 @@ class Feedback extends CI_Controller
             $this->Feedback_model->create_feedback($feedback_details);
         }
 
-        //render view
         $data['feedback'] = $this->Feedback_model->get_feedback_by_instance($instance_id);
+
+        foreach ($data['feedback'] as $k => $feedback) {
+            if ($feedback->sender == 'user') {
+                $data['feedback'][$k]->sender_name = $this->User_model->_user_details($feedback->user_id);
+            } else {
+                $data['feedback'][$k]->sender_name = $this->User_model->_user_details($feedback->reply_by);
+            }
+        }
+
+        //render view
         $data['instance_id'] = $instance_id;
         $data['title'] = "Feedback List";
         $this->load->view('header', $data);

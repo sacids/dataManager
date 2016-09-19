@@ -13,7 +13,7 @@
                         <li class="<?php echo $class; ?>">
                             <div class="msg">
                                 <p><?= $values->message ?></p>
-                                <span><?php //echo $values->fname . ' ' . $values->lname; ?></span>
+                                <span><?php echo $values->sender_name; ?></span>
                                 <time><?= date('H:i:s', strtotime($values->date_created)) ?></time>
                             </div>
                         </li>
