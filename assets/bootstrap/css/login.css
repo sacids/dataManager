@@ -81,6 +81,32 @@ p {
     background-color: transparent;
 }
 
+.navbar-nav > li.btn-link {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 10px;
+    transition: padding 0.5s ease;
+    -webkit-transition: padding 0.5s ease;
+    -moz-transition: padding 0.5s ease;
+    -ms-transition: padding 0.5s ease;
+    -o-transition: padding 0.5s ease;
+}
+
+.navbar-nav > li.btn-link .btn {
+    padding: 5px 10px !important;
+    color: #ffffff;
+}
+
+.navbar-nav > li.btn-link:last-child {
+    margin-right: 0;
+}
+
+.navbar-nav > li.btn-link:hover,
+.navbar-nav > li.btn-link:focus {
+    text-decoration: none;
+    cursor: default;
+}
+
 @media (min-width: 768px) {
     .navbar-default {
         background-color: transparent;
@@ -146,4 +172,25 @@ p.text-faded{
     text-align: justify !important;
     word-spacing:-2px;
     font-size: 14px;
+}
+
+/***************
+Button
+****************/
+.btn.btn-maroon {
+    background: #781E14;
+    color: #fff;
+    border: 1px solid #781E14;
+}
+
+.btn.btn-maroon:hover,
+.btn.btn-maroon:focus,
+.btn.btn-maroon:active,
+.btn.btn-maroon.active {
+    background: #781E14;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
 }

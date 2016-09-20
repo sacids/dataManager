@@ -56,15 +56,16 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav">
                 <li><a class="page-scroll" href="#about">About AfyaData</a></li>
                 <li><a class="page-scroll" href="#features">Features</a></li>
                 <li><a class="page-scroll" href="#involved">Get Involved</a></li>
-                <li>
-                    <a class="page-scroll" href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" download>Download App</a>
-                </li>
-                <li><a class="page-scroll" href="<?php echo site_url('auth/login'); ?>">Dashboard</a></li>
                 <li><a class="page-scroll" href="#contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="btn-link"><a href="<?php echo site_url('auth/login'); ?>" class="btn btn-sm btn-dark-orange">Login</a>
+                </li>
+                <li class="btn-link"><a href="#" class="btn btn-sm btn-maroon">Download App</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -177,15 +178,18 @@
     </div>
 </section>
 
-<aside class="bg-primary">
+<section id="involved" class="bg-primary">
     <div class="container text-center">
         <div class="call-to-action">
-            <h2>Addressing one health security at community level through technology!</h2>
-            <a href="<?php echo base_url(); ?>afyaDataV1-Beta.apk" class="btn btn-warning btn-xl">
+            <h2>Get involves with Afyadata.</h2>
+            <a href="#" class="btn btn-dark-orange btn-xl">
                 <i class="fa fa-android fa-lg"></i> Download App Now!</a>
+
+            <a href="#" class="btn btn-blue btn-xl">
+                <i class="fa fa-github fa-lg"></i> Github</a>
         </div>
     </div>
-</aside>
+</section>
 
 <section id="contact">
     <div class="container">
