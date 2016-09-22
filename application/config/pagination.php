@@ -4,10 +4,10 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 
-$config['per_page'] = 30;
-$config['num_links'] = 10;
-$config['full_tag_open'] = '<ul class="pagination pull-right">';
-$config['full_tag_close'] = '</ul><!--pagination-->';
+$config['per_page']           = 30;
+$config['num_links']          = 10;
+$config['full_tag_open']      = '<ul class="pagination pull-right">';
+$config['full_tag_close']     = '</ul><!--pagination-->';
 $config['first_link']         = '&lsaquo; First';
 $config['first_tag_open']     = '<li>';
 $config['first_tag_close']    = '</li>';
