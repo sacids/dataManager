@@ -129,7 +129,6 @@ class Migration_Ohkr extends CI_Migration
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table('diseases_symptoms');
 
-		$this->db->query('ALTER TABLE diseases_symptoms ADD CONSTRAINT fk_specie_id FOREIGN KEY(specie_id) REFERENCES species(id) ON DELETE CASCADE ON UPDATE CASCADE;');
 		$this->db->query('ALTER TABLE diseases_symptoms ADD CONSTRAINT fk_disease_id FOREIGN KEY(disease_id) REFERENCES diseases(id) ON DELETE CASCADE ON UPDATE CASCADE;');
 		$this->db->query('ALTER TABLE diseases_symptoms ADD CONSTRAINT fk_symptom_id FOREIGN KEY(symptom_id) REFERENCES symptoms(id) ON DELETE CASCADE ON UPDATE CASCADE;');
 	}
