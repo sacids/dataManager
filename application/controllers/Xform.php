@@ -293,38 +293,33 @@ class Xform extends CI_Controller
 						log_message("debug", "Response messages Query ==>\n\n" . $this->db->last_query() . "\n");
 
 						$message_sender_name = "AfyaData";
-						$messages_to_send['messages'][0] = array(
-							"from" => $message_sender_name,
-							"to"   => $data_collector_phone,
-							"text" => "Majibu kwa CHR"
-						);
+
 						$counter = 1;
 						if ($response_messages) {
 							foreach ($response_messages as $sms) {
 
+								$phone_number = (strpos($sms->group_name, 'chr') !== FALSE) ?
+									$data_collector_phone : $sms->phone;
+
+								log_message("debug", "Data Senders phone number " . $phone_number);
+
 								$sms_to_send = array(
 									"response_msg_id" => $sms->rsms_id,
-									"phone_number"    => $sms->phone,
+									"phone_number"    => $phone_number,
 									"date_sent"       => date("Y-m-d h:i:s"),
 									"status"          => "PENDING"
-								);
-
-								$messages_to_send["messages"][$counter] = array(
-									"from" => $message_sender_name,
-									"to"   => $sms->phone,
-									"text" => $sms->message
 								);
 
 								if ($msg_id = $this->Ohkr_model->create_send_sms($sms_to_send)) {
 									$sms_info = array(
 										"from" => $message_sender_name,
-										"to"   => $sms->phone,
+										"to"   => $phone_number,
 										"text" => $sms->message
 									);
 
 									$request_url = "sms/1/text/single";
 
-									/*if ($send_result = $this->Alert_model->send_alert_sms($request_url, $sms_info)) {
+									if ($send_result = $this->Alert_model->send_alert_sms($request_url, $sms_info)) {
 										$infobip_response = json_decode($send_result);
 										$message = (array)$infobip_response->messages;
 										$message = array_shift($message);
@@ -336,13 +331,11 @@ class Xform extends CI_Controller
 										//$this->db->reconnect();
 										$this->Alert_model->update_sms_status($msg_id, $sms_updates);
 										log_message("debug", "From:" . $message_sender_name . " To:" . $sms->phone . " Text: " . $sms->message);
-									}*/
+									}
 								}
 								$counter++;
 							}
 						}
-
-						log_message("debug", $i . ". Infobip messages to send batch \n " . json_encode($messages_to_send) . "\n");
 
 						log_message("debug", $i . ". Response\n " . json_encode($response_messages) . "\n");
 						$i++;
@@ -1457,7 +1450,7 @@ class Xform extends CI_Controller
 	function _get_mapped_table_column_name($form_id)
 	{
 		if (!$form_id)
-			$form_id = "ad_build_Dalili_Binadamu_Skolls_A_1467712626";
+			$form_id = "ad_build_week_report_skolls_b_1767716170";
 
 
 		$this->table_name = $form_id;
@@ -1496,6 +1489,21 @@ class Xform extends CI_Controller
 
 						$table_field_names[$key] = $value;
 					}
+				} elseif ($fdfn['type'] == "int") {
+
+					$find_male = " m ";
+					$find_female = " f ";
+
+					$group_name = str_replace("_", " ", $fdfn['field_name']);
+
+					if (strpos($group_name, $find_male)) {
+						$table_field_names[$kk] = str_replace($find_male, " " . $fdfn['label'] . " ", $group_name);
+					} elseif (strpos($group_name, $find_female)) {
+						$table_field_names[$kk] = str_replace($find_female, " " . $fdfn['label'] . " ", $group_name);
+					} else {
+						$table_field_names[$kk] = $group_name . " " . $fdfn['label'];
+					}
+
 				} else {
 					$table_field_names[$kk] = $fdfn['label'];
 				}
@@ -1521,7 +1529,7 @@ class Xform extends CI_Controller
 
 			$deleted_entry_count = 0;
 			foreach ($entry_ids as $entry_id) {
-				//TODO Delete media files too.
+				//TODO Implement delete media files too.
 				if ($this->Xform_model->delete_form_data($table_name, $entry_id)) {
 					$deleted_entry_count++;
 				}
@@ -1552,5 +1560,4 @@ class Xform extends CI_Controller
 
 		return $prefix;
 	}
-
 }
