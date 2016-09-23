@@ -13,15 +13,13 @@
 
             <form class="navbar-form form-inline" role="form">
                 <div class="form-group">
-                    <label>Change language</label>
+                    <label><?php echo $this->lang->line("nav_item_change_language") ?></label>
                     <select class=""
                             onchange="javascript:window.location.href='<?php echo base_url(); ?>LanguageChanger/switchLang/'+this.value;">
                         <option value="swahili" <?php if ($this->session->userdata('site_lang') == 'swahili') echo 'selected="selected"'; ?>>
-                            Swahili
-                        </option>
+                            <?= $this->lang->line("nav_item_language_swahili") ?></option>
                         <option value="english" <?php if ($this->session->userdata('site_lang') == 'english') echo 'selected="selected"'; ?>>
-                            English
-                        </option>
+                            <?= $this->lang->line("nav_item_language_english") ?></option>
                     </select>
                 </div>
             </form>

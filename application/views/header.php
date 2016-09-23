@@ -71,49 +71,51 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Forms <span class="caret"></span></a>
+                       aria-expanded="false"><?= $this->lang->line("nav_item_forms") ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo anchor('xform/forms', "List forms"); ?></li>
-                        <li><?php echo anchor('xform/add_new', "Add new form"); ?></li>
+                        <li><?php echo anchor('xform/forms', $this->lang->line("nav_item_list_forms")); ?></li>
+                        <li><?php echo anchor('xform/add_new', $this->lang->line("nav_item_add_new_form")); ?></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Manage users <span class="caret"></span></a>
+                       aria-expanded="false"><?= $this->lang->line("nav_item_manage_users") ?>
+                        <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo anchor('auth/users_list', "List Users"); ?></li>
-                        <li><?php echo anchor('auth/create_user', "Create User"); ?></li>
+                        <li><?php echo anchor('auth/users_list', $this->lang->line("nav_item_list_users")); ?></li>
+                        <li><?php echo anchor('auth/create_user', $this->lang->line("nav_item_create_user")); ?></li>
                         <li class="divider"></li>
-                        <li class="dropdown-header">Manage user groups</li>
-                        <li><?php echo anchor('auth/group_list', "List Groups"); ?></li>
-                        <li><?php echo anchor('auth/create_group', "Create Group"); ?></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">OHKR <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-header">Manage diseases</li>
-                        <li><?php echo anchor('ohkr/disease_list', "List diseases"); ?></li>
-                        <li><?php echo anchor('ohkr/add_new_disease', "Add new disease"); ?></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Manage symptoms</li>
-                        <li><?php echo anchor('ohkr/symptoms_list', "List symptoms"); ?></li>
-                        <li><?php echo anchor('ohkr/add_new_symptom', "Add new symptoms"); ?></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Manage species</li>
-                        <li><?php echo anchor('ohkr/species_list', "List species"); ?></li>
-                        <li><?php echo anchor('ohkr/add_new_specie', "Add new specie"); ?></li>
+                        <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_user_groups") ?></li>
+                        <li><?php echo anchor('auth/group_list', $this->lang->line("nav_item_list_groups")); ?></li>
+                        <li><?php echo anchor('auth/create_group', $this->lang->line("nav_item_create_group")); ?></li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Manage Campaign <span class="caret"></span></a>
+                       aria-expanded="false"><?= $this->lang->line("nav_item_ohkr") ?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo anchor('campaign/lists', "List Campaign"); ?></li>
-                        <li><?php echo anchor('campaign/add_new', "Add New Campaign"); ?></li>
+                        <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_diseases") ?></li>
+                        <li><?php echo anchor('ohkr/disease_list', $this->lang->line("nav_item_list_disease")); ?></li>
+                        <li><?php echo anchor('ohkr/add_new_disease', $this->lang->line("nav_item_add_disease")); ?></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_symptoms") ?></li>
+                        <li><?php echo anchor('ohkr/symptoms_list', $this->lang->line("nav_item_list_symptoms")); ?></li>
+                        <li><?php echo anchor('ohkr/add_new_symptom', $this->lang->line("nav_item_create_symptom")); ?></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_species") ?></li>
+                        <li><?php echo anchor('ohkr/species_list', $this->lang->line("nav_item_list_species")); ?></li>
+                        <li><?php echo anchor('ohkr/add_new_specie', $this->lang->line("nav_item_create_species")); ?></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><?= $this->lang->line("nav_item_manage_campaign") ?>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><?php echo anchor('campaign/lists', $this->lang->line("nav_item_list_campaign")); ?></li>
+                        <li><?php echo anchor('campaign/add_new', $this->lang->line("nav_item_create_campaign")); ?></li>
                     </ul>
                 </li>
                 <li><?php echo anchor('whatsapp/message_list', "WhatsApp db"); ?></li>
@@ -129,15 +131,15 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><?php echo anchor('feedback/lists', "Chats"); ?></li>
+                <li><?php echo anchor('feedback/lists', $this->lang->line("nav_item_chats")); ?></li>
 
                 <li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false"><?php display_full_name(); ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo anchor('auth/profile', "My Profile"); ?></li>
-                        <li><?php echo anchor('auth/change_password', "Change password"); ?></li>
-                        <li><?php echo anchor('auth/logout', "Logout"); ?></li>
+                        <li><?php echo anchor('auth/profile', $this->lang->line("nav_item_my_profile")); ?></li>
+                        <li><?php echo anchor('auth/change_password', $this->lang->line("nav_item_change_password")); ?></li>
+                        <li><?php echo anchor('auth/logout', $this->lang->line("nav_item_logout")); ?></li>
                     </ul>
                 </li>
             </ul>
