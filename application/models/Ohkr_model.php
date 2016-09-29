@@ -20,6 +20,7 @@ class Ohkr_model extends CI_Model
 	private static $table_name_users = "users";
 	private static $table_name_user_groups = "groups";
 	private static $table_name_users_groups = "users_groups";
+	private static $table_name_detected_diseases = "ohkr_detected_diseases";
 
 	public function __construct()
 	{
@@ -304,4 +305,8 @@ class Ohkr_model extends CI_Model
 		return $this->db->get()->result();
 	}
 
+	public function save_detected_diseases($diseases_batch = array())
+	{
+		return $this->db->insert_batch(self::$table_name_detected_diseases, $diseases_batch);
+	}
 }
