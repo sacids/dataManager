@@ -69,10 +69,7 @@ class Auth extends CI_Controller
     }
 
 
-    /**
-     * @param type
-     * @return mixed
-     */
+    //login
     function login()
     {
         //define response
@@ -107,6 +104,8 @@ class Auth extends CI_Controller
         echo json_encode($response);
     }
 
+
+    //register user
     function register()
     {
         //define response

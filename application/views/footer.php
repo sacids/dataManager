@@ -6,29 +6,6 @@
 <script src="<?= base_url() ?>assets/bootstrap/js/ie10-viewport-bug-workaround.js"></script>
 <script src="<?= base_url() ?>assets/public/js/highcharts.js"></script>
 
-
-<div class="footer">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12" style="margin-left: 90px;">
-
-            <form class="navbar-form form-inline" role="form">
-                <div class="form-group">
-                    <label>Change language</label>
-                    <select class=""
-                            onchange="javascript:window.location.href='<?php echo base_url(); ?>LanguageChanger/switchLang/'+this.value;">
-                        <option value="swahili" <?php if ($this->session->userdata('site_lang') == 'swahili') echo 'selected="selected"'; ?>>
-                            Swahili
-                        </option>
-                        <option value="english" <?php if ($this->session->userdata('site_lang') == 'english') echo 'selected="selected"'; ?>>
-                            English
-                        </option>
-                    </select>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 </body>
 </html>
 

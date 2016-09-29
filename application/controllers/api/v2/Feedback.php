@@ -240,9 +240,9 @@ class Feedback extends CI_Controller
      */
     function get_form_details()
     {
-        $table_name = 'ad_build_monthly_report_skolls_b_1467716176';//$this->input->get('table_name');
-        $instance_id = 'uuid:73c72646-f8db-47de-8596-3f0bc0066088';//$this->input->get('instance_id');
-        //$lang = $this->input->get('language');
+        $table_name = $this->input->get('table_name');
+        $instance_id = $this->input->get('instance_id');
+        $lang = $this->input->get('language');
 
         if ($table_name == null || $instance_id == NULL) {
             $response = array("status" => "failed", "message" => "Invalid table name or instance Id");
