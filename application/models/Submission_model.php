@@ -64,7 +64,7 @@ class Submission_model extends CI_Model
      */
     function get_submitted_forms()
     {
-        return $this->db->get('xforms')->result();
+        return $this->db->get_where('xforms', array('status' => 'published'))->result();
     }
 
     /**
