@@ -9,7 +9,7 @@
  * @link        http://sacids.org
  */
 //
-class XmlElement
+class XmlElements
 {
     var $name;
     var $attributes;
@@ -136,7 +136,7 @@ class Xform_comm
 
             $index = count($elements);
             if ($tag ['type'] == "complete" || $tag ['type'] == "open") {
-                $elements [$index] = new XmlElement();
+                $elements [$index] = new XmlElements();
                 $elements [$index]->name = $tag ['tag'];
 
                 if (!empty ($tag ['attributes'])) {
