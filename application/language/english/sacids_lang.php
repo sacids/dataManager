@@ -114,12 +114,8 @@ $lang['unknown_error_occurred']         = 'Unknown error occurred';
 $lang['user_does_not_exist']            = 'user does not exist';
 
 //Campaign
-$lang['label_campaign_title']             = "Title";
-$lang['label_campaign_type']              = "Type";
-$lang['label_campaign_icon']              = "Icon";
-$lang['label_campaign_featured']          = "Featured";
-$lang['label_campaign_created_date']      = "Created date";
 $lang['label_campaign_title']           = "Title";
 $lang['label_campaign_type']            = "Type";
 $lang['label_campaign_icon']            = "Icon";
+$lang['label_campaign_featured']        = "Featured";
 $lang['label_campaign_created_date']    = "Created date";
