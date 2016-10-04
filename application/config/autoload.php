@@ -97,7 +97,7 @@ $autoload['helper'] = array('url', 'file', 'form', 'xform', 'common');
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array("sacids", "pagination");
+$autoload['config'] = array("sacids", "pagination","sms");
 
 /*
 | -------------------------------------------------------------------

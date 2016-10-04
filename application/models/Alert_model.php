@@ -11,18 +11,19 @@ class Alert_model extends CI_Model
 
 	private static $info_bip_base_url = "https://api.infobip.com/";
 	private $user_agent = "curl/7.35.0 (AfyaData Alerts; Ubuntu 14.04.2 LTS;) Gecko/20100101 adSMS/1";
-	private $headers = array(
-		'accept:application/json',
-		'content-Type:application/json',
-		'authorization: Basic base64pwd',
-		'accept-encoding:gzip'
-	);
+	private $headers;
 
 	private static $table_name_sent_sms = "ohkr_sent_sms";
 
 	public function __construct()
 	{
 		parent::__construct();
+		$this->headers = array(
+			'accept:application/json',
+			'content-Type:application/json',
+			'authorization: Basic ' . $this->config->item("bauth"),
+			'accept-encoding:gzip'
+		);
 	}
 
 	/**
