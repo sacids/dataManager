@@ -13,8 +13,9 @@
             <div class="row" style="margin-bottom: 10px;">
                 <h3>Form data collected</h3>
 			<span class="pull-right">
-				<?php echo anchor("xform/excel_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/csv-export.png" height="30px"/>') ?>
-                <?php echo anchor("xform/xml_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/xml-export.png" height="30px"/>') ?>
+				<?php echo anchor("xform/excel_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_drive-ms-excel.png" height="25"/>') ?>
+                <?php echo anchor("form_visualization/chart/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_office-25.png" height="25"/>') ?>
+                <?php echo anchor("form_visualization/map/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_location.png" height="25"/>') ?>
 			</span>
             </div>
             <?php

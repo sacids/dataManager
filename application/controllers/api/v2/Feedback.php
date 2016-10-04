@@ -153,7 +153,7 @@ class Feedback extends CI_Controller
                 $where_array = $user->id;
             }
             //feedback list
-            $feedback_list = $this->Feedback_model->get_feedback_notification($where_perm, $where_array, $date_created);
+            $feedback_list = $this->Feedback_model->get_feedback_list($where_perm, $where_array, $date_created);
 
             foreach ($feedback_list as $value) {
                 $username = $this->User_model->find_by_id($value->user_id)->first_name;

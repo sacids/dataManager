@@ -449,7 +449,7 @@ class Ohkr extends CI_Controller
 
         $data['title'] = "Add Disease Symptom";
         $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
-        $data['symptoms'] = $this->Ohkr_model->find_all_symptoms(30, 0);
+        $data['symptoms'] = $this->Ohkr_model->find_all_symptoms(100, 0);
 
 		$this->form_validation->set_rules("symptom", $this->lang->line("label_symptom_name"), "required");
 		$this->form_validation->set_rules("importance", "Importance", "required");
@@ -486,7 +486,7 @@ class Ohkr extends CI_Controller
         }
 
         $data['title'] = "Edit Disease Symptom";
-        $data['symptoms'] = $this->Ohkr_model->find_all_symptoms(30, 0);
+        $data['symptoms'] = $this->Ohkr_model->find_all_symptoms(100, 0);
         $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
 
         $disease_symptom = $this->Ohkr_model->get_disease_symptom_by_id($disease_symptom_id);
