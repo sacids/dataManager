@@ -31,6 +31,7 @@ class Xform extends CI_Controller
 
 	private $user_id;
 	private $user_submitting_feedback_id;
+	private $sender; //Object
 
 	public function __construct()
 	{
@@ -142,6 +143,7 @@ class Xform extends CI_Controller
 
 		// get user details from database
 		$user = $this->User_model->find_by_username($username);
+		$this->sender = $user;
 		$password = $user->digest_password; // digest password
 		$db_username = $user->username; // username
 		$this->user_submitting_feedback_id = $user->id;
@@ -244,26 +246,16 @@ class Xform extends CI_Controller
 
 		if ($result) {
 
-			/* $feedback = array(
-				"user_id"      => $this->user_submitting_feedback_id,
-				"form_id"      => $this->table_name,
-				"message"      => "Tumepokea fomu yako",
-				"date_created" => date('Y-m-d H:i:s'),
-				"instance_id"  => $this->form_data['meta_instanceID'],
-				"sender"       => "server",
-				"status"       => "pending"
-			);
-			$this->Feedback_model->create_feedback($feedback);
-			*/
-
 			$symptoms_reported = explode(" ", $this->form_data['Dalili_Dalili']);
 			$district = $this->form_data['taarifa_awali_Wilaya']; // taarifa_awali_Wilaya is the database field name in the mean time
 
 			$data_collector_phone = $this->form_data['meta_username'];
 
 			if (count($symptoms_reported) > 0) {
-				$suspected_diseases_array = array();
+				$message_sender_name = "AfyaData";
+				$request_url_endpoint = "sms/1/text/single";
 
+				$suspected_diseases_array = array();
 				$suspected_diseases = $this->Ohkr_model->find_diseases_by_symptoms_code($symptoms_reported);
 
 				$suspected_diseases_list = "Tumepokea fomu yako, kutokana na taarifa ulizotuma haya ndiyo magonjwa yanayodhaniwa ni:\n<br/>";
@@ -283,49 +275,21 @@ class Xform extends CI_Controller
 							"location"      => $district
 						);
 
-						$response_messages = $this->Ohkr_model->find_response_messages_and_groups($disease->disease_id, $district);
-						$message_sender_name = "AfyaData";
+						$sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
+
+						if ($sender_msg) {
+							$this->_save_msg_and_send($sender_msg->rsms_id, $this->sender->phone, $sender_msg->message,
+								$this->sender->first_name, $message_sender_name, $request_url_endpoint);
+						}
+
+						$response_messages = $this->Ohkr_model->find_response_messages_and_groups($disease->disease_id,
+							$district);
 
 						$counter = 1;
 						if ($response_messages) {
 							foreach ($response_messages as $sms) {
-
-								$phone_number = (strpos(strtolower($sms->group_name), 'chr') !== FALSE) ?
-									$data_collector_phone : $sms->phone;
-
-								log_message("debug", "Data Senders phone number " . $phone_number);
-
-								$sms_to_send = array(
-									"response_msg_id" => $sms->rsms_id,
-									"phone_number"    => $phone_number,
-									"date_sent"       => date("Y-m-d h:i:s"),
-									"status"          => "PENDING"
-								);
-
-								if ($msg_id = $this->Ohkr_model->create_send_sms($sms_to_send)) {
-
-									$sms_text = "Ndugu " . $sms->first_name . ",\n" . $sms->message;
-									$sms_info = array(
-										"from" => $message_sender_name,
-										"to"   => $phone_number,
-										"text" => $sms_text
-									);
-
-									$request_url = "sms/1/text/single";
-
-									if ($send_result = $this->Alert_model->send_alert_sms($request_url, $sms_info)) {
-										$infobip_response = json_decode($send_result);
-										$message = (array)$infobip_response->messages;
-										$message = array_shift($message);
-										$sms_updates = array(
-											"status"           => "SENT", "date_sent" => date("c"),
-											"infobip_msg_id"   => $message->messageId,
-											"infobip_response" => $send_result
-										);
-										$this->Alert_model->update_sms_status($msg_id, $sms_updates);
-										log_message("debug", "From:" . $message_sender_name . " To:" . $sms->phone . " Text: " . $sms->message);
-									}
-								}
+								$this->_save_msg_and_send($sms->rsms_id, $sms->phone, $sms->message, $sms->first_name,
+									$message_sender_name, $request_url_endpoint);
 								$counter++;
 							}
 						}
@@ -334,6 +298,8 @@ class Xform extends CI_Controller
 
 					$this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
 				} else {
+					$suspected_diseases_list = "Hatukuweza kudhania ugonjwa kutokana na taarifa ulizotuma, 
+					tafadhali wasiliana na wataalam wetu kwa msaada zaidi";
 					log_message("debug", "Could not find disease with the specified symptoms");
 				}
 
@@ -499,16 +465,46 @@ class Xform extends CI_Controller
 		}
 	}
 
-
-	private function get_fieldname_map()
+	/**
+	 * @param $response_msg_id
+	 * @param $phone
+	 * @param $message
+	 * @param $first_name
+	 * @param $message_sender_name
+	 * @param $request_url_endpoint
+	 * @internal param $sms
+	 */
+	public function _save_msg_and_send($response_msg_id, $phone, $message, $first_name, $message_sender_name, $request_url_endpoint)
 	{
-		$tmp = $this->Xform_model->get_fieldname_map($this->table_name);
-		$map = array();
-		foreach ($tmp as $part) {
-			$key = $part['field_name'];
-			$map[$key] = $part;
+		$sms_to_send = array(
+			"response_msg_id" => $response_msg_id,
+			"phone_number"    => $phone,
+			"date_sent"       => date("Y-m-d h:i:s"),
+			"status"          => "PENDING"
+		);
+
+		if ($msg_id = $this->Ohkr_model->create_send_sms($sms_to_send)) {
+
+			$sms_text = "Ndugu " . $first_name . ",\n" . $message;
+			$sms_info = array(
+				"from" => $message_sender_name,
+				"to"   => $phone,
+				"text" => $sms_text
+			);
+
+
+			if ($send_result = $this->Alert_model->send_alert_sms($request_url_endpoint, $sms_info)) {
+				$infobip_response = json_decode($send_result);
+				$message = (array)$infobip_response->messages;
+				$message = array_shift($message);
+				$sms_updates = array(
+					"status"           => "SENT", "date_sent" => date("c"),
+					"infobip_msg_id"   => $message->messageId,
+					"infobip_response" => $send_result
+				);
+				$this->Alert_model->update_sms_status($msg_id, $sms_updates);
+			}
 		}
-		return $map;
 	}
 
 	/**

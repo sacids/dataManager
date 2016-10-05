@@ -296,13 +296,23 @@ class Ohkr_model extends CI_Model
 		$this->db->select("username, u.first_name, u.last_name, u.phone, g.name as group_name,
 		rsms.id as rsms_id, rsms.message", FALSE);
 		$this->db->from(self::$table_name_response_sms . " rsms");
-		$this->db->join(self::$table_name_users_groups . " ug", "ug.group_id = rsms.group_id");
+		$this->db->join(self::$table_name_users_groups . " ug", "ug.group_id = rsms.group_id", 'LEFT');
 		$this->db->join(self::$table_name_users . " u", "u.id = ug.user_id");
 		$this->db->join(self::$table_name_user_groups . " g", "g.id = ug.group_id");
 		$this->db->group_by("username");
 		$this->db->where("u.district", $district);
 		$this->db->where("rsms.disease_id", $disease_id);
 		return $this->db->get()->result();
+	}
+
+	public function find_sender_response_message($disease_id, $group_name = "sender")
+	{
+		$this->db->select("g.*, rsms.id as rsms_id, rsms.message", FALSE);
+		$this->db->from(self::$table_name_response_sms . " rsms");
+		$this->db->join(self::$table_name_user_groups . " g", "g.id = rsms.group_id");
+		$this->db->where("g.name", $group_name);
+		$this->db->where("rsms.disease_id", $disease_id);
+		return $this->db->get()->row();
 	}
 
 	public function save_detected_diseases($diseases_batch = array())
