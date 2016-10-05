@@ -102,9 +102,7 @@ class Submission_model extends CI_Model
     function count_daily_submitted_forms($form_id)
     {
         $today = date('Y-m-d');
-
-        $this->db->where("meta_start", $today);
-        return $this->db->get($form_id)->num_rows();
+        return $this->db->get_where($form_id, array('DATE(meta_start)' => $today))->num_rows();
     }
 
 
