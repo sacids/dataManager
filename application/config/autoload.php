@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','session','form_validation','pagination','ion_auth');
+$autoload['libraries'] = array('database', 'session', 'form_validation', 'pagination', 'ion_auth', 'image_lib');
 
 /*
 | -------------------------------------------------------------------
@@ -83,7 +83,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','file','form','xform','common');
+$autoload['helper'] = array('url', 'file', 'form', 'xform', 'common');
 
 /*
 | -------------------------------------------------------------------
@@ -97,7 +97,7 @@ $autoload['helper'] = array('url','file','form','xform','common');
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array("sacids");
+$autoload['config'] = array("sacids", "pagination","sms");
 
 /*
 | -------------------------------------------------------------------
@@ -126,4 +126,4 @@ $autoload['language'] = array("sacids");
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array();
+$autoload['model'] = array('User_model');

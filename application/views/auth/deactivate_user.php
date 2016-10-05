@@ -1,33 +1,36 @@
-<div class="grid_11" id="grid_padding">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 main">
 
+            <h3><?php echo lang('deactivate_heading');?></h3>
 
-<?php echo form_open("auth/deactivate/".$user->id,'class="pure-form pure-form-aligned"');?>
-<div class="formCon">
-    <div class="formConInner">
-        <fieldset>
-    <h1><?php echo lang('deactivate_heading');?></h1>
-<p><?php echo sprintf(lang('deactivate_subheading'), $user->username);?></p>
-        
-            
-  <p>
-  	<?php echo lang('deactivate_confirm_y_label', 'confirm');?>
-    <input type="radio" name="confirm" value="yes" checked="checked" />
-    <?php echo lang('deactivate_confirm_n_label', 'confirm');?>
-    <input type="radio" name="confirm" value="no" />
-  </p>
+            <?php
+            if ($this->session->flashdata('message') != '') {
+                echo display_message($this->session->flashdata('message'));
+            } ?>
 
-  <?php echo form_hidden($csrf); ?>
-  <?php echo form_hidden(array('id'=>$user->id)); ?>
+            <div class="col-sm-8">
+                <?php echo form_open("auth/deactivate/".$user->id,'class="pure-form pure-form-aligned"');?>
+                <p><?php echo sprintf(lang('deactivate_subheading'), $user->username);?></p>
 
-  <p>
-  <button type="submit" class="pure-button pure-button-primary"><?php echo lang('deactivate_submit_btn') ?></button>
-  
-        </fieldset>
+                    <div class="form-group">
+
+                        <?php echo lang('deactivate_confirm_y_label', 'confirm');?>
+                        <input type="radio" name="confirm" value="yes" checked="checked" /><br/>
+                        <?php echo lang('deactivate_confirm_n_label', 'confirm');?>
+                        <input type="radio" name="confirm" value="no" />
+
+                    </div>
+
+                    <?php echo form_hidden($csrf); ?>
+                    <?php echo form_hidden(array('id'=>$user->id)); ?>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+
+                <?php echo form_close();?>
+            </div>
+        </div>
     </div>
 </div>
-<?php echo form_close();?>    
-
-   </div>
-    <div style="clear: both;"></div>
-    </div>            </div>
-        </div>

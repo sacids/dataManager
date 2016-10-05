@@ -63,11 +63,11 @@ class Migration_Table_modifications extends CI_Migration
 				'constraint' => 100
 			),
 		);
-		$this->dbforge->modify_column('feedback', $fields);
-		$this->dbforge->drop_column('feedback', 'instance_id');
-		$this->dbforge->drop_column('feedback', 'sender');
-		$this->dbforge->drop_column('users', 'country_code');
-		$this->dbforge->drop_column('xforms', 'access');
-		$this->dbforge->drop_column('archive_xforms', 'access');
+		//$this->dbforge->modify_column('feedback', $fields);
+		//$this->dbforge->drop_column('feedback', 'instance_id');
+		//$this->dbforge->drop_column('feedback', 'sender');
+		//$this->dbforge->drop_column('users', 'country_code');
+		//$this->dbforge->drop_column('xforms', 'access');
+		//$this->dbforge->drop_column('archive_xforms', 'access');
 	}
 }

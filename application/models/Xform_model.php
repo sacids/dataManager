@@ -107,15 +107,59 @@ class Xform_model extends CI_Model
 	}
 
 	/**
-	 * @param null $user_id
+	 * @param null int $user_id
 	 * @param int $limit
 	 * @param int $offset
+	 * @param null string $status
 	 * @return mixed returns list of forms available.
 	 */
-	public function get_form_list($user_id = NULL, $limit = 30, $offset = 0)
+	public function get_form_list($user_id = NULL, $limit = 30, $offset = 0, $status = NULL)
 	{
 		if ($user_id != NULL)
 			$this->db->where("user_id", $user_id);
+
+		if ($status != NULL)
+			$this->db->where("status", $status);
+		$this->db->limit($limit, $offset);
+		return $this->db->get(self::$xform_table_name)->result();
+	}
+
+	/**
+	 * @param array $perms
+	 * @param int $limit
+	 * @param int $offset
+	 * @param null $status
+	 */
+	public function get_form_list_by_perms($perms, $limit = 30, $offset = 0, $status = NULL)
+	{
+		if (is_array($perms)) {
+			foreach ($perms as $key => $value) {
+				$this->db->or_like("perms", $value);
+			}
+		} else {
+			$this->db->where("perms", $perms);
+		}
+		if ($status != NULL)
+			$this->db->where("status", $status);
+		$this->db->limit($limit, $offset);
+		return $this->db->get(self::$xform_table_name)->result();
+	}
+
+	public function search_forms($user_id = NULL, $name = NULL, $access = NULL, $status = NULL, $limit = 30, $offset = 0)
+	{
+		if ($user_id != NULL)
+			$this->db->where("user_id", $user_id);
+
+		if ($name != NULL)
+			$this->db->like("title", $name);
+
+		if ($access != NULL)
+			$this->db->where("access", $access);
+
+		if ($status == NULL)
+			$this->db->where("status!=", "archived");
+		else
+			$this->db->where("status", $status);
 		$this->db->limit($limit, $offset);
 		return $this->db->get(self::$xform_table_name)->result();
 	}
@@ -130,13 +174,37 @@ class Xform_model extends CI_Model
 	{
 
 		$sql = " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ";
-		$sql .= " WHERE table_name = '{$table_name}' ";
+		$sql .= " WHERE table_schema = '{$this->db->database}' ";
+		$sql .= " AND table_name = '{$table_name}' ";
 		$sql .= " AND DATA_TYPE = 'point'";
 
 		$query = $this->db->query($sql);
 
+		log_message('debug', 'get point field query ' . $this->db->last_query());
+
 		return ($query->num_rows() == 1) ? $query->row(1)->COLUMN_NAME : FALSE;
 	}
+
+	/**
+	 * Inserts field name and corresponding label into field name map
+	 *
+	 * @param $table_name
+	 * @param $data
+	 * @return TRUE or FALSE
+	 */
+	public function insert_into_map($data)
+	{
+		return $this->db->insert_batch('xform_fieldname_map', $data);
+
+	}
+
+	/**
+	 * Returns result array for all fields of particular table
+	 *
+	 * @param $table_name
+	 * @return result array
+	 */
+
 
 	/**
 	 * @param $form_id
@@ -152,11 +220,47 @@ class Xform_model extends CI_Model
 	 * @param $xform_id
 	 * @return mixed
 	 */
+	public function find_by_xform_id($xform_id)
+	{
+		$this->db->where("form_id", $xform_id);
+		return $this->db->get(self::$xform_table_name)->row();
+	}
+
+	/**
+	 * @param $xform_id
+	 * @return mixed
+	 */
 	public function delete_form($xform_id)
 	{
 		$this->db->limit(1);
 		$this->db->where("id", $xform_id);
 		return $this->db->delete(self::$xform_table_name);
+	}
+
+	/**
+	 * @param $xform_id
+	 * @return mixed
+	 */
+	public function archive_form($xform_id)
+	{
+		$this->db->limit(1);
+		$this->db->where("id", $xform_id);
+		$this->db->set("last_updated", "NOW()", FALSE);
+		$this->db->set("status", "archived");
+		return $this->db->update(self::$xform_table_name);
+	}
+
+	/**
+	 * @param $xform_id
+	 * @return mixed
+	 */
+	public function restore_xform_from_archive($xform_id)
+	{
+		$this->db->limit(1);
+		$this->db->where("id", $xform_id);
+		$this->db->set("last_updated", "NOW()", FALSE);
+		$this->db->set("status", "published");
+		return $this->db->update(self::$xform_table_name);
 	}
 
 	/**
@@ -174,10 +278,20 @@ class Xform_model extends CI_Model
 	 * @param int $offset
 	 * @return mixed returns data from tables created by uploading xform definitions files.
 	 */
-	public function find_form_data($table_name, $limit = 30, $offset = 0)
+	public function find_form_data($table_name, $limit, $offset)
 	{
 		$this->db->limit($limit, $offset);
 		return $this->db->get($table_name)->result();
+	}
+
+	/**
+	 * @param $table_name
+	 * @return mixed
+	 */
+	public function count_all_records($table_name)
+	{
+		$this->db->from($table_name);
+		return $this->db->count_all_results();
 	}
 
 
@@ -199,29 +313,119 @@ class Xform_model extends CI_Model
 		return $this->db->field_data($table_name);
 	}
 
-	public function get_graph_data($table_name, $x_axis_column, $y_axis_column, $y_axis_action = "COUNT")
+
+	/**
+	 * @param $table_name
+	 * @param bool $cond
+	 *        sql condition (without the where)
+	 * @return list of lat,lon,info
+	 */
+
+	public function get_geospatial_data($table_name, $cond = TRUE)
+	{
+		//$this->db->where($cond);
+		$query = $this->db->get($table_name);
+		return ($query->num_rows() == 0) ? FALSE : $query->result_array();
+	}
+
+	/**
+	 * @param $table_name
+	 * @param $axis_column
+	 * @param string $function
+	 * @param null $group_by_column
+	 * @return mixed
+	 */
+	public function get_graph_data($table_name, $axis_column, $function = "COUNT", $group_by_column = NULL)
 	{
 
-		if ($y_axis_action == "COUNT") {
-			$this->db->select("`" . $y_axis_column . "`, COUNT(" . $y_axis_column . ") AS `" . strtolower($y_axis_action) . "`");
+		if ($function == "COUNT") {
+			$this->db->select("`{$axis_column}`, `{$group_by_column}`,COUNT(" . $axis_column . ") AS `" . strtolower($function) . "`");
 
 			//TODO Check field type before grouping
-
-			$this->db->group_by($x_axis_column);
+			if ($group_by_column != NULL) {
+				$this->db->group_by($group_by_column);
+			} else {
+				$this->db->group_by($axis_column);
+			}
 		}
 
-		if ($y_axis_action == "SUM") {
-			$this->db->select("`" . $y_axis_column . "`, SUM(" . $y_axis_column . ") AS `" . strtolower($y_axis_action) . "`");
+		if ($function == "SUM") {
+			$this->db->select("`{$axis_column}`, `{$group_by_column}`, SUM(" . $axis_column . ") AS `" . strtolower($function) . "`");
 			//TODO Check field type before grouping
-			$this->db->group_by($x_axis_column);
+			if ($group_by_column != NULL) {
+				$this->db->group_by($group_by_column);
+			} else {
+				$this->db->group_by($axis_column);
+			}
 		}
 
 		$this->db->from($table_name);
 		return $this->db->get()->result();
 	}
 
+	/**
+	 * @param $xform_table_name
+	 * @param $data
+	 * @return mixed
+	 */
 	public function insert_xform_data($xform_table_name, $data)
 	{
 		return $this->db->insert($xform_table_name, $data);
+	}
+
+
+	/**
+	 * @param $table_name
+	 * @return mixed
+	 */
+	public function get_fieldname_map($table_name)
+	{
+		$this->db->where('table_name', $table_name);
+		$this->db->from('xform_fieldname_map');
+		return $this->db->get()->result_array();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function count_all_xforms($status = NULL)
+	{
+		if ($status != NULL)
+			$this->db->where("status", $status);
+		$this->db->from(self::$xform_table_name);
+		return $this->db->count_all_results();
+	}
+
+	public function get_form_definition_filename($form_id)
+	{
+		$this->db->select('filename')->where('form_id', $form_id)->from('xforms');
+		return $this->db->get()->row(1)->filename;
+	}
+
+	public function add_to_field_name_map($data)
+	{
+		$q = $this->db->insert_string('xform_fieldname_map', $data);
+		$q = str_replace('INSERT INTO', 'INSERT IGNORE INTO', $q);
+		return $this->db->query($q);
+	}
+
+	public function update_field_map_labels($xform_id, $fields)
+	{
+		$this->db->trans_start();
+		foreach ($fields as $key => $value) {
+			$this->db->where("table_name", $xform_id);
+			$this->db->where("col_name", $key);
+			$this->db->set("field_label", $value);
+			$this->db->update("xform_fieldname_map");
+		}
+		$this->db->trans_complete();
+		return $this->db->trans_status();
+	}
+
+	public function delete_form_data($table_name, $entry_id)
+	{
+		$this->db->where("id", $entry_id);
+		$this->db->limit(1);
+		return $this->db->delete($table_name);
 	}
 }
