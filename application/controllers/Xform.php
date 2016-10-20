@@ -1,4 +1,39 @@
 <?php
+/**
+ * AfyaData
+ *
+ * An open source data collection and analysis tool.
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2016. Southern African Center for Infectious disease Surveillance (SACIDS)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ *
+ * @package	    AfyaData
+ * @author	    AfyaData Dev Team
+ * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license	    http://opensource.org/licenses/MIT	MIT License
+ * @link	    https://afyadata.sacids.org
+ * @since	    Version 1.0.0
+ */
 
 defined('BASEPATH') or exit ('No direct script access allowed');
 
@@ -56,6 +91,9 @@ class Xform extends CI_Controller
 		$this->forms();
 	}
 
+	/**
+	 *
+	 */
 	function forms()
 	{
 		$this->_is_logged_in();
@@ -100,7 +138,7 @@ class Xform extends CI_Controller
 		$this->load->view("form/index");
 		$this->load->view('footer');
 	}
-
+	
 	function _is_logged_in()
 	{
 		if (!$this->ion_auth->logged_in()) {
@@ -316,24 +354,8 @@ class Xform extends CI_Controller
 			} else {
 				log_message("debug", "No symptom reported");
 			}
-
 		}
 		return $result;
-	}
-
-
-	public function test_insert()
-	{
-
-		// call forms
-		$filename = 'Dalili za binadamu_2016-07-02_10-01-21.xml';
-		$this->set_data_file($this->config->item("form_data_upload_dir") . $filename);
-		$this->load_xml_data();
-
-		//
-		$statement = $this->get_insert_form_data_query();
-
-		echo $statement;
 	}
 
 	/**
@@ -521,10 +543,6 @@ class Xform extends CI_Controller
 		$form_data = $this->form_data;
 		$map = $this->get_field_map();
 
-		//echo '<pre>';
-		//print_r($this->form_data);
-		//print_r($this->form_defn);
-
 		$has_geopoint = FALSE;
 		$col_names = array();
 		$col_values = array();
@@ -627,6 +645,10 @@ class Xform extends CI_Controller
 		echo $response;
 	}
 
+	/**
+	 * Handles authentication and lists forms for AfyaData app to consume.
+	 * it handles <base-url>/formList requests from ODK app.
+	 */
 	function form_list()
 	{
 		// Get the digest from the http header
@@ -715,6 +737,9 @@ class Xform extends CI_Controller
 		echo $xml;
 	}
 
+	/**
+	 *
+	 */
 	function add_new()
 	{
 		if (!$this->ion_auth->logged_in()) {
@@ -846,6 +871,9 @@ class Xform extends CI_Controller
 		return $this->get_create_table_sql_query();
 	}
 
+	/**
+	 *
+	 */
 	public function test_init()
 	{
 
@@ -940,6 +968,10 @@ class Xform extends CI_Controller
 		return $this->xarray;
 	}
 
+	/**
+	 * @param $arr
+	 * @param bool $ref
+	 */
 	function _iterate_defn_file($arr, $ref = FALSE)
 	{
 
@@ -1071,9 +1103,12 @@ class Xform extends CI_Controller
 		return $statement;
 	}
 
+	/**
+	 * @param $field_name
+	 * @return bool|string
+	 */
 	private function _map_field($field_name)
 	{
-
 		// check length
 		if (strlen($field_name) < 20) {
 			return $field_name;
@@ -1096,6 +1131,10 @@ class Xform extends CI_Controller
 		return FALSE;
 	}
 
+	/**
+	 * @param $arr
+	 * @return bool|string
+	 */
 	private function _add_to_fieldname_map($arr)
 	{
 
@@ -1115,6 +1154,9 @@ class Xform extends CI_Controller
 		}
 	}
 
+	/**
+	 * @return array of shortened field names mapped to xform xml file labels
+	 */
 	private function get_field_map()
 	{
 
@@ -1128,6 +1170,9 @@ class Xform extends CI_Controller
 		return $map;
 	}
 
+	/**
+	 * @param $xform_id
+	 */
 	function edit_form($xform_id)
 	{
 
@@ -1200,6 +1245,10 @@ class Xform extends CI_Controller
 		}
 	}
 
+	/**
+	 * @param $xform_id
+	 * Archives the uploaded xforms so that they do not appear at first on the form lists page
+	 */
 	function archive_xform($xform_id)
 	{
 		if (!$this->ion_auth->logged_in()) {
@@ -1221,6 +1270,9 @@ class Xform extends CI_Controller
 	}
 
 
+	/**
+	 * @param $xform_id
+	 */
 	function restore_from_archive($xform_id)
 	{
 		if (!$this->ion_auth->logged_in()) {
@@ -1242,6 +1294,9 @@ class Xform extends CI_Controller
 	}
 
 
+	/**
+	 * @param $form_id
+	 */
 	function form_data($form_id)
 	{
 		$this->_is_logged_in();
@@ -1358,6 +1413,9 @@ class Xform extends CI_Controller
 
 	}
 
+	/**
+	 * @param null $xform_id
+	 */
 	function csv_export_form_data($xform_id = NULL)
 	{
 		if ($xform_id == NULL) {
@@ -1369,6 +1427,10 @@ class Xform extends CI_Controller
 		$this->_force_csv_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".csv");
 	}
 
+	/**
+	 * @param $query
+	 * @param string $filename
+	 */
 	function _force_csv_download($query, $filename = '.csv')
 	{
 		$this->load->dbutil();
@@ -1380,6 +1442,9 @@ class Xform extends CI_Controller
 		force_download($filename, $data);
 	}
 
+	/**
+	 * @param null $xform_id
+	 */
 	function xml_export_form_data($xform_id = NULL)
 	{
 		if ($xform_id == NULL) {
@@ -1392,6 +1457,10 @@ class Xform extends CI_Controller
 		$this->_force_xml_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".xml");
 	}
 
+	/**
+	 * @param $query
+	 * @param string $filename
+	 */
 	function _force_xml_download($query, $filename = '.xml')
 	{
 		$this->load->dbutil();
@@ -1407,6 +1476,9 @@ class Xform extends CI_Controller
 		force_download($filename, $data);
 	}
 
+	/**
+	 * @param $form_id
+	 */
 	function map_fields($form_id)
 	{
 		if (!$form_id) {
@@ -1432,6 +1504,10 @@ class Xform extends CI_Controller
 		}
 	}
 
+	/**
+	 * @param $form_id
+	 * @return array
+	 */
 	function _get_mapped_table_column_name($form_id)
 	{
 		if (!$form_id)
@@ -1500,6 +1576,10 @@ class Xform extends CI_Controller
 		return $table_field_names;
 	}
 
+	/**
+	 * @param $xform_id
+	 * Deletes as single or multiple entries for a given form table and id(s)
+	 */
 	function delete_entry($xform_id)
 	{
 
