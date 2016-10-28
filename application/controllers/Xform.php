@@ -386,7 +386,6 @@ class Xform extends CI_Controller
 		$prefix = $this->config->item("xform_tables_prefix");
 		//log_message("debug", "Table prefix " . $prefix);
 
-
 		// set table name
 		$this->table_name = $prefix . str_replace("-", "_", $rxml->attributes ['id']);
 
@@ -421,7 +420,6 @@ class Xform extends CI_Controller
 		xml_parse_into_struct($parser, $xml, $tags);
 		xml_parser_free($parser);
 
-		//log_message("debug", "Tags => " . json_encode($tags));
 		$elements = array(); // the currently filling [child] XmlElement array
 		$stack = array();
 		foreach ($tags as $tag) {
@@ -738,7 +736,7 @@ class Xform extends CI_Controller
 	}
 
 	/**
-	 *
+	 * Add/upload new xform and set permissions for groups or users.
 	 */
 	function add_new()
 	{
@@ -869,16 +867,6 @@ class Xform extends CI_Controller
 
 		// TODO: change function name to get_something suggested get_form_table_definition
 		return $this->get_create_table_sql_query();
-	}
-
-	/**
-	 *
-	 */
-	public function test_init()
-	{
-
-		$fn = 'Dalili_Binadamu_Skolls.xml';
-		echo $this->_initialize($fn);
 	}
 
 	/**
