@@ -1,13 +1,13 @@
 
 
-<div class='tab_wrp'>
+<ul class='nav nav-tabs'>
 	<?php
 	
-	echo 	'	<div class="min_tab">'
+	echo 	'	<li class="min_tab">'
 					.'<i class="material-icons md-light" style="font-size:15px;">keyboard_arrow_up</i>'.
-			'	</div>';
+			'	</li>';
 	
-	
+	$active	= 'active';
 	foreach($this->data['tabs'] as $val){
 		
 		if(array_key_exists('link', $val)){
@@ -21,14 +21,17 @@
 		}
 		
 		$args	= http_build_query($val);
-		echo 	'	<div class="tab" action="'.site_url($link).'" args="'.$args.'">'
+		echo 	'	<li class="tab '.$active.'" action="'.site_url($link).'" args="'.$args.'">'
+						.'<a data-toggle="tab" href="#tab_target">'
 						.'<i class="material-icons md-light" style="font-size:10px;">'.$icon.'</i>&nbsp;'
-						.$val['title'].
-				'	</div>';
+						.$val['title']
+						.'</a>'.
+				'	</li>';
+		$active = '';
 	}
 	?>
-</div>
-<div id="tab_target" class="perm_target_divs">
+</ul>
+<div id="tab_target" class="perm_target_divs tab_target tab-content tab-pane fade">
 
 empty
 </div>

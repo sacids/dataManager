@@ -92,6 +92,7 @@ class Perm extends CI_Controller
 			redirect('auth/login', 'refresh');
 		}
 		// set module id
+<<<<<<< Updated upstream
 		$this->session->set_userdata('module_id', $this->uri->segment(3, 0));
 
 		$modules = $this->Perm_model->get_modules();
@@ -99,6 +100,21 @@ class Perm extends CI_Controller
 		$this->load->view('Perm/header', $this->data);
 		// get all users options
 		$this->load->view('Perm/body', $this->data);
+=======
+		// $this->session->set_userdata ( 'module_id', $this->uri->segment ( 3, 0 ) );
+		
+		$modules = $this->Perm_model->get_modules ();
+
+		//print_r($modules);
+		$this->data['modules'] = $modules;
+		//$this->load->view ( 'header');
+		$this->load->view ( 'Perm/bs_head');
+		$this->load->view ( 'Perm/bs_header', $this->data );
+		// get all users options
+		$this->load->view ( 'Perm/bs_body', $this->data );
+		$this->load->view ( 'Perm/bs_footer', $this->data );
+		//$this->load->view ('footer');
+>>>>>>> Stashed changes
 	}
 
 	public function delete_row()
@@ -454,7 +470,11 @@ class Perm extends CI_Controller
 		// jquery to load initial results
 
 		echo '<div class="">';
+<<<<<<< Updated upstream
 		echo '<div class="group">';
+=======
+		echo '<div class="">';
+>>>>>>> Stashed changes
 
 		// search box
 		$data = array(
@@ -464,7 +484,11 @@ class Perm extends CI_Controller
 			'class'   => 'manage_table_searchbox',
 			'content' => ''
 		);
+<<<<<<< Updated upstream
 		echo '	<div 	class="left">' . form_input($data) . '
+=======
+		echo '	<div class="left">' . form_input ( $data ) . '
+>>>>>>> Stashed changes
 				</div>';
 
 		// check if has permissions to add
@@ -485,7 +509,12 @@ class Perm extends CI_Controller
 		}
 		// close group
 		echo '</div>';
+<<<<<<< Updated upstream
 
+=======
+		echo '<div class="clear"></div>';
+		
+>>>>>>> Stashed changes
 		// advance search link
 		echo '<div id="adv_search_link">advance search</div>';
 
@@ -710,9 +739,15 @@ class Perm extends CI_Controller
 			}
 
 			if ($start) {
+<<<<<<< Updated upstream
 
 				echo '<thead><tr class="table_res_row">' . $hd . '</tr></thead><tbody>';
 				$start = FALSE;
+=======
+				
+				echo '<thead><tr class="table_res_row info">' . $hd . '</tr></thead><tbody>';
+				$start = false;
+>>>>>>> Stashed changes
 			}
 			echo '<tr class="table_res_row row_' . $row ['id'] . '" id="' . $row ['id'] . '">' . $bd . '</tr>';
 		}
@@ -826,6 +861,7 @@ class Perm extends CI_Controller
 		} else {
 			$cond = $this->get_tab_cond();
 		}
+<<<<<<< Updated upstream
 
 		$this->data ['tabs'] = $this->Perm_model->get_tabs($post, $cond);
 
@@ -838,6 +874,23 @@ class Perm extends CI_Controller
 		$this->db_exp->set_form_attribute('class', 'view_table_row');
 		$this->db_exp->set_pri_id($row_id);
 		$this->db_exp->render('view');
+=======
+		
+		$this->data ['tabs'] = $this->Perm_model->get_tabs ( $post, $cond );
+
+		$this->load->view ( 'Perm/bs_show_tabs' );
+	}
+	public function view_table_row($table_id, $row_id) {
+
+
+		$this->db_table_render ( $table_id );
+		$this->db_exp->set_form_attribute('class','view_table_row');
+		$this->db_exp->set_pri_id ( $row_id );
+
+		echo '<div class="vtr">';
+		$this->db_exp->render ( 'view' );
+		echo '</div>';
+>>>>>>> Stashed changes
 	}
 
 	public function table_set_perms()

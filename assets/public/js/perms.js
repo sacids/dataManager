@@ -10,7 +10,8 @@ $(document).ready(
 
 			$('.list_wrp').hide();
 			$('.hidden').hide();
-			
+
+			/*
 			$(".link").on({
 			    mouseenter: function () {
 			        //stuff to do on mouse enter
@@ -21,7 +22,7 @@ $(document).ready(
 			        //stuff to do on mouse leave
 			    	$( this ).find( "div:last" ).remove();
 			    }
-			});
+			});*/
 	
 			$(document).on(
 					'click',
@@ -40,8 +41,8 @@ $(document).ready(
 						var args = $(this).attr('args');
 
 						// clear both targets contents
-						$('#list_wrp').html('');
-						$('#detail_wrp').html('');
+						//$('#list_wrp').html('');
+						//$('#detail_wrp').html('');
 						
 						// set 
 						$('.link').removeClass('link_sel');
@@ -51,11 +52,11 @@ $(document).ready(
 							//$('.list_wrp').addClass('min_list_wrp', 1000,"easeOutQuart");
 							//$('.list_wrp .icon_wrp').html('[+]');
 							//$('.list_wrp').hide();
-							$('.list_wrp').hide('slide', { direction: 'left', easing: 'easeOutQuart' },800);
-							$('#detail_wrp').show();
+							//$('.list_wrp').hide('slide', { direction: 'left', easing: 'easeOutQuart' },800);
+							//$('#detail_wrp').show();
 						} else {
 							//$('.list_wrp').show();
-							$('.list_wrp').show('slide', { direction: 'left', easing: 'easeOutQuart' },800);
+							//$('.list_wrp').show('slide', { direction: 'left', easing: 'easeOutQuart' },800);
 							//$('.list_wrp').removeClass('min_list_wrp', 1000,"easeOutQuart");
 							//$('.list_wrp .icon_wrp').html('[-]');
 						}
@@ -244,9 +245,7 @@ $(document).ready(
 			
 			$(document).on('click', '.min_tab', function(event) {
 
-				var parent_id = $(this).parent().parent().attr('id');
-				$('#'+parent_id+' form').slideToggle();
-
+				$('#vtr form').slideToggle();
 			});
 			
 			$('#manage_table_search_results tbody tr').addClass('visible');
