@@ -1,0 +1,47 @@
+.list_wrp {
+	overflow: auto;
+	font-size: 12px;
+	padding: 0px;
+	padding-top: 15px;
+	height: 100%;
+}
+
+.table_res_cell, .table_res_header{
+	max-width:100px;
+	min-width: 50px;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.detail_wrp{
+	height: 100%;
+	overflow: scroll;
+	padding: 0px;
+	padding-top: 15px;
+}
+
+.vtr{
+	padding:15px;
+	padding-top: 0px;
+}
+
+.tab_target{
+	height: 100%;
+	overflow: auto;
+}
+
+.table_res_row, .tab, .m_link{
+	cursor: pointer;
+}
+
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.clear{
+	clear: both;
+}

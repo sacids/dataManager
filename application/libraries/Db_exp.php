@@ -2,7 +2,6 @@
 if (!defined('BASEPATH'))
     exit ('No direct script access allowed');
 
-echo '<script src="'.base_url().'assets/public/ckeditor/ckeditor.js"></script>';
 
 class Db_exp
 {
