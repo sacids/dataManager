@@ -10,8 +10,7 @@ $(document).ready(
 
 			$('.list_wrp').hide();
 			$('.hidden').hide();
-
-			/*
+			
 			$(".link").on({
 			    mouseenter: function () {
 			        //stuff to do on mouse enter
@@ -22,7 +21,7 @@ $(document).ready(
 			        //stuff to do on mouse leave
 			    	$( this ).find( "div:last" ).remove();
 			    }
-			});*/
+			});
 	
 			$(document).on(
 					'click',
@@ -41,8 +40,8 @@ $(document).ready(
 						var args = $(this).attr('args');
 
 						// clear both targets contents
-						//$('#list_wrp').html('');
-						//$('#detail_wrp').html('');
+						$('#list_wrp').html('');
+						$('#detail_wrp').html('');
 						
 						// set 
 						$('.link').removeClass('link_sel');
@@ -52,11 +51,11 @@ $(document).ready(
 							//$('.list_wrp').addClass('min_list_wrp', 1000,"easeOutQuart");
 							//$('.list_wrp .icon_wrp').html('[+]');
 							//$('.list_wrp').hide();
-							//$('.list_wrp').hide('slide', { direction: 'left', easing: 'easeOutQuart' },800);
-							//$('#detail_wrp').show();
+							$('.list_wrp').hide('slide', { direction: 'left', easing: 'easeOutQuart' },800);
+							$('#detail_wrp').show();
 						} else {
 							//$('.list_wrp').show();
-							//$('.list_wrp').show('slide', { direction: 'left', easing: 'easeOutQuart' },800);
+							$('.list_wrp').show('slide', { direction: 'left', easing: 'easeOutQuart' },800);
 							//$('.list_wrp').removeClass('min_list_wrp', 1000,"easeOutQuart");
 							//$('.list_wrp .icon_wrp').html('[-]');
 						}
@@ -72,7 +71,7 @@ $(document).ready(
 			
 			$(document).on(
 					'click',
-					'.table_res_row .cell_del',
+					'.table_res_row .cell_del, .del_row',
 					function(event){
 						
 						var tbl_id = $(this).attr('tbl_id');
@@ -83,7 +82,7 @@ $(document).ready(
 							// do delete
 							$.post(action,{table: tbl_name, id: tbl_id}, function(data){
 								if(data == 'Delete Success!'){
-									alert('Delete successful');
+									//alert('Delete successful');
 									$('.row_'+tbl_id).slideUp();
 								}else{
 									alert('Delete failed');
@@ -211,16 +210,35 @@ $(document).ready(
 				var form = $(this).closest("form");
 				var action = form.attr('action');
 				var target = form.attr('target');
+				var id = form.attr('id');
 
 				if (target === undefined) {
 					// auto detect target id
 					target = $(this).closest('.perm_target_divs').attr('id');
 				}
 
+				var data = new FormData( $("#"+id)[0] );
 				var values = form.serialize();
 
-				$.post(action, values, function(data) {
-					$('#' + target).html(data);
+				//$.post(action, values, function(data) {
+				//	$('#' + target).html(data);
+				//});
+
+				//alert(data);
+				$.ajax({
+					type:"POST",
+					url:action,
+					data:data,
+					mimeType: "multipart/form-data",
+					contentType: false,
+					cache: false,
+					processData: false,
+					success:function(data)
+					{
+						//console.log(data);
+						$('#' + target).html(data);
+
+					}
 				});
 
 				// Avoid submit event to continue normal execution
@@ -245,7 +263,9 @@ $(document).ready(
 			
 			$(document).on('click', '.min_tab', function(event) {
 
-				$('#vtr form').slideToggle();
+				var parent_id = $(this).parent().parent().attr('id');
+				$('#'+parent_id+' form').slideToggle();
+
 			});
 			
 			$('#manage_table_search_results tbody tr').addClass('visible');
