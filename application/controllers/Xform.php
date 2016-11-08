@@ -27,12 +27,13 @@
  * THE SOFTWARE.
  *
  *
- * @package	    AfyaData
- * @author	    AfyaData Dev Team
- * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
- * @license	    http://opensource.org/licenses/MIT	MIT License
- * @link	    https://afyadata.sacids.org
- * @since	    Version 1.0.0
+ * @package        AfyaData
+ * @author        AfyaData Dev Team
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS
+ *     http://sacids.org)
+ * @license        http://opensource.org/licenses/MIT	MIT License
+ * @link        https://afyadata.sacids.org
+ * @since        Version 1.0.0
  */
 
 defined('BASEPATH') or exit ('No direct script access allowed');
@@ -138,7 +139,7 @@ class Xform extends CI_Controller
 		$this->load->view("form/index");
 		$this->load->view('footer');
 	}
-	
+
 	function _is_logged_in()
 	{
 		if (!$this->ion_auth->logged_in()) {
@@ -1074,6 +1075,10 @@ class Xform extends CI_Controller
 				$statement .= ", $col_name INT(20) $required ";
 			}
 
+			if ($type == 'decimal') {
+				$statement .= ", $col_name DECIMAL $required ";
+			}
+
 			if ($type == 'geopoint') {
 
 				$statement .= "," . $col_name . " VARCHAR(150) $required ";
@@ -1181,7 +1186,7 @@ class Xform extends CI_Controller
 		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
 		if ($this->form_validation->run() === FALSE) {
-			$users = $this->User_model->get_users();
+			$users = $this->User_model->get_users(200);
 			$groups = $this->User_model->find_user_groups();
 
 			$available_permissions = array();

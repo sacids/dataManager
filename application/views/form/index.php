@@ -48,7 +48,7 @@
                             <?php //echo $this->lang->line("label_xml"); ?><!--</th>-->
                             <th><?php echo $this->lang->line("label_access"); ?></th>
                             <th><?php echo $this->lang->line("label_date_created"); ?></th>
-                            <th colspan="2" class="text-center"><?php echo $this->lang->line("label_action"); ?></th>
+                            <th colspan="3" class="text-center"><?php echo $this->lang->line("label_action"); ?></th>
                         </tr>
 
                         <?php
@@ -79,6 +79,7 @@
                                             <li><?php echo anchor("xform/form_data/" . $form->id, "Data list"); ?></li>
                                             <li><?php echo anchor("form_visualization/chart/" . $form->form_id, "View Chart"); ?></li>
                                             <li><?php echo anchor("form_visualization/map/" . $form->form_id, "View Map"); ?></li>
+                                            <li><?php echo anchor_popup(base_url() . "assets/forms/definition/" . $form->filename, "Download XML file"); ?></li>
                                         </ul>
                                     </div>
                                 </td>
