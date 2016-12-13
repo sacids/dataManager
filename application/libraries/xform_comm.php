@@ -171,7 +171,7 @@ class Xform_comm
      *
      * @return array
      */
-    private function get_form_definition()
+    public function get_form_definition()
     {
 
         // retrieve object describing definition file

@@ -23,12 +23,11 @@ class Ohkr extends REST_Controller
         $diseases = $this->Ohkr_model->find_all_disease();
 
         if ($diseases) {
-            $response = array("disease" => $diseases, "status" => "success");
+            $this->response(array('disease' => $diseases, 'status' => 'success'), 200);
 
         } else {
-            $response = array("status" => "failed", "message" => "No disease found");
+            $this->response(array('status' => 'failed', 'message' => 'No disease found'), 204);
         }
-        $this->response($response, 200);
     }
 
 
@@ -37,12 +36,12 @@ class Ohkr extends REST_Controller
         $symptoms = $this->Ohkr_model->find_all_symptoms();
 
         if ($symptoms) {
-            $response = array("symptom" => $symptoms, "status" => "success");
+            $this->response(array('symptom' => $symptoms, 'status' => 'success'), 200);
 
         } else {
-            $response = array("status" => "failed", "message" => "No symptom found");
+            $this->response(array('status' => 'failed', 'message' => 'No symptom found'), 204);
         }
-        $this->response($response, 200);
+
     }
 
 }

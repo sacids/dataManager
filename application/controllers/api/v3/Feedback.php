@@ -26,7 +26,7 @@ class Feedback extends REST_Controller
     function index_get()
     {
         if (!$this->get('username')) {
-            $this->response(array('status' => 'failed', 'message' => 'Required username'));
+            $this->response(array('status' => 'failed', 'message' => 'Required username'), 202);
         }
 
         $user = $this->User_model->find_by_username($this->get('username'));
@@ -104,7 +104,7 @@ class Feedback extends REST_Controller
     function notification_get()
     {
         if (!$this->get('username')) {
-            $this->response(array('status' => 'failed', 'message' => 'Required username'));
+            $this->response(array('status' => 'failed', 'message' => 'Required username'),202);
         }
 
         $user = $this->User_model->find_by_username($this->get('username'));
@@ -198,7 +198,7 @@ class Feedback extends REST_Controller
             if ($result === FALSE)
                 $this->response(array('status' => 'failed', 'message' => 'Unknown error occured'));
             else
-                $this->response(array('message' => 'Feedback was received successfully', 'status' => 'success'));
+                $this->response(array('message' => 'Feedback was received successfully', 'status' => 'success'), 201);
 
         } else {
             $this->response(array('status' => 'failed', 'message' => 'User does not exist'));

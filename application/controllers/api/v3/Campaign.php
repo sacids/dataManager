@@ -41,11 +41,10 @@ class Campaign extends REST_Controller
                 );
             }
             //response
-            $response = array("campaign" => $campaign, "status" => "success");
-            $this->response($response, 200);
+            $this->response(array("campaign" => $campaign, "status" => "success"), 200);
 
         } else {
-            $this->response(array('status' => 'failed', 'message' => 'No campaign found'));
+            $this->response(array('status' => 'failed', 'message' => 'No campaign found'), 204);
         }
     }
 
