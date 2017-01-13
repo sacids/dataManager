@@ -1,0 +1,26 @@
+language: php
+php:
+  - '5.5'
+  - '5.6'
+
+
+services:
+  - mysql
+
+
+env:
+  - CI_ENV=development
+  - CI_ENV=testing
+  - CI_ENV=production
+
+
+#script: ./bin/test.sh
+
+
+# Customize when the notification emails are sent.
+notifications:
+    on_success: never
+    on_failure: always
+
+#after_success:
+ # - ./deploy.sh #write deploy script
