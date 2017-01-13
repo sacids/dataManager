@@ -12,8 +12,10 @@ class Welcome_test extends TestCase
 {
 	public function test_index()
 	{
-		$output = $this->request('GET', '/');
-		$this->assertContains('<title>AfyaData - Taarifa kwa wakati!</title>', $output);
+		$output = $this->request('GET', 'welcome/index');
+		$this->assertContains(
+			'<title>AfyaData - Taarifa kwa wakati!</title>', $output
+		);
 	}
 
 	public function test_method_404()
