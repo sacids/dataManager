@@ -45,12 +45,14 @@ class Xform_model_test extends TestCase
 {
     public function setUp()
     {
-        $this->obj = $this->newModel('Xform_model');
+        $this->resetInstance();
+        $this->CI->load->model('Xform_model');
+        $this->obj = $this->CI->Xform_model;
     }
 
     public function test_new_items_are_published()
     {
-        $this->assertEquals(0, count($this->CI->Xform_model->get_form_list(null, 100, 0, "published")));
+        $this->assertEquals(0, count($this->obj->get_form_list(null, 100, 0, "published")));
         $xform_details = array(
             "user_id" => 1,
             "form_id" => "build_id_272829292",
@@ -63,7 +65,7 @@ class Xform_model_test extends TestCase
             "access" => $this->input->post("access"),
             "perms" => "U1U,G12G"
         );
-        $this->CI->Xform_model->create_xform($xform_details);
-        $this->assertEquals(1, count($this->CI->Xform_model->get_form_list(null, 100, 0, "published")));
+        $this->obj->create_xform($xform_details);
+        $this->assertEquals(1, count($this->obj->get_form_list(null, 100, 0, "published")));
     }
 }
