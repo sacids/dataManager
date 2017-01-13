@@ -1,0 +1,65 @@
+<?php
+/**
+ * AfyaData
+ *
+ * An open source data collection and analysis tool.
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2017. Southern African Center for Infectious disease Surveillance (SACIDS)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ *
+ * @package	    AfyaData
+ * @author	    AfyaData Dev Team
+ * @copyright	Copyright (c) 2017. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license	    http://opensource.org/licenses/MIT	MIT License
+ * @link	    https://afyadata.sacids.org
+ * @since	    Version 1.0.0
+ */
+
+/**
+ * Created by PhpStorm.
+ * User: Godluck Akyoo
+ * Date: 13-Jan-17
+ * Time: 13:15
+ */
+class Xform_model_test extends TestCase
+{
+
+    public function test_new_items_are_pending()
+    {
+        $this->assertEquals(0, count($this->CI->Xform_model->get_()));
+        $xform_details = array(
+            "user_id"      => 1,
+            "form_id"      => "build_id_272829292",
+            "jr_form_id"   => "129",
+            "title"        => "Test form",
+            "description"  => "Test form description",
+            "filename"     => "test.xml",
+            "date_created" => date("c"),
+            "status"       =>"published",
+            "access"       => $this->input->post("access"),
+            "perms"        => "U1U,G12G"
+        );
+        $this->CI->Xform_model->create_xform($xform_details);
+        $this->assertEquals(1, count($this->CI->Xform_model->get_form_list(null,100,0,"published")));
+    }
+}
