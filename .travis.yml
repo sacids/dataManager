@@ -14,6 +14,8 @@ env:
   #- CI_ENV=production
 
 before_script:
+  - composer self-update
+  - rm application/tests/_ci_phpunit_test
   - composer update
   - chmod 0777 ./bin/test.sh
 
