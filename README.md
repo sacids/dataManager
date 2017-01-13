@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sacids/dataManager.svg?branch=development)](https://travis-ci.org/sacids/dataManager)
+
 # Afyadata Manager
 
 A guide to getting started contributing on this project
