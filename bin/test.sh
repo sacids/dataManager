@@ -9,6 +9,6 @@ CI_ENV=testing php index.php migration latest
 php application/vendor/kenjis/ci-phpunit-test/install.php
 
 cd application/tests/
-phpunit
+phpunit --coverage-text
 
 eval "cd ../..; exit $?"
