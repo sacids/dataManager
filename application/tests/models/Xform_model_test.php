@@ -62,7 +62,7 @@ class Xform_model_test extends TestCase
             "filename" => "test.xml",
             "date_created" => date("c"),
             "status" => "published",
-            "access" => $this->input->post("access"),
+            "access" => "public",
             "perms" => "U1U,G12G"
         );
         $this->obj->create_xform($xform_details);
