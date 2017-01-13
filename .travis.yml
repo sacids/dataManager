@@ -1,6 +1,6 @@
 language: php
 php:
-  - '5.5'
+  #- '5.5'
   - '5.6'
 
 
@@ -9,12 +9,12 @@ services:
 
 
 env:
-  - CI_ENV=development
+  #- CI_ENV=development
   - CI_ENV=testing
-  - CI_ENV=production
+  #- CI_ENV=production
 
 
-#script: ./bin/test.sh
+script: ./bin/test.sh
 
 
 # Customize when the notification emails are sent.
