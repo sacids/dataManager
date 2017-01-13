@@ -14,7 +14,7 @@ env:
   #- CI_ENV=production
 
 before_script:
-  - composer update
+  - composer self-update
   - chmod 0777 ./bin/test.sh
 
 script: ./bin/test.sh
