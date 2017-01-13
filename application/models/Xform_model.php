@@ -281,6 +281,7 @@ class Xform_model extends CI_Model
 	public function find_form_data($table_name, $limit, $offset)
 	{
 		$this->db->limit($limit, $offset);
+		$this->db->order_by("id","DESC");
 		return $this->db->get($table_name)->result();
 	}
 

@@ -181,7 +181,7 @@
 <section id="involved" class="bg-primary">
     <div class="container text-center">
         <div class="call-to-action">
-            <h2>Get involves with Afyadata.</h2>
+            <h2>Get involved with Afyadata.</h2>
             <a href="#" class="btn btn-dark-orange btn-xl">
                 <i class="fa fa-android fa-lg"></i> Download App Now!</a>
 
