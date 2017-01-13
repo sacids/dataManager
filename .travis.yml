@@ -13,6 +13,7 @@ env:
   - CI_ENV=testing
   #- CI_ENV=production
 
+before_script: chmod 0777 ./bin/test.sh
 
 script: ./bin/test.sh
 
