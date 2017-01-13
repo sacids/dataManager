@@ -8,9 +8,9 @@ CI_ENV=testing php index.php migration latest
 
 pwd
 
-php application/vendor/kenjis/ci-phpunit-test/install.php
+php ./application/vendor/kenjis/ci-phpunit-test/install.php
 
-cd application/tests/
+cd ./application/tests/
 ../../bin/phpunit
 
 eval "cd ../..; exit $?"
