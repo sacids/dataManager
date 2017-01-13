@@ -22,5 +22,5 @@ notifications:
     on_success: never
     on_failure: always
 
-after_success:
-  - ./bin/deploy.sh
+#after_success:
+ # - ./bin/deploy.sh
