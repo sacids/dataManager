@@ -7,4 +7,4 @@
  */
 
 
-$config['bauth'] = "credentials";
+$config['bauth'] = "YWZ5YWRhdGE6U2FjaWRzMSE=";
