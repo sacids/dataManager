@@ -12,9 +12,8 @@ env:
   #- CI_ENV=production
 
 before_script:
-  - composer self-update
+  - composer update
   - chmod 0777 ./bin/test.sh
-  - echo $TRAVIS_BRANCH
 
 script: ./bin/test.sh
 
