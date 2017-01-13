@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/sacids/dataManager.svg?branch=development)](https://travis-ci.org/sacids/dataManager)
+[![Coverage Status](https://coveralls.io/repos/github/sacids/dataManager/badge.svg?branch=master)](https://coveralls.io/github/sacids/dataManager?branch=master)  [![Build Status](https://travis-ci.org/sacids/dataManager.svg?branch=development)](https://travis-ci.org/sacids/dataManager)
 
 # Afyadata Manager
 
