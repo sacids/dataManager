@@ -54,6 +54,7 @@ class Xform_model_test extends TestCase
     {
         $this->assertEquals(0, count($this->obj->get_form_list(null, 100, 0, "published")));
         $xform_details = array(
+            "id" => 1,
             "user_id" => 1,
             "form_id" => "build_id_272829292",
             "jr_form_id" => "129",
@@ -67,5 +68,40 @@ class Xform_model_test extends TestCase
         );
         $this->obj->create_xform($xform_details);
         $this->assertEquals(1, count($this->obj->get_form_list(null, 100, 0, "published")));
+    }
+
+    public function test_get_form_list()
+    {
+        $expected = array(
+            array(
+                "id" => 1,
+                "user_id" => 1,
+                "form_id" => "build_id_272829292",
+                "jr_form_id" => "129",
+                "title" => "Test form",
+                "description" => "Test form description",
+                "filename" => "test.xml",
+                "date_created" => date("c"),
+                "status" => "published",
+                "access" => "public",
+                "perms" => "U1U,G12G"
+            )
+        );
+
+        $form_list = $this->obj->get_form_list(null, 100, 0, "published");
+        $i = 0;
+        foreach ($form_list as $item) {
+            $this->assertEquals($expected[0]["user_id"], $item->user_id);
+            $this->assertEquals($expected[0]["title"], $item->title);
+            $this->assertEquals($expected[0]["status"], $item->status);
+            $this->assertEquals($expected[0]["access"], $item->access);
+            $i++;
+        }
+    }
+
+    public function test_find_by_id()
+    {
+        $form = $this->obj->find_by_id(1);
+        $this->assertEquals(1, $form->id);
     }
 }
