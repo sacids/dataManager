@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-echo Deployment starting...
-
 if [ $TRAVIS_BRANCH == 'master' ]; then
     echo Deploying to production/live server
     # Deploy production

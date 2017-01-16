@@ -91,10 +91,10 @@ class Xform_model_test extends TestCase
         $form_list = $this->obj->get_form_list(null, 100, 0, "published");
         $i = 0;
         foreach ($form_list as $item) {
-            $this->assertEquals($expected[0]["user_id"], $item->user_id);
-            $this->assertEquals($expected[0]["title"], $item->title);
-            $this->assertEquals($expected[0]["status"], $item->status);
-            $this->assertEquals($expected[0]["access"], $item->access);
+            $this->assertEquals($expected[$i]["user_id"], $item->user_id);
+            $this->assertEquals($expected[$i]["title"], $item->title);
+            $this->assertEquals($expected[$i]["status"], $item->status);
+            $this->assertEquals($expected[$i]["access"], $item->access);
             $i++;
         }
     }
