@@ -14,8 +14,7 @@ addons:
   ssh_known_hosts: 41.73.194.139
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_b49b8bf9294a_key -iv $encrypted_b49b8bf9294a_iv
-  -in id_rsa.enc -out id_rsa -d
+  - openssl aes-256-cbc -K $encrypted_b49b8bf9294a_key -iv $encrypted_b49b8bf9294a_iv -in id_rsa.enc -out id_rsa -d
   - chmod 600 id_rsa
   - mv id_rsa ~/.ssh/id_rsa
   
@@ -26,10 +25,12 @@ before_script:
 
 script: ./bin/test.sh
 
-# Customize when the notification emails are sent.
 notifications:
-    on_success: never
-    on_failure: always
+  email:
+    recipients:
+      - afyadata@sacids.org
+    on_success: never # default: change
+    on_failure: always # default: always
 
 after_success:
   - ./bin/deploy.sh
