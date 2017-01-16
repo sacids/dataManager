@@ -13,9 +13,9 @@ elif [ $TRAVIS_BRANCH == 'development' ]; then
     cd _site
     git init
 
-    git remote add deploy "sacids_travis_ci@41.73.194.139:/var/www/afydata-deploy"
+    git remote add deploy "sacids@41.73.194.139:/var/www/afydata-deploy"
     git config user.name "Travis CI"
-    git config user.email "godluck.akyoo+TravisCI@afyadata.org"
+    git config user.email "g_akyoo@yahoo.com"
 
     git add .
     git commit -m "Deploy"
