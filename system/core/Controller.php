@@ -63,6 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Analyze_model $Analyze_model
  * @property xform_comm $xform_comm
  * @property Alert_model $Alert_model
+ * @property Barcode $barcode
  */
 
 class CI_Controller {

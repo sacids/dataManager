@@ -1,5 +1,39 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-
+<?php
+/**
+ * AfyaData
+ *  
+ * An open source data collection and analysis tool.
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2016. Southern African Center for Infectious disease Surveillance (SACIDS)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ *
+ * @package	    AfyaData
+ * @author	    AfyaData Dev Team
+ * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license	    http://opensource.org/licenses/MIT	MIT License
+ * @link	    https://afyadata.sacids.org
+ * @since	    Version 1.0.0
+ */
 
 /**
  * Feedback Model class
@@ -8,55 +42,58 @@
  * @author      Renfrid Ngolongolo
  * @link        http://sacids.org
  */
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Feedback_model extends CI_Model
 {
 
-    /**
-     * Feedback table name
-     *
-     * @var string
-     */
-    private static $table_name = "feedback";
-    private static $table_name_user = "users";
-    private static $table_name_xform = "xforms";
+	/**
+	 * Feedback table name
+	 *
+	 * @var string
+	 */
+	private static $table_name = "feedback";
+	private static $table_name_user = "users";
+	private static $table_name_xform = "xforms";
 
-    function __construct()
-    {
-        parent::__construct();
-    }
+	function __construct()
+	{
+		parent::__construct();
+	}
 
-    function count_new_feedback()
-    {
-        return $this->db->get('feedback')->num_rows();
-    }
+	function count_new_feedback()
+	{
+		return $this->db->get('feedback')->num_rows();
+	}
 
-    /**
-     * @param $feedback array of feedback information.
-     * @return mixed
-     * @author Godluck Akyoo
-     */
-    function create_feedback($feedback)
-    {
-        return $this->db->insert(self::$table_name, $feedback);
-    }
+	/**
+	 * @param $feedback array of feedback information.
+	 * @return mixed
+	 * @author Godluck Akyoo
+	 */
+	function create_feedback($feedback)
+	{
+		return $this->db->insert(self::$table_name, $feedback);
+	}
 
-    /**
-     * @return mixed
-     */
-    function count_feedback()
-    {
-        return $this->db->query('SELECT max(id) FROM feedback GROUP BY instance_id')->num_rows();
-    }
+	/**
+	 * @return mixed
+	 */
+	function count_feedback()
+	{
+		return $this->db->query('SELECT max(id) FROM feedback GROUP BY instance_id')->num_rows();
+	}
 
 
-    /**
-     * @param $num
-     * @param $start
-     * @return mixed
-     */
-    function find_all($num, $start)
-    {
-        return $this->db->query("
+	/**
+	 * @param $num
+	 * @param $start
+	 * @return mixed
+	 */
+	function find_all($num, $start)
+	{
+		return $this->db->query("
              SELECT feedback.id, feedback.instance_id, feedback.message, feedback.date_created,xforms.title,
              users.first_name, users.last_name, users.username
              FROM feedback
@@ -64,159 +101,159 @@ class Feedback_model extends CI_Model
              JOIN users ON feedback.user_id = users.id
              WHERE feedback.id IN ( SELECT MAX(feedback.id) FROM feedback GROUP BY instance_id)
              ORDER BY feedback.id DESC LIMIT $num OFFSET $start")->result();
-    }
+	}
 
 
-    /**
-     * @param form_name
-     * @param $username
-     * @return mixed
-     */
-    function search_feedback($name = NULL, $username = NULL)
-    {
-        if ($name != NULL)
-            $this->db->like("xforms.title", $name);
+	/**
+	 * @param form_name
+	 * @param $username
+	 * @return mixed
+	 */
+	function search_feedback($name = NULL, $username = NULL)
+	{
+		if ($name != NULL)
+			$this->db->like("xforms.title", $name);
 
-        if ($username != NULL)
-            $this->db->like("users.username", $username);
+		if ($username != NULL)
+			$this->db->like("users.username", $username);
 
-        return $this->db
-            ->select('feedback.id, feedback.instance_id, feedback.message, feedback.date_created,
+		return $this->db
+			->select('feedback.id, feedback.instance_id, feedback.message, feedback.date_created,
                     users.first_name, users.last_name, users.username, xforms.title')
-            ->order_by('feedback.id', 'DESC')
-            ->where_in("(SELECT MAX(feedback.id) FROM feedback GROUP BY instance_id)")
-            ->join('users', 'users.id = feedback.user_id')
-            ->join('xforms', 'xforms.form_id = feedback.form_id')
-            ->get(self::$table_name)
-            ->result();
-    }
+			->order_by('feedback.id', 'DESC')
+			->where_in("(SELECT MAX(feedback.id) FROM feedback GROUP BY instance_id)")
+			->join('users', 'users.id = feedback.user_id')
+			->join('xforms', 'xforms.form_id = feedback.form_id')
+			->get(self::$table_name)
+			->result();
+	}
 
-    /**
-     * @param  $instance_id
-     * @return mixed
-     */
-    function get_feedback_details_by_instance($instance_id)
-    {
-        return $this->db->limit(1)
-            ->get_where(self::$table_name, array('instance_id' => $instance_id))->row();
-    }
+	/**
+	 * @param  $instance_id
+	 * @return mixed
+	 */
+	function get_feedback_details_by_instance($instance_id)
+	{
+		return $this->db->limit(1)
+			->get_where(self::$table_name, array('instance_id' => $instance_id))->row();
+	}
 
-    /**
-     * @param $instance_id
-     * @return mixed
-     */
-    function get_feedback_by_instance($instance_id)
-    {
-        $this->db->order_by('feedback.date_created', 'ASC');
-        return $this->db->get_where(self::$table_name . " feedback", array('instance_id' => $instance_id))->result();
-
-
-    }
-
-    //function to update user feedback
-    function update_user_feedback($instance_id, $sender)
-    {
-        $query = $this->db->get_where('feedback',
-            array('instance_id' => $instance_id, 'sender' => $sender, 'status' => 'pending'))->result();
-
-        foreach ($query as $value) {
-            if (!empty($value->id)) {
-                $this->db->update('feedback', array('status' => 'delivered'), array('id' => $value->id));
-            } else {
-                //Do nothing
-            }
-        }
-    }
-
-    /**
-     * @param $user_id
-     * @return mixed
-     */
-    function get_reply_user($user_id)
-    {
-        $query = $this->db->get_where('users', array('id' => $user_id))->row();
-        if (!empty($query->id)) {
-            return $query->last_name;
-        } else {
-            return 'admin';
-        }
-    }
+	/**
+	 * @param $instance_id
+	 * @return mixed
+	 */
+	function get_feedback_by_instance($instance_id)
+	{
+		$this->db->order_by('feedback.date_created', 'ASC');
+		return $this->db->get_where(self::$table_name . " feedback", array('instance_id' => $instance_id))->result();
 
 
-    /**
-     * @param $user_id
-     * @return mixed
-     */
-    function get_feedback_mapping($user_id)
-    {
-        return $this->db->get_where('feedback_user_map', array('user_id' => $user_id))->row();
-    }
+	}
+
+	//function to update user feedback
+	function update_user_feedback($instance_id, $sender)
+	{
+		$query = $this->db->get_where('feedback',
+			array('instance_id' => $instance_id, 'sender' => $sender, 'status' => 'pending'))->result();
+
+		foreach ($query as $value) {
+			if (!empty($value->id)) {
+				$this->db->update('feedback', array('status' => 'delivered'), array('id' => $value->id));
+			} else {
+				//Do nothing
+			}
+		}
+	}
+
+	/**
+	 * @param $user_id
+	 * @return mixed
+	 */
+	function get_reply_user($user_id)
+	{
+		$query = $this->db->get_where('users', array('id' => $user_id))->row();
+		if (!empty($query->id)) {
+			return $query->last_name;
+		} else {
+			return 'admin';
+		}
+	}
 
 
-    /**
-     * @param $where_array
-     * @param $where_perm
-     * @param $date_created
-     * @return mixed
-     */
-    function get_feedback_list($where_perm, $where_array, $date_created = NULL)
-    {
-
-        if (is_array($where_perm)) {
-            $this->db->group_start();
-            foreach ($where_perm as $key => $value) {
-                $this->db->or_like("form_id", $value);
-                //$this->db->like("(form_id LIKE '$value' OR form_id LIKE '$value')");
-            }
-            $this->db->group_end();
-        } else {
-            $this->db->where("form_id", $where_perm);
-        }
+	/**
+	 * @param $user_id
+	 * @return mixed
+	 */
+	function get_feedback_mapping($user_id)
+	{
+		return $this->db->get_where('feedback_user_map', array('user_id' => $user_id))->row();
+	}
 
 
-        if ($date_created != null)
-            $this->db->where('date_created >', $date_created);
+	/**
+	 * @param $where_array
+	 * @param $where_perm
+	 * @param $date_created
+	 * @return mixed
+	 */
+	function get_feedback_list($where_perm, $where_array, $date_created = NULL)
+	{
+
+		if (is_array($where_perm)) {
+			$this->db->group_start();
+			foreach ($where_perm as $key => $value) {
+				$this->db->or_like("form_id", $value);
+				//$this->db->like("(form_id LIKE '$value' OR form_id LIKE '$value')");
+			}
+			$this->db->group_end();
+		} else {
+			$this->db->where("form_id", $where_perm);
+		}
 
 
-        $query = $this->db
-            ->where_in('user_id', $where_array)
-            ->get(self::$table_name)
-            ->result();
-
-        return $query;
-    }
-
-    /**
-     * @param $user_id
-     * @param $date_created
-     * @return mixed
-     */
-    function get_feedback_notification($user_id, $date_created = NULL)
-    {
-        if ($date_created != null)
-            $this->db->where('date_created >', $date_created);
-
-        return $this->db
-            ->get_where(self::$table_name, array('user_id' => $user_id, 'sender' => 'server'))->result();
-    }
+		if ($date_created != NULL)
+			$this->db->where('date_created >', $date_created);
 
 
-    /**
-     * @param $table_name
-     * @param $instance_id
-     * @return mixed
-     */
-    function get_feedback_form_details($table_name, $instance_id)
-    {
-        return $this->db->limit(1)->get_where($table_name, array('meta_instanceID' => $instance_id))->row();
-    }
+		$query = $this->db
+			->where_in('user_id', $where_array)
+			->get(self::$table_name)
+			->result();
 
-    /**
-     * @param $table_name
-     * @return mixed
-     */
-    function get_form_details($table_name)
-    {
-        return $this->db->get_where('xforms', array('form_id' => $table_name))->row();
-    }
+		return $query;
+	}
+
+	/**
+	 * @param $user_id
+	 * @param $date_created
+	 * @return mixed
+	 */
+	function get_feedback_notification($user_id, $date_created = NULL)
+	{
+		if ($date_created != NULL)
+			$this->db->where('date_created >', $date_created);
+
+		return $this->db
+			->get_where(self::$table_name, array('user_id' => $user_id, 'sender' => 'server'))->result();
+	}
+
+
+	/**
+	 * @param $table_name
+	 * @param $instance_id
+	 * @return mixed
+	 */
+	function get_feedback_form_details($table_name, $instance_id)
+	{
+		return $this->db->limit(1)->get_where($table_name, array('meta_instanceID' => $instance_id))->row();
+	}
+
+	/**
+	 * @param $table_name
+	 * @return mixed
+	 */
+	function get_form_details($table_name)
+	{
+		return $this->db->get_where('xforms', array('form_id' => $table_name))->row();
+	}
 }

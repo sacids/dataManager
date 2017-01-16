@@ -12,12 +12,13 @@ class Perm_model extends CI_Model
         $this->load->database();
     }
 
-    public function get_tasks()
+    public function get_tasks($module_id = 0)
     {
+        if($module_id == 0) $module_id = $this->session->userdata('module_id');
 
         $perms = array_flip($this->get_user_perms($this->session->userdata('user_id')));
 
-        $this->db->where('module_id', $this->session->userdata('module_id'));
+        $this->db->where('module_id', $module_id);
 
         $query = $this->db->get('perm_tree');
 

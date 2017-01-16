@@ -66,12 +66,16 @@ color: #CE3F38;
 	color: #ffffff;
 box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
-.db_exp_table{
-	font-size: 13px;
-color: #424242;
-font-family: "Segoe UI", Arial, sans-serif;
+.db_exp_table, .db_exp_wrapper{
+	font-size: 12px;
+	color: #424242;
+	font-family: "Segoe UI", Arial, sans-serif;
 }
-.db_exp_icon_btn{
+
+.db_exp_table td{
+	padding: 1px;
+}
+.db_exp_icon_btn, .min_tab{
 	cursor: pointer;
 }
 .db_exp_icon_btn:hover{
