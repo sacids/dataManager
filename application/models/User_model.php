@@ -109,6 +109,36 @@ class User_model extends CI_Model
         $this->db->where("ug.user_id", $user_id);
         return $this->db->get()->result();
     }
+
+
+    function get_perms_list($group_id)
+    {
+        $array = array();
+        $module = array();
+
+        $perms_module = $this->db->get('perms_module')->result();
+
+        foreach ($perms_module as $key => $value) {
+
+            $perms = $this->db->get_where('perms', array('module_id' => $value->id))->result();
+
+            foreach ($perms as $k => $v) {
+
+                $check = $this->db->get_where('perms_group', array('group_id' => $group_id, 'module_id' => $value->id, 'perm' => $v->perm))->row();
+
+                //perm module array
+                $module[$value->name][$v->perm] = array($value->id, $v->id);
+
+                if (count($check) == 1) {
+                    $array[$value->name][$v->perm] = $check->allow;
+                } else {
+                    $array[$value->name][$v->perm] = 0;
+                }
+            }
+        }
+
+        return array($array, $module);
+    }
 }
 
 /* End of file users_model.php */

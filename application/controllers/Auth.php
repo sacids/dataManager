@@ -1,7 +1,7 @@
 <?php
 /**
  * AfyaData
- *  
+ *
  * An open source data collection and analysis tool.
  *
  * This content is released under the MIT License (MIT)
@@ -27,12 +27,12 @@
  * THE SOFTWARE.
  *
  *
- * @package	    AfyaData
- * @author	    AfyaData Dev Team
- * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
- * @license	    http://opensource.org/licenses/MIT	MIT License
- * @link	    https://afyadata.sacids.org
- * @since	    Version 1.0.0
+ * @package        AfyaData
+ * @author        AfyaData Dev Team
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license        http://opensource.org/licenses/MIT	MIT License
+ * @link        https://afyadata.sacids.org
+ * @since        Version 1.0.0
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -41,6 +41,7 @@ class Auth extends CI_Controller
 {
     private $realm;
     private $user_id;
+    private $controller;
 
     function __construct()
     {
@@ -49,11 +50,12 @@ class Auth extends CI_Controller
         $this->load->helper(array('url', 'language'));
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
         $this->lang->load('auth');
-        $this->load->model('User_model');
+        $this->load->model(array('User_model'));
 
         //variable
         $this->realm = 'Authorized users of Sacids Openrosa';
         $this->user_id = $this->session->userdata('user_id');
+        $this->controller = $this->router->fetch_class();
     }
 
     // redirect if needed, otherwise display the user list
@@ -69,6 +71,17 @@ class Auth extends CI_Controller
 
     }
 
+    /**
+     * @param $method_name
+     * Check if user has permission
+     */
+    function has_allowed_perm($method_name)
+    {
+        if (!perms_role($this->controller, $method_name)) {
+            show_error("You are not allowed to view this page", 401, "Unauthorized");
+        }
+    }
+
 
     /**
      * List of all registered users
@@ -81,6 +94,9 @@ class Auth extends CI_Controller
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
             'base_url' => $this->config->base_url("auth/users_list"),
@@ -118,9 +134,6 @@ class Auth extends CI_Controller
      */
     function profile()
     {
-        //Specific user id of login in user
-        $user_id =
-
         $User = $this->User_model->find_by_id($this->user_id);
         $this->data['fname'] = $User->first_name . ' ' . $User->last_name;
         $this->data['username'] = $User->username;
@@ -460,6 +473,9 @@ class Auth extends CI_Controller
 
     function activate($id, $code = FALSE)
     {
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
+
         if ($code !== FALSE) {
             $activation = $this->ion_auth->activate($id, $code);
         } else if ($this->ion_auth->is_admin()) {
@@ -485,6 +501,9 @@ class Auth extends CI_Controller
             // redirect them to the home page because they must be an administrator to view this
             return show_error('You must be an administrator to view this page.');
         }
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $id = (int)$id;
 
@@ -528,9 +547,12 @@ class Auth extends CI_Controller
     {
         $this->data['title'] = "Create User";
 
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+        if (!$this->ion_auth->logged_in()) {
             redirect('auth/index', 'refresh');
         }
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $tables = $this->config->item('tables', 'ion_auth');
         $identity_column = $this->config->item('identity', 'ion_auth');
@@ -636,6 +658,9 @@ class Auth extends CI_Controller
         if (!$this->ion_auth->logged_in() || (!$this->ion_auth->is_admin() && !($this->ion_auth->user()->row()->id == $id))) {
             redirect('auth', 'refresh');
         }
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $user = $this->ion_auth->user($id)->row();
         $groups = $this->ion_auth->groups()->result_array();
@@ -767,6 +792,9 @@ class Auth extends CI_Controller
             redirect('auth/login', 'refresh');
         }
 
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
+
         $data['title'] = 'Manage Groups';
         $data['groups'] = $this->db->get('groups')->result();
         $this->load->view('header', $data);
@@ -782,6 +810,9 @@ class Auth extends CI_Controller
         if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
         }
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
 
         // validate form input
         $this->form_validation->set_rules('group_name', $this->lang->line('create_group_validation_name_label'), 'required|alpha_dash');
@@ -831,6 +862,9 @@ class Auth extends CI_Controller
             redirect('auth', 'refresh');
         }
 
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
+
         $group = $this->ion_auth->group($id)->row();
 
         // validate form input
@@ -873,59 +907,61 @@ class Auth extends CI_Controller
 
         //Load View
         $this->load->view('header', $this->data);
-        //$this->load->view('auth/menu');
         $this->_render_page('auth/edit_group');
         $this->load->view('footer');
     }
 
-    function assign_privilege($group_id)
+    function perms_group($group_id)
     {
+        $this->data['title'] = 'Assign Permission';
+
         if (!$this->ion_auth->logged_in()) {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
 
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
+
         //Group Name
         $groups = $this->db->get_where('groups', array('id' => $group_id))->row();
         $this->data['group_name'] = $groups->name;
+        $this->data['group_id'] = $group_id;
 
+        $this->data['perm_list'] = $this->User_model->get_perms_list($group_id);
 
+        //check if user save
         if ($this->input->post('save')) {
-            $priv = $this->User_model->privilege_list($group_id);
+            $perms = $this->User_model->get_perms_list($group_id);
 
-            foreach ($priv[1] as $key => $value) {
+            foreach ($perms[1] as $key => $value) {
 
                 foreach ($value as $k => $v):
 
                     if ($this->input->post('module_' . $v[0] . '_' . $v[1])) {
-                        $check = $this->db->get_where('access_level',
-                            array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k))->row();
+
+                        $check = $this->db->get_where('perms_group',
+                            array('group_id' => $group_id, 'module_id' => $v[0], 'perm' => $k))->row();
 
                         if (count($check) == 1) {
-                            $this->db->update('access_level',
+                            $this->db->update('perms_group',
                                 array('allow' => $this->input->post('module_' . $v[0] . '_' . $v[1])),
-                                array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k));
+                                array('group_id' => $group_id, 'module_id' => $v[0], 'perm' => $k));
                         } else {
-                            $this->db->insert('access_level',
-                                array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k, 'allow' => 1));
+                            $this->db->insert('perms_group', array('group_id' => $group_id, 'module_id' => $v[0], 'perm' => $k, 'allow' => 1));
                         }
                     } else {
-                        $this->db->update('access_level',
-                            array('allow' => 0),
-                            array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k));
+                        $this->db->update('perms_group', array('allow' => 0), array('group_id' => $group_id, 'module_id' => $v[0], 'perm' => $k));
                     }
                 endforeach;
             }
-            $this->session->set_flashdata('message', 'Privilege successfully configured');
-            redirect('auth/assign_privilege/' . $group_id, 'refresh');
+            $this->session->set_flashdata('message', display_message('Permission successfully configured'));
+            redirect('auth/perms_group/' . $group_id, 'refresh');
         }
 
-        $this->data['privilege_list'] = $this->User_model->privilege_list($group_id);
-        $this->data['group_id'] = $group_id;
-        $this->data['title'] = 'Assign Privilege';
+        //render view
         $this->load->view('header', $this->data);
-        $this->load->view('auth/menu');
-        $this->load->view('auth/assign_privilege');
+        $this->load->view('auth/perms_group');
         $this->load->view('footer');
     }
 

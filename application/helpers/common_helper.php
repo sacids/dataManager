@@ -15,21 +15,26 @@
  * @return boolean TRUE or FALSE
  */
 
-if (!function_exists("access_module")) {
+if (!function_exists("perm_module")) {
 
-    function access_module($module_id)
+    function perm_module($controller)
     {
         $CI = &get_instance();
         $user_id = $CI->session->userdata('user_id');
         $user_group = $CI->ion_auth_model->get_users_groups($user_id)->row();
 
-        //get access level
-        $check = $CI->db->get_where('access_level',
-            array('group_id' => $user_group->id, 'module_id' => $module_id, 'allow' => 1))->result();
+        //get perm_module details
+        $module = $CI->db->get_where('perms_module', array('controller' => $controller))->row();
 
-        //check if query exceed 0
-        if (count($check) > 0) {
-            return TRUE;
+        if (count($module) > 0) {
+            //get access level
+            $check = $CI->db->get_where('perms_group',
+                array('group_id' => $user_group->id, 'module_id' => $module->id, 'allow' => 1))->num_rows();
+
+            //check if query exceed 0
+            if ($check > 0) {
+                return TRUE;
+            }
         }
         return FALSE;
     }
@@ -44,22 +49,26 @@ if (!function_exists("access_module")) {
  * @return boolean TRUE or FALSE
  */
 
-if (!function_exists("access_level")) {
+if (!function_exists("perms_role")) {
 
-    function access_level($module_id, $perm_slug)
+    function perms_role($controller, $perm_slug)
     {
         $CI = &get_instance();
         $user_id = $CI->session->userdata('user_id');
         $user_group = $CI->ion_auth_model->get_users_groups($user_id)->row();
 
-        //get access level
-        $check = $CI->db->get_where('access_level',
-            array('group_id' => $user_group->id, 'module_id' => $module_id, 'perm_slug' => $perm_slug, 'allow' => 1))->result();
+        //get perm_module details
+        $module = $CI->db->get_where('perms_module', array('controller' => $controller))->row();
 
-        if (count($check) > 0) {
-            return TRUE;
+        if (count($module) > 0) {
+            //get access level
+            $check = $CI->db->get_where('perms_group',
+                array('group_id' => $user_group->id, 'module_id' => $module->id, 'perm' => $perm_slug, 'allow' => 1))->num_rows();
+
+            if ($check > 0) {
+                return TRUE;
+            }
         }
-
         return FALSE;
     }
 

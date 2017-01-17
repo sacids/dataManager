@@ -68,6 +68,7 @@ class Xform extends CI_Controller
 	private $user_id;
 	private $user_submitting_feedback_id;
 	private $sender; //Object
+	private $controller;
 
 	public function __construct()
 	{
@@ -85,6 +86,18 @@ class Xform extends CI_Controller
 		$this->load->library('form_auth');
 		$this->user_id = $this->session->userdata("user_id");
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+		$this->controller = $this->router->fetch_class();
+	}
+
+	/**
+	 * @param $method_name
+	 * Check if user has permission
+	 */
+	function has_allowed_perm($method_name)
+	{
+		if (!perms_role($this->controller, $method_name)) {
+			show_error("You are not allowed to view this page", 401, "Unauthorized");
+		}
 	}
 
 	public function index()
@@ -98,6 +111,9 @@ class Xform extends CI_Controller
 	function forms()
 	{
 		$this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
 		$data['title'] = $this->lang->line("heading_form_list");
 
@@ -745,6 +761,9 @@ class Xform extends CI_Controller
 			redirect('auth/login', 'refresh');
 		}
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		$data['title'] = $this->lang->line("heading_add_new_form");
 
 		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
@@ -1173,6 +1192,9 @@ class Xform extends CI_Controller
 			redirect('auth/login', 'refresh');
 		}
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if (!$xform_id) {
 			$this->session->set_flashdata("message", $this->lang->line("select_form_to_edit"));
 			redirect("xform/forms");
@@ -1248,6 +1270,9 @@ class Xform extends CI_Controller
 			redirect('auth/login', 'refresh');
 		}
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if (!$xform_id) {
 			$this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
 			redirect("xform/forms");
@@ -1272,6 +1297,9 @@ class Xform extends CI_Controller
 			redirect('auth/login', 'refresh');
 		}
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if (!$xform_id) {
 			$this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
 			redirect("xform/forms");
@@ -1293,6 +1321,9 @@ class Xform extends CI_Controller
 	function form_data($form_id)
 	{
 		$this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
 		if (!$form_id) {
 			$this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
@@ -1337,8 +1368,10 @@ class Xform extends CI_Controller
 	 */
 	function excel_export_form_data($form_id = NULL)
 	{
-		$this->load->library('excel');
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
+		$this->load->library('excel');
 
 		//table fields
 		$table_fields = $this->Xform_model->find_table_columns($form_id);
@@ -1411,6 +1444,9 @@ class Xform extends CI_Controller
 	 */
 	function csv_export_form_data($xform_id = NULL)
 	{
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if ($xform_id == NULL) {
 			$this->session->set_flashdata("message", display_message("You must select a form", "danger"));
 			redirect("xform/forms");
@@ -1440,6 +1476,9 @@ class Xform extends CI_Controller
 	 */
 	function xml_export_form_data($xform_id = NULL)
 	{
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if ($xform_id == NULL) {
 			$this->session->set_flashdata("message", display_message("You must select a form", "danger"));
 			redirect("xform/forms");
@@ -1474,6 +1513,9 @@ class Xform extends CI_Controller
 	 */
 	function map_fields($form_id)
 	{
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if (!$form_id) {
 			$this->session->set_flashdata("message", display_message("You must select a form", "danger"));
 			redirect("xform/forms");
@@ -1575,6 +1617,8 @@ class Xform extends CI_Controller
 	 */
 	function delete_entry($xform_id)
 	{
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
 		$this->form_validation->set_rules("entry_id[]", "Entry ID", "required");
 

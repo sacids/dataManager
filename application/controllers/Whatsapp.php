@@ -43,11 +43,13 @@
  */
 class Whatsapp extends CI_Controller
 {
+    private $controller;
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model("Whatsapp_model");
+        $this->controller = $this->router->fetch_class();
     }
 
     /**
@@ -60,6 +62,17 @@ class Whatsapp extends CI_Controller
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect('auth/login', 'refresh');
+        }
+    }
+
+    /**
+     * @param $method_name
+     * Check if user has permission
+     */
+    function has_allowed_perm($method_name)
+    {
+        if (!perms_role($this->controller, $method_name)) {
+            show_error("You are not allowed to view this page", 401, "Unauthorized");
         }
     }
 
@@ -132,6 +145,9 @@ class Whatsapp extends CI_Controller
         //check login
         $this->_is_logged_in();
 
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
+
         if (isset($_POST['search'])) {
             //TODO searching here
             $start_date = $this->input->post("start_date", NULL);
@@ -164,6 +180,9 @@ class Whatsapp extends CI_Controller
 
     function csv_export_data()
     {
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
+
         $table_name = "whatsapp";
         $query = $this->db->query("select * from {$table_name} order by id ASC ");
         $this->_force_csv_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".csv");

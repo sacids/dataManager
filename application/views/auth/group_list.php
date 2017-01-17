@@ -22,6 +22,7 @@
                             <td><?php echo $values->description; ?></td>
                             <td>
                                 <?php echo anchor("auth/edit_group/" . $values->id, lang('edit_group_heading'), array("class" => 'btn btn-primary btn-xs')); ?>
+                                <?php echo anchor("auth/perms_group/" . $values->id, 'Permission', array("class" => 'btn btn-primary btn-xs')); ?>
                             </td>
                         </tr>
                         <?php
