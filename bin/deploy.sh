@@ -9,9 +9,9 @@ if [ $TRAVIS_BRANCH == 'master' ]; then
 elif [ $TRAVIS_BRANCH == 'development' ]; then
     echo Deploying to testing/staging server
 
-    DB_USER=${DB_USER:-root}
+    DEV_DB_USER=${DEV_DB_USER:-root}
 
-    mysql -u $DB_USER -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+    mysql -u $DEV_DB_USER -p$DEV_DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DEV_DB_NAME;"
 
     CI_ENV=development php index.php migration latest
 
