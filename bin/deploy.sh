@@ -20,5 +20,5 @@ elif [ $TRAVIS_BRANCH == 'development' ]; then
 
     git add .
     git commit -m "Deploy"
-    git push --force deploy development
+    git push --force deploy master
 fi
