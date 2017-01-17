@@ -9,13 +9,22 @@ if [ $TRAVIS_BRANCH == 'master' ]; then
 elif [ $TRAVIS_BRANCH == 'development' ]; then
     echo Deploying to testing/staging server
 
+    DB_USER=${DB_USER:-root}
+
+    mysql -u $DB_USER -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+
+    CI_ENV=development php index.php migration latest
+
     # Initialize a new git repo in _site, and push it to our server.
+    mkdir _site
+    cp index.php _site/index.php
+    cp application _site/application
     cd _site
     git init
 
     git remote add deploy "sacids@41.73.194.139:/var/www/afydata-deploy"
     git config user.name "Travis CI"
-    git config user.email "g_akyoo@yahoo.com"
+    git config user.email "$COMMIT_AUTHOR_EMAIL"
 
     git add .
     git commit -m "Deploy"
