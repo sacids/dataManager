@@ -10,12 +10,10 @@ elif [ $TRAVIS_BRANCH == 'development' ]; then
 
     # Initialize a new git repo in _site, and push it to our server.
     mkdir _site
-    cp index.php _site/index.php
-    cp application _site/application
     cd _site
     git init
 
-    git remote add deploy "sacids@41.73.194.139:/var/www/afydata-deploy"
+    git remote add deploy "$REMOTE_USER@41.73.194.139:$REMOTE_PATH"
     git config user.name "Travis CI"
     git config user.email "$COMMIT_AUTHOR_EMAIL"
 
