@@ -7,13 +7,6 @@ if [ $TRAVIS_BRANCH == 'master' ]; then
     # curl -XPOST 'https://real-big-marketing.deploybot.com/webhook/deploy?env_id=49842&secret=8ec8e965c5d3d98aba9bd1b0d863c44881a096bd36188345'
 
 elif [ $TRAVIS_BRANCH == 'development' ]; then
-    echo Deploying to testing/staging server
-
-    DEV_DB_USER=${DEV_DB_USER:-root}
-
-    mysql -u $DEV_DB_USER -p$DEV_DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DEV_DB_NAME;"
-
-    CI_ENV=development php index.php migration latest
 
     # Initialize a new git repo in _site, and push it to our server.
     mkdir _site
