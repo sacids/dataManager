@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -x
 
+pwd
+ls -al
+
 if [ $TRAVIS_BRANCH == 'master' ]; then
     echo Not yet configured
     # Deploy production
@@ -11,7 +14,8 @@ elif [ $TRAVIS_BRANCH == 'development' ]; then
     # Initialize a new git repo in _site, and push it to our server.
     mkdir _site
     cd _site
-    echo "<h1>Hello world!</h1>" >> index.html
+    touch index.html
+    echo 'Hello world'>>index.html
     git init
 
     git remote add deploy "$REMOTE_USER@41.73.194.139:$REMOTE_PATH"
@@ -19,6 +23,6 @@ elif [ $TRAVIS_BRANCH == 'development' ]; then
     git config user.email "$COMMIT_AUTHOR_EMAIL"
 
     git add .
-    git commit -m "Deploy"
+    git commit -m "Travis-CI Deploy"
     git push --force deploy master
 fi

@@ -11,7 +11,4 @@ cd application/tests/
 
 phpunit --coverage-text
 
-pwd
-ls -al
-
 eval "cd ../..; exit $?"
