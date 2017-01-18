@@ -12,5 +12,5 @@ elif [ $TRAVIS_BRANCH == 'development' ]; then
     pwd
     cd ../
 
-    rsync -anv dataManager/ "$REMOTE_USER@41.73.194.139:$REMOTE_PATH/sandbox"
+    rsync -azP --exclude='test' --exclude='vendor' --exclude='bin' --exclude='logs' dataManager/ "$REMOTE_USER@41.73.194.139:$REMOTE_PATH/sandbox"
 fi
