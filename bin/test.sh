@@ -1,6 +1,4 @@
 #! /bin/sh
-set -x
-
 DB_USER=${DB_USER:-root}
 
 mysql -u $DB_USER -e "DROP DATABASE IF EXISTS afyadata_test;"
@@ -12,5 +10,8 @@ CI_ENV=testing php index.php migration latest
 cd application/tests/
 
 phpunit --coverage-text
+
+pwd
+ls -al
 
 eval "cd ../..; exit $?"
