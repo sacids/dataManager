@@ -10,7 +10,7 @@ elif [ $TRAVIS_BRANCH == 'development' ]; then
 
     # Initialize a new git repo in _site, and push it to our server.
     pwd
-    cd ../../../
+    cd ../
 
     rsync -anv dataManager/ "$REMOTE_USER@41.73.194.139:$REMOTE_PATH/sandbox"
 fi
