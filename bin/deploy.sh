@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -x
+#set -x
 
 if [ $TRAVIS_BRANCH == 'master' ]; then
     echo Not yet configured
@@ -9,8 +9,8 @@ if [ $TRAVIS_BRANCH == 'master' ]; then
 elif [ $TRAVIS_BRANCH == 'development' ]; then
 
     # Initialize a new git repo in _site, and push it to our server.
-    pwd
+
     cd ../
 
-    rsync -azP --exclude='test' --exclude='vendor' --exclude='bin' --exclude='logs' dataManager/ "$REMOTE_USER@41.73.194.139:$REMOTE_PATH/sandbox"
+    rsync -azP --exclude='test' --exclude='vendor' --exclude='bin' --exclude='logs' --exclude='.*' dataManager/ "$REMOTE_USER@41.73.194.139:$REMOTE_PATH/sandbox"
 fi
