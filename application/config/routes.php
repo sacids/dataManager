@@ -54,6 +54,7 @@ $route['formList'] = 'xform/form_list';
 $route['testFormList'] = 'xform/testFormList';
 $route['submission'] = 'xform/submission';
 $route['blog'] = 'blog/post';
+$route['login'] = 'auth/login';
 
 //Forms controller
 //$route['xform/formList'] = 'xform/form_list';
