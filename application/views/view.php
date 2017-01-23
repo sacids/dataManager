@@ -188,10 +188,10 @@
     <div class="container text-center">
         <div class="call-to-action">
             <h2>Get involved with AfyaData.</h2>
-            <a href="#" class="btn btn-dark-orange btn-xl">
+            <a href="https://play.google.com/store/apps/details?id=org.sacids.afyadata" class="btn btn-dark-orange btn-xl">
                 <i class="fa fa-android fa-lg"></i> Download App Now!</a>
 
-            <a href="#" class="btn btn-blue btn-xl">
+            <a href="https://github.com/sacids/dataManager" class="btn btn-blue btn-xl">
                 <i class="fa fa-github fa-lg"></i> Github</a>
         </div>
     </div>
