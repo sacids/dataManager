@@ -12,5 +12,5 @@ elif [ $TRAVIS_BRANCH == 'development' ]; then
 
     cd ../
 
-    rsync -azP --exclude='tests' --exclude='vendor' --exclude='bin' --exclude='logs' --exclude='.*' --exclude={*.json,*.enc,*.bat,*.txt} dataManager/ "$REMOTE_USER@41.73.194.139:$REMOTE_PATH/sandbox"
+    rsync -uahP --exclude='tests' --exclude='vendor' --exclude='bin' --exclude='logs' --exclude={.*,*.json,*.enc,*.bat,*.txt,*.rst,*.md,*.lock,database.php,config.php} dataManager/ "$REMOTE_USER@41.73.194.139:$REMOTE_PATH/sandbox"
 fi
