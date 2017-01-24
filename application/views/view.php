@@ -151,7 +151,7 @@
                 <div class="service-box">
                     <i class="fa fa-4x fa-th-list wow bounceIn text-primary"></i>
                     <h3>Forms Management</h3>
-                    <p class="text-muted">Involves add new form, list available forms and delete form in AfyaData
+                    <p class="text-muted">Involves add new form, list available forms, delete form and setting permissions for data collectors in AfyaData
                         Manager</p>
                 </div>
             </div>

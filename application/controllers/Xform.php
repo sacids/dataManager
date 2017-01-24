@@ -519,11 +519,12 @@ class Xform extends CI_Controller
 				$message = (array)$infobip_response->messages;
 				$message = array_shift($message);
 				$sms_updates = array(
-					"status"           => "SENT", "date_sent" => date("c"),
+					"status"           => "SENT", 
+					"date_sent" => date("c"),
 					"infobip_msg_id"   => $message->messageId,
 					"infobip_response" => $send_result
 				);
-				$this->Alert_model->update_sms_status($msg_id, $sms_updates);
+				$this->Ohkr_model->update_sms_status($msg_id, $sms_updates);
 			}
 		}
 	}

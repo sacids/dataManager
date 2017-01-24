@@ -174,7 +174,7 @@ class Ohkr_model extends CI_Model
 
     public function find_disease_symptoms($disease_id)
     {
-        $this->db->select("ds.id, ds. disease_id, ds.importance, symptom.title as symptom_title")
+        $this->db->select("ds.id, ds.disease_id,ds.symptom_id, ds.importance, symptom.title as symptom_title")
             ->join(self::$table_name_symptoms . " symptom", "ds.symptom_id = symptom.id");
         return $this->db->get_where(self::$table_disease_symptoms . " ds", array("disease_id" => $disease_id))->result();
     }
@@ -209,7 +209,7 @@ class Ohkr_model extends CI_Model
 
     public function get_all_symptoms()
     {
-        return $this->db->select('id,name')->get('symptoms')->result_array();
+        return $this->db->get(self::$table_disease_symptoms)->result_array();
     }
 
     //FAQ
@@ -246,6 +246,12 @@ class Ohkr_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    public function find_response_messages($limit = 30, $offset = 0)
+    {
+        $this->db->limit($limit, $offset);
+        $this->db->get(self::$table_name_response_sms)->result();
+    }
+
     public function find_response_sms_by_id($sms_id)
     {
         $this->db->from(self::$table_name_response_sms);
@@ -268,6 +274,12 @@ class Ohkr_model extends CI_Model
         return $this->db->update(self::$table_name_response_sms, $sms);
     }
 
+    public function count_response_sms()
+    {
+        $this->db->from(self::$table_name_response_sms);
+        return $this->db->count_all_results();
+    }
+
     public function delete_response_sms($sms_id)
     {
         $this->db->where("id", $sms_id);
@@ -278,6 +290,39 @@ class Ohkr_model extends CI_Model
     {
         $this->db->insert(self::$table_name_sent_sms, $sms_to_send);
         return $this->db->insert_id();
+    }
+
+    /**
+     * @param $id
+     * @param $sms
+     * @return mixed
+     */
+    public function update_sms_status($id, $sms)
+    {
+        $this->db->where("id", $id);
+        $this->db->limit(1);
+        return $this->db->update(self::$table_name_sent_sms, $sms);
+    }
+
+    public function find_send_sms($status = null)
+    {
+        if ($status != null) {
+            $this->db->where("status", $status);
+        }
+
+        return $this->db->get(self::$table_name_sent_sms)->result();
+    }
+
+    public function find_sent_sms_by_id($sent_sms_id)
+    {
+        $this->db->where("id", $sent_sms_id);
+        return $this->db->get(self::$table_name_sent_sms)->row(1);
+    }
+
+    public function count_send_sms()
+    {
+        $this->db->from(self::$table_name_sent_sms);
+        return $this->db->count_all_results();
     }
 
     public function find_diseases_by_symptoms_code($code = array())
