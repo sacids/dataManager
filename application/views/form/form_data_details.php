@@ -72,7 +72,7 @@
                         <?php
                         echo "<th class='text-center'>Select All<br/>" . form_checkbox(array("id" => "selectAll")) . "</th>";
 
-                        if ($selected_columns) {
+                        if (isset($selected_columns)) {
                             foreach ($selected_columns as $column) {
                                 echo "<th>" . $column . "</th>";
                             }
