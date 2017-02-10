@@ -1329,12 +1329,24 @@ class Xform extends CI_Controller
             $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
             $data['form_id'] = $form->form_id;
 
-            if (isset($_POST["apply"])) {
+            //Prevents the filters from applying to a different form
+            if ($this->session->userdata("filters_form_id") != $form_id) {
+                $this->session->unset_userdata("filters_form_id");
+                $this->session->unset_userdata("form_filters");
+            }
 
-                $selected_columns = $_POST;
-                $selected_columns = array('id' => "ID") + $selected_columns;
+            if (isset($_POST["apply"]) || $this->session->userdata("form_filters")) {
 
-                unset($selected_columns['apply']);
+                if (!isset($_POST["apply"])) {
+                    $selected_columns = $this->session->userdata("form_filters");
+                } else {
+                    $selected_columns = $_POST;
+                    $selected_columns = array('id' => "ID") + $selected_columns;
+
+                    unset($selected_columns['apply']);
+                    $this->session->set_userdata("filters_form_id", $form_id);
+                    $this->session->set_userdata(array("form_filters" => $selected_columns));
+                }
                 $data['selected_columns'] = $selected_columns;
                 $data['form_data'] = $this->Xform_model->find_form_data_by_fields($form->form_id, $selected_columns, $this->pagination->per_page, $page);
             } else {
