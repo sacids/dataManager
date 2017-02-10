@@ -1372,33 +1372,45 @@ class Xform extends CI_Controller
     {
         $this->load->library('excel');
 
+        //get form data
 
-        //table fields
-        $table_fields = $this->Xform_model->find_table_columns($form_id);
+        if ($this->session->userdata("form_filters")) {
 
-        //mapping field
-        $field_maps = $this->_get_mapped_table_column_name($form_id);
+            $form_filters = $this->session->userdata("form_filters");
 
-
-        $serial = 0;
-        foreach ($table_fields as $key => $column) {
-
-            $inc = 1;
-            $column_title = $this->getColumnLetter($serial);
-
-            if (array_key_exists($column, $field_maps)) {
-                $column_name = $field_maps[$column];
-            } else {
-                $column_name = $column;
+            $serial = 0;
+            foreach ($form_filters as $column_name) {
+                $inc = 1;
+                $column_title = $this->getColumnLetter($serial);
+                $this->excel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
+                $serial++;
             }
 
-            $this->excel->setActiveSheetIndex(0)
-                ->setCellValue($column_title . $inc, $column_name);
-            $serial++;
-        }
+            $form_data = $this->Xform_model->find_form_data_by_fields($form_id, $form_filters, 5000);
+        } else {
+            //table fields
+            $table_fields = $this->Xform_model->find_table_columns($form_id);
 
-        //form data
-        $form_data = $this->Xform_model->find_form_data($form_id);
+            //mapping field
+            $field_maps = $this->_get_mapped_table_column_name($form_id);
+
+            $serial = 0;
+            foreach ($table_fields as $key => $column) {
+
+                $inc = 1;
+                $column_title = $this->getColumnLetter($serial);
+
+                if (array_key_exists($column, $field_maps)) {
+                    $column_name = $field_maps[$column];
+                } else {
+                    $column_name = $column;
+                }
+
+                $this->excel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
+                $serial++;
+            }
+            $form_data = $this->Xform_model->find_form_data($form_id);
+        }
 
         $inc = 2;
         foreach ($form_data as $data) {
