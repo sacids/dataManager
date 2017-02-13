@@ -21,6 +21,12 @@ $lang['nav_item_manage_user_groups']= "Manage user groups";
 $lang['nav_item_list_groups']       = "List Groups";
 $lang['nav_item_create_group']      = "Create Group";
 
+//Permission
+$lang['nav_item_manage_permission']= "Manage Permission";
+$lang['nav_item_list_module']= "List Module";
+$lang['nav_item_list_permission']     = "List Permission";
+$lang['nav_item_create_permission']      = "Create Permission";
+
 //OHKR - Afya Moja
 $lang['nav_item_ohkr']              = "OHKR";
 $lang['nav_item_manage_diseases']   = "Manage Diseases";

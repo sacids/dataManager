@@ -90,13 +90,11 @@ class Auth extends CI_Controller
      */
     function users_list()
     {
-        if (!$this->ion_auth->logged_in()) {
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
-
-        //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
             'base_url' => $this->config->base_url("auth/users_list"),
@@ -473,8 +471,6 @@ class Auth extends CI_Controller
 
     function activate($id, $code = FALSE)
     {
-        //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
 
         if ($code !== FALSE) {
             $activation = $this->ion_auth->activate($id, $code);
@@ -501,9 +497,6 @@ class Auth extends CI_Controller
             // redirect them to the home page because they must be an administrator to view this
             return show_error('You must be an administrator to view this page.');
         }
-
-        //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
 
         $id = (int)$id;
 
@@ -547,12 +540,11 @@ class Auth extends CI_Controller
     {
         $this->data['title'] = "Create User";
 
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/index', 'refresh');
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
         }
-
-        //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
 
         $tables = $this->config->item('tables', 'ion_auth');
         $identity_column = $this->config->item('identity', 'ion_auth');
@@ -658,9 +650,6 @@ class Auth extends CI_Controller
         if (!$this->ion_auth->logged_in() || (!$this->ion_auth->is_admin() && !($this->ion_auth->user()->row()->id == $id))) {
             redirect('auth', 'refresh');
         }
-
-        //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
 
         $user = $this->ion_auth->user($id)->row();
         $groups = $this->ion_auth->groups()->result_array();
@@ -787,18 +776,15 @@ class Auth extends CI_Controller
 
     function group_list()
     {
-        if (!$this->ion_auth->logged_in()) {
+        //check login
+        if (!$this->ion_auth->logged_in() && !$this->ion_auth->is_admin()) {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
 
-        //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
-
         $data['title'] = 'Manage Groups';
         $data['groups'] = $this->db->get('groups')->result();
         $this->load->view('header', $data);
-        //$this->load->view('auth/menu');
         $this->load->view('auth/group_list');
         $this->load->view('footer');
     }
@@ -807,12 +793,11 @@ class Auth extends CI_Controller
     {
         $this->data['title'] = $this->lang->line('create_group_title');
 
-        if (!$this->ion_auth->logged_in()) {
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
-
-        //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
 
         // validate form input
         $this->form_validation->set_rules('group_name', $this->lang->line('create_group_validation_name_label'), 'required|alpha_dash');
@@ -858,12 +843,11 @@ class Auth extends CI_Controller
 
         $this->data['title'] = $this->lang->line('edit_group_title');
 
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth', 'refresh');
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
         }
-
-        //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
 
         $group = $this->ion_auth->group($id)->row();
 
@@ -915,20 +899,18 @@ class Auth extends CI_Controller
     {
         $this->data['title'] = 'Assign Permission';
 
-        if (!$this->ion_auth->logged_in()) {
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
-
-        //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
 
         //Group Name
         $groups = $this->db->get_where('groups', array('id' => $group_id))->row();
         $this->data['group_name'] = $groups->name;
         $this->data['group_id'] = $group_id;
 
-        $this->data['perm_list'] = $this->User_model->get_perms_list($group_id);
+        $this->data['perm_list'] = $perm_list = $this->User_model->get_perms_list($group_id);
 
         //check if user save
         if ($this->input->post('save')) {
@@ -962,6 +944,147 @@ class Auth extends CI_Controller
         //render view
         $this->load->view('header', $this->data);
         $this->load->view('auth/perms_group');
+        $this->load->view('footer');
+    }
+
+    //module list
+    function module_list()
+    {
+        $this->data['title'] = 'Module List';
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        $config = array(
+            'base_url' => $this->config->base_url("auth/module_list"),
+            'total_rows' => $this->User_model->count_module(),
+            'uri_segment' => 3,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $this->data['module'] = $this->User_model->find_all_module($this->pagination->per_page, $page);
+        $this->data["links"] = $this->pagination->create_links();
+
+        //render data
+        $this->load->view('header', $this->data);
+        $this->load->view("auth/module_list");
+        $this->load->view('footer');
+    }
+
+    //add new module
+    function add_module()
+    {
+        $this->data['title'] = "Add Module";
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        //validate form input
+        $this->form_validation->set_rules('name', 'Module', 'required');
+        $this->form_validation->set_rules('controller', 'Controller', 'required');
+
+        if ($this->form_validation->run() == true) {
+            $data = array(
+                'name' => $this->input->post('name'),
+                'controller' => $this->input->post('controller')
+            );
+            $this->db->insert('perms_module', $data);
+
+            //message and redirect
+            $this->session->set_flashdata("message", display_message("Module added successfully"));
+            redirect('auth/add_module', 'refresh');
+        }
+
+        //populate data
+        $this->data['name'] = array(
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('name'),
+        );
+
+        $this->data['controller'] = array(
+            'name' => 'controller',
+            'id' => 'controller',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('controller'),
+        );
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("auth/add_new_module");
+        $this->load->view('footer');
+    }
+
+    //add module
+    function edit_module($module_id)
+    {
+        $this->data['title'] = "Edit Module";
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        $this->data['module'] = $this->User_model->get_module_by_id($module_id);
+
+        //validate form input
+        $this->form_validation->set_rules('name', 'Module', 'required');
+        $this->form_validation->set_rules('controller', 'Controller', 'required');
+
+        if ($this->form_validation->run() == true) {
+            $data = array(
+                'name' => $this->input->post('name'),
+                'controller' => $this->input->post('controller')
+            );
+            $this->db->update('perms_module', $data, array('id' => $module_id));
+
+            $this->session->set_flashdata("message", display_message("Module edited successfully"));
+            redirect('auth/edit_module/' . $module_id, 'refresh');
+        }
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("auth/edit_module");
+        $this->load->view('footer');
+    }
+
+
+    //module list
+    function permission_list($module_id)
+    {
+        $this->data['title'] = 'Permission List';
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        $config = array(
+            'base_url' => $this->config->base_url("auth/permission_list/".$module_id."/"),
+            'total_rows' => $this->User_model->count_module(),
+            'uri_segment' => 4,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+        $this->data['module'] = $this->User_model->find_all_module($this->pagination->per_page, $page);
+        $this->data["links"] = $this->pagination->create_links();
+
+        //render data
+        $this->load->view('header', $this->data);
+        $this->load->view("auth/module_list");
         $this->load->view('footer');
     }
 

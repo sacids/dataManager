@@ -127,7 +127,7 @@ class User_model extends CI_Model
                 $check = $this->db->get_where('perms_group', array('group_id' => $group_id, 'module_id' => $value->id, 'perm' => $v->perm))->row();
 
                 //perm module array
-                $module[$value->name][$v->perm] = array($value->id, $v->id);
+                $module[$value->name][$v->perm] = array($value->id, $v->id, $v->name);
 
                 if (count($check) == 1) {
                     $array[$value->name][$v->perm] = $check->allow;
@@ -138,6 +138,39 @@ class User_model extends CI_Model
         }
 
         return array($array, $module);
+    }
+
+    /**
+     * Count module
+     * @return mixed
+     */
+    public function count_module()
+    {
+        $this->db->from("perms_module");
+        return $this->db->count_all_results();
+    }
+
+    /**
+     * Find all module
+     * @param int $limit
+     * @param int $offset
+     * @return mixed
+     */
+    public function find_all_module($limit = 30, $offset = 0)
+    {
+        $this->db
+            ->limit($limit, $offset);
+        return $this->db->get("perms_module")->result();
+    }
+
+    /**
+     * get module by id
+     * @param $module_id
+     * @return mixed
+     */
+    function get_module_by_id($module_id)
+    {
+        return $this->db->get_where('perms_module', array('id' => $module_id))->row();
     }
 }
 

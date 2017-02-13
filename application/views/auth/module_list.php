@@ -1,33 +1,39 @@
-<div id="grid_padding" class="grid_11" >
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 main">
+            <h3><?= $title ?></h3>
 
-    <div >
-        <table class="table" cellspacing="0" cellpadding="0" width="60%">
-            <tr>
-                <th></th>
-                <th>Module Name</th>
-                <th></th>
-            </tr>
+            <div class="col-sm-6">
+                <p><a class="btn btn-primary" href="<?= site_url('auth/add_module') ?>">Add Module</a></p>
 
-            <?php
-            $serial=1;
-            foreach ($modules as $values):?>
-                <tr>
-                    <td><?php echo $serial;?></td>
-                    <td><?php echo $values->name;?></td>
-                    <td>
-                        <?php echo anchor("auth/edit_module/".$values->id, 'Edit') ;?> |
-                        <?php echo anchor("auth/delete_module/".$values->id, 'Delete') ;?>
-                    </td>
-                </tr>
-                <?php
-                $serial++;
-            endforeach;?>
+                <table class="table table-striped table-responsive table-hover">
+                    <tr>
+                        <th>Module</th>
+                        <th>Controller</th>
+                        <th></th>
+                    </tr>
 
-
-        </table>
-
+                    <?php
+                    $serial = 1;
+                    foreach ($module as $value):?>
+                        <tr>
+                            <td><?php echo $value->name; ?></td>
+                            <td><?php echo $value->controller; ?></td>
+                            <td><?php echo anchor("auth/edit_module/" . $value->id, "Edit", array("class" => 'btn btn-primary btn-xs')); ?></td>
+                            </td>
+                        </tr>
+                        <?php
+                        $serial++;
+                    endforeach; ?>
+                </table>
+                <?php if (!empty($links)): ?>
+                    <div class="widget-foot">
+                        <?= $links ?>
+                        <div class="clearfix"></div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
 </div>
-<div style="clear: both;"></div>
-</div>            </div>
-</div>
+

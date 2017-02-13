@@ -80,7 +80,7 @@
                     </li>
                 <?php } ?>
 
-                <?php if (perm_module('Auth')) { ?>
+                <?php if ($this->ion_auth->is_admin()) { ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"><?= $this->lang->line("nav_item_manage_users") ?>
@@ -92,6 +92,10 @@
                             <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_user_groups") ?></li>
                             <li><?php echo anchor('auth/group_list', $this->lang->line("nav_item_list_groups")); ?></li>
                             <li><?php echo anchor('auth/create_group', $this->lang->line("nav_item_create_group")); ?></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_permission") ?></li>
+                            <li><?php echo anchor('auth/module_list', $this->lang->line("nav_item_list_module")); ?></li>
+                            <li><?php echo anchor('auth/permission_list', $this->lang->line("nav_item_list_permission")); ?></li>
                         </ul>
                     </li>
                 <?php } ?>

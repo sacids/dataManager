@@ -20,7 +20,7 @@
                     $module_id = $perm_list[1][$key][$k]; ?>
 
                     <div class="form-group" style="border-bottom: 1px dotted black;">
-                        <label><?php echo $k ?></label>
+                        <label><?php echo $module_id[2]; ?></label>
                         <input type="checkbox"
                                name="module_<?php echo $module_id[0] . '_' . $module_id[1] ?>" <?php echo($v == 1 ? 'checked="checked"' : ''); ?>
                                value="1">
