@@ -107,16 +107,4 @@ class Alert_model extends CI_Model
 		curl_close($ch);
 		return $response;
 	}
-
-	/**
-	 * @param $id
-	 * @param $sms
-	 * @return mixed
-	 */
-	public function update_sms_status($id, $sms)
-	{
-		$this->db->where("id", $id);
-		$this->db->limit(1);
-		return $this->db->update(self::$table_name_sent_sms, $sms);
-	}
 }

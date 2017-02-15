@@ -31,15 +31,21 @@ All the tables will be created and you can start contributing on the project rig
 
 ##### Seeding data 
 * If you have successfully migrated your database follow below instructions.
-*  To run this download and install [composer](https://getcomposer.org) if you have composer installed continue to step two below
+* To run this download and install [composer](https://getcomposer.org) if you have composer installed continue to step two below
 * Then run `$ composer update` to get dependencies
 * Open terminal or command line interface
 * Navigate to root directory of your project (`i.e afyadata`)
 * Then run `$ php index.php seeder seed` to get dummy data generated
 * You can adjust limit at any time to fit the number of records you want at `controllers/Seeder.php`
-    
 
 
+#### Installing ci-phpunit-test (PHPUnit for Codeigniter)
+* Navigate to project root directory `cd /path/to/project/`
+* Run `composer require kenjis/ci-phpunit-test --dev`
+* And run `install.php` inside vendor directory `$ php vendor/kenjis/ci-phpunit-test/install.php`
 
-
-
+#### Running tests
+* Navigate to test directory inside your application folder see below
+* Go to project folder/directory `$ cd /path/to/project/`
+* Then navigate to test folder `$ cd application/tests`
+* Run test `$ phpunit`

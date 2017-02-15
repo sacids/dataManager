@@ -7,11 +7,50 @@
  */
 
 ?>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select data filtering fields</h4>
+            </div>
+            <div class="modal-body">
+
+                <?php echo form_open("xform/form_data/" . $form->id, 'class="form-horizontal" role="form"') ?>
+
+                <?php
+                foreach ($mapped_fields as $key => $value) {
+                    echo '<div class="checkbox"><label>';
+                    echo form_checkbox($key, $value) . $value . "</label></div>";
+                }
+                ?>
+
+                <input type="submit" name="apply" value="Apply filters" class="btn btn-primary col-lg-offset-1"/>
+
+                <?php echo form_close(); ?>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div class="container body-content">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div class="row" style="margin-bottom: 10px;">
-                <h3>Form data collected</h3>
+                <h3>Form data collected
+                    <span class="pull-right">
+                    <button type="button" class="btn btn-link" data-toggle="modal"
+                            data-target="#myModal">Set Filters</button></span>
+                </h3>
 			<span class="pull-right">
 				<?php echo anchor("xform/excel_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_drive-ms-excel.png" height="25"/>') ?>
                 <?php echo anchor("form_visualization/chart/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_office-25.png" height="25"/>') ?>
@@ -32,11 +71,19 @@
                     <tr>
                         <?php
                         echo "<th class='text-center'>Select All<br/>" . form_checkbox(array("id" => "selectAll")) . "</th>";
-                        foreach ($table_fields as $key => $column) {
-                            if (array_key_exists($column, $field_maps)) {
-                                echo "<th>" . $field_maps[$column] . "</th>";
-                            } else {
+
+                        if (isset($selected_columns)) {
+                            foreach ($selected_columns as $column) {
                                 echo "<th>" . $column . "</th>";
+                            }
+                        } else {
+
+                            foreach ($table_fields as $key => $column) {
+                                if (array_key_exists($column, $field_maps)) {
+                                    echo "<th>" . $field_maps[$column] . "</th>";
+                                } else {
+                                    echo "<th>" . $column . "</th>";
+                                }
                             }
                         }
                         ?>
@@ -109,23 +156,23 @@
             $("#theModal").modal("show");
         };
         var MyHtml = '<div id="theModal" class="modal fade">' +
-                ' <div class="modal-dialog ">' +
-                '<div class="modal-content">' +
-                ' <div class="modal-header">' +
-                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-                '<h4 class="modal-title">'+imageTitle+'</h4>' +
-                '</div>' +
-                '<div class="modal-body">' +
-                '  <img not-to-enlarge="true" class="img-responsive" + src=""alt="...">' +
-                '</div>' +
-                '<div class="modal-footer">' +
-                '<button type="button" class="btn btn-default" data-dismiss="modal">' +
-                'Close' +
-                '</button>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
+            ' <div class="modal-dialog ">' +
+            '<div class="modal-content">' +
+            ' <div class="modal-header">' +
+            '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+            '<h4 class="modal-title">' + imageTitle + '</h4>' +
+            '</div>' +
+            '<div class="modal-body">' +
+            '  <img not-to-enlarge="true" class="img-responsive" + src=""alt="...">' +
+            '</div>' +
+            '<div class="modal-footer">' +
+            '<button type="button" class="btn btn-default" data-dismiss="modal">' +
+            'Close' +
+            '</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
         $("div.body-content").append(MyHtml);
         $("img[not-to-enlarge!=true]").click(showModal);
         $("img[not-to-enlarge!=true]").css("cursor", "pointer");

@@ -47,7 +47,7 @@ class Migration_Detection_modification extends CI_Migration
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->create_table('ohkr_detected_diseases');
         $this->db->query('ALTER TABLE ohkr_detected_diseases ADD CONSTRAINT fk_ohkr_dd_disease_id FOREIGN KEY(disease_id) REFERENCES ohkr_diseases(id) ON DELETE CASCADE ON UPDATE CASCADE;');
-        echo "Migration script to create ohkr_detected_diseases table finished running successfully\n\n";
+       
     }
 
     public function down()

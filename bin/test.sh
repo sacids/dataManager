@@ -1,4 +1,5 @@
 #! /bin/sh
+#set -x
 DB_USER=${DB_USER:-root}
 
 mysql -u $DB_USER -e "DROP DATABASE IF EXISTS afyadata_test;"
