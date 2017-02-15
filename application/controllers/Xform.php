@@ -114,7 +114,7 @@ class Xform extends CI_Controller
             if ($this->ion_auth->is_admin()) {
                 $data['forms'] = $this->Xform_model->get_form_list(NULL, $this->pagination->per_page, $page, "published");
             } else {
-                $data['forms'] = $this->Xform_model->get_form_list($this->user_id, $this->pagination->per_page, $page, "published");
+                $data['forms'] = $this->Xform_model->find_forms_by_permission($this->user_id, $this->pagination->per_page, $page, "published");
             }
             $data["links"] = $this->pagination->create_links();
 
@@ -288,8 +288,6 @@ class Xform extends CI_Controller
             $symptoms_reported = explode(" ", $this->form_data['Dalili_Dalili']);
             $district = $this->form_data['taarifa_awali_Wilaya']; // taarifa_awali_Wilaya is the database field name in the mean time
 
-            $data_collector_phone = $this->form_data['meta_username'];
-
             if (count($symptoms_reported) > 0) {
                 $message_sender_name = "AfyaData";
                 $request_url_endpoint = "sms/1/text/single";
@@ -314,22 +312,24 @@ class Xform extends CI_Controller
                             "location" => $district
                         );
 
-                        $sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
+                        if (ENVIRONMENT == 'development') {
+                            $sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
 
-                        if ($sender_msg) {
-                            $this->_save_msg_and_send($sender_msg->rsms_id, $this->sender->phone, $sender_msg->message,
-                                $this->sender->first_name, $message_sender_name, $request_url_endpoint);
-                        }
+                            if ($sender_msg) {
+                                $this->_save_msg_and_send($sender_msg->rsms_id, $this->sender->phone, $sender_msg->message,
+                                    $this->sender->first_name, $message_sender_name, $request_url_endpoint);
+                            }
 
-                        $response_messages = $this->Ohkr_model->find_response_messages_and_groups($disease->disease_id,
-                            $district);
+                            $response_messages = $this->Ohkr_model->find_response_messages_and_groups($disease->disease_id,
+                                $district);
 
-                        $counter = 1;
-                        if ($response_messages) {
-                            foreach ($response_messages as $sms) {
-                                $this->_save_msg_and_send($sms->rsms_id, $sms->phone, $sms->message, $sms->first_name,
-                                    $message_sender_name, $request_url_endpoint);
-                                $counter++;
+                            $counter = 1;
+                            if ($response_messages) {
+                                foreach ($response_messages as $sms) {
+                                    $this->_save_msg_and_send($sms->rsms_id, $sms->phone, $sms->message, $sms->first_name,
+                                        $message_sender_name, $request_url_endpoint);
+                                    $counter++;
+                                }
                             }
                         }
                         $i++;

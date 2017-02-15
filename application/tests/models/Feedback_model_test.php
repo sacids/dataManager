@@ -69,9 +69,7 @@ class Feedback_model_test extends TestCase
             "status" => "pending",
             "reply_by" => 0
         );
-
-        print_r($feedback);
-
+        
         $this->obj->create_feedback($feedback);
         $this->assertEquals(1, $this->obj->count_new_feedback());
     }
@@ -95,8 +93,6 @@ class Feedback_model_test extends TestCase
                 "reply_by" => 0
             )
         );
-
-        print_r($expected_fb[0]);
 
         $found_feedback = $this->obj->find_all();
 

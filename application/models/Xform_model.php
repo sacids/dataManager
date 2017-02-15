@@ -125,6 +125,36 @@ class Xform_model extends CI_Model
         return $this->db->get(self::$xform_table_name)->result();
     }
 
+
+    /**
+     * @param bool $user_id
+     * @param int $limit
+     * @param int $offset
+     * @return mixed
+     */
+    public function find_forms_by_permission($user_id = false, $limit = 30, $offset = 0)
+    {
+        //If no user_id was passed use the current users id
+        $user_id || $user_id = $this->session->userdata('user_id');
+
+        //User permission
+        $user_perm = "P" . $user_id . "P";
+
+        //check if user is in a group with permission to view the forms
+        $this->load->model("Ion_auth_model", "auth");
+        $user_groups = $this->auth->get_users_groups($user_id)->result();
+
+        if ($user_groups) {
+            foreach ($user_groups as $ug) {
+                $perm = "G" . $ug->id . "G";
+                $this->db->or_like("perms", $perm);
+            }
+        }
+        $this->db->or_like("perms", $user_perm);
+        $this->db->limit($limit, $offset);
+        return $this->db->get(self::$xform_table_name)->result();
+    }
+
     /**
      * @param array $perms
      * @param int $limit
