@@ -30,8 +30,8 @@
                 </div>
                 <?php echo form_close(); ?>
 
-                <?php echo validation_errors(); ?>
             </div>
+            <?php echo validation_errors(); ?>
 
             <div class="">
 
