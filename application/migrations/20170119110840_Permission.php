@@ -106,6 +106,30 @@ class Migration_Permission extends CI_Migration
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->create_table('perms_group');
 
+        // Drop table 'district' if it exists
+        $this->dbforge->drop_table('district', TRUE);
+
+        $this->dbforge->add_field(array(
+            'id' => array(
+                'type' => 'INT',
+                'constraint' => '11',
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
+            ),
+            'name' => array(
+                'type' => "VARCHAR",
+                'constraint' => '50',
+                'null' => FALSE
+            ),
+            'code' => array(
+                'type' => "VARCHAR",
+                'constraint' => '50',
+                'null' => FALSE
+            )
+        ));
+        $this->dbforge->add_key('id', TRUE);
+        $this->dbforge->create_table('district');
+
         $this->db->query('ALTER TABLE perms_group ADD CONSTRAINT fk_group_id FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE ON UPDATE CASCADE;');
         $this->db->query('ALTER TABLE perms_group ADD CONSTRAINT fk_module_id1 FOREIGN KEY(module_id) REFERENCES perms_module(id) ON DELETE CASCADE ON UPDATE CASCADE;');
     }
@@ -115,6 +139,7 @@ class Migration_Permission extends CI_Migration
         $this->dbforge->drop_table('perms_module', TRUE);
         $this->dbforge->drop_table('perms', TRUE);
         $this->dbforge->drop_table('perms_group', TRUE);
+        $this->dbforge->drop_table('district', TRUE);
     }
 
 }
