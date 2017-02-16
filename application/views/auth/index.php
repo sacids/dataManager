@@ -2,6 +2,31 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <h3><?= $title ?></h3>
+            <div class="pull-right" style="margin-bottom: 10px;">
+                <?php echo form_open("auth/users_list", 'class="form-inline" role="form"'); ?>
+
+                <div class="form-group">
+                    <?php echo form_input(array('name' => 'firstname', 'id' => 'fname', 'class' => "form-control", 'placeholder' => lang('index_fname_th'))); ?>
+                </div>
+
+                <div class="form-group">
+                    <?php echo form_input(array('name' => 'lastname', 'id' => 'lname', 'class' => "form-control", 'placeholder' => lang('index_lname_th'))); ?>
+                </div>
+
+                <div class="form-group">
+                    <?php echo form_input(array('name' => 'phone', 'id' => 'phone', 'class' => "form-control", 'placeholder' => lang('index_phone_th'))); ?>
+                </div>
+                <div class="form-group">
+                    <?php echo form_dropdown("status", array("" => "Choose status", 1 => "Active", 0 => "Inactive"), NULL, 'class="form-control"'); ?>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <?php echo form_submit("search", "Search", 'class="btn btn-primary"'); ?>
+                    </div>
+                </div>
+                <?php echo form_close(); ?>
+            </div>
 
             <div class="col-sm-12">
                 <table class="table table-striped table-responsive table-hover">
@@ -11,8 +36,7 @@
                         <th><?php echo lang('index_phone_th'); ?></th>
                         <th><?php echo lang('index_created_on_th'); ?></th>
                         <th><?php echo lang('index_last_login_th'); ?></th>
-                        <th><?php echo lang('index_status_th'); ?></th>
-                        <th></th>
+                        <th colspan="2" class="text-center"><?php echo lang('index_status_th'); ?></th>
                     </tr>
 
                     <?php

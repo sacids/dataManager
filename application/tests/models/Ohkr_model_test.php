@@ -376,17 +376,57 @@ class Ohkr_model_test extends TestCase
 
     public function test_find_disease_faq()
     {
+        $disease_faq = array(
+            array(
+                "id" => 1,
+                "disease_id" => 1,
+                "question" => "What are the necessary steps to take for a Malaria patient?",
+                "answer" => "Rush the patient immediately to the nearest health facility"
+            )
+        );
 
+        $faqs = $this->obj->find_disease_faq(1);
+        $i = 0;
+
+        foreach ($faqs as $faq) {
+            $this->assertEquals($disease_faq[$i]['id'], $faq->id);
+            $this->assertEquals($disease_faq[$i]['disease_id'], $faq->disease_id);
+            $this->assertEquals($disease_faq[$i]['question'], $faq->question);
+            $this->assertEquals($disease_faq[$i]['answer'], $faq->answer);
+            $i++;
+        }
     }
 
     public function test_add_disease_faq()
     {
+        $this->assertEquals(0, count($this->obj->find_disease_faq(1)));
+        $disease_faq = array(
+            "id" => 1,
+            "disease_id" => 1,
+            "question" => "What are the necessary steps to take for a Malaria patient?",
+            "answer" => "Rush the patient immediately to the nearest health facility"
+        );
 
+        $this->obj->add_disease_faq($disease_faq);
+        $this->assertEquals(1, count($this->obj->find_disease_faq(1)));
     }
 
     public function test_get_disease_faq_by_id()
     {
 
+        $expected_faq = array(
+            "id" => 1,
+            "disease_id" => 1,
+            "question" => "What are the necessary steps to take for a Malaria patient?",
+            "answer" => "Rush the patient immediately to the nearest health facility"
+        );
+
+        $found_faq = $this->obj->get_disease_faq_by_id(1);
+
+        $this->assertEquals($expected_faq['id'], $found_faq->id);
+        $this->assertEquals($expected_faq['disease_id'], $found_faq->disease_id);
+        $this->assertEquals($expected_faq['question'], $found_faq->question);
+        $this->assertEquals($expected_faq['answer'], $found_faq->answer);
     }
 
     public function test_update_disease_faq()

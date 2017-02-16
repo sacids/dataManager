@@ -109,6 +109,39 @@ class User_model extends CI_Model
         $this->db->where("ug.user_id", $user_id);
         return $this->db->get()->result();
     }
+
+    public function search_users($first_name = NULL, $last_name = NULL, $phone = NULL, $status = NULL, $limit = 30, $offset = 0)
+    {
+        if ($first_name != NULL)
+            $this->db->or_like("first_name", $first_name);
+
+        if ($last_name != NULL)
+            $this->db->or_like("last_name", $last_name);
+
+        if ($phone != NULL)
+            $this->db->or_where("phone", $phone);
+
+        if ($status != NULL)
+            $this->db->where("active", $status);
+        $this->db->limit($limit, $offset);
+        return $this->db->get(self::$table_name)->result();
+    }
+
+    public function count_users_by_search_terms($first_name = NULL, $last_name = NULL, $phone = NULL, $status = NULL)
+    {
+        if ($first_name != NULL)
+            $this->db->or_like("first_name", $first_name);
+
+        if ($last_name != NULL)
+            $this->db->or_like("last_name", $last_name);
+
+        if ($phone != NULL)
+            $this->db->or_where("phone", $phone);
+
+        if ($status != NULL)
+            $this->db->where("active", $status);
+        return $this->db->get(self::$table_name)->num_rows();
+    }
 }
 
 /* End of file users_model.php */

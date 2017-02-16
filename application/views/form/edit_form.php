@@ -1,8 +1,11 @@
 <div class="container">
     <div class="row">
-        <?php echo form_open_multipart('xform/edit_form/' . $form->id, 'class="form-horizontal" role="form'); ?>
+        <?php echo form_open_multipart('xform/edit_form/' . $form->id, 'class="form-horizontal" role="form"'); ?>
         <div class="col-sm-12 col-md-6 col-lg-6">
-            <h3>Edit form details<span class="pull-right"><?php echo anchor("xform/map_fields/" . $form->form_id,"Map columns") ?></span>
+            <!-- Trigger the modal with a button -->
+
+            <h3>Edit form details<span class="pull-right">
+                    <?php echo anchor("xform/map_fields/" . $form->form_id, "Map columns") ?></span>
             </h3>
 
             <?php

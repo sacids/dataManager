@@ -1,7 +1,7 @@
 <?php
 /**
  * AfyaData
- *  
+ *
  * An open source data collection and analysis tool.
  *
  * This content is released under the MIT License (MIT)
@@ -27,12 +27,12 @@
  * THE SOFTWARE.
  *
  *
- * @package	    AfyaData
- * @author	    AfyaData Dev Team
- * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
- * @license	    http://opensource.org/licenses/MIT	MIT License
- * @link	    https://afyadata.sacids.org
- * @since	    Version 1.0.0
+ * @package        AfyaData
+ * @author        AfyaData Dev Team
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license        http://opensource.org/licenses/MIT	MIT License
+ * @link        https://afyadata.sacids.org
+ * @since        Version 1.0.0
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -82,16 +82,30 @@ class Auth extends CI_Controller
             redirect('auth/login', 'refresh');
         }
 
+        if (!$this->input->post("search")) {
+            $searched = false;
+            $users_count = $this->User_model->count_users();
+        } else {
+            $searched = true;
+            $first_name = $this->input->post("firstname", null);
+            $last_name = $this->input->post("lastname", null);
+            $phone = $this->input->post("phone", null);
+            $user_status = $this->input->post("status", null);
+
+            $users_count = $this->User_model->count_users_by_search_terms($first_name, $last_name, $phone, $user_status);
+        }
         $config = array(
             'base_url' => $this->config->base_url("auth/users_list"),
-            'total_rows' => $this->User_model->count_users(),
+            'total_rows' => $users_count,
             'uri_segment' => 3,
         );
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-        $this->data['users'] = $this->User_model->get_users($this->pagination->per_page, $page);
+        $this->data['users'] = (!$searched) ? $this->User_model->get_users($this->pagination->per_page, $page) :
+            $this->User_model->search_users($first_name, $last_name, $phone, $user_status, $this->pagination->per_page, $page);
+
         $this->data["links"] = $this->pagination->create_links();
 
         //render view
