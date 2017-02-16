@@ -39,33 +39,52 @@
                     </div>
                     <?php echo form_error('email'); ?>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label
                             for="Country code"><?php echo $this->lang->line("create_user_country_code_label") ?>
                             <span>*</span></label>
                         <?php echo form_dropdown("country_code", array("254" => "254", "255" => "255", "256" => "256"), set_value("country_code", "255"), "class='form-control'"); ?>
                     </div>
-                    <?php echo form_error('country_code'); ?>
+                    <?php echo form_error('country_code'); ?>-->
+
+                    <div class="form-group">
+                        <label for="phone"><?php echo $this->lang->line("create_user_phone_label") ?>
+                            <span>*</span></label>
+                        <input type="text" name="phone" value="<?php echo set_value('phone'); ?>"
+                               id="phone" placeholder="Enter phone number" class="form-control"/></div>
+                    <?php echo form_error('phone'); ?>
 
                     <div class="form-group">
                         <label for="identity"><?php echo $this->lang->line("create_user_identity_label") ?>
                             <span>*</span></label>
                         <input type="text" name="identity" value="<?php echo set_value('identity'); ?>"
-                               id="identity" placeholder="phone number" class="form-control"/></div>
+                               id="identity" placeholder="Enter username" class="form-control"/></div>
                     <?php echo form_error('identity'); ?>
 
+
                     <div class="form-group">
-                        <label for="group">Group: <span>*</span></label>
+                        <label for="group"><?php echo $this->lang->line("create_user_group_label") ?>
+                            <span>*</span></label>
                         <select name="group" id="group" class="form-control">
                             <option value="">Choose Group</option>
                             <?php
-                            $groups = $this->db->order_by('name', 'asc')->get('groups')->result();
                             foreach ($groups as $values): ?>
                                 <option value="<?php echo $values->id; ?>"><?php echo $values->name; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <?php echo form_error('group'); ?>
+
+                    <div class="form-group">
+                        <label for="group"><?php echo $this->lang->line("create_user_district_label") ?> <span>*</span></label>
+                        <select name="district" id="district" class="form-control">
+                            <option value="">Choose district</option>
+                            <?php foreach ($districts as $values): ?>
+                                <option value="<?php echo $values->code; ?>"><?php echo $values->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <?php echo form_error('district'); ?>
 
                     <div class="form-group">
                         <label for="password"><?php echo $this->lang->line("create_user_password_label") ?>

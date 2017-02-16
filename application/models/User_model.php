@@ -116,7 +116,7 @@ class User_model extends CI_Model
         $array = array();
         $module = array();
 
-        $perms_module = $this->db->get('perms_module')->result();
+        $perms_module = $this->db->order_by('perms_module.name', 'ASC')->get('perms_module')->result();
 
         foreach ($perms_module as $key => $value) {
 
@@ -124,15 +124,15 @@ class User_model extends CI_Model
 
             foreach ($perms as $k => $v) {
 
-                $check = $this->db->get_where('perms_group', array('group_id' => $group_id, 'module_id' => $value->id, 'perm' => $v->perm))->row();
+                $check = $this->db->get_where('perms_group', array('group_id' => $group_id, 'module_id' => $value->id, 'perm_slug' => $v->perm_slug))->row();
 
                 //perm module array
-                $module[$value->name][$v->perm] = array($value->id, $v->id, $v->name);
+                $module[$value->name][$v->perm_slug] = array($value->id, $v->id, $v->name);
 
                 if (count($check) == 1) {
-                    $array[$value->name][$v->perm] = $check->allow;
+                    $array[$value->name][$v->perm_slug] = $check->allow;
                 } else {
-                    $array[$value->name][$v->perm] = 0;
+                    $array[$value->name][$v->perm_slug] = 0;
                 }
             }
         }
@@ -160,7 +160,9 @@ class User_model extends CI_Model
     {
         $this->db
             ->limit($limit, $offset);
-        return $this->db->get("perms_module")->result();
+        return $this->db
+            ->order_by('perms_module.name', 'ASC')
+            ->get("perms_module")->result();
     }
 
     /**
@@ -172,6 +174,43 @@ class User_model extends CI_Model
     {
         return $this->db->get_where('perms_module', array('id' => $module_id))->row();
     }
+
+    /**
+     * Count perms
+     * @return mixed
+     */
+    public function count_perms()
+    {
+        $this->db->from("perms");
+        return $this->db->count_all_results();
+    }
+
+    /**
+     * Find all module
+     * @param int $limit
+     * @param int $offset
+     * @return mixed
+     */
+    public function find_all_perms($limit = 30, $offset = 0)
+    {
+        $this->db
+            ->limit($limit, $offset);
+        return $this->db
+            ->select('perms.id as p_id, perms.name as p_name, perms_module.name as m_name, perms.perm_slug')
+            ->order_by('perms_module.name', 'ASC')
+            ->join('perms_module', 'perms_module.id = perms.module_id')
+            ->get("perms")->result();
+    }
+
+    /**
+     * @param $perm_id
+     * @return mixed
+     */
+    public function get_perm_by_id($perm_id)
+    {
+        return $this->db->get_where("perms", array('perms.id' => $perm_id))->row();
+    }
+
 }
 
 /* End of file users_model.php */

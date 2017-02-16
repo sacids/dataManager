@@ -63,7 +63,7 @@ if (!function_exists("perms_role")) {
         if (count($module) > 0) {
             //get access level
             $check = $CI->db->get_where('perms_group',
-                array('group_id' => $user_group->id, 'module_id' => $module->id, 'perm' => $perm_slug, 'allow' => 1))->num_rows();
+                array('group_id' => $user_group->id, 'module_id' => $module->id, 'perm_slug' => $perm_slug, 'allow' => 1))->num_rows();
 
             if ($check > 0) {
                 return TRUE;
