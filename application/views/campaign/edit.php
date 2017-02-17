@@ -80,7 +80,7 @@
                 <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Edit</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
                 </div>
 
                 <?php echo form_close(); ?>
