@@ -8,13 +8,17 @@
  */
 class Ohkr extends CI_Controller
 {
+	private $controller;
 
     public function __construct()
     {
         parent::__construct();
 
 		$this->load->model(array("Ohkr_model", "Perm_model", "User_model"));
+		log_message('debug', 'Ohkr controller initialized');
 		//$this->load->library("Db_exp");
+
+		$this->controller = $this->router->fetch_class();
 	}
 
     /**
@@ -30,6 +34,17 @@ class Ohkr extends CI_Controller
         }
     }
 
+	/**
+	 * @param $method_name
+	 * Check if user has permission
+	 */
+	function has_allowed_perm($method_name)
+	{
+		if (!perms_role($this->controller, $method_name)) {
+			show_error("You are not allowed to view this page", 401, "Unauthorized");
+		}
+	}
+
 
     public function index()
     {
@@ -43,6 +58,9 @@ class Ohkr extends CI_Controller
     {
         //check login
         $this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
             'base_url' => $this->config->base_url("ohkr/disease_list"),
@@ -70,6 +88,9 @@ class Ohkr extends CI_Controller
 	{
 		//check login
 		$this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
 		$data['title'] = "Add new";
 		$data['species'] = $this->Ohkr_model->find_all_species(100, 0);
@@ -133,6 +154,9 @@ class Ohkr extends CI_Controller
 		//check login
 		$this->_is_logged_in();
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if (!$disease_id) {
 			$this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_edit")));
 			redirect("ohkr/disease_list");
@@ -180,6 +204,9 @@ class Ohkr extends CI_Controller
 		//check login
 		$this->_is_logged_in();
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if (!$disease_id) {
 			$this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_delete")));
 			redirect("ohkr/disease_list");
@@ -199,6 +226,9 @@ class Ohkr extends CI_Controller
 	{
 		//check login
 		$this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
 		$config = array(
 			'base_url'    => $this->config->base_url("ohkr/species_list"),
@@ -223,6 +253,9 @@ class Ohkr extends CI_Controller
 	{
 		//check login
 		$this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
 		$data['title'] = "Add new specie";
 
@@ -251,6 +284,9 @@ class Ohkr extends CI_Controller
 	{
 		//check login
 		$this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
 		if (!$specie_id) {
 			$this->session->set_flashdata("message", display_message($this->lang->line("select_specie_to_edit")));
@@ -286,6 +322,9 @@ class Ohkr extends CI_Controller
 		//check login
 		$this->_is_logged_in();
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if (!$specie_id) {
 			$this->session->set_flashdata("message", display_message($this->lang->line("select_specie_to_delete")));
 			redirect("ohkr/species_list");
@@ -308,6 +347,9 @@ class Ohkr extends CI_Controller
 	{
 		//check login
 		$this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
 		$config = array(
 			'base_url'    => $this->config->base_url("ohkr/symptoms_list"),
@@ -335,6 +377,9 @@ class Ohkr extends CI_Controller
 	{
 		//check login
 		$this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
 		$data['title'] = "Add new symptom";
 
@@ -369,6 +414,9 @@ class Ohkr extends CI_Controller
 	{
 		//check login
 		$this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
         if (!$symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_edit")));
@@ -406,6 +454,9 @@ class Ohkr extends CI_Controller
 		//check login
 		$this->_is_logged_in();
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if (!$symptom_id) {
 			$this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_delete")));
 			redirect("ohkr/symptoms_list");
@@ -427,6 +478,9 @@ class Ohkr extends CI_Controller
 		//check login
 		$this->_is_logged_in();
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
         $data['title'] = "Disease Symptoms";
         $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
         $data['symptoms'] = $this->Ohkr_model->find_disease_symptoms($disease_id);
@@ -440,6 +494,9 @@ class Ohkr extends CI_Controller
     {
         //check login
         $this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
         if (!$disease_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_add")));
@@ -478,6 +535,9 @@ class Ohkr extends CI_Controller
     {
         //check login
         $this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
         if (!$disease_symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_edit")));
@@ -524,6 +584,9 @@ class Ohkr extends CI_Controller
         //check login
         $this->_is_logged_in();
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
         if (!$disease_symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_delete")));
             redirect("ohkr/disease_symptoms_list/" . $disease_id);
@@ -546,6 +609,9 @@ class Ohkr extends CI_Controller
         //check login
         $this->_is_logged_in();
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
         $data['title'] = "Disease FAQ";
         $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
         $data['faq'] = $this->Ohkr_model->find_disease_faq($disease_id);
@@ -560,6 +626,9 @@ class Ohkr extends CI_Controller
     {
         //check login
         $this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
         if (!$disease_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_add")));
@@ -598,6 +667,9 @@ class Ohkr extends CI_Controller
     {
         //check login
         $this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
         if (!$faq_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_faq_to_edit")));
@@ -638,6 +710,9 @@ class Ohkr extends CI_Controller
     {
         //check login
         $this->_is_logged_in();
+
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
 
         if (!$faq_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_faq_to_delete")));
@@ -725,6 +800,9 @@ class Ohkr extends CI_Controller
 
 		$this->_is_logged_in();
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if (!$disease_id) {
 			$this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_edit")));
 			redirect("ohkr/disease_list");
@@ -769,6 +847,9 @@ class Ohkr extends CI_Controller
 
 		$this->_is_logged_in();
 
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		if (!$sms_id) {
 			$this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_edit")));
 			redirect("ohkr/disease_list");
@@ -806,6 +887,9 @@ class Ohkr extends CI_Controller
 
 	public function delete_response_sms($sms_id)
 	{
+		//check permission
+		$this->has_allowed_perm($this->router->fetch_method());
+
 		$message = $this->Ohkr_model->find_response_sms_by_id($sms_id);
 
 		if ($this->Ohkr_model->delete_response_sms($sms_id)) {

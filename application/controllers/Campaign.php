@@ -1,7 +1,7 @@
 <?php
 /**
  * AfyaData
- *  
+ *
  * An open source data collection and analysis tool.
  *
  * This content is released under the MIT License (MIT)
@@ -27,12 +27,12 @@
  * THE SOFTWARE.
  *
  *
- * @package	    AfyaData
- * @author	    AfyaData Dev Team
- * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
- * @license	    http://opensource.org/licenses/MIT	MIT License
- * @link	    https://afyadata.sacids.org
- * @since	    Version 1.0.0
+ * @package        AfyaData
+ * @author        AfyaData Dev Team
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license        http://opensource.org/licenses/MIT	MIT License
+ * @link        https://afyadata.sacids.org
+ * @since        Version 1.0.0
  */
 
 /**
@@ -46,15 +46,16 @@
 class Campaign extends CI_Controller
 {
     private $imageUrl;
+    private $controller;
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model(array('Campaign_model', 'Xform_model'));
+        log_message('debug', 'Campaign controller initialized');
 
         $this->imageUrl = base_url() . 'assets/forms/data/images/';
-
-        //$this->output->enable_profiler(TRUE);
+        $this->controller = $this->router->fetch_class();
     }
 
     /**
@@ -71,12 +72,26 @@ class Campaign extends CI_Controller
     }
 
     /**
+     * @param $method_name
+     * Check if user has permission
+     */
+    function has_allowed_perm($method_name)
+    {
+        if (!perms_role($this->controller, $method_name)) {
+            show_error("You are not allowed to view this page", 401, "Unauthorized");
+        }
+    }
+
+    /**
      * Campaign List
      */
     function lists()
     {
         //check if logged in
         $this->_is_logged_in();
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $data['campaigns'] = $this->Campaign_model->get_campaign();
 
@@ -95,6 +110,9 @@ class Campaign extends CI_Controller
     {
         //check if logged in
         $this->_is_logged_in();
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $data['title'] = "Add new Campaign";
         $data['forms'] = $this->Xform_model->get_form_list();
@@ -136,6 +154,9 @@ class Campaign extends CI_Controller
         //check if logged in
         $this->_is_logged_in();
 
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
+
         $data['title'] = "Edit Campaign";
         $data['forms'] = $this->Xform_model->get_form_list();
         $data['campaign'] = $campaign = $this->Campaign_model->get_campaign_by_id($campaign_id);
@@ -173,6 +194,9 @@ class Campaign extends CI_Controller
     {
         //check if logged in
         $this->_is_logged_in();
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $this->data['campaign'] = $campaign = $this->Campaign_model->get_campaign_by_id($campaign_id);
 

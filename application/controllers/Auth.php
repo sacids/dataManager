@@ -41,6 +41,7 @@ class Auth extends CI_Controller
 {
     private $realm;
     private $user_id;
+    private $controller;
 
     function __construct()
     {
@@ -49,11 +50,12 @@ class Auth extends CI_Controller
         $this->load->helper(array('url', 'language'));
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
         $this->lang->load('auth');
-        $this->load->model('User_model');
+        $this->load->model(array('User_model'));
 
         //variable
         $this->realm = 'Authorized users of Sacids Openrosa';
         $this->user_id = $this->session->userdata('user_id');
+        $this->controller = $this->router->fetch_class();
     }
 
     // redirect if needed, otherwise display the user list
@@ -69,6 +71,17 @@ class Auth extends CI_Controller
 
     }
 
+    /**
+     * @param $method_name
+     * Check if user has permission
+     */
+    function has_allowed_perm($method_name)
+    {
+        if (!perms_role($this->controller, $method_name)) {
+            show_error("You are not allowed to view this page", 401, "Unauthorized");
+        }
+    }
+
 
     /**
      * List of all registered users
@@ -77,7 +90,8 @@ class Auth extends CI_Controller
      */
     function users_list()
     {
-        if (!$this->ion_auth->logged_in()) {
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
@@ -132,9 +146,6 @@ class Auth extends CI_Controller
      */
     function profile()
     {
-        //Specific user id of login in user
-        $user_id =
-
         $User = $this->User_model->find_by_id($this->user_id);
         $this->data['fname'] = $User->first_name . ' ' . $User->last_name;
         $this->data['username'] = $User->username;
@@ -474,6 +485,7 @@ class Auth extends CI_Controller
 
     function activate($id, $code = FALSE)
     {
+
         if ($code !== FALSE) {
             $activation = $this->ion_auth->activate($id, $code);
         } else if ($this->ion_auth->is_admin()) {
@@ -542,8 +554,10 @@ class Auth extends CI_Controller
     {
         $this->data['title'] = "Create User";
 
+        //check login
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('auth/index', 'refresh');
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
         }
 
         $tables = $this->config->item('tables', 'ion_auth');
@@ -555,19 +569,21 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
 
         if ($identity_column !== 'email') {
-            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required|numeric');
+            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required');
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
         } else {
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
         }
+        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
 
+        $this->form_validation->set_rules('group', $this->lang->line('create_user_group_label'), 'required');
+        $this->form_validation->set_rules('district', $this->lang->line('create_user_district_label'), 'required');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 
         if ($this->form_validation->run() == TRUE) {
-            $country_code = $this->input->post("country_code");
             $email = strtolower($this->input->post('email'));
-            $identity = $country_code . substr($this->input->post('identity'), -9);
+            $identity = $this->input->post('identity');
             $password = $this->input->post('password');
             $groups = array($this->input->post('group'));
 
@@ -577,8 +593,8 @@ class Auth extends CI_Controller
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
                 'last_name' => $this->input->post('last_name'),
-                'phone' => $identity,
-                'country_code' => $country_code,
+                'phone' => $this->input->post('phone'),
+                'district' => $this->input->post('district'),
                 'digest_password' => $digest_password
             );
         }
@@ -608,9 +624,16 @@ class Auth extends CI_Controller
                 'name' => 'identity',
                 'id' => 'identity',
                 'type' => 'text',
-                'value' => $this->form_validation->set_value('identity
-                '),
+                'value' => $this->form_validation->set_value('identity'),
             );
+
+            $this->data['phone'] = array(
+                'name' => 'phone',
+                'id' => 'phone',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('phone'),
+            );
+
             $this->data['email'] = array(
                 'name' => 'email',
                 'id' => 'email',
@@ -631,6 +654,8 @@ class Auth extends CI_Controller
                 'value' => $this->form_validation->set_value('password_confirm'),
             );
 
+            $this->data['districts'] = $this->db->order_by('name', 'asc')->get('district')->result();
+            $this->data['groups'] = $this->db->order_by('name', 'asc')->get('groups')->result();
             //render view
             $this->data['title'] = "Create New User";
             $this->load->view('header', $this->data);
@@ -658,7 +683,9 @@ class Auth extends CI_Controller
         // validate form input
         $this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'required');
         $this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'required');
-        $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required|numeric');
+        $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required');
+        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
+        $this->form_validation->set_rules('district', $this->lang->line('create_user_district_label'), 'required');
         $this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'required|valid_email');
 
         if (isset($_POST) && !empty($_POST)) {
@@ -679,7 +706,9 @@ class Auth extends CI_Controller
                 $data = array(
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
-                    'email' => $this->input->post('email')
+                    'email' => $this->input->post('email'),
+                    'phone' => $this->input->post('phone'),
+                    'district' => $this->input->post('district'),
                 );
 
                 // update the password if it was posted
@@ -748,12 +777,28 @@ class Auth extends CI_Controller
             'type' => 'text',
             'value' => $this->form_validation->set_value('email', $user->email),
         );
+        $this->data['phone'] = array(
+            'name' => 'phone',
+            'id' => 'phone',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('phone', $user->phone),
+        );
+
         $this->data['identity'] = array(
             'name' => 'identity',
             'id' => 'identity',
             'type' => 'text',
             'value' => $this->form_validation->set_value('identity', $user->username),
         );
+
+        $this->data['phone'] = array(
+            'name' => 'phone',
+            'id' => 'phone',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('phone', $user->phone),
+        );
+
+
         $this->data['password'] = array(
             'name' => 'password',
             'id' => 'password',
@@ -765,6 +810,8 @@ class Auth extends CI_Controller
             'type' => 'password'
         );
 
+        $this->data['district'] = $this->db->get_where('district', array('code' => $user->district))->row();
+        $this->data['districts'] = $this->db->order_by('name', 'asc')->get('district')->result();
         //render view
         $this->load->view('header', $this->data);
         $this->_render_page('auth/edit_user');
@@ -773,10 +820,10 @@ class Auth extends CI_Controller
 
 
     //assign privilege to group
-
     function group_list()
     {
-        if (!$this->ion_auth->logged_in()) {
+        //check login
+        if (!$this->ion_auth->logged_in() && !$this->ion_auth->is_admin()) {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
@@ -784,7 +831,6 @@ class Auth extends CI_Controller
         $data['title'] = 'Manage Groups';
         $data['groups'] = $this->db->get('groups')->result();
         $this->load->view('header', $data);
-        //$this->load->view('auth/menu');
         $this->load->view('auth/group_list');
         $this->load->view('footer');
     }
@@ -793,7 +839,9 @@ class Auth extends CI_Controller
     {
         $this->data['title'] = $this->lang->line('create_group_title');
 
-        if (!$this->ion_auth->logged_in()) {
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
 
@@ -841,8 +889,10 @@ class Auth extends CI_Controller
 
         $this->data['title'] = $this->lang->line('edit_group_title');
 
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth', 'refresh');
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
         }
 
         $group = $this->ion_auth->group($id)->row();
@@ -887,14 +937,16 @@ class Auth extends CI_Controller
 
         //Load View
         $this->load->view('header', $this->data);
-        //$this->load->view('auth/menu');
         $this->_render_page('auth/edit_group');
         $this->load->view('footer');
     }
 
-    function assign_privilege($group_id)
+    function perms_group($group_id)
     {
-        if (!$this->ion_auth->logged_in()) {
+        $this->data['title'] = 'Assign Permission';
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
@@ -902,44 +954,273 @@ class Auth extends CI_Controller
         //Group Name
         $groups = $this->db->get_where('groups', array('id' => $group_id))->row();
         $this->data['group_name'] = $groups->name;
+        $this->data['group_id'] = $group_id;
 
+        $this->data['perm_list'] = $perm_list = $this->User_model->get_perms_list($group_id);
 
+        //check if user save
         if ($this->input->post('save')) {
-            $priv = $this->User_model->privilege_list($group_id);
+            $perms = $this->User_model->get_perms_list($group_id);
 
-            foreach ($priv[1] as $key => $value) {
+            foreach ($perms[1] as $key => $value) {
 
                 foreach ($value as $k => $v):
 
                     if ($this->input->post('module_' . $v[0] . '_' . $v[1])) {
-                        $check = $this->db->get_where('access_level',
+
+                        $check = $this->db->get_where('perms_group',
                             array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k))->row();
 
                         if (count($check) == 1) {
-                            $this->db->update('access_level',
+                            $this->db->update('perms_group',
                                 array('allow' => $this->input->post('module_' . $v[0] . '_' . $v[1])),
                                 array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k));
                         } else {
-                            $this->db->insert('access_level',
-                                array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k, 'allow' => 1));
+                            $this->db->insert('perms_group', array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k, 'allow' => 1));
                         }
                     } else {
-                        $this->db->update('access_level',
-                            array('allow' => 0),
-                            array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k));
+                        $this->db->update('perms_group', array('allow' => 0), array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k));
                     }
                 endforeach;
             }
-            $this->session->set_flashdata('message', 'Privilege successfully configured');
-            redirect('auth/assign_privilege/' . $group_id, 'refresh');
+            $this->session->set_flashdata('message', display_message('Permission successfully configured'));
+            redirect('auth/perms_group/' . $group_id, 'refresh');
         }
 
-        $this->data['privilege_list'] = $this->User_model->privilege_list($group_id);
-        $this->data['group_id'] = $group_id;
-        $this->data['title'] = 'Assign Privilege';
+        //render view
         $this->load->view('header', $this->data);
-        $this->load->view('auth/menu');
-        $this->load->view('auth/assign_privilege');
+        $this->load->view('auth/perms_group');
+        $this->load->view('footer');
+    }
+
+    //module list
+    function module_list()
+    {
+        $this->data['title'] = 'Module List';
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        $config = array(
+            'base_url' => $this->config->base_url("auth/module_list"),
+            'total_rows' => $this->User_model->count_module(),
+            'uri_segment' => 3,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $this->data['module'] = $this->User_model->find_all_module($this->pagination->per_page, $page);
+        $this->data["links"] = $this->pagination->create_links();
+
+        //render data
+        $this->load->view('header', $this->data);
+        $this->load->view("auth/module_list");
+        $this->load->view('footer');
+    }
+
+    //add new module
+    function add_module()
+    {
+        $this->data['title'] = "Add Module";
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        //validate form input
+        $this->form_validation->set_rules('name', 'Module', 'required');
+        $this->form_validation->set_rules('controller', 'Controller', 'required');
+
+        if ($this->form_validation->run() == true) {
+            $data = array(
+                'name' => $this->input->post('name'),
+                'controller' => $this->input->post('controller')
+            );
+            $this->db->insert('perms_module', $data);
+
+            //message and redirect
+            $this->session->set_flashdata("message", display_message("Module added successfully"));
+            redirect('auth/add_module', 'refresh');
+        }
+
+        //populate data
+        $this->data['name'] = array(
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('name'),
+        );
+
+        $this->data['controller'] = array(
+            'name' => 'controller',
+            'id' => 'controller',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('controller'),
+        );
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("auth/add_new_module");
+        $this->load->view('footer');
+    }
+
+    //add module
+    function edit_module($module_id)
+    {
+        $this->data['title'] = "Edit Module";
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        $this->data['module'] = $this->User_model->get_module_by_id($module_id);
+
+        //validate form input
+        $this->form_validation->set_rules('name', 'Module', 'required');
+        $this->form_validation->set_rules('controller', 'Controller', 'required');
+
+        if ($this->form_validation->run() == true) {
+            $data = array(
+                'name' => $this->input->post('name'),
+                'controller' => $this->input->post('controller')
+            );
+            $this->db->update('perms_module', $data, array('id' => $module_id));
+
+            $this->session->set_flashdata("message", display_message("Module edited successfully"));
+            redirect('auth/edit_module/' . $module_id, 'refresh');
+        }
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("auth/edit_module");
+        $this->load->view('footer');
+    }
+
+
+    //permission list
+    function permission_list()
+    {
+        $this->data['title'] = 'Permission List';
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        $config = array(
+            'base_url' => $this->config->base_url("auth/permission_list/"),
+            'total_rows' => $this->User_model->count_perms(),
+            'uri_segment' => 3,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $this->data['perms'] = $this->User_model->find_all_perms($this->pagination->per_page, $page);
+        $this->data["links"] = $this->pagination->create_links();
+
+        //render data
+        $this->load->view('header', $this->data);
+        $this->load->view("auth/perms_list");
+        $this->load->view('footer');
+    }
+
+    //add new perms
+    function add_perm()
+    {
+        $this->data['title'] = "Add Perm";
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        //validate form input
+        $this->form_validation->set_rules('name', 'Perm name', 'required');
+        $this->form_validation->set_rules('perm_slug', 'Perm slug', 'required');
+        $this->form_validation->set_rules('module', 'Module', 'required');
+
+        if ($this->form_validation->run() == true) {
+            $data = array(
+                'name' => $this->input->post('name'),
+                'perm_slug' => $this->input->post('perm_slug'),
+                'module_id' => $this->input->post('module')
+            );
+            $this->db->insert('perms', $data);
+
+            //message and redirect
+            $this->session->set_flashdata("message", display_message("Perms added successfully"));
+            redirect('auth/add_perm', 'refresh');
+        }
+
+        //populate data
+        $this->data['name'] = array(
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('name'),
+        );
+
+        $this->data['perm_slug'] = array(
+            'name' => 'perm_slug',
+            'id' => 'perm_slug',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('perm_slug'),
+        );
+
+        $this->data['module'] = $this->User_model->find_all_module(30, 0);
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("auth/add_perm");
+        $this->load->view('footer');
+    }
+
+    //edit perm
+    function edit_perm($perm_id)
+    {
+        $this->data['title'] = "Edit Perm";
+
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        $this->data['perm'] = $perm = $this->User_model->get_perm_by_id($perm_id);
+
+        $this->data['module_name'] = $this->User_model->get_module_by_id($perm->module_id)->name;
+
+        //validate form input
+        $this->form_validation->set_rules('name', 'Perm name', 'required');
+        $this->form_validation->set_rules('perm_slug', 'Perm slug', 'required');
+        $this->form_validation->set_rules('module', 'Module', 'required');
+
+        if ($this->form_validation->run() == true) {
+            $data = array(
+                'name' => $this->input->post('name'),
+                'perm_slug' => $this->input->post('perm_slug'),
+                'module_id' => $this->input->post('module')
+            );
+            $this->db->update('perms', $data, array('id' => $perm_id));
+
+            $this->session->set_flashdata("message", display_message("Perm edited successfully"));
+            redirect('auth/edit_perm/' . $perm_id, 'refresh');
+        }
+
+        $this->data['module'] = $this->User_model->find_all_module(30, 0);
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("auth/edit_perm");
         $this->load->view('footer');
     }
 
