@@ -69,9 +69,6 @@ class Migration_Permission extends CI_Migration
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->create_table('perms');
 
-        $this->db->query('ALTER TABLE perms ADD CONSTRAINT fk_module_id FOREIGN KEY(module_id) REFERENCES perms_module(id) ON DELETE CASCADE ON UPDATE CASCADE;');
-
-
         // Drop table 'perms_group' if it exists
         $this->dbforge->drop_table('perms_group', TRUE);
 
@@ -129,9 +126,6 @@ class Migration_Permission extends CI_Migration
         ));
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->create_table('district');
-
-        $this->db->query('ALTER TABLE perms_group ADD CONSTRAINT fk_group_id FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE ON UPDATE CASCADE;');
-        $this->db->query('ALTER TABLE perms_group ADD CONSTRAINT fk_module_id1 FOREIGN KEY(module_id) REFERENCES perms_module(id) ON DELETE CASCADE ON UPDATE CASCADE;');
     }
 
     public function down()

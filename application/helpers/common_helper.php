@@ -105,4 +105,15 @@ if (!function_exists("display_message")) {
             echo ucfirst($User->first_name) . ' ' . ucfirst($User->last_name);
         }
     }
+
+    //display first name and last name
+    if (!function_exists('display_full_name')) {
+        function display_full_name()
+        {
+            $CI = &get_instance();
+            $user_id = $CI->session->userdata('user_id');
+            $User = $CI->User_model->find_by_id($user_id);
+            echo ucfirst($User->first_name) . ' ' . ucfirst($User->last_name);
+        }
+    }
 }
