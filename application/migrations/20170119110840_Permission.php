@@ -402,6 +402,30 @@ class Migration_Permission extends CI_Migration
             )
         );
         $this->db->insert_batch('district', $data);
+
+        //drop table if exist 'xforms_config'
+        $this->dbforge->drop_table('xforms_config', TRUE);
+
+        $this->dbforge->add_field(array(
+            'id' => array(
+                'type' => 'INT',
+                'constraint' => '11',
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
+            ),
+            'xform_id' => array(
+                'type' => "INT",
+                'constraint' => '11',
+                'null' => FALSE
+            ),
+            'search_fields' => array(
+                'type' => "TEXT",
+                'null' => FALSE
+            )
+        ));
+        $this->dbforge->add_key('id', TRUE);
+        $this->dbforge->create_table('xforms_config');
+
     }
 
     public function down()
@@ -410,6 +434,7 @@ class Migration_Permission extends CI_Migration
         $this->dbforge->drop_table('perms', TRUE);
         $this->dbforge->drop_table('perms_group', TRUE);
         $this->dbforge->drop_table('district', TRUE);
+        $this->dbforge->drop_table('xforms_config', TRUE);
     }
 
 }
