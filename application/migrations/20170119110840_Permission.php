@@ -391,14 +391,12 @@ class Migration_Permission extends CI_Migration
         // Dumping data for table 'district'
         $data = array(
             array(
-                'id' => '1',
                 'name' => 'Ngorongoro',
                 'code' => 'Ngorongoro',
             ),
             array(
-                'id' => '2',
                 'name' => 'Morogoro mjini',
-                'name' => 'Morogoro_mjini',
+                'code' => 'Morogoro_mjini',
             )
         );
         $this->db->insert_batch('district', $data);
