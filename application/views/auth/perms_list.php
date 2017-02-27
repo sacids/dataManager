@@ -4,22 +4,24 @@
             <h3><?= $title ?></h3>
 
             <div class="col-sm-6">
-                <p><a class="btn btn-primary" href="<?= site_url('auth/add_module') ?>">Add Module</a></p>
+                <p><a class="btn btn-primary" href="<?= site_url('auth/add_perm') ?>">Add Perm</a></p>
 
                 <table class="table table-striped table-responsive table-hover">
                     <tr>
                         <th>Module</th>
-                        <th>Controller</th>
+                        <th>Name</th>
+                        <th>Slug</th>
                         <th></th>
                     </tr>
 
                     <?php
                     $serial = 1;
-                    foreach ($module as $value):?>
+                    foreach ($perms as $value):?>
                         <tr>
-                            <td><?php echo $value->name; ?></td>
-                            <td><?php echo $value->controller; ?></td>
-                            <td><?php echo anchor("auth/edit_module/" . $value->id, "Edit", array("class" => 'btn btn-primary btn-xs')); ?></td>
+                            <td><?php echo $value->m_name; ?></td>
+                            <td><?php echo $value->p_name; ?></td>
+                            <td><?php echo $value->perm_slug; ?></td>
+                            <td><?php echo anchor("auth/edit_perm/" . $value->p_id, "Edit", array("class" => 'btn btn-primary btn-xs')); ?></td>
                             </td>
                         </tr>
                         <?php

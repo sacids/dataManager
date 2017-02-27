@@ -11,6 +11,7 @@
 class Feedback extends CI_Controller
 {
     private $user_id;
+    private $controller;
 
     function __construct()
     {
@@ -21,8 +22,7 @@ class Feedback extends CI_Controller
         log_message('debug', 'Feedback controller initialized');
 
         $this->user_id = $this->session->userdata("user_id");
-
-        //$this->output->enable_profiler(TRUE);
+        $this->controller = $this->router->fetch_class();
     }
 
     /**
@@ -38,6 +38,17 @@ class Feedback extends CI_Controller
         }
     }
 
+    /**
+     * @param $method_name
+     * Check if user has permission
+     */
+    function has_allowed_perm($method_name)
+    {
+        if (!perms_role($this->controller, $method_name)) {
+            show_error("You are not allowed to view this page", 401, "Unauthorized");
+        }
+    }
+
 
     /**
      * input null
@@ -48,6 +59,9 @@ class Feedback extends CI_Controller
     {
         //check if logged in
         $this->_is_logged_in();
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
 
         if (isset($_POST['search'])) {
             //TODO searching here
@@ -90,6 +104,9 @@ class Feedback extends CI_Controller
     {
         //check if logged in
         $this->_is_logged_in();
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
 
         //update all feedback from android app using instance_id
         $this->Feedback_model->update_user_feedback($instance_id, 'user');

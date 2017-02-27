@@ -18,8 +18,14 @@ $lang['nav_item_create_user']       = "Ongeza Mtumiaji";
 
 //User groups
 $lang['nav_item_manage_user_groups']= "Makundi ya watumiaji";
+$lang['nav_item_list_module']= "Orodhesha Moduli";
 $lang['nav_item_list_groups']       = "Orodhesha Makundi";
 $lang['nav_item_create_group']      = "Ongeza Kundi";
+
+//Permission
+$lang['nav_item_manage_permission']= "Ruhusa ya watumiaji";
+$lang['nav_item_list_permission']       = "Orodhosha ruhusa";
+$lang['nav_item_create_permission']      = "Ongeza ruhusu";
 
 //OHKR - Afya Moja
 $lang['nav_item_ohkr']              = "Afya Moja";

@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 main">
 
-        <h3>Edit User Account</h3>
+        <h3><?php echo $this->lang->line("edit_user_heading") ?></h3>
         <?php
         if ($this->session->flashdata('message') != '') {
             echo display_message($this->session->flashdata('message'));
@@ -14,22 +14,28 @@
 
         <div class="col-sm-8">
             <div class="form-group">
-                <label> <label for="first_name">First Name:<span>*</span></label> </label>
+                <label for="first_name"><?php echo $this->lang->line("create_user_fname_label") ?></label>
                 <?php echo form_input($first_name, "", "class='form-control'"); ?>
             </div>
             <?php echo form_error('first_name'); ?>
 
             <div class="form-group">
-                <label> <label for="last_name">Last Name:<span>*</span></label> </label>
+                <label for="last_name"><?php echo $this->lang->line("create_user_lname_label") ?></label>
                 <?php echo form_input($last_name, "", "class='form-control'"); ?>
             </div>
             <?php echo form_error('last_name'); ?>
 
             <div class="form-group">
-                <label> <label for="email">Email:</label> </label>
+                <label for="email"><?php echo $this->lang->line("create_user_email_label") ?></label>
                 <?php echo form_input($email, "", "class='form-control'"); ?>
             </div>
             <?php echo form_error('email'); ?>
+
+            <div class="form-group">
+                <label for="phone"><?php echo $this->lang->line("create_user_phone_label") ?></label>
+                <?php echo form_input($phone, "", "class='form-control'"); ?>
+            </div>
+            <?php echo form_error('phone'); ?>
 
             <div class="form-group">
                 <label for="identity"><?php echo $this->lang->line("create_user_identity_label") ?>
@@ -61,6 +67,17 @@
                 </div>
                 <?php echo form_error('group'); ?>
             </div>
+
+            <div class="form-group">
+                <label for="group"><?php echo $this->lang->line("create_user_district_label") ?> <span>*</span></label>
+                <select name="district" id="district" class="form-control">
+                    <option value="<?= $district->code ?>"><?= $district->name ?></option>
+                    <?php foreach ($districts as $values): ?>
+                        <option value="<?php echo $values->code; ?>"><?php echo $values->name; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <?php echo form_error('district'); ?>
 
             <div class="form-group">
                 <label> <label for="password">Password:<br/>
