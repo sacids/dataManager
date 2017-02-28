@@ -1,5 +1,7 @@
 #Allow from all
 
+SetEnv CI_ENV development
+
 Options +FollowSymLinks
 
 RewriteEngine on
