@@ -100,14 +100,14 @@ class Search extends CI_Controller{
                 if($field_type == 'select') {
                     $opts = $var['option'];
 
-                    $tmp1 = explode(" ", $item->field_name);
+                    $tmp1 = explode(" ", $item->$field_name);
                     $t2 = '';
                     foreach ($tmp1 as $v1) {
                         $t2 .= ', ' . $opts[$v1];
                     }
                     $val    = $t2;
                 }else{
-                    $val    = $item->field_name;
+                    $val    = $item->$field_name;
                 }
 
                 //$nn[$label]     = $val;
