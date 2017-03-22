@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div class="row" style="margin-bottom: 10px;">
-                <h3>Form data collected
+                <h3><?= $title ?> - Form data collected
                     <span class="pull-right">
                     <button type="button" class="btn btn-link" data-toggle="modal"
                             data-target="#myModal">Set Filters</button></span>
@@ -156,23 +156,23 @@
             $("#theModal").modal("show");
         };
         var MyHtml = '<div id="theModal" class="modal fade">' +
-            ' <div class="modal-dialog ">' +
-            '<div class="modal-content">' +
-            ' <div class="modal-header">' +
-            '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-            '<h4 class="modal-title">' + imageTitle + '</h4>' +
-            '</div>' +
-            '<div class="modal-body">' +
-            '  <img not-to-enlarge="true" class="img-responsive" + src=""alt="...">' +
-            '</div>' +
-            '<div class="modal-footer">' +
-            '<button type="button" class="btn btn-default" data-dismiss="modal">' +
-            'Close' +
-            '</button>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
+                ' <div class="modal-dialog ">' +
+                '<div class="modal-content">' +
+                ' <div class="modal-header">' +
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                '<h4 class="modal-title">' + imageTitle + '</h4>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                '  <img not-to-enlarge="true" class="img-responsive" + src=""alt="...">' +
+                '</div>' +
+                '<div class="modal-footer">' +
+                '<button type="button" class="btn btn-default" data-dismiss="modal">' +
+                'Close' +
+                '</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
         $("div.body-content").append(MyHtml);
         $("img[not-to-enlarge!=true]").click(showModal);
         $("img[not-to-enlarge!=true]").css("cursor", "pointer");

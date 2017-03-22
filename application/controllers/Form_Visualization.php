@@ -306,6 +306,4 @@ class Form_visualization extends CI_Controller
 
 		return $holder;
 	}
-
-
 }
