@@ -10,6 +10,7 @@ class Ussd extends CI_Controller
 {
     private $api_key;
     private $sms_push_url;
+    private $user;
 
     function __construct()
     {
@@ -17,6 +18,64 @@ class Ussd extends CI_Controller
 
         $this->api_key = 'HaPbQDXbUtCBd9CWlkfmB56QdvA8kIGwb41qklNS';
         $this->sms_push_url = 'http://msdg.ega.go.tz/msdg/public/quick_sms';
+        $this->user = 'kadefue@sua.ac.tz';
+    }
+
+
+    //push message
+    function sms_push()
+    {
+        $date_time = date('Y-m-d H:i:s');
+
+        $message = array(
+            'recipients' => '255717705746, 255753437856',
+            'message' => 'Testing message',
+            'datetime' => $date_time,
+            'sender_id' => '15200',
+            'mobile_service_id' => 93
+        );
+
+        $post_data = array('data' => json_encode($message), 'datetime' => $date_time);
+
+        //HASH the JSON with the generated user API key using SHA-256 method.
+        $hash = hash_hmac('sha256', $post_data['data'], $this->api_key, true);
+
+        //Encode the hash using Base 64 Encode method
+        $base64_value = base64_encode($hash);
+
+        $http_header = array(
+            'X-Auth-Request-Hash:' . $base64_value,
+            'X-Auth-Request-Id:' . $this->user,
+            'X-Auth-Request-Type:api'
+        );
+
+        //Initialise connection using PHP CURL
+        $ch = curl_init();
+
+        //set option of URL to post to
+        curl_setopt($ch, CURLOPT_URL, $this->sms_push_url);
+
+        //set option of request method -----HTTP POST Request
+        curl_setopt($ch, CURLOPT_POST, true);
+
+        //The HTTP Header
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
+
+        //This line sets the parameters to post to the URL
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+
+        //This line makes sure that the response is gotten back to the $response object(see below) and not echoed
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        //This line executes the RPC call
+        $response = curl_exec($ch); //and assigns the result to $response object
+
+        echo $return_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        //Close the stream
+        curl_close($ch);
+
+        echo $response;
     }
 
     //receive menu from EGA
@@ -64,55 +123,6 @@ class Ussd extends CI_Controller
         echo json_encode($response);
     }
 
-    //push message
-    function sms_push()
-    {
-        $post_data = array(
-            'msisdn' => '255717705746',
-            'message' => 'Testing message',
-            'datetime' => date('Y-m-d H:i:s'),
-            'mobile_service_id' => 93
-        );
-
-        //HASH the JSON with the generated user API key using SHA-256 method.
-        $hash = hash('sha256', json_encode($post_data), $this->api_key);
-
-        //Encode the hash using Base 64 Encode method
-        $base64_value = base64_encode($hash);
-
-        $http_header = array(
-            'X-Auth-Request-Hash' => $base64_value,
-            'X-Auth-Request-Id' => 'kadefue@sua.ac.tz',
-            'X-Auth-Request-Type' => 'api'
-        );
-
-        //Initialise connection using PHP CURL
-        $ch = curl_init();
-
-        //set option of URL to post to
-        curl_setopt($ch, CURLOPT_URL, $this->sms_push_url);
-
-        //set option of request method -----HTTP POST Request
-        curl_setopt($ch, CURLOPT_POST, true);
-
-        //The HTTP Header
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
-
-        //This line sets the parameters to post to the URL
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
-
-        //This line makes sure that the response is gotten back to the $response object(see below) and not echoed
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        //This line executes the RPC call
-        $response = curl_exec($ch); //and assigns the result to $response object
-
-        $return_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        //Close the stream
-        curl_close($ch);
-    }
-
     //pull message
     function sms_pull()
     {
@@ -137,6 +147,60 @@ class Ussd extends CI_Controller
         );
 
         echo json_encode($response);
+    }
+
+
+    //push message
+    function push_sms()
+    {
+        $post_data['data'] = array(
+            'recipients' => '255717705746',
+            'message' => 'Testing message',
+            'datetime' => date('Y-m-d H:i:s'),
+            'sender_id' => '15200',
+            'mobile_service_id' => 93
+        );
+
+
+        //HASH the JSON with the generated user API key using SHA-256 method.
+        $hash = hash_hmac('sha256', json_encode($post_data['data']), $this->api_key);
+
+        //Encode the hash using Base 64 Encode method
+        $base64_value = base64_encode($hash);
+
+        $http_header = array(
+            'X-Auth-Request-Hash:' . $base64_value,
+            'X-Auth-Request-Id:kadefue@sua.ac.tz',
+            'X-Auth-Request-Type:api'
+        );
+
+        //Initialise connection using PHP CURL
+        $ch = curl_init();
+
+        //set option of URL to post to
+        curl_setopt($ch, CURLOPT_URL, $this->sms_push_url);
+
+        //set option of request method -----HTTP POST Request
+        curl_setopt($ch, CURLOPT_POST, true);
+
+        //The HTTP Header
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
+
+        //This line sets the parameters to post to the URL
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+
+        //This line makes sure that the response is gotten back to the $response object(see below) and not echoed
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        //This line executes the RPC call
+        $response = curl_exec($ch); //and assigns the result to $response object
+
+        echo $return_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        //Close the stream
+        curl_close($ch);
+
+        echo $response;
     }
 
 }
