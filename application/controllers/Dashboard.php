@@ -1,7 +1,7 @@
 <?php
 /**
  * AfyaData
- *  
+ *
  * An open source data collection and analysis tool.
  *
  * This content is released under the MIT License (MIT)
@@ -27,12 +27,12 @@
  * THE SOFTWARE.
  *
  *
- * @package	    AfyaData
- * @author	    AfyaData Dev Team
- * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
- * @license	    http://opensource.org/licenses/MIT	MIT License
- * @link	    https://afyadata.sacids.org
- * @since	    Version 1.0.0
+ * @package        AfyaData
+ * @author        AfyaData Dev Team
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license        http://opensource.org/licenses/MIT	MIT License
+ * @link        https://afyadata.sacids.org
+ * @since        Version 1.0.0
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -70,15 +70,32 @@ class Dashboard extends CI_Controller
         $this->data['active_campaign'] = $this->Campaign_model->count_active_campaign();
         $this->data['new_feedback'] = $this->Feedback_model->count_new_feedback();
 
+        $form_title = array();
+        $overall_data = array();
+        $monthly_data = array();
+        $weekly_data = array();
+        $daily_data = array();
         //submitted forms
-        $this->data['submitted_forms'] = $this->Submission_model->get_submitted_forms();
+        $submitted_forms = $this->Submission_model->get_submitted_forms();
 
-        foreach ($this->data['submitted_forms'] as $k => $form) {
-            $this->data['submitted_forms'][$k]->overall_form = $this->Submission_model->count_overall_submitted_forms($form->form_id);
-            $this->data['submitted_forms'][$k]->monthly_form = $this->Submission_model->count_monthly_submitted_forms($form->form_id);
-            $this->data['submitted_forms'][$k]->weekly_form = $this->Submission_model->count_weekly_submitted_forms($form->form_id);
-            $this->data['submitted_forms'][$k]->daily_form = $this->Submission_model->count_daily_submitted_forms($form->form_id);
+        $i = 0;
+        foreach ($submitted_forms as $value) {
+            $form_title[$i] = $value->title;
+            $overall_data[$i] = $this->Submission_model->count_overall_submitted_forms($value->form_id);
+            $monthly_data[$i] = $this->Submission_model->count_monthly_submitted_forms($value->form_id);
+            $weekly_data[$i] = $this->Submission_model->count_weekly_submitted_forms($value->form_id);
+            $daily_data[$i] = $this->Submission_model->count_daily_submitted_forms($value->form_id);
+            $i++;
         }
+
+        $this->data['form_title'] = json_encode($form_title);
+        $this->data['overall_data'] = json_encode($overall_data);
+        $this->data['monthly_data'] = json_encode($monthly_data);
+        $this->data['weekly_data'] = json_encode($weekly_data);
+        $this->data['daily_data'] = json_encode($daily_data);
+
+        //feedback
+        $this->data['feedback'] = $this->Feedback_model->find_all(5, 0);
 
         $this->data['title'] = "Taarifa kwa wakati!";
         $this->load->view('header', $this->data);

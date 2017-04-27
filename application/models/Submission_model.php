@@ -73,16 +73,39 @@ class Submission_model extends CI_Model
      */
     function count_overall_submitted_forms($form_id)
     {
-        return $this->db->get($form_id)->num_rows();
+
+        $sql = " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ";
+        $sql .= " WHERE table_schema = '{$this->db->database}' ";
+        $sql .= " AND table_name = '{$form_id}' ";
+
+        $query = $this->db->query($sql);
+
+        if (empty($query->num_rows() == 1)) {
+            return $this->db->get($form_id)->num_rows();
+        } else {
+            return 0;
+        }
+
     }
 
     /**
      * @param $form_id
+     * @return int
      */
     function count_monthly_submitted_forms($form_id)
     {
-        return $this->db
-            ->get_where($form_id, array('MONTH(meta_start)' => date('m')))->num_rows();
+        $sql = " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ";
+        $sql .= " WHERE table_schema = '{$this->db->database}' ";
+        $sql .= " AND table_name = '{$form_id}' ";
+
+        $query = $this->db->query($sql);
+
+        if (empty($query->num_rows() == 1)) {
+            return $this->db
+                ->get_where($form_id, array('MONTH(meta_start)' => date('m')))->num_rows();
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -94,15 +117,39 @@ class Submission_model extends CI_Model
         $today = date('Y-m-d');
         $last = date('Y-m-d', strtotime("-7 day", strtotime($today)));
 
-        $this->db->where("meta_start BETWEEN '$last%' AND '$today%'", NULL, FALSE);
-        return $this->db->get($form_id)->num_rows();
+        $sql = " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ";
+        $sql .= " WHERE table_schema = '{$this->db->database}' ";
+        $sql .= " AND table_name = '{$form_id}' ";
+
+        $query = $this->db->query($sql);
+
+        if (empty($query->num_rows() == 1)) {
+            $this->db->where("meta_start BETWEEN '$last%' AND '$today%'", NULL, FALSE);
+            return $this->db->get($form_id)->num_rows();
+        } else {
+            return 0;
+        }
     }
 
-
+    /**
+     * @param $form_id
+     * @return int
+     */
     function count_daily_submitted_forms($form_id)
     {
         $today = date('Y-m-d');
-        return $this->db->get_where($form_id, array('DATE(meta_start)' => $today))->num_rows();
+
+        $sql = " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ";
+        $sql .= " WHERE table_schema = '{$this->db->database}' ";
+        $sql .= " AND table_name = '{$form_id}' ";
+
+        $query = $this->db->query($sql);
+
+        if (empty($query->num_rows() == 1)) {
+            return $this->db->get_where($form_id, array('DATE(meta_start)' => $today))->num_rows();
+        } else {
+            return 0;
+        }
     }
 
 

@@ -79,7 +79,8 @@ class Auth extends CI_Controller
         $password = $this->input->post('password');
 
         //substring last 9 character
-        $username = $this->initial . substr($phone, -9);
+        //$username = $this->initial . substr($phone, -9);
+        $username = $phone;
 
         //login process validation
         $login_status = $this->ion_auth->login($username, $password);
@@ -118,6 +119,7 @@ class Auth extends CI_Controller
         $password_confirm = $this->input->post('password_confirm');
 
         //substring last 9 character
+        //$username = $this->initial . substr($phone, -9);
         $username = $this->initial . substr($phone, -9);
 
         //check username if exist
