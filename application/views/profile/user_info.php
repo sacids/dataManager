@@ -1,7 +1,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-lg-12 main">
-			<h3><?php echo $title; ?></h3>
+            <div id="header-title">
+                <h3 class="title">My Profile</h3>
+            </div>
 
 			<div class="col-sm-3 col-md-3 col-lg-3">
 				<div id="header-title" style="" class="text-center">

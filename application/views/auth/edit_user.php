@@ -1,8 +1,10 @@
 <div class="container"">
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 main">
+        <div id="header-title">
+            <h3 class="title"><?php echo $this->lang->line("edit_user_heading") ?></h3>
+        </div>
 
-        <h3><?php echo $this->lang->line("edit_user_heading") ?></h3>
         <?php
         if ($this->session->flashdata('message') != '') {
             echo display_message($this->session->flashdata('message'));

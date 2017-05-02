@@ -1,7 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Feedback List</h3>
+            <div id="header-title">
+                <h3 class="title">Feedback List</h3>
+            </div>
 
             <div class="col-sm-12">
 

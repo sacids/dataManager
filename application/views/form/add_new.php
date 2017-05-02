@@ -2,9 +2,9 @@
     <div class="row">
         <?php echo form_open_multipart('xform/add_new', 'class="form-horizontal" role="form"'); ?>
         <div class="col-sm-12 col-md-6 col-lg-6">
-
-            <h3>Form Details</h3>
-
+            <div id="header-title">
+                <h3 class="title">Form Details</h3>
+            </div>
 
             <?php
             if ($this->session->flashdata('message') != '') {

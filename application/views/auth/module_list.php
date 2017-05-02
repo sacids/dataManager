@@ -1,7 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3><?= $title ?></h3>
+            <div id="header-title">
+                <h3 class="title"><?php echo $title ?></h3>
+            </div>
 
             <div class="col-sm-6">
                 <p><a class="btn btn-primary" href="<?= site_url('auth/add_module') ?>">Add Module</a></p>

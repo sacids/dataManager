@@ -1,7 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Campaign List</h3>
+            <div id="header-title">
+                <h3 class="title">Campaign List</h3>
+            </div>
 
             <div class="row">
                 <?php

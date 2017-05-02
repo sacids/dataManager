@@ -1,7 +1,10 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Add Specie Details</h3>
+            <div id="header-title">
+                <h3 class="title">Add Specie Details</h3>
+            </div>
+
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';

@@ -2,6 +2,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
+            <div id="header-title">
+                <h3 class="title">Add disease details</h3>
+            </div>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -26,7 +29,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active " id="diseaseInfo" style="padding: 20px;">
-                            <h3>Add Disease Details</h3>
+                            <h3>Disease Details</h3>
 
                             <div class="form-group">
                                 <label><?php echo $this->lang->line("label_disease_name") ?> <span>*</span></label>

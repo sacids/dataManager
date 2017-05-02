@@ -2,7 +2,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Edit Symptom Details</h3>
+            <div id="header-title">
+                <h3 class="title">Edit Symptom Details</h3>
+            </div>
 
             <?php
             if ($this->session->flashdata('message') != '') {
