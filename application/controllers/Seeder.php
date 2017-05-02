@@ -39,7 +39,7 @@ class Seeder extends CI_Controller
 		$this->_truncate_db();
 
 		// seed users
-		//$this->_seed_users(25);
+		$this->_seed_users(25);
 
 		// call dalili za mifugo
 		$this->_seed_dalili_za_mifugo_forms(2150);
