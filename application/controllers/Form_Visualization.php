@@ -27,12 +27,13 @@
  * THE SOFTWARE.
  *
  *
- * @package	    AfyaData
- * @author	    AfyaData Dev Team
- * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
- * @license	    http://opensource.org/licenses/MIT	MIT License
- * @link	    https://afyadata.sacids.org
- * @since	    Version 1.0.0
+ * @package        AfyaData
+ * @author        AfyaData Dev Team
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS
+ *     http://sacids.org)
+ * @license        http://opensource.org/licenses/MIT	MIT License
+ * @link        https://afyadata.sacids.org
+ * @since        Version 1.0.0
  */
 
 /**
@@ -56,7 +57,8 @@ class Form_visualization extends CI_Controller
 		$this->load->model(array(
 			'Xform_model',
 			'User_model',
-			'Submission_model'
+			'Submission_model',
+			'Feedback_model'
 		));
 
 		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
@@ -83,6 +85,16 @@ class Form_visualization extends CI_Controller
 			$table_name = $form_details->form_id;
 			$data['table_fields'] = $table_fields = $this->Xform_model->find_table_columns($table_name);
 			$data['table_fields_data'] = $table_fields_data = $this->Xform_model->find_table_columns_data($table_name);
+			$data['field_maps'] = $this->_get_mapped_table_column_name($form_details->form_id);
+			$data['mapped_fields'] = array();
+			foreach ($table_fields as $key => $column_name) {
+				if (array_key_exists($column_name, $data['field_maps'])) {
+					$data['mapped_fields'][$column_name] = $data['field_maps'][$column_name];
+				} else {
+					$data['mapped_fields'][$column_name] = $column_name;
+				}
+			}
+			$data['table_fields'] = $data['mapped_fields'];
 
 			$this->form_validation->set_rules("axis", "Column to plot", "required");
 			$this->form_validation->set_rules("group_by", "Select column to group by", "required");
@@ -106,14 +118,14 @@ class Form_visualization extends CI_Controller
 				$data['results'] = $results = $this->Xform_model->get_graph_data($table_name, $axis_column, $function, $group_by_column);
 
 				$i = 0;
-				foreach ($results as $results) {
+				foreach ($results as $result) {
 					if ($function == "COUNT") {
-						$categories[$i] = $results->$group_by_column;
-						$series_data[$i] = $results->count;
+						$categories[$i] = $result->$group_by_column;
+						$series_data[$i] = $result->count;
 					}
 					if ($function == "SUM") {
-						$categories[$i] = $results->$axis_column;
-						$series_data[$i] = $results->sum;
+						$categories[$i] = $result->$axis_column;
+						$series_data[$i] = $result->sum;
 					}
 					$i++;
 				}
@@ -130,6 +142,75 @@ class Form_visualization extends CI_Controller
 		$this->load->view("header", $data);
 		$this->load->view("graph/chart", $data);
 		$this->load->view("footer", $data);
+	}
+
+	/**
+	 * @param $form_id
+	 * @return array
+	 */
+	function _get_mapped_table_column_name($form_id)
+	{
+		if (!$form_id)
+			redirect("form_visualization");
+
+		$table_name = $form_id;
+		$map = $this->get_field_map($table_name);
+
+		$this->load->library("Xform_comm");
+		$form_details = $this->Feedback_model->get_form_details($form_id);
+		$file_name = $form_details->filename;
+		$this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
+		$this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+		$form_definition = $this->xform_comm->get_defn();
+		$table_field_names = array();
+		foreach ($form_definition as $fdfn) {
+			$kk = $fdfn['field_name'];
+			// check if column name was mapped to fieldmap table
+			if (array_key_exists($kk, $map)) {
+				$kk = $map[$kk];
+			}
+			if (array_key_exists("label", $fdfn)) {
+				if ($fdfn['type'] == "select") {
+					$options = $fdfn['option'];
+					foreach ($options as $key => $value) {
+						// check if column name was mapped to fieldmap table
+						if (array_key_exists($key, $map)) {
+							$key = $map[$key];
+						}
+						$table_field_names[$key] = $value;
+					}
+				} elseif ($fdfn['type'] == "int") {
+					$find_male = " m ";
+					$find_female = " f ";
+					$group_name = str_replace("_", " ", $fdfn['field_name']);
+					if (strpos($group_name, $find_male)) {
+						$table_field_names[$kk] = str_replace($find_male, " " . $fdfn['label'] . " ", $group_name);
+					} elseif (strpos($group_name, $find_female)) {
+						$table_field_names[$kk] = str_replace($find_female, " " . $fdfn['label'] . " ", $group_name);
+					} else {
+						$table_field_names[$kk] = $group_name . " " . $fdfn['label'];
+					}
+				} else {
+					$table_field_names[$kk] = $fdfn['label'];
+				}
+			} else {
+				$table_field_names[$kk] = $fdfn['field_name'];
+			}
+		}
+		return $table_field_names;
+	}
+
+	private function get_field_map($table_name)
+	{
+
+		$arr = $this->Xform_model->get_fieldname_map($table_name);
+		$map = array();
+		foreach ($arr as $val) {
+			$key = $val['field_name'];
+			$label = $val['col_name'];
+			$map[$key] = $label;
+		}
+		return $map;
 	}
 
 	/**

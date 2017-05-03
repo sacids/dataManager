@@ -61,7 +61,8 @@ class Dhis2 extends CI_Controller
 	public static $OPTION_SET_URL = "api/optionSets";
 
 	public static $DATASETS_URL = "api/me/assignedDataSets";
-	public static $DATASET_UPLOAD_URL = "api/dataValueSets";
+	public static $DATASET_UPLOAD_URL = "api/26/dataValueSets";
+	public static $DATA_VALUES_URL = "api/dataValues";
 	public static $DATASET_VALUES_URL = "api/dataSets";
 
 	public static $FORM_PARAM = "form?ou=";
@@ -131,8 +132,11 @@ class Dhis2 extends CI_Controller
 	function _post_data($url, $data)
 	{
 		$headers = array(
+			"Accept:application/json",
 			"Content-Type:application/json",
-			'Authorization: Basic ' . base64_encode("gakyoo:AfyaData123")
+			//"Content-Type:text/json",
+			'Authorization: Basic ' . base64_encode("admin:district")
+			//'Authorization: Basic ' . base64_encode("gakyoo:AfyaData123")
 		);
 
 		$ch = curl_init();
@@ -156,30 +160,30 @@ class Dhis2 extends CI_Controller
 		$dhis2_data = array(
 			"dataSet"      => "AuMIR3qLjI8",
 			"completeDate" => date("Y-m-d"),
-			"period"       => "201702",
+			"period"       => "201704",
 			"orgUnit"      => "dwTq2CbVWhC", //AfyaDataTest  id for Morogoro Regional Hospital
-			"name"         => "AfyaDataTest DHIS2",// . date("Y-m-d H:i:s"),
+			"name"         => "AfyaData Community Reporting",// . date("Y-m-d H:i:s"),
 			"periodType"   => "Daily",
 //			"attributeOptionCombo" => "jgxivsFwmyR",
 			"dataValues"   => array(
 				array(
 					"dataElement" => "Ht3Nw94dOP7",
 //					"categoryOptionCombo" => "HllvX50cXC0",
-					"period"      => "20170201",
+					"period"      => "20170401",
 					"value"       => mt_rand(1, 50),
 					"comment"     => "HIV Cases report",
 				),//HIV AIDS Cases
 				array(
 					"dataElement" => "IjezpgJWhMB",
 //					"categoryOptionCombo" => "HllvX50cXC0",
-					"period"      => "20170201",
+					"period"      => "20170401",
 					"value"       => mt_rand(1, 5),
 					"comment"     => "Malaria cases"
 				), //Malaria cases
 				array(
 					"dataElement" => "RQSBQrKmCOt",
 //					"categoryOptionCombo" => "HllvX50cXC0",
-					"period"      => "20170201",
+					"period"      => "20170401",
 					"value"       => mt_rand(0, 20),
 					"comment"     => "Typhoid cases"
 				),//Cholera Cases
@@ -196,37 +200,103 @@ class Dhis2 extends CI_Controller
 	function send_data_values()
 	{
 
-		$data_values = array();
-		for ($i = 1; $i <= 28; $i++) {
+		$data_values = array(/*"dataSet"      => "DLF7kRDWZuF",
+			"completeData" => "2014-03-10",
+			"period"       => "201703",
+			"orgUnit"      => "dwTq2CbVWhC",*/
+		);
+
+		for ($i = 10; $i <= 15; $i++) {
 			$data_values["dataValue"][] = array(
-				"dataElement"         => "IjezpgJWhMB",//Malaria
-				"categoryOptionCombo" => "HllvX50cXC0",
-				"period"              => "201702" . $i,
-				"value"               => mt_rand(0, 200)
+				"dataElement" => "yAgXEgf3Gak",//Malaria
+				//"orgUnit"     => "dwTq2CbVWhC",
+				"period"      => "201703" . $i,
+				"value"       => mt_rand(0, 200)
 			);
 			$data_values['dataValue'][] = array(
-				"dataElement"         => "Ht3Nw94dOP7", //HIV
-				"categoryOptionCombo" => "HllvX50cXC0",
-				"period"              => "201702" . $i,
-				"value"               => mt_rand(0, 200)
+				"dataElement" => "Z0oDoDwQkYk", //HIV
+				//"orgUnit"     => "dwTq2CbVWhC",
+				"period"      => "201703" . $i,
+				"value"       => mt_rand(0, 200)
 			);
 			$data_values["dataValue"][] = array(
-				"dataElement"         => "RQSBQrKmCOt",//Cholera
-				"categoryOptionCombo" => "HllvX50cXC0",
-				"period"              => "201702" . $i,
-				"value"               => mt_rand(0, 200)
+				"dataElement" => "BCeYzx9bwMj",//Typhoid
+				//"orgUnit"     => "dwTq2CbVWhC",
+				"period"      => "201703" . $i,
+				"value"       => mt_rand(0, 200)
 			);
 		}
+
 		//echo json_encode($data_values);
 		log_message("debug", json_encode($data_values));
 		header("Content-Type:text/json");
 		$response = $this->_post_data($this->_get_absolute_url(
-			self::$DATASET_UPLOAD_URL . "?dryRun=false&importStrategy=CREATE"), $data_values);
+			self::$DATASET_UPLOAD_URL), $data_values);
+		//. "?dryRun=false&importStrategy=CREATE"
+		//. "?dataElementIdScheme=UID&orgUnitIdScheme=UID&dryRun=true&importStrategy=CREATE"
 		echo $response;
+	}
+
+	function data_values()
+	{
+		$count = 0;
+		for ($i = 18; $i <= 22; $i++) {
+			$data_dataValue = array(
+				array(
+					"dataElement" => "yAgXEgf3Gak",//Malaria
+					"orgUnit"     => "jDxW846ZIoe",
+					"period"      => "201702".$i,
+					"value"       => mt_rand(0, 200)
+				),
+				array(
+					"dataElement" => "Z0oDoDwQkYk", //HIV
+					"orgUnit"     => "jDxW846ZIoe",
+					"period"      => "201702" . $i,
+					"value"       => mt_rand(0, 200)
+				),
+				array(
+					"dataElement" => "BCeYzx9bwMj",//Typhoid
+					"orgUnit"     => "jDxW846ZIoe",
+					"period"      => "201702" . $i,
+					"value"       => mt_rand(0, 200)
+				));
+			foreach ($data_dataValue as $dv) {
+				try {
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL, self::$base_url . "api/dataValues?de={$dv['dataElement']}&pe=" . $dv['period'] . "&ou=".$dv['orgUnit']);
+					curl_setopt($ch, CURLOPT_POST, 1);
+					curl_setopt($ch, CURLOPT_USERPWD, "admin:district");
+					curl_setopt($ch, CURLOPT_POSTFIELDS, "value=".$dv['value']);  //. mt_rand(0, 200));
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+					$server_output = curl_exec($ch);
+					curl_close($ch);
+					log_message("debug", "Output " . $i . " " . $server_output);
+					header("Content-Type:text/json");
+					echo $server_output;
+				} catch (Exception $e) {
+					echo 'Sorry! Caught exception: ', $e->getMessage(), "\n";
+				}
+				$count++;
+			}
+		}
+
+		echo "Sent {$count} entries";
 	}
 
 	function get()
 	{
 		echo $this->_send_get_request($this->_get_absolute_url(self::$DATASETS_URL));
+	}
+
+	function dhis2_data(){
+		$data['title'] = "Dhis2";
+
+		if($this->form_validation->run() === FALSE){
+			$this->load->view('header', $data);
+			$this->load->view("dhis2");
+			$this->load->view('footer');
+		}else{
+
+		}
 	}
 }
