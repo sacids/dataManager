@@ -37,6 +37,7 @@
 
     <!-- Custom styles for this template -->
     <link href="<?= base_url() ?>assets/bootstrap/css/navbar-fixed-top.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/css/form.css" type="text/css">
 
     <!-- Font awesome css -->
     <link href="<?php echo base_url(); ?>assets/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet"
@@ -69,6 +70,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><?= $this->lang->line("nav_item_projects") ?> <span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
+                            <li><?php echo anchor('projects/add_new', $this->lang->line("nav_item_add_new_project")); ?></li>
+                        </ul>
+                    </li>
+
                 <?php if (perm_module('Xform')) { ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

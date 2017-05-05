@@ -15,10 +15,10 @@
             </div>
 
             <div class="right-col col-lg-5">
-                <form action="<?php echo site_url('auth/login'); ?>" class="form-horizontal" role="form"
+                <form action="<?php echo site_url('auth/sign_up'); ?>" class="form-horizontal" role="form"
                       method="post" accept-charset="utf-8">
                     <div class="pure-form">
-                        <h2>Login to Afyadata</h2>
+                        <h2>Sign up to Afyadata</h2>
                         <div class="col-sm-12">
                             <div class="row">
                                 <?php if (validation_errors() != "") {
@@ -27,11 +27,37 @@
                                     echo $message;
                                 } ?>
                             </div>
+
+                            <div class="col-xs col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <?php echo form_input($first_name); ?>
+                                </div> <!-- /form-group -->
+                            </div> <!-- /col -->
+                            <div class="col-xs col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <?php echo form_input($last_name); ?>
+                                </div> <!-- /form-group -->
+                            </div> <!-- /col -->
+
+
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <?= form_input($identity) ?>
+                                    <?= form_input($organization) ?>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <?= form_input($email) ?>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <?= form_input($phone) ?>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <?= form_password($password) ?>
@@ -40,16 +66,15 @@
 
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <div class="checkbox">
-                                        <label class="">
-                                            <input class="" type="checkbox">Remember me</label>
-                                    </div>
+                                    <?= form_password($password_confirm) ?>
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <?php echo form_hidden('group[]', '8'); ?>
+
+                            <div class="form-group last">
                                 <div class="col-sm-8">
-                                    <?php echo form_submit('submit', 'Login', array('class' => "btn btn-maroon btn-large btn-block")); ?>
+                                    <?php echo form_submit('submit', 'Sign up', array('class' => "btn btn-maroon btn-large btn-block")); ?>
                                 </div>
                             </div>
                         </div>

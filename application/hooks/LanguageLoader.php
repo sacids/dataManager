@@ -20,10 +20,10 @@ class LanguageLoader
 			$ci->lang->load('sacids', $siteLanguage);
 			$ci->lang->load('nav_menu', $siteLanguage);
 		} else {
-			$ci->lang->load('auth', 'swahili');
-			$ci->lang->load('ion_auth', "swahili");
-			$ci->lang->load('sacids', "swahili");
-			$ci->lang->load('nav_menu', "swahili");
+			$ci->lang->load('auth', 'english');
+			$ci->lang->load('ion_auth', "english");
+			$ci->lang->load('sacids', "english");
+			$ci->lang->load('nav_menu', "english");
 		}
 	}
 }

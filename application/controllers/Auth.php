@@ -200,13 +200,20 @@ class Auth extends CI_Controller
                 'id' => 'identity',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('identity'),
+                'class' => 'form-control',
+                'placeholder' => 'Enter username'
             );
             $this->data['password'] = array('name' => 'password',
                 'id' => 'password',
                 'type' => 'password',
+                'class' => 'form-control',
+                'placeholder' => 'Enter username'
             );
 
-            $this->_render_page('auth/login', $this->data);
+            //render view
+            $this->load->view('layout/header', $this->data);
+            $this->_render_page('auth/login');
+            $this->load->view('layout/footer');
         }
     }
 
@@ -547,9 +554,125 @@ class Auth extends CI_Controller
         }
     }
 
-    /**
-     * create new user
-     */
+    //sign up
+    function sign_up()
+    {
+        $this->data['title'] = "Create account";
+
+        $tables = $this->config->item('tables', 'ion_auth');
+        $identity_column = $this->config->item('identity', 'ion_auth');
+        $this->data['identity_column'] = $identity_column;
+
+        // validate form input
+        $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
+        $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
+        $this->form_validation->set_rules('organization', 'Organization', 'required');
+
+//        if ($identity_column !== 'email') {
+//            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required');
+//            $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
+//        } else {
+        $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
+        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
+        $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+        $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+
+        if ($this->form_validation->run() == TRUE) {
+            $email = strtolower($this->input->post('email'));
+            $identity = $this->input->post('email');
+            $password = $this->input->post('password');
+            $groups = array($this->input->post('group'));
+
+            //digest password
+            $digest_password = md5("{$identity}:{$this->realm}:{$password}");
+
+            $additional_data = array(
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'phone' => $this->input->post('phone'),
+                'company' => $this->input->post('organization'),
+                'digest_password' => $digest_password
+            );
+        }
+        if ($this->form_validation->run() == TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data, $groups)) {
+            // check to see if we are creating the user
+            // redirect them back to the admin page
+            $this->session->set_flashdata('message', display_message($this->ion_auth->messages()));
+            redirect("auth/sign_up", 'refresh');
+        } else {
+            // display the create user form
+            // set the flash data error message if there is one
+            $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+
+            $this->data['first_name'] = array(
+                'name' => 'first_name',
+                'id' => 'first_name',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('first_name'),
+                'class' => 'form-control',
+                'placeholder' => 'First name e.g Eric'
+            );
+            $this->data['last_name'] = array(
+                'name' => 'last_name',
+                'id' => 'last_name',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('last_name'),
+                'class' => 'form-control',
+                'placeholder' => 'Last name e.g Beda'
+            );
+
+            $this->data['organization'] = array(
+                'name' => 'organization',
+                'id' => 'organization',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('organization'),
+                'class' => 'form-control',
+                'placeholder' => 'Organization e.g SACIDS Tanzania'
+            );
+
+            $this->data['phone'] = array(
+                'name' => 'phone',
+                'id' => 'phone',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('phone'),
+                'class' => 'form-control',
+                'placeholder' => 'Phone number e.g 255717705746'
+            );
+
+            $this->data['email'] = array(
+                'name' => 'email',
+                'id' => 'email',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('email'),
+                'class' => 'form-control',
+                'placeholder' => 'Email e.g afyadata@sacids.org'
+            );
+
+            $this->data['password'] = array(
+                'name' => 'password',
+                'id' => 'password',
+                'type' => 'password',
+                'value' => $this->form_validation->set_value('password'),
+                'class' => 'form-control',
+                'placeholder' => 'Password {at lease 8 character}'
+            );
+            $this->data['password_confirm'] = array(
+                'name' => 'password_confirm',
+                'id' => 'password_confirm',
+                'type' => 'password',
+                'value' => $this->form_validation->set_value('password_confirm'),
+                'class' => 'form-control',
+                'placeholder' => 'Confirm password'
+            );
+
+            //render view
+            $this->load->view('layout/header', $this->data);
+            $this->_render_page('auth/sign_up');
+            $this->load->view('layout/footer');
+        }
+    }
+
+    //create new user
     function create_user()
     {
         $this->data['title'] = "Create User";

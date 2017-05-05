@@ -21,7 +21,12 @@ class Welcome extends CI_Controller
      */
     public function index()
     {
+        $this->data['title'] = 'Taarifa kwa wakati';
+
+        //render view
+        $this->load->view('layout/header', $this->data);
         $this->load->view('view');
+        $this->load->view('layout/footer');
     }
 
 }
