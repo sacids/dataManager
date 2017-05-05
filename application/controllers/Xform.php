@@ -1284,7 +1284,7 @@ class Xform extends CI_Controller
         }
         redirect("xform/forms");
     }
-    
+
     /**
      * @param $form_id
      */
@@ -1377,7 +1377,7 @@ class Xform extends CI_Controller
                 $this->excel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
                 $serial++;
             }
-            $form_data = $this->Xform_model->find_form_data_by_fields($form_id, $form_filters, 5000);
+            $form_data = $this->Xform_model->find_form_data_by_fields($form_id, $form_filters, 100000, 0);
         } else {
             //table fields
             $table_fields = $this->Xform_model->find_table_columns($form_id);
@@ -1397,7 +1397,7 @@ class Xform extends CI_Controller
                 $this->excel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
                 $serial++;
             }
-            $form_data = $this->Xform_model->find_form_data($form_id);
+            $form_data = $this->Xform_model->find_form_data($form_id, 100000, 0);
         }
 
         $inc = 2;
@@ -1536,7 +1536,7 @@ class Xform extends CI_Controller
     {
         if (!$form_id)
             $form_id = "ad_build_week_report_skolls_b_1767716170";
-        
+
         $this->table_name = $form_id;
         $map = $this->get_field_map();
 
@@ -1608,6 +1608,7 @@ class Xform extends CI_Controller
             redirect("xform/form_data/" . $xform_id, "refresh");
         }
     }
+
     /**
      * get column name from number
      *
