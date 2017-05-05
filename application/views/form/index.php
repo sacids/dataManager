@@ -2,7 +2,10 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">Form List</h3>
+                <h3 class="title">Form List
+                    <span class="pull-right">
+                        <?= anchor("xform/add_new", 'Add new form', 'class="btn-link"') ?></span
+                </h3>
             </div>
 
             <?php
