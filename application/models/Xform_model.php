@@ -335,8 +335,7 @@ class Xform_model extends CI_Model
      * @param $table_name
      * @return mixed
      */
-    public
-    function count_all_records($table_name)
+    public function count_all_records($table_name)
     {
         $this->db->from($table_name);
         return $this->db->count_all_results();
@@ -347,8 +346,7 @@ class Xform_model extends CI_Model
      * @param $table_name
      * @return mixed return an object of fields of the specified table
      */
-    public
-    function find_table_columns($table_name)
+    public function find_table_columns($table_name)
     {
         return $this->db->list_fields($table_name);
     }
@@ -357,8 +355,7 @@ class Xform_model extends CI_Model
      * @param $table_name
      * @return mixed returns table fields/columns with metadata object
      */
-    public
-    function find_table_columns_data($table_name)
+    public function find_table_columns_data($table_name)
     {
         return $this->db->field_data($table_name);
     }
@@ -371,8 +368,7 @@ class Xform_model extends CI_Model
      * @return list of lat,lon,info
      */
 
-    public
-    function get_geospatial_data($table_name, $cond = TRUE)
+    public function get_geospatial_data($table_name, $cond = TRUE)
     {
         //$this->db->where($cond);
         $query = $this->db->get($table_name);
@@ -386,8 +382,7 @@ class Xform_model extends CI_Model
      * @param null $group_by_column
      * @return mixed
      */
-    public
-    function get_graph_data($table_name, $axis_column, $function = "COUNT", $group_by_column = NULL)
+    public function get_graph_data($table_name, $axis_column, $function = "COUNT", $group_by_column = NULL)
     {
 
         if ($function == "COUNT") {
@@ -420,8 +415,7 @@ class Xform_model extends CI_Model
      * @param $data
      * @return mixed
      */
-    public
-    function insert_xform_data($xform_table_name, $data)
+    public function insert_xform_data($xform_table_name, $data)
     {
         return $this->db->insert($xform_table_name, $data);
     }
@@ -430,8 +424,7 @@ class Xform_model extends CI_Model
      * @param $table_name
      * @return mixed
      */
-    public
-    function get_fieldname_map($table_name)
+    public function get_fieldname_map($table_name)
     {
         $this->db->where('table_name', $table_name);
         $this->db->from('xform_fieldname_map');
@@ -441,8 +434,7 @@ class Xform_model extends CI_Model
     /**
      * @return int
      */
-    public
-    function count_all_xforms($status = NULL)
+    public function count_all_xforms($status = NULL)
     {
         if ($status != NULL)
             $this->db->where("status", $status);
@@ -450,23 +442,20 @@ class Xform_model extends CI_Model
         return $this->db->count_all_results();
     }
 
-    public
-    function get_form_definition_filename($form_id)
+    public function get_form_definition_filename($form_id)
     {
         $this->db->select('filename')->where('form_id', $form_id)->from('xforms');
         return $this->db->get()->row(1)->filename;
     }
 
-    public
-    function add_to_field_name_map($data)
+    public function add_to_field_name_map($data)
     {
         $q = $this->db->insert_string('xform_fieldname_map', $data);
         $q = str_replace('INSERT INTO', 'INSERT IGNORE INTO', $q);
         return $this->db->query($q);
     }
 
-    public
-    function update_field_map_labels($xform_id, $fields)
+    public function update_field_map_labels($xform_id, $fields)
     {
         $this->db->trans_start();
         foreach ($fields as $key => $value) {

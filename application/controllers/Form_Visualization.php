@@ -318,10 +318,7 @@ class Form_visualization extends CI_Controller
 	{
 
 		if ($form_id != NULL) {
-
 			$data = $this->_load_points($form_id);
-
-			log_message('debug', ' Tatizo ' . json_encode($data));
 
 			$this->load->view("header");
 			$this->load->view("graph/map", $data);
@@ -346,11 +343,24 @@ class Form_visualization extends CI_Controller
 
 		$gps_prefix = substr($point_field, 0, -6);
 
-		$data = $this->Xform_model->get_geospatial_data($form_id);
+		$form_data = $this->Xform_model->get_geospatial_data($form_id);
+
+		//todo Finish
+		/*$field_maps = $this->_get_mapped_table_column_name($form_id);
+		$data['mapped_fields'] = [];
+		foreach ($form_data as $key => $value) {
+			if (array_key_exists($key, $field_maps)) {
+				$data['mapped_fields'][$field_maps[$key]] = $value;
+			} else {
+				$data['mapped_fields'][$key] = $value;
+			}
+		}
+		$form_data = $data['mapped_fields'];*/
 
 		$addressPoints = '<script type="text/javascript"> var addressPoints = [';
 		$first = 0;
-		foreach ($data as $val) {
+
+		foreach ($form_data as $val) {
 			$data_string = "<h3>" . $xform->title . "</h3>";
 
 			foreach ($val as $key => $value) {
@@ -376,7 +386,6 @@ class Form_visualization extends CI_Controller
 				$addressPoints .= ',[' . $lat . ', ' . $lng . ', "' . $data_string . '"]';
 			}
 		}
-
 
 		$addressPoints .= ']; </script>';
 		$latlon = $lat . ', ' . $lng;

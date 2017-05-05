@@ -1167,7 +1167,6 @@ class Xform extends CI_Controller
 	 */
 	function edit_form($xform_id)
 	{
-
 		if (!$this->ion_auth->logged_in()) {
 			redirect('auth/login', 'refresh');
 		}
@@ -1205,9 +1204,7 @@ class Xform extends CI_Controller
 			$this->load->view('header', $data);
 			$this->load->view("form/edit_form");
 			$this->load->view('footer');
-
 		} else {
-
 			if ($form) {
 				$new_perms = $this->input->post("perms");
 
@@ -1229,7 +1226,6 @@ class Xform extends CI_Controller
 					$this->session->set_flashdata("message", display_message($this->lang->line("form_update_failed"), "warning"));
 				}
 				redirect("xform/forms");
-
 			} else {
 				$this->session->set_flashdata("message", $this->lang->line("unknown_error_occurred"));
 				redirect("xform/forms");
