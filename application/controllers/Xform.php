@@ -753,17 +753,19 @@ class Xform extends CI_Controller
 			$users = $this->User_model->get_users();
 			$groups = $this->User_model->find_user_groups();
 
-			$permission_options = array();
+			$group_permissions = array();
 
 			foreach ($groups as $group) {
-				$permission_options['G' . $group->id . 'G'] = $group->name;
+				$group_permissions['G' . $group->id . 'G'] = $group->name;
 			}
+			$data['group_perms'] = $group_permissions;
 
+			$user_permissions = [];
 			foreach ($users as $user) {
-				$permission_options['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
+				$user_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
 			}
 
-			$data['perms'] = $permission_options;
+			$data['user_perms'] = $user_permissions;
 
 			if ($this->input->is_ajax_request()) {
 				$this->load->view("form/add_new", $data);
@@ -1186,18 +1188,20 @@ class Xform extends CI_Controller
 			$users = $this->User_model->get_users(200);
 			$groups = $this->User_model->find_user_groups();
 
-			$available_permissions = array();
+			$available_group_permissions = array();
+			$available_user_permissions = array();
 
 			foreach ($groups as $group) {
-				$available_permissions['G' . $group->id . 'G'] = $group->name;
+				$available_group_permissions['G' . $group->id . 'G'] = $group->name;
 			}
+			$data['group_perms'] = $available_group_permissions;
 
 			foreach ($users as $user) {
-				$available_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
+				$available_user_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
 			}
-			$current_permissions = explode(",", $form->perms);
+			$data['user_perms'] = $available_user_permissions;
 
-			$data['perms'] = $available_permissions;
+			$current_permissions = explode(",", $form->perms);
 			$data['current_perms'] = $current_permissions;
 
 			$this->load->view('header', $data);
@@ -1224,7 +1228,7 @@ class Xform extends CI_Controller
 				} else {
 					$this->session->set_flashdata("message", display_message($this->lang->line("form_update_failed"), "warning"));
 				}
-				redirect("xform/forms");
+				redirect("xform/edit_form/{$xform_id}");
 			} else {
 				$this->session->set_flashdata("message", $this->lang->line("unknown_error_occurred"));
 				redirect("xform/forms");
