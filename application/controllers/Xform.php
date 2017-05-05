@@ -92,7 +92,7 @@ class Xform extends CI_Controller
 	}
 
 	/**
-	 *
+	 * List all available forms
 	 */
 	function forms()
 	{
@@ -448,7 +448,6 @@ class Xform extends CI_Controller
 				unset ($stack [count($stack) - 1]);
 			}
 		}
-
 		return $elements [0]; // the single top-level element
 	}
 	/**
