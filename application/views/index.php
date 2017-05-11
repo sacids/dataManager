@@ -123,12 +123,13 @@
                                             <?php foreach ($feedback as $value) { ?>
                                                 <li>
                                                     <div class="row">
-                                                        <div class="col-12 col-lg-12 col-xl-12">
+                                                        <div class="col-sm-12">
                                                             <span class="name"><?= $value->first_name . ' ' . $value->last_name ?></span>
                                                             <span
-                                                                    class="time"><?= date('d-m-Y H:i:s', strtotime($value->date_created)); ?></span>
+                                                                    class="time"><?= time_ago($value->date_created); ?></span>
                                                             <br>
                                                             <span class="msg"><?= $value->message ?></span>
+                                                            <br/><?= anchor('feedback/user_feedback/' . $value->instance_id, 'Read more', 'class="read-more"') ?>
                                                         </div>
                                                     </div>
                                                     <hr>

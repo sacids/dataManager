@@ -27,6 +27,15 @@ class User_model extends CI_Model
         return $this->db->get(self::$table_name)->num_rows();
     }
 
+    //count data collectors
+    function count_data_collectors()
+    {
+        return $this->db
+            ->join('users_groups', 'users_groups.user_id = users.id')
+            ->join('groups', 'groups.id = users_groups.group_id')
+            ->get_where('users', array('groups.name' => 'chr'))->num_rows();
+    }
+
     /**
      * @return mixed
      * @param $limit
@@ -123,6 +132,7 @@ class User_model extends CI_Model
         $this->db->limit($limit, $offset);
         return $this->db->get(self::$table_name)->result();
     }
+
     public function count_users_by_search_terms($first_name = NULL, $last_name = NULL, $phone = NULL, $status = NULL)
     {
         if ($first_name != NULL)

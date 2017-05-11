@@ -44,6 +44,15 @@ class Migration_Table_project extends CI_Migration
 
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->create_table('project');
+
+        //add project_id
+        $field = array(
+            'project_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+            ),
+        );
+        $this->dbforge->add_column('xforms', $field);
     }
 
     public function down()
