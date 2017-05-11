@@ -19,63 +19,44 @@
                       method="post" accept-charset="utf-8">
                     <div class="pure-form">
                         <h2>Sign up to Afyadata</h2>
-                        <div class="col-sm-12">
-                            <div class="row">
-                                <?php if (validation_errors() != "") {
-                                    echo '<div class="alert alert-danger fade in">' . validation_errors() . '</div>';
-                                } else if ($message != "") {
-                                    echo $message;
-                                } ?>
-                            </div>
 
-                            <div class="col-xs col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                                <div class="form-group">
-                                    <?php echo form_input($first_name); ?>
-                                </div> <!-- /form-group -->
-                            </div> <!-- /col -->
-                            <div class="col-xs col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                                <div class="form-group">
-                                    <?php echo form_input($last_name); ?>
-                                </div> <!-- /form-group -->
-                            </div> <!-- /col -->
+                        <?php if ($message != "") {
+                            echo '<div style="color: red; font-size: 11px;">' . $message . '</div>';
+                        } ?>
 
+                        <div class="col-lg-12" style="margin-top: 10px;">
+                            <div class="form-group">
+                                <?php echo form_input($first_name); ?>
+                            </div> <!-- /form-group -->
 
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <?= form_input($organization) ?>
-                                </div>
+                                <?php echo form_input($last_name); ?>
+                            </div> <!-- /form-group -->
+
+                            <div class="form-group">
+                                <?= form_input($organization) ?>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <?= form_input($email) ?>
-                                </div>
+                                <?= form_input($email) ?>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <?= form_input($phone) ?>
-                                </div>
+                                <?= form_input($phone) ?>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <?= form_password($password) ?>
-                                </div>
+                                <?= form_password($password) ?>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <?= form_password($password_confirm) ?>
-                                </div>
+                                <?= form_password($password_confirm) ?>
                             </div>
 
                             <?php echo form_hidden('group[]', '8'); ?>
 
                             <div class="form-group last">
-                                <div class="col-sm-8">
-                                    <?php echo form_submit('submit', 'Sign up', array('class' => "btn btn-maroon btn-large btn-block")); ?>
-                                </div>
+                                <?php echo form_submit('submit', 'Sign up', array('class' => "btn btn-maroon")); ?>
                             </div>
                         </div>
                         <div class="form-group"></div>
