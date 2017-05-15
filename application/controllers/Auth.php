@@ -207,7 +207,7 @@ class Auth extends CI_Controller
                 'id' => 'password',
                 'type' => 'password',
                 'class' => 'form-control',
-                'placeholder' => 'Enter username'
+                'placeholder' => 'Enter password'
             );
 
             //render view
