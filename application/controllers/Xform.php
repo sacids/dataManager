@@ -1110,10 +1110,10 @@ class Xform extends CI_Controller
 	 */
 	private function _map_field($field_name)
 	{
-		/*
-		if ($field_name == 'meta_instanceID') {
+
+		if ( substr(0,5,$field_name) == 'meta_') {
 			return $field_name;
-		}*/
+		}
 
 		$tmp = sanitize_col_name($field_name);
 		$asc = ascii_val($tmp);

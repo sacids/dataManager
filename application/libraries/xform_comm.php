@@ -32,6 +32,7 @@ class Xform_comm
     private $itext;
     private $lang;
 
+    
     public function __construct()
     {
         $this->CI =& get_instance();
