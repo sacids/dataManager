@@ -27,13 +27,12 @@
  * THE SOFTWARE.
  *
  *
- * @package        AfyaData
- * @author        AfyaData Dev Team
- * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS
- *     http://sacids.org)
- * @license        http://opensource.org/licenses/MIT	MIT License
- * @link        https://afyadata.sacids.org
- * @since        Version 1.0.0
+ * @package	    AfyaData
+ * @author	    AfyaData Dev Team
+ * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license	    http://opensource.org/licenses/MIT	MIT License
+ * @link	    https://afyadata.sacids.org
+ * @since	    Version 1.0.0
  */
 
 defined('BASEPATH') or exit ('No direct script access allowed');
@@ -45,6 +44,7 @@ class XmlElement
 	var $content;
 	var $children;
 }
+
 
 /**
  * XForm Class
@@ -78,10 +78,13 @@ class Xform extends CI_Controller
 			'Feedback_model',
 			'Submission_model',
 			'Ohkr_model',
+			'model',
 			'Alert_model'
 		));
 
 		$this->load->library('form_auth');
+		$this->load->library('db_exp');
+		$this->load->library('xform_comm');
 		$this->user_id = $this->session->userdata("user_id");
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 	}
@@ -92,7 +95,7 @@ class Xform extends CI_Controller
 	}
 
 	/**
-	 * List all available forms
+	 *
 	 */
 	function forms()
 	{
@@ -113,9 +116,10 @@ class Xform extends CI_Controller
 			if ($this->ion_auth->is_admin()) {
 				$data['forms'] = $this->Xform_model->get_form_list(NULL, $this->pagination->per_page, $page, "published");
 			} else {
-				$data['forms'] = $this->Xform_model->find_forms_by_permission($this->user_id, $this->pagination->per_page, $page, "published");
+				$data['forms'] = $this->Xform_model->get_form_list($this->user_id, $this->pagination->per_page, $page, "published");
 			}
 			$data["links"] = $this->pagination->create_links();
+
 		} else {
 			$form_name = $this->input->post("name", NULL);
 			$access = $this->input->post("access", NULL);
@@ -137,7 +141,7 @@ class Xform extends CI_Controller
 		$this->load->view("form/index");
 		$this->load->view('footer');
 	}
-
+	
 	function _is_logged_in()
 	{
 		if (!$this->ion_auth->logged_in()) {
@@ -286,6 +290,8 @@ class Xform extends CI_Controller
 			$symptoms_reported = explode(" ", $this->form_data['Dalili_Dalili']);
 			$district = $this->form_data['taarifa_awali_Wilaya']; // taarifa_awali_Wilaya is the database field name in the mean time
 
+			$data_collector_phone = $this->form_data['meta_username'];
+
 			if (count($symptoms_reported) > 0) {
 				$message_sender_name = "AfyaData";
 				$request_url_endpoint = "sms/1/text/single";
@@ -310,24 +316,22 @@ class Xform extends CI_Controller
 							"location"      => $district
 						);
 
-						if (ENVIRONMENT == 'development' || ENVIRONMENT == "testing") {
-							$sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
+						$sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
 
-							if ($sender_msg) {
-								$this->_save_msg_and_send($sender_msg->rsms_id, $this->sender->phone, $sender_msg->message,
-									$this->sender->first_name, $message_sender_name, $request_url_endpoint);
-							}
+						if ($sender_msg) {
+							$this->_save_msg_and_send($sender_msg->rsms_id, $this->sender->phone, $sender_msg->message,
+								$this->sender->first_name, $message_sender_name, $request_url_endpoint);
+						}
 
-							$response_messages = $this->Ohkr_model->find_response_messages_and_groups($disease->disease_id,
-								$district);
+						$response_messages = $this->Ohkr_model->find_response_messages_and_groups($disease->disease_id,
+							$district);
 
-							$counter = 1;
-							if ($response_messages) {
-								foreach ($response_messages as $sms) {
-									$this->_save_msg_and_send($sms->rsms_id, $sms->phone, $sms->message, $sms->first_name,
-										$message_sender_name, $request_url_endpoint);
-									$counter++;
-								}
+						$counter = 1;
+						if ($response_messages) {
+							foreach ($response_messages as $sms) {
+								$this->_save_msg_and_send($sms->rsms_id, $sms->phone, $sms->message, $sms->first_name,
+									$message_sender_name, $request_url_endpoint);
+								$counter++;
 							}
 						}
 						$i++;
@@ -448,6 +452,7 @@ class Xform extends CI_Controller
 				unset ($stack [count($stack) - 1]);
 			}
 		}
+
 		return $elements [0]; // the single top-level element
 	}
 	/**
@@ -516,12 +521,11 @@ class Xform extends CI_Controller
 				$message = (array)$infobip_response->messages;
 				$message = array_shift($message);
 				$sms_updates = array(
-					"status"           => "SENT",
-					"date_sent"        => date("c"),
+					"status"           => "SENT", "date_sent" => date("c"),
 					"infobip_msg_id"   => $message->messageId,
 					"infobip_response" => $send_result
 				);
-				$this->Ohkr_model->update_sms_status($msg_id, $sms_updates);
+				$this->Alert_model->update_sms_status($msg_id, $sms_updates);
 			}
 		}
 	}
@@ -569,7 +573,7 @@ class Xform extends CI_Controller
 				foreach ($options as $opt) {
 					$opt = trim($opt);
 
-					if (array_key_exists($opt, $map)) {
+					if (array_key_exists($cn.'_'.$opt, $map)) {
 						$opt = $map[$opt];
 					}
 
@@ -753,19 +757,17 @@ class Xform extends CI_Controller
 			$users = $this->User_model->get_users();
 			$groups = $this->User_model->find_user_groups();
 
-			$group_permissions = array();
+			$permission_options = array();
 
 			foreach ($groups as $group) {
-				$group_permissions['G' . $group->id . 'G'] = $group->name;
+				$permission_options['G' . $group->id . 'G'] = $group->name;
 			}
-			$data['group_perms'] = $group_permissions;
 
-			$user_permissions = [];
 			foreach ($users as $user) {
-				$user_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
+				$permission_options['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
 			}
 
-			$data['user_perms'] = $user_permissions;
+			$data['perms'] = $permission_options;
 
 			if ($this->input->is_ajax_request()) {
 				$this->load->view("form/add_new", $data);
@@ -868,6 +870,14 @@ class Xform extends CI_Controller
 
 		// TODO: change function name to get_something suggested get_form_table_definition
 		return $this->get_create_table_sql_query();
+	}
+
+	public function init_test(){
+		$this->set_defn_file($this->config->item("form_definition_upload_dir") . 'testo.xml');
+		$this->load_xml_definition();
+
+		// TODO: change function name to get_something suggested get_form_table_definition
+		echo '<pre>'; print_r( $this->get_create_table_sql_query());
 	}
 
 	/**
@@ -1002,6 +1012,8 @@ class Xform extends CI_Controller
 		$structure = $this->form_defn;
 		$tbl_name = $this->table_name;
 
+		//print_r($structure);
+
 		// initiate statement, set id as primary key, autoincrement
 		$statement = "CREATE TABLE $tbl_name ( id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY ";
 
@@ -1047,7 +1059,7 @@ class Xform extends CI_Controller
 
 				foreach ($val['option'] as $key => $select_opts) {
 
-					$key = $this->_map_field($key);
+					$key = $this->_map_field($col_name.'_'.$key);
 					if (!$key) {
 						// failed need to exit
 					}
@@ -1075,10 +1087,6 @@ class Xform extends CI_Controller
 				$statement .= ", $col_name INT(20) $required ";
 			}
 
-			if ($type == 'decimal') {
-				$statement .= ", $col_name DECIMAL $required ";
-			}
-
 			if ($type == 'geopoint') {
 
 				$statement .= "," . $col_name . " VARCHAR(150) $required ";
@@ -1102,14 +1110,14 @@ class Xform extends CI_Controller
 	 */
 	private function _map_field($field_name)
 	{
-		// check length
-		if (strlen($field_name) < 20) {
+		/*
+		if ($field_name == 'meta_instanceID') {
 			return $field_name;
-		}
+		}*/
 
 		$tmp = sanitize_col_name($field_name);
 		$asc = ascii_val($tmp);
-		$fn = '_xf_' . condense_col_name($field_name) . '_' . $asc;
+		$fn = '_xf_' . condense_col_name($tmp) . '_' . $asc;
 
 		$data = array();
 		$data['table_name'] = $this->table_name;
@@ -1168,6 +1176,7 @@ class Xform extends CI_Controller
 	 */
 	function edit_form($xform_id)
 	{
+
 		if (!$this->ion_auth->logged_in()) {
 			redirect('auth/login', 'refresh');
 		}
@@ -1185,29 +1194,29 @@ class Xform extends CI_Controller
 		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
 		if ($this->form_validation->run() === FALSE) {
-			$users = $this->User_model->get_users(200);
+			$users = $this->User_model->get_users();
 			$groups = $this->User_model->find_user_groups();
 
-			$available_group_permissions = array();
-			$available_user_permissions = array();
+			$available_permissions = array();
 
 			foreach ($groups as $group) {
-				$available_group_permissions['G' . $group->id . 'G'] = $group->name;
+				$available_permissions['G' . $group->id . 'G'] = $group->name;
 			}
-			$data['group_perms'] = $available_group_permissions;
 
 			foreach ($users as $user) {
-				$available_user_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
+				$available_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
 			}
-			$data['user_perms'] = $available_user_permissions;
-
 			$current_permissions = explode(",", $form->perms);
+
+			$data['perms'] = $available_permissions;
 			$data['current_perms'] = $current_permissions;
 
 			$this->load->view('header', $data);
 			$this->load->view("form/edit_form");
 			$this->load->view('footer');
+
 		} else {
+
 			if ($form) {
 				$new_perms = $this->input->post("perms");
 
@@ -1228,7 +1237,8 @@ class Xform extends CI_Controller
 				} else {
 					$this->session->set_flashdata("message", display_message($this->lang->line("form_update_failed"), "warning"));
 				}
-				redirect("xform/edit_form/{$xform_id}");
+				redirect("xform/forms");
+
 			} else {
 				$this->session->set_flashdata("message", $this->lang->line("unknown_error_occurred"));
 				redirect("xform/forms");
@@ -1260,6 +1270,7 @@ class Xform extends CI_Controller
 		redirect("xform/forms");
 	}
 
+
 	/**
 	 * @param $xform_id
 	 */
@@ -1283,6 +1294,7 @@ class Xform extends CI_Controller
 		redirect("xform/forms");
 	}
 
+
 	/**
 	 * @param $form_id
 	 */
@@ -1300,19 +1312,10 @@ class Xform extends CI_Controller
 
 		if ($form) {
 			// check if form_id ~ form data table is not empty or null
-			$data['title'] = $form->title;
+			$data['title'] = $form->title . " form";
 			$data['form'] = $form;
 			$data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
 			$data['field_maps'] = $this->_get_mapped_table_column_name($form->form_id);
-
-			$data['mapped_fields'] = array();
-			foreach ($data['table_fields'] as $key => $column) {
-				if (array_key_exists($column, $data['field_maps'])) {
-					$data['mapped_fields'][$column] = $data['field_maps'][$column];
-				} else {
-					$data['mapped_fields'][$column] = $column;
-				}
-			}
 
 			$config = array(
 				'base_url'    => $this->config->base_url("xform/form_data/" . $form_id),
@@ -1323,29 +1326,7 @@ class Xform extends CI_Controller
 			$this->pagination->initialize($config);
 			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
 			$data['form_id'] = $form->form_id;
-
-			//Prevents the filters from applying to a different form
-			if ($this->session->userdata("filters_form_id") != $form_id) {
-				$this->session->unset_userdata("filters_form_id");
-				$this->session->unset_userdata("form_filters");
-			}
-
-			if (isset($_POST["apply"]) || $this->session->userdata("form_filters")) {
-				if (!isset($_POST["apply"])) {
-					$selected_columns = $this->session->userdata("form_filters");
-				} else {
-					$selected_columns = $_POST;
-					$selected_columns = array('id' => "ID") + $selected_columns;
-
-					unset($selected_columns['apply']);
-					$this->session->set_userdata("filters_form_id", $form_id);
-					$this->session->set_userdata(array("form_filters" => $selected_columns));
-				}
-				$data['selected_columns'] = $selected_columns;
-				$data['form_data'] = $this->Xform_model->find_form_data_by_fields($form->form_id, $selected_columns, $this->pagination->per_page, $page);
-			} else {
-				$data['form_data'] = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page);
-			}
+			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page);
 			$data["links"] = $this->pagination->create_links();
 
 			$this->load->view('header', $data);
@@ -1365,44 +1346,42 @@ class Xform extends CI_Controller
 	function excel_export_form_data($form_id = NULL)
 	{
 		$this->load->library('excel');
-		//get form data
-		if ($this->session->userdata("form_filters")) {
-			$form_filters = $this->session->userdata("form_filters");
-			$serial = 0;
-			foreach ($form_filters as $column_name) {
-				$inc = 1;
-				$column_title = $this->getColumnLetter($serial);
-				$this->excel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
-				$serial++;
-			}
-			$form_data = $this->Xform_model->find_form_data_by_fields($form_id, $form_filters, 5000);
-		} else {
-			//table fields
-			$table_fields = $this->Xform_model->find_table_columns($form_id);
-			//mapping field
-			$field_maps = $this->_get_mapped_table_column_name($form_id);
-			$serial = 0;
-			foreach ($table_fields as $key => $column) {
 
-				$inc = 1;
-				$column_title = $this->getColumnLetter($serial);
 
-				if (array_key_exists($column, $field_maps)) {
-					$column_name = $field_maps[$column];
-				} else {
-					$column_name = $column;
-				}
-				$this->excel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
-				$serial++;
+		//table fields
+		$table_fields = $this->Xform_model->find_table_columns($form_id);
+
+		//mapping field
+		$field_maps = $this->_get_mapped_table_column_name($form_id);
+
+
+		$serial = 0;
+		foreach ($table_fields as $key => $column) {
+
+			$inc = 1;
+			$column_title = $this->getColumnLetter($serial);
+
+			if (array_key_exists($column, $field_maps)) {
+				$column_name = $field_maps[$column];
+			} else {
+				$column_name = $column;
 			}
-			$form_data = $this->Xform_model->find_form_data($form_id);
+
+			$this->excel->setActiveSheetIndex(0)
+				->setCellValue($column_title . $inc, $column_name);
+			$serial++;
 		}
+
+		//form data
+		$form_data = $this->Xform_model->find_form_data($form_id);
 
 		$inc = 2;
 		foreach ($form_data as $data) {
+
 			$serial = 0;
 			foreach ($data as $key => $entry) {
 				$column_title = $this->getColumnLetter($serial);
+
 				if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
 					$column_value = '';
 				} else {
@@ -1420,7 +1399,7 @@ class Xform extends CI_Controller
 
 		$filename = "Exported_" . $form_id . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
 
-		//header 
+		//header
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 		header("Cache-Control: no-store, no-cache, must-revalidate");
 		header("Cache-Control: post-check=0, pre-check=0", FALSE);
@@ -1432,6 +1411,7 @@ class Xform extends CI_Controller
 		ob_end_clean();
 
 		$objWriter->save('php://output');
+
 	}
 
 	/**
@@ -1534,8 +1514,11 @@ class Xform extends CI_Controller
 		if (!$form_id)
 			$form_id = "ad_build_week_report_skolls_b_1767716170";
 
+
 		$this->table_name = $form_id;
 		$map = $this->get_field_map();
+
+		//print_r($map);
 
 		$this->load->library("Xform_comm");
 		$form_details = $this->Feedback_model->get_form_details($form_id);
@@ -1543,27 +1526,38 @@ class Xform extends CI_Controller
 		$this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
 		$this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
 		$form_definition = $this->xform_comm->get_defn();
+
 		$table_field_names = array();
+
 		foreach ($form_definition as $fdfn) {
+
 			$kk = $fdfn['field_name'];
+
 			// check if column name was mapped to fieldmap table
 			if (array_key_exists($kk, $map)) {
 				$kk = $map[$kk];
 			}
+
+
 			if (array_key_exists("label", $fdfn)) {
 				if ($fdfn['type'] == "select") {
 					$options = $fdfn['option'];
 					foreach ($options as $key => $value) {
+
 						// check if column name was mapped to fieldmap table
 						if (array_key_exists($key, $map)) {
 							$key = $map[$key];
 						}
+
 						$table_field_names[$key] = $value;
 					}
 				} elseif ($fdfn['type'] == "int") {
+
 					$find_male = " m ";
 					$find_female = " f ";
+
 					$group_name = str_replace("_", " ", $fdfn['field_name']);
+
 					if (strpos($group_name, $find_male)) {
 						$table_field_names[$kk] = str_replace($find_male, " " . $fdfn['label'] . " ", $group_name);
 					} elseif (strpos($group_name, $find_female)) {
@@ -1571,6 +1565,7 @@ class Xform extends CI_Controller
 					} else {
 						$table_field_names[$kk] = $group_name . " " . $fdfn['label'];
 					}
+
 				} else {
 					$table_field_names[$kk] = $fdfn['label'];
 				}
@@ -1578,6 +1573,7 @@ class Xform extends CI_Controller
 				$table_field_names[$kk] = $fdfn['field_name'];
 			}
 		}
+
 		return $table_field_names;
 	}
 
@@ -1587,12 +1583,16 @@ class Xform extends CI_Controller
 	 */
 	function delete_entry($xform_id)
 	{
+
 		$this->form_validation->set_rules("entry_id[]", "Entry ID", "required");
+
 		if ($this->form_validation->run() === FALSE) {
 			$this->form_data($xform_id);
 		} else {
+
 			$table_name = $this->input->post("table_name");
 			$entry_ids = $this->input->post("entry_id");
+
 			$deleted_entry_count = 0;
 			foreach ($entry_ids as $entry_id) {
 				//TODO Implement delete media files too.
@@ -1617,11 +1617,62 @@ class Xform extends CI_Controller
 		$numeric = $number % 26;
 		$suffix = chr(65 + $numeric);
 		$prefNum = intval($number / 26);
+
 		if ($prefNum > 0) {
 			$prefix = $this->getColumnLetter($prefNum - 1) . $suffix;
 		} else {
 			$prefix = $suffix;
 		}
+
 		return $prefix;
+	}
+
+
+
+	function configure(){
+
+		$this->save_dbexp_post_vars();
+		$xform_id	= $this->session->userdata['post']['ele_id'];
+		
+		$this->model->set_table('xforms');
+		$xform	= $this->model->get($xform_id);
+		$this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $xform->filename);
+		$defn	= $this->xform_comm->get_form_definition($xform_id);
+		
+
+		$cols 		= $this->Xform_model->find_table_columns($xform->form_id);
+		$nn			= array();
+		$nn[0]	= 'None';
+		foreach($defn as $v){
+
+			if(!array_key_exists('label',$v)) continue;
+			$fn	= $v['field_name'];
+			$lb	= $v['label'];
+			$nn[$fn] = $lb;
+		}
+
+
+		$this->model->set_table('xforms_config');
+		if($tmp	= $this->model->get_by('xform_id',$xform_id)){
+			$this->db_exp->set_pri_id($tmp->id);
+			$this->db_exp->set_default_action('edit');
+		}else{
+			$this->db_exp->set_default_action('insert');
+		}
+
+		$this->db_exp->set_table('xforms_config');
+		$this->db_exp->set_hidden('xform_id',$xform_id);
+		$this->db_exp->set_hidden('id');
+		$this->db_exp->set_list('search_fields',$nn);
+		$this->db_exp->render();
+	}
+
+	public function save_dbexp_post_vars() {
+		$post = $this->input->post ();
+		$db_exp_submit = $this->input->post ( 'db_exp_submit_engaged' );
+		if (! empty ( $db_exp_submit ) || @$post ['action'] == 'insert' || @$post ['action'] == 'edit' || @$post ['action'] == 'delete') {
+		} else {
+			$this->session->set_userdata ( 'post', $post );
+		}
 	}
 }
