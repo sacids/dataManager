@@ -1111,7 +1111,7 @@ class Xform extends CI_Controller
 	private function _map_field($field_name)
 	{
 
-		if ( substr(0,5,$field_name) == 'meta_') {
+		if ( substr($field_name,0,5) == 'meta_') {
 			return $field_name;
 		}
 
