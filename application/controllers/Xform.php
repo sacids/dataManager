@@ -1188,8 +1188,8 @@ class Xform extends CI_Controller
 			$users = $this->User_model->get_users(200);
 			$groups = $this->User_model->find_user_groups();
 
-			$available_group_permissions = array();
-			$available_user_permissions = array();
+			$available_group_permissions = [];
+			$available_user_permissions = [];
 
 			foreach ($groups as $group) {
 				$available_group_permissions['G' . $group->id . 'G'] = $group->name;
@@ -1205,7 +1205,7 @@ class Xform extends CI_Controller
 			$data['current_perms'] = $current_permissions;
 
 			$this->load->view('header', $data);
-			$this->load->view("form/edit_form");
+			$this->load->view("form/edit_form",$data);
 			$this->load->view('footer');
 		} else {
 			if ($form) {
@@ -1623,5 +1623,31 @@ class Xform extends CI_Controller
 			$prefix = $suffix;
 		}
 		return $prefix;
+	}
+
+	public function form_overview($xform_id)
+	{
+		$data['form'] = $this->Xform_model->find_by_xform_id($xform_id);
+		$data['title'] = "Overview {$data['form']->title} Form";
+
+		$data['table_fields'] = $this->Xform_model->find_table_columns($data['form']->form_id);
+		$data['field_maps'] = $this->_get_mapped_table_column_name($data['form']->form_id);
+
+		$data['mapped_fields'] = array();
+		foreach ($data['table_fields'] as $key => $column) {
+			if (array_key_exists($column, $data['field_maps'])) {
+				$data['mapped_fields'][$column] = $data['field_maps'][$column];
+			} else {
+				$data['mapped_fields'][$column] = $column;
+			}
+		}
+
+		$data['form_data'] = $this->Xform_model->find_form_data($data['form']->form_id, 10);
+		$data['recent_feedback'] = $this->Feedback_model->find_by_xform_id($data['form']->form_id,10);
+		
+
+		$this->load->view("header", $data);
+		$this->load->view("form/form_overview", $data);
+		$this->load->view("footer");
 	}
 }
