@@ -1,4 +1,4 @@
-# Contributing to Afyadata Manager
+# Contributing to Afyadata
 
 
 CodeIgniter is a community driven project and accepts contributions of code and documentation from the community. These contributions are made in the form of issues or [Pull Requests](http://help.github.com/send-pull-requests/) on the [Afyadata Manager repository](https://github.com/sacids/afyadata.git) on GitHub.

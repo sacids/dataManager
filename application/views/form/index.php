@@ -39,11 +39,8 @@
             <?php echo validation_errors(); ?>
 
             <div class="">
-
                 <?php if (!empty($forms)) { ?>
-
-                    <table class="table table-striped table-responsive table-hover" cellspacing="0"
-                           cellpadding="0">
+                    <table class="table table-striped table-responsive table-hover" cellspacing="0" cellpadding="0">
                         <tr>
                             <th><?php echo $this->lang->line("label_form_name"); ?></th>
                             <!--								<th>-->
@@ -84,6 +81,7 @@
                                             <li><?php echo anchor("xform/form_data/" . $form->id, "Data list"); ?></li>
                                             <li><?php echo anchor("form_visualization/chart/" . $form->form_id, "View Chart"); ?></li>
                                             <li><?php echo anchor("form_visualization/map/" . $form->form_id, "View Map"); ?></li>
+                                            <li><?php echo anchor("xform/form_overview/" . $form->form_id, "Overview"); ?></li>
                                             <li><?php echo anchor_popup(base_url() . "assets/forms/definition/" . $form->filename, "Download XML file"); ?></li>
                                         </ul>
                                     </div>
