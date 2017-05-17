@@ -85,7 +85,7 @@ class Projects extends CI_Controller
                 'created_at' => date('Y-m-d H:i:s'),
                 'owner' => $this->user_id
             );
-            $id = $this->db->insert('project', $data);
+            $id = $this->db->insert('projects', $data);
 
             if ($id) {
                 $this->session->set_flashdata('message', display_message('Project added'));
@@ -145,7 +145,7 @@ class Projects extends CI_Controller
                 'title' => $this->input->post('name'),
                 'description' => $this->input->post('description')
             );
-            $this->db->update('project', $data, array('id' => $project_id));
+            $this->db->update('projects', $data, array('id' => $project_id));
 
             $this->session->set_flashdata('message', display_message('Project updated'));
             redirect('projects/lists', 'refresh');

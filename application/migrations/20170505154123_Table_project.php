@@ -13,7 +13,7 @@ class Migration_Table_project extends CI_Migration
     public function up()
     {
         // Drop table 'project' if it exists
-        $this->dbforge->drop_table('project', TRUE);
+        $this->dbforge->drop_table('projects', TRUE);
 
         // Table structure for table 'project'
         $this->dbforge->add_field(array(
@@ -43,12 +43,21 @@ class Migration_Table_project extends CI_Migration
         ));
 
         $this->dbforge->add_key('id', TRUE);
-        $this->dbforge->create_table('project');
+        $this->dbforge->create_table('projects');
+
+        //add project_id
+        $field = array(
+            'project_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+            ),
+        );
+        $this->dbforge->add_column('xforms', $field);
     }
 
     public function down()
     {
-        $this->dbforge->drop_table('project', TRUE);
+        $this->dbforge->drop_table('projects', TRUE);
     }
 
 }

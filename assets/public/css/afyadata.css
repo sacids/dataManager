@@ -269,62 +269,32 @@ Info block
     border-radius: 0;
 }
 
-/**chat card **/
+/*********
+Chat card
+*********/
 .card-chat {
     padding: 0;
 }
 
-.card-chat img {
-    height: 45px;
-    width: 45px;
-}
-
-.card-chat .name {
-    font-size: 15px;
-    color: #000;
-}
-
-.card-chat .time {
-    float: right;
+.card-chat span.name {
     font-size: 13px;
+    color: #3F3F3F;
 }
 
-.card-chat .name {
-    font-size: 15px;
-    font-width: bold
-}
-
-.card-chat .time {
+.card-chat span.time {
     float: right;
     font-size: 12px;
     color: #A6A6A6;
 }
 
-.card-chat .msg {
+.card-chat span.msg {
     color: #7F8385;
-    font-size: 13px;
+    font-size: 12px;
 }
 
-.card-chat .social_icons {
-    font-size: 14px;
-    float: right;
-    cursor: pointer;
-}
-
-.card-chat .fa-stack {
-    font-size: 9px;
-}
-
-.card-chat .fb {
-    color: #3B5998;
-}
-
-.card-chat .google {
-    color: #D00003;
-}
-
-.card-chat .twit {
-    color: #55ACEE;
+.card-chat a.read-more {
+    color: #0d47a1;
+    font-size: 12px;
 }
 
 .card-chat ul li {
@@ -334,4 +304,5 @@ Info block
 .card-chat ul li img {
     margin-top: 2px;
 }
+
 

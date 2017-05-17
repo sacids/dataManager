@@ -22,7 +22,7 @@ class Project_model extends CI_Model
         if ($owner != null)
             $this->db->where('owner', $owner);
 
-        return $this->db->get('project')->num_rows();
+        return $this->db->get('projects')->num_rows();
     }
 
     /**
@@ -38,7 +38,7 @@ class Project_model extends CI_Model
 
         return $this->db
             ->limit($num, $start)
-            ->get('project')->result();
+            ->get('projects')->result();
     }
 
     /**
@@ -47,7 +47,7 @@ class Project_model extends CI_Model
      */
     function get_project_by_id($project_id)
     {
-        return $this->db->get_where('project', array('id' => $project_id))->row();
+        return $this->db->get_where('projects', array('id' => $project_id))->row();
     }
 
 }

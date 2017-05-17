@@ -19,38 +19,29 @@
                       method="post" accept-charset="utf-8">
                     <div class="pure-form">
                         <h2>Login to Afyadata</h2>
-                        <div class="col-sm-12">
-                            <div class="row">
-                                <?php if (validation_errors() != "") {
-                                    echo '<div class="alert alert-danger fade in">' . validation_errors() . '</div>';
-                                } else if ($message != "") {
-                                    echo $message;
-                                } ?>
+
+                        <?php if ($message != "") {
+                            echo '<div style="color: red; font-size: 11px;">' . $message . '</div>';
+                        } ?>
+
+                        <div class="col-lg-12" style="margin-top: 10px;">
+
+                            <div class="form-group">
+                                <?= form_input($identity) ?>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <?= form_input($identity) ?>
-                                </div>
+                                <?= form_password($password) ?>
                             </div>
+
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <?= form_password($password) ?>
+                                <div class="checkbox">
+                                    <label class="">
+                                        <input class="" type="checkbox">Remember me</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <div class="checkbox">
-                                        <label class="">
-                                            <input class="" type="checkbox">Remember me</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-8">
-                                    <?php echo form_submit('submit', 'Login', array('class' => "btn btn-maroon btn-large btn-block")); ?>
-                                </div>
+                                <?php echo form_submit('submit', 'Login', array('class' => "btn btn-maroon")); ?>
                             </div>
                         </div>
                         <div class="form-group"></div>

@@ -65,7 +65,7 @@ class Dashboard extends CI_Controller
         $this->_is_logged_in();
 
         //statistics
-        $this->data['active_users'] = $this->User_model->count_users();
+        $this->data['active_users'] = $this->User_model->count_data_collectors();
         $this->data['published_forms'] = $this->Submission_model->count_published_forms();
         $this->data['active_campaign'] = $this->Campaign_model->count_active_campaign();
         $this->data['new_feedback'] = $this->Feedback_model->count_new_feedback();
