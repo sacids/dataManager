@@ -80,11 +80,11 @@ class Dashboard extends CI_Controller
 
         $i = 0;
         foreach ($submitted_forms as $value) {
-            $form_title[$i] = $value->title;
-            $overall_data[$i] = $this->Submission_model->count_overall_submitted_forms($value->form_id);
-            $monthly_data[$i] = $this->Submission_model->count_monthly_submitted_forms($value->form_id);
-            $weekly_data[$i] = $this->Submission_model->count_weekly_submitted_forms($value->form_id);
-            $daily_data[$i] = $this->Submission_model->count_daily_submitted_forms($value->form_id);
+            $form_title[$i] = '<a href="' . site_url('xform/form_data/' . $value->id) . '" >' . $value->title . '</a>';;
+            $overall_data[$i] = $this->Submission_model->count_overall_submitted_forms($value->title);
+            $monthly_data[$i] = $this->Submission_model->count_monthly_submitted_forms($value->title);
+            $weekly_data[$i] = $this->Submission_model->count_weekly_submitted_forms($value->title);
+            $daily_data[$i] = $this->Submission_model->count_daily_submitted_forms($value->title);
             $i++;
         }
 

@@ -119,3 +119,9 @@ $lang['label_campaign_type']            = "Type";
 $lang['label_campaign_icon']            = "Icon";
 $lang['label_campaign_featured']        = "Featured";
 $lang['label_campaign_created_date']    = "Created date";
+
+//Dashboard
+$lang['label_read_more']           = "Read more";
+$lang['label_detected_disease']    = "Mostly detected diseases";
+$lang['label_user_chats']          = "Recent user chats";
+$lang['label_graphical_submission']= "Graphical recent submission";

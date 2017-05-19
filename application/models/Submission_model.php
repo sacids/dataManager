@@ -68,88 +68,51 @@ class Submission_model extends CI_Model
     }
 
     /**
-     * @param $form_id
+     * @param $form
      * @return mixed
      */
-    function count_overall_submitted_forms($form_id)
+    function count_overall_submitted_forms($form)
     {
-
-        $sql = " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ";
-        $sql .= " WHERE table_schema = '{$this->db->database}' ";
-        $sql .= " AND table_name = '{$form_id}' ";
-
-        $query = $this->db->query($sql);
-
-        if (empty($query->num_rows() == 1)) {
-            return $this->db->get($form_id)->num_rows();
-        } else {
-            return 0;
-        }
-
+        return $this->db
+            ->like('file_name', $form)
+            ->get('submission_form')->num_rows();
     }
 
     /**
-     * @param $form_id
+     * @param $form
      * @return int
      */
-    function count_monthly_submitted_forms($form_id)
+    function count_monthly_submitted_forms($form)
     {
-        $sql = " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ";
-        $sql .= " WHERE table_schema = '{$this->db->database}' ";
-        $sql .= " AND table_name = '{$form_id}' ";
-
-        $query = $this->db->query($sql);
-
-        if (empty($query->num_rows() == 1)) {
-            return $this->db
-                ->get_where($form_id, array('MONTH(meta_start)' => date('m')))->num_rows();
-        } else {
-            return 0;
-        }
+        return $this->db
+            ->like('file_name', $form)
+            ->get_where('submission_form', array('MONTH(submitted_on)' => date('m')))->num_rows();
     }
 
     /**
-     * @param $form_id
+     * @param $form
      * @return mixed
      */
-    function count_weekly_submitted_forms($form_id)
+    function count_weekly_submitted_forms($form)
     {
         $today = date('Y-m-d');
         $last = date('Y-m-d', strtotime("-7 day", strtotime($today)));
 
-        $sql = " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ";
-        $sql .= " WHERE table_schema = '{$this->db->database}' ";
-        $sql .= " AND table_name = '{$form_id}' ";
-
-        $query = $this->db->query($sql);
-
-        if (empty($query->num_rows() == 1)) {
-            $this->db->where("meta_start BETWEEN '$last%' AND '$today%'", NULL, FALSE);
-            return $this->db->get($form_id)->num_rows();
-        } else {
-            return 0;
-        }
+        return $this->db
+            ->like('file_name', $form)
+            ->where("submitted_on BETWEEN '$last%' AND '$today%'", NULL, FALSE)
+            ->get('submission_form')->num_rows();
     }
 
     /**
-     * @param $form_id
+     * @param $form
      * @return int
      */
-    function count_daily_submitted_forms($form_id)
+    function count_daily_submitted_forms($form)
     {
-        $today = date('Y-m-d');
-
-        $sql = " SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS ";
-        $sql .= " WHERE table_schema = '{$this->db->database}' ";
-        $sql .= " AND table_name = '{$form_id}' ";
-
-        $query = $this->db->query($sql);
-
-        if (empty($query->num_rows() == 1)) {
-            return $this->db->get_where($form_id, array('DATE(meta_start)' => $today))->num_rows();
-        } else {
-            return 0;
-        }
+        return $this->db
+            ->like('file_name', $form)
+            ->get_where('submission_form', array('DATE(submitted_on)' => date('Y-m-d')))->num_rows();
     }
 
 
