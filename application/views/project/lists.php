@@ -8,7 +8,6 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li><a href="<?= site_url('projects/lists') ?>">Manage Projects</a></li>
                 <li class="active">List projects</li>
             </ol>
 
@@ -36,12 +35,18 @@
                                     <td><?php echo $value->description; ?></td>
                                     <td><?php echo date('d-m-Y H:i:s', strtotime($value->created_at)); ?></td>
                                     <td>
-                                        <?php echo anchor("projects/edit/" . $value->id, "Edit", 'class="btn btn-primary btn-xs"'); ?>
+                                        <?php echo anchor("projects/edit/" . $value->id, "Edit"); ?>
                                     </td>
                                 </tr>
                                 <?php $serial++;
                             } ?>
                         </table>
+                        <?php if (!empty($links)): ?>
+                            <div class="widget-foot">
+                                <?= $links ?>
+                                <div class="clearfix"></div>
+                            </div>
+                        <?php endif; ?>
 
                     <?php } else { ?>
                         <div class="fail_message">You don't have any project</div>

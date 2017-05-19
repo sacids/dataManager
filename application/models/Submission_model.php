@@ -13,6 +13,8 @@ class Submission_model extends CI_Model
      */
     private static $table_name = "submission_form";
 
+    private $user_id;
+
     /**
      * Submission_model constructor.
      */
@@ -20,6 +22,19 @@ class Submission_model extends CI_Model
     {
         parent::__construct();
         $this->initialize_table();
+
+        $this->user_id = $this->session->userdata('user_id');
+    }
+
+    /**
+     * @param $table_name
+     * @param $column
+     */
+    function where_condition($table_name, $column)
+    {
+        if (!$this->ion_auth->in_group('admin')) {
+            $this->db->where($table_name . '.' . $column, $this->user_id);
+        }
     }
 
     /**
@@ -56,6 +71,8 @@ class Submission_model extends CI_Model
      */
     function count_published_forms()
     {
+        $this->where_condition('xforms', 'user_id');
+
         return $this->db->get_where('xforms', array('status' => 'published'))->num_rows();
     }
 
@@ -64,6 +81,8 @@ class Submission_model extends CI_Model
      */
     function get_submitted_forms()
     {
+        $this->where_condition('xforms', 'user_id');
+
         return $this->db->get_where('xforms', array('status' => 'published'))->result();
     }
 

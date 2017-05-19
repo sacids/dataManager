@@ -90,40 +90,44 @@ class Auth extends CI_Controller
      */
     function users_list()
     {
+        $this->data['title'] = "Users List";
+
         //check login
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
 
-        if (!$this->input->post("search")) {
-            $searched = false;
-            $users_count = $this->User_model->count_users();
-        } else {
-            $searched = true;
+        if ($this->input->post("search")) {
             $first_name = $this->input->post("firstname", null);
             $last_name = $this->input->post("lastname", null);
             $phone = $this->input->post("phone", null);
             $user_status = $this->input->post("status", null);
 
-            $users_count = $this->User_model->count_users_by_search_terms($first_name, $last_name, $phone, $user_status);
+            $this->data['user_list'] = $this->User_model->search_users($first_name, $last_name, $phone, $user_status);
+            foreach ($this->data['user_list'] as $k => $user) {
+                $this->data['user_list'][$k]->groups = $this->ion_auth->get_users_groups($user->user_id)->result();
+            }
+
+        } else {
+
+            $config = array(
+                'base_url' => $this->config->base_url("auth/users_list"),
+                'total_rows' => $this->User_model->count_users(),
+                'uri_segment' => 3,
+            );
+
+            $this->pagination->initialize($config);
+            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+            $this->data['user_list'] = $this->User_model->get_users_list($this->pagination->per_page, $page);
+            foreach ($this->data['user_list'] as $k => $user) {
+                $this->data['user_list'][$k]->groups = $this->ion_auth->get_users_groups($user->user_id)->result();
+            }
+            $this->data["links"] = $this->pagination->create_links();
         }
-        $config = array(
-            'base_url' => $this->config->base_url("auth/users_list"),
-            'total_rows' => $users_count,
-            'uri_segment' => 3,
-        );
-
-        $this->pagination->initialize($config);
-        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-        $this->data['users'] = (!$searched) ? $this->User_model->get_users($this->pagination->per_page, $page) :
-            $this->User_model->search_users($first_name, $last_name, $phone, $user_status, $this->pagination->per_page, $page);
-
-        $this->data["links"] = $this->pagination->create_links();
 
         //render view
-        $this->data['title'] = "Users List";
         $this->load->view('header', $this->data);
         $this->_render_page('auth/index');
         $this->load->view('footer');
@@ -240,18 +244,24 @@ class Auth extends CI_Controller
                 'name' => 'old',
                 'id' => 'old',
                 'type' => 'password',
+                'class' => 'form-control',
+                'placeholder' => 'Enter old password'
             );
             $this->data['new_password'] = array(
                 'name' => 'new',
                 'id' => 'new',
                 'type' => 'password',
                 'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
+                'class' => 'form-control',
+                'placeholder' => 'Enter new password'
             );
             $this->data['new_password_confirm'] = array(
                 'name' => 'new_confirm',
                 'id' => 'new_confirm',
                 'type' => 'password',
                 'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
+                'class' => 'form-control',
+                'placeholder' => 'Confirm new password'
             );
             $this->data['user_id'] = array(
                 'name' => 'user_id',
@@ -700,7 +710,6 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
 
         $this->form_validation->set_rules('group', $this->lang->line('create_user_group_label'), 'required');
-        $this->form_validation->set_rules('district', $this->lang->line('create_user_district_label'), 'required');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 
@@ -717,68 +726,100 @@ class Auth extends CI_Controller
                 'first_name' => $this->input->post('first_name'),
                 'last_name' => $this->input->post('last_name'),
                 'phone' => $this->input->post('phone'),
-                'district' => $this->input->post('district'),
                 'digest_password' => $digest_password
             );
         }
         if ($this->form_validation->run() == TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data, $groups)) {
             // check to see if we are creating the user
             // redirect them back to the admin page
-            $this->session->set_flashdata('message', $this->ion_auth->messages());
+            $this->session->set_flashdata('message', display_message($this->ion_auth->messages()));
             redirect("auth/create_user", 'refresh');
         } else {
             // display the create user form
             // set the flash data error message if there is one
             $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
+            //populate data
             $this->data['first_name'] = array(
                 'name' => 'first_name',
                 'id' => 'first_name',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('first_name'),
+                'class' => 'form-control',
+                'placeholder' => 'Enter first name'
             );
             $this->data['last_name'] = array(
                 'name' => 'last_name',
                 'id' => 'last_name',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('last_name'),
+                'class' => 'form-control',
+                'placeholder' => 'Enter last name'
             );
             $this->data['identity'] = array(
                 'name' => 'identity',
                 'id' => 'identity',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('identity'),
+                'class' => 'form-control',
+                'placeholder' => 'Enter username'
             );
-
-            $this->data['phone'] = array(
-                'name' => 'phone',
-                'id' => 'phone',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('phone'),
-            );
-
             $this->data['email'] = array(
                 'name' => 'email',
                 'id' => 'email',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('email'),
+                'class' => 'form-control',
+                'placeholder' => 'Enter email address'
             );
-
+            $this->data['group_id'] = array(
+                'name' => 'group_id',
+                'id' => 'group_id',
+                'type' => 'select',
+                'value' => $this->form_validation->set_value('group_id'),
+                'class' => 'form-control'
+            );
+            $this->data['level_id'] = array(
+                'name' => 'level_id',
+                'id' => 'level_id',
+                'type' => 'select',
+                'value' => $this->form_validation->set_value('level_id'),
+                'class' => 'form-control'
+            );
+            $this->data['user_level'] = array(
+                'name' => 'user_level',
+                'id' => 'user_level',
+                'type' => 'select',
+                'value' => $this->form_validation->set_value('user_level'),
+                'class' => 'form-control'
+            );
+            $this->data['phone'] = array(
+                'name' => 'phone',
+                'id' => 'phone',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('phone'),
+                'class' => 'form-control',
+                'placeholder' => 'Enter phone'
+            );
             $this->data['password'] = array(
                 'name' => 'password',
                 'id' => 'password',
                 'type' => 'password',
                 'value' => $this->form_validation->set_value('password'),
+                'class' => 'form-control',
+                'placeholder' => 'Enter password'
             );
             $this->data['password_confirm'] = array(
                 'name' => 'password_confirm',
                 'id' => 'password_confirm',
                 'type' => 'password',
                 'value' => $this->form_validation->set_value('password_confirm'),
+                'class' => 'form-control',
+                'placeholder' => 'Confirm password'
             );
 
             $this->data['districts'] = $this->db->order_by('name', 'asc')->get('district')->result();
-            $this->data['groups'] = $this->db->order_by('name', 'asc')->get('groups')->result();
+            $this->data['group_list'] = $this->db->order_by('name', 'asc')->get('groups')->result();
             //render view
             $this->data['title'] = "Create New User";
             $this->load->view('header', $this->data);
@@ -808,7 +849,6 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'required');
         $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required');
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
-        $this->form_validation->set_rules('district', $this->lang->line('create_user_district_label'), 'required');
         $this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'required|valid_email');
 
         if (isset($_POST) && !empty($_POST)) {
@@ -830,8 +870,7 @@ class Auth extends CI_Controller
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
                     'email' => $this->input->post('email'),
-                    'phone' => $this->input->post('phone'),
-                    'district' => $this->input->post('district'),
+                    'phone' => $this->input->post('phone')
                 );
 
                 // update the password if it was posted
@@ -863,7 +902,7 @@ class Auth extends CI_Controller
                 // check to see if we are updating the user
                 if ($this->ion_auth->update($user->id, $data)) {
                     // redirect them back to the admin page if admin, or to the base url if non admin
-                    $this->session->set_flashdata('message', "User Saved");
+                    $this->session->set_flashdata('message', display_message("User Saved"));
                     redirect('auth/edit_user/' . $id, 'refresh');
 
                 }
@@ -882,29 +921,20 @@ class Auth extends CI_Controller
         $this->data['groups'] = $groups;
         $this->data['currentGroups'] = $currentGroups;
 
+        //populate data
         $this->data['first_name'] = array(
             'name' => 'first_name',
             'id' => 'first_name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('first_name', $user->first_name),
+            'class' => 'form-control'
         );
         $this->data['last_name'] = array(
             'name' => 'last_name',
             'id' => 'last_name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('last_name', $user->last_name),
-        );
-        $this->data['email'] = array(
-            'name' => 'email',
-            'id' => 'email',
-            'type' => 'text',
-            'value' => $this->form_validation->set_value('email', $user->email),
-        );
-        $this->data['phone'] = array(
-            'name' => 'phone',
-            'id' => 'phone',
-            'type' => 'text',
-            'value' => $this->form_validation->set_value('phone', $user->phone),
+            'class' => 'form-control'
         );
 
         $this->data['identity'] = array(
@@ -912,6 +942,29 @@ class Auth extends CI_Controller
             'id' => 'identity',
             'type' => 'text',
             'value' => $this->form_validation->set_value('identity', $user->username),
+            'class' => 'form-control',
+        );
+        $this->data['email'] = array(
+            'name' => 'email',
+            'id' => 'email',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('email', $user->email),
+            'class' => 'form-control',
+        );
+
+        $this->data['level_id'] = array(
+            'name' => 'level_id',
+            'id' => 'level_id',
+            'type' => 'select',
+            'value' => $this->form_validation->set_value('level_id'),
+            'class' => 'form-control'
+        );
+        $this->data['user_level'] = array(
+            'name' => 'user_level',
+            'id' => 'user_level',
+            'type' => 'select',
+            'value' => $this->form_validation->set_value('user_level'),
+            'class' => 'form-control'
         );
 
         $this->data['phone'] = array(
@@ -919,18 +972,19 @@ class Auth extends CI_Controller
             'id' => 'phone',
             'type' => 'text',
             'value' => $this->form_validation->set_value('phone', $user->phone),
+            'class' => 'form-control'
         );
-
-
         $this->data['password'] = array(
             'name' => 'password',
             'id' => 'password',
-            'type' => 'password'
+            'type' => 'password',
+            'class' => 'form-control'
         );
         $this->data['password_confirm'] = array(
             'name' => 'password_confirm',
             'id' => 'password_confirm',
-            'type' => 'password'
+            'type' => 'password',
+            'class' => 'form-control'
         );
 
         $this->data['district'] = $this->db->get_where('district', array('code' => $user->district))->row();
@@ -989,15 +1043,21 @@ class Auth extends CI_Controller
                 'id' => 'group_name',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('group_name'),
+                'class' => 'form-control',
+                'placeholder' => 'Enter group name'
             );
             $this->data['description'] = array(
                 'name' => 'description',
                 'id' => 'description',
-                'type' => 'text',
+                'type' => 'text area',
+                'rows' => '5',
                 'value' => $this->form_validation->set_value('description'),
+                'class' => 'form-control',
+                'placeholder' => 'Enter group description'
             );
+
+            //render view
             $this->load->view('header', $this->data);
-            //$this->load->view('auth/menu');
             $this->_render_page('auth/create_group');
             $this->load->view('footer');
         }
@@ -1049,12 +1109,15 @@ class Auth extends CI_Controller
             'id' => 'group_name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('group_name', $group->name),
+            'class' => 'form-control',
             $readonly => $readonly,
         );
         $this->data['description'] = array(
             'name' => 'description',
             'id' => 'description',
-            'type' => 'text',
+            'type' => 'text area',
+            'rows' => '5',
+            'class' => 'form-control',
             'value' => $this->form_validation->set_value('description', $group->description),
         );
 

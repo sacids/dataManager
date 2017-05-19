@@ -8,7 +8,7 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li><a href="<?= site_url('projects/lists') ?>">Manage Projects</a></li>
+                <li><a href="<?= site_url('projects/lists') ?>">Manage projects</a></li>
                 <li class="active">Add new project</li>
             </ol>
 

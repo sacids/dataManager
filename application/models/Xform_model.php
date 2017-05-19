@@ -196,6 +196,16 @@ class Xform_model extends CI_Model
     }
 
     /**
+     * @param $jr_form_id
+     * @return mixed
+     */
+    function get_form_by_jr_form_id($jr_form_id)
+    {
+        return $this->db
+            ->get_where(self::$xform_table_name, array('jr_form_id' => $jr_form_id))->row();
+    }
+
+    /**
      * Finds a table field with point data type
      *
      * @param $table_name

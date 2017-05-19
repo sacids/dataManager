@@ -8,37 +8,47 @@
  */
 class Project_model extends CI_Model
 {
+    private $user_id;
+
     public function __construct()
     {
         parent::__construct();
+        $this->user_id = $this->session->userdata('user_id');
     }
 
     /**
-     * @param null $owner
+     * @param $table_name
+     * @param $column
+     */
+    function where_condition($table_name, $column)
+    {
+        if (!$this->ion_auth->in_group('admin')) {
+            $this->db->where($table_name . '.' . $column, $this->user_id);
+        }
+    }
+
+    /**
      * @return mixed
      */
-    function count_projects($owner = null)
+    function count_projects()
     {
-        if ($owner != null)
-            $this->db->where('owner', $owner);
+        $this->where_condition('projects', 'owner');
 
-        return $this->db->get('project')->num_rows();
+        return $this->db->get('projects')->num_rows();
     }
 
     /**
-     * @param null $owner
      * @param $num
      * @param $start
      * @return mixed
      */
-    function get_project_list($owner = null, $num, $start)
+    function get_project_list($num, $start)
     {
-        if ($owner != null)
-            $this->db->where('owner', $owner);
+        $this->where_condition('projects', 'owner');
 
         return $this->db
             ->limit($num, $start)
-            ->get('project')->result();
+            ->get('projects')->result();
     }
 
     /**
@@ -47,7 +57,7 @@ class Project_model extends CI_Model
      */
     function get_project_by_id($project_id)
     {
-        return $this->db->get_where('project', array('id' => $project_id))->row();
+        return $this->db->get_where('projects', array('id' => $project_id))->row();
     }
 
 }

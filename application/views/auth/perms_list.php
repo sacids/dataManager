@@ -5,6 +5,12 @@
                 <h3 class="title"><?php echo $title ?></h3>
             </div>
 
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">List perm</li>
+            </ol>
+
             <div class="col-sm-6">
                 <p><a class="btn btn-primary" href="<?= site_url('auth/add_perm') ?>">Add Perm</a></p>
 
@@ -23,7 +29,7 @@
                             <td><?php echo $value->m_name; ?></td>
                             <td><?php echo $value->p_name; ?></td>
                             <td><?php echo $value->perm_slug; ?></td>
-                            <td><?php echo anchor("auth/edit_perm/" . $value->p_id, "Edit", array("class" => 'btn btn-primary btn-xs')); ?></td>
+                            <td><?php echo anchor("auth/edit_perm/" . $value->p_id, "Edit"); ?></td>
                             </td>
                         </tr>
                         <?php

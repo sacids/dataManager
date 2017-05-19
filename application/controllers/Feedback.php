@@ -57,6 +57,8 @@ class Feedback extends CI_Controller
      */
     function lists()
     {
+        $this->data['title'] = "Feedback List";
+
         //check if logged in
         $this->_is_logged_in();
 
@@ -89,9 +91,8 @@ class Feedback extends CI_Controller
         }
 
         //render view
-        $this->data['title'] = "Feedback List";
         $this->load->view('header', $this->data);
-        $this->load->view("feedback/feedback_list");
+        $this->load->view("feedback/list");
         $this->load->view('footer');
     }
 
@@ -142,9 +143,10 @@ class Feedback extends CI_Controller
 
         //render view
         $data['instance_id'] = $instance_id;
+
         $data['title'] = "Feedback List";
         $this->load->view('header', $data);
-        $this->load->view("feedback/user_feedback_list");
+        $this->load->view("feedback/user_feedback");
         $this->load->view('footer');
     }
 

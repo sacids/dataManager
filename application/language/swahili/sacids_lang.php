@@ -48,10 +48,10 @@ $lang['nav_item_form_list'] = "Orodha ya fomu";
 $lang['nav_item_form_add_new'] = "Ongeza fomu mpya";
 
 $lang['label_instance_id'] = "Instance ID";
-$lang['label_message'] = "Ujumbe wa mwisho";
+$lang['label_message'] = "Ujumbe";
 $lang['label_user'] = "Mpiga Soga";
 $lang['label_username'] = "Jina la mtumiaji";
-$lang['label_feedback_date'] = "Tarehe ya mwisho ya soga";
+$lang['label_feedback_date'] = "Muda wa soga";
 $lang['label_status'] = "Hadhi";
 
 

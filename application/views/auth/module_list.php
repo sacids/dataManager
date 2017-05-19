@@ -5,6 +5,12 @@
                 <h3 class="title"><?php echo $title ?></h3>
             </div>
 
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">List module</li>
+            </ol>
+
             <div class="col-sm-6">
                 <p><a class="btn btn-primary" href="<?= site_url('auth/add_module') ?>">Add Module</a></p>
 
@@ -21,7 +27,7 @@
                         <tr>
                             <td><?php echo $value->name; ?></td>
                             <td><?php echo $value->controller; ?></td>
-                            <td><?php echo anchor("auth/edit_module/" . $value->id, "Edit", array("class" => 'btn btn-primary btn-xs')); ?></td>
+                            <td><?php echo anchor("auth/edit_module/" . $value->id, "Edit"); ?></td>
                             </td>
                         </tr>
                         <?php
