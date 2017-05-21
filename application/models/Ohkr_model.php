@@ -63,7 +63,7 @@ class Ohkr_model extends CI_Model
     public function get_disease_by_id($disease_id)
     {
         $this->db->select('disease.id, disease.description,disease.title, disease.title as d_title, 
-        specie_id, specie.id as s_id, specie.title as s_title,disease.date_created')
+        specie_id, specie.id as s_id, specie.title as s_title')
             ->join(self::$table_name_species . " specie ", "disease.specie_id = specie.id");
         return $this->db->get_where(self::$table_name_diseases . " disease", array('disease.id' => $disease_id))->row();
     }

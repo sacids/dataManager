@@ -1,6 +1,17 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <div id="header-title">
+                <h3 class="title">Edit form</h3>
+            </div>
+
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">Edit form</li>
+            </ol>
+
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
@@ -25,7 +36,7 @@
                                 <div class="form-group">
                                     <?php echo form_label($this->lang->line("label_form_title"), " <span>*</span>"); ?>
                                     <input type="text" name="title" placeholder="Enter form title"
-                                           class="form-control input-lg"
+                                           class="form-control"
                                            value="<?php echo set_value('title', $form->title); ?>">
                                 </div>
                                 <div class=""><?php echo form_error('title'); ?></div>
@@ -40,7 +51,7 @@
                                 <div class="form-group">
                                     <label for="campus"><?php echo $this->lang->line("label_access") ?> :</label>
                                     <?php echo form_dropdown("access", array("private" => "Private", "public" => "Public"),
-                                            set_value("access", $form->access), 'class="form-control  input-lg"'); ?>
+                                            set_value("access", $form->access), 'class="form-control"'); ?>
                                 </div>
                                 <div class=""><?php echo form_error('access'); ?></div>
                             </div>

@@ -1,7 +1,7 @@
 <?php
 /**
  * AfyaData
- *  
+ *
  * An open source data collection and analysis tool.
  *
  * This content is released under the MIT License (MIT)
@@ -27,12 +27,12 @@
  * THE SOFTWARE.
  *
  *
- * @package	    AfyaData
- * @author	    AfyaData Dev Team
- * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
- * @license	    http://opensource.org/licenses/MIT	MIT License
- * @link	    https://afyadata.sacids.org
- * @since	    Version 1.0.0
+ * @package        AfyaData
+ * @author        AfyaData Dev Team
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license        http://opensource.org/licenses/MIT	MIT License
+ * @link        https://afyadata.sacids.org
+ * @since        Version 1.0.0
  */
 
 /**
@@ -44,12 +44,14 @@
 class Whatsapp extends CI_Controller
 {
     private $controller;
+    private $user_id;
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model("Whatsapp_model");
         $this->controller = $this->router->fetch_class();
+        $this->user_id = $this->session->userdata('user_id');
     }
 
     /**
@@ -74,6 +76,47 @@ class Whatsapp extends CI_Controller
         if (!perms_role($this->controller, $method_name)) {
             show_error("You are not allowed to view this page", 401, "Unauthorized");
         }
+    }
+
+    //import file
+    function import()
+    {
+        $this->data['title'] = "Import message file";
+
+        $this->_is_logged_in();
+
+        //form validation
+        $this->form_validation->set_rules('txt_file', 'Message file', 'callback_upload_txt_file_path');
+
+        if ($this->form_validation->run() == TRUE) {
+            $txt_file_path = './assets/whatsapp/' . $_POST['txt_file'];
+
+            $handle = fopen($txt_file_path, "r");
+            if ($handle) {
+                while (($line = fgets($handle)) !== FALSE) {
+                    $message = $this->_extract_line_message($line);
+                    $this->Whatsapp_model->create($message);
+                }
+                fclose($handle);
+            } else {
+                log_message("debug", "error opening the file.");
+            }
+            //redirect
+            $this->session->set_flashdata('message', display_message('Message file imported'));
+            redirect('whatsapp/message_list', 'refresh');
+        }
+        //populate data
+        $this->data['txt_file'] = array(
+            'name' => 'txt_file',
+            'id' => 'txt_file',
+            'type' => 'file',
+            'value' => $this->form_validation->set_value('txt_file'),
+        );
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("whatsapp/import");
+        $this->load->view('footer');
     }
 
     public function index()
@@ -123,6 +166,7 @@ class Whatsapp extends CI_Controller
             "message" => trim($message),
             //"date_sent_received" => $date_obj->format('Y-m-d h:i'),
             "date_sent_received" => date('Y-m-d H:i:s', $date_obj),
+            "user_id" => $this->user_id,
             "date_created" => date("c")
         );
 
@@ -197,5 +241,40 @@ class Whatsapp extends CI_Controller
         $newline = "\r\n";
         $data = $this->dbutil->csv_from_result($query, $delimiter, $newline);
         force_download($filename, $data);
+    }
+
+    //function to upload excel file
+    function upload_txt_file_path()
+    {
+        $config['upload_path'] = './assets/whatsapp/';
+        $config['allowed_types'] = 'txt';
+        $config['max_size'] = '20000';
+        $config['overwrite'] = TRUE;
+        $config['remove_spaces'] = TRUE;
+
+        //initialize config
+        $this->upload->initialize($config);
+
+        if (isset($_FILES['txt_file']) && !empty($_FILES['txt_file']['name'])) {
+            if ($this->upload->do_upload('student_file')) {
+                // set a $_POST value for 'image' that we can use later
+                $upload_data = $this->upload->data();
+                $excel_path = $upload_data['full_path'];
+
+                //POST variables
+                $_POST['txt_file'] = $upload_data['file_name'];
+                $_POST['txt_path'] = $upload_data['full_path'];
+
+                return true;
+            } else {
+                // possibly do some clean up ... then throw an error
+                $this->form_validation->set_message('upload_txt_file_path', $this->upload->display_errors());
+                return false;
+            }
+        } else {
+            // throw an error because nothing was uploaded
+            $this->form_validation->set_message('upload_txt_file_path', "Attach txt file");
+            return false;
+        }
     }
 }

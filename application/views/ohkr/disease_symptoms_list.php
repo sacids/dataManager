@@ -5,6 +5,12 @@
                 <h3 class="title"><?php echo $disease->d_title; ?> clinical manifestation</h3>
             </div>
 
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">List clinical manifestation</li>
+            </ol>
+
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';

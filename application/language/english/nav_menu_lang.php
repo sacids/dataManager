@@ -40,7 +40,7 @@ $lang['nav_item_add_disease']       = "Add new Disease";
 
 $lang['nav_item_manage_symptoms']   = "Manage symptoms";
 $lang['nav_item_list_symptoms']     = "List symptoms";
-$lang['nav_item_create_symptom']    = "Create symptom";
+$lang['nav_item_create_symptom']    = "Add new symptom";
 
 $lang['nav_item_manage_species']    = "Manage Species";
 $lang['nav_item_list_species']      = "List species";

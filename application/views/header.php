@@ -70,15 +70,15 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><?= $this->lang->line("nav_item_projects") ?> <span
-                                    class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
-                            <li><?php echo anchor('projects/add_new', $this->lang->line("nav_item_add_new_project")); ?></li>
-                        </ul>
-                    </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><?= $this->lang->line("nav_item_projects") ?> <span
+                                class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
+                        <li><?php echo anchor('projects/add_new', $this->lang->line("nav_item_add_new_project")); ?></li>
+                    </ul>
+                </li>
 
                 <?php if (perm_module('Xform')) { ?>
                     <li class="dropdown">
@@ -129,7 +129,15 @@
                 <?php } ?>
 
                 <?php if (perm_module('Whatsapp')) { ?>
-                    <li><?php echo anchor('whatsapp/message_list', "WhatsApp db"); ?></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">WhatsApp db
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><?php echo anchor('whatsapp/message_list', 'List message'); ?></li>
+                            <li><?php echo anchor('whatsapp/import', 'Import file'); ?></li>
+                        </ul>
+                    </li>
                 <?php } ?>
 
                 <?php if (perm_module('Blog')) { ?>
