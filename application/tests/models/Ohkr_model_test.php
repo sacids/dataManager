@@ -113,8 +113,7 @@ class Ohkr_model_test extends TestCase
                 "id" => 1,
                 "title" => "Malaria",
                 "specie_id" => 1,
-                "description" => "Tropical disease",
-                "date_created" => date("Y-m-d H:i:s")
+                "description" => "Tropical disease"
             )
         );
         $diseases = $this->obj->get_diseases(30, 0);
@@ -135,8 +134,7 @@ class Ohkr_model_test extends TestCase
             "id" => 1,
             "title" => "Malaria",
             "specie_id" => 1,
-            "description" => "Tropical disease",
-            "date_created" => date("Y-m-d H:i:s")
+            "description" => "Tropical disease"
         );
 
         $disease = $this->obj->get_disease_by_id($expected_disease['id']);
@@ -162,8 +160,7 @@ class Ohkr_model_test extends TestCase
     {
         $expected_disease = array(
             "id" => 1,
-            "description" => "Tropical disease, Updated",
-            "date_created" => "2017-01-16 11:01:55"
+            "description" => "Tropical disease, Updated"
         );
 
         $this->obj->update_disease($expected_disease['id'], $expected_disease);
@@ -179,8 +176,7 @@ class Ohkr_model_test extends TestCase
     {
         $expected_specie = array(
             "id" => 1,
-            "title" => "Binadamu Updated",
-            "date_created" => "2017-01-16 11:01:55"
+            "title" => "Binadamu Updated"
         );
 
         $this->obj->update_specie($expected_specie['id'], $expected_specie);
