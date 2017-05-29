@@ -8,6 +8,8 @@
  */
 class Xform_model extends CI_Model
 {
+    private $user_id;
+
     /**
      * Table name for xform definitions
      *
@@ -26,6 +28,18 @@ class Xform_model extends CI_Model
     public function __construct()
     {
         $this->initialize_table();
+        $this->user_id = $this->session->userdata('user_id');
+    }
+
+    /**
+     * @param $table_name
+     * @param $column
+     */
+    function where_condition($table_name, $column)
+    {
+        if (!$this->ion_auth->in_group('admin')) {
+            $this->db->where($table_name . '.' . $column, $this->user_id);
+        }
     }
 
     /**
@@ -193,6 +207,26 @@ class Xform_model extends CI_Model
             $this->db->where("status", $status);
         $this->db->limit($limit, $offset);
         return $this->db->get(self::$xform_table_name)->result();
+    }
+
+    /**
+     * @param $jr_form_id
+     * @return mixed
+     */
+    function get_form_by_jr_form_id($jr_form_id)
+    {
+        return $this->db
+            ->get_where(self::$xform_table_name, array('jr_form_id' => $jr_form_id))->row();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    function get_form_by_id($id)
+    {
+        return $this->db
+            ->get_where(self::$xform_table_name, array('id' => $id))->row();
     }
 
     /**
@@ -473,5 +507,29 @@ class Xform_model extends CI_Model
         $this->db->where("id", $entry_id);
         $this->db->limit(1);
         return $this->db->delete($table_name);
+    }
+
+    /**
+     * @return mixed
+     */
+    function count_searchable_form()
+    {
+        $this->where_condition('xforms_config', 'user_id');
+
+        return $this->db->get('xforms_config')->num_rows();
+    }
+
+    /**
+     * @param $num
+     * @param $start
+     * @return mixed
+     */
+    function get_searchable_form_list($num, $start)
+    {
+        $this->where_condition('xforms_config', 'user_id');
+
+        return $this->db
+            ->limit($num, $start)
+            ->get('xforms_config')->result();
     }
 }

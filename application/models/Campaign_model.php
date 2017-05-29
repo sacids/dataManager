@@ -10,6 +10,8 @@
 class Campaign_model extends CI_Model
 {
 
+    private $user_id;
+
     /**
      * Campaign table name
      *
@@ -21,12 +23,32 @@ class Campaign_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
+
+        $this->user_id = $this->session->userdata('user_id');
     }
 
+    /**
+     * @param $table_name
+     * @param $column
+     */
+    function where_condition($table_name, $column)
+    {
+        if (!$this->ion_auth->in_group('admin')) {
+            $this->db->where($table_name . '.' . $column, $this->user_id);
+        }
+    }
+
+
+    /**
+     * @return mixed
+     */
     function count_active_campaign()
     {
+        $this->where_condition('campaign', 'owner');
+
         return $this->db->get('campaign')->num_rows();
     }
+
 
     /**
      * @param $campaign_details
@@ -39,14 +61,16 @@ class Campaign_model extends CI_Model
     }
 
     /**
-     * @param null
+     * @param $num
+     * @param $start
      * @return mixed
      */
-    public function get_campaign()
+    public function get_campaign($num, $start)
     {
-        return $this->db->select('campaign.id, campaign.title as campaign_title, campaign.icon, campaign.featured, campaign.type,
-                        campaign.date_created, campaign.jr_form_id, campaign.description, xform.title as xform_title')
-            ->join(self::$xform_table_name . " xform", "xform.jr_form_id = campaign.jr_form_id", "left")
+        $this->where_condition('campaign', 'owner');
+
+        return $this->db
+            ->limit($num, $start)
             ->get(self::$table_name . " campaign")
             ->result();
     }
@@ -58,11 +82,7 @@ class Campaign_model extends CI_Model
     public function get_campaign_by_id($campaign_id)
     {
         return $this->db
-            ->select('campaign.id, campaign.title as campaign_title, campaign.icon, campaign.featured, campaign.type,
-                        campaign.date_created, campaign.jr_form_id, campaign.description, xform.title as xform_title')
-            ->join(self::$xform_table_name . " xform", "xform.jr_form_id = campaign.jr_form_id", "left")
-            ->get_where(self::$table_name . " campaign", array('campaign.id' => $campaign_id))
-            ->row();
+            ->get_where(self::$table_name, array('id' => $campaign_id))->row();
     }
 
 

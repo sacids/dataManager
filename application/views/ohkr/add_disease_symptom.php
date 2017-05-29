@@ -5,13 +5,19 @@
                 <h3 class="title">Add <?php echo $disease->d_title; ?> clinical manifestation</h3>
             </div>
 
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">Add clinical manifestation</li>
+            </ol>
+
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
             } ?>
 
             <div class="col-sm-8">
-                <?php echo form_open('ohkr/add_disease_symptom/' . $disease->id, 'class="form-horizontal" role="form"'); ?>
+                <?php echo form_open('ohkr/add_disease_symptom/' . $disease->id, 'role="form"'); ?>
 
                 <div class="form-group">
                     <label><?php echo $this->lang->line("label_symptom_name") ?> <span>*</span></label>

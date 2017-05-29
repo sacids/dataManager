@@ -129,7 +129,8 @@
                                                                     class="time"><?= time_ago($value->date_created); ?></span>
                                                             <br>
                                                             <span class="msg"><?= $value->message ?></span>
-                                                            <br/><?= anchor('feedback/user_feedback/' . $value->instance_id, 'Read more', 'class="read-more"') ?>
+                                                            <br/><span
+                                                                    class="pull-right"><?= anchor('feedback/user_feedback/' . $value->instance_id, 'Conversation', 'class="btn btn-primary btn-xs"') ?></span>
                                                         </div>
                                                     </div>
                                                     <hr>

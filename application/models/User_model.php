@@ -49,6 +49,19 @@ class User_model extends CI_Model
         return $users;
     }
 
+    /**
+     * @param $num
+     * @param $start
+     * @return mixed
+     */
+    function get_users_list($num = 100, $start = 0)
+    {
+        return $this->db
+            ->select('*, users.id as user_id')
+            ->limit($num, $start)
+            ->get(self::$table_name)->result();
+    }
+
     function get_user($user_id)
     {
         $users = $this->db->get_where('users', array('users.id' => $user_id))->row();
@@ -119,7 +132,7 @@ class User_model extends CI_Model
         return $this->db->get()->result();
     }
 
-    public function search_users($first_name = NULL, $last_name = NULL, $phone = NULL, $status = NULL, $limit = 30, $offset = 0)
+    public function search_users($first_name = NULL, $last_name = NULL, $phone = NULL, $status = NULL)
     {
         if ($first_name != NULL)
             $this->db->or_like("first_name", $first_name);
@@ -129,8 +142,10 @@ class User_model extends CI_Model
             $this->db->or_where("phone", $phone);
         if ($status != NULL)
             $this->db->where("active", $status);
-        $this->db->limit($limit, $offset);
-        return $this->db->get(self::$table_name)->result();
+
+        return $this->db
+            ->select('*, users.id as user_id')
+            ->get(self::$table_name)->result();
     }
 
     public function count_users_by_search_terms($first_name = NULL, $last_name = NULL, $phone = NULL, $status = NULL)

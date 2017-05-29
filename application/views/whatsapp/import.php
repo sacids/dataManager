@@ -2,14 +2,13 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">Add new project</h3>
+                <h3 class="title">Import message file</h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li><a href="<?= site_url('projects/lists') ?>">Manage projects</a></li>
-                <li class="active">Add new project</li>
+                <li class="active">Import file</li>
             </ol>
 
             <div class="row">
@@ -19,29 +18,25 @@
                     } else if ($this->session->flashdata('message') != "") {
                         echo $this->session->flashdata('message');
                     } ?>
+                    <?php echo form_open_multipart('whatsapp/import', 'role="form"'); ?>
 
-                    <?php echo form_open('projects/add_new', 'role="form"'); ?>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Title</label>
-                            <?php echo form_input($name); ?>
+                            <label>Message File</label>
+                            <?php echo form_input($txt_file); ?>
                         </div>
 
-                        <div class="form-group">
-                            <label>Description</label>
-                            <?php echo form_textarea($description); ?>
-                        </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary">Import</button>
                         </div>
                     </div>
+
                     <div class="form-group"></div>
                     <?php echo form_close(); ?>
-
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+

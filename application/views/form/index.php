@@ -8,6 +8,12 @@
                 </h3>
             </div>
 
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">List forms</li>
+            </ol>
+
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo $this->session->flashdata('message');

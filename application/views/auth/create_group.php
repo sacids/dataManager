@@ -1,36 +1,48 @@
-<div class="container">
+<div class="container" id="content-middle">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
                 <h3 class="title">Create new group</h3>
             </div>
 
-            <?php
-            if ($this->session->flashdata('message') != '') {
-                echo display_message($this->session->flashdata('message'));
-            } ?>
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">Create new group</li>
+            </ol>
 
-            <div class="col-sm-8">
-                <form action="<?php echo site_url('auth/create_group'); ?>"
-                      class="form-horizontal" role="form" method="post" accept-charset="utf-8">
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php if (validation_errors() != "") {
+                        echo '<div class="alert alert-danger fade in">' . validation_errors() . '</div>';
+                    } else if ($this->session->flashdata('message') != "") {
+                        echo $this->session->flashdata('message');
+                    } ?>
 
+                    <?php echo form_open("auth/create_group", 'role="form"'); ?>
                     <div class="form-group">
-                        <label> <label for="group_name">Group Name:<span>*</span></label> </label>
-                        <input type="text" name="group_name" value="<?php echo set_value('group_name'); ?>"
-                               class="form-control" id="group_name"/></div>
-                    <?php echo form_error('group_name'); ?>
-                    <div class="form-group">
-                        <label> <label for="description">Description:</label> </label>
-						<textarea name="description" id="description"
-                                  class="form-control"><?php echo set_value('description'); ?></textarea>
+                        <label><?php echo lang('create_group_name_label', 'group_name'); ?> <span
+                                    style="color: red;">*</span></label>
+                        <?php echo form_input($group_name); ?>
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <label><?php echo lang('create_group_desc_label', 'description'); ?></label>
+                        <?php echo form_textarea($description); ?>
                     </div>
 
-                </form>
+                    <div class="form-group">
+                        <?php echo form_submit('submit', 'Create Group', array('class' => "btn btn-primary")); ?>
+                    </div>
+
+                    <?php echo form_close(); ?>
+
+
+                </div>
             </div>
+
         </div>
     </div>
 </div>
+
+

@@ -9,15 +9,13 @@
 class Projects extends CI_Controller
 {
     private $controller;
-    private $user_id;
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Project_model'));
+        $this->load->model(array('project_model'));
 
         $this->controller = $this->router->fetch_class();
-        $this->user_id = $this->session->userdata('user_id');
     }
 
     /**
@@ -55,7 +53,17 @@ class Projects extends CI_Controller
         //check permission
         //$this->has_allowed_perm($this->router->fetch_method());
 
-        $this->data['project_list'] = $this->Project_model->get_project_list($this->user_id, 100, 0);
+        $config = array(
+            'base_url' => $this->config->base_url("projects/lists"),
+            'total_rows' => $this->project_model->count_projects(),
+            'uri_segment' => 3,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $this->data['project_list'] = $this->project_model->get_project_list($this->pagination->per_page, $page);
+        $this->data["links"] = $this->pagination->create_links();
 
         //render view
         $this->load->view('header', $this->data);
@@ -134,7 +142,7 @@ class Projects extends CI_Controller
         //check permission
         //$this->has_allowed_perm($this->router->fetch_method());
 
-        $project = $this->Project_model->get_project_by_id($project_id);
+        $project = $this->project_model->get_project_by_id($project_id);
 
         //form validation
         $this->form_validation->set_rules('name', 'Title', 'required|trim');

@@ -9,91 +9,73 @@
     });
 </script>
 
-<script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">Add campaign details</h3>
+                <h3 class="title">Add new campaign</h3>
             </div>
 
-            <?php
-            if ($this->session->flashdata('message') != '') {
-                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-            } ?>
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('campaign/lists') ?>">Manage campaign</a></li>
+                <li class="active">Add new campaign</li>
+            </ol>
 
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php if (validation_errors() != "") {
+                        echo '<div class="alert alert-danger fade in">' . validation_errors() . '</div>';
+                    } else if ($this->session->flashdata('message') != "") {
+                        echo $this->session->flashdata('message');
+                    } ?>
+                    <?php echo form_open_multipart('campaign/add_new', 'role="form"'); ?>
 
-            <div class="col-sm-8">
-                <?php echo form_open_multipart('campaign/add_new', 'class="form-horizontal" role="form"'); ?>
-                <div class="form-group">
-                    <label><?php echo $this->lang->line("label_campaign_title"); ?> <span>*</span></label>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label><?= $this->lang->line("label_campaign_title"); ?></label>
+                            <?php echo form_input($name); ?>
+                        </div>
 
-                    <input type="text" name="title" placeholder="Enter Campaign Title" class="form-control"
-                           value="<?php echo set_value('title'); ?>">
-                </div>
-                <div class="error" style="color: red"> <?php echo form_error('title'); ?></div>
+                        <div class="form-group">
+                            <label><?= $this->lang->line("label_campaign_icon"); ?></label>
+                            <?php echo form_input($icon); ?>
+                        </div>
 
-                <div class="form-group">
-                    <label><?php echo $this->lang->line("label_campaign_icon"); ?> <span>*</span></label>
-                    <input type="file" name="icon">
-                </div>
-                <div class="error" style="color: red"><?php echo form_error('icon'); ?></div>
+                        <div class="form-group">
+                            <label><?= $this->lang->line("label_campaign_type"); ?></label>
+                            <br/><?php echo form_radio("type", "general", NULL, 'id = "general"', set_radio('type', 'general')); ?>
+                            General Campaign
+                            <br/><?php echo form_radio("type", "form", NULL, 'id = "form"', set_radio('type', 'form')); ?>
+                            Form Campaign
+                        </div>
 
-                <div class="form-group">
-                    <label><?php echo $this->lang->line("label_campaign_type"); ?> <span>*</span></label>
+                        <div id="div1" style="display: none" class="form-group">
+                            <label><?= $this->lang->line("label_form_name"); ?></label>
+                            <?php
+                            $form_options = array();
+                            foreach ($form_list as $value) {
+                                $form_options[$value->jr_form_id] = $value->title;
+                            }
+                            $form_options = array('' => 'Choose form') + $form_options;
+                            echo form_dropdown('jr_form_id', $form_options, set_value('jr_form_id'), 'class="form-control"'); ?>
+                        </div>
 
-                    <div class="radio">
-                        <label><input id="general" type="radio" name="type" value="general"/>General
-                            Campaign</label>
+                        <div class="form-group">
+                            <label><?php echo $this->lang->line("label_description") ?></label>
+                            <?php echo form_textarea($description); ?>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
                     </div>
-                    <div class="radio">
-                        <label><input id="form" type="radio" name="type" value="form"/>Form Campaign</label>
-                    </div>
+
+                    <div class="form-group"></div>
+                    <?php echo form_close(); ?>
                 </div>
-                <div class="error" style="color: red"><?php echo form_error('type'); ?></div>
-
-                <div id="div1" style="display: none" class="form-group">
-                    <label><?php echo $this->lang->line("label_form_name"); ?> </label>
-                    <select name="form_id" id="form_id" class="form-control">
-                        <option value="">Choose form</option>
-                        <?php foreach ($forms as $form) { ?>
-                            <option value="<?php echo $form->jr_form_id ?>"><?php echo $form->title; ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="error" style="color: red"><?php echo form_error('form_id'); ?></div>
-
-
-                <div class="form-group">
-                    <label><?php echo $this->lang->line("label_campaign_featured"); ?> </label>
-                    <select name="featured" id="featured" class="form-control">
-                        <option value="">Choose option</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-                <div class="error" style="color: red"><?php echo form_error('featured'); ?></div>
-
-
-                <div class="form-group">
-                    <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label>
-                        <textarea class="form-control" name="description"
-                                  id="description"><?php echo set_value('description'); ?></textarea>
-                    <script>
-                        CKEDITOR.replace('description');
-                    </script>
-                </div>
-                <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-
-
-                <?php echo form_close(); ?>
-
             </div>
-
         </div>
     </div>
 </div>

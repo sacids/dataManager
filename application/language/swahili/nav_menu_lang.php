@@ -15,6 +15,7 @@ $lang['nav_item_add_new_project'] = "Weka mradi mpya";
 $lang['nav_item_forms'] = "Fomu";
 $lang['nav_item_list_forms'] = "Orodhesha Fomu";
 $lang['nav_item_add_new_form'] = "Weka Fomu Mpya";
+$lang['nav_item_searchable_form']   = "Searchable forms";
 
 //Watumiaji
 $lang['nav_item_manage_users'] = "Watumiaji";

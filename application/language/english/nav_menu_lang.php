@@ -15,6 +15,7 @@ $lang['nav_item_add_new_project']   = "Add new project";
 $lang['nav_item_forms']             = "Forms";
 $lang['nav_item_list_forms']        = "List Forms";
 $lang['nav_item_add_new_form']      = "Add new Form";
+$lang['nav_item_searchable_form']   = "Searchable forms";
 
 //Users
 $lang['nav_item_manage_users']      = "Manage Users";
@@ -40,7 +41,7 @@ $lang['nav_item_add_disease']       = "Add new Disease";
 
 $lang['nav_item_manage_symptoms']   = "Manage symptoms";
 $lang['nav_item_list_symptoms']     = "List symptoms";
-$lang['nav_item_create_symptom']    = "Create symptom";
+$lang['nav_item_create_symptom']    = "Add new symptom";
 
 $lang['nav_item_manage_species']    = "Manage Species";
 $lang['nav_item_list_species']      = "List species";

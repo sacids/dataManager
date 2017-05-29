@@ -3,8 +3,14 @@
         <?php echo form_open_multipart('xform/add_new', 'class="form-vertical" role="form"'); ?>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div id="header-title">
-                <h3 class="title">Form Details</h3>
+                <h3 class="title">Add new form</h3>
             </div>
+
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">Add new form</li>
+            </ol>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -27,7 +33,7 @@
                                 <div class="form-group">
                                     <label><?php echo $this->lang->line("label_form_title") ?> <span>*</span></label>
                                     <input type="text" name="title" placeholder="Enter form title"
-                                           class="form-control input-lg"
+                                           class="form-control"
                                            value="<?php echo set_value('title'); ?>">
                                 </div>
                                 <?php echo form_error('title'); ?>
@@ -35,19 +41,19 @@
                                 <div class="form-group">
                                     <label for=""><?php echo $this->lang->line("label_form_xml_file") ?>
                                         <span>*</span></label>
-                                    <?= form_upload("userfile","",'class="form-control input-lg"') ?>
+                                    <?= form_upload("userfile","",'class="form-control"') ?>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label>
-                        <textarea class="form-control  input-lg" name="description"
+                        <textarea class="form-control" name="description" rows="5"
                                   id="description"><?php echo set_value('description'); ?></textarea>
                                 </div>
                                 <?php echo form_error('description'); ?>
 
                                 <div class="form-group">
                                     <label for="campus"><?php echo $this->lang->line("label_access") ?> :</label>
-                                    <?php echo form_dropdown("access", array("private" => "Private", "public" => "Public"), set_value("access", ""), 'class="form-control  input-lg"'); ?>
+                                    <?php echo form_dropdown("access", array("private" => "Private", "public" => "Public"), set_value("access", ""), 'class="form-control"'); ?>
                                 </div>
                                 <?php echo form_error('access'); ?>
                             </div>
