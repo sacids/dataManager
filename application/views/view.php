@@ -3,12 +3,7 @@
     <div class="header-content">
         <div class="header-content-inner">
             <h1>AfyaData</h1>
-            <p>
-                AfyaData is a mobile app inspired by ODK Collect, developed by Southern African Centre for Infectious
-                Disease Surveillance (SACIDS) for collecting, submitting, receiving and/or tracking feedback of
-                submitted health
-                data.
-            </p>
+            <p>Taarifa kwa wakati!!</p>
         </div>
     </div>
 </header>

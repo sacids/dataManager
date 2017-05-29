@@ -32,9 +32,10 @@
                 </div>
 
                 <form method="post" id="form" class="feedback_form">
-                    <input class="textarea" type="text" name="message" id="message" placeholder="Type feedback here!"/>
+                    <input class="textarea" type="text" name="message" id="message" placeholder="Type feedback here!"
+                           required/>
                     <input type="hidden" name="instance_id" id="instance_id" value=""/>
-                    <button type="submit" name="submit" class="submit btn btn-primary" onClick="submitdata();">Send
+                    <button type="submit" name="submit" class="submit btn btn-primary">Send
                     </button>
                 </form>
 
