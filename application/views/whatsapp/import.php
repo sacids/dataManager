@@ -22,7 +22,7 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Txt File</label>
+                            <label>Message File</label>
                             <?php echo form_input($txt_file); ?>
                         </div>
 

@@ -49,7 +49,7 @@
 
                     <?php if (!empty($messages)) { ?>
 
-                        <table class="table table-striped table-responsive table-hover table-bordered">
+                        <table class="table table-striped table-responsive table-hover">
                             <tr>
                                 <th class="col-md-2">Sent Date</th>
                                 <th class="col-md-2">Full name</th>

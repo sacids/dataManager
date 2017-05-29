@@ -49,7 +49,10 @@ class Whatsapp extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("Whatsapp_model");
+        $this->load->model(array('Whatsapp_model'));
+        $this->load->library('upload');
+
+
         $this->controller = $this->router->fetch_class();
         $this->user_id = $this->session->userdata('user_id');
     }
@@ -256,7 +259,7 @@ class Whatsapp extends CI_Controller
         $this->upload->initialize($config);
 
         if (isset($_FILES['txt_file']) && !empty($_FILES['txt_file']['name'])) {
-            if ($this->upload->do_upload('student_file')) {
+            if ($this->upload->do_upload('txt_file')) {
                 // set a $_POST value for 'image' that we can use later
                 $upload_data = $this->upload->data();
                 $excel_path = $upload_data['full_path'];
