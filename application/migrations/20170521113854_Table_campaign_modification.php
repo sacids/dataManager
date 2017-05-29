@@ -29,6 +29,15 @@ class Migration_Table_campaign_modification extends CI_Migration
             ),
         );
         $this->dbforge->add_column('whatsapp', $field);
+
+        //add owner
+        $field = array(
+            'user_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+            ),
+        );
+        $this->dbforge->add_column('xforms_config', $field);
     }
 
     public function down()

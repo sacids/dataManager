@@ -87,6 +87,7 @@
                         <ul class="dropdown-menu">
                             <li><?php echo anchor('xform/forms', $this->lang->line("nav_item_list_forms")); ?></li>
                             <li><?php echo anchor('xform/add_new', $this->lang->line("nav_item_add_new_form")); ?></li>
+                            <li><?php echo anchor('xform/searchable_form_lists', $this->lang->line("nav_item_searchable_form")); ?></li>
                         </ul>
                     </li>
                 <?php } ?>
