@@ -109,7 +109,6 @@
                     <div class="fail_message">You don't have any form to display</div>
                 <?php } ?>
             </div>
-
         </div>
     </div>
 </div>
