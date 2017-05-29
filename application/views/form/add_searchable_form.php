@@ -20,6 +20,9 @@
 
                     <?php echo form_open('xform/add_searchable_form', 'role="form"'); ?>
                     <div class="col-sm-6">
+
+                        <input type="hidden" id="base_url" name="base_url" value="<?php echo base_url() ?>"/>
+
                         <div class="form-group">
                             <label>Form name <span style="color: red;">*</span></label>
                             <select name="form_id" id="form_id" class="form-control"
