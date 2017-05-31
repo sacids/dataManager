@@ -21,15 +21,16 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#form-details">Edit form details</a></li>
                 <li><a data-toggle="tab" href="#access-permissions">Manage Access Permissions</a></li>
+                <li><a data-toggle="tab" href="#map-columns"><?php echo "Map columns" ?></a></li>
             </ul>
 
             <div class="tab-content">
+                <br/>
                 <div id="form-details" class="tab-pane fade in active">
                     <div class="">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="">Edit form details<span class="pull-right">
-                                    <?php echo anchor("xform/map_fields/" . $form->form_id, "Map columns") ?></h3>
+                                <h3 class="">Edit form details</h3>
                             </div>
                             <div class="panel-body">
 
@@ -86,11 +87,40 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-lg">Save changes</button>
+                <div id="map-columns" class="tab-pane fade">
+                    <div class="">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="">Map columns</h3>
+                            </div>
+                            <div class="panel-body">
+
+                                <table class="table table-responsive table-bordered table-striped">
+                                    <tr>
+                                        <th class="text-center">Hide</th>
+                                        <th class="text-center">Question/Label</th>
+                                        <th class="text-center">Mapping To</th>
+                                    </tr>
+                                    <?php
+
+                                    foreach ($table_fields as $tf) {
+                                        echo "<tr>";
+                                        echo "<td class='text-center'>" . form_checkbox("hide[]", $tf['id'], ($tf['hide'] == 1)) . "</td>";
+                                        echo "<td>" . form_hidden("ids[]", $tf['id']) . " " . form_input("label[]", $tf['field_label'], 'class="form-control"') . "</td>";
+                                        echo "<td><em>{$tf['col_name']}</em></td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg">Save changes</button>
+                </div>
+                <?php echo form_close(); ?>
             </div>
-            <?php echo form_close(); ?>
         </div>
-    </div>

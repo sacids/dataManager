@@ -43,20 +43,38 @@
  * Time: 11:18
  */
 ?>
+<style>
+    /* Always set the map height explicitly to define the size of the div
+	 * element that contains the map. */
+    #map {
+        height: 400px;
+        background-color: gainsboro;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
 <section class="bg-light-grey">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div id="header-title">
                     <h3 class="title"><?= $form->title ?></h3>
-                    <p><small><?= $form->description ?></small></p>
+                    <p>
+                        <small><?= $form->description ?></small>
+                    </p>
                 </div>
             </div>
             <div class="col-sm-12 col-md-9 col-lg-9">
                 <div class="panel panel-default">
                     <div class="panel-heading"><b>Map of Recent Submissions</b></div>
                     <div class="panel-body">
-                        Map coming soon here
+                        <div id="map"></div>
                     </div>
                 </div>
 
@@ -141,3 +159,65 @@
         </div>
     </div>
 </section>
+
+
+<?php
+$geo_points = [];
+
+foreach ($form_data as $fd) {
+    /*$geo_points[] = [
+            "title"    => $fd->taarifa_awali_Kijiji,
+            "location" => [
+                    "lat" => $fd->Utambuzi_GPS_lat,
+                    "lng" => $fd->Utambuzi_GPS_lng
+            ]
+    ];*/
+
+    $geo_points[] = [
+            "lat" => $fd->Utambuzi_GPS_lat,
+            "lng" => $fd->Utambuzi_GPS_lng
+    ];
+}
+$json_object = json_encode($geo_points);
+
+log_message("debug", "Labels {$json_object}");
+?>
+
+<script type="text/javascript">
+
+    function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: {lat: -6.830373, lng: 37.670589}
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function (location, i) {
+            return new google.maps.Marker({
+                position: location,
+                label: labels[i % labels.length]
+            });
+        });
+
+        /*
+        var marker = new google.maps.Marker({
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: {lat: 59.327, lng: 18.067}
+        });*/
+
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    }
+    var locations = <?=str_replace("\"", "", $json_object)?>;
+</script>
