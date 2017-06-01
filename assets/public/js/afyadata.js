@@ -18,10 +18,11 @@ var http = createObject();
 //suggest level
 function suggest_form() {
     form_id = document.getElementById('form_id').value;
+
     // Set te random number to add to URL request
-    var base_url = 'http://127.0.0.1/afyadata/xform/get_search_field';
+    var base_url = document.getElementById('base_url').value;
     nocache = Math.random();
-    http.open('POST', base_url + '/' + form_id);
+    http.open('POST', base_url + 'xform/get_search_field/' + form_id);
 
     http.onreadystatechange = suggest_reply_form;
     http.send(null);

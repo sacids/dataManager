@@ -113,14 +113,14 @@ class Auth extends CI_Controller
         $response = array();
 
         //post variable
-        $phone = $this->input->post('username');
+        $username = $this->input->post('username');
         $full_name = $this->input->post('full_name');
         $password = $this->input->post('password');
         $password_confirm = $this->input->post('password_confirm');
 
         //substring last 9 character
-        //$username = $this->initial . substr($phone, -9);
-        $username = $this->initial . substr($phone, -9);
+        //$phone = $this->initial . substr($phone, -9);
+        $phone = $this->initial . substr($username, -9);
 
         //check username if exist
         $check_username = $this->check_username($username);
@@ -144,7 +144,7 @@ class Auth extends CI_Controller
             $additional_data = array(
                 'first_name' => $arrayName[0],
                 'last_name' => $arrayName[1],
-                'phone' => $username,
+                'phone' => $phone,
                 'digest_password' => $digest_password
             );
             $email = "";
