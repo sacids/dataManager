@@ -1778,25 +1778,44 @@ class Xform extends CI_Controller
 		$data['form'] = $this->Xform_model->find_by_xform_id($xform_id);
 		$data['title'] = "Overview {$data['form']->title} Form";
 
-		$data['table_fields'] = $this->Xform_model->find_table_columns($data['form']->form_id);
-		$data['field_maps'] = $this->_get_mapped_table_column_name($data['form']->form_id);
+		$db_columns = $this->Xform_model->find_all_field_name_maps($data['form']->form_id, 0);
+		if ($db_columns) {
 
-		$data['mapped_fields'] = array();
-		foreach ($data['table_fields'] as $key => $column) {
-			if (array_key_exists($column, $data['field_maps'])) {
-				$data['mapped_fields'][$column] = $data['field_maps'][$column];
-			} else {
-				$data['mapped_fields'][$column] = $column;
+			log_message("debug", "result " . json_encode($db_columns));
+			$selected_columns = [];
+
+			$data['selected_columns'] = [];
+			$i = 0;
+			foreach ($db_columns as $c) {
+				if ($c->hide != 1) {
+					$data['selected_columns'][$i] = (!empty($c->field_label)) ? $c->field_label : $c->field_name;
+					$selected_columns[$c->col_name] = $c->col_name;
+				}
+				$i++;
 			}
-		}
 
-		$data['form_data'] = $this->Xform_model->find_form_data($data['form']->form_id, 10);
+			$data['form_data'] = $this->Xform_model->find_form_data_by_fields($data['form']->form_id, $selected_columns, 10);
+		} else {
+			$data['table_fields'] = $this->Xform_model->find_table_columns($data['form']->form_id);
+			$data['field_maps'] = $this->_get_mapped_table_column_name($data['form']->form_id);
+
+			$data['mapped_fields'] = array();
+			foreach ($data['table_fields'] as $key => $column) {
+				if (array_key_exists($column, $data['field_maps'])) {
+					$data['mapped_fields'][$column] = $data['field_maps'][$column];
+				} else {
+					$data['mapped_fields'][$column] = $column;
+				}
+			}
+			$data['form_data'] = $this->Xform_model->find_form_data($data['form']->form_id, 10);
+		}
 		$data['recent_feedback'] = $this->Feedback_model->find_by_xform_id($data['form']->form_id, 10);
+		$data['load_map'] = true;
 
 
 		$this->load->view("header", $data);
 		$this->load->view("form/form_overview", $data);
-		$this->load->view("footer");
+		$this->load->view("footer",$data);
 	}
 
 	function configure()
@@ -1808,7 +1827,7 @@ class Xform extends CI_Controller
 		$this->model->set_table('xforms');
 		$xform = $this->model->get($xform_id);
 		$this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $xform->filename);
-		$defn = $this->xform_comm->get_form_definition($xform_id);
+		$defn = $this->xform_comm->get_form_definition();
 
 
 		$cols = $this->Xform_model->find_table_columns($xform->form_id);
@@ -1821,7 +1840,6 @@ class Xform extends CI_Controller
 			$lb = $v['label'];
 			$nn[$fn] = $lb;
 		}
-
 
 		$this->model->set_table('xforms_config');
 		if ($tmp = $this->model->get_by('xform_id', $xform_id)) {

@@ -6,7 +6,7 @@
 <script src="<?= base_url() ?>assets/bootstrap/js/ie10-viewport-bug-workaround.js"></script>
 <script src="<?= base_url() ?>assets/public/js/highcharts.js"></script>
 
-<?php if (isset($map)): ?>
+<?php if (isset($load_map)): ?>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script async defer

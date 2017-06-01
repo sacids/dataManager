@@ -47,7 +47,7 @@
     /* Always set the map height explicitly to define the size of the div
 	 * element that contains the map. */
     #map {
-        height: 400px;
+        height: 450px;
         background-color: gainsboro;
     }
 
@@ -70,85 +70,98 @@
                     </p>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-9 col-lg-9">
+            <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading"><b>Map of Recent Submissions</b></div>
                     <div class="panel-body">
                         <div id="map"></div>
                     </div>
                 </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
 
-                <div class="panel panel-default">
-                    <div class="panel-heading"><b><h3>Recent data Submissions</h3></b></div>
-                    <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#recent-submissions">Recent data Submissions</a></li>
+                    <li><a data-toggle="tab" href="#recent-user-chats">Recent user chats</a></li>
+                    <!--<li><a data-toggle="tab" href="#map-columns"><?php /*echo "Map columns" */ ?></a></li>-->
+                </ul>
 
-                        <div class="" style="overflow-x: scroll; width: 100%;">
-                            <table class="table table_list table-bordered table-striped table-hover table-condensed">
-                                <tr>
-                                    <?php
-                                    if (isset($selected_columns)) {
-                                        foreach ($selected_columns as $column) {
-                                            echo "<th>" . $column . "</th>";
-                                        }
-                                    } else {
+                <div class="tab-content">
+                    <div id="recent-submissions" class="tab-pane fade in active">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><b><h3>Recent data Submissions</h3></b></div>
+                            <div class="panel-body">
 
-                                        foreach ($table_fields as $key => $column) {
-                                            if (array_key_exists($column, $field_maps)) {
-                                                echo "<th>" . $field_maps[$column] . "</th>";
+                                <div class="" style="overflow-x: scroll; width: 100%;">
+                                    <table class="table table_list table-bordered table-striped table-hover table-condensed">
+                                        <tr>
+                                            <?php
+                                            if (isset($selected_columns)) {
+                                                foreach ($selected_columns as $column) {
+                                                    echo "<th>" . $column . "</th>";
+                                                }
                                             } else {
-                                                echo "<th>" . $column . "</th>";
-                                            }
-                                        }
-                                    }
-                                    ?>
-                                </tr>
-                                <?php
-                                foreach ($form_data as $data) {
-                                    echo "<tr>";
-                                    foreach ($data as $key => $entry) {
-                                        /* if ($key == "id") {
-											 echo "<td class='text-center'>" . form_checkbox("entry_id[]", $entry) . "</td>";
-										 }*/
 
-                                        if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                                            echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
-                                        } else {
-                                            echo "<td>" . $entry . "</td>";
+                                                foreach ($table_fields as $key => $column) {
+                                                    if (array_key_exists($column, $field_maps)) {
+                                                        echo "<th>" . $field_maps[$column] . "</th>";
+                                                    } else {
+                                                        echo "<th>" . $column . "</th>";
+                                                    }
+                                                }
+                                            }
+                                            ?>
+                                        </tr>
+                                        <?php
+                                        foreach ($form_data as $data) {
+                                            echo "<tr>";
+                                            foreach ($data as $key => $entry) {
+                                                /* if ($key == "id") {
+													 echo "<td class='text-center'>" . form_checkbox("entry_id[]", $entry) . "</td>";
+												 }*/
+
+                                                if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                                                    echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                                                } else {
+                                                    echo "<td>" . $entry . "</td>";
+                                                }
+                                            }
+                                            echo "</tr>";
                                         }
-                                    }
-                                    echo "</tr>";
-                                }
-                                ?>
-                            </table>
+                                        ?>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div id="recent-user-chats" class="tab-pane fade in">
+                        <div class="">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h3>Recent user chats</h3></div>
+                                <div class="panel-body">
+                                    <table class="table table-responsive table-bordered table-striped">
+                                        <tr>
+                                            <td>Sender Name</td>
+                                            <td>Message</td>
+                                            <td>Date sent</td>
+                                            <td>Sender</td>
+                                            <td>Status</td>
+                                            <td>ViewedBy</td>
+                                        </tr>
 
-                <div class="">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><h3>Recent user chats</h3></div>
-                        <div class="panel-body">
-                            <table class="table table-responsive table-bordered table-striped">
-                                <tr>
-                                    <td>Sender Name</td>
-                                    <td>Message</td>
-                                    <td>Date sent</td>
-                                    <td>Sender</td>
-                                    <td>Status</td>
-                                    <td>ViewedBy</td>
-                                </tr>
-
-                                <?php foreach ($recent_feedback as $feedback): ?>
-                                    <tr>
-                                        <td><?= $feedback->first_name . " " . $feedback->last_name ?></td>
-                                        <td><?= $feedback->message ?></td>
-                                        <td><?= $feedback->date_created ?></td>
-                                        <td><?= $feedback->sender ?></td>
-                                        <td><?= $feedback->status ?></td>
-                                        <td><?= $feedback->viewed_by ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </table>
+                                        <?php foreach ($recent_feedback as $feedback): ?>
+                                            <tr>
+                                                <td><?= $feedback->first_name . " " . $feedback->last_name ?></td>
+                                                <td><?= $feedback->message ?></td>
+                                                <td><?= $feedback->date_created ?></td>
+                                                <td><?= $feedback->sender ?></td>
+                                                <td><?= $feedback->status ?></td>
+                                                <td><?= $feedback->viewed_by ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -207,12 +220,12 @@ log_message("debug", "Labels {$json_object}");
         });
 
         /*
-        var marker = new google.maps.Marker({
-            map: map,
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            position: {lat: 59.327, lng: 18.067}
-        });*/
+         var marker = new google.maps.Marker({
+         map: map,
+         draggable: true,
+         animation: google.maps.Animation.DROP,
+         position: {lat: 59.327, lng: 18.067}
+         });*/
 
 
         // Add a marker clusterer to manage the markers.

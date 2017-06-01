@@ -511,6 +511,22 @@ class Xform_model extends CI_Model
 		return $this->db->update_batch(self::$xform_fieldname_map_table_name, $details, "id");
 	}
 
+	/**
+	 * Returns mapped and actual table column names for a particular xform table
+	 *
+	 * @param $form_id = which is equivalent to table name
+	 * @param null $hide_show_status
+	 * @return mixed
+	 */
+	public function find_all_field_name_maps($form_id, $hide_show_status = NULL)
+	{
+		$this->db->where("table_name", $form_id);
+		if ($hide_show_status != NULL) {
+			$this->db->where("hide", $hide_show_status);
+		}
+		return $this->db->get(self::$xform_fieldname_map_table_name)->result();
+	}
+
 	public function update_field_map_labels($xform_id, $fields)
 	{
 		$this->db->trans_start();
