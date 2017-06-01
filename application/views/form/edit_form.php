@@ -107,7 +107,7 @@
                                     foreach ($table_fields as $tf) {
                                         echo "<tr>";
                                         echo "<td class='text-center'>" . form_checkbox("hide[]", $tf['id'], ($tf['hide'] == 1)) . "</td>";
-                                        echo "<td>" . form_hidden("ids[]", $tf['id']) . " " . form_input("label[]", $tf['field_label'], 'class="form-control"') . "</td>";
+                                        echo "<td>" . form_hidden("ids[]", $tf['id']) . " " . form_input("label[]", (!empty($tf['field_label']) ? $tf['field_label'] : $tf['field_name']), 'class="form-control"') . "</td>";
                                         echo "<td><em>{$tf['col_name']}</em></td>";
                                         echo "</tr>";
                                     }
