@@ -70,15 +70,17 @@
                     </p>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><b>Map of Recent Submissions</b></div>
-                    <div class="panel-body">
-                        <div id="map"></div>
+            <?php if (isset($map_data)) : ?>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><b>Map of Recent Submissions</b></div>
+                        <div class="panel-body">
+                            <div id="map"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-12 col-md-9 col-lg-9">
+            <?php endif; ?>
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#recent-submissions">Recent data Submissions</a></li>
@@ -93,7 +95,8 @@
                             <div class="panel-body">
 
                                 <div class="" style="overflow-x: scroll; width: 100%;">
-                                    <table class="table table_list table-bordered table-striped table-hover table-condensed">
+                                    <table
+                                        class="table table_list table-bordered table-striped table-hover table-condensed">
                                         <tr>
                                             <?php
                                             if (isset($selected_columns)) {
@@ -167,7 +170,13 @@
                 </div>
             </div>
             <div class="col-sm-12 col-xs-12 col-md-3 col-lg-3">
-                Chats coming soon
+                <br/><br/>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><b><h3 class="text-center">Submissions Charts</h3></b></div>
+                    <div class="panel-body">
+                        <div id="last-year-submissions"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -175,21 +184,15 @@
 
 
 <?php
+
 $geo_points = [];
-
-foreach ($form_data as $fd) {
-    /*$geo_points[] = [
-            "title"    => $fd->taarifa_awali_Kijiji,
-            "location" => [
-                    "lat" => $fd->Utambuzi_GPS_lat,
-                    "lng" => $fd->Utambuzi_GPS_lng
-            ]
-    ];*/
-
-    $geo_points[] = [
-            "lat" => $fd->Utambuzi_GPS_lat,
-            "lng" => $fd->Utambuzi_GPS_lng
-    ];
+if (isset($map_data)) {
+    foreach ($map_data as $md) {
+        $geo_points[] = [
+            "lat" => $md->$lat_column,
+            "lng" => $md->$lng_column
+        ];
+    }
 }
 $json_object = json_encode($geo_points);
 
@@ -230,7 +233,43 @@ log_message("debug", "Labels {$json_object}");
 
         // Add a marker clusterer to manage the markers.
         var markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     }
     var locations = <?=str_replace("\"", "", $json_object)?>;
+
+
+    $(function () {
+
+        Highcharts.setOptions({
+            lang: {
+                thousandsSep: ','
+            }
+        });
+
+        $('#last-year-submissions').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                colors: ['ORANGE'],//, '#910000', '#8bbc21', '#1aadce'],
+                title: {
+                    text: '<?=$report_title?>'
+                },
+                xAxis: {
+                    categories: <?=$categories?>
+                },
+                yAxis: {
+                    title: {
+                        text: 'Data submitted count'
+                    }
+                },
+                series: [{
+                    name: '<?=$series['name']?>',
+                    data: <?=$series['series']?>
+                }],
+                credits: {
+                    enabled: false
+                }
+            }
+        );
+    });
 </script>
