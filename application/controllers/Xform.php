@@ -577,7 +577,7 @@ class Xform extends CI_Controller
                     $opt = trim($opt);
 
                     if (array_key_exists($cn . '_' . $opt, $map)) {
-                        $opt = $map[$opt];
+                        $opt = $map[$cn . '_' . $opt];
                     }
 
                     array_push($col_values, 1);
