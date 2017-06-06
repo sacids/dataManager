@@ -1287,6 +1287,26 @@ class Xform extends CI_Controller
         $data['title'] = $this->lang->line("heading_edit_form");
         $data['form'] = $form = $this->Xform_model->find_by_id($xform_id);
 
+        // TODO
+        // Search field by table name from mapping fields
+        $db_table_fields = $this->Xform_model->get_fieldname_map($form->form_id);
+
+        if (empty($db_table_fields)) {
+            $table_fields = $this->Xform_model->find_table_columns($form->form_id);
+            foreach ($table_fields as $tf) {
+                $details = [
+                    "table_name" => $form->form_id,
+                    "col_name" => $tf,
+                    "field_name" => $tf,
+                    "field_label" => str_replace("_", " ", $tf)
+                ];
+                $this->Xform_model->create_field_name_map($details);
+            }
+
+            $db_table_fields = $this->Xform_model->get_fieldname_map($form->form_id);
+        }
+        $data['table_fields'] = $db_table_fields;
+
         $this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required");
         $this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
@@ -1314,6 +1334,10 @@ class Xform extends CI_Controller
             $this->load->view("form/edit_form", $data);
             $this->load->view('footer');
         } else {
+            $hides = $this->input->post("hide[]");
+            $ids = $this->input->post("ids[]");
+            $labels = $this->input->post("label[]");
+
             if ($form) {
                 $new_perms = $this->input->post("perms");
 
@@ -1329,7 +1353,25 @@ class Xform extends CI_Controller
                     "last_updated" => date("c")
                 );
 
-                if ($this->Xform_model->update_form($xform_id, $new_form_details)) {
+                $this->db->trans_start();
+                $this->Xform_model->update_form($xform_id, $new_form_details);
+
+                $mapped_fields = [];
+                $i = 0;
+                foreach ($labels as $key => $value) {
+                    $mapped_fields[$i]["field_label"] = $value;
+                    $mapped_fields[$i]["id"] = $ids[$i];
+                    $mapped_fields[$i]["hide"] = 0;
+
+                    if (!empty($hides) && in_array($ids[$i], $hides)) {
+                        $mapped_fields[$i]["hide"] = 1;
+                    }
+                    $i++;
+                }
+                $this->Xform_model->update_field_name_maps($mapped_fields);
+                $this->db->trans_complete();
+
+                if ($this->db->trans_status()) {
                     $this->session->set_flashdata("message", display_message($this->lang->line("form_update_successful")));
                 } else {
                     $this->session->set_flashdata("message", display_message($this->lang->line("form_update_failed"), "warning"));
@@ -1736,25 +1778,89 @@ class Xform extends CI_Controller
         $data['form'] = $this->Xform_model->find_by_xform_id($xform_id);
         $data['title'] = "Overview {$data['form']->title} Form";
 
-        $data['table_fields'] = $this->Xform_model->find_table_columns($data['form']->form_id);
-        $data['field_maps'] = $this->_get_mapped_table_column_name($data['form']->form_id);
+        $db_columns = $this->Xform_model->find_all_field_name_maps($data['form']->form_id, 0);
+        $date_column = "meta_start";
+        $gps_latitude_column = null;
+        $gps_longitude_column = null;
+        $date_column_set_automatically = false;
+        if ($db_columns) {
+            log_message("debug", "result " . json_encode($db_columns));
+            $selected_columns = [];
 
-        $data['mapped_fields'] = array();
-        foreach ($data['table_fields'] as $key => $column) {
-            if (array_key_exists($column, $data['field_maps'])) {
-                $data['mapped_fields'][$column] = $data['field_maps'][$column];
-            } else {
-                $data['mapped_fields'][$column] = $column;
+            $data['selected_columns'] = [];
+            $i = 0;
+            foreach ($db_columns as $c) {
+                if ($c->hide != 1) {
+                    $data['selected_columns'][$i] = (!empty($c->field_label)) ? $c->field_label : $c->field_name;
+                    $selected_columns[$c->col_name] = $c->col_name;
+
+                    $pattern = "/tarehe|date/i";
+                    if ((preg_match($pattern, $c->field_label) || preg_match($pattern, $c->field_name) && !$date_column_set_automatically)) {
+                        $date_column = $c->col_name;
+                        $date_column_set_automatically = true;
+                    }
+                }
+
+                $gps_latitude_pattern = "/GPS_lat|_lat|latitude/i";
+                if ((preg_match($gps_latitude_pattern, $c->field_label) || preg_match($gps_latitude_pattern, $c->field_name))) {
+                    $gps_latitude_column = $c->col_name;
+                }
+
+                $gps_longitude_pattern = "/GPS_lng|_lng|longitude/i";
+                if ((preg_match($gps_longitude_pattern, $c->field_label) || preg_match($gps_longitude_pattern, $c->field_name))) {
+                    $gps_longitude_column = $c->col_name;
+                }
+                $i++;
             }
+            $data['form_data'] = $this->Xform_model->find_form_data_by_fields($data['form']->form_id, $selected_columns, 10);
+        } else {
+            $data['table_fields'] = $this->Xform_model->find_table_columns($data['form']->form_id);
+            $data['field_maps'] = $this->_get_mapped_table_column_name($data['form']->form_id);
+
+            $data['mapped_fields'] = array();
+            foreach ($data['table_fields'] as $key => $column) {
+                if (array_key_exists($column, $data['field_maps'])) {
+                    $data['mapped_fields'][$column] = $data['field_maps'][$column];
+                } else {
+                    $data['mapped_fields'][$column] = $column;
+                }
+            }
+            $data['form_data'] = $this->Xform_model->find_form_data($data['form']->form_id, 10);
         }
 
-        $data['form_data'] = $this->Xform_model->find_form_data($data['form']->form_id, 10);
+
+        if ($gps_latitude_column != null && $gps_longitude_column != null) {
+            $data['lat_column'] = $gps_latitude_column;
+            $data['lng_column'] = $gps_longitude_column;
+            $data['map_data'] = $this->Xform_model->find_form_data_by_fields($data['form']->form_id, [$gps_latitude_column => 1, $gps_longitude_column => 1], 100);
+        }
+
+        //$data['last_year_submissions'] = $submissions = $this->Xform_model->find_submissions_count_by_duration($data['form']->form_id, $date_column, "today");
+        $data['last_year_submissions'] = $submissions = $this->Xform_model->find_submissions_count_by_duration($data['form']->form_id, $date_column, "last_year");
+
+        $categories = array();
+        $series = array();
+        $i = 0;
+        foreach ($submissions as $submission) {
+            $categories[$i] = $submission->$date_column;
+            $series[$i] = $submission->submissions_count;
+            $i++;
+        }
+        $data['categories'] = json_encode($categories);
+        $data['series'] = array(
+            "name" => "Data submissions",
+            "series" => str_replace('"', "", json_encode($series))
+        );
+        $data['report_title'] = "Last year submissions";
+
+
         $data['recent_feedback'] = $this->Feedback_model->find_by_xform_id($data['form']->form_id, 10);
+        $data['load_map'] = true;
 
 
         $this->load->view("header", $data);
         $this->load->view("form/form_overview", $data);
-        $this->load->view("footer");
+        $this->load->view("footer", $data);
     }
 
     function configure()
@@ -1766,7 +1872,7 @@ class Xform extends CI_Controller
         $this->model->set_table('xforms');
         $xform = $this->model->get($xform_id);
         $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $xform->filename);
-        $defn = $this->xform_comm->get_form_definition($xform_id);
+        $defn = $this->xform_comm->get_form_definition();
 
 
         $cols = $this->Xform_model->find_table_columns($xform->form_id);
@@ -1779,7 +1885,6 @@ class Xform extends CI_Controller
             $lb = $v['label'];
             $nn[$fn] = $lb;
         }
-
 
         $this->model->set_table('xforms_config');
         if ($tmp = $this->model->get_by('xform_id', $xform_id)) {

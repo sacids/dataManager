@@ -24,6 +24,8 @@ class Xform_model extends CI_Model
      */
     private static $archive_xform_table_name = "archive_xformx"; //default value
 
+    private static $xform_fieldname_map_table_name = "xform_fieldname_map";
+
 
     public function __construct()
     {
@@ -83,7 +85,7 @@ class Xform_model extends CI_Model
         } else {
             $error = $this->db->error(); // Has keys 'code' and 'message'
             log_message("debug", $statement . ", error " . json_encode($error));
-            return false;
+            return FALSE;
         }
     }
 
@@ -146,7 +148,7 @@ class Xform_model extends CI_Model
      * @param int $offset
      * @return mixed
      */
-    public function find_forms_by_permission($user_id = false, $limit = 30, $offset = 0)
+    public function find_forms_by_permission($user_id = FALSE, $limit = 30, $offset = 0)
     {
         //If no user_id was passed use the current users id
         $user_id || $user_id = $this->session->userdata('user_id');
@@ -259,7 +261,7 @@ class Xform_model extends CI_Model
      */
     public function insert_into_map($data)
     {
-        return $this->db->insert_batch('xform_fieldname_map', $data);
+        return $this->db->insert_batch(self::$xform_fieldname_map_table_name, $data);
 
     }
 
@@ -461,7 +463,7 @@ class Xform_model extends CI_Model
     public function get_fieldname_map($table_name)
     {
         $this->db->where('table_name', $table_name);
-        $this->db->from('xform_fieldname_map');
+        $this->db->from(self::$xform_fieldname_map_table_name);
         return $this->db->get()->result_array();
     }
 
@@ -484,9 +486,45 @@ class Xform_model extends CI_Model
 
     public function add_to_field_name_map($data)
     {
-        $q = $this->db->insert_string('xform_fieldname_map', $data);
+        $q = $this->db->insert_string(self::$xform_fieldname_map_table_name, $data);
         $q = str_replace('INSERT INTO', 'INSERT IGNORE INTO', $q);
         return $this->db->query($q);
+    }
+
+    /**
+     * @param $details
+     * @return mixed
+     */
+    public function create_field_name_map($details)
+    {
+        return $this->db->insert(self::$xform_fieldname_map_table_name, $details);
+    }
+
+    /**
+     * Updates multiple field maps
+     *
+     * @param $details
+     * @return mixed
+     */
+    public function update_field_name_maps($details)
+    {
+        return $this->db->update_batch(self::$xform_fieldname_map_table_name, $details, "id");
+    }
+
+    /**
+     * Returns mapped and actual table column names for a particular xform table
+     *
+     * @param $form_id = which is equivalent to table name
+     * @param null $hide_show_status
+     * @return mixed
+     */
+    public function find_all_field_name_maps($form_id, $hide_show_status = NULL)
+    {
+        $this->db->where("table_name", $form_id);
+        if ($hide_show_status != NULL) {
+            $this->db->where("hide", $hide_show_status);
+        }
+        return $this->db->get(self::$xform_fieldname_map_table_name)->result();
     }
 
     public function update_field_map_labels($xform_id, $fields)
@@ -496,7 +534,7 @@ class Xform_model extends CI_Model
             $this->db->where("table_name", $xform_id);
             $this->db->where("col_name", $key);
             $this->db->set("field_label", $value);
-            $this->db->update("xform_fieldname_map");
+            $this->db->update(self::$xform_fieldname_map_table_name);
         }
         $this->db->trans_complete();
         return $this->db->trans_status();
@@ -531,5 +569,64 @@ class Xform_model extends CI_Model
         return $this->db
             ->limit($num, $start)
             ->get('xforms_config')->result();
+    }
+
+
+    /**
+     * @param string $table_name which is form_id (xform instance id)
+     * @param string $date_column the name of the date column
+     * @param string $duration possible values are today, yesterday,last7days, month, last_month, year, last_year
+     * @return mixed
+     */
+    public function find_submissions_count_by_duration($table_name, $date_column, $duration = "month")
+    {
+        if ($duration == "today") {
+            $date = date("Y-m-d");
+            $this->db->select("HOUR({$date_column}) AS `{$date_column}`,COUNT(*) AS submissions_count ", FALSE);
+            $this->db->where("DATE(DATE_FORMAT(`{$date_column}`,'%Y-%m-%d')) =", "'" . $date . "'", FALSE);
+            $this->db->group_by("HOUR(`{$date_column}`)");
+        }
+
+        if ($duration == "yesterday") {
+            $date = new DateTime();
+            $date->sub(new DateInterval('P1D'));
+            $this->db->select("HOUR({$date_column}) AS `{$date_column}`,COUNT(*) AS submissions_count ", FALSE);
+            $this->db->where("DATE(DATE_FORMAT(`{$date_column}`,'%Y-%m-%d')) =", "'" . $date->format("Y-m-d") . "'", FALSE);
+            $this->db->group_by("HOUR(`{$date_column}`)");
+        }
+
+        if ($duration == "last7days") {
+            $this->db->select("DATE_FORMAT(`{$date_column}`,'%Y-%m-%d') AS `{$date_column}`,COUNT(*) AS submissions_count ", FALSE);
+            $this->db->where("DATE(DATE_FORMAT(`{$date_column}`,'%Y-%m-%d')) >=", "DATE(NOW()) - INTERVAL 7 DAY", FALSE);
+            $this->db->group_by("DATE(DATE_FORMAT(`{$date_column}`,'%Y-%m-%d'))");
+        }
+
+        if ($duration == "month") {
+            $this->db->select("DATE_FORMAT(`{$date_column}`,'%Y-%m-%d') AS `{$date_column}`,COUNT(*) AS submissions_count ", FALSE);
+            $this->db->where("MONTH(`{$date_column}`) ", "MONTH(CURDATE())", FALSE);
+            $this->db->group_by("DATE(DATE_FORMAT(`{$date_column}`,'%Y-%m-%d'))");
+        }
+
+        if ($duration == "last_month") {
+            $this->db->select("DATE_FORMAT(`{$date_column}`,'%Y-%m-%d') AS `{$date_column}`,COUNT(*) AS submissions_count ", FALSE);
+            $this->db->where("YEAR(`{$date_column}`) ", " YEAR(CURRENT_DATE - INTERVAL 1 MONTH)", FALSE);
+            $this->db->where("MONTH(`{$date_column}`) ", " MONTH(CURRENT_DATE - INTERVAL 1 MONTH)", FALSE);
+            $this->db->group_by("DATE(DATE_FORMAT(`{$date_column}`,'%Y-%m-%d'))");
+        }
+
+        if ($duration == "year") {
+            $this->db->select("MONTHNAME(`{$date_column}`) AS `{$date_column}`,COUNT(*) AS submissions_count ", FALSE);
+            $this->db->where("YEAR(`{$date_column}`) ", " YEAR(CURRENT_DATE)", FALSE);
+            $this->db->group_by("MONTHNAME(`{$date_column}`)");
+            $this->db->order_by("MONTHNAME(`{$date_column}`)", "ASC");
+        }
+
+        if ($duration == "last_year") {
+            $this->db->select("MONTHNAME(`{$date_column}`) AS `{$date_column}`,COUNT(*) AS submissions_count ", FALSE);
+            $this->db->where("(YEAR(`{$date_column}`))", " (YEAR(CURRENT_DATE) - 1)", FALSE);
+            $this->db->group_by("MONTHNAME(`{$date_column}`)");
+            $this->db->order_by("MONTHNAME(`{$date_column}`)", "ASC");
+        }
+        return $this->db->get($table_name)->result();
     }
 }

@@ -6,6 +6,14 @@
 <script src="<?= base_url() ?>assets/bootstrap/js/ie10-viewport-bug-workaround.js"></script>
 <script src="<?= base_url() ?>assets/public/js/highcharts.js"></script>
 
+<?php if (isset($load_map)): ?>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjO8E4UMo5tGs5U9HQ6zLmVQBa3k7UYIs&callback=initMap">
+    </script>
+<?php endif; ?>
+
 </body>
 </html>
 
@@ -21,28 +29,28 @@
         });
 
         $('#graph-content').highcharts({
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: '<?php echo $series['name']; ?>'
-                },
-                xAxis: {
-                    categories: <?php echo $categories; ?>
-                },
-                yAxis: {
+                    chart: {
+                        type: 'column'
+                    },
                     title: {
-                        text: '<?php echo !empty($chart_title) ? $chart_title : "Count"?>'
+                        text: '<?php echo $series['name']; ?>'
+                    },
+                    xAxis: {
+                        categories: <?php echo $categories; ?>
+                    },
+                    yAxis: {
+                        title: {
+                            text: '<?php echo !empty($chart_title) ? $chart_title : "Count"?>'
+                        }
+                    },
+                    series: [{
+                        name: '<?php echo $series['name']; ?>',
+                        data: <?php echo str_replace('"', "", json_encode($series['data']));?>
+                    }],
+                    credits: {
+                        enabled: false
                     }
-                },
-                series: [{
-                    name: '<?php echo $series['name']; ?>',
-                    data: <?php echo str_replace('"', "", json_encode($series['data']));?>
-                }],
-                credits: {
-                    enabled: false
                 }
-            }
         );
     });
     <?php } ?>
