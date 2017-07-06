@@ -582,6 +582,7 @@ class Xform extends CI_Controller
 
                     array_push($col_values, 1);
                     array_push($col_names, $opt);
+                    
                 }
             }
 
