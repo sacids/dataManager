@@ -126,17 +126,5 @@ class Intel extends REST_Controller{
         $this->resp['data']     = $score;
 
         echo json_encode($this->resp);
-
-
-
-
-
-
-
-
     }
-
-
-
-
 }

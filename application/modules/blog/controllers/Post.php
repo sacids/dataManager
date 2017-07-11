@@ -1,4 +1,39 @@
 <?php
+/**
+ * AfyaData
+ *  
+ * An open source data collection and analysis tool.
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2017. Southern African Center for Infectious disease Surveillance (SACIDS)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ *
+ * @package	    AfyaData
+ * @author	    AfyaData Dev Team
+ * @copyright	Copyright (c) 2017. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license	    http://opensource.org/licenses/MIT	MIT License
+ * @link	    https://afyadata.sacids.org
+ * @since	    Version 1.0.0
+ */
 
 /**
  * Created by PhpStorm.
@@ -6,7 +41,7 @@
  * Date: 20-Jun-16
  * Time: 10:31
  */
-class Post extends CI_Controller
+class Post extends MX_Controller
 {
 
 	public function __construct()
@@ -14,7 +49,7 @@ class Post extends CI_Controller
 		parent::__construct();
 
 		$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
-		$this->load->model("blog/Post_model");
+		$this->load->model("Post_model");
 	}
 
 	public function index()
@@ -27,9 +62,9 @@ class Post extends CI_Controller
 		$data['title'] = "Afyadata Blog";
 		$data['posts'] = $this->Post_model->find_all();
 
-		$this->load->view("blog/blog_header", $data);
-		$this->load->view("blog/posts_view", $data);
-		$this->load->view("blog/blog_footer", $data);
+		$this->load->view("blog_header", $data);
+		$this->load->view("posts_view", $data);
+		$this->load->view("blog_footer", $data);
 	}
 
 	public function post_details($post_id)
@@ -42,9 +77,9 @@ class Post extends CI_Controller
 		$data['post'] = $this->Post_model->find_by_id($post_id);
 		$data['recent_posts'] = $this->Post_model->find_all(5);
 
-		$this->load->view("blog/blog_header", $data);
-		$this->load->view("blog/single_post_view", $data);
-		$this->load->view("blog/blog_footer");
+		$this->load->view("blog_header", $data);
+		$this->load->view("single_post_view", $data);
+		$this->load->view("blog_footer");
 	}
 
 	public function new_post()
@@ -60,7 +95,7 @@ class Post extends CI_Controller
 		if ($this->form_validation->run() === FALSE) {
 
 			$this->load->view('header', $data);
-			$this->load->view("blog/new_post");
+			$this->load->view("new_post");
 			$this->load->view('footer');
 		} else {
 
@@ -96,9 +131,9 @@ class Post extends CI_Controller
 		if ($this->form_validation->run() === FALSE) {
 			$data['post'] = $this->Post_model->find_by_id($post_id);
 
-			$this->load->view("blog/blog_header", $data);
-			$this->load->view("blog/edit_post", $data);
-			$this->load->view("blog/blog_footer");
+			$this->load->view("blog_header", $data);
+			$this->load->view("edit_post", $data);
+			$this->load->view("blog_footer");
 
 		} else {
 

@@ -319,7 +319,7 @@ class Form_visualization extends CI_Controller
 
 		if ($form_id != NULL) {
 			$data = $this->_load_points($form_id);
-
+			
 			$this->load->view("header");
 			$this->load->view("graph/map", $data);
 			$this->load->view("footer");
