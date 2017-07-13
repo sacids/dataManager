@@ -19,5 +19,5 @@ class Search extends REST_Controller
         $this->load->library(array('Xform_comm'));
     }
 
-    
+
 }

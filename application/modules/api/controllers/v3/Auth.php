@@ -78,7 +78,7 @@ class Auth extends REST_Controller
     //register user details
     function register_post()
     {
-        if (!$this->post('first_name') || !$this->post('last_name') || !$this->post('mobile') || !$this->post('password') || !$this->post('password_confirm')) {
+        if (!$this->post('first_name') || !$this->post('last_name') || !$this->post('phone') || !$this->post('password') || !$this->post('password_confirm')) {
             $this->response(array('status' => TRUE, 'error_msg' => 'Required parameter are missing'), 202);
         }
 
