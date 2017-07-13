@@ -228,9 +228,6 @@ class Projects extends MX_Controller
 
 	public function forms($project_id = NULL)
 	{
-
-		sleep(1);
-
 		$project_forms = NULL;
 		if ($project_id) {
 			$project_forms = $this->Project_model->find_project_forms($project_id);
