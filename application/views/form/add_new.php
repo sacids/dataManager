@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <?php echo form_open_multipart('xform/add_new', 'class="form-vertical" role="form"'); ?>
+        <?php echo form_open_multipart('xform/add_new/' . $project_id, 'class="form-vertical" role="form"'); ?>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div id="header-title">
                 <h3 class="title">Add new form</h3>
@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label for=""><?php echo $this->lang->line("label_form_xml_file") ?>
                                         <span>*</span></label>
-                                    <?= form_upload("userfile","",'class="form-control"') ?>
+                                    <?= form_upload("userfile", "", 'class="form-control"') ?>
                                 </div>
 
                                 <div class="form-group">

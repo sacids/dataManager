@@ -772,13 +772,14 @@ class Xform extends CI_Controller
 	/**
 	 * Add/upload new xform and set permissions for groups or users.
 	 */
-	function add_new()
+	function add_new($project_id = "")
 	{
 		if (!$this->ion_auth->logged_in()) {
 			redirect('auth/login', 'refresh');
 		}
 
 		$data['title'] = $this->lang->line("heading_add_new_form");
+		$data['project_id'] = $project_id;
 
 		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
 		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
@@ -860,7 +861,8 @@ class Xform extends CI_Controller
 								"filename"     => $filename,
 								"date_created" => date("c"),
 								"access"       => $this->input->post("access"),
-								"perms"        => $all_permissions
+								"perms"        => $all_permissions,
+								"project_id"   => $project_id
 							);
 
 							//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
