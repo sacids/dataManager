@@ -827,7 +827,7 @@ class Xform extends CI_Controller
 
 				if (!$this->upload->do_upload("userfile")) {
 					$this->session->set_flashdata("message", "<div class='warning'>" . $this->upload->display_errors("", "") . "</div>");
-					redirect("xform/add_new");
+					redirect("xform/add_new/{$project_id}");
 				} else {
 					$xml_data = $this->upload->data();
 					$filename = $xml_data['file_name'];
@@ -840,12 +840,11 @@ class Xform extends CI_Controller
 					}
 
 					$create_table_statement = $this->_initialize($filename);
-
-
+					
 					if ($this->Xform_model->find_by_xform_id($this->table_name)) {
 						@unlink($form_definition_upload_dir . $filename);
 						$this->session->set_flashdata("message", display_message("Form ID is already used, try a different one", "danger"));
-						redirect("xform/add_new");
+						redirect("xform/add_new/{$project_id}");
 					} else {
 						$create_table_result = $this->Xform_model->create_table($create_table_statement);
 						//log_message("debug", "Create table result " . $create_table_result);
@@ -876,12 +875,12 @@ class Xform extends CI_Controller
 							$this->session->set_flashdata("message", display_message($create_table_statement, "danger"));
 						}
 
-						redirect("xform/add_new");
+						redirect("xform/add_new/{$project_id}");
 					}
 				}
 			} else {
 				$this->session->set_flashdata("message", display_message($this->lang->line("form_saving_failed"), "danger"));
-				redirect("xform/add_new");
+				redirect("xform/add_new/{$project_id}");
 			}
 		}
 	}
