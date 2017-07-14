@@ -1241,9 +1241,7 @@ class Xform extends CI_Controller
 			return $field_name;
 		}
 
-		$tmp = sanitize_col_name($field_name);
-		$asc = ascii_val($tmp);
-		$fn = '_xf_' . condense_col_name($tmp) . '_' . $asc;
+		$fn = '_xf_' . md5($field_name);
 
 		$data = array();
 		$data['table_name'] = $this->table_name;
