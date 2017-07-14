@@ -1,7 +1,7 @@
 <?php
 /**
  * AfyaData
- *  
+ *
  * An open source data collection and analysis tool.
  *
  * This content is released under the MIT License (MIT)
@@ -27,12 +27,13 @@
  * THE SOFTWARE.
  *
  *
- * @package	    AfyaData
- * @author	    AfyaData Dev Team
- * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
- * @license	    http://opensource.org/licenses/MIT	MIT License
- * @link	    https://afyadata.sacids.org
- * @since	    Version 1.0.0
+ * @package        AfyaData
+ * @author        AfyaData Dev Team
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS
+ *     http://sacids.org)
+ * @license        http://opensource.org/licenses/MIT	MIT License
+ * @link        https://afyadata.sacids.org
+ * @since        Version 1.0.0
  */
 
 /**
@@ -106,5 +107,29 @@ class Alert_model extends CI_Model
 		$response = curl_exec($ch);
 		curl_close($ch);
 		return $response;
+	}
+
+	public function send_post_symptoms_request($query_params)
+	{
+
+		$url = base_url("api/v2/intel/disease");
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_POST, TRUE);
+		curl_setopt($ch, CURLOPT_USERAGENT, "");
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $query_params);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Content-Type: application/json',
+				'Content-Length: ' . strlen($query_params))
+		);
+
+		$response = curl_exec($ch);
+		$http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_close($ch);
+		return ($http_response_code == 200 || $http_response_code == 300) ? $response : FALSE;
 	}
 }
