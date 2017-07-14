@@ -84,9 +84,17 @@
 
 
                         $.each(forms, function (i, form) {
-                            html += "<div><h4>" + form.title + "</h4><span class='small'>" + form.description
-                                    + "</span><span class='pull-right'><a " +
-                                    "href='<?= base_url('xform/edit_form/')?>/" + form.id + "'>Edit</a></span></div> ";
+
+                            var form_status = null;
+                            if (form.access == "private") {
+                                form_status = "<span class='label label-warning pull-right small text-white'>" + form.access + "</span>";
+                            } else {
+                                form_status = "<span class='label label-success pull-right small text-white'>" + form.access + "</span>";
+                            }
+
+                            html += "<div><h4>" + form.title + form_status + "</h4><span class='small'>" + form.description
+                                    + "</span><span class='pull-right'><a href='<?= base_url('xform/edit_form/')?>/" + form.id + "'>Edit</a></span>" +
+                                    "<p><a href='<?=base_url("xform/form_overview")?>/" + form.form_id + "'>Overview</a></p></div>";
                         });
                     }
 
@@ -101,10 +109,8 @@
                     $("#notificationBar").html('<?=display_message("<i class=\"fa fa-spinner fa-refresh fa-spin fa-1x\" aria-hidden=\"true\"></i> Getting forms, Please wait... ")?>');
                 },
                 error(){
-
                 }
             });
         });
-
     });
 </script>
