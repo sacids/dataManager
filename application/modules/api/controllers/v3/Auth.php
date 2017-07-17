@@ -78,7 +78,7 @@ class Auth extends REST_Controller
     //register user details
     function register_post()
     {
-        if (!$this->post('first_name') || !$this->post('last_name') || !$this->post('phone') || !$this->post('password')) {
+        if (!$this->post('first_name') || !$this->post('last_name') || !$this->post('phone') || !$this->post('password') || !$this->post('password_confirm')) {
             $this->response(array('status' => TRUE, 'error_msg' => 'Required parameter are missing'), 202);
         }
 
@@ -87,6 +87,7 @@ class Auth extends REST_Controller
         $last_name = $this->post('last_name');
         $phone = $this->post('phone');
         $password = $this->post('password');
+        $password_confirm = $this->post('password_confirm');
 
         //assign phone to username
         $username = $phone;
@@ -95,6 +96,10 @@ class Auth extends REST_Controller
         if ($this->check_mobile_existence($username)) {
             //return error response
             $this->response(array('error' => TRUE, 'error_msg' => 'Mobile used by another user'), 204);
+
+        } else if ($password != $password_confirm) {
+            //return error response
+            $this->response(array('error' => TRUE, 'error_msg' => 'Password does not match'), 204);
 
         } else {
             //digest password
