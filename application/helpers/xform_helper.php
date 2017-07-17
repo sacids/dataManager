@@ -34,7 +34,7 @@ if (!function_exists('shorten_column_name')) {
 		$string = str_replace(' ', '_', $string); // Replaces all spaces with underscore.
    		$string = preg_replace('/[^A-Za-z0-9\_]/', '', $string); // Removes special chars.
    		$string	= preg_replace('/_+/', '_', $string); // Replaces multiple underscore with single one.
-   		$string = strtolower($string); // add prefix and lowercase string
+   		//$string = strtolower($string); // add prefix and lowercase string
 
    		return $string;
 
@@ -43,7 +43,7 @@ if (!function_exists('shorten_column_name')) {
 
 	function ascii_val($string){
 
-		$string	= strtolower($string);
+		$string	= strtolower(base64_encode($string));
 		$letters = $string;// preg_replace('~[^a-z][0-9]~i', '', $string); // remove non alpha
 		$sum = 0;
 		for ($i = 0; $i < strlen($letters); $i++){
@@ -55,10 +55,10 @@ if (!function_exists('shorten_column_name')) {
 
 	function condense_col_name($string){
 
-		$tmp	= explode('_',$string);
+		$tmp	= explode('_',strtolower($string));
 		$pre	= '';
 		foreach($tmp as $parts){
-			$pre	.= substr($parts,0,1);
+			$pre	.= substr($parts,0,2);
 		}
 
 		return $pre;

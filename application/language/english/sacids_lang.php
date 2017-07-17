@@ -124,3 +124,21 @@ $lang['label_read_more'] = "Read more";
 $lang['label_detected_disease'] = "Mostly detected diseases";
 $lang['label_user_chats'] = "Recent user chats";
 $lang['label_graphical_submission'] = "Graphical recent submission";
+
+
+
+/* CHR Module */
+
+$lang['label_chr_first_name']    = 'First name';
+$lang['label_chr_last_name']     = 'Last name';
+$lang['label_chr_email']         = 'Email address';
+$lang['label_chr_phone']         = 'Phone number';
+$lang['label_chr_school_college']= 'School or College';
+$lang['label_chr_field_study']   = 'Field of study';
+$lang['label_chr_grade']         = 'Grade or Qualification';
+$lang['label_chr_activities']    = 'Activities and societies';
+$lang['label_chr_from_year']     = 'From Year';
+$lang['label_chr_to_year']       = 'To Year (or expected)';
+
+
+$lang['btn_add_chr']             = 'Add CHR';

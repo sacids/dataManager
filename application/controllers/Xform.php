@@ -772,13 +772,14 @@ class Xform extends CI_Controller
 	/**
 	 * Add/upload new xform and set permissions for groups or users.
 	 */
-	function add_new()
+	function add_new($project_id = "")
 	{
 		if (!$this->ion_auth->logged_in()) {
 			redirect('auth/login', 'refresh');
 		}
 
 		$data['title'] = $this->lang->line("heading_add_new_form");
+		$data['project_id'] = $project_id;
 
 		$this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
 		$this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
@@ -826,7 +827,7 @@ class Xform extends CI_Controller
 
 				if (!$this->upload->do_upload("userfile")) {
 					$this->session->set_flashdata("message", "<div class='warning'>" . $this->upload->display_errors("", "") . "</div>");
-					redirect("xform/add_new");
+					redirect("xform/add_new/{$project_id}");
 				} else {
 					$xml_data = $this->upload->data();
 					$filename = $xml_data['file_name'];
@@ -839,12 +840,11 @@ class Xform extends CI_Controller
 					}
 
 					$create_table_statement = $this->_initialize($filename);
-
-
+					
 					if ($this->Xform_model->find_by_xform_id($this->table_name)) {
 						@unlink($form_definition_upload_dir . $filename);
 						$this->session->set_flashdata("message", display_message("Form ID is already used, try a different one", "danger"));
-						redirect("xform/add_new");
+						redirect("xform/add_new/{$project_id}");
 					} else {
 						$create_table_result = $this->Xform_model->create_table($create_table_statement);
 						//log_message("debug", "Create table result " . $create_table_result);
@@ -860,7 +860,8 @@ class Xform extends CI_Controller
 								"filename"     => $filename,
 								"date_created" => date("c"),
 								"access"       => $this->input->post("access"),
-								"perms"        => $all_permissions
+								"perms"        => $all_permissions,
+								"project_id"   => $project_id
 							);
 
 							//TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
@@ -874,12 +875,12 @@ class Xform extends CI_Controller
 							$this->session->set_flashdata("message", display_message($create_table_statement, "danger"));
 						}
 
-						redirect("xform/add_new");
+						redirect("xform/add_new/{$project_id}");
 					}
 				}
 			} else {
 				$this->session->set_flashdata("message", display_message($this->lang->line("form_saving_failed"), "danger"));
-				redirect("xform/add_new");
+				redirect("xform/add_new/{$project_id}");
 			}
 		}
 	}
@@ -1240,9 +1241,7 @@ class Xform extends CI_Controller
 			return $field_name;
 		}
 
-		$tmp = sanitize_col_name($field_name);
-		$asc = ascii_val($tmp);
-		$fn = '_xf_' . condense_col_name($tmp) . '_' . $asc;
+		$fn = '_xf_' . md5($field_name);
 
 		$data = array();
 		$data['table_name'] = $this->table_name;

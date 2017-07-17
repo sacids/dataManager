@@ -65,9 +65,9 @@
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div id="header-title">
                     <h3 class="title"><?= $form->title ?></h3>
-                    <p>
+                    <div class="well well-sm bg-white">
                         <small><?= $form->description ?></small>
-                    </p>
+                    </div>
                 </div>
             </div>
             <?php if (isset($map_data)) : ?>

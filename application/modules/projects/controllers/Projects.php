@@ -51,7 +51,12 @@ class Projects extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('project_model'));
+
+		if (!$this->ion_auth->logged_in()) {
+			redirect('auth/login', 'refresh');
+		}
+
+		$this->load->model(array('Project_model'));
 		$this->user_id = $this->session->userdata("user_id");
 		$this->controller = $this->router->fetch_class();
 	}
@@ -93,14 +98,14 @@ class Projects extends MX_Controller
 
 		$config = array(
 			'base_url'    => $this->config->base_url("projects/lists"),
-			'total_rows'  => $this->project_model->count_projects(),
+			'total_rows'  => $this->Project_model->count_projects(),
 			'uri_segment' => 3,
 		);
 
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-		$this->data['project_list'] = $this->project_model->get_project_list($this->pagination->per_page, $page);
+		$this->data['project_list'] = $this->Project_model->get_project_list($this->pagination->per_page, $page);
 		$this->data["links"] = $this->pagination->create_links();
 
 		//render view
@@ -180,7 +185,7 @@ class Projects extends MX_Controller
 		//check permission
 		//$this->has_allowed_perm($this->router->fetch_method());
 
-		$project = $this->project_model->get_project_by_id($project_id);
+		$project = $this->Project_model->get_project_by_id($project_id);
 
 		//form validation
 		$this->form_validation->set_rules('name', 'Title', 'required|trim');
@@ -221,4 +226,24 @@ class Projects extends MX_Controller
 		$this->load->view('footer');
 	}
 
+	public function forms($project_id = NULL)
+	{
+		$project_forms = NULL;
+		if ($project_id) {
+			$project_forms = $this->Project_model->find_project_forms($project_id);
+			$project_forms_count = $this->Project_model->count_project_forms($project_id);
+		}
+
+
+		if ($this->input->is_ajax_request()) {
+
+			if ($project_forms != NULL) {
+				echo json_encode(['status' => "success", "forms_count" => $project_forms_count, "forms" => $project_forms]);
+			} else {
+				echo json_encode(['status' => "success", "forms_count" => $project_forms_count]);
+			}
+		} else {
+			$this->data['forms'] = $project_forms;
+		}
+	}
 }
