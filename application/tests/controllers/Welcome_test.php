@@ -10,6 +10,11 @@
 
 class Welcome_test extends TestCase
 {
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 	public function test_index()
 	{
 		$output = $this->request('GET', 'welcome/index');
