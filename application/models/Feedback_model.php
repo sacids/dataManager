@@ -203,7 +203,6 @@ class Feedback_model extends CI_Model
 			$this->db->group_start();
 			foreach ($where_perm as $key => $value) {
 				$this->db->or_like("form_id", $value);
-				//$this->db->like("(form_id LIKE '$value' OR form_id LIKE '$value')");
 			}
 			$this->db->group_end();
 		} else {

@@ -111,7 +111,7 @@ class Feedback extends REST_Controller
     }
 
     //post feedback
-    function feedback_post()
+    function send_post()
     {
         if (!$this->post('username')) {
             $this->response(array('status' => 'failed', 'message' => 'Username is required'));
