@@ -38,7 +38,7 @@
 
 /**
  * Created by PhpStorm.
- * User: renfrid
+ * User: Renfrid
  * Date: 5/5/17
  * Time: 12:13 PM
  */
@@ -233,7 +233,6 @@ class Projects extends MX_Controller
 			$project_forms = $this->Project_model->find_project_forms($project_id);
 			$project_forms_count = $this->Project_model->count_project_forms($project_id);
 		}
-
 
 		if ($this->input->is_ajax_request()) {
 

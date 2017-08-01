@@ -299,7 +299,7 @@ class Xform extends CI_Controller
 			$result = $this->Alert_model->send_post_symptoms_request(json_encode($request_data));
 			$json_object = json_decode($result);
 
-			if ($json_object->status == 1) {
+			if (isset($json_object->status) && $json_object->status == 1) {
 				$detected_diseases = [];
 
 				foreach ($json_object->data as $disease) {
@@ -315,9 +315,8 @@ class Xform extends CI_Controller
 				}
 				$this->Ohkr_model->save_detected_diseases($detected_diseases);
 			} else {
-				//no disease found
+				//todo do something when no disease found
 			}
-
 
 			if (count($symptoms_reported) > 0) {
 				$message_sender_name = "AfyaData";
@@ -840,7 +839,7 @@ class Xform extends CI_Controller
 					}
 
 					$create_table_statement = $this->_initialize($filename);
-					
+
 					if ($this->Xform_model->find_by_xform_id($this->table_name)) {
 						@unlink($form_definition_upload_dir . $filename);
 						$this->session->set_flashdata("message", display_message("Form ID is already used, try a different one", "danger"));

@@ -12,12 +12,14 @@
             </ol>
 
             <div class="row">
+                <?php
+                if ($this->session->flashdata('message') != '') {
+                    echo '<div class="col-sm-12 col-md-12 col-lg-12">';
+                    echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
+                    echo '</div>';
+                }
+                ?>
                 <div class="col-sm-12 col-md-6 col-lg-6">
-                    <?php
-                    if ($this->session->flashdata('message') != '') {
-                        echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-                    } ?>
-
                     <?php if (count($project_list) > 0) { ?>
                         <table class="table table-responsive table-hover table-bordered">
                             <tr>
@@ -62,9 +64,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-
         $('tr.projectRow').on('click', function () {
-
             var projectId = $(this).attr('id');
             console.log("project id is " + projectId);
 
@@ -82,7 +82,6 @@
                     if (data.status == "success" && data.forms_count > 0) {
                         var forms = data.forms;
 
-
                         $.each(forms, function (i, form) {
 
                             var form_status = null;
@@ -93,8 +92,12 @@
                             }
 
                             html += "<div><h4>" + form.title + form_status + "</h4><span class='small'>" + form.description
-                                    + "</span><span class='pull-right'><a href='<?= base_url('xform/edit_form/')?>/" + form.id + "'>Edit</a></span>" +
-                                    "<p><a href='<?=base_url("xform/form_overview")?>/" + form.form_id + "'>Overview</a></p></div>";
+                                    + "</span><span class='pull-right'><a href='<?= base_url('xform/edit_form/')?>/" + form.id + "'>Edit</a></span>"
+                                    + "<p>" +
+                                    "<a href='<?=base_url("xform/form_overview")?>/" + form.form_id + "' class='mr-3'>Overview</a>&nbsp;&nbsp;" +
+                                    "<a href='<?=base_url("form_visualization/chart")?>/" + form.form_id + "' target='_blank' class='mr-3'>Chart</a>&nbsp;&nbsp;" +
+                                    "<a href='<?=base_url("form_visualization/map")?>/" + form.form_id + "' target='_blank' >Map</a>" +
+                                    "</p></div>";
                         });
                     }
 
