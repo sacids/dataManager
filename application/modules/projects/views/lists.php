@@ -69,7 +69,7 @@
             console.log("project id is " + projectId);
 
             $.ajax({
-                url: "<?= base_url("projects/forms/") ?>/" + projectId,
+                url: "<?= base_url("projects/forms") ?>/" + projectId,
                 type: "post",
                 dataType: 'json',
                 data: {
@@ -95,8 +95,9 @@
                                     + "</span><span class='pull-right'><a href='<?= base_url('xform/edit_form/')?>/" + form.id + "'>Edit</a></span>"
                                     + "<p>" +
                                     "<a href='<?=base_url("xform/form_overview")?>/" + form.form_id + "' class='mr-3'>Overview</a>&nbsp;&nbsp;" +
-                                    "<a href='<?=base_url("form_visualization/chart")?>/" + form.form_id + "' target='_blank' class='mr-3'>Chart</a>&nbsp;&nbsp;" +
-                                    "<a href='<?=base_url("form_visualization/map")?>/" + form.form_id + "' target='_blank' >Map</a>" +
+                                    "<a href='<?=base_url("xform/form_data")?>/" + form.id + "' target='_blank' class='mr-3'>Form Data</a>&nbsp;&nbsp;" +
+                                    "<a href='<?=base_url("Form_Visualization/chart")?>/" + form.form_id + "' target='_blank' class='mr-3'>Chart</a>&nbsp;&nbsp;" +
+                                    "<a href='<?=base_url("Form_Visualization/map")?>/" + form.form_id + "' target='_blank' >Map</a>" +
                                     "</p></div>";
                         });
                     }
@@ -111,8 +112,7 @@
                     $("#formsListArea").html("");
                     $("#notificationBar").html('<?=display_message("<i class=\"fa fa-spinner fa-refresh fa-spin fa-1x\" aria-hidden=\"true\"></i> Getting forms, Please wait... ")?>');
                 },
-                error(){
-                }
+                error(){}
             });
         });
     });

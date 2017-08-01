@@ -149,5 +149,4 @@ class Feedback extends CI_Controller
         $this->load->view("feedback/user_feedback");
         $this->load->view('footer');
     }
-
 }

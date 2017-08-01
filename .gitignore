@@ -77,3 +77,4 @@ assets/forms/definition/archive/*.xml
 assets/forms/definition/*.jpg
 /application/vendor
 /application/config/sms.php
+/vendor/

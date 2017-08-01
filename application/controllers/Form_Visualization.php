@@ -42,7 +42,7 @@
  * Date: 3/31/2016
  * Time: 10:10 AM
  */
-class Form_visualization extends CI_Controller
+class Form_Visualization extends CI_Controller
 {
 
 	public function __construct()
