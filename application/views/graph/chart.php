@@ -7,7 +7,7 @@
                     <ul>
                         <?php foreach ($xforms as $form) { ?>
                             <li>
-                                <?php echo anchor("form_visualization/chart/" . $form->form_id, $form->title); ?>
+                                <?php echo anchor("Form_Visualization/chart/" . $form->form_id, $form->title); ?>
                             </li>
                         <?php } ?>
                     </ul>
@@ -19,7 +19,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header" id="xform-title"><?php echo $form_details->title ?></h1>
             <div class="" style="margin-bottom: 10px;">
-                <?php echo form_open("form_visualization/chart/" . $form_details->form_id, 'class="form-inline" role="form"'); ?>
+                <?php echo form_open("Form_Visualization/chart/" . $form_details->form_id, 'class="form-inline" role="form"'); ?>
                 <?php
                 $options = array("" => "Select column to plot");
                 foreach ($table_fields as $key => $value) {
