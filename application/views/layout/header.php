@@ -30,6 +30,20 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/creative.css" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/css/form.css" type="text/css">
 
+
+    <!-- jQuery -->
+    <script src="<?= base_url() ?>assets/bootstrap/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="<?= base_url() ?>assets/bootstrap/js/jquery.easing.min.js"></script>
+    <script src="<?= base_url() ?>assets/bootstrap/js/jquery.fittext.js"></script>
+    <script src="<?= base_url() ?>assets/bootstrap/js/wow.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="<?= base_url() ?>assets/bootstrap/js/creative.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

@@ -1,17 +1,53 @@
-<!-- jQuery -->
-<script src="<?= base_url() ?>assets/bootstrap/js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="<?= base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Plugin JavaScript -->
-<script src="<?= base_url() ?>assets/bootstrap/js/jquery.easing.min.js"></script>
-<script src="<?= base_url() ?>assets/bootstrap/js/jquery.fittext.js"></script>
-<script src="<?= base_url() ?>assets/bootstrap/js/wow.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="<?= base_url() ?>assets/bootstrap/js/creative.js"></script>
+<?php if (isset($load_map)): ?>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjO8E4UMo5tGs5U9HQ6zLmVQBa3k7UYIs&callback=initMap">
+    </script>
+<?php endif; ?>
 
 </body>
-
 </html>
+
+<script type="text/javascript">
+
+    <?php if (isset($categories)){ ?>
+    $(function () {
+
+        Highcharts.setOptions({
+            lang: {
+                thousandsSep: ','
+            }
+        });
+
+        $('#graph-content').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: '<?php echo $series['name']; ?>'
+                    },
+                    xAxis: {
+                        categories: <?php echo $categories; ?>
+                    },
+                    yAxis: {
+                        title: {
+                            text: '<?php echo !empty($chart_title) ? $chart_title : "Count"?>'
+                        }
+                    },
+                    series: [{
+                        name: '<?php echo $series['name']; ?>',
+                        data: <?php echo str_replace('"', "", json_encode($series['data']));?>
+                    }],
+                    credits: {
+                        enabled: false
+                    }
+                }
+        );
+    });
+    <?php } ?>
+    $(document).ready(function () {
+        //working fine
+        // Ajax calls here.
+    });
+</script>

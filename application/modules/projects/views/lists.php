@@ -66,8 +66,7 @@
     $(document).ready(function () {
         $('tr.projectRow').on('click', function () {
             var projectId = $(this).attr('id');
-            console.log("project id is " + projectId);
-
+           
             $.ajax({
                 url: "<?= base_url("projects/forms") ?>/" + projectId,
                 type: "post",
