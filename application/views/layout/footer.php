@@ -1,4 +1,4 @@
-<?php if (isset($load_map)): ?>
+<?php if (isset($events_map)): ?>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
     <script async defer

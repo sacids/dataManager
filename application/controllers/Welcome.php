@@ -22,6 +22,12 @@ class Welcome extends MX_Controller
 	 *
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	public function __construct()
+	{
+		$this->load->model("Xform_model");
+	}
+
 	public function index()
 	{
 		$this->events_map();
@@ -29,8 +35,6 @@ class Welcome extends MX_Controller
 
 	public function events_map()
 	{
-		$this->load->model("Xform_model");
-
 		$geo_data = $this->Xform_model->get_geospatial_data("ad_build_AfyaData_Demo_1500530768");
 
 		$geo_data_array = [];
@@ -46,11 +50,24 @@ class Welcome extends MX_Controller
 		}
 
 		$data['geo_data_json'] = json_encode($geo_data_array);
-		$data['load_map'] = TRUE;
+		$data['events_map'] = TRUE;
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('health_map_view', $data);
 		$this->load->view('layout/footer');
+	}
+
+	public function get_events()
+	{
+		$events = $this->Xform_model->get_geospatial_data("ad_build_AfyaData_Demo_1500530768");
+
+		log_message("debug", "Events list " . json_encode($events));
+
+		if ($this->input->is_ajax_request()) {
+			echo json_encode(['status' => "success", "events_count" => count($events), "events" => $events]);
+		} else {
+			show_error("Contact admin", 501);
+		}
 	}
 
 	public function about()

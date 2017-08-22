@@ -44,34 +44,22 @@
  */
 
 ?>
-<style type="text/css">
-    /* Always set the map height explicitly to define the size of the div
-	 * element that contains the map. */
-    #map {
-        margin-top: 40px;
-        min-height: 500px;
-        height: 100%;
-        background-color: gainsboro;
-    }
-
-    /* Optional: Makes the sample page fill the window. */
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .container-full {
-        margin: 10px auto 0;
-        width: 100%;
-        padding: 0;
-        height: 100%;
-    }
-</style>
-
 <div class="container container-full">
     <div id="map"></div>
 </div>
+<div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="eventsModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <h3>Data Model</h3>
+                <div id="notification"></div>
+                <div id="content-area"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script type="text/javascript">
 
@@ -80,8 +68,16 @@
     function initMap() {
 
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: {lat: -6.8288657, lng: 37.670589} //-6.8016854
+            zoom: 6,
+            center: {lat: -6.8288657, lng: 37.670589},//-6.8016854
+            fullscreenControl: true,
+            fullscreenControlOptions: {
+                position: google.maps.ControlPosition.BOTTOM_RIGHT
+            },
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                position: google.maps.ControlPosition.BOTTOM_LEFT
+            }
         });
 
         $.each(geoPointsObject, function (key, data) {

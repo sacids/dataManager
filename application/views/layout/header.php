@@ -29,7 +29,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/css/creative.css" type="text/css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/css/form.css" type="text/css">
-
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/css/afyadata.css" type="text/css">
 
     <!-- jQuery -->
     <script src="<?= base_url() ?>assets/bootstrap/js/jquery.js"></script>
@@ -50,6 +50,82 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+    <?php if (isset($events_map)): ?>
+        <style type="text/css">
+            /* Always set the map height explicitly to define the size of the div
+			 * element that contains the map. */
+            #map {
+                margin-top: 0px;
+                min-height: 500px;
+                height: 100%;
+                background-color: gainsboro;
+            }
+
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container-full {
+                margin: 0;
+                width: 100%;
+                padding: 0;
+                height: 100%;
+                z-index: -1;
+            }
+
+            #mainNav {
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $("a#eventsListView").on("click", function (e) {
+                    e.preventDefault();
+
+                    $.ajax({
+                        url: "<?= base_url("welcome/get_events") ?>",
+                        type: "get",
+                        dataType: 'json',
+                        success: function (data) {
+                            $("#notificationBar").html("");
+
+                            var html = '<h3 class="title">Project forms</h3>';
+
+                            if (data.status == "success" && data.events_count > 0) {
+                                var reportedEvents = data.events;
+                                var table = '<table class="table table-responsive table stripped">';
+
+                                $.each(reportedEvents, function (i, singleEvent) {
+
+                                    table += "<tr>" +
+                                            "<td>" + singleEvent._xf_72485ff63b11061b01c236b9c62b58bd + "</td>" +
+                                            "<td>" + singleEvent._xf_300dd0bbe98836946e681905250e2390 + "</td>" +
+                                            "<td>" + singleEvent.meta_start + "</td>" +
+                                            "</tr>";
+                                });
+
+                                table += '</table>';
+                                $("div#content-area").html(table);
+                            }
+
+                        },
+                        beforeSend(){
+                            $("#formsListArea").html("");
+                            $("#notificationBar").html('<?=display_message("<i class=\"fa fa-spinner fa-refresh fa-spin fa-1x\" aria-hidden=\"true\"></i> Getting forms, Please wait... ")?>');
+                        },
+                        error(){
+                        }
+                    });
+                });
+            });
+        </script>
+    <?php endif; ?>
 
 </head>
 
@@ -83,11 +159,11 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li class="btn-link"><a href="<?= site_url('auth/login'); ?>"
-                                        class="btn btn-sm btn-dark-orange">Login</a>
-                </li>
-                <li class="btn-link">
-                    <a href="<?= site_url('auth/sign_up') ?>" class="btn btn-sm btn-maroon">Sign up</a></li>
+                <?php if (isset($events_map)): ?>
+                    <li class="btn-link"><?= anchor("#eventsModal", '<i class="fa fa-list"></i>', 'class="btn btn-sm btn-dark-orange" id="eventsListView" data-toggle="modal" data-target="#eventsModal"') ?></li>
+                <?php endif; ?>
+                <li class="btn-link"><?= anchor("auth/login", 'Login', 'class="btn btn-sm btn-dark-orange"') ?></li>
+                <li class="btn-link"><?= anchor("auth/sign_up", 'Sign up', 'class="btn btn-sm btn-maroon"') ?></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

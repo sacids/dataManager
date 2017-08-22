@@ -235,7 +235,6 @@ class Projects extends MX_Controller
 		}
 
 		if ($this->input->is_ajax_request()) {
-
 			if ($project_forms != NULL) {
 				echo json_encode(['status' => "success", "forms_count" => $project_forms_count, "forms" => $project_forms]);
 			} else {
