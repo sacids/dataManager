@@ -24,10 +24,10 @@ class Welcome extends MX_Controller
 	 */
 	public function index()
 	{
-		$this->health_map();
+		$this->events_map();
 	}
 
-	public function health_map()
+	public function events_map()
 	{
 		$this->load->model("Xform_model");
 
