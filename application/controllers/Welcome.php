@@ -31,7 +31,7 @@ class Welcome extends MX_Controller
 	{
 		$this->load->model("Xform_model");
 
-		$geo_data = $this->Xform_model->get_geospatial_data("ad_build_afyadata_demo_1500530768");
+		$geo_data = $this->Xform_model->get_geospatial_data("ad_build_AfyaData_Demo_1500530768");
 
 		$geo_data_array = [];
 		$count = 0;
@@ -44,6 +44,7 @@ class Welcome extends MX_Controller
 				$count++;
 			}
 		}
+
 		$data['geo_data_json'] = json_encode($geo_data_array);
 		$data['load_map'] = TRUE;
 
