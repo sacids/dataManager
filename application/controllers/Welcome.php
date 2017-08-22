@@ -24,12 +24,7 @@ class Welcome extends MX_Controller
 	 */
 	public function index()
 	{
-		$this->data['title'] = 'Taarifa kwa wakati';
-
-		//render view
-		$this->load->view('layout/header', $this->data);
-		$this->load->view('view');
-		$this->load->view('layout/footer');
+		$this->health_map();
 	}
 
 	public function health_map()
@@ -54,6 +49,16 @@ class Welcome extends MX_Controller
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('health_map_view', $data);
+		$this->load->view('layout/footer');
+	}
+
+	public function about()
+	{
+		$this->data['title'] = 'Taarifa kwa wakati';
+		$this->data['about_page'] = TRUE;
+		//render view
+		$this->load->view('layout/header', $this->data);
+		$this->load->view('view');
 		$this->load->view('layout/footer');
 	}
 }

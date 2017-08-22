@@ -17,8 +17,8 @@
 
     <!-- Custom Fonts -->
     <link
-        href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-        rel='stylesheet' type='text/css'>
+            href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+            rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="<?= base_url() ?>assets/bootstrap/font-awesome/css/font-awesome.min.css"
           type="text/css">
@@ -72,11 +72,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a class="page-scroll" href="#about">About AfyaData</a></li>
-                <li><a class="page-scroll" href="#features">Features</a></li>
-                <li><a class="page-scroll" href="#involved">Get Involved</a></li>
-                <li><a class="page-scroll" href="#contact">Contact</a></li>
+                <li><?= anchor("welcome/health_map", "Health Map", 'class="page-scroll"') ?></li>
+                <?php if (isset($about_page) && $about_page): ?>
+                    <li><a class="page-scroll" href="#about">About AfyaData</a></li>
+                    <li><a class="page-scroll" href="#features">Features</a></li>
+                    <li><a class="page-scroll" href="#involved">Get Involved</a></li>
+                    <li><a class="page-scroll" href="#contact">Contact</a></li>
+                <?php else: ?>
+                    <li><?= anchor("welcome/about", "Learn more", 'class="page-scroll"') ?></li>
+                <?php endif; ?>
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <li class="btn-link"><a href="<?= site_url('auth/login'); ?>"
                                         class="btn btn-sm btn-dark-orange">Login</a>

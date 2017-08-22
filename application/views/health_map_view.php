@@ -60,25 +60,22 @@
         margin: 0;
         padding: 0;
     }
+
+    .container-full {
+        margin: 10px auto 0;
+        width: 100%;
+        padding: 0;
+        height: 100%;
+    }
 </style>
 
-<section class="bg-light-grey">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <div id="map"></div>
-            </div>
-        </div>
-    </div>
-</section>
+<div class="container container-full">
+    <div id="map"></div>
+</div>
 
 <script type="text/javascript">
-    
-    var geoPointsObject = JSON.parse('<?=$geo_data_json?>');
 
-    $.each(geoPointsObject, function (key, value) {
-        console.log(key + " - " + value.event+" "+value.lat);
-    });
+    var geoPointsObject = JSON.parse('<?=$geo_data_json?>');
 
     function initMap() {
 
@@ -97,7 +94,7 @@
             });
             marker.setMap(map);
         });
-        
+
         // Add a marker clusterer to manage the markers.
         var markerCluster = new MarkerClusterer(map, markers,
                 {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
