@@ -72,7 +72,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><?= anchor("welcome/health_map", "Health Map", 'class="page-scroll"') ?></li>
                 <?php if (isset($about_page) && $about_page): ?>
                     <li><a class="page-scroll" href="#about">About AfyaData</a></li>
                     <li><a class="page-scroll" href="#features">Features</a></li>
