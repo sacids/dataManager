@@ -87,15 +87,22 @@
 
                 $("a#eventsListView").on("click", function (e) {
                     e.preventDefault();
+                    loadReportedEvents();
+                });
 
+                function loadReportedEvents(currentPage = null) {
+                    var dataUrl = "<?= base_url("welcome/get_events") ?>";
+                    if (currentPage != null) {
+                        dataUrl += "/" + currentPage;
+                    }
                     $.ajax({
-                        url: "<?= base_url("welcome/get_events") ?>",
+                        url: dataUrl,
                         type: "get",
                         dataType: 'json',
                         success: function (data) {
                             $("#notificationBar").html("");
 
-                            var html = '<h3 class="title">Project forms</h3>';
+                            var html = '<div class=""> <h3 class="title">Events</h3>';
 
                             if (data.status == "success" && data.events_count > 0) {
                                 var reportedEvents = data.events;
@@ -111,18 +118,34 @@
                                 });
 
                                 table += '</table>';
-                                $("div#content-area").html(table);
+                                html += table;
+
+                                if (!data.links.trim() == '') {
+                                    html += '<div style="margin-top: 0px;">' + data.links + '</div>';
+                                }
+                            }
+                            html += '</div>';
+
+                            $("div#content-area").html(html);
+                            if (!data.links.trim() == '') {
+                                $("li.pagination-link a").on("click", function (e) {
+                                    e.preventDefault();
+                                    var currentPage = $(this).attr("data-ci-pagination-page");
+                                    loadReportedEvents(currentPage);
+                                });
                             }
 
                         },
-                        beforeSend(){
+                        beforeSend()
+                        {
                             $("#formsListArea").html("");
                             $("#notificationBar").html('<?=display_message("<i class=\"fa fa-spinner fa-refresh fa-spin fa-1x\" aria-hidden=\"true\"></i> Getting forms, Please wait... ")?>');
                         },
-                        error(){
+                        error()
+                        {
                         }
                     });
-                });
+                }
             });
         </script>
     <?php endif; ?>

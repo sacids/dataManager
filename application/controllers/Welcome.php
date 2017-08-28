@@ -59,12 +59,31 @@ class Welcome extends MX_Controller
 
 	public function get_events()
 	{
-		$events = $this->Xform_model->get_geospatial_data("ad_build_AfyaData_Demo_1500530768");
+		$table_name = "ad_build_AfyaData_Demo_1500530768";
 
-		log_message("debug", "Events list " . json_encode($events));
+
+		$config = [
+			'base_url'    => $this->config->base_url("welcome/get_events/"),
+			'total_rows'  => $this->Xform_model->count_all_records($table_name),
+			'uri_segment' => 4,
+			'per_page' => 2,
+		];
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+		$events = $this->Xform_model->get_geospatial_data($table_name, $this->pagination->per_page, $page);
+		$links = $this->pagination->create_links();
 
 		if ($this->input->is_ajax_request()) {
-			echo json_encode(['status' => "success", "events_count" => count($events), "events" => $events]);
+			$result = [
+				'status'       => "success",
+				"events_count" => $config['total_rows'],
+				"events"       => $events,
+				"links"        => $links
+			];
+			echo json_encode($result);
+			log_message("debug", "Result " . json_encode($result));
 		} else {
 			show_error("Contact admin", 501);
 		}

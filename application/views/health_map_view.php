@@ -60,7 +60,6 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
 
     var geoPointsObject = JSON.parse('<?=$geo_data_json?>');
