@@ -284,7 +284,7 @@ class Xform extends CI_Controller
 		$statement = $this->get_insert_form_data_query();
 		$result = $this->Xform_model->insert_data($statement);
 
-		if ($result) {
+		if ($result && isset($this->form_data['Dalili_Dalili'])) {
 			$symptoms_reported = explode(" ", $this->form_data['Dalili_Dalili']);
 			// taarifa_awali_Wilaya is the database field name in the mean time
 			$district = $this->form_data['taarifa_awali_Wilaya'];
@@ -385,6 +385,8 @@ class Xform extends CI_Controller
 			} else {
 				log_message("debug", "No symptom reported");
 			}
+		} else {
+			log_message("debug", "Dalili_Dalili index is not set implement dynamic way of getting dalili field");
 		}
 		return $result;
 	}

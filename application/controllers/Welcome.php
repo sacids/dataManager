@@ -66,7 +66,7 @@ class Welcome extends MX_Controller
 			'base_url'    => $this->config->base_url("welcome/get_events/"),
 			'total_rows'  => $this->Xform_model->count_all_records($table_name),
 			'uri_segment' => 4,
-			'per_page' => 2,
+			'per_page' => 15,
 		];
 
 		$this->pagination->initialize($config);
