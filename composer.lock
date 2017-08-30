@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4d36863673946d0c3ab7bfab400f87be",
-    "content-hash": "710d2e86589e2c8a2cf28da0b34591bc",
+    "hash": "c4229ec8019f82c483e2c2c77b7ad083",
+    "content-hash": "fd41d1a8a68114731053f529fefe3142",
     "packages": [],
     "packages-dev": [
         {
@@ -14,12 +14,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "1c33e894fbbad6cf65bd42871719cd33227ed6a7"
+                "reference": "03eb255d66bf1c11fccb4b4d1ed62fee70e3b6f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/1c33e894fbbad6cf65bd42871719cd33227ed6a7",
-                "reference": "1c33e894fbbad6cf65bd42871719cd33227ed6a7",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/03eb255d66bf1c11fccb4b4d1ed62fee70e3b6f4",
+                "reference": "03eb255d66bf1c11fccb4b4d1ed62fee70e3b6f4",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,54 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-04-13 06:45:05"
+            "time": "2017-01-05 16:44:55"
+        },
+        {
+            "name": "kenjis/ci-phpunit-test",
+            "version": "v0.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kenjis/ci-phpunit-test.git",
+                "reference": "5536b66461ac124df8146a5736923d4b094beff6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/5536b66461ac124df8146a5736923d4b094beff6",
+                "reference": "5536b66461ac124df8146a5736923d4b094beff6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "replace": {
+                "nikic/php-parser": "2.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kenji Suzuki",
+                    "homepage": "https://github.com/kenjis"
+                }
+            ],
+            "description": "An easier way to use PHPUnit with CodeIgniter 3.x",
+            "homepage": "http://kenjis.github.io/ci-phpunit-test/",
+            "keywords": [
+                "codeigniter",
+                "monkey patch",
+                "phpunit",
+                "test",
+                "unit testing"
+            ],
+            "time": "2016-11-20 12:00:54"
         },
         {
             "name": "mikey179/vfsStream",

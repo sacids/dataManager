@@ -165,7 +165,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?= anchor("", '<img src="' . base_url() . 'assets/public/images/logo_default.png" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
+            <?= anchor("", '<img src="' . base_url('assets/public/images/logo_default.png') . '" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
