@@ -86,7 +86,7 @@ class Xform extends CI_Controller
 		$this->load->library('db_exp');
 		$this->load->library('xform_comm');
 		$this->user_id = $this->session->userdata("user_id");
-		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger"><i class="fa fa-warning"></i>.', '</div>');
 	}
 
 	public function index()
@@ -672,9 +672,9 @@ class Xform extends CI_Controller
 
 		$content_length = sizeof($response);
 		// set header response
-		header("X-OpenRosa-Version: 1.0");
+		header("X-OpenRosa-Version:1.0");
 		header("X-OpenRosa-Accept-Content-Length:" . $content_length);
-		header("Date: " . date('r'), FALSE, $http_response_code);
+		header("Date:" . date('r'), FALSE, $http_response_code);
 		echo $response;
 	}
 
@@ -761,18 +761,19 @@ class Xform extends CI_Controller
 
 		$content_length = sizeof($xml);
 		//set header response
-		header('Content-Type: text/xml; charset=utf-8');
-		header('"HTTP_X_OPENROSA_VERSION": "1.0"');
+		header('Content-Type:text/xml; charset=utf-8');
+		header('HTTP_X_OPENROSA_VERSION:1.0');
 		header("X-OpenRosa-Accept-Content-Length:" . $content_length);
 		header('X-OpenRosa-Version:1.0');
-		header("Date: " . date('r'), FALSE);
+		header("Date:" . date('r'), FALSE);
 
 		echo $xml;
 	}
 
-	/**
-	 * Add/upload new xform and set permissions for groups or users.
-	 */
+    /**
+     * Add/upload new xform and set permissions for groups or users.
+     * @param string $project_id
+     */
 	function add_new($project_id = "")
 	{
 		if (!$this->ion_auth->logged_in()) {

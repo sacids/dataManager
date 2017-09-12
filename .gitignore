@@ -90,3 +90,4 @@ assets/forms/definition/*.jpg
 /application/vendor
 /application/config/sms.php
 /vendor/
+.DS_Store
