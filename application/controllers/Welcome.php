@@ -59,14 +59,14 @@ class Welcome extends MX_Controller
 
 	public function get_events()
 	{
+		//todo make form table selection dynamic.
 		$table_name = "ad_build_AfyaData_Demo_1500530768";
-
 
 		$config = [
 			'base_url'    => $this->config->base_url("welcome/get_events/"),
 			'total_rows'  => $this->Xform_model->count_all_records($table_name),
 			'uri_segment' => 4,
-			'per_page' => 15,
+			'per_page'    => 15,
 		];
 
 		$this->pagination->initialize($config);

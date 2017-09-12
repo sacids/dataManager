@@ -1,78 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="63" assertions="108" failures="0" errors="0" time="2.291426">
-    <testsuite name="Welcome_test" file="C:\xampp\htdocs\afyadata\application\tests\controllers\Welcome_test.php" fullPackage="Welcome" tests="3" assertions="3" failures="0" errors="0" time="0.267852">
-      <testcase name="test_index" class="Welcome_test" file="C:\xampp\htdocs\afyadata\application\tests\controllers\Welcome_test.php" line="13" assertions="1" time="0.044479"/>
-      <testcase name="test_method_404" class="Welcome_test" file="C:\xampp\htdocs\afyadata\application\tests\controllers\Welcome_test.php" line="19" assertions="1" time="0.041143"/>
-      <testcase name="test_APPPATH" class="Welcome_test" file="C:\xampp\htdocs\afyadata\application\tests\controllers\Welcome_test.php" line="25" assertions="1" time="0.182230"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="62" assertions="105" failures="0" errors="0" time="3.711615">
+    <testsuite name="Welcome_test" file="C:\xampp\htdocs\afyadata\application\tests\controllers\Welcome_test.php" fullPackage="Welcome" tests="3" assertions="3" failures="0" errors="0" time="0.134912">
+      <testcase name="test_index" class="Welcome_test" file="C:\xampp\htdocs\afyadata\application\tests\controllers\Welcome_test.php" line="18" assertions="1" time="0.075486"/>
+      <testcase name="test_method_404" class="Welcome_test" file="C:\xampp\htdocs\afyadata\application\tests\controllers\Welcome_test.php" line="24" assertions="1" time="0.051517"/>
+      <testcase name="test_APPPATH" class="Welcome_test" file="C:\xampp\htdocs\afyadata\application\tests\controllers\Welcome_test.php" line="30" assertions="1" time="0.007909"/>
     </testsuite>
-    <testsuite name="Xform_test" file="C:\xampp\htdocs\afyadata\application\tests\controllers\Xform_test.php" fullPackage="Xform" tests="1" assertions="1" failures="0" errors="0" time="0.036636">
-      <testcase name="test_index_not_logged_in" class="Xform_test" file="C:\xampp\htdocs\afyadata\application\tests\controllers\Xform_test.php" line="47" assertions="1" time="0.036636"/>
+    <testsuite name="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" fullPackage="Feedback.model" tests="14" assertions="4" failures="0" errors="0" time="0.812802">
+      <testcase name="test_count_new_feedback" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="53" assertions="1" time="0.063811"/>
+      <testcase name="test_create_feedback" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="58" assertions="2" time="0.060665"/>
+      <testcase name="test_count_feedback" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="77" assertions="1" time="0.056547"/>
+      <testcase name="test_find_all" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="82" assertions="0" time="0.055579"/>
+      <testcase name="test_search_feedback" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="113" assertions="0" time="0.055257"/>
+      <testcase name="test_get_feedback_details_by_instance" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="118" assertions="0" time="0.057781"/>
+      <testcase name="test_get_feedback_by_instance" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="122" assertions="0" time="0.060028"/>
+      <testcase name="test_update_user_feedback" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="126" assertions="0" time="0.055128"/>
+      <testcase name="test_get_reply_user" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="130" assertions="0" time="0.055835"/>
+      <testcase name="test_get_feedback_mapping" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="134" assertions="0" time="0.058400"/>
+      <testcase name="test_get_feedback_list" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="138" assertions="0" time="0.054482"/>
+      <testcase name="test_get_feedback_notification" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="142" assertions="0" time="0.054554"/>
+      <testcase name="test_get_feedback_form_details" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="146" assertions="0" time="0.056663"/>
+      <testcase name="test_get_form_details" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="150" assertions="0" time="0.068072"/>
     </testsuite>
-    <testsuite name="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" fullPackage="Feedback.model" tests="14" assertions="4" failures="0" errors="0" time="0.428645">
-      <testcase name="test_count_new_feedback" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="53" assertions="1" time="0.030846"/>
-      <testcase name="test_create_feedback" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="58" assertions="2" time="0.040746"/>
-      <testcase name="test_count_feedback" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="77" assertions="1" time="0.027805"/>
-      <testcase name="test_find_all" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="82" assertions="0" time="0.037839"/>
-      <testcase name="test_search_feedback" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="113" assertions="0" time="0.025974"/>
-      <testcase name="test_get_feedback_details_by_instance" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="118" assertions="0" time="0.032226"/>
-      <testcase name="test_get_feedback_by_instance" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="122" assertions="0" time="0.026153"/>
-      <testcase name="test_update_user_feedback" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="126" assertions="0" time="0.034378"/>
-      <testcase name="test_get_reply_user" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="130" assertions="0" time="0.026719"/>
-      <testcase name="test_get_feedback_mapping" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="134" assertions="0" time="0.027059"/>
-      <testcase name="test_get_feedback_list" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="138" assertions="0" time="0.025736"/>
-      <testcase name="test_get_feedback_notification" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="142" assertions="0" time="0.033659"/>
-      <testcase name="test_get_feedback_form_details" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="146" assertions="0" time="0.026022"/>
-      <testcase name="test_get_form_details" class="Feedback_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Feedback_model_test.php" line="150" assertions="0" time="0.033484"/>
+    <testsuite name="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" fullPackage="Ohkr.model" tests="42" assertions="91" failures="0" errors="0" time="2.575250">
+      <testcase name="test_add_specie" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="53" assertions="2" time="0.065313"/>
+      <testcase name="test_find_specie_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="64" assertions="2" time="0.055102"/>
+      <testcase name="test_find_all_species" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="76" assertions="2" time="0.057870"/>
+      <testcase name="test_add_disease" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="94" assertions="2" time="0.067146"/>
+      <testcase name="test_find_all_disease" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="107" assertions="4" time="0.055228"/>
+      <testcase name="test_get_disease_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="129" assertions="4" time="0.056361"/>
+      <testcase name="test_count_disease" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="146" assertions="1" time="0.056099"/>
+      <testcase name="test_count_specie" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="152" assertions="1" time="0.055351"/>
+      <testcase name="test_update_disease" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="157" assertions="2" time="0.066918"/>
+      <testcase name="test_update_specie" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="173" assertions="2" time="0.073771"/>
+      <testcase name="test_add_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="189" assertions="2" time="0.070692"/>
+      <testcase name="test_find_all_symptoms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="204" assertions="4" time="0.057154"/>
+      <testcase name="test_get_symptom_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="227" assertions="4" time="0.055259"/>
+      <testcase name="test_count_symptoms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="245" assertions="1" time="0.054666"/>
+      <testcase name="test_update_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="250" assertions="4" time="0.062449"/>
+      <testcase name="test_add_disease_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="269" assertions="2" time="0.065400"/>
+      <testcase name="test_find_disease_symptoms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="283" assertions="4" time="0.061152"/>
+      <testcase name="test_get_disease_symptom_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="306" assertions="4" time="0.057375"/>
+      <testcase name="test_get_all_symptoms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="323" assertions="4" time="0.054786"/>
+      <testcase name="test_update_disease_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="347" assertions="4" time="0.064168"/>
+      <testcase name="test_get_submitted_symptoms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="366" assertions="0" time="0.059379"/>
+      <testcase name="test_find_disease_faq" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="371" assertions="0" time="0.059037"/>
+      <testcase name="test_add_disease_faq" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="394" assertions="2" time="0.061140"/>
+      <testcase name="test_get_disease_faq_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="408" assertions="4" time="0.055084"/>
+      <testcase name="test_update_disease_faq" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="426" assertions="0" time="0.059414"/>
+      <testcase name="test_create_response_sms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="431" assertions="2" time="0.068927"/>
+      <testcase name="test_find_response_sms_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="447" assertions="5" time="0.063663"/>
+      <testcase name="test_find_response_sms_by_disease_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="466" assertions="5" time="0.057473"/>
+      <testcase name="test_update_response_sms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="492" assertions="6" time="0.066320"/>
+      <testcase name="test_create_send_sms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="514" assertions="2" time="0.061307"/>
+      <testcase name="test_update_sms_status" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="530" assertions="3" time="0.059803"/>
+      <testcase name="test_find_diseases_by_symptoms_code" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="546" assertions="0" time="0.054678"/>
+      <testcase name="test_count_response_sms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="551" assertions="1" time="0.059154"/>
+      <testcase name="test_find_response_messages_and_groups" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="556" assertions="0" time="0.055701"/>
+      <testcase name="test_find_sender_response_message" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="561" assertions="0" time="0.056483"/>
+      <testcase name="test_save_detected_diseases" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="566" assertions="0" time="0.056685"/>
+      <testcase name="test_delete_disease_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="571" assertions="1" time="0.070681"/>
+      <testcase name="test_delete_disease_faq" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="577" assertions="1" time="0.084617"/>
+      <testcase name="test_delete_response_sms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="583" assertions="1" time="0.063456"/>
+      <testcase name="test_delete_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="589" assertions="1" time="0.061739"/>
+      <testcase name="test_delete_disease" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="595" assertions="1" time="0.065186"/>
+      <testcase name="test_delete_specie" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="601" assertions="1" time="0.063063"/>
     </testsuite>
-    <testsuite name="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" fullPackage="Ohkr.model" tests="42" assertions="93" failures="0" errors="0" time="1.461823">
-      <testcase name="test_add_specie" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="53" assertions="2" time="0.043928"/>
-      <testcase name="test_find_specie_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="64" assertions="2" time="0.034526"/>
-      <testcase name="test_find_all_species" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="76" assertions="2" time="0.026849"/>
-      <testcase name="test_add_disease" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="95" assertions="2" time="0.037090"/>
-      <testcase name="test_find_all_disease" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="109" assertions="4" time="0.029734"/>
-      <testcase name="test_get_disease_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="132" assertions="4" time="0.028896"/>
-      <testcase name="test_count_disease" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="150" assertions="1" time="0.026765"/>
-      <testcase name="test_count_specie" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="156" assertions="1" time="0.034269"/>
-      <testcase name="test_update_disease" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="161" assertions="3" time="0.040311"/>
-      <testcase name="test_update_specie" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="178" assertions="3" time="0.040667"/>
-      <testcase name="test_add_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="195" assertions="2" time="0.036666"/>
-      <testcase name="test_find_all_symptoms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="210" assertions="4" time="0.030885"/>
-      <testcase name="test_get_symptom_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="233" assertions="4" time="0.027401"/>
-      <testcase name="test_count_symptoms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="251" assertions="1" time="0.033642"/>
-      <testcase name="test_update_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="256" assertions="4" time="0.036848"/>
-      <testcase name="test_add_disease_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="275" assertions="2" time="0.041485"/>
-      <testcase name="test_find_disease_symptoms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="289" assertions="4" time="0.027694"/>
-      <testcase name="test_get_disease_symptom_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="312" assertions="4" time="0.026686"/>
-      <testcase name="test_get_all_symptoms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="329" assertions="4" time="0.034689"/>
-      <testcase name="test_update_disease_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="353" assertions="4" time="0.037775"/>
-      <testcase name="test_get_submitted_symptoms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="372" assertions="0" time="0.026546"/>
-      <testcase name="test_find_disease_faq" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="377" assertions="0" time="0.029208"/>
-      <testcase name="test_add_disease_faq" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="400" assertions="2" time="0.039516"/>
-      <testcase name="test_get_disease_faq_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="414" assertions="4" time="0.027025"/>
-      <testcase name="test_update_disease_faq" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="432" assertions="0" time="0.030357"/>
-      <testcase name="test_create_response_sms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="437" assertions="2" time="0.049331"/>
-      <testcase name="test_find_response_sms_by_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="453" assertions="5" time="0.034983"/>
-      <testcase name="test_find_response_sms_by_disease_id" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="472" assertions="5" time="0.028800"/>
-      <testcase name="test_update_response_sms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="498" assertions="6" time="0.045601"/>
-      <testcase name="test_create_send_sms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="520" assertions="2" time="0.047374"/>
-      <testcase name="test_update_sms_status" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="536" assertions="3" time="0.035308"/>
-      <testcase name="test_find_diseases_by_symptoms_code" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="552" assertions="0" time="0.033645"/>
-      <testcase name="test_count_response_sms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="557" assertions="1" time="0.027080"/>
-      <testcase name="test_find_response_messages_and_groups" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="562" assertions="0" time="0.026788"/>
-      <testcase name="test_find_sender_response_message" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="567" assertions="0" time="0.026142"/>
-      <testcase name="test_save_detected_diseases" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="572" assertions="0" time="0.033959"/>
-      <testcase name="test_delete_disease_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="577" assertions="1" time="0.038180"/>
-      <testcase name="test_delete_disease_faq" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="583" assertions="1" time="0.037836"/>
-      <testcase name="test_delete_response_sms" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="589" assertions="1" time="0.039165"/>
-      <testcase name="test_delete_symptom" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="595" assertions="1" time="0.034617"/>
-      <testcase name="test_delete_disease" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="601" assertions="1" time="0.040400"/>
-      <testcase name="test_delete_specie" class="Ohkr_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Ohkr_model_test.php" line="607" assertions="1" time="0.053157"/>
-    </testsuite>
-    <testsuite name="Xform_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Xform_model_test.php" fullPackage="Xform.model" tests="3" assertions="7" failures="0" errors="0" time="0.096470">
-      <testcase name="test_new_items_are_published" class="Xform_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Xform_model_test.php" line="53" assertions="2" time="0.039016"/>
-      <testcase name="test_get_form_list" class="Xform_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Xform_model_test.php" line="73" assertions="4" time="0.027412"/>
-      <testcase name="test_find_by_id" class="Xform_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Xform_model_test.php" line="102" assertions="1" time="0.030042"/>
+    <testsuite name="Xform_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Xform_model_test.php" fullPackage="Xform.model" tests="3" assertions="7" failures="0" errors="0" time="0.188651">
+      <testcase name="test_new_items_are_published" class="Xform_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Xform_model_test.php" line="53" assertions="2" time="0.072842"/>
+      <testcase name="test_get_form_list" class="Xform_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Xform_model_test.php" line="73" assertions="4" time="0.056417"/>
+      <testcase name="test_find_by_id" class="Xform_model_test" file="C:\xampp\htdocs\afyadata\application\tests\models\Xform_model_test.php" line="102" assertions="1" time="0.059392"/>
     </testsuite>
   </testsuite>
 </testsuites>
