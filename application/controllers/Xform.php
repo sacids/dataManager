@@ -813,10 +813,8 @@ class Xform extends CI_Controller
 				$this->load->view('footer');
 			}
 		} else {
-
 			$form_definition_upload_dir = $this->config->item("form_definition_upload_dir");
 
-			//print_r($_FILES['userfile']['name']);
 			if (!empty($_FILES['userfile']['name'])) {
 
 				$config['upload_path'] = $form_definition_upload_dir;

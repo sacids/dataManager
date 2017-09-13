@@ -63,7 +63,6 @@ local.properties
 .texlipse
 
 # Created by .ignore support plugin (hsz.mobi)
-application/config/database.php
 .idea
 sql
 assets/forms/data/audio/*
@@ -87,7 +86,6 @@ assets/forms/definition/archive/*.xml
 !assets/forms/definition/archive/index.html
 
 assets/forms/definition/*.jpg
-/application/vendor
 /application/config/sms.php
+/composer.lock
 /vendor/
-.DS_Store
