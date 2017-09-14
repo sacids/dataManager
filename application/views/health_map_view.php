@@ -47,19 +47,29 @@
 <div class="container container-full">
     <div id="map"></div>
 </div>
-<div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="eventsModal">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div id="notification"></div>
-                <div id="content-area"></div>
-            </div>
+
+<?php
+$options = ["" => "Choose form"];
+if (isset($public_forms)) {
+    foreach ($public_forms as $form) {
+        $options[$form->form_id] = $form->title;
+    }
+}
+?>
+
+
+<div id="hideShowEventDataArea" class="bg-light-grey"
+     style="position :fixed; z-index :100; bottom :0;left :0; width :100%;height:auto; padding: 10px;">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <a href="#" id="closeDataAreaBtn" title="Close"><i class="fa fa-angle-double-down fa-2x text-primary"></i></a>
+            <?/*= form_dropdown("form_name", $options, 'class="form-control pull-right"') */?>
         </div>
+        <div class="col-md-12" id="eventsDataArea"></div>
     </div>
 </div>
 
 <script type="text/javascript">
-
     var geoPointsObject = JSON.parse('<?=$geo_data_json?>');
 
     function initMap() {
@@ -90,6 +100,6 @@
 
         // Add a marker clusterer to manage the markers.
         var markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     }
 </script>

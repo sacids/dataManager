@@ -85,6 +85,13 @@
         <script type="text/javascript">
             $(document).ready(function () {
 
+                $("#hideShowEventDataArea").hide();
+
+                $("#closeDataAreaBtn").on("click", function (e) {
+                    e.preventDefault();
+                    $("#hideShowEventDataArea").hide(1000);
+                });
+
                 $("a#eventsListView").on("click", function (e) {
                     e.preventDefault();
                     loadReportedEvents();
@@ -92,6 +99,7 @@
 
                 function loadReportedEvents(currentPage = null) {
                     var dataUrl = "<?= base_url("welcome/get_events") ?>";
+
                     if (currentPage != null) {
                         dataUrl += "/" + currentPage;
                     }
@@ -106,15 +114,20 @@
 
                             if (data.status == "success" && data.events_count > 0) {
                                 var reportedEvents = data.events;
-                                var table = '<table class="table table-responsive table stripped">';
+                                var table = '<table class="table table-responsive table-bordered">';
+
+                                table += "<tr class='bg-primary'>" +
+                                    "<th>Event</th>" +
+                                    "<th>Symptoms</th>" +
+                                    "<th>Date</th>" +
+                                    "</tr>";
 
                                 $.each(reportedEvents, function (i, singleEvent) {
-
                                     table += "<tr>" +
-                                            "<td>" + singleEvent._xf_72485ff63b11061b01c236b9c62b58bd + "</td>" +
-                                            "<td>" + singleEvent._xf_300dd0bbe98836946e681905250e2390 + "</td>" +
-                                            "<td>" + singleEvent.meta_start + "</td>" +
-                                            "</tr>";
+                                        "<td>" + singleEvent._xf_72485ff63b11061b01c236b9c62b58bd + "</td>" +
+                                        "<td>" + singleEvent._xf_300dd0bbe98836946e681905250e2390 + "</td>" +
+                                        "<td>" + singleEvent.meta_start + "</td>" +
+                                        "</tr>";
                                 });
 
                                 table += '</table>';
@@ -127,6 +140,9 @@
                             html += '</div>';
 
                             $("div#content-area").html(html);
+                            $("div#eventsDataArea").html(html);
+                            $("#hideShowEventDataArea").show("slow");
+
                             if (!data.links.trim() == '') {
                                 $("li.pagination-link a").on("click", function (e) {
                                     e.preventDefault();
@@ -136,17 +152,16 @@
                             }
 
                         },
-                        beforeSend()
-                        {
+                        beforeSend: function () {
                             $("#formsListArea").html("");
                             $("#notificationBar").html('<?=display_message("<i class=\"fa fa-spinner fa-refresh fa-spin fa-1x\" aria-hidden=\"true\"></i> Getting forms, Please wait... ")?>');
                         },
-                        error()
-                        {
+                        error: function () {
                         }
                     });
                 }
             });
+
         </script>
     <?php endif; ?>
 

@@ -17,27 +17,27 @@
 
 if (!function_exists("perm_module")) {
 
-	function perm_module($controller)
-	{
-		$CI = &get_instance();
-		$user_id = $CI->session->userdata('user_id');
-		$user_group = $CI->ion_auth_model->get_users_groups($user_id)->row();
+    function perm_module($controller)
+    {
+        $CI = &get_instance();
+        $user_id = $CI->session->userdata('user_id');
+        $user_group = $CI->ion_auth_model->get_users_groups($user_id)->row();
 
-		//get perm_module details
-		$module = $CI->db->get_where('perms_module', array('controller' => $controller))->row();
+        //get perm_module details
+        $module = $CI->db->get_where('perms_module', array('controller' => $controller))->row();
 
-		if (count($module) > 0) {
-			//get access level
-			$check = $CI->db->get_where('perms_group',
-				array('group_id' => $user_group->id, 'module_id' => $module->id, 'allow' => 1))->num_rows();
+        if (count($module) > 0) {
+            //get access level
+            $check = $CI->db->get_where('perms_group',
+                array('group_id' => $user_group->id, 'module_id' => $module->id, 'allow' => 1))->num_rows();
 
-			//check if query exceed 0
-			if ($check > 0) {
-				return TRUE;
-			}
-		}
-		return FALSE;
-	}
+            //check if query exceed 0
+            if ($check > 0) {
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
 }
 
 /**
@@ -51,65 +51,64 @@ if (!function_exists("perm_module")) {
 
 if (!function_exists("perms_role")) {
 
-	function perms_role($controller, $perm_slug)
-	{
-		$CI = &get_instance();
-		$user_id = $CI->session->userdata('user_id');
-		$user_group = $CI->ion_auth_model->get_users_groups($user_id)->row();
+    function perms_role($controller, $perm_slug)
+    {
+        $CI = &get_instance();
+        $user_id = $CI->session->userdata('user_id');
+        $user_group = $CI->ion_auth_model->get_users_groups($user_id)->row();
 
-		//get perm_module details
-		$module = $CI->db->get_where('perms_module', array('controller' => $controller))->row();
+        //get perm_module details
+        $module = $CI->db->get_where('perms_module', array('controller' => $controller))->row();
 
-		if (count($module) > 0) {
-			//get access level
-			$check = $CI->db->get_where('perms_group',
-				array('group_id' => $user_group->id, 'module_id' => $module->id, 'perm_slug' => $perm_slug, 'allow' => 1))->num_rows();
+        if (count($module) > 0) {
+            //get access level
+            $check = $CI->db->get_where('perms_group',
+                array('group_id' => $user_group->id, 'module_id' => $module->id, 'perm_slug' => $perm_slug, 'allow' => 1))->num_rows();
 
-			if ($check > 0) {
-				return TRUE;
-			}
-		}
-		return FALSE;
-	}
+            if ($check > 0) {
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
 
 }
 
 if (!function_exists("display_message")) {
-	function display_message($message, $message_type = "success")
-	{
+    function display_message($message, $message_type = "success")
+    {
 
-		if ($message_type == "success") {
-			return '<div class="alert alert-success">' . $message . '</div>';
-		}
+        if ($message_type == "success") {
+            return '<div class="alert alert-success">' . $message . '</div>';
+        }
 
-		if ($message_type == "info") {
-			return '<div class="alert alert-info">' . $message . '</div>';
-		}
+        if ($message_type == "info") {
+            return '<div class="alert alert-info">' . $message . '</div>';
+        }
 
-		if ($message_type == "warning") {
-			return '<div class="alert alert-warning">' . $message . '</div>';
-		}
+        if ($message_type == "warning") {
+            return '<div class="alert alert-warning">' . $message . '</div>';
+        }
 
-		if ($message_type == "danger") {
-			return '<div class="alert alert-danger">' . $message . '</div>';
-		}
-	}
+        if ($message_type == "danger") {
+            return '<div class="alert alert-danger">' . $message . '</div>';
+        }
+    }
 }
 
 //display first name and last name
 if (!function_exists('display_full_name')) {
-	function display_full_name()
-	{
-		$CI = &get_instance();
-		$user_id = $CI->session->userdata('user_id');
-		$User = $CI->User_model->find_by_id($user_id);
-		echo ucfirst($User->first_name) . ' ' . ucfirst($User->last_name);
-	}
+    function display_full_name()
+    {
+        $CI = &get_instance();
+        $user_id = $CI->session->userdata('user_id');
+        $User = $CI->User_model->find_by_id($user_id);
+        echo ucfirst($User->first_name) . ' ' . ucfirst($User->last_name);
+    }
 }
 
-
 //time ago
-if(!function_exists('time_ago')){
+if (!function_exists('time_ago')) {
     function time_ago($date)
     {
         if (empty($date)) {
@@ -152,3 +151,22 @@ if(!function_exists('time_ago')){
     }
 }
 
+
+if (!function_exists('array_utf8_encode')) {
+    /**
+     * Encode array to utf8 recursively
+     * @param $dat
+     * @return array|string
+     */
+    function array_utf8_encode($dat)
+    {
+        if (is_string($dat))
+            return utf8_encode($dat);
+        if (!is_array($dat))
+            return $dat;
+        $ret = array();
+        foreach ($dat as $i => $d)
+            $ret[$i] = array_utf8_encode($d);
+        return $ret;
+    }
+}
