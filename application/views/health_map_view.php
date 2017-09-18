@@ -57,7 +57,6 @@ if (isset($public_forms)) {
 }
 ?>
 
-
 <div id="hideShowEventDataArea" class="bg-light-grey"
      style="position :fixed; z-index :100; bottom :0;left :0; width :100%;height:auto; padding: 10px;">
     <div class="row">

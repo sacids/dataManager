@@ -85,8 +85,6 @@
         <script type="text/javascript">
             $(document).ready(function () {
 
-                $("#hideShowEventDataArea").hide();
-
                 $("#closeDataAreaBtn").on("click", function (e) {
                     e.preventDefault();
                     $("#hideShowEventDataArea").hide(1000);
@@ -94,6 +92,7 @@
 
                 $("a#eventsListView").on("click", function (e) {
                     e.preventDefault();
+                    $("#hideShowEventDataArea").toggle(1000);
                     loadReportedEvents();
                 });
 
