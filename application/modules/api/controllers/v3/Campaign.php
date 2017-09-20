@@ -36,17 +36,16 @@ class Campaign extends REST_Controller
                     'title' => $value->title,
                     'type' => $value->type,
                     'jr_form_id' => $value->jr_form_id,
-                    'featured' => $value->featured,
                     'icon' => $this->imageUrl . $value->icon,
                     'description' => $value->description,
                     'date_created' => $value->date_created
                 );
             }
             //response
-            $this->response(array("campaign" => $campaign, "status" => "success"), 200);
+            $this->response(array("status" => "success", "campaign" => $campaign), 200);
 
         } else {
-            $this->response(array('status' => 'failed', 'message' => 'No campaign found'), 204);
+            $this->response(array('status' => 'failed', 'message' => 'No campaign found'), 202);
         }
     }
 
