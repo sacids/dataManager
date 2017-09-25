@@ -71,40 +71,46 @@ class Feedback extends REST_Controller
             //feedback List
             $feedback_list = $this->Feedback_model->get_feedback_list($where_perm, $where_array, $date_created);
 
-            foreach ($feedback_list as $value) {
-                //user details
-                $this->model->set_table('users');
-                $user = $this->model->get_by('id', $value->user_id);
+            if ($feedback_list) {
+                $feedback = array();
 
-                //form details
-                $this->model->set_table('xforms');
-                $form = $this->model->get_by('form_id', $value->form_id);
+                foreach ($feedback_list as $value) {
+                    //user details
+                    $this->model->set_table('users');
+                    $user = $this->model->get_by('id', $value->user_id);
 
-                //get reply user
-                if ($value->reply_by != 0) {
-                    $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
-                } else {
-                    $reply_user = $value->reply_by;
+                    //form details
+                    $this->model->set_table('xforms');
+                    $form = $this->model->get_by('form_id', $value->form_id);
+
+                    //get reply user
+                    if ($value->reply_by != 0) {
+                        $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
+                    } else {
+                        $reply_user = $value->reply_by;
+                    }
+
+                    //feedback array
+                    $feedback[] = array(
+                        'id' => $value->id,
+                        'form_id' => $value->form_id,
+                        'instance_id' => $value->instance_id,
+                        'title' => $form->title,
+                        'message' => $value->message,
+                        'sender' => $value->sender,
+                        'user' => $username,
+                        'chr_name' => $user->first_name . ' ' . $user->last_name,
+                        'date_created' => $value->date_created,
+                        'status' => $value->status,
+                        'reply_by' => $reply_user
+                    );
                 }
+                //response
+                $this->response(array("status" => "success", "feedback" => $feedback), 200);
 
-                $feedback[] = array(
-                    'id' => $value->id,
-                    'form_id' => $value->form_id,
-                    'instance_id' => $value->instance_id,
-                    'title' => $form->title,
-                    'message' => $value->message,
-                    'sender' => $value->sender,
-                    'user' => $username,
-                    'chr_name' => $user->first_name . ' ' . $user->last_name,
-                    'date_created' => $value->date_created,
-                    'status' => $value->status,
-                    'reply_by' => $reply_user
-                );
+            } else {
+                $this->response(array('status' => 'failed', 'message' => 'No feedback found'), 202);
             }
-            //response
-            $response = array("feedback" => $feedback, "status" => "success");
-            $this->response($response, 200);
-
         } else {
             $this->response(array('status' => 'failed', 'message' => 'User does not exist'));
         }
@@ -151,12 +157,12 @@ class Feedback extends REST_Controller
 
             //check if feedback inserted
             if ($id)
-                $this->response(array('message' => 'Feedback was received successfully', 'status' => 'success'), 201);
+                $this->response(array('status' => 'success', 'message' => 'Feedback received'), 200);
             else
-                $this->response(array('status' => 'failed', 'message' => 'Unknown error occured'));
+                $this->response(array('status' => 'failed', 'message' => 'Unknown error occurred'), 202);
 
         } else {
-            $this->response(array('status' => 'failed', 'message' => 'User does not exist'));
+            $this->response(array('status' => 'failed', 'message' => 'User does not exist'), 203);
         }
     }
 
@@ -164,32 +170,30 @@ class Feedback extends REST_Controller
     //form details
     function form_details_get()
     {
-        if (!$this->get('table_name') || $this->get('instance_id')) {
-            $this->response(array('status' => 'failed', 'message' => 'Invalid table name or instance Id'));
-
-        } else {
-            $this->table_name = $this->get('table_name');
-            $this->instance_id = $this->get('instance_id');
-
-            // get definition file name
-            $this->model->set_table('xforms');
-            $form_details = $this->model->get_by('form_id', $this->table_name);
-
-            //set file defn
-            $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $form_details->filename);
-            $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
-            $form_definition = $this->xform_comm->get_defn();
-
-            //get form data
-            $form_data = $this->get_form_data($form_definition, $this->get_field_name_map($this->table_name));
-
-            if ($form_data) {
-                $response = array("form_details" => $form_data, "status" => "success");
-            } else {
-                $response = array("status" => "failed", "message" => "Nothing found");
-            }
-            $this->response($response, 200);
+        if (!$this->get('table_name') || !$this->get('instance_id')) {
+            $this->response(array('status' => 'failed', 'message' => 'Invalid table name or instance Id'), 202);
         }
+
+        //get variables
+        $this->table_name = $this->get('table_name');
+        $this->instance_id = $this->get('instance_id');
+
+        // get definition file name
+        $this->model->set_table('xforms');
+        $form_details = $this->model->get_by('form_id', $this->table_name);
+
+        //set file defn
+        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $form_details->filename);
+        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+        $form_definition = $this->xform_comm->get_defn();
+
+        //get form data
+        $form_data = $this->get_form_data($form_definition, $this->get_field_name_map($this->table_name));
+
+        if ($form_data)
+            $this->response(array("status" => "success", "form_details" => $form_data), 200);
+        else
+            $this->response(array("status" => "failed", "message" => "No details found"), 202);
     }
 
     //get form data

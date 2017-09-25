@@ -25,103 +25,116 @@ class Search extends REST_Controller
         $this->model->set_table('xforms_config');
         $forms = $this->model->get_all();
 
-        $this->model->set_table('xforms');
-        $result = array();
-        $tmp = array();
+        if ($forms) {
+            $result = array();
+            $tmp = array();
 
-        foreach ($forms as $form) {
-            $sForm = $this->model->get($form->xform_id);
-            $tmp['xform_id'] = $sForm->form_id;
-            $tmp['jr_form_id'] = $sForm->jr_form_id;
-            $tmp['title'] = $sForm->title;
-            $tmp['form_id'] = $form->xform_id;
+            foreach ($forms as $form) {
+                $this->model->set_table('xforms');
+                $sForm = $this->model->get($form->xform_id);
 
-            $flds = explode(',', $form->search_fields);
+                //variable
+                $tmp['xform_id'] = $sForm->form_id;
+                $tmp['jr_form_id'] = $sForm->jr_form_id;
+                $tmp['title'] = $sForm->title;
+                $tmp['form_id'] = $form->xform_id;
 
-            $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $sForm->filename);
-            $defn = $this->xform_comm->get_form_definition($sForm->form_id);
+                $flds = explode(',', $form->search_fields);
 
-            $nn = array();
-            $tmp2 = array();
-            foreach ($defn as $v) {
+                $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $sForm->filename);
+                $defn = $this->xform_comm->get_form_definition($sForm->form_id);
 
-                if (!array_key_exists('label', $v)) continue;
-                $fn = $v['field_name'];
-                $lb = $v['label'];
+                $nn = array();
+                $tmp2 = array();
+                foreach ($defn as $v) {
 
-                if (in_array($fn, $flds)) {
-                    $nn['label'] = $lb;
-                    $nn['value'] = $fn;
-                    array_push($tmp2, $nn);
+                    if (!array_key_exists('label', $v)) continue;
+                    $fn = $v['field_name'];
+                    $lb = $v['label'];
+
+                    if (in_array($fn, $flds)) {
+                        $nn['label'] = $lb;
+                        $nn['value'] = $fn;
+                        array_push($tmp2, $nn);
+                    }
                 }
+                $tmp['search_fields'] = $tmp2;
+
+                array_push($result, $tmp);
             }
-            $tmp['search_fields'] = $tmp2;
 
-            array_push($result, $tmp);
+            //response
+            $this->response(array('status' => 'success', 'searchable_form' => $result), 200);
+
+        } else {
+            $this->response(array('status' => 'failed', 'message' => 'No form found'), 202);
         }
-
-        $tmp3['searchable_form'] = $result;
-        $tmp3['status'] = 'success';
-
-        echo json_encode($tmp3);
     }
 
     //form search
     public function form_get()
     {
-        $field = $this->input->get('field');
-        $search = $this->input->get('search_for');
-        $form_id = $this->input->get('form_id');
+        if (!$this->get('field') || !$this->get('search_for') || !$this->get('form_id')) {
+            $this->response(array('status' => 'failed', 'message' => 'Parameters are missing'), 202);
+        }
+
+        //get variable
+        $field = $this->get('field');
+        $search = $this->get('search_for');
+        $form_id = $this->get('form_id');
 
         $this->model->set_table('xforms');
-        $xform = $this->model->get($form_id);
+        $xform = $this->model->get_by('form_id', $form_id);
+
         $table = $xform->form_id;
         $filename = $xform->filename;
 
         $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $filename);
         $defn = $this->xform_comm->get_form_definition($table);
 
+        //search results
         $this->model->set_table($table);
-        $qr = $this->model->get_by($field, $search);
         $qr = $this->model->get_many_by($field, $search);
-        $result = array();
 
-        //print_r($defn);
-        foreach ($qr as $item) {
+        if ($qr) {
+            $result = array();
 
-            $nn = array();
-            $tmp2 = array();
-            //print_r($item); echo '</pre>';
-            foreach ($defn as $var) {
+            foreach ($qr as $item) {
+                $tmp2 = array();
 
-                if (!array_key_exists('label', $var)) continue;
-                $field_type = $var['type'];
-                $label = $var['label'];
-                $field_name = $var['field_name'];
-                $id = $item->id;
+                foreach ($defn as $var) {
+                    if (!array_key_exists('label', $var)) continue;
+                    $field_type = $var['type'];
+                    $label = $var['label'];
+                    $field_name = $var['field_name'];
+                    $id = $item->id;
 
-                if ($field_type == 'geopoint' OR $field_type == 'binary') continue;
-                if ($field_type == 'select') {
-                    $opts = $var['option'];
+                    if ($field_type == 'geopoint' OR $field_type == 'binary') continue;
+                    if ($field_type == 'select') {
+                        $opts = $var['option'];
 
-                    $tmp1 = explode(" ", $item->$field_name);
-                    $t2 = '';
-                    foreach ($tmp1 as $v1) {
-                        $t2 .= ', ' . $opts[$v1];
+                        $tmp1 = explode(" ", $item->$field_name);
+                        $t2 = '';
+                        foreach ($tmp1 as $v1) {
+                            $t2 .= ', ' . $opts[$v1];
+                        }
+                        $val = $t2;
+                    } else {
+                        $val = $item->$field_name;
                     }
-                    $val = $t2;
-                } else {
-                    $val = $item->$field_name;
-                }
 
-                $tmp2['label'] = $label;
-                $tmp2['value'] = $val;
-                array_push($result, $tmp2);
+                    $tmp2['label'] = $label;
+                    $tmp2['value'] = $val;
+                    array_push($result, $tmp2);
+                }
             }
+
+            //response
+            $this->response(array('status' => 'success', 'form_details' => $result), 200);
+
+        } else {
+            $this->response(array("status" => "failed", "message" => "No search results found"), 202);
         }
-        $tmp3['form_details'] = $result;
-        $tmp3['status'] = 'success';
-        echo json_encode($tmp3);
     }
 
 }
