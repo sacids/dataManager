@@ -77,8 +77,7 @@
                                 echo "<th>" . $column . "</th>";
                             }
                         } else {
-
-                            foreach ($table_fields as $key => $column) {
+                            foreach ($mapped_fields as $key => $column) {
                                 if (array_key_exists($column, $field_maps)) {
                                     echo "<th>" . $field_maps[$column] . "</th>";
                                 } else {

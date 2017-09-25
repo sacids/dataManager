@@ -54,8 +54,6 @@
 
     <?php if (isset($events_map)): ?>
         <style type="text/css">
-            /* Always set the map height explicitly to define the size of the div
-			 * element that contains the map. */
             #map {
                 margin-top: 0px;
                 min-height: 500px;
@@ -85,27 +83,35 @@
         <script type="text/javascript">
             $(document).ready(function () {
 
+                $("#hideShowEventDataArea").hide();
+
                 $("#closeDataAreaBtn").on("click", function (e) {
                     e.preventDefault();
                     $("#hideShowEventDataArea").hide(1000);
                 });
 
+                var tableName = $("#availablePublicForms option:eq(1)").val();
+
                 $("a#eventsListView").on("click", function (e) {
                     e.preventDefault();
                     $("#hideShowEventDataArea").toggle(1000);
-                    loadReportedEvents();
+                    loadReportedEvents(tableName, null);
                 });
 
-                function loadReportedEvents(currentPage = null) {
+                function loadReportedEvents(tableName, currentPage = null) {
                     var dataUrl = "<?= base_url("welcome/get_events") ?>";
 
-                    if (currentPage != null) {
+                    if (currentPage !== null) {
                         dataUrl += "/" + currentPage;
                     }
+
                     $.ajax({
                         url: dataUrl,
-                        type: "get",
+                        type: "post",
                         dataType: 'json',
+                        data: {
+                            table_name: tableName
+                        },
                         success: function (data) {
                             $("#notificationBar").html("");
 
@@ -132,7 +138,7 @@
                                 table += '</table>';
                                 html += table;
 
-                                if (!data.links.trim() == '') {
+                                if (data.links.trim()) {
                                     html += '<div style="margin-top: 0px;">' + data.links + '</div>';
                                 }
                             }
@@ -142,23 +148,27 @@
                             $("div#eventsDataArea").html(html);
                             $("#hideShowEventDataArea").show("slow");
 
-                            if (!data.links.trim() == '') {
+                            if (data.links.trim()) {
                                 $("li.pagination-link a").on("click", function (e) {
                                     e.preventDefault();
                                     var currentPage = $(this).attr("data-ci-pagination-page");
-                                    loadReportedEvents(currentPage);
+                                    loadReportedEvents(tableName, currentPage);
                                 });
                             }
-
                         },
                         beforeSend: function () {
                             $("#formsListArea").html("");
                             $("#notificationBar").html('<?=display_message("<i class=\"fa fa-spinner fa-refresh fa-spin fa-1x\" aria-hidden=\"true\"></i> Getting forms, Please wait... ")?>');
                         },
                         error: function () {
-                        }
+                        },
                     });
                 }
+
+                $("#availablePublicForms").change(function () {
+                    var selectedTableId = $(this).val();
+                    loadReportedEvents(selectedTableId);
+                });
             });
 
         </script>
@@ -170,7 +180,6 @@
 
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1">
@@ -203,7 +212,5 @@
                 <li class="btn-link"><?= anchor("auth/sign_up", 'Sign up', 'class="btn btn-sm btn-maroon"') ?></li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container-fluid -->
 </nav>

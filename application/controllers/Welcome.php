@@ -35,6 +35,12 @@ class Welcome extends MX_Controller
 
     public function events_map()
     {
+        if (AFYADATA_MODE === "private" && !$this->ion_auth->logged_in()) {
+            $this->session->set_flashdata("message",display_message("You must be logged to continue","danger"));
+            redirect("auth/login");
+            exit;
+        }
+
         $data['title'] = "Reported Health Events";
         $data['public_forms'] = $this->Xform_model->search_forms(null, null, "public", "published");
 
@@ -65,13 +71,15 @@ class Welcome extends MX_Controller
     public function get_events()
     {
         //todo make form table selection dynamic.
-        $table_name = "ad_build_AfyaData_Demo_1500530768";
+        $table_name = $this->input->get_post("table_name");
+
+        log_message("debug", "Posted table name {$table_name}");
 
         $config = [
             'base_url' => $this->config->base_url("welcome/get_events/"),
             'total_rows' => $this->Xform_model->count_all_records($table_name),
             'uri_segment' => 4,
-            'per_page' => 15,
+            'per_page' => 100,
         ];
 
         $this->pagination->initialize($config);
@@ -87,13 +95,10 @@ class Welcome extends MX_Controller
                 "events" => $events,
                 "links" => $links
             ];
-
             $result = array_utf8_encode($result);
-
             echo json_encode($result);
-            log_message("error",json_last_error_msg());
         } else {
-            show_error("Not Implement", 501,"Page not implemented"); //page not implemented
+            show_error("Not Implement", 501, "Page not implemented"); //page not implemented
         }
     }
 

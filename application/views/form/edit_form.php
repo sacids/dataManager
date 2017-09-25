@@ -44,15 +44,15 @@
 
                                 <div class="form-group">
                                     <label for="campus"><?php echo $this->lang->line("label_description") ?>:</label>
-                        <textarea class="form-control" name="description" rows="5"
-                                  id="description"><?php echo set_value('description', $form->description); ?></textarea>
+                                    <textarea class="form-control" name="description" rows="5"
+                                              id="description"><?php echo set_value('description', $form->description); ?></textarea>
                                 </div>
                                 <div class=""><?php echo form_error('description'); ?></div>
 
                                 <div class="form-group">
                                     <label for="campus"><?php echo $this->lang->line("label_access") ?> :</label>
                                     <?php echo form_dropdown("access", array("private" => "Private", "public" => "Public"),
-                                            set_value("access", $form->access), 'class="form-control"'); ?>
+                                        set_value("access", $form->access), 'class="form-control"'); ?>
                                 </div>
                                 <div class=""><?php echo form_error('access'); ?></div>
                             </div>
@@ -101,14 +101,22 @@
                                         <th class="text-center">Hide</th>
                                         <th class="text-center">Question/Label</th>
                                         <th class="text-center">Mapping To</th>
+                                        <th class="text-center">Field Type</th>
                                     </tr>
                                     <?php
+
+                                    $field_type_options = ['TEXT' => "Text", 'INT' => "Number",
+                                        "GPS" => "GPS Location", "DATE" => "DATE", "DALILI" => 'Dalili',
+                                        "LAT" => "Latitude", "LONG" => "Longitude",
+                                        "IDENTITY" => "Username/Identity","IMAGE"=>"Image"];
+
 
                                     foreach ($table_fields as $tf) {
                                         echo "<tr>";
                                         echo "<td class='text-center'>" . form_checkbox("hide[]", $tf['id'], ($tf['hide'] == 1)) . "</td>";
                                         echo "<td>" . form_hidden("ids[]", $tf['id']) . " " . form_input("label[]", (!empty($tf['field_label']) ? $tf['field_label'] : $tf['field_name']), 'class="form-control"') . "</td>";
                                         echo "<td><em>{$tf['col_name']}</em></td>";
+                                        echo "<td>" . form_dropdown("field_type[]", $field_type_options, $tf['field_type']) . "</td>";
                                         echo "</tr>";
                                     }
                                     ?>

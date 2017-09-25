@@ -61,8 +61,12 @@ if (isset($public_forms)) {
      style="position :fixed; z-index :100; bottom :0;left :0; width :100%;height:auto; padding: 10px;">
     <div class="row">
         <div class="col-md-12 text-center">
+            <?= form_open("#", ['method' => 'post', 'role' => 'form','class'=>'form-vertical']) ?>
+            <div class="form-group">
+                <?= form_dropdown("form_name", $options,'', 'class="form-control" id="availablePublicForms"') ?>
+            </div>
+            <?= form_close() ?>
             <a href="#" id="closeDataAreaBtn" title="Close"><i class="fa fa-angle-double-down fa-2x text-primary"></i></a>
-            <?/*= form_dropdown("form_name", $options, 'class="form-control pull-right"') */?>
         </div>
         <div class="col-md-12" id="eventsDataArea"></div>
     </div>

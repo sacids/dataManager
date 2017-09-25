@@ -1,6 +1,7 @@
 #Allow from all
 
 SetEnv CI_ENV development
+SetEnv AD_MODE private
 
 Options +FollowSymLinks
 
