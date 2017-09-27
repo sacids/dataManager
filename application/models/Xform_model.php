@@ -497,19 +497,15 @@ class Xform_model extends CI_Model
      */
     public function create_field_name_map($details)
     {
-        if (!$this->xform_table_column_exists(self::$xform_fieldname_map_table_name, $details['col_name'])) {
-            return $this->db->insert(self::$xform_fieldname_map_table_name, $details);
-        }else{
-            //do nothing or update...???
-        }
+        return $this->db->insert(self::$xform_fieldname_map_table_name, $details);
     }
 
     public function xform_table_column_exists($table_name, $column_name)
     {
         $this->db->where("table_name", $table_name);
         $this->db->where("col_name", $column_name);
-        $this->db->limit(1);
-        return ($this->db->get(self::$xform_fieldname_map_table_name)->num_rows() > 1) ? TRUE : FALSE;
+        //$this->db->limit(1);
+        return ($this->db->get(self::$xform_fieldname_map_table_name)->num_rows() > 0) ? TRUE : FALSE;
     }
 
     /**

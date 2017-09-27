@@ -58,6 +58,11 @@ class Migration_XformMapping extends CI_Migration
                 'constraint' => 45,
                 'default'    => 'TEXT'
             ),
+            'chart_use' => array(
+                'type'       => 'TINYINT',
+                'constraint' => 1,
+                'default'    => 1
+            ),
 		);
 		$this->dbforge->add_column('xform_fieldname_map', $field);
 	}

@@ -177,6 +177,13 @@
                         <div id="last-year-submissions"></div>
                     </div>
                 </div>
+
+                <div class="panel panel-default">
+                    <!--<div class="panel-heading"><b><h3 class="text-center">Submissions Charts</h3></b></div>-->
+                    <div class="panel-body">
+                        <div id="submissions"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -265,6 +272,32 @@ log_message("debug", "Labels {$json_object}");
                 series: [{
                     name: '<?=$series['name']?>',
                     data: <?=$series['series']?>
+                }],
+                credits: {
+                    enabled: false
+                }
+            }
+        );
+
+        $('#submissions').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                colors: ['ORANGE'],//, '#910000', '#8bbc21', '#1aadce'],
+                title: {
+                    text: '<?=$current_year_report_title?>'
+                },
+                xAxis: {
+                    categories: <?=$current_year_categories?>
+                },
+                yAxis: {
+                    title: {
+                        text: 'Data submitted count'
+                    }
+                },
+                series: [{
+                    name: '<?=$current_year_series['name']?>',
+                    data: <?=$current_year_series['series']?>
                 }],
                 credits: {
                     enabled: false
