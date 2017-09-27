@@ -203,7 +203,6 @@ if (isset($map_data)) {
 }
 $json_object = json_encode($geo_points);
 
-log_message("debug", "Labels {$json_object}");
 ?>
 
 <script type="text/javascript">
@@ -262,7 +261,7 @@ log_message("debug", "Labels {$json_object}");
                     text: '<?=$report_title?>'
                 },
                 xAxis: {
-                    categories: <?=$categories?>
+                    categories: <?=$icategories?>
                 },
                 yAxis: {
                     title: {

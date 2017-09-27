@@ -1368,6 +1368,7 @@ class Xform extends CI_Controller
             $labels = $this->input->post("label[]");
             $field_types = $this->input->post("field_type[]");
             $chart_use = $this->input->post("chart_use[]");
+            $type_option = $this->input->post("type[]");
 
             if ($form) {
                 $new_perms = $this->input->post("perms");
@@ -1394,6 +1395,7 @@ class Xform extends CI_Controller
                     $mapped_fields[$i]["id"] = $ids[$i];
                     $mapped_fields[$i]["field_type"] = $field_types[$i];
                     $mapped_fields[$i]["chart_use"] = $chart_use[$i];
+                    $mapped_fields[$i]["type"] = $type_option[$i];
                     $mapped_fields[$i]["hide"] = 0;
 
                     if (!empty($hides) && in_array($ids[$i], $hides)) {

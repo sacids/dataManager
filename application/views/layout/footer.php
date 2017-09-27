@@ -11,7 +11,7 @@
 
 <script type="text/javascript">
 
-    <?php if (isset($categories)){ ?>
+    <?php if (isset($icategories)){ ?>
     $(function () {
 
         Highcharts.setOptions({
@@ -28,7 +28,7 @@
                         text: '<?php echo $series['name']; ?>'
                     },
                     xAxis: {
-                        categories: <?php echo $categories; ?>
+                        categories: <?php echo $icategories; ?>
                     },
                     yAxis: {
                         title: {

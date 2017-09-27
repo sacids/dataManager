@@ -61,7 +61,7 @@ class Migration_XformMapping extends CI_Migration
             'chart_use' => array(
                 'type'       => 'TINYINT',
                 'constraint' => 1,
-                'default'    => 1
+                'default'    => 0
             ),
 		);
 		$this->dbforge->add_column('xform_fieldname_map', $field);
@@ -71,5 +71,4 @@ class Migration_XformMapping extends CI_Migration
 	{
 
 	}
-
 }

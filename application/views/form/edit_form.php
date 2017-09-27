@@ -103,8 +103,17 @@
                                         <th class="text-center">Question/Label</th>
                                         <th class="text-center">Field Type</th>
                                         <th class="text-center">Chart use</th>
+                                        <th class="text-center">Option</th>
                                     </tr>
                                     <?php
+
+                                    $form_specific_options = [
+                                        '' => "Select Option",
+                                        'male case' => "Male Case",
+                                        'male death' => "Male Death",
+                                        'female case' => "Female Case",
+                                        'female death' => "Female Death"
+                                    ];
 
                                     $field_type_options = ['TEXT' => "Text", 'INT' => "Number",
                                         "GPS" => "GPS Location", "DATE" => "DATE", "DALILI" => 'Dalili',
@@ -121,6 +130,7 @@
                                         echo "<td>" . form_hidden("ids[]", $tf['id']) . " " . form_input("label[]", (!empty($tf['field_label']) ? $tf['field_label'] : $tf['field_name']), 'class="form-control"') . "</td>";
                                         echo "<td>" . form_dropdown("field_type[]", $field_type_options, $tf['field_type']) . "</td>";
                                         echo "<td>" . form_dropdown("chart_use[]", $use_in_chart_options, $tf['chart_use']) . "</td>";
+                                        echo "<td>" . form_dropdown("type[]", $form_specific_options, $tf['type']) . "</td>";
                                         echo "</tr>";
                                     }
                                     ?>
