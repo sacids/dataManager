@@ -13,6 +13,11 @@ class Report extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        if (!$this->ion_auth->logged_in()) {
+            $this->session->set_flashdata("message",display_message("You must be logged in","error"));
+            redirect('auth/login', 'refresh');
+            exit;
+        }
 
         $this->load->model("Report_model");
         $this->load->model("Xform_model");

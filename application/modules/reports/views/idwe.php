@@ -12,14 +12,21 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <?php
-            echo form_open();
-            echo form_dropdown("report", $reports);
-            echo form_dropdown("column", $options);
-            echo form_dropdown("group_by", $group_by_options);
-            echo form_submit("submit", "Submit");
-            echo form_close();
-            ?>
+            <div style="padding: 0 0 0 30px;">
+                <?php
+                echo form_open("", ['method' => "post", "role" => "form", "class" => "form-inline"]);
+                echo "<div class='form-group'>";
+                echo form_dropdown("report", $reports, null, 'class="form-control" style="margin-right:10px;"');
+                echo "</div><div class='form-group'>";
+                echo form_dropdown("column", $options, null, 'class="form-control" style="margin-right:10px;"');
+                echo "</div><div class='form-group'>";
+                echo form_dropdown("group_by", $group_by_options, null, 'class="form-control" style="margin-right:10px;"');
+                echo "</div><div class='form-group'>";
+                echo form_submit("submit", "Submit", 'class="btn btn-primary"');
+                echo "</div>";
+                echo form_close();
+                ?>
+            </div>
             <div id='idwe-chart' class="" style="min-height: 600px;"></div>
         </div>
     </div>
