@@ -10,15 +10,15 @@
 
 class Welcome_test extends TestCase
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-	public function test_index()
+    public function test_index()
 	{
-		$output = $this->request('GET', 'welcome/index');
-		$this->assertContains('<title>AfyaData - Taarifa kwa wakati!</title>', $output);
+        $output = $this->request('GET', 'welcome/index');
+        $this->assertContains('<title>AfyaData - Taarifa kwa wakati!</title>', $output);
 	}
 
 	public function test_method_404()
