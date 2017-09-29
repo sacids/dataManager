@@ -1326,16 +1326,17 @@ class Xform extends CI_Controller
         $table_fields = $this->Xform_model->find_table_columns($form->form_id);
         if (count($db_table_fields) != count($table_fields)) {
             foreach ($table_fields as $tf) {
-                $details = [
-                    "table_name" => $form->form_id,
-                    "col_name" => $tf,
-                    "field_name" => $tf,
-                    "field_label" => str_replace("_", " ", $tf)
-                ];
-                $this->Xform_model->create_field_name_map($details);
+                if (!$this->Xform_model->xform_table_column_exists($form->form_id, $tf)) {
+                    $details = [
+                        "table_name" => $form->form_id,
+                        "col_name" => $tf,
+                        "field_name" => $tf,
+                        "field_label" => str_replace("_", " ", $tf)
+                    ];
+                    $this->Xform_model->create_field_name_map($details);
+                }
             }
         }
-
         $data['table_fields'] = $this->Xform_model->get_fieldname_map($form->form_id);
         ///$data['table_fields'] = $db_table_fields;
 
@@ -1370,6 +1371,8 @@ class Xform extends CI_Controller
             $ids = $this->input->post("ids[]");
             $labels = $this->input->post("label[]");
             $field_types = $this->input->post("field_type[]");
+            $chart_use = $this->input->post("chart_use[]");
+            $type_option = $this->input->post("type[]");
 
             if ($form) {
                 $new_perms = $this->input->post("perms");
@@ -1395,6 +1398,8 @@ class Xform extends CI_Controller
                     $mapped_fields[$i]["field_label"] = $value;
                     $mapped_fields[$i]["id"] = $ids[$i];
                     $mapped_fields[$i]["field_type"] = $field_types[$i];
+                    $mapped_fields[$i]["chart_use"] = $chart_use[$i];
+                    $mapped_fields[$i]["type"] = $type_option[$i];
                     $mapped_fields[$i]["hide"] = 0;
 
                     if (!empty($hides) && in_array($ids[$i], $hides)) {
@@ -2089,8 +2094,8 @@ class Xform extends CI_Controller
             $data['map_data'] = $this->Xform_model->find_form_data_by_fields($data['form']->form_id, [$gps_latitude_column => 1, $gps_longitude_column => 1], 100);
         }
 
-        //$data['last_year_submissions'] = $submissions = $this->Xform_model->find_submissions_count_by_duration($data['form']->form_id, $date_column, "today");
-        $data['last_year_submissions'] = $submissions = $this->Xform_model->find_submissions_count_by_duration($data['form']->form_id, $date_column, "last_year");
+        $current_year_submissions = $this->Xform_model->find_submissions_count_by_duration($data['form']->form_id, $date_column, "year");
+        $submissions = $this->Xform_model->find_submissions_count_by_duration($data['form']->form_id, $date_column, "last7days");
 
         $categories = array();
         $series = array();
@@ -2105,12 +2110,26 @@ class Xform extends CI_Controller
             "name" => "Data submissions",
             "series" => str_replace('"', "", json_encode($series))
         );
-        $data['report_title'] = "Last year submissions";
+        $data['report_title'] = "Last 7 Days submissions";
 
+        $current_year_categories = array();
+        $current_year_series = array();
+        $ci = 0;
+        foreach ($current_year_submissions as $submission) {
+            $categories[$ci] = $submission->$date_column;
+            $series[$ci] = $submission->submissions_count;
+            $ci++;
+        }
+        $data['current_year_categories'] = json_encode($current_year_categories);
+        $data['current_year_series'] = array(
+            "name" => "Data submissions",
+            "series" => str_replace('"', "", json_encode($current_year_series))
+        );
+
+        $data['current_year_report_title'] = date("Y")." submissions";
 
         $data['recent_feedback'] = $this->Feedback_model->find_by_xform_id($data['form']->form_id, 10);
         $data['load_map'] = TRUE;
-
 
         $this->load->view("header", $data);
         $this->load->view("form/form_overview", $data);

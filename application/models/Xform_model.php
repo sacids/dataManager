@@ -420,7 +420,6 @@ class Xform_model extends CI_Model
      */
     public function get_graph_data($table_name, $axis_column, $function = "COUNT", $group_by_column = NULL)
     {
-
         if ($function == "COUNT") {
             $this->db->select("`{$axis_column}`, `{$group_by_column}`,COUNT(" . $axis_column . ") AS `" . strtolower($function) . "`");
 
@@ -497,19 +496,15 @@ class Xform_model extends CI_Model
      */
     public function create_field_name_map($details)
     {
-        if (!$this->xform_table_column_exists(self::$xform_fieldname_map_table_name, $details['col_name'])) {
-            return $this->db->insert(self::$xform_fieldname_map_table_name, $details);
-        }else{
-            //do nothing or update...???
-        }
+        return $this->db->insert(self::$xform_fieldname_map_table_name, $details);
     }
 
     public function xform_table_column_exists($table_name, $column_name)
     {
         $this->db->where("table_name", $table_name);
         $this->db->where("col_name", $column_name);
-        $this->db->limit(1);
-        return ($this->db->get(self::$xform_fieldname_map_table_name)->num_rows() > 1) ? TRUE : FALSE;
+        //$this->db->limit(1);
+        return ($this->db->get(self::$xform_fieldname_map_table_name)->num_rows() > 0) ? TRUE : FALSE;
     }
 
     /**
@@ -528,13 +523,18 @@ class Xform_model extends CI_Model
      *
      * @param $form_id = which is equivalent to table name
      * @param null $hide_show_status
+     * @param null $chart_use
      * @return mixed
      */
-    public function find_all_field_name_maps($form_id, $hide_show_status = NULL)
+    public function find_all_field_name_maps($form_id, $hide_show_status = NULL, $chart_use = NULL)
     {
         $this->db->where("table_name", $form_id);
         if ($hide_show_status != NULL) {
             $this->db->where("hide", $hide_show_status);
+        }
+
+        if ($chart_use != NULL) {
+            $this->db->where("chart_use", $chart_use);
         }
         return $this->db->get(self::$xform_fieldname_map_table_name)->result();
     }
@@ -639,6 +639,23 @@ class Xform_model extends CI_Model
             $this->db->group_by("MONTHNAME(`{$date_column}`)");
             $this->db->order_by("MONTHNAME(`{$date_column}`)", "ASC");
         }
+        return $this->db->get($table_name)->result();
+    }
+
+
+    public function get_count_by_columns($table_name, $count_columns, $group_by)
+    {
+        if (is_array($count_columns)) {
+        } else {
+
+            $this->db->select($group_by);
+            if ($count_columns == null) {
+                return false;
+            }
+            $this->db->select_sum($count_columns, $count_columns);
+        }
+
+        $this->db->group_by($group_by);
         return $this->db->get($table_name)->result();
     }
 }

@@ -99,24 +99,38 @@
                                 <table class="table table-responsive table-bordered table-striped">
                                     <tr>
                                         <th class="text-center">Hide</th>
-                                        <th class="text-center">Question/Label</th>
                                         <th class="text-center">Mapping To</th>
+                                        <th class="text-center">Question/Label</th>
                                         <th class="text-center">Field Type</th>
+                                        <th class="text-center">Chart use</th>
+                                        <th class="text-center">Option</th>
                                     </tr>
                                     <?php
+
+                                    $form_specific_options = [
+                                        '' => "Select Option",
+                                        'male case' => "Male Case",
+                                        'male death' => "Male Death",
+                                        'female case' => "Female Case",
+                                        'female death' => "Female Death"
+                                    ];
 
                                     $field_type_options = ['TEXT' => "Text", 'INT' => "Number",
                                         "GPS" => "GPS Location", "DATE" => "DATE", "DALILI" => 'Dalili',
                                         "LAT" => "Latitude", "LONG" => "Longitude",
-                                        "IDENTITY" => "Username/Identity","IMAGE"=>"Image"];
+                                        "IDENTITY" => "Username/Identity", "IMAGE" => "Image"];
+
+                                    $use_in_chart_options = [1 => 'Yes', 0 => 'No'];
 
 
                                     foreach ($table_fields as $tf) {
                                         echo "<tr>";
                                         echo "<td class='text-center'>" . form_checkbox("hide[]", $tf['id'], ($tf['hide'] == 1)) . "</td>";
-                                        echo "<td>" . form_hidden("ids[]", $tf['id']) . " " . form_input("label[]", (!empty($tf['field_label']) ? $tf['field_label'] : $tf['field_name']), 'class="form-control"') . "</td>";
                                         echo "<td><em>{$tf['col_name']}</em></td>";
+                                        echo "<td>" . form_hidden("ids[]", $tf['id']) . " " . form_input("label[]", (!empty($tf['field_label']) ? $tf['field_label'] : $tf['field_name']), 'class="form-control"') . "</td>";
                                         echo "<td>" . form_dropdown("field_type[]", $field_type_options, $tf['field_type']) . "</td>";
+                                        echo "<td>" . form_dropdown("chart_use[]", $use_in_chart_options, $tf['chart_use']) . "</td>";
+                                        echo "<td>" . form_dropdown("type[]", $form_specific_options, $tf['type']) . "</td>";
                                         echo "</tr>";
                                     }
                                     ?>

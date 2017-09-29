@@ -74,31 +74,31 @@ class Seeder extends CI_Controller
         $table_name = "ad_build_dalili_za_mifugo_1418895355";
 
         $sql = "CREATE TABLE IF NOT EXISTS `" . $table_name . "` (
-			  `id` int(20) UNSIGNED NOT NULL,
-			  `meta_instanceID` varchar(300) DEFAULT NULL,
-			  `meta_deviceID` varchar(300) DEFAULT NULL,
-			  `taarifa_za_awali_jina_la_mkusanyaji_taarifa` varchar(300) NOT NULL,
-			  `taarifa_za_awali_Wilaya` enum('Ngorongoro','Kibaha','Bagamoyo') NOT NULL,
-			  `taarifa_za_awali_Kijiji` varchar(300) NOT NULL,
-			  `taarifa_za_awali_kitongoji` varchar(300) DEFAULT NULL,
-			  `taarifa_za_awali_tarehe_kukusanya_taarifa` date NOT NULL,
-			  `dalili_jina_boma` varchar(300) DEFAULT NULL,
-			  `dalili_aina_mifugo_dalili` enum('Ng''ombe','Mbuzi','Kondoo','Punda','Mbwa','Kuku') DEFAULT NULL,
-			  `dalili_aina_nyingine_mfugo` varchar(300) DEFAULT NULL,
-			  `dalili_zilizoonekana` text,
-			  `dalili_zingine` varchar(300) DEFAULT NULL,
-			  `umri_idadi_Idadi_dalili_wadogo` int(20) NOT NULL,
-			  `umri_idadi_Idadi_dalili_wakubwa` int(20) NOT NULL,
-			  `umri_idadi_idadi_vifo_wadogo` int(20) NOT NULL,
-			  `umri_idadi_Idadi_vifo_wakubwa` int(20) NOT NULL,
-			  `GPS_picha_ugonjwa_ugonjwa_unaodhaniwa` varchar(300) DEFAULT NULL,
-			  `GPS_picha_ugonjwa_picture` varchar(300) DEFAULT NULL,
-			  `GPS_picha_ugonjwa_GPS` varchar(150) NOT NULL,
-			  `GPS_picha_ugonjwa_GPS_point` point NOT NULL,
-			  `GPS_picha_ugonjwa_GPS_lat` decimal(38,10) NOT NULL,
-			  `GPS_picha_ugonjwa_GPS_lng` decimal(38,10) NOT NULL,
-			  `GPS_picha_ugonjwa_GPS_acc` decimal(38,10) NOT NULL,
-			  `GPS_picha_ugonjwa_GPS_alt` decimal(38,10) NOT NULL
+			  `id` INT(20) UNSIGNED NOT NULL,
+			  `meta_instanceID` VARCHAR(300) DEFAULT NULL,
+			  `meta_deviceID` VARCHAR(300) DEFAULT NULL,
+			  `taarifa_za_awali_jina_la_mkusanyaji_taarifa` VARCHAR(300) NOT NULL,
+			  `taarifa_za_awali_Wilaya` ENUM('Ngorongoro','Kibaha','Bagamoyo') NOT NULL,
+			  `taarifa_za_awali_Kijiji` VARCHAR(300) NOT NULL,
+			  `taarifa_za_awali_kitongoji` VARCHAR(300) DEFAULT NULL,
+			  `taarifa_za_awali_tarehe_kukusanya_taarifa` DATE NOT NULL,
+			  `dalili_jina_boma` VARCHAR(300) DEFAULT NULL,
+			  `dalili_aina_mifugo_dalili` ENUM('Ng''ombe','Mbuzi','Kondoo','Punda','Mbwa','Kuku') DEFAULT NULL,
+			  `dalili_aina_nyingine_mfugo` VARCHAR(300) DEFAULT NULL,
+			  `dalili_zilizoonekana` TEXT,
+			  `dalili_zingine` VARCHAR(300) DEFAULT NULL,
+			  `umri_idadi_Idadi_dalili_wadogo` INT(20) NOT NULL,
+			  `umri_idadi_Idadi_dalili_wakubwa` INT(20) NOT NULL,
+			  `umri_idadi_idadi_vifo_wadogo` INT(20) NOT NULL,
+			  `umri_idadi_Idadi_vifo_wakubwa` INT(20) NOT NULL,
+			  `GPS_picha_ugonjwa_ugonjwa_unaodhaniwa` VARCHAR(300) DEFAULT NULL,
+			  `GPS_picha_ugonjwa_picture` VARCHAR(300) DEFAULT NULL,
+			  `GPS_picha_ugonjwa_GPS` VARCHAR(150) NOT NULL,
+			  `GPS_picha_ugonjwa_GPS_point` POINT NOT NULL,
+			  `GPS_picha_ugonjwa_GPS_lat` DECIMAL(38,10) NOT NULL,
+			  `GPS_picha_ugonjwa_GPS_lng` DECIMAL(38,10) NOT NULL,
+			  `GPS_picha_ugonjwa_GPS_acc` DECIMAL(38,10) NOT NULL,
+			  `GPS_picha_ugonjwa_GPS_alt` DECIMAL(38,10) NOT NULL
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
         $this->db->query($sql);
@@ -173,34 +173,34 @@ class Seeder extends CI_Controller
         $table_name = "ad_build_dalili_za_binadamu_1418894655";
 
         $sql = "CREATE TABLE IF NOT EXISTS `" . $table_name . "` (
-			  `id` int(20) UNSIGNED NOT NULL,
-			  `meta_instanceID` varchar(300) DEFAULT NULL,
-			  `meta_deviceID` varchar(300) DEFAULT NULL,
-			  `taarifa_za_awali_jina_la_mkusanyaji_taarifa` varchar(300) NOT NULL,
-			  `taarifa_za_awali_wilaya` enum('Ngorongoro','Kibaha','Bagamoyo') NOT NULL,
-			  `taarifa_za_awali_kijiji` varchar(300) NOT NULL,
-			  `taarifa_za_awali_kitongoji` varchar(300) DEFAULT NULL,
-			  `taarifa_za_awali_tarehe_ya_ukusanyaji_taarifa` date NOT NULL,
-			  `dalili_jinsia` enum('mme','mke') NOT NULL,
-			  `dalili_zinazoonesha` text,
-			  `dalili_zingine` varchar(300) DEFAULT NULL,
-			  `Umri_idadi_vifo_umri` enum('Chini ya miaka 5','6 - 18','19 - 25','26 - 35','36 - 45','56 - 65','Zaidi ya 65') NOT NULL,
-			  `Umri_idadi_vifo_Idadi_dalili_chini_miaka_5` int(20) NOT NULL,
-			  `Umri_idadi_vifo_idadi_dalili_watoto` int(20) NOT NULL,
-			  `Umri_idadi_vifo_Idadi_dalili_vijana` int(20) NOT NULL,
-			  `Umri_idadi_vifo_Idadi_dalili_wazee` int(20) NOT NULL,
-			  `Umri_idadi_vifo_idadi_vifo_chini_5` int(20) NOT NULL,
-			  `Umri_idadi_vifo_idadi_vifo_watoto` int(20) NOT NULL,
-			  `Umri_idadi_vifo_idadi_vifo_vijana` int(20) NOT NULL,
-			  `Umri_idadi_vifo_Idadi_vifo_wazee` int(20) NOT NULL,
-			  `GPS_picha_ugonjwa_ugonjwa_unaodhaniwa` varchar(300) DEFAULT NULL,
-			  `GPS_picha_ugonjwa_picture` varchar(300) DEFAULT NULL,
-			  `GPS_picha_ugonjwa_GPS` varchar(150) NOT NULL,
-			  `GPS_picha_ugonjwa_GPS_point` point NOT NULL,
-			  `GPS_picha_ugonjwa_GPS_lat` decimal(38,10) NOT NULL,
-			  `GPS_picha_ugonjwa_GPS_lng` decimal(38,10) NOT NULL,
-			  `GPS_picha_ugonjwa_GPS_acc` decimal(38,10) NOT NULL,
-			  `GPS_picha_ugonjwa_GPS_alt` decimal(38,10) NOT NULL
+			  `id` INT(20) UNSIGNED NOT NULL,
+			  `meta_instanceID` VARCHAR(300) DEFAULT NULL,
+			  `meta_deviceID` VARCHAR(300) DEFAULT NULL,
+			  `taarifa_za_awali_jina_la_mkusanyaji_taarifa` VARCHAR(300) NOT NULL,
+			  `taarifa_za_awali_wilaya` ENUM('Ngorongoro','Kibaha','Bagamoyo') NOT NULL,
+			  `taarifa_za_awali_kijiji` VARCHAR(300) NOT NULL,
+			  `taarifa_za_awali_kitongoji` VARCHAR(300) DEFAULT NULL,
+			  `taarifa_za_awali_tarehe_ya_ukusanyaji_taarifa` DATE NOT NULL,
+			  `dalili_jinsia` ENUM('mme','mke') NOT NULL,
+			  `dalili_zinazoonesha` TEXT,
+			  `dalili_zingine` VARCHAR(300) DEFAULT NULL,
+			  `Umri_idadi_vifo_umri` ENUM('Chini ya miaka 5','6 - 18','19 - 25','26 - 35','36 - 45','56 - 65','Zaidi ya 65') NOT NULL,
+			  `Umri_idadi_vifo_Idadi_dalili_chini_miaka_5` INT(20) NOT NULL,
+			  `Umri_idadi_vifo_idadi_dalili_watoto` INT(20) NOT NULL,
+			  `Umri_idadi_vifo_Idadi_dalili_vijana` INT(20) NOT NULL,
+			  `Umri_idadi_vifo_Idadi_dalili_wazee` INT(20) NOT NULL,
+			  `Umri_idadi_vifo_idadi_vifo_chini_5` INT(20) NOT NULL,
+			  `Umri_idadi_vifo_idadi_vifo_watoto` INT(20) NOT NULL,
+			  `Umri_idadi_vifo_idadi_vifo_vijana` INT(20) NOT NULL,
+			  `Umri_idadi_vifo_Idadi_vifo_wazee` INT(20) NOT NULL,
+			  `GPS_picha_ugonjwa_ugonjwa_unaodhaniwa` VARCHAR(300) DEFAULT NULL,
+			  `GPS_picha_ugonjwa_picture` VARCHAR(300) DEFAULT NULL,
+			  `GPS_picha_ugonjwa_GPS` VARCHAR(150) NOT NULL,
+			  `GPS_picha_ugonjwa_GPS_point` POINT NOT NULL,
+			  `GPS_picha_ugonjwa_GPS_lat` DECIMAL(38,10) NOT NULL,
+			  `GPS_picha_ugonjwa_GPS_lng` DECIMAL(38,10) NOT NULL,
+			  `GPS_picha_ugonjwa_GPS_acc` DECIMAL(38,10) NOT NULL,
+			  `GPS_picha_ugonjwa_GPS_alt` DECIMAL(38,10) NOT NULL
 			) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
         $this->db->query($sql);
@@ -373,34 +373,33 @@ class Seeder extends CI_Controller
         echo PHP_EOL;
     }
 
-
     function seed_idwe($limit = 50)
     {
-
-        $table = "ad_build_IDWE_Zanzibar_14053392668";
+        echo "Seeding {$limit} entries\n";
+        $table = "ad_build_IDWE_Zanzibar_1506336659";
 
         $table_fields = $this->Xform_model->find_table_columns($table);
 
-        for ($i = 0; $i < $limit; $i++) {
+        for ($i = 0; $i <= $limit; $i++) {
+
+            $year_date = date("Y-m-d", date_timestamp_get($this->faker->dateTimeBetween('-6 months', 'now')));
+            $date = new DateTime($year_date);
+            $week_number = $date->format('W');
+
             $data_array = [
                 "meta_instanceID" => uniqid(),
-                "_xf_20de688d974183449850b0d32a15de47" => $this->faker->numberBetween(25, 36),
-                "_xf_95b360beefc40c13b168164f302de79d" => $this->faker->date("Y-m-d")
+                "_xf_20de688d974183449850b0d32a15de47" => $week_number,
+                "_xf_95b360beefc40c13b168164f302de79d" => $year_date
             ];
-
-            for ($i = 4; $i <= (count($table_fields) - 8); $i++) {
-                $data_array[$table_fields[$i]] = mt_rand(0, 3);
+            for ($j = 4; $j <= (count($table_fields) - 7); $j++) {
+                $data_array[$table_fields[$j]] = mt_rand(0, 20);
             }
 
-
-            $data_array['meta_instanceName'] = 'IDWE: ' . $this->faker->numberBetween(25,36);
+            $data_array['meta_instanceName'] = $this->faker->name();
             $data_array['meta_start'] = $this->faker->date("Y-m-d H:i:s");
             $data_array['meta_end'] = $this->faker->date("Y-m-d H:i:s");
-            $data_array['meta_username'] = "255717705746";
-
+            $data_array['meta_username'] = $this->faker->userName;
             $this->db->insert($table, $data_array);
-            print_r($data_array);
         }
-
     }
 }

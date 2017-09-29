@@ -54,6 +54,7 @@ require dirname(__FILE__).'/Base.php';
  * @property Alert_model $Alert_model
  * @property Barcode $barcode
  * @property Ussd_model $Ussd_model
+ * @property Report_model $Report_model
  */
 class MX_Controller 
 {

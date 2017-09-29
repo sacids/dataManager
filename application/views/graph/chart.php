@@ -55,7 +55,7 @@
             </div>
             <div id="graph-content">
                 <!--TODO Insert graph code here -->
-                <?php if (empty($categories)) {
+                <?php if (empty($icategories)) {
                     $message = "<p class='text-center'>Select <strong>columns</strong> you want to plot against a group column and function you want to use, to see a chart here</p>";
                     echo display_message($message, "info");
                 }

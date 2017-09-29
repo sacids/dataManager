@@ -45,6 +45,8 @@
 class Form_Visualization extends CI_Controller
 {
 
+    private $data;
+
     public function __construct()
     {
         parent::__construct();
@@ -64,6 +66,7 @@ class Form_Visualization extends CI_Controller
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 
         //$this->output->enable_profiler(TRUE);
+        $this->data['title'] = "Data Visualizations";
     }
 
     public function index()

@@ -9,6 +9,7 @@ services:
 env:
   #- CI_ENV=development
   - CI_ENV=testing
+  - AD_MODE=public
   #- CI_ENV=production
 
 addons:
