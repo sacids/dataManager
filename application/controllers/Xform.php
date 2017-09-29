@@ -1553,11 +1553,103 @@ class Xform extends CI_Controller
         }
     }
 
+    /**
+     * Author: Renfrid
+     * Export form data to excel
+     *
+     * @param null $form_id
+     */
+    function excel_export_form_data($form_id = NULL)
+    {
+        //get form data
+        if ($this->session->userdata("form_filters")) {
+            $form_filters = $this->session->userdata("form_filters");
+            $serial = 0;
+            foreach ($form_filters as $column_name) {
+                $inc = 1;
+                $column_title = $this->getColumnLetter($serial);
+                $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
+                $serial++;
+            }
+            $form_data = $this->Xform_model->find_form_data_by_fields($form_id, $form_filters, 5000);
+        } else {
+            //table fields
+            $table_fields = $this->Xform_model->find_table_columns($form_id);
+            //mapping field
+            $field_maps = $this->_get_mapped_table_column_name($form_id);
+            $serial = 0;
+            foreach ($table_fields as $key => $column) {
+
+                $inc = 1;
+                $column_title = $this->getColumnLetter($serial);
+
+                if (array_key_exists($column, $field_maps)) {
+                    $column_name = $field_maps[$column];
+                } else {
+                    $column_name = $column;
+                }
+                $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
+                $serial++;
+            }
+            $form_data = $this->Xform_model->find_form_data($form_id);
+        }
+
+        $inc = 2;
+        foreach ($form_data as $data) {
+            $serial = 0;
+            foreach ($data as $key => $entry) {
+                $column_title = $this->getColumnLetter($serial);
+                if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                    $column_value = '';
+                } else {
+                    $column_value = $entry;
+                }
+
+                $this->objPHPExcel->getActiveSheet()->setCellValue($column_title . $inc, $column_value);
+                $serial++;
+            }
+            $inc++;
+        }
+
+        //name the worksheet
+        $this->objPHPExcel->getActiveSheet()->setTitle("Form Data");
+
+        $filename = "Exported_" . $form_id . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
+
+        //header
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        header("Cache-Control: no-store, no-cache, must-revalidate");
+        header("Cache-Control: post-check=0, pre-check=0", FALSE);
+        header("Pragma: no-cache");
+        header('Content-type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+
+        $objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');
+        ob_end_clean();
+
+        $objWriter->save('php://output');
+    }
 
     //exporting Zanzibar IDWE
-    public function idwe_export($week_number = 21, $form_id = 'ad_build_IDWE_Zanzibar_1506336659')
+    public function export_IDWE($form_id = null)
     {
-        $last_column = $this->columnLetter(135);
+        //form details
+        $this->model->set_table('xforms');
+        $xform = $this->model->get_by('form_id', $form_id);
+
+        //check if week number selected
+        if ($this->input->post('week') == null) {
+            redirect('xform/form_data/' . $xform->id, display_message('You should select week number', 'danger'));
+        }
+
+        //week number
+        $week_number = $this->input->post('week');
+
+        //table fields
+        $table_fields = $this->Xform_model->find_table_columns($form_id);
+        $columns = count($table_fields);
+
+        $last_column = $this->columnLetter($columns);
 
         //variable html1
         $html1 = '';
@@ -1605,28 +1697,29 @@ class Xform extends CI_Controller
         $this->objPHPExcel->getActiveSheet()->getStyle('D3')->getAlignment()->setTextRotation(90);
 
         $diseases = array(
-            'AFP',
-            'Anthrax',
-            'Blood Diarhea',
+            'Malaria',
             'Cholera',
-            'CS Meningitis',
-            'Human Influenza Sari',
-            'Keratoconjuctivitis',
+            'Blood Diarhea',
+            'Animal Bites',
             'Measles',
+            'CS Meningitis',
+            'Yellow Fever',
+            'AFP',
+            'Dengue Fever',
             'Neonatal Tetanus',
             'Plague',
             'Rabies',
-            'Animal Bites',
             'Small Pox',
-            'Dengue Fever',
+            'Trypanosomiasis',
             'Viral Haemorrhagic Fevers',
-            'Yellow Fever',
-            'Malaria'
+            'Keratoconjuctivitis',
+            'Human Influenza Sari',
+            'Anthrax'
         );
 
         $d = 0;
 
-        for ($i = 4, $c = 0; $i < 140; $i++, $c++) {
+        for ($i = 4, $c = 0; $i < 148; $i++, $c++) {
 
             if (!($c % 8)) {
 
@@ -1669,6 +1762,7 @@ class Xform extends CI_Controller
 
         // get values from DB
         $this->model->set_table($form_id);
+        //$data = $this->model->as_array()->get_all();
         $data = $this->model->as_array()->get_many_by('_xf_20de688d974183449850b0d32a15de47', $week_number);
 
         //echo '<pre>';
@@ -1680,9 +1774,10 @@ class Xform extends CI_Controller
             $c = 0;
             $tmp = array();
             foreach ($row as $k => $v) {
+
                 if ($c == 4) {
                     array_push($tmp, $sn++);
-                    array_push($tmp, $v->meta_username);
+                    array_push($tmp, "HF");
                 }
 
                 if (substr($k, 0, 4) == '_xf_') array_push($tmp, $v);
@@ -1753,93 +1848,6 @@ class Xform extends CI_Controller
         $objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');
         $objWriter->save('php://output');
         exit;
-    }
-
-    //getColumnLetter
-    function columnLetter($n)
-    {
-        for ($r = ""; $n >= 0; $n = intval($n / 26) - 1)
-            $r = chr($n % 26 + 0x41) . $r;
-        return $r;
-    }
-
-
-    /**
-     * Author: Renfrid
-     * Export form data to excel
-     *
-     * @param null $form_id
-     */
-    function excel_export_form_data($form_id = NULL)
-    {
-        $this->load->library('excel');
-        //get form data
-        if ($this->session->userdata("form_filters")) {
-            $form_filters = $this->session->userdata("form_filters");
-            $serial = 0;
-            foreach ($form_filters as $column_name) {
-                $inc = 1;
-                $column_title = $this->getColumnLetter($serial);
-                $this->excel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
-                $serial++;
-            }
-            $form_data = $this->Xform_model->find_form_data_by_fields($form_id, $form_filters, 5000);
-        } else {
-            //table fields
-            $table_fields = $this->Xform_model->find_table_columns($form_id);
-            //mapping field
-            $field_maps = $this->_get_mapped_table_column_name($form_id);
-            $serial = 0;
-            foreach ($table_fields as $key => $column) {
-
-                $inc = 1;
-                $column_title = $this->getColumnLetter($serial);
-
-                if (array_key_exists($column, $field_maps)) {
-                    $column_name = $field_maps[$column];
-                } else {
-                    $column_name = $column;
-                }
-                $this->excel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
-                $serial++;
-            }
-            $form_data = $this->Xform_model->find_form_data($form_id);
-        }
-
-        $inc = 2;
-        foreach ($form_data as $data) {
-            $serial = 0;
-            foreach ($data as $key => $entry) {
-                $column_title = $this->getColumnLetter($serial);
-                if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                    $column_value = '';
-                } else {
-                    $column_value = $entry;
-                }
-
-                $this->excel->getActiveSheet()->setCellValue($column_title . $inc, $column_value);
-                $serial++;
-            }
-            $inc++;
-        }
-
-        //name the worksheet
-        $this->excel->getActiveSheet()->setTitle("Form Data");
-
-        $filename = "Exported_" . $form_id . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
-
-        //header
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", FALSE);
-        header("Pragma: no-cache");
-        header('Content-type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
-        ob_end_clean();
-
-        $objWriter->save('php://output');
     }
 
     /**
@@ -2033,6 +2041,14 @@ class Xform extends CI_Controller
         return $prefix;
     }
 
+    //getColumnLetter
+    function columnLetter($n)
+    {
+        for ($r = ""; $n >= 0; $n = intval($n / 26) - 1)
+            $r = chr($n % 26 + 0x41) . $r;
+        return $r;
+    }
+
     public function form_overview($xform_id)
     {
         $data['form'] = $this->Xform_model->find_by_xform_id($xform_id);
@@ -2126,7 +2142,7 @@ class Xform extends CI_Controller
             "series" => str_replace('"', "", json_encode($current_year_series))
         );
 
-        $data['current_year_report_title'] = date("Y")." submissions";
+        $data['current_year_report_title'] = date("Y") . " submissions";
 
         $data['recent_feedback'] = $this->Feedback_model->find_by_xform_id($data['form']->form_id, 10);
         $data['load_map'] = TRUE;

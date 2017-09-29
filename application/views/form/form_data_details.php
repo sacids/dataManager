@@ -45,18 +45,48 @@
 <div class="container body-content">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <div class="row" style="margin-bottom: 10px;">
-                <h3><?= $title ?> - Form data collected
-                    <span class="pull-right">
-                    <button type="button" class="btn btn-link" data-toggle="modal"
-                            data-target="#myModal">Set Filters</button></span>
-                </h3>
-			<span class="pull-right">
-				<?php echo anchor("xform/excel_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_drive-ms-excel.png" height="25"/>') ?>
-                <?php echo anchor("form_visualization/chart/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_office-25.png" height="25"/>') ?>
-                <?php echo anchor("form_visualization/map/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_location.png" height="25"/>') ?>
-			</span>
+            <div id="header-title">
+                <h3 class="title"><?= $title ?> - Form data collected</h3>
             </div>
+
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active"><?= $title ?></li>
+            </ol>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="pull-left">
+                        <?php echo form_open("xform/export_IDWE/" . $form_id, 'class="form-inline" role="form"'); ?>
+                        <div class="form-group">
+                            <?php
+                            $week_options = array();
+                            for ($i = 1; $i <= 36; $i++) {
+                                $week_options[$i] = $i;
+                            }
+                            $week_options = array('' => 'Week Number') + $week_options;
+                            echo form_dropdown('week', $week_options, set_value('week'), 'class="form-control"'); ?>
+                        </div>
+
+                        <div class="form-group">
+                            <?php echo form_submit("export", "Export", 'class="btn btn-primary"'); ?>
+                        </div>
+                        <?php echo form_close(); ?>
+                    </div>
+
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-link" data-toggle="modal"
+                                data-target="#myModal">Set Filters
+                        </button>
+
+                        <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_drive-ms-excel.png" height="25"/>') ?>
+                        <?php echo anchor("form_visualization/chart/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_office-25.png" height="25"/>') ?>
+                        <?php echo anchor("form_visualization/map/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_location.png" height="25"/>') ?>
+                    </div>
+                </div>
+            </div>
+
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
@@ -155,23 +185,23 @@
             $("#theModal").modal("show");
         };
         var MyHtml = '<div id="theModal" class="modal fade">' +
-                ' <div class="modal-dialog ">' +
-                '<div class="modal-content">' +
-                ' <div class="modal-header">' +
-                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-                '<h4 class="modal-title">' + imageTitle + '</h4>' +
-                '</div>' +
-                '<div class="modal-body">' +
-                '  <img not-to-enlarge="true" class="img-responsive" + src=""alt="...">' +
-                '</div>' +
-                '<div class="modal-footer">' +
-                '<button type="button" class="btn btn-default" data-dismiss="modal">' +
-                'Close' +
-                '</button>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
+            ' <div class="modal-dialog ">' +
+            '<div class="modal-content">' +
+            ' <div class="modal-header">' +
+            '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+            '<h4 class="modal-title">' + imageTitle + '</h4>' +
+            '</div>' +
+            '<div class="modal-body">' +
+            '  <img not-to-enlarge="true" class="img-responsive" + src=""alt="...">' +
+            '</div>' +
+            '<div class="modal-footer">' +
+            '<button type="button" class="btn btn-default" data-dismiss="modal">' +
+            'Close' +
+            '</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
         $("div.body-content").append(MyHtml);
         $("img[not-to-enlarge!=true]").click(showModal);
         $("img[not-to-enlarge!=true]").css("cursor", "pointer");
