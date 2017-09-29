@@ -1639,7 +1639,8 @@ class Xform extends CI_Controller
 
         //check if week number selected
         if ($this->input->post('week') == null) {
-            redirect('xform/form_data/' . $xform->id, display_message('You should select week number', 'danger'));
+            $this->session->set_flashdata('message', display_message('You should select week number', 'danger'));
+            redirect('xform/form_data/' . $xform->id, 'refresh');
         }
 
         //week number
@@ -1699,7 +1700,7 @@ class Xform extends CI_Controller
         $diseases = array(
             'Malaria',
             'Cholera',
-            'Blood Diarhea',
+            'Bloody Diarrhoea',
             'Animal Bites',
             'Measles',
             'CS Meningitis',
@@ -1722,7 +1723,6 @@ class Xform extends CI_Controller
         for ($i = 4, $c = 0; $i < 148; $i++, $c++) {
 
             if (!($c % 8)) {
-
                 $r = $this->columnLetter($i) . '3:' . $this->columnLetter($i + 7) . '3';
                 $this->objPHPExcel->getActiveSheet()->mergeCells($r);
                 $this->objPHPExcel->getActiveSheet()->setCellValue($this->columnLetter($i) . '3', $diseases[$d]);
@@ -1774,10 +1774,9 @@ class Xform extends CI_Controller
             $c = 0;
             $tmp = array();
             foreach ($row as $k => $v) {
-
                 if ($c == 4) {
                     array_push($tmp, $sn++);
-                    array_push($tmp, "HF");
+                    array_push($tmp, $row['meta_username']);
                 }
 
                 if (substr($k, 0, 4) == '_xf_') array_push($tmp, $v);
@@ -1793,7 +1792,7 @@ class Xform extends CI_Controller
 
 
         // set headers
-        $header = 'a3:ei6';
+        $header = 'a3:er6';
         $header_style = array(
             'fill' => array(
                 'type' => PHPExcel_Style_Fill::FILL_SOLID,
@@ -1820,14 +1819,14 @@ class Xform extends CI_Controller
             )
         );
         $c = sizeof($idwe_data) + 6;
-        $range = 'a3:ei' . $c;
+        $range = 'a3:er' . $c;
         $this->objPHPExcel->getActiveSheet()->getStyle($range)->applyFromArray($borders);
 
 
         // Rename worksheet
         $this->objPHPExcel->getActiveSheet()->setTitle('FORM REPORT');
 
-        $filename = "Exported_" . $form_id . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
+        $filename = "WEEK_" . $week_number . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
 
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $this->objPHPExcel->setActiveSheetIndex(0);

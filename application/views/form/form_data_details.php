@@ -79,7 +79,6 @@
                         <button type="button" class="btn btn-link" data-toggle="modal"
                                 data-target="#myModal">Set Filters
                         </button>
-
                         <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_drive-ms-excel.png" height="25"/>') ?>
                         <?php echo anchor("form_visualization/chart/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_office-25.png" height="25"/>') ?>
                         <?php echo anchor("form_visualization/map/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_location.png" height="25"/>') ?>
@@ -87,12 +86,17 @@
                 </div>
             </div>
 
-            <?php
-            if ($this->session->flashdata('message') != '') {
-                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-            }
-            echo validation_errors();
-            ?>
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php
+                    if ($this->session->flashdata('message') != '') {
+                        echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
+                    }
+                    echo validation_errors();
+                    ?>
+                </div>
+            </div><!--end of row -->
+
             <div style="overflow-x: scroll;">
                 <?php echo form_open("xform/delete_entry/" . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>
                 <?php echo form_hidden("table_name", $form_id); ?>
