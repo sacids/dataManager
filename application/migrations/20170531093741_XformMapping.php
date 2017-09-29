@@ -65,7 +65,8 @@ class Migration_XformMapping extends CI_Migration
             ),
 		);
 		$this->dbforge->add_column('xform_fieldname_map', $field);
-	}
+        $this->db->query("CREATE TABLE `ad_build_AfyaData_Demo_1500530768`( `id` int(20) UNSIGNED NOT NULL, `meta_instanceID` varchar(300) DEFAULT NULL, `_xf_72485ff63b11061b01c236b9c62b58bd` varchar(300) DEFAULT NULL, `_xf_300dd0bbe98836946e681905250e2390` text, `_xf_742d9217ff0a76a9689033e1334f681a` enum('1','0') NOT NULL DEFAULT '0', `_xf_0be9ec0d9e25d39c69153d6885e33100` enum('1','0') NOT NULL DEFAULT '0', `_xf_2447a0936af14f6ca2034c51ffe43285` enum('1','0') NOT NULL DEFAULT '0', `_xf_cccd8fdfcdf5157f6ac8d243e4584e51` enum('1','0') NOT NULL DEFAULT '0', `_xf_83c8fd1cbc52bbe2d73240654838e957` varchar(300) DEFAULT NULL, `_xf_c6a6184e0be6372480cae841cc28dba4` varchar(150) DEFAULT NULL, `_xf_c6a6184e0be6372480cae841cc28dba4_point` point DEFAULT NULL, `_xf_c6a6184e0be6372480cae841cc28dba4_lat` decimal(38,10) DEFAULT NULL, `_xf_c6a6184e0be6372480cae841cc28dba4_lng` decimal(38,10) DEFAULT NULL, `_xf_c6a6184e0be6372480cae841cc28dba4_acc` decimal(38,10) DEFAULT NULL, `_xf_c6a6184e0be6372480cae841cc28dba4_alt` decimal(38,10) DEFAULT NULL, `meta_instanceName` varchar(300) DEFAULT NULL, `meta_start` datetime DEFAULT NULL, `meta_end` datetime DEFAULT NULL, `meta_username` varchar(300) DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
+    }
 
 	public function down()
 	{
