@@ -19,6 +19,7 @@
   "require-dev": {
     "mikey179/vfsStream": "1.1.*",
     "fzaninotto/Faker": "dev-master",
-    "kenjis/ci-phpunit-test": "^0.13.0"
+    "kenjis/ci-phpunit-test": "^0.13.0",
+    "phpoffice/phpexcel": "1.8.1"
   }
 }

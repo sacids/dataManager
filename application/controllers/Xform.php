@@ -68,6 +68,8 @@ class Xform extends CI_Controller
     private $user_submitting_feedback_id;
     private $sender; //Object
 
+    private $objPHPExcel;
+
     public function __construct()
     {
         parent::__construct();
@@ -87,6 +89,8 @@ class Xform extends CI_Controller
         $this->load->library('xform_comm');
         $this->user_id = $this->session->userdata("user_id");
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><i class="fa fa-warning"></i>.', '</div>');
+
+        $this->objPHPExcel = new PHPExcel();
     }
 
     public function index()
@@ -1543,6 +1547,217 @@ class Xform extends CI_Controller
             redirect("projects/lists");
         }
     }
+
+
+    //exporting Zanzibar IDWE
+    public function idwe_export($week_number = 21, $form_id = 'ad_build_IDWE_Zanzibar_1506336659')
+    {
+        $last_column = $this->columnLetter(135);
+
+        //variable html1
+        $html1 = '';
+
+        // Set some content to print
+        $html1 .= "INFECTIOUS DISEASE WEEK ENDING REPORT (IDWE)\r";
+        $html1 .= $week_number . "th WK  BY HEALTH FACILITIES AND DISTRICTS IN ZANZIBAR.\r";
+
+        // Set document properties
+        $this->objPHPExcel->getProperties()
+            ->setCreator("Sacids")
+            ->setLastModifiedBy("Renfrid")
+            ->setTitle("AfyaData IDWE Report")
+            ->setSubject("Zanzibar IDWE")
+            ->setDescription("Infectious Disease Week Ending Report")
+            ->setKeywords("IDWE, Zanzibar")
+            ->setCategory("IDWE REPORT");
+
+        //activate worksheet number 1
+        $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', $html1);
+        $this->objPHPExcel->setActiveSheetIndex(0)->mergeCells('A1:' . $last_column . '1');
+        $this->objPHPExcel->getActiveSheet()->getRowDimension('1')->setRowHeight(50);
+
+        $this->objPHPExcel->getActiveSheet()->getStyle('A1')->applyFromArray(
+            array('font' => array("bold" => true))
+        );
+        $this->objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setWrapText(true);
+
+
+        //Header Columns
+        $this->objPHPExcel->getActiveSheet()->mergeCells('A3:A6');
+        $this->objPHPExcel->getActiveSheet()->setCellValue('A3', 'Week Number');
+        $this->objPHPExcel->getActiveSheet()->getStyle('A3')->getAlignment()->setTextRotation(90);
+
+        $this->objPHPExcel->getActiveSheet()->mergeCells('B3:B6');
+        $this->objPHPExcel->getActiveSheet()->setCellValue('B3', 'Year');
+        $this->objPHPExcel->getActiveSheet()->getStyle('B3')->getAlignment()->setTextRotation(90);
+
+        $this->objPHPExcel->getActiveSheet()->mergeCells('C3:C6');
+        $this->objPHPExcel->getActiveSheet()->setCellValue('C3', 'S/N');
+        $this->objPHPExcel->getActiveSheet()->freezePane('E7');
+
+        $this->objPHPExcel->getActiveSheet()->mergeCells('D3:D6');
+        $this->objPHPExcel->getActiveSheet()->setCellValue('D3', 'Health Facilities');
+        $this->objPHPExcel->getActiveSheet()->getStyle('D3')->getAlignment()->setTextRotation(90);
+
+        $diseases = array(
+            'AFP',
+            'Anthrax',
+            'Blood Diarhea',
+            'Cholera',
+            'CS Meningitis',
+            'Human Influenza Sari',
+            'Keratoconjuctivitis',
+            'Measles',
+            'Neonatal Tetanus',
+            'Plague',
+            'Rabies',
+            'Animal Bites',
+            'Small Pox',
+            'Dengue Fever',
+            'Viral Haemorrhagic Fevers',
+            'Yellow Fever',
+            'Malaria'
+        );
+
+        $d = 0;
+
+        for ($i = 4, $c = 0; $i < 140; $i++, $c++) {
+
+            if (!($c % 8)) {
+
+                $r = $this->columnLetter($i) . '3:' . $this->columnLetter($i + 7) . '3';
+                $this->objPHPExcel->getActiveSheet()->mergeCells($r);
+                $this->objPHPExcel->getActiveSheet()->setCellValue($this->columnLetter($i) . '3', $diseases[$d]);
+                //echo " " . $c . ":" . $d;
+                $d++;
+
+                if (!($c % 4)) {
+
+                    for ($k = 0; $k < 2; $k++) {
+                        $r = $this->columnLetter($i + $k * 4) . '4:' . $this->columnLetter($i + $k * 4 + 3) . '4';
+                        $this->objPHPExcel->getActiveSheet()->mergeCells($r);
+                        $v = ($k % 2) ? ' > 5 yrs ' : ' < 5 yrs';
+                        $this->objPHPExcel->getActiveSheet()->setCellValue($this->columnLetter($i + $k * 4) . '4', $v);
+
+                    }
+                    //$nne .= '<td colspan="4">  < 5 yrs </td><td colspan="4">  > 5 yrs </td>';
+
+                    if (!($c % 2)) {
+
+                        for ($k = 0; $k < 4; $k++) {
+                            $r = $this->columnLetter($i + $k * 2) . '5:' . $this->columnLetter($i + $k * 2 + 1) . '5';
+                            $this->objPHPExcel->getActiveSheet()->mergeCells($r);
+                            $v = ($k % 2) ? 'C' : 'D';
+                            $this->objPHPExcel->getActiveSheet()->setCellValue($this->columnLetter($i + $k * 2) . '5', $v);
+
+                        }
+                    }
+
+                }
+            }
+
+            $v = ($c % 2) ? 'F' : 'M';
+            $this->objPHPExcel->getActiveSheet()->setCellValue($this->columnLetter($i) . '6', $v);
+
+        }
+
+
+        // get values from DB
+        $this->model->set_table($form_id);
+        $data = $this->model->as_array()->get_many_by('_xf_20de688d974183449850b0d32a15de47', $week_number);
+
+        //echo '<pre>';
+        //print_r($data);
+
+        $idwe_data = array();
+        $sn = 1;
+        foreach ($data as $row) {
+            $c = 0;
+            $tmp = array();
+            foreach ($row as $k => $v) {
+                if ($c == 4) {
+                    array_push($tmp, $sn++);
+                    array_push($tmp, $v->meta_username);
+                }
+
+                if (substr($k, 0, 4) == '_xf_') array_push($tmp, $v);
+                $c++;
+            }
+            array_push($idwe_data, $tmp);
+        }
+
+        $this->objPHPExcel->getActiveSheet()->fromArray($idwe_data, 0, 'A7', true);
+
+        //echo '<pre>';
+        //print_r($idwe_data);
+
+
+        // set headers
+        $header = 'a3:ei6';
+        $header_style = array(
+            'fill' => array(
+                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('rgb' => '83C9FC')
+
+            ),
+            'font' => array(
+                'bold' => false,
+                'size' => '12',
+                'color' => array('rgb' => '000000')
+            ),
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            )
+        );
+        $this->objPHPExcel->getActiveSheet()->getStyle($header)->applyFromArray($header_style);
+
+        // set boarders
+        $borders = array(
+            'borders' => array(
+                'allborders' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                )
+            )
+        );
+        $c = sizeof($idwe_data) + 6;
+        $range = 'a3:ei' . $c;
+        $this->objPHPExcel->getActiveSheet()->getStyle($range)->applyFromArray($borders);
+
+
+        // Rename worksheet
+        $this->objPHPExcel->getActiveSheet()->setTitle('FORM REPORT');
+
+        $filename = "Exported_" . $form_id . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
+
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $this->objPHPExcel->setActiveSheetIndex(0);
+
+        // Redirect output to a client’s web browser (Excel2007)
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        // If you're serving to IE over SSL, then the following may be needed
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
+
+        $objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+        exit;
+    }
+
+    //getColumnLetter
+    function columnLetter($n)
+    {
+        for ($r = ""; $n >= 0; $n = intval($n / 26) - 1)
+            $r = chr($n % 26 + 0x41) . $r;
+        return $r;
+    }
+
 
     /**
      * Author: Renfrid
