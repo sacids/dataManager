@@ -29,7 +29,7 @@ class Auth extends REST_Controller
     {
         //get current app version
         $this->model->set_table('app_version');
-        $app_version = $this->model->get_by('status', 'current');
+        $app_version = $this->model->get_by('status', 'active');
 
         if ($app_version) {
             $this->response(array('status' => 'success', 'app_version' => $app_version), 200);
