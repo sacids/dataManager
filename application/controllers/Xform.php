@@ -78,6 +78,7 @@ class Xform extends CI_Controller
             'Xform_model',
             'User_model',
             'Feedback_model',
+            'facilities/Facilities_model',
             'Submission_model',
             'Ohkr_model',
             'model',
@@ -1687,15 +1688,23 @@ class Xform extends CI_Controller
 
         $this->objPHPExcel->getActiveSheet()->mergeCells('B3:B6');
         $this->objPHPExcel->getActiveSheet()->setCellValue('B3', 'Year');
+        $this->objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
         $this->objPHPExcel->getActiveSheet()->getStyle('B3')->getAlignment()->setTextRotation(90);
 
         $this->objPHPExcel->getActiveSheet()->mergeCells('C3:C6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('C3', 'S/N');
-        $this->objPHPExcel->getActiveSheet()->freezePane('E7');
+        $this->objPHPExcel->getActiveSheet()->setCellValue('C3', 'District');
+        $this->objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+        $this->objPHPExcel->getActiveSheet()->getStyle('C3')->getAlignment()->setTextRotation(90);
 
         $this->objPHPExcel->getActiveSheet()->mergeCells('D3:D6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('D3', 'Health Facilities');
-        $this->objPHPExcel->getActiveSheet()->getStyle('D3')->getAlignment()->setTextRotation(90);
+        $this->objPHPExcel->getActiveSheet()->setCellValue('D3', 'S/N');
+
+        $this->objPHPExcel->getActiveSheet()->mergeCells('E3:E6');
+        $this->objPHPExcel->getActiveSheet()->setCellValue('E3', 'Health Facilities');
+        $this->objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+        $this->objPHPExcel->getActiveSheet()->getStyle('E3')->getAlignment()->setTextRotation(90);
+
+        $this->objPHPExcel->getActiveSheet()->freezePane('F7');
 
         $diseases = array(
             'Malaria',
@@ -1720,7 +1729,7 @@ class Xform extends CI_Controller
 
         $d = 0;
 
-        for ($i = 4, $c = 0; $i < 148; $i++, $c++) {
+        for ($i = 5, $c = 0; $i < 148; $i++, $c++) {
 
             if (!($c % 8)) {
                 $r = $this->columnLetter($i) . '3:' . $this->columnLetter($i + 7) . '3';
@@ -1775,8 +1784,9 @@ class Xform extends CI_Controller
             $tmp = array();
             foreach ($row as $k => $v) {
                 if ($c == 4) {
+                    array_push($tmp, $this->get_district_details($row['meta_username']));
                     array_push($tmp, $sn++);
-                    array_push($tmp, $row['meta_username']);
+                    array_push($tmp, $this->get_health_facility_details($row['meta_username']));
                 }
 
                 if (substr($k, 0, 4) == '_xf_') array_push($tmp, $v);
@@ -1792,7 +1802,7 @@ class Xform extends CI_Controller
 
 
         // set headers
-        $header = 'a3:er6';
+        $header = 'A3:ES6';
         $header_style = array(
             'fill' => array(
                 'type' => PHPExcel_Style_Fill::FILL_SOLID,
@@ -1819,7 +1829,7 @@ class Xform extends CI_Controller
             )
         );
         $c = sizeof($idwe_data) + 6;
-        $range = 'a3:er' . $c;
+        $range = 'A3:ES' . $c;
         $this->objPHPExcel->getActiveSheet()->getStyle($range)->applyFromArray($borders);
 
 
@@ -1847,6 +1857,41 @@ class Xform extends CI_Controller
         $objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');
         $objWriter->save('php://output');
         exit;
+    }
+
+    //get health Facility name
+    function get_health_facility_details($username)
+    {
+        $user = $this->User_model->find_by_username($username);
+
+        if ($user->facility != 0) {
+            $facility = $this->Facilities_model->get_facility_by_id($user->facility);
+
+            if ($facility)
+                return $facility->name;
+            else
+                return '';
+        } else {
+            return '';
+        }
+    }
+
+    //get health Facility name
+    function get_district_details($username)
+    {
+        $user = $this->User_model->find_by_username($username);
+
+        if ($user->district != 0) {
+            $this->model->set_table('district');
+            $district = $this->model->get_by('id', $user->district);
+
+            if ($district)
+                return $district->name;
+            else
+                return '';
+        } else {
+            return '';
+        }
     }
 
     /**
