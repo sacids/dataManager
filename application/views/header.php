@@ -173,6 +173,10 @@
                             <li><?php echo anchor('auth/users_list', $this->lang->line("nav_item_list_users")); ?></li>
                             <li><?php echo anchor('auth/create_user', $this->lang->line("nav_item_create_user")); ?></li>
                             <li class="divider"></li>
+                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_facilities") ?></li>
+                            <li><?php echo anchor('facilities/lists', $this->lang->line("nav_item_list_facilities")); ?></li>
+                            <li><?php echo anchor('facilities/add_new', $this->lang->line("nav_item_add_facility")); ?></li>
+                            <li class="divider"></li>
                             <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_user_groups") ?></li>
                             <li><?php echo anchor('auth/group_list', $this->lang->line("nav_item_list_groups")); ?></li>
                             <li><?php echo anchor('auth/create_group', $this->lang->line("nav_item_create_group")); ?></li>

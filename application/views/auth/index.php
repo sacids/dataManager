@@ -40,11 +40,11 @@
             <div class="col-sm-12">
                 <table class="table table-striped table-responsive table-hover">
                     <tr>
-                        <th width="15%"><?php echo lang('index_fname_th'); ?></th>
-                        <th width="15%"><?php echo lang('index_lname_th'); ?></th>
+                        <th width="15%">Name</th>
                         <th width="12%"><?php echo lang('index_phone_th'); ?></th>
                         <th width="17%"><?php echo lang('index_created_on_th'); ?></th>
                         <th width="17%"><?php echo lang('index_last_login_th'); ?></th>
+                        <th width="17%">Health Facility</th>
                         <th width="18%"><?php echo lang('index_status_th'); ?></th>
                     </tr>
 
@@ -52,11 +52,11 @@
                     $serial = 1;
                     foreach ($user_list as $user):?>
                         <tr>
-                            <td><?php echo $user->first_name; ?></td>
-                            <td><?php echo $user->last_name; ?></td>
+                            <td><?php echo $user->first_name . ' ' . $user->last_name; ?></td>
                             <td><?php echo $user->phone; ?></td>
                             <td><?php echo date('d-m-Y H:i:s', $user->created_on); ?></td>
                             <td><?php echo date('d-m-Y H:i:s', $user->last_login); ?></td>
+                            <td><?php echo ($user->facility != 0) ? $user->facilities->name : 'No facility'; ?></td>
                             <td><?php echo ($user->active) ? anchor("auth/deactivate/" . $user->id, lang('index_active_link'), array("class" => 'btn btn-info btn-xs')) :
                                     anchor("auth/activate/" . $user->id, lang('index_inactive_link'), array("class" => 'btn btn-warning btn-xs')); ?>
                                 <?php echo anchor("auth/edit_user/" . $user->id, lang('edit_user_heading'), array("class" => 'btn btn-primary btn-xs')); ?></td>

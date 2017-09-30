@@ -50,7 +50,7 @@ class Auth extends CI_Controller
         $this->load->helper(array('url', 'language'));
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
         $this->lang->load('auth');
-        $this->load->model(array('User_model'));
+        $this->load->model(array('User_model', 'model'));
 
         //variable
         $this->realm = 'Authorized users of Sacids Openrosa';
@@ -107,6 +107,10 @@ class Auth extends CI_Controller
             $this->data['user_list'] = $this->User_model->search_users($first_name, $last_name, $phone, $user_status);
             foreach ($this->data['user_list'] as $k => $user) {
                 $this->data['user_list'][$k]->groups = $this->ion_auth->get_users_groups($user->user_id)->result();
+
+                //facility
+                $this->model->set_table('health_facilities');
+                $this->data['user_list'][$k]->facility = $this->model->get_by('id', $user->facility);
             }
 
         } else {
@@ -123,6 +127,10 @@ class Auth extends CI_Controller
             $this->data['user_list'] = $this->User_model->get_users_list($this->pagination->per_page, $page);
             foreach ($this->data['user_list'] as $k => $user) {
                 $this->data['user_list'][$k]->groups = $this->ion_auth->get_users_groups($user->user_id)->result();
+
+                //facility
+                $this->model->set_table('health_facilities');
+                $this->data['user_list'][$k]->facilities = $this->model->get_by('id', $user->facility);
             }
             $this->data["links"] = $this->pagination->create_links();
         }
@@ -708,6 +716,9 @@ class Auth extends CI_Controller
         }
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
 
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('facility', 'Health Facility', 'required');
+
         $this->form_validation->set_rules('group', $this->lang->line('create_user_group_label'), 'required');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
@@ -725,7 +736,9 @@ class Auth extends CI_Controller
                 'first_name' => $this->input->post('first_name'),
                 'last_name' => $this->input->post('last_name'),
                 'phone' => $this->input->post('phone'),
-                'digest_password' => $digest_password
+                'digest_password' => $digest_password,
+                'district' => $this->input->post('district'),
+                'facility' => $this->input->post('facility')
             );
         }
         if ($this->form_validation->run() == TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data, $groups)) {
@@ -817,8 +830,9 @@ class Auth extends CI_Controller
                 'placeholder' => 'Confirm password'
             );
 
-            $this->data['districts'] = $this->db->order_by('name', 'asc')->get('district')->result();
+            $this->data['district_list'] = $this->db->order_by('name', 'asc')->get('district')->result();
             $this->data['group_list'] = $this->db->order_by('name', 'asc')->get('groups')->result();
+
             //render view
             $this->data['title'] = "Create New User";
             $this->load->view('header', $this->data);
@@ -850,11 +864,14 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
         $this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'required|valid_email');
 
+        $this->form_validation->set_rules('district', 'District', 'required');
+        $this->form_validation->set_rules('facility', 'Health Facility', 'required');
+
         if (isset($_POST) && !empty($_POST)) {
-            // do we have a valid request?
-            if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
-                show_error($this->lang->line('error_csrf'));
-            }
+//            // do we have a valid request?
+//            if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
+//                show_error($this->lang->line('error_csrf'));
+//            }
 
             // update the password if it was posted
             if ($this->input->post('password')) {
@@ -869,7 +886,9 @@ class Auth extends CI_Controller
                     'first_name' => $this->input->post('first_name'),
                     'last_name' => $this->input->post('last_name'),
                     'email' => $this->input->post('email'),
-                    'phone' => $this->input->post('phone')
+                    'phone' => $this->input->post('phone'),
+                    'district' => $this->input->post('district'),
+                    'facility' => $this->input->post('facility')
                 );
 
                 // update the password if it was posted
@@ -986,12 +1005,34 @@ class Auth extends CI_Controller
             'class' => 'form-control'
         );
 
-        $this->data['district'] = $this->db->get_where('district', array('code' => $user->district))->row();
-        $this->data['districts'] = $this->db->order_by('name', 'asc')->get('district')->result();
+        $this->data['district_list'] = $this->db->order_by('name', 'asc')->get('district')->result();
+
+        $this->model->set_table('health_facilities');
+        $this->data['facilities_list'] = $this->model->get_many_by('district', $user->district);
+
         //render view
         $this->load->view('header', $this->data);
         $this->_render_page('auth/edit_user');
         $this->load->view('footer');
+    }
+
+    /**
+     * @param $district_id
+     */
+    function get_facilities($district_id)
+    {
+        $this->model->set_table('health_facilities');
+        $facilities_list = $this->model->get_many_by('district', $district_id);
+
+        //print_r($facilities_list);
+
+        if ($facilities_list) {
+            foreach ($facilities_list as $value) {
+                echo '<option value="' . $value->id . '" ' . set_value("facility", $value->id) . '>' . $value->name . '</option>';
+            }
+        } else {
+            echo '<option value="">Choose Facility</option>';
+        }
     }
 
 

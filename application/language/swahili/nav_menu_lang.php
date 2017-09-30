@@ -30,8 +30,13 @@ $lang['nav_item_create_group'] = "Ongeza Kundi";
 
 //Permission
 $lang['nav_item_manage_permission'] = "Ruhusa ya watumiaji";
-$lang['nav_item_list_permission'] = "Orodhosha ruhusa";
+$lang['nav_item_list_permission'] = "Orodhesha ruhusa";
 $lang['nav_item_create_permission'] = "Ongeza ruhusu";
+
+//Health Facilities
+$lang['nav_item_manage_facilities'] = "Vituo Vya Afya";
+$lang['nav_item_list_facilities'] = "Orodhesha";
+$lang['nav_item_add_facility'] = "Ongeza";
 
 //OHKR - Afya Moja
 $lang['nav_item_ohkr'] = "Afya Moja";
