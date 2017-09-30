@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <?php
                             $week_options = array();
-                            for ($i = 1; $i <= 36; $i++) {
+                            for ($i = 1; $i <= 54; $i++) {
                                 $week_options[$i] = $i;
                             }
                             $week_options = array('' => 'Week Number') + $week_options;

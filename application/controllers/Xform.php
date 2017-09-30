@@ -1836,7 +1836,7 @@ class Xform extends CI_Controller
         // Rename worksheet
         $this->objPHPExcel->getActiveSheet()->setTitle('FORM REPORT');
 
-        $filename = "WEEK_" . $week_number . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
+        $filename = "WEEK_" . $week_number . "_" . date("Y-m-d") . ".xls"; //save our workbook as this file name
 
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $this->objPHPExcel->setActiveSheetIndex(0);
