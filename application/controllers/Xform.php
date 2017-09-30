@@ -1836,7 +1836,7 @@ class Xform extends CI_Controller
         // Rename worksheet
         $this->objPHPExcel->getActiveSheet()->setTitle('FORM REPORT');
 
-        $filename = "WEEK_" . $week_number . "_" . date("Y-m-d") . ".xls"; //save our workbook as this file name
+        $filename = "WEEK_" . $week_number . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
 
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $this->objPHPExcel->setActiveSheetIndex(0);
@@ -1864,7 +1864,7 @@ class Xform extends CI_Controller
     {
         $user = $this->User_model->find_by_username($username);
 
-        if ($user->facility != 0) {
+        if ($user->facility != null) {
             $facility = $this->Facilities_model->get_facility_by_id($user->facility);
 
             if ($facility)
@@ -1881,7 +1881,7 @@ class Xform extends CI_Controller
     {
         $user = $this->User_model->find_by_username($username);
 
-        if ($user->district != 0) {
+        if ($user->district != null) {
             $this->model->set_table('district');
             $district = $this->model->get_by('id', $user->district);
 
