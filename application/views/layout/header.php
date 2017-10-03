@@ -208,8 +208,13 @@
                 <?php if (isset($events_map)): ?>
                     <li class="btn-link"><?= anchor("#eventsModal", '<i class="fa fa-list"></i>', 'class="btn btn-sm btn-dark-orange" id="eventsListView" data-toggle="modal" data-target="#eventsModal"') ?></li>
                 <?php endif; ?>
-                <li class="btn-link"><?= anchor("auth/login", 'Login', 'class="btn btn-sm btn-dark-orange"') ?></li>
-                <li class="btn-link"><?= anchor("auth/sign_up", 'Sign up', 'class="btn btn-sm btn-maroon"') ?></li>
+
+                <?php if (!$this->ion_auth->logged_in()): ?>
+                    <li class="btn-link"><?= anchor("auth/login", 'Login', 'class="btn btn-sm btn-dark-orange"') ?></li>
+                    <li class="btn-link"><?= anchor("auth/sign_up", 'Sign up', 'class="btn btn-sm btn-maroon"') ?></li>
+                <?php else: ?>
+                    <li class="btn-link"><?= anchor("auth/logout", 'Logout', 'class="btn btn-sm btn-maroon"') ?></li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

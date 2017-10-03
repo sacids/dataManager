@@ -14,7 +14,7 @@ class Report extends MX_Controller
     {
         parent::__construct();
         if (!$this->ion_auth->logged_in()) {
-            $this->session->set_flashdata("message",display_message("You must be logged in","error"));
+            $this->session->set_flashdata("message", display_message("You must be logged in", "error"));
             redirect('auth/login', 'refresh');
             exit;
         }
@@ -53,22 +53,34 @@ class Report extends MX_Controller
         $this->data['group_by_column'] = "_xf_95b360beefc40c13b168164f302de79d";
 
         $this->form_validation->set_rules("report", "Report", "required");
-        $this->form_validation->set_rules("group_by", "Group by", "required");
+        //$this->form_validation->set_rules("group_by", "Group by", "required");
+
+        $this->data['report_type'] = null;
+        $this->data['disease_name'] = null;
 
         $data_series = null;
         if ($this->form_validation->run() === true) {
 
-            $report_id = $this->input->post("report");
+            $report_id = (int)$this->input->post("report");
             $group_by_column = $this->input->post("group_by");
 
+
             $report_query = $this->Report_model->find_by_id($report_id);
-            if($group_by_column != null){
-                $condition = "Group by ".$this->security->xss_clean($group_by_column);
-            }else{
+
+            if ($report_id >= 2) {
+                $this->data['report_type'] = "single_disease";
+                $this->data['chart_title'] = $report_query->title;
+                $this->data['disease_name'] = $report_query->title;
+            }
+
+            if ($group_by_column != null) {
+                $condition = "Group by " . $this->security->xss_clean($group_by_column);
+            } else {
                 $condition = $report_query->where_condition;
             }
             $this->data['report_data'] = $this->Report_model->execute_query($report_query->sql_query, $condition);
             $this->data['group_by_column'] = $group_by_column;
+            log_message("debug", "last query " . $this->db->last_query());
         } else {
             $result = $this->Report_model->find_all_reports(1);
             $report_query = array_shift($result);

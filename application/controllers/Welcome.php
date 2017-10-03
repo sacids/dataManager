@@ -36,7 +36,7 @@ class Welcome extends MX_Controller
     public function events_map()
     {
         if (AFYADATA_MODE === "private" && !$this->ion_auth->logged_in()) {
-            $this->session->set_flashdata("message",display_message("You must be logged to continue","danger"));
+            $this->session->set_flashdata("message", display_message("You must be logged to continue", "danger"));
             redirect("auth/login");
             exit;
         }
@@ -110,5 +110,10 @@ class Welcome extends MX_Controller
         $this->load->view('layout/header', $this->data);
         $this->load->view('view');
         $this->load->view('layout/footer');
+    }
+
+    public function open_source_licenses()
+    {
+        $this->load->view('view');
     }
 }

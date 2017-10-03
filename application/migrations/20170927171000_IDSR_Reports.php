@@ -19,7 +19,11 @@ class Migration_IDSR_Reports extends CI_Migration
             ),
             'title' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 255
+                'constraint' => 45
+            ),
+            'chart_title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 45
             ),
             'sql_query' => array(
                 'type' => 'TEXT',
@@ -33,6 +37,14 @@ class Migration_IDSR_Reports extends CI_Migration
             'where_condition' => array(
                 'type' => "TEXT"
             ),
+            'group_by_column' => array(
+                'type' => "TEXT"
+            ),
+            'report_type' => array(
+                'type' => "VARCHAR",
+                'constraint' => 45,
+                'default' => 'single_disease' //Specifies if is single disease or any other type that requires different data layout for high charts
+            ),
         );
         $this->dbforge->add_key('id', true);
         $this->dbforge->add_field($fields);
@@ -41,6 +53,6 @@ class Migration_IDSR_Reports extends CI_Migration
 
     public function down()
     {
-
+        $this->dbforge->drop_table('idsr_reports', TRUE);
     }
 }
