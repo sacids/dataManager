@@ -1832,18 +1832,17 @@ class Xform extends CI_Controller
         $range = 'A3:ES' . $c;
         $this->objPHPExcel->getActiveSheet()->getStyle($range)->applyFromArray($borders);
 
-
         // Rename worksheet
         $this->objPHPExcel->getActiveSheet()->setTitle('FORM REPORT');
 
-        $filename = "WEEK_" . $week_number . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
+        //$filename = "WEEK_" . $week_number . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
 
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $this->objPHPExcel->setActiveSheetIndex(0);
 
         // Redirect output to a client’s web browser (Excel2007)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Content-Disposition: attachment;filename="WEEK-' . $week_number . '.xlsx"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
@@ -1860,35 +1859,43 @@ class Xform extends CI_Controller
     }
 
     //get health Facility name
-    function get_health_facility_details($username)
+    function get_health_facility_details($username = null)
     {
-        $user = $this->User_model->find_by_username($username);
+        if ($username != null) {
+            $user = $this->User_model->find_by_username($username);
 
-        if ($user->facility != null) {
-            $facility = $this->Facilities_model->get_facility_by_id($user->facility);
+            if ($user->facility != null) {
+                $facility = $this->Facilities_model->get_facility_by_id($user->facility);
 
-            if ($facility)
-                return $facility->name;
-            else
+                if ($facility)
+                    return $facility->name;
+                else
+                    return '';
+            } else {
                 return '';
+            }
         } else {
             return '';
         }
     }
 
     //get health Facility name
-    function get_district_details($username)
+    function get_district_details($username = null)
     {
-        $user = $this->User_model->find_by_username($username);
+        if ($username != null) {
+            $user = $this->User_model->find_by_username($username);
 
-        if ($user->district != null) {
-            $this->model->set_table('district');
-            $district = $this->model->get_by('id', $user->district);
+            if ($user->district != null) {
+                $this->model->set_table('district');
+                $district = $this->model->get_by('id', $user->district);
 
-            if ($district)
-                return $district->name;
-            else
+                if ($district)
+                    return $district->name;
+                else
+                    return '';
+            } else {
                 return '';
+            }
         } else {
             return '';
         }
