@@ -41,6 +41,32 @@ function suggest_reply_form() {
     }
 }
 
+//suggest facilities
+function suggest_facilities() {
+    district_id = document.getElementById('district').value;
+
+    // Set te random number to add to URL request
+    var base_url = document.getElementById('base_url').value;
+    nocache = Math.random();
+    http.open('POST', base_url + 'auth/get_facilities/' + district_id);
+
+    http.onreadystatechange = suggest_reply_facilities;
+    http.send(null);
+}
+
+function suggest_reply_facilities() {
+    if (http.readyState == 4) {
+        var response = http.responseText;
+        e = document.getElementById('facility');
+        if (response != "") {
+            e.innerHTML = response;
+            e.style.display = "block";
+        } else {
+            e.style.display = "none";
+        }
+    }
+}
+
 //delete function
 $(document).ready(function () {
 
