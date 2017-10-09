@@ -185,29 +185,19 @@ class Xform_comm
         $binds = $rxml->children [0]->children [1]->children;
         //echo '<pre>'; print_r($rxml->children [1]->children);
         // get the body section of xform
-        $tmp2 = $rxml->children [0]->children [1]->children [1]->children [0]->children;
-
-        $tmp3 = $rxml->children [0]->children [1]->children[1]->children;
+        //$tmp2 = $rxml->children [0]->children [1]->children [1]->children [0]->children;
+        //$tmp3 = $rxml->children [0]->children [1]->children[1]->children;
         //print_r($tmp3);
 
         $tmp2 = $rxml->children [1]->children;
         // container
         $xarray = array();
 
-
-        foreach ($tmp3 as $key => $val) {
-
-            $attributes = $val->attributes;
-            $lang = $attributes['lang'];
-            $this->itext[$lang] = array();
-            if(!$this->lang)    $this->lang = $lang;
-            $this->_iterate_itext($val->children, $lang);
-        }
-
-        //print_r($this->itext);
-
         foreach ($binds as $key => $val) {
 
+            if ($val->name == 'itext'){
+                $itext  = $val->children;
+            }
             if ($val->name == 'bind') {
 
                 $attributes = $val->attributes;
@@ -223,6 +213,19 @@ class Xform_comm
                 }
             }
         }
+
+        foreach ($itext as $key => $val) {
+
+            $attributes = $val->attributes;
+            $lang = $attributes['lang'];
+            $this->itext[$lang] = array();
+            if(!$this->lang)    $this->lang = $lang;
+            $this->_iterate_itext($val->children, $lang);
+        }
+
+        //print_r($this->itext);
+
+
 
         $this->xarray = $xarray;
         $this->_iterate_defn_file($tmp2, false);
