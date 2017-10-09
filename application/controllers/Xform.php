@@ -242,6 +242,7 @@ class Xform extends CI_Controller
                         "submitted_on" => date("Y-m-d h:i:s")
                     );
 
+
                     $inserted_form_id = $this->Submission_model->create($data);
 
                 } elseif ($file_extension == 'jpg' or $file_extension == 'jpeg' or $file_extension == 'png') {
@@ -1172,14 +1173,20 @@ class Xform extends CI_Controller
                 $required = '';
             }
 
-            if ($type == 'string' || $type == 'binary') {
+            if ($type == 'string' || $type == 'binary' || $type == 'barcode') {
                 $statement .= ", $col_name VARCHAR(300) $required";
+                
             }
 
             if ($type == 'select1') {
                 // Mysql recommended way of handling single quotes for queries is by using two single quotes at once.
-                $tmp3 = array_keys($val ['option']);
-                $statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $tmp3)) . "') $required";
+                if(!$val['option']){
+                    // itemset
+                    $statement .= ", $col_name  VARCHAR(300) $required";
+                }else {
+                    $tmp3 = array_keys($val ['option']);
+                    $statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $tmp3)) . "') $required";
+                }
             }
 
             if ($type == 'select') {
