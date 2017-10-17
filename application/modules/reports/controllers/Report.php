@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: akyoo
+ * User: Godluck Akyoo
  * Date: 27/09/2017
  * Time: 12:12
  */
@@ -50,7 +50,7 @@ class Report extends MX_Controller
 
         $this->data['chart_title'] = "Weekly report";
         $this->data['yaxis_title'] = "Count";
-        $this->data['group_by_column'] = "_xf_95b360beefc40c13b168164f302de79d";
+        $this->data['group_by_column'] = "_xf_1e0b70ceccc8a5457221fb938ee70caf";
 
         $this->form_validation->set_rules("report", "Report", "required");
         //$this->form_validation->set_rules("group_by", "Group by", "required");

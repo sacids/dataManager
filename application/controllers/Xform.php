@@ -854,7 +854,6 @@ class Xform extends CI_Controller
                         redirect("xform/add_new/{$project_id}");
                     } else {
                         $create_table_result = $this->Xform_model->create_table($create_table_statement);
-                        //log_message("debug", "Create table result " . $create_table_result);
 
                         if ($create_table_result) {
 
