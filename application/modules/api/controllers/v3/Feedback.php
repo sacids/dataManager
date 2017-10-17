@@ -182,6 +182,7 @@ class Feedback extends REST_Controller
         $this->model->set_table('xforms');
         $form_details = $this->model->get_by('form_id', $this->table_name);
 
+
         //set file defn
         $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $form_details->filename);
         $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
@@ -205,8 +206,9 @@ class Feedback extends REST_Controller
 
         if (!$data) return false;
         $holder = array();
-        // print_r($map);
+        //print_r($map);
         //print_r($structure);
+
         $ext_dirs = array(
             'jpg' => "images",
             'jpeg' => "images",
@@ -223,17 +225,27 @@ class Feedback extends REST_Controller
             $tmp = array();
             $field_name = $val['field_name'];
             $type = $val['type'];
-            if (!array_key_exists('label', $val)) {
-                $label = $field_name;
-            } else {
-                $label = $val['label'];
+
+            //TODO : change way to get label
+            if (array_key_exists($field_name, $map)) {
+                if (!empty($map[$field_name]['field_label'])) {
+                    $label = $map[$field_name]['field_label'];
+                } else {
+                    if (!array_key_exists('label', $val))
+                        $label = $field_name;
+                    else
+                        $label = $val['label'];
+                }
             }
+
             if (array_key_exists($field_name, $map)) {
                 $field_name = $map[$field_name]['col_name'];
             }
             $l = $data->$field_name;
+
+
             if ($type == 'select1') {
-                $l = $val['option'][$l];
+                //$l = $val['option'][$l];
             }
             if ($type == 'binary') {
                 // check file extension
