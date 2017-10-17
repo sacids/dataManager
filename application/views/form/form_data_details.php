@@ -58,11 +58,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="pull-left">
-                        <?php echo form_open("xform/export_IDWE/" . $form_id, 'class="form-inline" role="form"'); ?>
+                        <?php echo form_open(uri_string(), 'class="form-inline" role="form"'); ?>
                         <div class="form-group">
                             <?php
                             $week_options = array();
-                            for ($i = 1; $i <= 54; $i++) {
+                            for ($i = 1; $i <= 52; $i++) {
                                 $week_options[$i] = $i;
                             }
                             $week_options = array('' => 'Week Number') + $week_options;

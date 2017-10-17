@@ -1175,15 +1175,15 @@ class Xform extends CI_Controller
 
             if ($type == 'string' || $type == 'binary' || $type == 'barcode') {
                 $statement .= ", $col_name VARCHAR(300) $required";
-                
+
             }
 
             if ($type == 'select1') {
                 // Mysql recommended way of handling single quotes for queries is by using two single quotes at once.
-                if(!$val['option']){
+                if (!$val['option']) {
                     // itemset
                     $statement .= ", $col_name  VARCHAR(300) $required";
-                }else {
+                } else {
                     $tmp3 = array_keys($val ['option']);
                     $statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $tmp3)) . "') $required";
                 }
@@ -1491,6 +1491,19 @@ class Xform extends CI_Controller
             exit;
         }
 
+        //if $_POST['export']
+        if (isset($_POST['export'])) {
+            //check if week number selected
+            if ($this->input->post('week') == null) {
+                $this->session->set_flashdata('message', display_message('You should select week number', 'danger'));
+                redirect('xform/form_data/' . $form_id, 'refresh');
+            }
+
+            //week number
+            $week_number = $this->input->post('week');
+            $this->export_IDWE($form_id, $week_number);
+        }
+
         $form = $this->Xform_model->find_by_id($form_id);
 
         if ($form) {
@@ -1639,23 +1652,15 @@ class Xform extends CI_Controller
     }
 
     //exporting Zanzibar IDWE
-    public function export_IDWE($form_id = null)
+    public function export_IDWE($form_id, $week_number)
     {
         //form details
         $this->model->set_table('xforms');
-        $xform = $this->model->get_by('form_id', $form_id);
-
-        //check if week number selected
-        if ($this->input->post('week') == null) {
-            $this->session->set_flashdata('message', display_message('You should select week number', 'danger'));
-            redirect('xform/form_data/' . $xform->id, 'refresh');
-        }
-
-        //week number
-        $week_number = $this->input->post('week');
+        $xform = $this->model->get_by('id', $form_id);
 
         //table fields
-        $table_fields = $this->Xform_model->find_table_columns($form_id);
+        $table_fields = $this->Xform_model->find_table_columns($xform->form_id);
+
         $columns = count($table_fields);
 
         $last_column = $this->columnLetter($columns);
@@ -1699,19 +1704,24 @@ class Xform extends CI_Controller
         $this->objPHPExcel->getActiveSheet()->getStyle('B3')->getAlignment()->setTextRotation(90);
 
         $this->objPHPExcel->getActiveSheet()->mergeCells('C3:C6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('C3', 'District');
+        $this->objPHPExcel->getActiveSheet()->setCellValue('C3', 'Region');
         $this->objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
         $this->objPHPExcel->getActiveSheet()->getStyle('C3')->getAlignment()->setTextRotation(90);
 
         $this->objPHPExcel->getActiveSheet()->mergeCells('D3:D6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('D3', 'S/N');
+        $this->objPHPExcel->getActiveSheet()->setCellValue('D3', 'District');
+        $this->objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+        $this->objPHPExcel->getActiveSheet()->getStyle('D3')->getAlignment()->setTextRotation(90);
 
         $this->objPHPExcel->getActiveSheet()->mergeCells('E3:E6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('E3', 'Health Facilities');
-        $this->objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-        $this->objPHPExcel->getActiveSheet()->getStyle('E3')->getAlignment()->setTextRotation(90);
+        $this->objPHPExcel->getActiveSheet()->setCellValue('E3', 'S/N');
 
-        $this->objPHPExcel->getActiveSheet()->freezePane('F7');
+        $this->objPHPExcel->getActiveSheet()->mergeCells('F3:F6');
+        $this->objPHPExcel->getActiveSheet()->setCellValue('F3', 'Health Facilities');
+        $this->objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+        $this->objPHPExcel->getActiveSheet()->getStyle('F3')->getAlignment()->setTextRotation(90);
+
+        $this->objPHPExcel->getActiveSheet()->freezePane('G7');
 
         $diseases = array(
             'Malaria',
@@ -1736,7 +1746,7 @@ class Xform extends CI_Controller
 
         $d = 0;
 
-        for ($i = 5, $c = 0; $i < 148; $i++, $c++) {
+        for ($i = 6, $c = 0; $i < 150; $i++, $c++) {
 
             if (!($c % 8)) {
                 $r = $this->columnLetter($i) . '3:' . $this->columnLetter($i + 7) . '3';
@@ -1777,8 +1787,10 @@ class Xform extends CI_Controller
 
 
         // get values from DB
-        $this->model->set_table($form_id);
-        //$data = $this->model->as_array()->get_all();
+        $this->model->set_table($xform->form_id);
+        $this->model->order_by('_xf_da0f48ffc452923e77a8c70e393ed5ac', 'ASC');
+        $this->model->order_by('_xf_0c37672a5ed28b81b30d37d52b20f57e', 'ASC');
+        $this->model->order_by('_xf_3b4caf4273007b260d666188609c6e2a', 'ASC');
         $data = $this->model->as_array()->get_many_by('_xf_20de688d974183449850b0d32a15de47', $week_number);
 
         //echo '<pre>';
@@ -1790,13 +1802,18 @@ class Xform extends CI_Controller
             $c = 0;
             $tmp = array();
             foreach ($row as $k => $v) {
-                if ($c == 4) {
-                    array_push($tmp, $this->get_district_details($row['meta_username']));
+                if ($c == 0) {
+                    array_push($tmp, $row['_xf_20de688d974183449850b0d32a15de47']);
+                    array_push($tmp, date('Y', strtotime($row['_xf_1e0b70ceccc8a5457221fb938ee70caf'])));
+                    array_push($tmp, ucfirst(str_replace('_', ' ', $row['_xf_da0f48ffc452923e77a8c70e393ed5ac'])));
+                    array_push($tmp, ucfirst(str_replace('_', ' ', $row['_xf_0c37672a5ed28b81b30d37d52b20f57e'])));
                     array_push($tmp, $sn++);
-                    array_push($tmp, $this->get_health_facility_details($row['meta_username']));
+                    array_push($tmp, ucfirst(str_replace('_', ' ', $row['_xf_3b4caf4273007b260d666188609c6e2a'])));
                 }
-
-                if (substr($k, 0, 4) == '_xf_') array_push($tmp, $v);
+                //print data
+                if ($c > 6) {
+                    if (substr($k, 0, 4) == '_xf_') array_push($tmp, $v);
+                }
                 $c++;
             }
             array_push($idwe_data, $tmp);
@@ -1804,12 +1821,8 @@ class Xform extends CI_Controller
 
         $this->objPHPExcel->getActiveSheet()->fromArray($idwe_data, 0, 'A7', true);
 
-        //echo '<pre>';
-        //print_r($idwe_data);
-
-
         // set headers
-        $header = 'A3:ES6';
+        $header = 'A3:ET6';
         $header_style = array(
             'fill' => array(
                 'type' => PHPExcel_Style_Fill::FILL_SOLID,
@@ -1836,20 +1849,20 @@ class Xform extends CI_Controller
             )
         );
         $c = sizeof($idwe_data) + 6;
-        $range = 'A3:ES' . $c;
+        $range = 'A3:ET' . $c;
         $this->objPHPExcel->getActiveSheet()->getStyle($range)->applyFromArray($borders);
 
         // Rename worksheet
         $this->objPHPExcel->getActiveSheet()->setTitle('FORM REPORT');
 
-        //$filename = "WEEK_" . $week_number . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
+        $filename = date("Y") . "_WEEK_" . $week_number . ".xlsx"; //save our workbook as this file name
 
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $this->objPHPExcel->setActiveSheetIndex(0);
 
         // Redirect output to a client’s web browser (Excel2007)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="WEEK-' . $week_number . '.xlsx"');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
