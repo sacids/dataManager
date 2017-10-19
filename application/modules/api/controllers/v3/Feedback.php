@@ -84,11 +84,13 @@ class Feedback extends REST_Controller
                     $form = $this->model->get_by('form_id', $value->form_id);
 
                     //get reply user
-                    if ($value->reply_by != 0) {
-                        $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
-                    } else {
-                        $reply_user = $value->reply_by;
-                    }
+                    if ($value->reply_by != 0) $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
+                    else $reply_user = $value->reply_by;
+
+                    //calculate week number
+                    $this->model->set_table($value->form_id);
+                    $table = $this->model->get_by('meta_instanceID', $value->instance_id);
+
 
                     //feedback array
                     $feedback[] = array(
@@ -116,7 +118,7 @@ class Feedback extends REST_Controller
         }
     }
 
-    //post feedback
+//post feedback
     function send_post()
     {
         if (!$this->post('username')) {
@@ -167,7 +169,7 @@ class Feedback extends REST_Controller
     }
 
 
-    //form details
+//form details
     function form_details_get()
     {
         if (!$this->get('table_name') || !$this->get('instance_id')) {
@@ -197,7 +199,7 @@ class Feedback extends REST_Controller
             $this->response(array("status" => "failed", "message" => "No details found"), 202);
     }
 
-    //get form data
+//get form data
     function get_form_data($structure, $map)
     {
         //get feedback form details
@@ -274,8 +276,9 @@ class Feedback extends REST_Controller
         return $holder;
     }
 
-    //get field name map
-    private function get_field_name_map($table_name)
+//get field name map
+    private
+    function get_field_name_map($table_name)
     {
         $tmp = $this->Xform_model->get_fieldname_map($table_name);
         $map = array();

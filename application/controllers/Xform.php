@@ -296,7 +296,7 @@ class Xform extends CI_Controller
             // taarifa_awali_Wilaya is the database field name in the mean time
             $district = $this->form_data['taarifa_awali_Wilaya'];
 
-            $specie_id = 11; //binadamu
+            $specie_id = 1; //binadamu
 
             $request_data = [
                 "specie_id" => $specie_id,
@@ -332,7 +332,8 @@ class Xform extends CI_Controller
                 $suspected_diseases_array = array();
                 $suspected_diseases = $this->Ohkr_model->find_diseases_by_symptoms_code($symptoms_reported);
 
-                $suspected_diseases_list = "Tumepokea fomu yako, kutokana na taarifa ulizotuma haya ndiyo magonjwa yanayodhaniwa ni:\n<br/>";
+                //$suspected_diseases_list = "Tumepokea fomu yako, kutokana na taarifa ulizotuma haya ndiyo magonjwa yanayodhaniwa ni:\n<br/>";
+                $suspected_diseases_list = "We received your information, according to submitted data suspected disease might be:\n<br/>";
 
                 if ($suspected_diseases) {
 
@@ -374,8 +375,11 @@ class Xform extends CI_Controller
 
                     $this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
                 } else {
-                    $suspected_diseases_list = "Tumepokea taarifa, Hatukuweza kudhania ugonjwa kutokana na taarifa ulizotuma kwa sasa, 
-					tafadhali wasiliana na wataalam wetu kwa msaada zaidi";
+//                    $suspected_diseases_list = "Tumepokea taarifa, Hatukuweza kudhania ugonjwa kutokana na taarifa ulizotuma kwa sasa,
+//					tafadhali wasiliana na wataalam wetu kwa msaada zaidi";
+                    $suspected_diseases_list = "We received your information, but we could not suspect any disease with specified symptoms. 
+                    Please contact with our team for more details.";
+
                     log_message("debug", "Could not find disease with the specified symptoms");
                 }
 
@@ -396,7 +400,7 @@ class Xform extends CI_Controller
             $feedback = array(
                 "user_id"      => $this->user_submitting_feedback_id,
                 "form_id"      => $this->table_name,
-                "message"      => "Asante kwa kutuma taarifa, Tumepokea fomu yako.",
+                "message"      => "Thank you, We received your form.", //Asante kwa kutuma taarifa, Tumepokea fomu yako.",
                 "date_created" => date('Y-m-d H:i:s'),
                 "instance_id"  => $this->form_data['meta_instanceID'],
                 "sender"       => "server",
