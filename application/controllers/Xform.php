@@ -684,7 +684,7 @@ class Xform extends CI_Controller
      *            Input string
      * @return response
      */
-    function get_response($http_response_code, $response_message = "Asante!, Fomu imepokelewa")
+    function get_response($http_response_code, $response_message = "Asante, Fomu imepokelewa")
     {
         // OpenRosa Success Response
         $response = '<OpenRosaResponse xmlns="http://openrosa.org/http/response">
