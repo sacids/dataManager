@@ -91,12 +91,17 @@ class Feedback extends REST_Controller
                     $this->model->set_table($value->form_id);
                     $table = $this->model->get_by('meta_instanceID', $value->instance_id);
 
+                    if (array_key_exists('meta_instanceName', $table))
+                        $label = $table->meta_instanceName;
+                    else
+                        $label = '';
+
                     //feedback array
                     $feedback[] = array(
                         'id' => $value->id,
                         'form_id' => $value->form_id,
                         'instance_id' => $value->instance_id,
-                        'title' => $form->title . ' - ' . $table->meta_instanceName,
+                        'title' => $form->title . ' - ' . $label,
                         'message' => $value->message,
                         'sender' => $value->sender,
                         'user' => $username,
