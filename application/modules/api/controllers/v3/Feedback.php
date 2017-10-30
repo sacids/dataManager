@@ -91,13 +91,12 @@ class Feedback extends REST_Controller
                     $this->model->set_table($value->form_id);
                     $table = $this->model->get_by('meta_instanceID', $value->instance_id);
 
-
                     //feedback array
                     $feedback[] = array(
                         'id' => $value->id,
                         'form_id' => $value->form_id,
                         'instance_id' => $value->instance_id,
-                        'title' => $form->title,
+                        'title' => $form->title . ' - ' . $table->meta_instanceName,
                         'message' => $value->message,
                         'sender' => $value->sender,
                         'user' => $username,
