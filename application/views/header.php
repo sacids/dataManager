@@ -80,17 +80,17 @@
                     </ul>
                 </li>
 
-                <?php /*if (perm_module('Xform')) { */?><!--
+                <?php /*if (perm_module('Xform')) { */ ?><!--
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><?/*= $this->lang->line("nav_item_forms") */?> <span class="caret"></span></a>
+                           aria-expanded="false"><? /*= $this->lang->line("nav_item_forms") */ ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><?php /*echo anchor('xform/forms', $this->lang->line("nav_item_list_forms")); */?></li>
-                            <li><?php /*echo anchor('xform/add_new', $this->lang->line("nav_item_add_new_form")); */?></li>
-                            <li><?php /*echo anchor('xform/searchable_form_lists', $this->lang->line("nav_item_searchable_form")); */?></li>
+                            <li><?php /*echo anchor('xform/forms', $this->lang->line("nav_item_list_forms")); */ ?></li>
+                            <li><?php /*echo anchor('xform/add_new', $this->lang->line("nav_item_add_new_form")); */ ?></li>
+                            <li><?php /*echo anchor('xform/searchable_form_lists', $this->lang->line("nav_item_searchable_form")); */ ?></li>
                         </ul>
                     </li>
-                --><?php /*} */?>
+                --><?php /*} */ ?>
 
                 <?php if (perm_module('Feedback')) { ?>
                     <li><?php echo anchor('feedback/lists', $this->lang->line("nav_item_chats")); ?></li>
@@ -184,6 +184,13 @@
                             <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_permission") ?></li>
                             <li><?php echo anchor('auth/module_list', $this->lang->line("nav_item_list_module")); ?></li>
                             <li><?php echo anchor('auth/permission_list', $this->lang->line("nav_item_list_permission")); ?></li>
+                            <li class="dropdown-submenu">
+                                <?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl"), 'tabindex="-1"'); ?>
+                                <ul class="dropdown-menu">
+                                    <li><?php echo anchor('auth/accesscontrol', "Permissions" . $this->lang->line("")); ?></li>
+                                    <li><?php echo anchor('auth/accesscontrol/new_filter', "Add filter" . $this->lang->line("")); ?></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                 <?php } ?>

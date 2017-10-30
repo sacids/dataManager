@@ -32,6 +32,7 @@ $lang['nav_item_create_group'] = "Ongeza Kundi";
 $lang['nav_item_manage_permission'] = "Ruhusa ya watumiaji";
 $lang['nav_item_list_permission'] = "Orodhesha ruhusa";
 $lang['nav_item_create_permission'] = "Ongeza ruhusu";
+$lang['nav_item_acl']           = "Uthibiti wa upatikanaji";
 
 //Health Facilities
 $lang['nav_item_manage_facilities'] = "Vituo Vya Afya";

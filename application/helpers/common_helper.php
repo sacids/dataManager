@@ -170,3 +170,27 @@ if (!function_exists('array_utf8_encode')) {
         return $ret;
     }
 }
+
+if (!function_exists("get_flashdata")) {
+    function get_flashdata()
+    {
+        $CI = &get_instance();
+        return (($CI->session->flashdata("message") != "")) ? $CI->session->flashdata("message") : "";
+    }
+}
+
+if (!function_exists("set_flashdata")) {
+    function set_flashdata($flash_message)
+    {
+        $CI = &get_instance();
+        $CI->session->set_flashdata("message", $flash_message);
+    }
+}
+
+if (!function_exists("get_current_user_id")) {
+    function get_current_user_id()
+    {
+        $CI = &get_instance();
+        return $CI->session->userdata("user_id");
+    }
+}

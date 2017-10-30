@@ -37,11 +37,12 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends CI_Controller
+class Auth extends MX_Controller
 {
     private $realm;
     private $user_id;
     private $controller;
+    private $data = [];
 
     function __construct()
     {
@@ -137,7 +138,7 @@ class Auth extends CI_Controller
 
         //render view
         $this->load->view('header', $this->data);
-        $this->_render_page('auth/index');
+        $this->_render_page('index');
         $this->load->view('footer');
     }
 
@@ -177,10 +178,6 @@ class Auth extends CI_Controller
     // log the user out
     function login()
     {
-        if ($this->ion_auth->logged_in()) {
-            redirect('dashboard', 'refresh');
-        }
-
         $this->data['title'] = "Login";
 
         //validate form input
@@ -195,6 +192,7 @@ class Auth extends CI_Controller
             if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) {
                 //if the login is successful
                 //redirect them back to the home page
+
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
                 redirect('auth/index', 'refresh');
             } else {

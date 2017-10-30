@@ -57,6 +57,7 @@ require dirname(__FILE__).'/Base.php';
  * @property Report_model $Report_model
  * @property Facilities_model $Facilities_model
  * @property Model $model
+ * @property Acl_model $Acl_model
  */
 class MX_Controller 
 {

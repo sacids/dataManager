@@ -82,7 +82,8 @@ class Xform extends CI_Controller
             'Submission_model',
             'Ohkr_model',
             'model',
-            'Alert_model'
+            'Alert_model',
+            'auth/Acl_model'
         ));
 
         $this->load->library('form_auth');
@@ -1506,6 +1507,7 @@ class Xform extends CI_Controller
         }
 
         //if $_POST['export']
+        //todo add a check if is idwe form
         if (isset($_POST['export'])) {
             //check if week number selected
             if ($this->input->post('week') == null) {
@@ -1519,6 +1521,10 @@ class Xform extends CI_Controller
         }
 
         $form = $this->Xform_model->find_by_id($form_id);
+
+        $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form->form_id);
+        log_message("debug", "xofms -->" . json_encode($where_condition));
+
 
         if ($form) {
             $data['title'] = $form->title . " form";
@@ -1573,10 +1579,12 @@ class Xform extends CI_Controller
                     $this->session->set_userdata(array("form_filters" => $selected_columns));
                 }
                 $data['selected_columns'] = $selected_columns;
-                $data['form_data'] = $this->Xform_model->find_form_data_by_fields($form->form_id, $selected_columns, $this->pagination->per_page, $page);
+                $data['form_data'] = $this->Xform_model->find_form_data_by_fields($form->form_id, $selected_columns, $this->pagination->per_page, $page,$where_condition);
             } else {
-                $data['form_data'] = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page);
+                $data['form_data'] = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page,$where_condition);
             }
+            log_message("debug","Row security ->> ".$this->db->last_query());
+
             $data["links"] = $this->pagination->create_links();
 
             $this->load->view('header', $data);

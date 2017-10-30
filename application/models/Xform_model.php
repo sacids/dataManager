@@ -343,10 +343,17 @@ class Xform_model extends CI_Model
      * @param $table_name
      * @param int $limit
      * @param int $offset
+     * @param null $perm_conditions
      * @return mixed returns data from tables created by uploading xform definitions files.
      */
-    public function find_form_data($table_name, $limit = 30, $offset = 0)
+    public function find_form_data($table_name, $limit = 30, $offset = 0, $perm_conditions = null)
     {
+        if ($perm_conditions != null) {
+            if ($perm_conditions != null) {
+                $this->db->where($perm_conditions, "", false);
+            }
+        }
+
         $this->db->limit($limit, $offset);
         $this->db->order_by("id", "DESC");
         return $this->db->get($table_name)->result();
@@ -357,13 +364,19 @@ class Xform_model extends CI_Model
      * @param array $selected_columns
      * @param int $limit
      * @param int $offset
+     * @param null $perm_conditions
      * @return mixed
      */
-    public function find_form_data_by_fields($table_name, $selected_columns = array(), $limit = 30, $offset = 0)
+    public function find_form_data_by_fields($table_name, $selected_columns = array(), $limit = 30, $offset = 0, $perm_conditions = null)
     {
         $this->db->select(implode(",", array_keys($selected_columns)));
         $this->db->limit($limit, $offset);
         $this->db->order_by("id", "DESC");
+
+        if ($perm_conditions != null) {
+            $this->db->where($perm_conditions, "", false);
+        }
+
         return $this->db->get($table_name)->result();
     }
 
@@ -661,8 +674,8 @@ class Xform_model extends CI_Model
 
     public function find_form_map_by_field_type($table_name, $field_type)
     {
-        $this->db->where("table_name",$table_name);
-        $this->db->where("field_type",$field_type);
+        $this->db->where("table_name", $table_name);
+        $this->db->where("field_type", $field_type);
         $this->db->get(self::$xform_fieldname_map_table_name)->row();
     }
 }

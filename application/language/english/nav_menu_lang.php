@@ -32,6 +32,7 @@ $lang['nav_item_manage_permission'] = "Manage Permission";
 $lang['nav_item_list_module'] = "List Module";
 $lang['nav_item_list_permission'] = "List Permission";
 $lang['nav_item_create_permission'] = "Create Permission";
+$lang['nav_item_acl']       = "Access control list";
 
 //Health Facilities
 $lang['nav_item_manage_facilities'] = "Health Facilities";
