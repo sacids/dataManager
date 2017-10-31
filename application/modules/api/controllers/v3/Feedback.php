@@ -188,7 +188,6 @@ class Feedback extends REST_Controller
         $this->model->set_table('xforms');
         $form_details = $this->model->get_by('form_id', $this->table_name);
 
-
         //set file defn
         $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $form_details->filename);
         $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
@@ -203,7 +202,7 @@ class Feedback extends REST_Controller
             $this->response(array("status" => "failed", "message" => "No details found"), 202);
     }
 
-//get form data
+    //get form data
     function get_form_data($structure, $map)
     {
         //get feedback form details
@@ -253,6 +252,7 @@ class Feedback extends REST_Controller
             if ($type == 'select1') {
                 //$l = $val['option'][$l];
             }
+
             if ($type == 'binary') {
                 // check file extension
                 $value = explode('.', $l);
@@ -261,6 +261,7 @@ class Feedback extends REST_Controller
                     $l = site_url('assets/forms/data') . '/' . $ext_dirs[$file_extension] . '/' . $l;
                 }
             }
+
             if ($type == 'select') {
                 $tmp1 = explode(" ", $l);
                 $arr = array();
@@ -270,9 +271,10 @@ class Feedback extends REST_Controller
                 }
                 $l = implode(",", $arr);
             }
+
             if (substr($label, 0, 5) == 'meta_') continue;
             $tmp['id'] = $id . $c++;
-            $tmp['label'] = $label;
+            $tmp['label'] = str_replace('_', ' ', $label);
             $tmp['type'] = $type;
             $tmp['value'] = $l;
             array_push($holder, $tmp);
@@ -280,7 +282,7 @@ class Feedback extends REST_Controller
         return $holder;
     }
 
-//get field name map
+    //get field name map
     private
     function get_field_name_map($table_name)
     {
