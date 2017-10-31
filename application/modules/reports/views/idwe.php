@@ -25,7 +25,7 @@
                     echo form_close();
                     ?>
                 </div>
-                <div id='idwe-chart' class="" style="min-height: 600px;"></div>
+                <div id='idwe-chart' class="" style="min-height: 700px;"></div>
             </div>
         </div>
     </div>
@@ -62,9 +62,6 @@ if (isset($report_type) && $report_type == "single_disease") {
             $icategories[] = $data->_xf_95b360beefc40c13b168164f302de79d;
         }
     }
-
-    log_message("debug", " icategories  => " . json_encode($icategories));
-    log_message("debug", " returned json => " . json_encode($occurrence_count, JSON_NUMERIC_CHECK));
     ?>
 
 

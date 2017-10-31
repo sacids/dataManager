@@ -58,6 +58,7 @@ require dirname(__FILE__).'/Base.php';
  * @property Facilities_model $Facilities_model
  * @property Model $model
  * @property Acl_model $Acl_model
+ * @property XformReader_model $XformReader_model
  */
 class MX_Controller 
 {
