@@ -457,10 +457,15 @@ class Xform_model extends CI_Model
 
     /**
      * @param $table_name
+     * @param $hide_show_status
      * @return mixed
      */
-    public function get_fieldname_map($table_name)
+    public function get_fieldname_map($table_name, $hide_show_status = null)
     {
+        if ($hide_show_status != NULL) {
+            $this->db->where("hide", $hide_show_status);
+        }
+
         $this->db->where('table_name', $table_name);
         $this->db->from(self::$xform_fieldname_map_table_name);
         return $this->db->get()->result_array();
@@ -661,8 +666,8 @@ class Xform_model extends CI_Model
 
     public function find_form_map_by_field_type($table_name, $field_type)
     {
-        $this->db->where("table_name",$table_name);
-        $this->db->where("field_type",$field_type);
+        $this->db->where("table_name", $table_name);
+        $this->db->where("field_type", $field_type);
         $this->db->get(self::$xform_fieldname_map_table_name)->row();
     }
 }

@@ -193,6 +193,8 @@ class Feedback extends REST_Controller
         $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
         $form_definition = $this->xform_comm->get_defn();
 
+        //print_r($this->get_field_name_map($this->table_name));
+
         //get form data
         $form_data = $this->get_form_data($form_definition, $this->get_field_name_map($this->table_name));
 
@@ -250,6 +252,7 @@ class Feedback extends REST_Controller
 
 
             if ($type == 'select1') {
+                print_r($val);
                 //$l = $val['option'][$l];
             }
 
@@ -286,7 +289,7 @@ class Feedback extends REST_Controller
     private
     function get_field_name_map($table_name)
     {
-        $tmp = $this->Xform_model->get_fieldname_map($table_name);
+        $tmp = $this->Xform_model->get_fieldname_map($table_name, '0');
         $map = array();
         foreach ($tmp as $part) {
             $key = $part['field_name'];
