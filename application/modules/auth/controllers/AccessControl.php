@@ -125,6 +125,13 @@ class AccessControl extends MX_Controller
         }
     }
 
+    public function edit_permission($permission_id)
+    {
+        $this->load->view("header", $this->data);
+        $this->load->view("acl/edit_permission", $this->data);
+        $this->load->view("footer");
+    }
+
     public function get_table_columns($table_name)
     {
         $table_columns = $this->db->list_fields($table_name);
@@ -169,20 +176,20 @@ class AccessControl extends MX_Controller
         if ($this->form_validation->run() === false) {
 
             $this->data['user'] = $this->User_model->find_by_id($user_id);
-            $groups = $this->User_model->find_user_groups();
+            $groups = $this->User_model->get_user_groups_by_id($user_id);
 
-            $this->data['user_groups'] = "{";
+            $this->data['user_groups'] = "{ ";
             $i = 0;
             $count = count($groups);
 
             foreach ($groups as $group) {
-                $this->data['user_groups'] .= $group->name . " " . $group->description;
+                $this->data['user_groups'] .= ucfirst($group->name) . " " . $group->description;
                 if ($i < ($count - 1)) {
                     $this->data['user_groups'] .= " , ";
                 }
                 $i++;
             }
-            $this->data['user_groups'] .= "}";
+            $this->data['user_groups'] .= " }";
             $this->data['permissions'] = $this->Acl_model->find_permissions();
 
             $this->load->view("header", $this->data);

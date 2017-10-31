@@ -89,13 +89,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <?php
-                    if ($this->session->flashdata('message') != '') {
-                        echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-                    }
+                    echo get_flashdata();
                     echo validation_errors();
                     ?>
                 </div>
-            </div><!--end of row -->
+            </div>
 
             <div style="overflow-x: scroll;">
                 <?php echo form_open("xform/delete_entry/" . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>

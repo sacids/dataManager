@@ -38,14 +38,6 @@
 
 defined('BASEPATH') or exit ('No direct script access allowed');
 
-class XmlElement
-{
-    var $name;
-    var $attributes;
-    var $content;
-    var $children;
-}
-
 /**
  * XForm Class
  *
@@ -56,13 +48,7 @@ class XmlElement
  */
 class Xform extends CI_Controller
 {
-    private $form_defn;
-    private $form_data;
-    private $xml_defn_filename;
-    private $xml_data_filename;
-    private $table_name;
-    private $jr_form_id;
-    private $xarray;
+    private $xFormReader;
 
     private $user_id;
     private $user_submitting_feedback_id;
@@ -83,8 +69,11 @@ class Xform extends CI_Controller
             'Ohkr_model',
             'model',
             'Alert_model',
-            'auth/Acl_model'
+            'auth/Acl_model',
+            'webform/XformReader_model'
         ));
+
+        $this->xFormReader = new XformReader_model();
 
         $this->load->library('form_auth');
         $this->load->library('db_exp');
@@ -107,12 +96,17 @@ class Xform extends CI_Controller
     {
         $this->_is_logged_in();
 
+        if (!$this->ion_auth->is_admin()) {
+            $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Xform_model::$xform_table_name);
+        }
+
+
         $data['title'] = $this->lang->line("heading_form_list");
 
         if (!$this->input->post("search")) {
             $config = array(
-                'base_url' => $this->config->base_url("xform/forms"),
-                'total_rows' => $this->Xform_model->count_all_xforms("published"),
+                'base_url'    => $this->config->base_url("xform/forms"),
+                'total_rows'  => $this->Xform_model->count_all_xforms("published"),
                 'uri_segment' => 3,
             );
 
@@ -122,8 +116,13 @@ class Xform extends CI_Controller
             if ($this->ion_auth->is_admin()) {
                 $data['forms'] = $this->Xform_model->get_form_list(NULL, $this->pagination->per_page, $page, "published");
             } else {
-                $data['forms'] = $this->Xform_model->get_form_list($this->user_id, $this->pagination->per_page, $page, "published");
+                if ($filter_conditions != null) {
+                    $data['forms'] = $this->Xform_model->get_form_list(null, $this->pagination->per_page, $page, "published", $filter_conditions);
+                } else {
+                    $data['forms'] = $this->Xform_model->get_form_list($this->user_id, $this->pagination->per_page, $page, "published");
+                }
             }
+
             $data["links"] = $this->pagination->create_links();
 
         } else {
@@ -134,7 +133,10 @@ class Xform extends CI_Controller
             if ($this->ion_auth->is_admin()) {
                 $forms = $this->Xform_model->search_forms(NULL, $form_name, $access, $status);
             } else {
-                $forms = $this->Xform_model->search_forms($this->user_id, $form_name, $access, $status);
+                if ($filter_conditions != null)
+                    $forms = $this->Xform_model->search_forms(null, $form_name, $access, $status, 30, 0, $filter_conditions);
+                else
+                    $forms = $this->Xform_model->search_forms($this->user_id, $form_name, $access, $status);
             }
 
             if ($forms) {
@@ -238,11 +240,10 @@ class Xform extends CI_Controller
                     $path = $this->config->item("form_data_upload_dir") . $file_name;
                     // insert form details in database
                     $data = array(
-                        'file_name' => $file_name,
-                        'user_id' => $user->id,
+                        'file_name'    => $file_name,
+                        'user_id'      => $user->id,
                         "submitted_on" => date("Y-m-d h:i:s")
                     );
-
 
                     $inserted_form_id = $this->Submission_model->create($data);
 
@@ -271,7 +272,7 @@ class Xform extends CI_Controller
         }
 
         // return response
-        $this->get_response($http_response_code);
+        echo $this->_get_response($http_response_code);
     }
 
     /**
@@ -283,25 +284,26 @@ class Xform extends CI_Controller
      */
     public function _insert($filename)
     {
-        // call forms
-        $this->set_data_file($this->config->item("form_data_upload_dir") . $filename);
-        $this->load_xml_data();
+        $datafile = $this->config->item("form_data_upload_dir") . $filename;
+
+        $this->xFormReader->set_data_file($datafile);
+        $this->xFormReader->load_xml_data();
 
         // get mysql statement used to insert form data into corresponding table
 
-        $statement = $this->get_insert_form_data_query();
+        $statement = $this->xFormReader->get_insert_form_data_query();
         $result = $this->Xform_model->insert_data($statement);
 
-        if ($result && isset($this->form_data['Dalili_Dalili'])) {
-            $symptoms_reported = explode(" ", $this->form_data['Dalili_Dalili']);
+        if ($result && isset($this->xFormReader->get_form_data()['Dalili_Dalili'])) {
+            $symptoms_reported = explode(" ", $this->xFormReader->get_form_data()['Dalili_Dalili']);
             // taarifa_awali_Wilaya is the database field name in the mean time
-            $district = $this->form_data['taarifa_awali_Wilaya'];
+            $district = $this->xFormReader->get_form_data()['taarifa_awali_Wilaya'];
 
             $specie_id = 1; //binadamu
 
             $request_data = [
                 "specie_id" => $specie_id,
-                "symptoms" => $symptoms_reported
+                "symptoms"  => $symptoms_reported
             ];
 
             $result = $this->Alert_model->send_post_symptoms_request(json_encode($request_data));
@@ -314,10 +316,10 @@ class Xform extends CI_Controller
                     $ungonjwa = $this->Ohkr_model->find_by_disease_name($disease->title);
 
                     $detected_diseases[] = [
-                        "form_id" => $this->table_name,
-                        "disease_id" => $ungonjwa->id,
-                        "location" => $district,
-                        "instance_id" => $this->form_data['meta_instanceID'],
+                        "form_id"       => $this->xFormReader->get_table_name(),
+                        "disease_id"    => $ungonjwa->id,
+                        "location"      => $district,
+                        "instance_id"   => $this->xFormReader->get_form_data()['meta_instanceID'],
                         "date_detected" => date("Y-m-d H:i:s")
                     ];
                 }
@@ -344,11 +346,11 @@ class Xform extends CI_Controller
                         $suspected_diseases_list .= $i . "." . $disease->disease_name . "\n<br/>";
 
                         $suspected_diseases_array[$i - 1] = array(
-                            "form_id" => $this->table_name,
-                            "disease_id" => $disease->disease_id,
-                            "instance_id" => $this->form_data['meta_instanceID'],
+                            "form_id"       => $this->xFormReader->get_table_name(),
+                            "disease_id"    => $disease->disease_id,
+                            "instance_id"   => $this->xFormReader->get_form_data()['meta_instanceID'],
                             "date_detected" => date("Y-m-d H:i:s"),
-                            "location" => $district
+                            "location"      => $district
                         );
 
                         if (ENVIRONMENT == 'development' || ENVIRONMENT == "testing") {
@@ -385,13 +387,13 @@ class Xform extends CI_Controller
                 }
 
                 $feedback = array(
-                    "user_id" => $this->user_submitting_feedback_id,
-                    "form_id" => $this->table_name,
-                    "message" => $suspected_diseases_list,
+                    "user_id"      => $this->user_submitting_feedback_id,
+                    "form_id"      => $this->xFormReader->get_table_name(),
+                    "message"      => $suspected_diseases_list,
                     "date_created" => date('Y-m-d H:i:s'),
-                    "instance_id" => $this->form_data['meta_instanceID'],
-                    "sender" => "server",
-                    "status" => "pending"
+                    "instance_id"  => $this->xFormReader->get_form_data()['meta_instanceID'],
+                    "sender"       => "server",
+                    "status"       => "pending"
                 );
                 $this->Feedback_model->create_feedback($feedback);
             } else {
@@ -399,145 +401,18 @@ class Xform extends CI_Controller
             }
         } else {
             $feedback = array(
-                "user_id" => $this->user_submitting_feedback_id,
-                "form_id" => $this->table_name,
-                "message" => "Asante kwa kutuma taarifa, Tumepokea fomu yako.",
+                "user_id"      => $this->user_submitting_feedback_id,
+                "form_id"      => $this->xFormReader->get_table_name(),
+                "message"      => "Asante kwa kutuma taarifa, Tumepokea fomu yako.",
                 "date_created" => date('Y-m-d H:i:s'),
-                "instance_id" => $this->form_data['meta_instanceID'],
-                "sender" => "server",
-                "status" => "pending"
+                "instance_id"  => $this->xFormReader->get_form_data()['meta_instanceID'],
+                "sender"       => "server",
+                "status"       => "pending"
             );
             $this->Feedback_model->create_feedback($feedback);
             log_message("debug", "Dalili_Dalili index is not set implement dynamic way of getting dalili field");
         }
         return $result;
-    }
-
-    /**
-     * @param $filename
-     */
-    public function set_data_file($filename)
-    {
-        $this->xml_data_filename = $filename;
-    }
-
-    /**
-     * sets form_data variable to an array containing all fields of a filled xform file submitted
-     * Author : Eric Beda
-     */
-    private function load_xml_data()
-    {
-        // get submitted file
-        $file_name = $this->get_data_file();
-
-        // load file into a string
-        $xml = file_get_contents($file_name);
-
-        // convert string into an object
-        $rxml = $this->xml_to_object($xml);
-
-        // array to hold values and field names;
-        $this->form_data = array(); // TODO move to constructor
-        $prefix = $this->config->item("xform_tables_prefix");
-        //log_message("debug", "Table prefix " . $prefix);
-
-        // set table name
-        $this->table_name = $prefix . str_replace("-", "_", $rxml->attributes ['id']);
-
-        // set form definition structure
-        $file_name = $this->Xform_model->get_form_definition_filename($this->table_name);
-        $this->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
-        $this->load_xml_definition();
-
-        // set form data
-        foreach ($rxml->children as $val) {
-            $this->get_path('', $val);
-        }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function get_data_file()
-    {
-        return $this->xml_data_filename;
-    }
-
-    /**
-     * @param $xml
-     * @return mixed
-     */
-    private function xml_to_object($xml)
-    {
-        $parser = xml_parser_create();
-        xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
-        xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
-        xml_parse_into_struct($parser, $xml, $tags);
-        xml_parser_free($parser);
-
-        $elements = array(); // the currently filling [child] XmlElement array
-        $stack = array();
-        foreach ($tags as $tag) {
-
-            $index = count($elements);
-            if ($tag ['type'] == "complete" || $tag ['type'] == "open") {
-                $elements [$index] = new XmlElement ();
-                $elements [$index]->name = $tag ['tag'];
-
-                if (!empty ($tag ['attributes'])) {
-                    $elements [$index]->attributes = $tag ['attributes'];
-                }
-
-                if (!empty ($tag ['value'])) {
-                    $elements [$index]->content = $tag ['value'];
-                }
-
-                if ($tag ['type'] == "open") { // push
-                    $elements [$index]->children = array();
-                    $stack [count($stack)] = &$elements;
-                    $elements = &$elements [$index]->children;
-                }
-            }
-
-            if ($tag ['type'] == "close") { // pop
-                $elements = &$stack [count($stack) - 1];
-                unset ($stack [count($stack) - 1]);
-            }
-        }
-
-        return $elements [0]; // the single top-level element
-    }
-    /**
-     * Recursive function that runs through xml xform object and uses array keys as
-     * absolute path of variable, and sets its value to the data submitted by user
-     * Author : Eric Beda
-     *
-     * @param string $name of xml element
-     * @param object $obj
-     */
-
-    // TO DO : Change function name to be more representative
-
-    /**
-     * @param string $name
-     * @param object $obj
-     */
-    private function get_path($name, $obj)
-    {
-        $name .= "_" . $obj->name;
-
-        if (is_array($obj->children)) {
-            foreach ($obj->children as $val) {
-                $this->get_path($name, $val);
-            }
-        } else {
-            $column_name = substr($name, 1);
-            //shorten long column names
-            if (strlen($column_name) > 64) {
-                $column_name = shorten_column_name($column_name);
-            }
-            $this->form_data [$column_name] = $obj->content;
-        }
     }
 
     /**
@@ -553,9 +428,9 @@ class Xform extends CI_Controller
     {
         $sms_to_send = array(
             "response_msg_id" => $response_msg_id,
-            "phone_number" => $phone,
-            "date_sent" => date("Y-m-d h:i:s"),
-            "status" => "PENDING"
+            "phone_number"    => $phone,
+            "date_sent"       => date("Y-m-d h:i:s"),
+            "status"          => "PENDING"
         );
 
         if ($msg_id = $this->Ohkr_model->create_send_sms($sms_to_send)) {
@@ -563,7 +438,7 @@ class Xform extends CI_Controller
             $sms_text = "Ndugu " . $first_name . ",\n" . $message;
             $sms_info = array(
                 "from" => $message_sender_name,
-                "to" => $phone,
+                "to"   => $phone,
                 "text" => $sms_text
             );
 
@@ -573,110 +448,14 @@ class Xform extends CI_Controller
                 $message = (array)$infobip_response->messages;
                 $message = array_shift($message);
                 $sms_updates = array(
-                    "status" => "SENT",
-                    "date_sent" => date("c"),
-                    "infobip_msg_id" => $message->messageId,
+                    "status"           => "SENT",
+                    "date_sent"        => date("Y-m-d H:i:s"),
+                    "infobip_msg_id"   => $message->messageId,
                     "infobip_response" => $send_result
                 );
                 $this->Alert_model->update_sms_status($msg_id, $sms_updates);
             }
         }
-    }
-
-    /**
-     * Create query string for inserting data into table from submitted xform data
-     * file
-     * Author : Eric Beda
-     *
-     * @return boolean|string
-     */
-    private function get_insert_form_data_query()
-    {
-
-        $table_name = $this->table_name;
-        $form_data = $this->form_data;
-        $map = $this->get_field_map();
-
-        $has_geopoint = FALSE;
-        $col_names = array();
-        $col_values = array();
-        $points_v = array();
-        $points_n = array();
-
-        //echo '<pre>'; print_r($this->form_defn);
-        foreach ($this->form_defn as $str) {
-
-            $type = $str['type'];
-            $cn = $str['field_name'];
-
-            if (isset($this->form_data[$cn]))
-                $cv = $this->form_data[$cn];
-            else
-                $cv = '';
-
-            if ($cv == '' || $cn == '') continue;
-
-            // check if column name was mapped to fieldmap table
-            if (array_key_exists($cn, $map)) {
-                $cn = $map[$cn];
-            }
-
-            array_push($col_names, $cn);
-            array_push($col_values, $cv);
-
-            if ($type == 'select') {
-                $options = explode(' ', $cv);
-                foreach ($options as $opt) {
-                    $opt = trim($opt);
-
-                    if (array_key_exists($cn . '_' . $opt, $map)) {
-                        $opt = $map[$cn . '_' . $opt];
-                    }
-
-                    array_push($col_values, 1);
-                    array_push($col_names, $opt);
-
-                }
-            }
-
-            if ($type == 'geopoint') {
-
-                $has_geopoint = TRUE;
-                $geopoints = explode(" ", $cv);
-
-                $lat = $geopoints [0];
-                array_push($col_values, $lat);
-                array_push($col_names, $cn . '_lat');
-
-                $lng = $geopoints [1];
-                array_push($col_values, $lng);
-                array_push($col_names, $cn . '_lng');
-
-                $alt = $geopoints [2];
-                array_push($col_values, $alt);
-                array_push($col_names, $cn . '_alt');
-
-                $acc = $geopoints [3];
-                array_push($col_values, $acc);
-                array_push($col_names, $cn . '_acc');
-
-                $point = "GeomFromText('POINT($lat $lng)')";
-                array_push($points_v, $point);
-                array_push($points_n, $cn . '_point');
-            }
-        }
-
-        if ($has_geopoint) {
-            $field_names = "(`" . implode("`,`", $col_names) . "`,`" . implode("`,`", $points_n) . "`)";
-            $field_values = "('" . implode("','", $col_values) . "'," . implode("`,`", $points_v) . ")";
-        } else {
-            $field_names = "(`" . implode("`,`", $col_names) . "`)";
-            $field_values = "('" . implode("','", $col_values) . "')";
-        }
-
-        $query = "INSERT INTO {$table_name} {$field_names} VALUES {$field_values}";
-
-        return $query;
     }
 
     /**
@@ -686,9 +465,9 @@ class Xform extends CI_Controller
      *            Input string
      * @param string $response_message
      *            Input string
-     * @return response
+     * @return string response
      */
-    function get_response($http_response_code, $response_message = "Asante, Fomu imepokelewa")
+    function _get_response($http_response_code, $response_message = "Asante, Fomu imepokelewa")
     {
         // OpenRosa Success Response
         $response = '<OpenRosaResponse xmlns="http://openrosa.org/http/response">
@@ -700,7 +479,7 @@ class Xform extends CI_Controller
         header("X-OpenRosa-Version:1.0");
         header("X-OpenRosa-Accept-Content-Length:" . $content_length);
         header("Date:" . date('r'), FALSE, $http_response_code);
-        echo $response;
+        return $response;
     }
 
     /**
@@ -876,16 +655,16 @@ class Xform extends CI_Controller
                         if ($create_table_result) {
 
                             $form_details = array(
-                                "user_id" => $this->session->userdata("user_id"),
-                                "form_id" => $this->table_name,
-                                "jr_form_id" => $this->jr_form_id,
-                                "title" => $this->input->post("title"),
-                                "description" => $this->input->post("description"),
-                                "filename" => $filename,
+                                "user_id"      => $this->session->userdata("user_id"),
+                                "form_id"      => $this->table_name,
+                                "jr_form_id"   => $this->jr_form_id,
+                                "title"        => $this->input->post("title"),
+                                "description"  => $this->input->post("description"),
+                                "filename"     => $filename,
                                 "date_created" => date("c"),
-                                "access" => $this->input->post("access"),
-                                "perms" => $all_permissions,
-                                "project_id" => $project_id
+                                "access"       => $this->input->post("access"),
+                                "perms"        => $all_permissions,
+                                "project_id"   => $project_id
                             );
 
                             //TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
@@ -925,8 +704,8 @@ class Xform extends CI_Controller
         //$this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url' => $this->config->base_url("xform/searchable_form_lists"),
-            'total_rows' => $this->Xform_model->count_searchable_form(),
+            'base_url'    => $this->config->base_url("xform/searchable_form_lists"),
+            'total_rows'  => $this->Xform_model->count_searchable_form(),
             'uri_segment' => 3,
         );
 
@@ -958,9 +737,9 @@ class Xform extends CI_Controller
 
         if ($this->form_validation->run() === TRUE) {
             $data = array(
-                "xform_id" => $this->input->post("form_id"),
+                "xform_id"      => $this->input->post("form_id"),
                 "search_fields" => $this->input->post("search_field"),
-                "user_id" => $this->user_id
+                "user_id"       => $this->user_id
             );
             $this->db->insert('xforms_config', $data);
 
@@ -998,334 +777,6 @@ class Xform extends CI_Controller
     }
 
     /**
-     * Creates appropriate tables from an xform definition file
-     * Author : Eric Beda
-     *
-     * @param string $file_name
-     *            definition file
-     * @return string with create table statement
-     */
-    public function _initialize($file_name)
-    {
-        //log_message("debug", "File to load " . $file_name);
-
-        // create table structure
-        $this->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
-
-        $this->load_xml_definition();
-
-        // TODO: change function name to get_something suggested get_form_table_definition
-        return $this->get_create_table_sql_query();
-    }
-
-    public function init_test()
-    {
-        $this->set_defn_file($this->config->item("form_definition_upload_dir") . 'testo.xml');
-        $this->load_xml_definition();
-
-        // TODO: change function name to get_something suggested get_form_table_definition
-        echo '<pre>';
-        print_r($this->get_create_table_sql_query());
-    }
-
-    /**
-     * @param $filename
-     */
-    public function set_defn_file($filename)
-    {
-        $this->xml_defn_filename = $filename;
-    }
-
-    /**
-     * Create an array representative of xform definition file for easy transversing
-     * Author : Eric Beda
-     */
-    private function load_xml_definition()
-    {
-        $file_name = $this->get_defn_file();
-        $xml = file_get_contents($file_name);
-        $rxml = $this->xml_to_object($xml);
-
-        // TODO reference by names instead of integer keys
-        $instance = $rxml->children [0]->children [1]->children [0]->children [0];
-
-        $prefix = $this->config->item("xform_tables_prefix");
-        //log_message("debug", "Table prefix during creation " . $prefix);
-        $jr_form_id = $instance->attributes ['id'];
-        $table_name = $prefix . str_replace("-", "_", $jr_form_id);
-
-        // get array rep of xform
-        $this->form_defn = $this->get_form_definition();
-
-        //log_message("debug", "Table name " . $table_name);
-        $this->table_name = $table_name;
-        $this->jr_form_id = $jr_form_id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function get_defn_file()
-    {
-        return $this->xml_defn_filename;
-    }
-
-    /**
-     * Return a double array containing field path as key and a value containing
-     * array filled with its corresponding attributes
-     * Author : Eric Beda
-     *
-     * @return array
-     */
-    private function get_form_definition()
-    {
-
-        // retrieve object describing definition file
-        $rxml = $this->xml_to_object(file_get_contents($this->get_defn_file()));
-
-
-        // get the binds compononent of xform
-        $binds = $rxml->children [0]->children [1]->children;
-        //echo '<pre>'; print_r($rxml->children [1]->children);
-        // get the body section of xform
-        $tmp2 = $rxml->children [0]->children [1]->children [1]->children [0]->children;
-        $tmp2 = $rxml->children [1]->children;
-        // container
-        $xarray = array();
-
-        foreach ($binds as $key => $val) {
-
-            if ($val->name == 'bind') {
-
-                $attributes = $val->attributes;
-                $nodeset = $attributes ['nodeset'];
-
-                $xarray [$nodeset] = array();
-                $xarray [$nodeset] ['field_name'] = str_replace("/", "_", substr($nodeset, 6));
-
-                // set each attribute key and corresponding value
-                foreach ($attributes as $k2 => $v2) {
-
-                    $xarray [$nodeset] [$k2] = $v2;
-                }
-            }
-        }
-        $this->xarray = $xarray;
-        $this->_iterate_defn_file($tmp2, FALSE);
-        return $this->xarray;
-    }
-
-    /**
-     * @param $arr
-     * @param bool $ref
-     */
-    function _iterate_defn_file($arr, $ref = FALSE)
-    {
-
-        $i = 0;
-        foreach ($arr as $val) {
-
-            switch ($val->name) {
-
-                case 'group':
-                    $this->_iterate_defn_file($val->children);
-                    break;
-                case 'input':
-                    $nodeset = $val->attributes['ref'];
-                    $this->xarray[$nodeset]['label'] = '0';
-                    break;
-                case 'select':
-                case 'select1':
-                    $nodeset = $val->attributes['ref'];
-                    $this->_iterate_defn_file($val->children, $nodeset);
-                    break;
-                case 'item':
-                    $l = $val->children[0]->content;
-                    $v = $val->children[1]->content;
-                    $this->xarray[$ref]['option'][$v] = $l;
-                    break;
-            }
-        }
-
-    }
-
-    /**
-     * creates query corresponding to mysql table structure of an xform definition file
-     * Author : Eric Beda
-     *
-     * @return string statement for creating table structure of xform
-     */
-    private function get_create_table_sql_query()
-    {
-        $structure = $this->form_defn;
-        $tbl_name = $this->table_name;
-
-        // initiate statement, set id as primary key, autoincrement
-        $statement = "CREATE TABLE $tbl_name ( id INT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY ";
-
-        // loop through xform definition array
-        $counter = 0;
-        foreach ($structure as $key => $val) {
-
-            // check if type is empty
-            if (empty ($val ['type']))
-                continue;
-
-
-            $field_name = $val['field_name'];
-            $col_name = $this->_map_field($field_name);
-
-            if (array_key_exists('label', $val)) {
-                $field_label = $val['label'];
-            } else {
-                $tmp = explode('/', $val['nodeset']);
-                $field_label = array_pop($tmp);
-            }
-            $type = $val ['type'];
-
-            // check if field is required
-            if (!empty ($val ['required'])) {
-                $required = 'NOT NULL';
-            } else {
-                $required = '';
-            }
-
-            if ($type == 'string' || $type == 'binary' || $type == 'barcode') {
-                $statement .= ", $col_name VARCHAR(300) $required";
-
-            }
-
-            if ($type == 'select1') {
-                // Mysql recommended way of handling single quotes for queries is by using two single quotes at once.
-                if (!$val['option']) {
-                    // itemset
-                    $statement .= ", $col_name  VARCHAR(300) $required";
-                } else {
-                    $tmp3 = array_keys($val ['option']);
-                    $statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $tmp3)) . "') $required";
-                }
-            }
-
-            if ($type == 'select') {
-                $statement .= ", $col_name TEXT $required ";
-
-                foreach ($val['option'] as $key => $select_opts) {
-
-                    $key = $this->_map_field($col_name . '_' . $key);
-                    if (!$key) {
-                        // failed need to exit
-                    }
-                    $statement .= ", " . $key . " ENUM('1','0') DEFAULT '0' NOT NULL ";
-                }
-            }
-
-            if ($type == 'text') {
-                $statement .= ", $col_name TEXT $required ";
-            }
-
-            if ($type == 'date') {
-                $statement .= ", $col_name DATE $required ";
-            }
-
-            if ($type == 'dateTime') {
-                $statement .= ", $col_name datetime $required";
-            }
-
-            if ($type == 'time') {
-                $statement .= ", $col_name TIME $required";
-            }
-
-            if ($type == 'int') {
-                $statement .= ", $col_name INT(20) $required ";
-            }
-
-            if ($type == 'decimal') {
-                $statement .= ", $col_name DECIMAL $required ";
-            }
-
-            if ($type == 'geopoint') {
-
-                $statement .= "," . $col_name . " VARCHAR(150) $required ";
-                $statement .= "," . $col_name . "_point POINT $required ";
-                $statement .= "," . $col_name . "_lat DECIMAL(38,10) $required ";
-                $statement .= "," . $col_name . "_lng DECIMAL(38,10) $required ";
-                $statement .= "," . $col_name . "_acc DECIMAL(38,10) $required ";
-                $statement .= "," . $col_name . "_alt DECIMAL(38,10) $required ";
-            }
-
-            $statement .= "\n";
-        }
-
-        $statement .= ")";
-        return $statement;
-    }
-
-    /**
-     * @param $field_name
-     * @return bool|string
-     */
-    private function _map_field($field_name)
-    {
-
-        if (substr($field_name, 0, 5) == 'meta_') {
-            return $field_name;
-        }
-
-        $fn = '_xf_' . md5($field_name);
-
-        $data = array();
-        $data['table_name'] = $this->table_name;
-        $data['col_name'] = $fn;
-        $data['field_name'] = $field_name;
-
-        if ($this->Xform_model->add_to_field_name_map($data)) {
-            return $fn;
-        }
-
-        //log_message('error', 'failed to map field');
-        return FALSE;
-    }
-
-    /**
-     * @param $arr
-     * @return bool|string
-     */
-    private function _add_to_fieldname_map($arr)
-    {
-
-        $ut = microtime();
-        $pre = '';
-        $prefix = explode("_", $field_name);
-        foreach ($prefix as $parts) {
-            $pre .= substr($value, 0, 1);
-        }
-
-        $pre = $pre . '_' . $ut;
-
-        if ($this->Xform_model->set_field_name($pre, $field_name)) {
-            return $pre;
-        } else {
-            return FALSE;
-        }
-    }
-
-    /**
-     * @return array of shortened field names mapped to xform xml file labels
-     */
-    private function get_field_map()
-    {
-
-        $arr = $this->Xform_model->get_fieldname_map($this->table_name);
-        $map = array();
-        foreach ($arr as $val) {
-            $key = $val['field_name'];
-            $label = $val['col_name'];
-            $map[$key] = $label;
-        }
-        return $map;
-    }
-
-    /**
      * @param $xform_id
      */
     function edit_form($xform_id)
@@ -1353,9 +804,9 @@ class Xform extends CI_Controller
             foreach ($table_fields as $tf) {
                 if (!$this->Xform_model->xform_table_column_exists($form->form_id, $tf)) {
                     $details = [
-                        "table_name" => $form->form_id,
-                        "col_name" => $tf,
-                        "field_name" => $tf,
+                        "table_name"  => $form->form_id,
+                        "col_name"    => $tf,
+                        "field_name"  => $tf,
                         "field_label" => str_replace("_", " ", $tf)
                     ];
                     $this->Xform_model->create_field_name_map($details);
@@ -1407,10 +858,10 @@ class Xform extends CI_Controller
                     $new_perms_string = join(",", $new_perms);
                 }
                 $new_form_details = array(
-                    "title" => $this->input->post("title"),
-                    "description" => $this->input->post("description"),
-                    "access" => $this->input->post("access"),
-                    "perms" => $new_perms_string,
+                    "title"        => $this->input->post("title"),
+                    "description"  => $this->input->post("description"),
+                    "access"       => $this->input->post("access"),
+                    "perms"        => $new_perms_string,
                     "last_updated" => date("c")
                 );
 
@@ -1503,7 +954,7 @@ class Xform extends CI_Controller
         $this->_is_logged_in();
 
         if (!$form_id) {
-            $this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
+            set_flashdata(display_message($this->lang->line("select_form_to_delete"), "error"));
             redirect("xform/forms");
             exit;
         }
@@ -1513,7 +964,7 @@ class Xform extends CI_Controller
         if (isset($_POST['export'])) {
             //check if week number selected
             if ($this->input->post('week') == null) {
-                $this->session->set_flashdata('message', display_message('You should select week number', 'danger'));
+                set_flashdata(display_message('You should select week number', 'danger'));
                 redirect('xform/form_data/' . $form_id, 'refresh');
             }
 
@@ -1525,8 +976,7 @@ class Xform extends CI_Controller
         $form = $this->Xform_model->find_by_id($form_id);
 
         $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form->form_id);
-        log_message("debug", "xofms -->" . json_encode($where_condition));
-
+        log_message("debug", "xfoms ACL conditions -->" . json_encode($where_condition));
 
         if ($form) {
             $data['title'] = $form->title . " form";
@@ -1554,8 +1004,8 @@ class Xform extends CI_Controller
             $data['mapped_fields'] = $mapped_fields;
 
             $config = array(
-                'base_url' => $this->config->base_url("xform/form_data/" . $form_id),
-                'total_rows' => $this->Xform_model->count_all_records($form->form_id),
+                'base_url'    => $this->config->base_url("xform/form_data/" . $form_id),
+                'total_rows'  => $this->Xform_model->count_all_records($form->form_id),
                 'uri_segment' => 4,
             );
 
@@ -1581,11 +1031,11 @@ class Xform extends CI_Controller
                     $this->session->set_userdata(array("form_filters" => $selected_columns));
                 }
                 $data['selected_columns'] = $selected_columns;
-                $data['form_data'] = $this->Xform_model->find_form_data_by_fields($form->form_id, $selected_columns, $this->pagination->per_page, $page,$where_condition);
+                $data['form_data'] = $this->Xform_model->find_form_data_by_fields($form->form_id, $selected_columns, $this->pagination->per_page, $page, $where_condition);
             } else {
-                $data['form_data'] = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page,$where_condition);
+                $data['form_data'] = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page, $where_condition);
             }
-            log_message("debug","Row security ->> ".$this->db->last_query());
+            log_message("debug", "Row security ->> " . $this->db->last_query());
 
             $data["links"] = $this->pagination->create_links();
 
@@ -1612,7 +1062,7 @@ class Xform extends CI_Controller
             $serial = 0;
             foreach ($form_filters as $column_name) {
                 $inc = 1;
-                $column_title = $this->getColumnLetter($serial);
+                $column_title = $this->xFormReader->getColumnLetter($serial);
                 $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
                 $serial++;
             }
@@ -1626,7 +1076,7 @@ class Xform extends CI_Controller
             foreach ($table_fields as $key => $column) {
 
                 $inc = 1;
-                $column_title = $this->getColumnLetter($serial);
+                $column_title = $this->xFormReader->getColumnLetter($serial);
 
                 if (array_key_exists($column, $field_maps)) {
                     $column_name = $field_maps[$column];
@@ -1643,7 +1093,7 @@ class Xform extends CI_Controller
         foreach ($form_data as $data) {
             $serial = 0;
             foreach ($data as $key => $entry) {
-                $column_title = $this->getColumnLetter($serial);
+                $column_title = $this->xFormReader->getColumnLetter($serial);
                 if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
                     $column_value = '';
                 } else {
@@ -1687,7 +1137,7 @@ class Xform extends CI_Controller
 
         $columns = count($table_fields);
 
-        $last_column = $this->columnLetter($columns);
+        $last_column = $this->xFormReader->columnLetter($columns);
 
         //variable html1
         $html1 = '';
@@ -1773,19 +1223,19 @@ class Xform extends CI_Controller
         for ($i = 6, $c = 0; $i < 150; $i++, $c++) {
 
             if (!($c % 8)) {
-                $r = $this->columnLetter($i) . '3:' . $this->columnLetter($i + 7) . '3';
+                $r = $this->xFormReader->columnLetter($i) . '3:' . $this->xFormReader->columnLetter($i + 7) . '3';
                 $this->objPHPExcel->getActiveSheet()->mergeCells($r);
-                $this->objPHPExcel->getActiveSheet()->setCellValue($this->columnLetter($i) . '3', $diseases[$d]);
+                $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i) . '3', $diseases[$d]);
                 //echo " " . $c . ":" . $d;
                 $d++;
 
                 if (!($c % 4)) {
 
                     for ($k = 0; $k < 2; $k++) {
-                        $r = $this->columnLetter($i + $k * 4) . '4:' . $this->columnLetter($i + $k * 4 + 3) . '4';
+                        $r = $this->xFormReader->columnLetter($i + $k * 4) . '4:' . $this->xFormReader->columnLetter($i + $k * 4 + 3) . '4';
                         $this->objPHPExcel->getActiveSheet()->mergeCells($r);
                         $v = ($k % 2) ? ' > 5 yrs ' : ' < 5 yrs';
-                        $this->objPHPExcel->getActiveSheet()->setCellValue($this->columnLetter($i + $k * 4) . '4', $v);
+                        $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i + $k * 4) . '4', $v);
 
                     }
                     //$nne .= '<td colspan="4">  < 5 yrs </td><td colspan="4">  > 5 yrs </td>';
@@ -1793,10 +1243,10 @@ class Xform extends CI_Controller
                     if (!($c % 2)) {
 
                         for ($k = 0; $k < 4; $k++) {
-                            $r = $this->columnLetter($i + $k * 2) . '5:' . $this->columnLetter($i + $k * 2 + 1) . '5';
+                            $r = $this->xFormReader->columnLetter($i + $k * 2) . '5:' . $this->xFormReader->columnLetter($i + $k * 2 + 1) . '5';
                             $this->objPHPExcel->getActiveSheet()->mergeCells($r);
                             $v = ($k % 2) ? 'C' : 'D';
-                            $this->objPHPExcel->getActiveSheet()->setCellValue($this->columnLetter($i + $k * 2) . '5', $v);
+                            $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i + $k * 2) . '5', $v);
 
                         }
                     }
@@ -1805,7 +1255,7 @@ class Xform extends CI_Controller
             }
 
             $v = ($c % 2) ? 'F' : 'M';
-            $this->objPHPExcel->getActiveSheet()->setCellValue($this->columnLetter($i) . '6', $v);
+            $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i) . '6', $v);
 
         }
 
@@ -1816,9 +1266,6 @@ class Xform extends CI_Controller
         $this->model->order_by('_xf_0c37672a5ed28b81b30d37d52b20f57e', 'ASC');
         $this->model->order_by('_xf_3b4caf4273007b260d666188609c6e2a', 'ASC');
         $data = $this->model->as_array()->get_many_by('_xf_20de688d974183449850b0d32a15de47', $week_number);
-
-        //echo '<pre>';
-        //print_r($data);
 
         $idwe_data = array();
         $sn = 1;
@@ -1848,14 +1295,14 @@ class Xform extends CI_Controller
         // set headers
         $header = 'A3:ET6';
         $header_style = array(
-            'fill' => array(
-                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            'fill'      => array(
+                'type'  => PHPExcel_Style_Fill::FILL_SOLID,
                 'color' => array('rgb' => '83C9FC')
 
             ),
-            'font' => array(
-                'bold' => false,
-                'size' => '12',
+            'font'      => array(
+                'bold'  => false,
+                'size'  => '12',
                 'color' => array('rgb' => '000000')
             ),
             'alignment' => array(
@@ -1999,10 +1446,10 @@ class Xform extends CI_Controller
         $this->load->helper('file');
         $this->load->helper('download');
         $config = array(
-            'root' => 'afyadata',
+            'root'    => 'afyadata',
             'element' => 'form_data',
             'newline' => "\n",
-            'tab' => "\t"
+            'tab'     => "\t"
         );
         $data = $this->dbutil->xml_from_result($query, $config);
         force_download($filename, $data);
@@ -2014,7 +1461,7 @@ class Xform extends CI_Controller
     function map_fields($form_id)
     {
         if (!$form_id) {
-            $this->session->set_flashdata("message", display_message("You must select a form", "danger"));
+            set_flashdata(display_message("You must select a form", "danger"));
             redirect("xform/forms");
         }
 
@@ -2045,14 +1492,17 @@ class Xform extends CI_Controller
         if (!$form_id)
             $form_id = "ad_build_week_report_skolls_b_1767716170";
 
-        $this->table_name = $form_id;
-        $map = $this->get_field_map();
+
+        $this->xFormReader->set_table_name($form_id);
+        $map = $this->xFormReader->get_field_map();
 
         $this->load->library("Xform_comm");
         $form_details = $this->Feedback_model->get_form_details($form_id);
+
         $file_name = $form_details->filename;
         $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
         $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+
         $form_definition = $this->xform_comm->get_defn();
         $table_field_names = array();
         foreach ($form_definition as $fdfn) {
@@ -2115,33 +1565,6 @@ class Xform extends CI_Controller
             $this->session->set_flashdata("message", display_message($deleted_entry_count . " " . $message . " deleted successfully"));
             redirect("xform/form_data/" . $xform_id, "refresh");
         }
-    }
-
-    /**
-     * get column name from number
-     *
-     * @param $number
-     * @return string
-     */
-    function getColumnLetter($number)
-    {
-        $numeric = $number % 26;
-        $suffix = chr(65 + $numeric);
-        $prefNum = intval($number / 26);
-        if ($prefNum > 0) {
-            $prefix = $this->getColumnLetter($prefNum - 1) . $suffix;
-        } else {
-            $prefix = $suffix;
-        }
-        return $prefix;
-    }
-
-    //getColumnLetter
-    function columnLetter($n)
-    {
-        for ($r = ""; $n >= 0; $n = intval($n / 26) - 1)
-            $r = chr($n % 26 + 0x41) . $r;
-        return $r;
     }
 
     public function form_overview($xform_id)
@@ -2218,7 +1641,7 @@ class Xform extends CI_Controller
         }
         $data['categories'] = json_encode($categories);
         $data['series'] = array(
-            "name" => "Data submissions",
+            "name"   => "Data submissions",
             "series" => str_replace('"', "", json_encode($series))
         );
         $data['report_title'] = "Last 7 Days submissions";
@@ -2233,7 +1656,7 @@ class Xform extends CI_Controller
         }
         $data['current_year_categories'] = json_encode($current_year_categories);
         $data['current_year_series'] = array(
-            "name" => "Data submissions",
+            "name"   => "Data submissions",
             "series" => str_replace('"', "", json_encode($current_year_series))
         );
 
@@ -2245,85 +1668,5 @@ class Xform extends CI_Controller
         $this->load->view("header", $data);
         $this->load->view("form/form_overview", $data);
         $this->load->view("footer", $data);
-    }
-
-    function configure()
-    {
-        $this->save_dbexp_post_vars();
-        $xform_id = $this->session->userdata['post']['ele_id'];
-
-        $this->model->set_table('xforms');
-        $xform = $this->model->get($xform_id);
-        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $xform->filename);
-        $defn = $this->xform_comm->get_form_definition();
-
-
-        $cols = $this->Xform_model->find_table_columns($xform->form_id);
-        $nn = array();
-        $nn[0] = 'None';
-        foreach ($defn as $v) {
-
-            if (!array_key_exists('label', $v)) continue;
-            $fn = $v['field_name'];
-            $lb = $v['label'];
-            $nn[$fn] = $lb;
-        }
-
-        $this->model->set_table('xforms_config');
-        if ($tmp = $this->model->get_by('xform_id', $xform_id)) {
-            $this->db_exp->set_pri_id($tmp->id);
-            $this->db_exp->set_default_action('edit');
-        } else {
-            $this->db_exp->set_default_action('insert');
-        }
-
-        $this->db_exp->set_table('xforms_config');
-        $this->db_exp->set_hidden('xform_id', $xform_id);
-        $this->db_exp->set_hidden('id');
-        $this->db_exp->set_list('search_fields', $nn);
-        $this->db_exp->render();
-    }
-
-    public function save_dbexp_post_vars()
-    {
-        $post = $this->input->post();
-        $db_exp_submit = $this->input->post('db_exp_submit_engaged');
-        if (!empty ($db_exp_submit) || @$post ['action'] == 'insert' || @$post ['action'] == 'edit' || @$post ['action'] == 'delete') {
-        } else {
-            $this->session->set_userdata('post', $post);
-        }
-    }
-
-    function test_disease_detection()
-    {
-        $specie_id = 11; //binadamu
-        $symptoms = "A02,A03,A04,A05,A06,A07,A08,A09,A10";
-        //field name _xf_dd_1341
-
-        $request_data = [
-            "specie_id" => $specie_id,
-            "symptoms" => $symptoms
-        ];
-
-        $result = $this->Alert_model->send_post_symptoms_request(json_encode($request_data));
-        $json_object = json_decode($result);
-
-        if ($json_object->status == 1) {
-            $detected_diseases = [];
-
-            foreach ($json_object->data as $disease) {
-                $ungonjwa = $this->Ohkr_model->find_by_disease_name($disease->title);
-
-                $detected_diseases[] = [
-                    //"form_id"       => $this->jr_form_id,
-                    "disease_id" => $ungonjwa->id,
-                    //"instance_id"   => $instance_id,
-                    "date_detected" => date("Y-m-d H:i:s")
-                ];
-            }
-            $this->Ohkr_model->save_detected_diseases($detected_diseases);
-        } else {
-            //no disease found
-        }
     }
 }

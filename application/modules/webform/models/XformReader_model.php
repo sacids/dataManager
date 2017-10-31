@@ -50,9 +50,20 @@ class XformReader_model extends CI_Model
         $this->xml_defn_filename = $filename;
     }
 
+    /**
+     * @param $table_name
+     */
     public function set_table_name($table_name)
     {
         $this->table_name = $table_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get_table_name()
+    {
+        return $this->table_name;
     }
 
     /**
@@ -61,6 +72,48 @@ class XformReader_model extends CI_Model
     public function set_data_file($filename)
     {
         $this->xml_data_filename = $filename;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get_form_data()
+    {
+        return $this->form_data;
+    }
+
+    /**
+     * Creates appropriate tables from an xform definition file
+     * Author : Eric Beda
+     *
+     * @param string $file_name
+     *            definition file
+     * @return string with create table statement
+     */
+    public function _initialize($file_name)
+    {
+        //log_message("debug", "File to load " . $file_name);
+
+        // create table structure
+        $this->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
+
+        $this->load_xml_definition();
+
+        // TODO: change function name to get_something suggested get_form_table_definition
+        return $this->get_create_table_sql_query();
+    }
+
+    /**
+     *
+     */
+    public function init_test()
+    {
+        $this->set_defn_file($this->config->item("form_definition_upload_dir") . 'testo.xml');
+        $this->load_xml_definition();
+
+        // TODO: change function name to get_something suggested get_form_table_definition
+        echo '<pre>';
+        print_r($this->get_create_table_sql_query());
     }
 
     /**
@@ -183,7 +236,7 @@ class XformReader_model extends CI_Model
      * @param object $obj
      */
 
-    // TO DO : Change function name to be more representative
+    //TODO : Change function name to be more representative
 
     /**
      * @param string $name
@@ -208,8 +261,16 @@ class XformReader_model extends CI_Model
     }
 
 
+    /**
+     * Create query string for inserting data into table from submitted xform data
+     * file
+     * Author : Eric Beda
+     *
+     * @return boolean|string
+     */
     public function get_insert_form_data_query()
     {
+
         $table_name = $this->table_name;
         $form_data = $this->form_data;
         $map = $this->get_field_map();
@@ -225,7 +286,10 @@ class XformReader_model extends CI_Model
             $type = $str['type'];
             $cn = $str['field_name'];
 
-            $cv = $this->form_data[$cn];
+            if (isset($this->form_data[$cn]))
+                $cv = $this->form_data[$cn];
+            else
+                $cv = '';
 
             if ($cv == '' || $cn == '') continue;
 
@@ -483,7 +547,7 @@ class XformReader_model extends CI_Model
     /**
      * @return array of shortened field names mapped to xform xml file labels
      */
-    private function get_field_map()
+    public function get_field_map()
     {
         $CI =& get_instance();
         $arr = $CI->Xform_model->get_fieldname_map($this->table_name);
@@ -523,6 +587,68 @@ class XformReader_model extends CI_Model
         return FALSE;
     }
 
+    /**
+     * @param $arr
+     * @return bool|string
+     */
+    private function _add_to_fieldname_map($arr)
+    {
+
+        $ut = microtime();
+        $pre = '';
+        $prefix = explode("_", $field_name);
+        foreach ($prefix as $parts) {
+            $pre .= substr($value, 0, 1);
+        }
+
+        $pre = $pre . '_' . $ut;
+
+        if ($this->Xform_model->set_field_name($pre, $field_name)) {
+            return $pre;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /**
+     * get column name from number
+     *
+     * @param $number
+     * @return string
+     */
+    function getColumnLetter($number)
+    {
+        $numeric = $number % 26;
+        $suffix = chr(65 + $numeric);
+        $prefNum = intval($number / 26);
+        if ($prefNum > 0) {
+            $prefix = $this->getColumnLetter($prefNum - 1) . $suffix;
+        } else {
+            $prefix = $suffix;
+        }
+        return $prefix;
+    }
+
+    //getColumnLetter
+
+    /**
+     * @param $n
+     * @return string
+     */
+    function columnLetter($n)
+    {
+        for ($r = ""; $n >= 0; $n = intval($n / 26) - 1)
+            $r = chr($n % 26 + 0x41) . $r;
+        return $r;
+    }
+
+    /**
+     * Create html form
+     *
+     * @param $table_name
+     * @param $xml_filename
+     * @return string
+     */
     public function render_form($table_name, $xml_filename)
     {
         $xr = new XformReader_model();
@@ -532,7 +658,6 @@ class XformReader_model extends CI_Model
         $xr->set_table_name($table_name);
         $xr->load_xml_definition();
         $form_definition = $xr->get_form_definition();
-
 
         /*echo "<pre>";
         print_r($form_definition);

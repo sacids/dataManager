@@ -48,7 +48,7 @@
                                     <td><?php echo $perm->title; ?></td>
                                     <td><?php echo $perm->description; ?></td>
                                     <td><?php echo date('d-m-Y H:i:s', strtotime($perm->date_added)); ?></td>
-                                    <td><?php echo anchor("projects/edit/" . $perm->id, "Edit"); ?></td>
+                                    <td><?php echo anchor("auth/accesscontrol/edit_permission/" . $perm->id, "Edit"); ?></td>
                                 </tr>
                                 <?php $serial++;
                             } ?>
@@ -89,10 +89,9 @@
                 data: {
                     project_id: permissionId
                 },
-
                 beforeSend() {
                     $("#formsListArea").html("");
-                    $("#notificationBar").html('<?=display_message("<i class=\"fa fa-spinner fa-refresh fa-spin fa-1x\" aria-hidden=\"true\"></i> Getting filters, Please wait... ")?>');
+                    $("#notificationBar").html('<?=display_message('<i class="fa fa-spinner fa-refresh fa-spin fa-1x" aria-hidden="true"></i> Getting filters, Please wait... ')?>');
                 },
                 success: function (data) {
 

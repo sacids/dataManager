@@ -126,8 +126,7 @@ class Acl_model extends CI_Model
                 $i++;
             }
             return $condition;
-        } else {
-            return null;
         }
+        return null;
     }
 }
