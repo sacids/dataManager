@@ -15,7 +15,7 @@ class Xform_model extends CI_Model
      *
      * @var string
      */
-    private static $xform_table_name = "xforms"; //default value
+    public static $xform_table_name = "xforms"; //default value
 
     /**
      * Table name for archived/deleted xforms
@@ -130,13 +130,18 @@ class Xform_model extends CI_Model
      * @param null string $status
      * @return mixed returns list of forms available.
      */
-    public function get_form_list($user_id = NULL, $limit = 30, $offset = 0, $status = NULL)
+    public function get_form_list($user_id = NULL, $limit = 30, $offset = 0, $status = NULL, $filter_condition = null)
     {
         if ($user_id != NULL)
             $this->db->where("user_id", $user_id);
 
         if ($status != NULL)
             $this->db->where("status", $status);
+
+        if ($filter_condition != null) {
+            $this->db->where($filter_condition, "", false);
+        }
+
         $this->db->limit($limit, $offset);
         return $this->db->get(self::$xform_table_name)->result();
     }
@@ -192,8 +197,13 @@ class Xform_model extends CI_Model
         return $this->db->get(self::$xform_table_name)->result();
     }
 
-    public function search_forms($user_id = NULL, $name = NULL, $access = NULL, $status = NULL, $limit = 30, $offset = 0)
+    public function search_forms($user_id = NULL, $name = NULL, $access = NULL, $status = NULL, $limit = 30, $offset = 0, $filter_condition = null)
     {
+
+        if ($filter_condition != null) {
+            $this->db->where($filter_condition, "", false);
+        }
+
         if ($user_id != NULL)
             $this->db->where("user_id", $user_id);
 
@@ -207,6 +217,7 @@ class Xform_model extends CI_Model
             $this->db->where("status!=", "archived");
         else
             $this->db->where("status", $status);
+
         $this->db->limit($limit, $offset);
         return $this->db->get(self::$xform_table_name)->result();
     }
@@ -343,10 +354,17 @@ class Xform_model extends CI_Model
      * @param $table_name
      * @param int $limit
      * @param int $offset
+     * @param null $perm_conditions
      * @return mixed returns data from tables created by uploading xform definitions files.
      */
-    public function find_form_data($table_name, $limit = 30, $offset = 0)
+    public function find_form_data($table_name, $limit = 30, $offset = 0, $perm_conditions = null)
     {
+        if ($perm_conditions != null) {
+            if ($perm_conditions != null) {
+                $this->db->where($perm_conditions, "", false);
+            }
+        }
+
         $this->db->limit($limit, $offset);
         $this->db->order_by("id", "DESC");
         return $this->db->get($table_name)->result();
@@ -357,13 +375,19 @@ class Xform_model extends CI_Model
      * @param array $selected_columns
      * @param int $limit
      * @param int $offset
+     * @param null $perm_conditions
      * @return mixed
      */
-    public function find_form_data_by_fields($table_name, $selected_columns = array(), $limit = 30, $offset = 0)
+    public function find_form_data_by_fields($table_name, $selected_columns = array(), $limit = 30, $offset = 0, $perm_conditions = null)
     {
         $this->db->select(implode(",", array_keys($selected_columns)));
         $this->db->limit($limit, $offset);
         $this->db->order_by("id", "DESC");
+
+        if ($perm_conditions != null) {
+            $this->db->where($perm_conditions, "", false);
+        }
+
         return $this->db->get($table_name)->result();
     }
 
