@@ -11,6 +11,10 @@ require APPPATH . '/libraries/REST_Controller.php';
  */
 class Search extends REST_Controller
 {
+    private $table_name;
+    private $label;
+    private $search_value;
+
     function __construct()
     {
         // load model
@@ -42,19 +46,29 @@ class Search extends REST_Controller
                 $flds = explode(',', $form->search_fields);
 
                 $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $sForm->filename);
-                $defn = $this->xform_comm->get_form_definition($sForm->form_id);
+                $defn = $this->xform_comm->get_form_definition();
+                $map = $this->get_fieldname_map($sForm->form_id);
+
+                //print_r($map);
 
                 $nn = array();
                 $tmp2 = array();
-                foreach ($defn as $v) {
 
+
+                foreach ($defn as $v) {
                     if (!array_key_exists('label', $v)) continue;
                     $fn = $v['field_name'];
                     $lb = $v['label'];
 
-                    if (in_array($fn, $flds)) {
+                    //check column mapping
+                    if (array_key_exists($fn, $map))
+                        $col_name = $map[$fn]['col_name'];
+                    else
+                        $col_name = $fn;
+
+                    if (in_array($col_name, $flds)) {
                         $nn['label'] = $lb;
-                        $nn['value'] = $fn;
+                        $nn['value'] = $col_name;
                         array_push($tmp2, $nn);
                     }
                 }
@@ -79,62 +93,116 @@ class Search extends REST_Controller
         }
 
         //get variable
-        $field = $this->get('field');
-        $search = $this->get('search_for');
         $form_id = $this->get('form_id');
+        $this->label = $this->get('field');
+        $this->search_value = $this->get('search_for');
 
         $this->model->set_table('xforms');
-        $xform = $this->model->get_by('form_id', $form_id);
+        $xform = $this->model->get_by('id', $form_id);
 
-        $table = $xform->form_id;
-        $filename = $xform->filename;
+        //table name
+        $this->table_name = $xform->form_id;
 
-        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $filename);
-        $defn = $this->xform_comm->get_form_definition($table);
+        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $xform->filename);
+        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+        $form_definition = $this->xform_comm->get_defn();
 
-        //search results
-        $this->model->set_table($table);
-        $qr = $this->model->get_many_by($field, $search);
+        //get form data
+        $form_data = $this->get_form_data($form_definition, $this->get_fieldname_map($this->table_name));
 
-        if ($qr) {
-            $result = array();
+        if ($form_data)
+            $this->response(array("status" => "success", "form_details" => $form_data), 200);
+        else
+            $this->response(array("status" => "failed", "message" => "No search results found"), 202);
+    }
 
-            foreach ($qr as $item) {
-                $tmp2 = array();
+    //get form data
+    function get_form_data($structure, $map)
+    {
+        //get feedback form details
+        $this->model->set_table($this->table_name);
+        $data = $this->model->get_by($this->label, $this->search_value);
 
-                foreach ($defn as $var) {
-                    if (!array_key_exists('label', $var)) continue;
-                    $field_type = $var['type'];
-                    $label = $var['label'];
-                    $field_name = $var['field_name'];
-                    $id = $item->id;
+        if (!$data) return false;
+        $holder = array();
+        //print_r($map);
+        //print_r($structure);
 
-                    if ($field_type == 'geopoint' OR $field_type == 'binary') continue;
-                    if ($field_type == 'select') {
-                        $opts = $var['option'];
+        $ext_dirs = array(
+            'jpg' => "images",
+            'jpeg' => "images",
+            'png' => "images",
+            '3gpp' => 'audio',
+            'amr' => 'audio',
+            '3gp' => 'video',
+            'mp4' => 'video');
 
-                        $tmp1 = explode(" ", $item->$field_name);
-                        $t2 = '';
-                        foreach ($tmp1 as $v1) {
-                            $t2 .= ', ' . $opts[$v1];
-                        }
-                        $val = $t2;
-                    } else {
-                        $val = $item->$field_name;
-                    }
+        $c = 1;
+        $id = $data->id;
 
-                    $tmp2['label'] = $label;
-                    $tmp2['value'] = $val;
-                    array_push($result, $tmp2);
+        foreach ($structure as $val) {
+            $tmp = array();
+            $field_name = $val['field_name'];
+            $type = $val['type'];
+
+            //TODO : change way to get label
+            if (array_key_exists($field_name, $map)) {
+                if (!empty($map[$field_name]['field_label'])) {
+                    $label = $map[$field_name]['field_label'];
+                } else {
+                    if (!array_key_exists('label', $val))
+                        $label = $field_name;
+                    else
+                        $label = $val['label'];
                 }
             }
 
-            //response
-            $this->response(array('status' => 'success', 'form_details' => $result), 200);
+            if (array_key_exists($field_name, $map)) {
+                $field_name = $map[$field_name]['col_name'];
+            }
+            $l = $data->$field_name;
 
-        } else {
-            $this->response(array("status" => "failed", "message" => "No search results found"), 202);
+
+            if ($type == 'select1') {
+                //$l = $val['option'][$l];
+            }
+            if ($type == 'binary') {
+                // check file extension
+                $value = explode('.', $l);
+                $file_extension = end($value);
+                if (array_key_exists($file_extension, $ext_dirs)) {
+                    $l = site_url('assets/forms/data') . '/' . $ext_dirs[$file_extension] . '/' . $l;
+                }
+            }
+            if ($type == 'select') {
+                $tmp1 = explode(" ", $l);
+                $arr = array();
+                foreach ($tmp1 as $item) {
+                    $item = trim($item);
+                    array_push($arr, $val['option'][$item]);
+                }
+                $l = implode(",", $arr);
+            }
+            if (substr($label, 0, 5) == 'meta_') continue;
+            $tmp['id'] = $id . $c++;
+            $tmp['label'] = $label;
+            $tmp['type'] = $type;
+            $tmp['value'] = $l;
+            array_push($holder, $tmp);
         }
+        return $holder;
+    }
+
+    //get fieldname map
+    private function get_fieldname_map($table_name)
+    {
+        $tmp = $this->Xform_model->get_fieldname_map($table_name);
+        $map = array();
+        foreach ($tmp as $part) {
+            $key = $part['field_name'];
+            $map[$key] = $part;
+        }
+        return $map;
     }
 
 }

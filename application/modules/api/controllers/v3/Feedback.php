@@ -89,8 +89,12 @@ class Feedback extends REST_Controller
 
                     //calculate week number
                     $this->model->set_table($value->form_id);
-                    $table = $this->model->get_by('meta_instanceID', $value->instance_id);
+                    $table = $this->model->as_array()->get_by('meta_instanceID', $value->instance_id);
 
+//                    if (array_key_exists('meta_instanceName', $table))
+//                        $label = ' - ' . $table['meta_instanceName'];
+//                    else
+//                        $label = '';
 
                     //feedback array
                     $feedback[] = array(
