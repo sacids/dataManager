@@ -59,7 +59,9 @@
                             <td><?php echo ($user->facility != 0) ? $user->facilities->name : 'No facility'; ?></td>
                             <td><?php echo ($user->active) ? anchor("auth/deactivate/" . $user->id, lang('index_active_link'), array("class" => 'btn btn-info btn-xs')) :
                                     anchor("auth/activate/" . $user->id, lang('index_inactive_link'), array("class" => 'btn btn-warning btn-xs')); ?>
-                                <?php echo anchor("auth/edit_user/" . $user->id, lang('edit_user_heading'), array("class" => 'btn btn-primary btn-xs')); ?></td>
+                                <?php echo anchor("auth/edit_user/" . $user->id, lang('edit_user_heading'), array("class" => 'btn btn-primary btn-xs')); ?>
+                                <?php echo anchor("auth/accesscontrol/assign_permission/" . $user->id, lang('edit_user_assign_permission'), array("class" => 'btn btn-warning btn-xs')); ?>
+                            </td>
                             </td>
                         </tr>
                         <?php

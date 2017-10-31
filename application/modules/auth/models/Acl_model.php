@@ -33,6 +33,27 @@ class Acl_model extends CI_Model
     }
 
     /**
+     * @param $users_permissions
+     * @return mixed
+     */
+    public function assign_users_permissions($users_permissions)
+    {
+        return $this->db->insert_batch(self::$table_name_users_permissions, $users_permissions);
+    }
+
+    /**
+     * @param $user_id
+     * @param $permission_id
+     * @return mixed
+     */
+    public function delete_user_permission($user_id, $permission_id)
+    {
+        $this->db->where("user_id", $user_id);
+        $this->db->where("permission_id", $permission_id);
+        return $this->db->delete(self::$table_name_users_permissions);
+    }
+
+    /**
      * @param int $limit
      * @param int $offset
      * @return mixed

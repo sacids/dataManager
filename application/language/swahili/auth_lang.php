@@ -146,3 +146,6 @@ $lang['reset_password_new_password_confirm_label']            = 'Hakiki neno sir
 $lang['reset_password_submit_btn']                            = 'Badili';
 $lang['reset_password_validation_new_password_label']         = 'Neno siri jipya';
 $lang['reset_password_validation_new_password_confirm_label'] = 'Hakiki neno siri jipya';
+
+
+$lang['edit_user_assign_permission']            =  'Gawa ruhusa';

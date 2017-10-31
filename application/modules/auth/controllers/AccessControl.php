@@ -47,7 +47,6 @@ class AccessControl extends MX_Controller
             redirect("auth/accesscontrol");
         }
 
-
         $this->form_validation->set_rules("filter", "Filter name", "required");
         $this->form_validation->set_rules("table", "Table name", "required");
         $this->form_validation->set_rules("filter_column", "Column name", "");
@@ -74,7 +73,7 @@ class AccessControl extends MX_Controller
             $filters_count = count($filter_column);
 
             for ($i = 0; $i < $filters_count; $i++) {
-                $condition .= " " . $filter_column[$i] . " " . $filter_operator[$i] . " " . $filter_value[$i] . " ";
+                $condition .= " " . $filter_column[$i] . " " . $filter_operator[$i] . " '" . $filter_value[$i] . "' ";
 
                 if ($i < ($filters_count - 1)) {
                     $condition .= " AND ";
@@ -112,7 +111,7 @@ class AccessControl extends MX_Controller
             $this->load->view("footer");
         } else {
             $permission = [
-                "title"        => $this->input->post("permission"),
+                "title"       => $this->input->post("permission"),
                 "description" => $this->input->post("description"),
                 "date_added"  => date("Y-m-d H:i:s")
             ];
@@ -139,12 +138,11 @@ class AccessControl extends MX_Controller
         }
     }
 
-
     public function filters($permission_id)
     {
         $permission_filters = NULL;
         if ($permission_id) {
-            $permission_filters = $this->Acl_model->find_filters(100,0,$permission_id);
+            $permission_filters = $this->Acl_model->find_filters(100, 0, $permission_id);
             $permission_filters_count = $this->Acl_model->count_permission_filters($permission_id);
         }
 
@@ -156,6 +154,62 @@ class AccessControl extends MX_Controller
             }
         } else {
             $this->data['filters'] = $permission_filters;
+        }
+    }
+
+    public function assign_permission($user_id)
+    {
+        if (!$user_id) {
+            set_flashdata(display_message("Select user to assign permission", "warning"));
+            redirect("auth/users_list");
+        }
+
+        $this->form_validation->set_rules("user_id", "User id", "required");
+
+        if ($this->form_validation->run() === false) {
+
+            $this->data['user'] = $this->User_model->find_by_id($user_id);
+            $groups = $this->User_model->find_user_groups();
+
+            $this->data['user_groups'] = "{";
+            $i = 0;
+            $count = count($groups);
+
+            foreach ($groups as $group) {
+                $this->data['user_groups'] .= $group->name . " " . $group->description;
+                if ($i < ($count - 1)) {
+                    $this->data['user_groups'] .= " , ";
+                }
+                $i++;
+            }
+            $this->data['user_groups'] .= "}";
+            $this->data['permissions'] = $this->Acl_model->find_permissions();
+
+            $this->load->view("header", $this->data);
+            $this->load->view("acl/assign_permission", $this->data);
+            $this->load->view("footer");
+        } else {
+
+            $post_permissions = $this->input->post("permissions");
+
+            $count = count($post_permissions);
+
+            $users_permissions = [];
+            for ($j = 0; $j < $count; $j++) {
+                $this->Acl_model->delete_user_permission($user_id, $post_permissions[$j]);
+                $users_permissions[$j] = [
+                    "user_id"       => $user_id,
+                    "permission_id" => $post_permissions[$j],
+                    "date_added"    => date("Y-m-d H:i:s")
+                ];
+            }
+
+            if ($this->Acl_model->assign_users_permissions($users_permissions)) {
+                set_flashdata(display_message("You have assigned permission(s) successfully"));
+            } else {
+                set_flashdata(display_message("Failed to assign permission", "error"));
+            }
+            redirect("auth/accesscontrol/assign_permission/" . $user_id);
         }
     }
 }

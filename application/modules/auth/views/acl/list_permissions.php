@@ -20,7 +20,7 @@
                 <li><?= anchor('dashboard', 'Dashboard') ?></li>
                 <li><?= anchor('auth', 'Auth') ?></li>
                 <li class="active">Permissions</li>
-                <li class="pull-right"><?= anchor('auth/accesscontrol/new_permission', 'Add New','class="pull-right active"') ?></li>
+                <li class="pull-right"><?= anchor('auth/accesscontrol/new_permission', 'Add New', 'class="pull-right active"') ?></li>
             </ol>
 
             <div class="row">
@@ -63,7 +63,7 @@
                     <?php } else { ?>
                         <div class="fail_message">You don't have any permission yet</div>
                         <div class="" style="margin-top:20px;">
-                            <button class="btn btn-primary btn-lg">Create your first permission</button>
+                            <?= anchor('auth/accesscontrol/new_permission/', '<button class="btn btn-primary btn-lg">Create your first permission</button>', 'class=""') ?>
                         </div>
                     <?php } ?>
                 </div>
@@ -106,7 +106,7 @@
 
                             html += "<div><h4>" + filter.name + "</h4><span class='small'>" + filter.table_name
                                 + "</span><span class='pull-right'><a href='<?= base_url('auth/accesscontrol/edit_filter')?>/" + filter.id + "'>Edit</a></span>"
-                                + "<p>Condition: "+filter.where_condition+"</p></div>";
+                                + "<p>Condition: " + filter.where_condition + "</p></div>";
                         });
                     }
 
