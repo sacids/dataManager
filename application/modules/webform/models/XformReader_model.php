@@ -109,7 +109,8 @@ class XformReader_model extends CI_Model
     /**
      * @return mixed
      */
-    public function get_jr_form_id(){
+    public function get_jr_form_id()
+    {
         return $this->jr_form_id;
     }
 
@@ -322,6 +323,10 @@ class XformReader_model extends CI_Model
 
         foreach ($this->form_defn as $str) {
 
+            // check if type is empty
+            if (empty ($str ['type']))
+                continue;
+
             $type = $str['type'];
             $cn = $str['field_name'];
 
@@ -493,7 +498,6 @@ class XformReader_model extends CI_Model
             // check if type is empty
             if (empty ($val ['type']))
                 continue;
-
 
             $field_name = $val['field_name'];
             $col_name = $this->_map_field($field_name);
