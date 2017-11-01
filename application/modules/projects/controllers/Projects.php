@@ -82,35 +82,37 @@ class Projects extends MX_Controller
 
         $filter_conditions = null;
         if (!$this->ion_auth->is_admin()) {
-            $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Xform_model::$xform_table_name);
+            $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Project_model::$table_name);
+
+            $total_rows = $this->Project_model->count_projects(get_current_user_id(), $filter_conditions);
+        } else {
+            $total_rows = $this->Project_model->count_projects();
         }
 
         $config = array(
             'base_url'    => $this->config->base_url("projects/lists"),
-            'total_rows'  => $this->Project_model->count_projects(),
+            'total_rows'  => $total_rows,
             'uri_segment' => 3,
         );
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-        $this->data['project_list'] = $this->Project_model->get_project_list($this->pagination->per_page, $page, $filter_conditions);
+        if ($this->ion_auth->is_admin()) {
+            $this->data['project_list'] = $this->Project_model->get_project_list($this->pagination->per_page, $page);
+        } else {
+            $this->data['project_list'] = $this->Project_model->get_project_list($this->pagination->per_page, $page, get_current_user_id(), $filter_conditions);
+        }
         $this->data["links"] = $this->pagination->create_links();
 
-        //render view
         $this->load->view('header', $this->data);
         $this->load->view("lists");
         $this->load->view('footer');
     }
 
-    //add new project
     function add_new()
     {
         $this->data['title'] = "Add new project";
-
-        //check if logged in
-        $this->_is_logged_in();
-
         //check permission
         //$this->has_allowed_perm($this->router->fetch_method());
 
@@ -168,9 +170,6 @@ class Projects extends MX_Controller
     {
         $this->data['title'] = "Edit project";
 
-        //check if logged in
-        $this->_is_logged_in();
-
         //check permission
         //$this->has_allowed_perm($this->router->fetch_method());
 
@@ -217,10 +216,16 @@ class Projects extends MX_Controller
 
     public function forms($project_id = NULL)
     {
+        $filter_conditions = null;
+        if (!$this->ion_auth->is_admin()) {
+            $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Xform_model::$xform_table_name);
+        }
+
         $project_forms = NULL;
+        $project_forms_count = 0;
         if ($project_id) {
-            $project_forms = $this->Project_model->find_project_forms($project_id);
-            $project_forms_count = $this->Project_model->count_project_forms($project_id);
+            $project_forms = $this->Project_model->find_project_forms($project_id, $filter_conditions);
+            $project_forms_count = $this->Project_model->count_project_forms($project_id, $filter_conditions);
         }
 
         if ($this->input->is_ajax_request()) {

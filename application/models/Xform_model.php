@@ -137,6 +137,7 @@ class Xform_model extends CI_Model
      * @param int $limit
      * @param int $offset
      * @param null string $status
+     * @param null $filter_condition
      * @return mixed returns list of forms available.
      */
     public function get_form_list($user_id = NULL, $limit = 30, $offset = 0, $status = NULL, $filter_condition = null)
