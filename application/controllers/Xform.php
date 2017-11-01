@@ -74,14 +74,20 @@ class Xform extends CI_Controller
         ));
 
         $this->xFormReader = new XformReader_model();
-
         $this->load->library('form_auth');
-        $this->load->library('db_exp');
-        $this->load->library('xform_comm');
+
         $this->user_id = $this->session->userdata("user_id");
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><i class="fa fa-warning"></i>.', '</div>');
 
         $this->objPHPExcel = new PHPExcel();
+    }
+
+    function _is_logged_in()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+            exit;
+        }
     }
 
     public function index()
@@ -99,7 +105,6 @@ class Xform extends CI_Controller
         if (!$this->ion_auth->is_admin()) {
             $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Xform_model::$xform_table_name);
         }
-
 
         $data['title'] = $this->lang->line("heading_form_list");
 
@@ -148,14 +153,6 @@ class Xform extends CI_Controller
         $this->load->view('header', $data);
         $this->load->view("form/index");
         $this->load->view('footer');
-    }
-
-    function _is_logged_in()
-    {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-            exit;
-        }
     }
 
     /**
@@ -382,8 +379,6 @@ class Xform extends CI_Controller
 					tafadhali wasiliana na wataalam wetu kwa msaada zaidi";
                     //$suspected_diseases_list = "We received your information, but we could not suspect any disease with specified symptoms.
                     //Please contact with our team for more details.";
-
-                    log_message("debug", "Could not find disease with the specified symptoms");
                 }
 
                 $feedback = array(
@@ -630,7 +625,7 @@ class Xform extends CI_Controller
                 $this->upload->initialize($config);
 
                 if (!$this->upload->do_upload("userfile")) {
-                    $this->session->set_flashdata("message", "<div class='warning'>" . $this->upload->display_errors("", "") . "</div>");
+                    set_flashdata(display_message($this->upload->display_errors("", ""), "error"));
                     redirect("xform/add_new/{$project_id}");
                 } else {
                     $xml_data = $this->upload->data();
@@ -643,9 +638,9 @@ class Xform extends CI_Controller
                         $all_permissions = join(",", $perms);
                     }
 
-                    $create_table_statement = $this->_initialize($filename);
+                    $create_table_statement = $this->xFormReader->initialize($filename);
 
-                    if ($this->Xform_model->find_by_xform_id($this->table_name)) {
+                    if ($this->Xform_model->find_by_xform_id($this->xFormReader->get_table_name())) {
                         @unlink($form_definition_upload_dir . $filename);
                         $this->session->set_flashdata("message", display_message("Form ID is already used, try a different one", "danger"));
                         redirect("xform/add_new/{$project_id}");
@@ -655,13 +650,13 @@ class Xform extends CI_Controller
                         if ($create_table_result) {
 
                             $form_details = array(
-                                "user_id"      => $this->session->userdata("user_id"),
-                                "form_id"      => $this->table_name,
-                                "jr_form_id"   => $this->jr_form_id,
+                                "user_id"      => get_current_user_id(),
+                                "form_id"      => $this->xFormReader->get_table_name(),
+                                "jr_form_id"   => $this->xFormReader->get_jr_form_id(),
                                 "title"        => $this->input->post("title"),
                                 "description"  => $this->input->post("description"),
                                 "filename"     => $filename,
-                                "date_created" => date("c"),
+                                "date_created" => date("Y-m-d H:i:s"),
                                 "access"       => $this->input->post("access"),
                                 "perms"        => $all_permissions,
                                 "project_id"   => $project_id
@@ -695,10 +690,10 @@ class Xform extends CI_Controller
     //list searchable form
     function searchable_form_lists()
     {
-        $this->data['title'] = "List searchable form";
-
         //check if logged in
         $this->_is_logged_in();
+
+        $this->data['title'] = "List searchable form";
 
         //check permission
         //$this->has_allowed_perm($this->router->fetch_method());
@@ -781,10 +776,7 @@ class Xform extends CI_Controller
      */
     function edit_form($xform_id)
     {
-
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        $this->_is_logged_in();
 
         if (!$xform_id) {
             $this->session->set_flashdata("message", $this->lang->line("select_form_to_edit"));
@@ -905,9 +897,7 @@ class Xform extends CI_Controller
      */
     function archive_xform($xform_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        $this->_is_logged_in();
 
         if (!$xform_id) {
             $this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
@@ -928,9 +918,7 @@ class Xform extends CI_Controller
      */
     function restore_from_archive($xform_id)
     {
-        if (!$this->ion_auth->logged_in()) {
-            redirect('auth/login', 'refresh');
-        }
+        $this->_is_logged_in();
 
         if (!$xform_id) {
             $this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
@@ -959,6 +947,13 @@ class Xform extends CI_Controller
             exit;
         }
 
+        $form = $this->Xform_model->find_by_id($form_id);
+
+        $where_condition = null;
+        if (!$this->ion_auth->is_admin()) {
+            $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form->form_id);
+        }
+
         //if $_POST['export']
         //todo add a check if is idwe form
         if (isset($_POST['export'])) {
@@ -972,11 +967,6 @@ class Xform extends CI_Controller
             $week_number = $this->input->post('week');
             $this->export_IDWE($form_id, $week_number);
         }
-
-        $form = $this->Xform_model->find_by_id($form_id);
-
-        $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form->form_id);
-        log_message("debug", "xfoms ACL conditions -->" . json_encode($where_condition));
 
         if ($form) {
             $data['title'] = $form->title . " form";
@@ -1035,7 +1025,6 @@ class Xform extends CI_Controller
             } else {
                 $data['form_data'] = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page, $where_condition);
             }
-            log_message("debug", "Row security ->> " . $this->db->last_query());
 
             $data["links"] = $this->pagination->create_links();
 
@@ -1054,8 +1043,13 @@ class Xform extends CI_Controller
      *
      * @param null $form_id
      */
-    function excel_export_form_data($form_id = NULL)
+    function excel_export_form_data($form_id)
     {
+        $where_condition = null;
+        if (!$this->ion_auth->is_admin()) {
+            $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form_id);
+        }
+
         //get form data
         if ($this->session->userdata("form_filters")) {
             $form_filters = $this->session->userdata("form_filters");
@@ -1066,7 +1060,7 @@ class Xform extends CI_Controller
                 $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
                 $serial++;
             }
-            $form_data = $this->Xform_model->find_form_data_by_fields($form_id, $form_filters, 5000);
+            $form_data = $this->Xform_model->find_form_data_by_fields($form_id, $form_filters, 5000, 0, $where_condition);
         } else {
             //table fields
             $table_fields = $this->Xform_model->find_table_columns($form_id);
@@ -1086,7 +1080,7 @@ class Xform extends CI_Controller
                 $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
                 $serial++;
             }
-            $form_data = $this->Xform_model->find_form_data($form_id);
+            $form_data = $this->Xform_model->find_form_data($form_id, 5000, 0, $where_condition);
         }
 
         $inc = 2;
@@ -1247,7 +1241,6 @@ class Xform extends CI_Controller
                             $this->objPHPExcel->getActiveSheet()->mergeCells($r);
                             $v = ($k % 2) ? 'C' : 'D';
                             $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i + $k * 2) . '5', $v);
-
                         }
                     }
 
@@ -1256,7 +1249,6 @@ class Xform extends CI_Controller
 
             $v = ($c % 2) ? 'F' : 'M';
             $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i) . '6', $v);
-
         }
 
 
@@ -1492,18 +1484,16 @@ class Xform extends CI_Controller
         if (!$form_id)
             $form_id = "ad_build_week_report_skolls_b_1767716170";
 
-
         $this->xFormReader->set_table_name($form_id);
         $map = $this->xFormReader->get_field_map();
 
-        $this->load->library("Xform_comm");
         $form_details = $this->Feedback_model->get_form_details($form_id);
 
         $file_name = $form_details->filename;
-        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
-        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+        $this->xFormReader->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
+        $this->xFormReader->load_xml_definition($this->config->item("xform_tables_prefix"));
 
-        $form_definition = $this->xform_comm->get_defn();
+        $form_definition = $this->xFormReader->get_defn();
         $table_field_names = array();
         foreach ($form_definition as $fdfn) {
             $kk = $fdfn['field_name'];

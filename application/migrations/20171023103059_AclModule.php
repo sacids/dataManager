@@ -87,8 +87,8 @@ class Migration_AclModule extends CI_Migration
         $this->dbforge->add_field($fields);
         $this->dbforge->create_table('acl_users_permissions');
 
-        $this->db->query('ALTER TABLE acl_users_permissions ADD CONSTRAINT fk_acl_user_id FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE;');
+        /*$this->db->query('ALTER TABLE acl_users_permissions ADD CONSTRAINT fk_acl_user_id FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE;');*/
 
-        /*$this->db->query('ALTER TABLE acl_users_permissions ADD CONSTRAINT fk_acl_perm_id FOREIGN KEY(permission_id) REFERENCES acl_permissions(id) ON DELETE CASCADE ON UPDATE CASCADE;');*/
+        $this->db->query('ALTER TABLE acl_users_permissions ADD CONSTRAINT fk_acl_perm_id FOREIGN KEY(permission_id) REFERENCES acl_permissions(id) ON DELETE CASCADE ON UPDATE CASCADE;');
     }
 }

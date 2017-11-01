@@ -8,6 +8,11 @@
  */
 class Xform_model extends CI_Model
 {
+    /**
+     * Currently logged in user id
+     *
+     * @var int
+     */
     private $user_id;
 
     /**
@@ -18,19 +23,25 @@ class Xform_model extends CI_Model
     public static $xform_table_name = "xforms"; //default value
 
     /**
-     * Table name for archived/deleted xforms
+     * Table name for archived/deleted xforms //default value
      *
      * @var string
      */
-    private static $archive_xform_table_name = "archive_xformx"; //default value
+    private static $archive_xform_table_name = "archive_xformx";
 
+    /**
+     * @var string
+     */
     private static $xform_fieldname_map_table_name = "xform_fieldname_map";
 
 
+    /**
+     * Xform_model constructor.
+     */
     public function __construct()
     {
         $this->initialize_table();
-        $this->user_id = $this->session->userdata('user_id');
+        $this->user_id = get_current_user_id();
     }
 
     /**
@@ -62,7 +73,6 @@ class Xform_model extends CI_Model
      */
     public function create_table($statement)
     {
-
         if ($this->db->simple_query($statement)) {
             log_message("debug", "Success!");
             return TRUE;
@@ -90,8 +100,8 @@ class Xform_model extends CI_Model
     }
 
     /**
-     * @param $form_details an array of form details with keys match db field names
-     * @return id for the created form
+     * @param array $form_details associative array of form details with keys match db field names
+     * @return int form_id for the created form
      */
     public function create_xform($form_details)
     {
@@ -100,13 +110,12 @@ class Xform_model extends CI_Model
     }
 
     /**
-     * @param int    xform_id the row that needs to be updated
-     * @param string form_id
+     * @param int $xform_id the row that needs to be updated
+     * @param string $form_id
      * @return bool
      */
     public function update_form_id($xform_id, $form_id)
     {
-
         $data = array('form_id' => $form_id);
         $this->db->where('id', $xform_id);
         return $this->db->update(self::$xform_table_name, $data);
@@ -128,6 +137,7 @@ class Xform_model extends CI_Model
      * @param int $limit
      * @param int $offset
      * @param null string $status
+     * @param null $filter_condition
      * @return mixed returns list of forms available.
      */
     public function get_form_list($user_id = NULL, $limit = 30, $offset = 0, $status = NULL, $filter_condition = null)
@@ -145,7 +155,6 @@ class Xform_model extends CI_Model
         $this->db->limit($limit, $offset);
         return $this->db->get(self::$xform_table_name)->result();
     }
-
 
     /**
      * @param bool $user_id
@@ -197,6 +206,16 @@ class Xform_model extends CI_Model
         return $this->db->get(self::$xform_table_name)->result();
     }
 
+    /**
+     * @param null $user_id
+     * @param null $name
+     * @param null $access
+     * @param null $status
+     * @param int $limit
+     * @param int $offset
+     * @param null $filter_condition
+     * @return mixed
+     */
     public function search_forms($user_id = NULL, $name = NULL, $access = NULL, $status = NULL, $limit = 30, $offset = 0, $filter_condition = null)
     {
 
@@ -246,7 +265,7 @@ class Xform_model extends CI_Model
      * Finds a table field with point data type
      *
      * @param $table_name
-     * @return field name or FALSE
+     * @return string|bool column name or FALSE
      */
     public function get_point_field($table_name)
     {
@@ -266,23 +285,15 @@ class Xform_model extends CI_Model
     /**
      * Inserts field name and corresponding label into field name map
      *
-     * @param $table_name
      * @param $data
      * @return TRUE or FALSE
+     * @internal param $table_name
      */
     public function insert_into_map($data)
     {
         return $this->db->insert_batch(self::$xform_fieldname_map_table_name, $data);
 
     }
-
-    /**
-     * Returns result array for all fields of particular table
-     *
-     * @param $table_name
-     * @return result array
-     */
-
 
     /**
      * @param $form_id
@@ -506,12 +517,20 @@ class Xform_model extends CI_Model
         return $this->db->count_all_results();
     }
 
+    /**
+     * @param $form_id
+     * @return mixed
+     */
     public function get_form_definition_filename($form_id)
     {
         $this->db->select('filename')->where('form_id', $form_id)->from('xforms');
         return $this->db->get()->row(1)->filename;
     }
 
+    /**
+     * @param $data
+     * @return mixed
+     */
     public function add_to_field_name_map($data)
     {
         $q = $this->db->insert_string(self::$xform_fieldname_map_table_name, $data);
@@ -528,6 +547,11 @@ class Xform_model extends CI_Model
         return $this->db->insert(self::$xform_fieldname_map_table_name, $details);
     }
 
+    /**
+     * @param $table_name
+     * @param $column_name
+     * @return bool
+     */
     public function xform_table_column_exists($table_name, $column_name)
     {
         $this->db->where("table_name", $table_name);
@@ -568,6 +592,11 @@ class Xform_model extends CI_Model
         return $this->db->get(self::$xform_fieldname_map_table_name)->result();
     }
 
+    /**
+     * @param $xform_id
+     * @param $fields
+     * @return mixed
+     */
     public function update_field_map_labels($xform_id, $fields)
     {
         $this->db->trans_start();
@@ -581,6 +610,11 @@ class Xform_model extends CI_Model
         return $this->db->trans_status();
     }
 
+    /**
+     * @param $table_name
+     * @param $entry_id
+     * @return mixed
+     */
     public function delete_form_data($table_name, $entry_id)
     {
         $this->db->where("id", $entry_id);
@@ -672,6 +706,12 @@ class Xform_model extends CI_Model
     }
 
 
+    /**
+     * @param $table_name
+     * @param $count_columns
+     * @param $group_by
+     * @return bool
+     */
     public function get_count_by_columns($table_name, $count_columns, $group_by)
     {
         if (is_array($count_columns)) {
@@ -688,6 +728,10 @@ class Xform_model extends CI_Model
         return $this->db->get($table_name)->result();
     }
 
+    /**
+     * @param $table_name
+     * @param $field_type
+     */
     public function find_form_map_by_field_type($table_name, $field_type)
     {
         $this->db->where("table_name", $table_name);
