@@ -619,7 +619,7 @@ class Xform extends CI_Controller
             if (!empty($_FILES['userfile']['name'])) {
 
                 $config['upload_path'] = $form_definition_upload_dir;
-                $config['allowed_types'] = 'xml';
+                //$config['allowed_types'] = 'xml';
                 $config['max_size'] = '1024';
                 $config['remove_spaces'] = TRUE;
 
@@ -627,7 +627,7 @@ class Xform extends CI_Controller
                 $this->upload->initialize($config);
 
                 if (!$this->upload->do_upload("userfile")) {
-                    $this->session->set_flashdata("message", "<div class='warning'>" . $this->upload->display_errors("", "") . "</div>");
+                    set_flashdata(display_message($this->upload->display_errors("", ""), "error"));
                     redirect("xform/add_new/{$project_id}");
                 } else {
                     $xml_data = $this->upload->data();
