@@ -16,15 +16,39 @@ class XmlElement
 
 class XformReader_model extends CI_Model
 {
+    /**
+     * @var
+     */
     public $form_defn;
+    /**
+     * @var
+     */
     public $form_data;
+    /**
+     * @var
+     */
     public $xml_defn_filename;
+    /**
+     * @var
+     */
     public $xml_data_filename;
+    /**
+     * @var
+     */
     public $table_name;
+    /**
+     * @var
+     */
     public $jr_form_id;
+    /**
+     * @var
+     */
     public $xarray;
 
 
+    /**
+     * XformReader_model constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -82,8 +106,19 @@ class XformReader_model extends CI_Model
         return $this->form_data;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_jr_form_id(){
         return $this->jr_form_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get_defn()
+    {
+        return $this->xarray;
     }
 
     /**

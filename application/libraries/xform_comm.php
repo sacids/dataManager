@@ -71,7 +71,6 @@ class Xform_comm
 
     public function get_defn()
     {
-
         return $this->xarray;
     }
 
@@ -284,10 +283,4 @@ class Xform_comm
 
 
     }
-
-    /*
-     *
-     */
-
-
 }

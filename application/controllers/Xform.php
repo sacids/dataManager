@@ -74,10 +74,8 @@ class Xform extends CI_Controller
         ));
 
         $this->xFormReader = new XformReader_model();
-
         $this->load->library('form_auth');
-        $this->load->library('db_exp');
-        $this->load->library('xform_comm');
+
         $this->user_id = $this->session->userdata("user_id");
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><i class="fa fa-warning"></i>.', '</div>');
 
@@ -619,7 +617,7 @@ class Xform extends CI_Controller
             if (!empty($_FILES['userfile']['name'])) {
 
                 $config['upload_path'] = $form_definition_upload_dir;
-                //$config['allowed_types'] = 'xml';
+                $config['allowed_types'] = 'xml';
                 $config['max_size'] = '1024';
                 $config['remove_spaces'] = TRUE;
 
@@ -1486,18 +1484,16 @@ class Xform extends CI_Controller
         if (!$form_id)
             $form_id = "ad_build_week_report_skolls_b_1767716170";
 
-
         $this->xFormReader->set_table_name($form_id);
         $map = $this->xFormReader->get_field_map();
 
-        $this->load->library("Xform_comm");
         $form_details = $this->Feedback_model->get_form_details($form_id);
 
         $file_name = $form_details->filename;
-        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
-        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+        $this->xFormReader->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
+        $this->xFormReader->load_xml_definition($this->config->item("xform_tables_prefix"));
 
-        $form_definition = $this->xform_comm->get_defn();
+        $form_definition = $this->xFormReader->get_defn();
         $table_field_names = array();
         foreach ($form_definition as $fdfn) {
             $kk = $fdfn['field_name'];
