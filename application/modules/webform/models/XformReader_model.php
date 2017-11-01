@@ -82,6 +82,10 @@ class XformReader_model extends CI_Model
         return $this->form_data;
     }
 
+    public function get_jr_form_id(){
+        return $this->jr_form_id;
+    }
+
     /**
      * Creates appropriate tables from an xform definition file
      * Author : Eric Beda
@@ -90,7 +94,7 @@ class XformReader_model extends CI_Model
      *            definition file
      * @return string with create table statement
      */
-    public function _initialize($file_name)
+    public function initialize($file_name)
     {
         //log_message("debug", "File to load " . $file_name);
 
