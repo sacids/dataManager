@@ -14,7 +14,7 @@ class XmlElement
     var $children;
 }
 
-class XformReader_model extends CI_Model
+class Xformreader_model extends CI_Model
 {
     /**
      * @var

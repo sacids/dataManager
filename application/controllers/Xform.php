@@ -70,10 +70,10 @@ class Xform extends CI_Controller
             'model',
             'Alert_model',
             'auth/Acl_model',
-            'webform/XformReader_model'
+            'webform/Xformreader_model'
         ));
 
-        $this->xFormReader = new XformReader_model();
+        $this->xFormReader = new Xformreader_model();
         $this->load->library('form_auth');
 
         $this->user_id = $this->session->userdata("user_id");

@@ -70,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Facilities_model $Facilities_model
  * @property Model $model
  * @property Acl_model $Acl_model
- * @property XformReader_model $XformReader_model
+ * @property Xformreader_model $Xformreader_model
  */
 class CI_Controller
 {
