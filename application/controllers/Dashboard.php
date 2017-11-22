@@ -64,6 +64,10 @@ class Dashboard extends CI_Controller
         //check if logged in
         $this->_is_logged_in();
 
+        $filter_conditions = null;
+        if (!$this->ion_auth->is_admin())
+            $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Submission_model::$xform_table_name);
+
         //statistics
         $this->data['active_users'] = $this->User_model->count_data_collectors();
         $this->data['published_forms'] = $this->Submission_model->count_published_forms();
@@ -75,8 +79,9 @@ class Dashboard extends CI_Controller
         $monthly_data = array();
         $weekly_data = array();
         $daily_data = array();
+
         //submitted forms
-        $submitted_forms = $this->Submission_model->get_submitted_forms();
+        $submitted_forms = $this->Submission_model->get_submitted_forms($filter_conditions);
 
         $i = 0;
         foreach ($submitted_forms as $value) {

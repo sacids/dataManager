@@ -42,6 +42,7 @@ class Project_model extends CI_Model
 
         if ($owner != null)
             $this->db->where('owner', $owner);
+
         return $this->db->get(self::$table_name)->num_rows();
     }
 

@@ -13,6 +13,8 @@ class Submission_model extends CI_Model
      */
     private static $table_name = "submission_form";
 
+    public static $xform_table_name = "xforms";
+
     private $user_id;
 
     /**
@@ -77,11 +79,15 @@ class Submission_model extends CI_Model
     }
 
     /**
+     * @param null $filter_condition
      * @return mixed
      */
-    function get_submitted_forms()
+    function get_submitted_forms($filter_condition = null)
     {
-        $this->where_condition('xforms', 'user_id');
+        //$this->where_condition('xforms', 'user_id');
+
+        if ($filter_condition != null)
+            $this->db->where($filter_condition, "", false);
 
         return $this->db->get_where('xforms', array('status' => 'published'))->result();
     }
