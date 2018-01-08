@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['formList'] = 'xform/form_list';
 $route['submission'] = 'xform/submission';
+$route['about'] = 'welcome/about';
 $route['blog'] = 'blog/post';
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
