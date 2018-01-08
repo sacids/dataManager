@@ -5,6 +5,12 @@
                 <h3 class="title">NewsLetter Posts List</h3>
             </div>
 
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">Posts List</li>
+            </ol>
+
             <div class="row">
                 <?php
                 if ($this->session->flashdata('message') != '') {
