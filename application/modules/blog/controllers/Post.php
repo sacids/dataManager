@@ -53,7 +53,7 @@ class Post extends MX_Controller
         $this->load->library(array('upload', 'mailchimp'));
 
         $this->form_validation->CI =& $this;
-        $this->list_id = 'd2e949d030';
+        $this->list_id = '';
         $this->user_id = $this->session->userdata("user_id");
 
         //$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
