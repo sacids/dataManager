@@ -1,51 +1,70 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Godluck Akyoo
- * Date: 20-Jun-16
- * Time: 12:16
- */
+<section>
+    <!-- Page Content -->
+    <div class="container">
 
-?>
-<div class="container" style="margin-top: 60px;">
-    <div class="row">
-        <div class="col-md-8 col-lg-8 col-lg-offset-1 col-md-offset-1   ">
+        <div class="row">
 
-            <h1 class="text-center"><?php echo $post->title ?></h1><br/>
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
 
-            <div class="post-date" style="margin-bottom: 10px;">
-                <?php echo date("d M, Y g:i A", strtotime($post->date_created)) ?> | <span
-                        class="text-info"><?= $post->first_name . " " . $post->last_name ?></span>
+                <!-- Title -->
+                <h1 class="mt-4"><?= (isset($post) ? $post->title : '') ?></h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    by
+                    <a href="#"><?= (isset($user) ? $user->first_name . ' ' . $user->last_name : 'Administrator') ?></a>
+                </p>
+                <hr>
+                <!-- Date/Time -->
+                <p><?= date("F d, Y g:i A", strtotime($post->date_created)) ?></p>
+                <hr>
+
+                <!-- Preview Image -->
+                <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+                <hr>
+
+                <!-- Post Content -->
+                <?= $post->content ?>
             </div>
 
-            <div class="post-intro">
-                <?php echo $post->content ?>
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Side Widget -->
+                <!-- Begin fluid width widget -->
+                <div class="panel panel-light">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-list-alt"></span>  Recent Posts
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="media-list">
+
+                            <?php if (isset($recent_posts) && $recent_posts) {
+                                foreach ($recent_posts as $p) { ?>
+                                    <li class="media">
+                                        <div class="media-body">
+                                            <h4 class="media-heading">
+                                                <?= anchor("blog/post/post_details/" . $p->id, $p->title, 'class="text-primary"'); ?>
+                                            </h4>
+                                        </div>
+                                    </li>
+                                <?php }
+                            } ?>
+
+                        </ul>
+                        <a href="<?= site_url('blog') ?>" class="btn btn-default btn-block">More Blog Posts »</a>
+                    </div>
+                </div>
+                <!-- End fluid width widget -->
+
             </div>
 
-            <!--<div class="post-date">
-                tags | <a href="">JavaScript</a> , <a href="">jQuery</a> , <a href="">Angular</a>
-                <span></span>
-            </div>-->
-
-            <ul class="social-links outline text-center">
-                <li><a href="https://twitter.com/sacids"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://facebook.com/SACIDS/"><i class="fa fa-facebook"></i></a></li>
-                <!--<li><a href="https://plus.google.com/+sacids"><i class="fa fa-google-plus"></i></a></li>-->
-            </ul>
-            <br/>
         </div>
+        <!-- /.row -->
 
-        <div class="col-lg-3 col-md-3">
-
-            <h3>Recent posts</h3>
-
-            <?php foreach ($recent_posts as $p) { ?>
-
-                <h4 style="font-weight: normal;"><?php echo anchor("blog/post/post_details/" . $p->id, $p->title); ?></h4>
-                <div class=""><?php echo substr($p->content, 0, 50) ?></div>
-
-            <?php } ?>
-
-        </div>
     </div>
-</div>
+    <!-- /.container -->
+</section>
