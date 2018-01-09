@@ -22,6 +22,7 @@
                     <?php if (isset($posts) && $posts) { ?>
                         <table class="table table-striped table-bordered table-responsive table-hover">
                             <tr>
+                                <th width="4%"></th>
                                 <th width="40%">Title</th>
                                 <th width="14%">Author</th>
                                 <th width="8%">Status</th>
@@ -33,6 +34,7 @@
                             $serial = 1;
                             foreach ($posts as $post) { ?>
                                 <tr>
+                                    <td><?= $serial; ?></td>
                                     <td><?= $post->title; ?></td>
                                     <td><?= $post->user->first_name . ' ' . $post->user->last_name ?></td>
                                     <td><?= ($post->status = 'published') ? '<span class="label label-success">Published</span>' : '<span class="label label-warning">Draft</span>'; ?></td>

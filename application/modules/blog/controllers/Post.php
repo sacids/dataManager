@@ -44,12 +44,16 @@
 class Post extends MX_Controller
 {
     private $data;
+    private $list_id;
     private $user_id;
 
     public function __construct()
     {
         parent::__construct();
+        $this->load->library(array('upload', 'mailchimp'));
+
         $this->form_validation->CI =& $this;
+        $this->list_id = 'd2e949d030';
         $this->user_id = $this->session->userdata("user_id");
 
         //$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
@@ -250,6 +254,38 @@ class Post extends MX_Controller
         $this->load->view("edit_post");
         $this->load->view("footer");
     }
+
+    function subscribe()
+    {
+        //create campaign
+        $campaign = $this->mailchimp->post('/campaigns', [
+            'type' => 'regular',
+            'recipients' => ['list_id' => $this->list_id],
+            'settings' => [
+                'subject_line' => 'Newsletter Edition 12',
+                'preview_text' => 'Just a testing case',
+                'title' => 'Newsletter Edition 12',
+                'reply_to' => 'renfridfrancis@gmail.com',
+                'from_name' => 'AfyaData',
+            ]
+        ]);
+
+        $result = array();
+        if ($campaign) {
+            //insert campaign content
+            $create = $this->mailchimp->put('campaigns/' . $campaign['id'] . '/content',
+                [
+                    'html' => '<p>The HTML to use for the saved campaign</p>'
+                ]);
+
+            // Send campaign
+            $result = $this->mailchimp->post('campaigns/' . $campaign['id'] . '/actions/send');
+        }
+
+        echo '<pre>';
+        print_r($result);
+    }
+
 
     /*============================================================
     CALLBACK FUNCTIONS
