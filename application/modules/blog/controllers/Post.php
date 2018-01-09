@@ -301,6 +301,7 @@ class Post extends MX_Controller
         $config['encrypt_name'] = TRUE;
 
         //initialize config
+        $this->load->library(array('upload'));
         $this->upload->initialize($config);
 
         if (isset($_FILES['attachment']) && !empty($_FILES['attachment']['name'])) {
