@@ -8,6 +8,7 @@
 
 
 $config['realm'] = "Authorized users of Sacids Openrosa";
+//$config['Mailchimp_api_key'] = '8805137b58c9d12844133d2a5864b894-us5';
 $config['Mailchimp_api_key'] = '';
 
 

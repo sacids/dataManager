@@ -200,7 +200,7 @@
                 <?php else: ?>
                     <li><?= anchor("about", "Learn more", 'class="page-scroll"') ?></li>
                 <?php endif; ?>
-                <li><?= anchor("blog", "Newsletter", 'class="page-scroll"') ?></li>
+                <li><?= anchor("blog", "Newsletter Stories", 'class="page-scroll"') ?></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

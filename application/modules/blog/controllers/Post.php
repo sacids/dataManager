@@ -46,6 +46,8 @@ class Post extends MX_Controller
     private $data;
     private $list_id;
     private $user_id;
+    private $reply_to;
+    private $from_name;
 
     public function __construct()
     {
@@ -53,8 +55,12 @@ class Post extends MX_Controller
         $this->load->library(array('upload', 'mailchimp'));
 
         $this->form_validation->CI =& $this;
-        $this->list_id = '';
         $this->user_id = $this->session->userdata("user_id");
+
+        //$this->list_id = 'd2e949d030';
+        $this->list_id = '';
+        $this->reply_to = 'renfridfrancis@gmail.com';
+        $this->from_name = 'AfyaData Newsletter';
 
         //$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
         $this->load->model("Post_model");
@@ -255,35 +261,104 @@ class Post extends MX_Controller
         $this->load->view("footer");
     }
 
-    function subscribe()
+    //send newsletter
+    function send_newsletter()
+    {
+        $this->data['title'] = "Send Newsletter";
+
+        $this->_is_logged_in();
+
+        $this->form_validation->set_rules("subject", "Subject", "required|trim");
+        $this->form_validation->set_rules("message", "Message", "required|trim");
+        $this->form_validation->set_rules("attachment", "Attachment", "callback_upload_attachment|trim");
+
+        //validation success
+        if ($this->form_validation->run() == TRUE) {
+            $subject = $this->input->post('subject');
+            $message = $this->input->post('message');
+            $attachment = $_POST['attachment'];
+
+            $message = $message . '<p>Please link below here to download newsletter</p>' . anchor('./assets/uploads/' . $attachment, 'Download Newsletter');
+
+            $this->action_send($subject, $message);
+
+            //redirect
+            $this->session->set_flashdata("message", display_message("Newsletter sent"));
+            redirect("blog/post/send_newsletter", "refresh");
+        }
+
+        //populate data
+        $this->data['subject'] = array(
+            'name' => 'subject',
+            'id' => 'subject',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('subject'),
+            'class' => 'form-control',
+            'placeholder' => 'Write subject ...'
+        );
+
+        $this->data['message'] = array(
+            'name' => 'message',
+            'id' => 'message',
+            'type' => 'text area',
+            'value' => $this->form_validation->set_value('message'),
+            'class' => 'form-control',
+            'placeholder' => 'Write message here...'
+        );
+
+        $this->data['attachment'] = array(
+            'name' => 'attachment',
+            'id' => 'attachment',
+            'type' => 'file',
+            'value' => $this->form_validation->set_value('attachment'),
+            'class' => 'form-control'
+        );
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("send_newsletter");
+        $this->load->view('footer');
+    }
+
+    //action to subscribe in list
+    function action_subscribe($first_name, $last_name, $email)
+    {
+        $result = $this->mailchimp->post("lists/$this->list_id/members", [
+            'email_address' => $email,
+            'merge_fields' => ['FNAME' => $first_name, 'LNAME' => $last_name],
+            'status' => 'subscribed',
+        ]);
+    }
+
+    //action to send campaign to mailChimp
+    function action_send($subject, $message)
     {
         //create campaign
         $campaign = $this->mailchimp->post('/campaigns', [
             'type' => 'regular',
             'recipients' => ['list_id' => $this->list_id],
             'settings' => [
-                'subject_line' => 'Newsletter Edition 12',
-                'preview_text' => 'Just a testing case',
-                'title' => 'Newsletter Edition 12',
-                'reply_to' => 'renfridfrancis@gmail.com',
-                'from_name' => 'AfyaData',
+                'subject_line' => $subject,
+                'title' => $subject,
+                'reply_to' => $this->reply_to,
+                'from_name' => $this->from_name
             ]
         ]);
 
         $result = array();
         if ($campaign) {
             //insert campaign content
-            $create = $this->mailchimp->put('campaigns/' . $campaign['id'] . '/content',
+            $this->mailchimp->put('campaigns/' . $campaign['id'] . '/content',
                 [
-                    'html' => '<p>The HTML to use for the saved campaign</p>'
+                    'html' => $message
                 ]);
 
             // Send campaign
             $result = $this->mailchimp->post('campaigns/' . $campaign['id'] . '/actions/send');
         }
 
-        echo '<pre>';
-        print_r($result);
+        //echo '<pre>';
+        //print_r($result);
     }
 
 
@@ -295,7 +370,7 @@ class Post extends MX_Controller
     {
         $config['upload_path'] = './assets/uploads/';
         $config['allowed_types'] = '*';
-        $config['max_size'] = '20000';
+        $config['max_size'] = '100000';
         $config['overwrite'] = TRUE;
         $config['remove_spaces'] = TRUE;
         $config['encrypt_name'] = TRUE;
@@ -313,15 +388,17 @@ class Post extends MX_Controller
                 $_POST['attachment'] = $upload_data['file_name'];
 
                 //Image Resizing
-                $resize_conf['source_image'] = $this->upload->upload_path . $this->upload->file_name;
-                $resize_conf['new_image'] = $this->upload->upload_path . 'thumb_' . $this->upload->file_name;
-                $resize_conf['maintain_ratio'] = FALSE;
-                $resize_conf['width'] = 400;
-                $resize_conf['height'] = 300;
+                if ($upload_data['is_image'] == 1) {
+                    $resize_conf['source_image'] = $this->upload->upload_path . $this->upload->file_name;
+                    $resize_conf['new_image'] = $this->upload->upload_path . 'thumb_' . $this->upload->file_name;
+                    $resize_conf['maintain_ratio'] = FALSE;
+                    $resize_conf['width'] = 800;
+                    $resize_conf['height'] = 600;
 
-                // initializing image_lib
-                $this->image_lib->initialize($resize_conf);
-                $this->image_lib->resize();
+                    // initializing image_lib
+                    $this->image_lib->initialize($resize_conf);
+                    $this->image_lib->resize();
+                }
 
                 return TRUE;
             } else {
@@ -331,7 +408,7 @@ class Post extends MX_Controller
             }
         } else {
             // throw an error because nothing was uploaded
-            $this->form_validation->set_message('upload_attachment', "Please, attach media image");
+            $this->form_validation->set_message('upload_attachment', "Please, include attachment");
             return FALSE;
         }
     }
