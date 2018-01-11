@@ -52,7 +52,7 @@ class Post extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library(array('upload', 'mailchimp'));
+        $this->load->library(array('upload', 'MailChimp'));
 
         $this->form_validation->CI =& $this;
         $this->user_id = $this->session->userdata("user_id");
@@ -323,7 +323,7 @@ class Post extends MX_Controller
     //action to subscribe in list
     function action_subscribe($first_name, $last_name, $email)
     {
-        $result = $this->mailchimp->post("lists/$this->list_id/members", [
+        $result = $this->MailChimp->post("lists/$this->list_id/members", [
             'email_address' => $email,
             'merge_fields' => ['FNAME' => $first_name, 'LNAME' => $last_name],
             'status' => 'subscribed',
@@ -334,7 +334,7 @@ class Post extends MX_Controller
     function action_send($subject, $message)
     {
         //create campaign
-        $campaign = $this->mailchimp->post('/campaigns', [
+        $campaign = $this->MailChimp->post('/campaigns', [
             'type' => 'regular',
             'recipients' => ['list_id' => $this->list_id],
             'settings' => [
@@ -348,13 +348,13 @@ class Post extends MX_Controller
         $result = array();
         if ($campaign) {
             //insert campaign content
-            $this->mailchimp->put('campaigns/' . $campaign['id'] . '/content',
+            $this->MailChimp->put('campaigns/' . $campaign['id'] . '/content',
                 [
                     'html' => $message
                 ]);
 
             // Send campaign
-            $result = $this->mailchimp->post('campaigns/' . $campaign['id'] . '/actions/send');
+            $result = $this->MailChimp->post('campaigns/' . $campaign['id'] . '/actions/send');
         }
 
         //echo '<pre>';

@@ -53,7 +53,7 @@ require dirname(__FILE__).'/Base.php';
  * @property xform_comm $xform_comm
  * @property Alert_model $Alert_model
  * @property Barcode $barcode
- * @property MailChimp $mailchimp
+ * @property MailChimp $MailChimp
  * @property Ussd_model $Ussd_model
  * @property Report_model $Report_model
  * @property Facilities_model $Facilities_model
