@@ -57,6 +57,7 @@ require dirname(__FILE__).'/Base.php';
  * @property Ussd_model $Ussd_model
  * @property Report_model $Report_model
  * @property Facilities_model $Facilities_model
+ * @property Post_model $Post_model
  * @property Model $model
  * @property Acl_model $Acl_model
  * @property XformReader_model $XformReader_model

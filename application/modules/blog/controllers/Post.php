@@ -58,8 +58,8 @@ class Post extends MX_Controller
         $this->user_id = $this->session->userdata("user_id");
 
         //$this->list_id = 'd2e949d030';
-        $this->list_id = '';
-        $this->reply_to = 'renfridfrancis@gmail.com';
+        $this->list_id = '5a798801f2';
+        $this->reply_to = 'afyadata@sacids.org';
         $this->from_name = 'AfyaData Newsletter';
 
         //$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
@@ -84,7 +84,17 @@ class Post extends MX_Controller
     public function posts()
     {
         $this->data['title'] = "Newsletter Posts";
-        $this->data['posts'] = $this->Post_model->find_all();
+
+        $config = array(
+            'base_url' => $this->config->base_url("blog/"),
+            'total_rows' => $this->Post_model->count_posts(),
+            'uri_segment' => 2,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->data['posts'] = $this->Post_model->find_all($this->pagination->per_page, $page);
+        $this->data["links"] = $this->pagination->create_links();
 
         foreach ($this->data['posts'] as $k => $v) {
             $this->data['posts'][$k]->user = $this->User_model->find_by_id($v->user_id);

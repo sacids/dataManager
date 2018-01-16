@@ -175,8 +175,7 @@
 </head>
 
 <body id="page-top">
-
-<nav id="mainNav" class="navbar navbar-fixed-top">
+<nav id="mainNav" class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -186,20 +185,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?= anchor("", '<img src="' . base_url('assets/public/images/logo.png') . '" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
+            <?= anchor("", '<img src="' . base_url('assets/public/images/logo_default.png') . '" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <?php if (isset($about_page) && $about_page): ?>
-                    <li><a class="page-scroll" href="#about">About AfyaData</a></li>
-                    <li><a class="page-scroll" href="#features">Features</a></li>
-                    <li><a class="page-scroll" href="#involved">Get Involved</a></li>
-                    <li><a class="page-scroll" href="#contact">Contact</a></li>
-                <?php else: ?>
-                    <li><?= anchor("about", "Learn more", 'class="page-scroll"') ?></li>
-                <?php endif; ?>
+                <li><?= anchor("about", "About AfyaData", 'class="page-scroll"') ?></li>
                 <li><?= anchor("blog", "Newsletter Stories", 'class="page-scroll"') ?></li>
             </ul>
 

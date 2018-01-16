@@ -1,70 +1,140 @@
-<section>
-    <!-- Page Content -->
-    <div class="container">
+<!-- Page Content -->
+<div class="container">
+    <div class="page-header">
+        <h5 class="section-title">
+                <span>
+                    <a href="#">Newsletter Stories</a>
+                </span>
+        </h5>
+    </div>
 
-        <div class="row">
+    <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Title -->
+            <h4 class="mt-4 text-primary"><?= (isset($post) ? $post->title : '') ?></h4>
 
-            <!-- Post Content Column -->
-            <div class="col-lg-8">
+            <!-- Author -->
+            <p>Author :
+                <a href="#"><?= (isset($user) ? $user->first_name . ' ' . $user->last_name : 'Administrator') ?></a>
+            </p>
+            <hr>
+            <!-- Date/Time -->
+            <p><?= date("F d, Y g:i A", strtotime($post->date_created)) ?></p>
+            <hr>
 
-                <!-- Title -->
-                <h1 class="mt-4"><?= (isset($post) ? $post->title : '') ?></h1>
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+            <hr>
 
-                <!-- Author -->
-                <p class="lead">
-                    by
-                    <a href="#"><?= (isset($user) ? $user->first_name . ' ' . $user->last_name : 'Administrator') ?></a>
-                </p>
-                <hr>
-                <!-- Date/Time -->
-                <p><?= date("F d, Y g:i A", strtotime($post->date_created)) ?></p>
-                <hr>
+            <!-- Post Content -->
+            <?= $post->content ?>
 
-                <!-- Preview Image -->
-                <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-                <hr>
-
-                <!-- Post Content -->
-                <?= $post->content ?>
-            </div>
-
-            <!-- Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Side Widget -->
-                <!-- Begin fluid width widget -->
-                <div class="panel panel-light">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <span class="glyphicon glyphicon-list-alt"></span>  Recent Posts
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="media-list">
-
-                            <?php if (isset($recent_posts) && $recent_posts) {
-                                foreach ($recent_posts as $p) { ?>
-                                    <li class="media">
-                                        <div class="media-body">
-                                            <h4 class="media-heading">
-                                                <?= anchor("blog/post/post_details/" . $p->id, $p->title, 'class="text-primary"'); ?>
-                                            </h4>
-                                        </div>
-                                    </li>
-                                <?php }
-                            } ?>
-
-                        </ul>
-                        <a href="<?= site_url('blog') ?>" class="btn btn-default btn-block">More Blog Posts »</a>
-                    </div>
+            <hr>
+            <!-- Comments Form -->
+            <div class="panel panel-light">
+                <div class="panel-heading">
+                    <i class="fa fa-comments-o"></i>
+                    Comments
                 </div>
-                <!-- End fluid width widget -->
 
+                <div class="panel-body">
+                    <div id="disqus_thread"></div>
+                    <script>
+
+                        /**
+                         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                        /*
+                        var disqus_config = function () {
+                        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                        };
+                        */
+                        (function () { // DON'T EDIT BELOW THIS LINE
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://afyadata.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+                            powered by Disqus.</a></noscript>
+                </div>
             </div>
-
         </div>
-        <!-- /.row -->
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+            <!-- Search Widget -->
+            <div class="panel panel-danger my-4">
+                <div class="panel-heading">
+                    <i class="fa fa-search"></i>
+                    Search
+                </div>
+
+                <div class="panel-body">
+                    <?= form_open('blog', 'role="form"') ?>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">Go!</button>
+                        </span>
+                    </div>
+                    <?= form_close() ?>
+                </div>
+            </div><!--./panel -->
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <i class="fa fa-info-circle"></i>
+                    Get in Touch
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Are you interested in know more about AfyaData?
+                        Are you want to use AfyaData tool for data collection?
+                        Contact us at the number or email address below
+                    </p>
+
+                    <p>
+                        <i class="fa fa-envelope hue"></i> <a
+                                href="mailto:afyadata@sacids.org">afyadata@sacids.org</a><br/>
+                        <i class="fa fa-phone hue"></i> +255 783 555 386
+                    </p>
+                </div>
+            </div><!--./panel -->
+
+            <!-- Begin fluid width widget -->
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <i class="fa fa-list"></i>
+                    Recent Posts
+                </div>
+                <div class="panel-body">
+                    <ul class="media-list">
+                        <?php if (isset($recent_posts) && $recent_posts) {
+                            foreach ($recent_posts as $p) { ?>
+                                <li class="media">
+                                    <div class="media-body">
+                                        <h6 class="media-heading">
+                                            <?= anchor("blog/post/post_details/" . $p->id, $p->title, 'class="text-primary"'); ?>
+                                        </h6>
+                                    </div>
+                                </li>
+                            <?php }
+                        } ?>
+
+                    </ul>
+                    <a href="<?= site_url('blog') ?>" class="btn btn-default btn-block">More Newsletter Stories »</a>
+                </div>
+            </div>
+            <!-- End fluid width widget -->
+
+        </div><!--./col-md-4 -->
 
     </div>
-    <!-- /.container -->
-</section>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
