@@ -219,7 +219,7 @@ class Post extends MX_Controller
         $this->data['post'] = $post;
 
         //form validation
-        $this->form_validation->set_rules("title", "Title", "required");
+        $this->form_validation->set_rules("name", "Title", "required");
         $this->form_validation->set_rules("content", "Content", "");
         $this->form_validation->set_rules("status", "Status", "");
 
@@ -227,7 +227,7 @@ class Post extends MX_Controller
 
             $post_details = array(
                 "user_id" => $this->session->userdata("user_id"),
-                "title" => $this->input->post("title"),
+                "title" => $this->input->post("name"),
                 "alias" => str_replace(array(" ", "&", "."), "-", $this->input->post("title")),
                 "content" => $this->input->post("content"),
                 "status" => $this->input->post("status"),
