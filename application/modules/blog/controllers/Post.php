@@ -167,7 +167,7 @@ class Post extends MX_Controller
 
             if ($post_id = $this->Post_model->create($post_details)) {
                 $this->session->set_flashdata("message", display_message("Posted was created"));
-                redirect("blog/post/edit_post/" . $post_id, "refresh");
+                redirect("blog/post/lists", "refresh");
             } else {
                 $this->session->set_flashdata("message", display_message("An error occurred"), "danger");
             }
@@ -399,7 +399,7 @@ class Post extends MX_Controller
                     $resize_conf['new_image'] = $this->upload->upload_path . 'thumb_' . $this->upload->file_name;
                     $resize_conf['maintain_ratio'] = FALSE;
                     $resize_conf['width'] = 800;
-                    $resize_conf['height'] = 600;
+                    $resize_conf['height'] = 340;
 
                     // initializing image_lib
                     $this->image_lib->initialize($resize_conf);

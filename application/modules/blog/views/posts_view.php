@@ -17,7 +17,11 @@
                     foreach ($posts as $post) { ?>
                         <!-- Blog Post -->
                         <div class="card mb-4">
-                            <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+                            <?php if (file_exists('./assets/uploads/' . $post->image)) { ?>
+                                <img class="card-img-top" src="<?= base_url('./assets/uploads/' . $post->image)?>" alt="<?= $post->title ?>">
+                            <?php } else { ?>
+                                <img class="card-img-top" src="http://placehold.it/750x300" alt="<?= $post->title ?>">
+                            <?php } ?>
                             <div class="card-body">
                                 <h4 class="card-title">
                                     <a href="<?= site_url('blog/post/post_details/' . $post->id) ?>"><?= $post->title ?></a>

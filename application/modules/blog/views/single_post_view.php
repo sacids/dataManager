@@ -25,7 +25,11 @@
                 <hr>
 
                 <!-- Preview Image -->
-                <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+                <?php if (file_exists('./assets/uploads/' . $post->image)) { ?>
+                    <img class="img-fluid rounded" src="<?= base_url('./assets/uploads/' . $post->image)?>" alt="<?= $post->title ?>">
+                <?php } else { ?>
+                    <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="<?= $post->title ?>">
+                <?php } ?>
                 <hr>
 
                 <!-- Post Content -->
