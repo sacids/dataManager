@@ -53,24 +53,20 @@ class Post extends MX_Controller
     {
         parent::__construct();
         $this->load->library(array('upload', 'MailChimp'));
+        $this->load->model(array("Post_model"));
 
         $this->form_validation->CI =& $this;
         $this->user_id = $this->session->userdata("user_id");
 
-        //$this->list_id = 'd2e949d030';
         $this->list_id = '5a798801f2';
         $this->reply_to = 'afyadata@sacids.org';
         $this->from_name = 'AfyaData Newsletter';
-
-        //$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
-        $this->load->model("Post_model");
     }
 
     //check user login
     function _is_logged_in()
     {
         if (!$this->ion_auth->logged_in()) {
-            // redirect them to the login page
             redirect('auth/login', 'refresh');
         }
     }
