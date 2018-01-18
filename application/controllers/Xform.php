@@ -53,6 +53,7 @@ class Xform extends CI_Controller
     private $user_id;
     private $user_submitting_feedback_id;
     private $sender; //Object
+    private $mobile_app_language = "swahili";
 
     private $objPHPExcel;
 
@@ -195,11 +196,13 @@ class Xform extends CI_Controller
         $db_username = $user->username; // username
         $this->user_submitting_feedback_id = $user->id;
         $uploaded_filename = NULL;
+
+        //todo capture language in use from the app here.
+
         // show status header if user not available in database
         if (empty ($db_username)) {
             // populate login form if no digest authenticate
             $this->form_auth->require_login_prompt($realm, $nonce);
-            log_message('debug', 'username is not available');
             exit ();
         }
 
@@ -212,7 +215,6 @@ class Xform extends CI_Controller
         if ($digest_parts ['response'] != $calculated_response) {
             // populate login form if no digest authenticate
             $this->form_auth->require_login_prompt($realm, $nonce);
-            log_message('debug', 'Digest does not match');
             exit ();
         }
 
@@ -281,22 +283,60 @@ class Xform extends CI_Controller
      */
     public function _insert($filename)
     {
+        $this->lang->load("api", $this->mobile_app_language);
+
         $datafile = $this->config->item("form_data_upload_dir") . $filename;
 
         $this->xFormReader->set_data_file($datafile);
         $this->xFormReader->load_xml_data();
 
-        // get mysql statement used to insert form data into corresponding table
-
         $statement = $this->xFormReader->get_insert_form_data_query();
-        $result = $this->Xform_model->insert_data($statement);
+        $insert_result = $this->Xform_model->insert_data($statement);
 
-        if ($result && isset($this->xFormReader->get_form_data()['Dalili_Dalili'])) {
+        $xForm_form = $this->Xform_model->find_by_xform_id($this->xFormReader->get_table_name());
+        if ($xForm_form->allow_dhis == 1 && $insert_result) {
+
+            $dhis_data_elements = $this->Xform_model->get_fieldname_map($this->xFormReader->get_table_name());
+            $form_data = $this->Xform_model->find_form_data_by_id($xForm_form->form_id, $insert_result);
+            $form_data_array = (array)$form_data;
+
+            foreach ($form_data_array as $key => $value) {
+                if (strpos($key, '_point') !== false) {
+                    $form_data_array[$key] = utf8_encode($value);
+                }
+            }
+
+            $prepare_data_set_array = array();
+            foreach ($dhis_data_elements as $data_element) {
+                if ($data_element['dhis_data_element'] != null || $data_element['dhis_data_element'] != "") {
+                    $prepare_data_set_array[$data_element['dhis_data_element']] = $form_data_array[$data_element['col_name']];
+                }
+            }
+
+            $data_set_values = [
+                "dataSet"      => $xForm_form->dhis_data_set,
+                "completeDate" => date("Y-m-d"),
+                "period"       => date("Yd"),
+                "orgUnit"      => $xForm_form->org_unit_id,
+                "name"         => $xForm_form->title,
+                "periodType"   => $xForm_form->period_type,
+                'dataValues'   => $prepare_data_set_array
+            ];
+
+            log_message("debug", "Prepared data set values " . json_encode($data_set_values));
+
+            $this->load->model("dhis2/Dhis2_model");
+            $response = $this->Dhis2_model->post_data("api/dataSets", $data_set_values);
+            log_message("debug", "Dhis2 server response " . $response);
+        }
+
+        //TODO Improve to be able to get dalili field dynamically
+        if ($insert_result && isset($this->xFormReader->get_form_data()['Dalili_Dalili'])) {
             $symptoms_reported = explode(" ", $this->xFormReader->get_form_data()['Dalili_Dalili']);
-            // taarifa_awali_Wilaya is the database field name in the mean time
+
             $district = $this->xFormReader->get_form_data()['taarifa_awali_Wilaya'];
 
-            $specie_id = 1; //binadamu
+            $specie_id = 1; //todo get specie dynamically binadamu
 
             $request_data = [
                 "specie_id" => $specie_id,
@@ -321,8 +361,6 @@ class Xform extends CI_Controller
                     ];
                 }
                 $this->Ohkr_model->save_detected_diseases($detected_diseases);
-            } else {
-                //todo do something when no disease found
             }
 
             if (count($symptoms_reported) > 0) {
@@ -332,8 +370,8 @@ class Xform extends CI_Controller
                 $suspected_diseases_array = array();
                 $suspected_diseases = $this->Ohkr_model->find_diseases_by_symptoms_code($symptoms_reported);
 
-                $suspected_diseases_list = "Tumepokea fomu yako, kutokana na taarifa ulizotuma haya ndiyo magonjwa yanayodhaniwa ni:\n<br/>";
-                //$suspected_diseases_list = "We received your information, according to submitted data suspected disease might be:\n<br/>";
+                $message = $this->lang->line("message_data_received");
+                $suspected_diseases_list = $message . "<br/>";
 
                 if ($suspected_diseases) {
 
@@ -375,10 +413,7 @@ class Xform extends CI_Controller
 
                     $this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
                 } else {
-                    $suspected_diseases_list = "Tumepokea taarifa, Hatukuweza kudhania ugonjwa kutokana na taarifa ulizotuma kwa sasa,
-					tafadhali wasiliana na wataalam wetu kwa msaada zaidi";
-                    //$suspected_diseases_list = "We received your information, but we could not suspect any disease with specified symptoms.
-                    //Please contact with our team for more details.";
+                    $suspected_diseases_list = $this->lang->line("message_auto_detect_disease_failed");
                 }
 
                 $feedback = array(
@@ -390,24 +425,27 @@ class Xform extends CI_Controller
                     "sender"       => "server",
                     "status"       => "pending"
                 );
+                log_message("debug", "Load translated message " . $suspected_diseases_list);
                 $this->Feedback_model->create_feedback($feedback);
             } else {
                 log_message("debug", "No symptom reported");
             }
         } else {
+
             $feedback = array(
                 "user_id"      => $this->user_submitting_feedback_id,
                 "form_id"      => $this->xFormReader->get_table_name(),
-                "message"      => "Asante kwa kutuma taarifa, Tumepokea fomu yako.",
+                "message"      => $this->lang->line("message_feedback_data_received"),
                 "date_created" => date('Y-m-d H:i:s'),
                 "instance_id"  => $this->xFormReader->get_form_data()['meta_instanceID'],
                 "sender"       => "server",
                 "status"       => "pending"
             );
+            log_message("debug", "Load translated feedback message " . $this->lang->line("message_feedback_data_received"));
             $this->Feedback_model->create_feedback($feedback);
             log_message("debug", "Dalili_Dalili index is not set implement dynamic way of getting dalili field");
         }
-        return $result;
+        return $insert_result;
     }
 
     /**
@@ -760,8 +798,6 @@ class Xform extends CI_Controller
         $table_fields = $this->Xform_model->find_table_columns($table_name);
         $field_maps = $this->_get_mapped_table_column_name($form_details->form_id);
 
-        //print_r($field_maps);
-
         foreach ($table_fields as $key => $value) {
             if (key_exists($value, $field_maps)) {
                 echo '<option value="' . $value . '">' . $field_maps[$value] . '</option>';
@@ -841,6 +877,7 @@ class Xform extends CI_Controller
             $field_types = $this->input->post("field_type[]");
             $chart_use = $this->input->post("chart_use[]");
             $type_option = $this->input->post("type[]");
+            $dhis2_data_element = $this->input->post("data_element[]");
 
             if ($form) {
                 $new_perms = $this->input->post("perms");
@@ -849,12 +886,16 @@ class Xform extends CI_Controller
                 if (count($new_perms) > 0) {
                     $new_perms_string = join(",", $new_perms);
                 }
+
+                $allow_dhis2_checked = (isset($_POST['allow_dhis2'])) ? 1 : 0;
+
                 $new_form_details = array(
                     "title"        => $this->input->post("title"),
                     "description"  => $this->input->post("description"),
                     "access"       => $this->input->post("access"),
                     "perms"        => $new_perms_string,
-                    "last_updated" => date("c")
+                    "last_updated" => date("c"),
+                    "allow_dhis"   => $allow_dhis2_checked
                 );
 
                 $this->db->trans_start();
@@ -869,6 +910,7 @@ class Xform extends CI_Controller
                     $mapped_fields[$i]["chart_use"] = $chart_use[$i];
                     $mapped_fields[$i]["type"] = $type_option[$i];
                     $mapped_fields[$i]["hide"] = 0;
+                    $mapped_fields[$i]["dhis_data_element"] = $dhis2_data_element[$i];
 
                     if (!empty($hides) && in_array($ids[$i], $hides)) {
                         $mapped_fields[$i]["hide"] = 1;

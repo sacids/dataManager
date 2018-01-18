@@ -90,8 +90,8 @@ class Xform_model extends CI_Model
     public function insert_data($statement)
     {
         if ($this->db->simple_query($statement)) {
-            log_message("debug", "Success!");
-            return TRUE;
+            log_message("debug", "Data insert success!");
+            return $this->db->insert_id();
         } else {
             $error = $this->db->error(); // Has keys 'code' and 'message'
             log_message("debug", $statement . ", error " . json_encode($error));
@@ -400,6 +400,19 @@ class Xform_model extends CI_Model
         }
 
         return $this->db->get($table_name)->result();
+    }
+
+
+    /**
+     * @param $table_name
+     * @param $entry_id
+     * @return mixed
+     */
+    public function find_form_data_by_id($table_name, $entry_id)
+    {
+        $this->db->where("id", $entry_id);
+        $this->db->from($table_name);
+        return $this->db->get()->row(1);
     }
 
     /**

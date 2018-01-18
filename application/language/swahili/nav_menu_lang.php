@@ -71,3 +71,4 @@ $lang['nav_item_logout'] = "Toka";
 $lang['nav_item_change_language'] = "Badilisha Lugha";
 $lang['nav_item_language_english'] = "Kiingereza";
 $lang['nav_item_language_swahili'] = "Kiswahili";
+$lang['nav_item_language']      = "Lugha";

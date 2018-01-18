@@ -169,7 +169,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Lang<span class="caret"></span></a>
+                       aria-expanded="false"><?= $this->lang->line("nav_item_language") ?> <span
+                                class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><?php echo anchor('languageChanger/switchLang/english', 'English'); ?></li>
                         <li><?php echo anchor('languageChanger/switchLang/swahili', 'Swahili'); ?></li>

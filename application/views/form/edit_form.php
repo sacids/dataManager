@@ -54,7 +54,12 @@
                                     <?php echo form_dropdown("access", array("private" => "Private", "public" => "Public"),
                                         set_value("access", $form->access), 'class="form-control"'); ?>
                                 </div>
-                                <div class=""><?php echo form_error('access'); ?></div>
+
+                                <div class="form-group">
+                                    <label for="Allow Dhis2 Integration"><?php echo $this->lang->line("label_allow_dhis2") ?>
+                                        :</label>
+                                    <?php echo form_checkbox("allow_dhis2", null, set_value("allow_dhis2", $form->allow_dhis)); ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -100,6 +105,9 @@
                                     <tr>
                                         <th class="text-center">Hide</th>
                                         <th class="text-center">Mapping To</th>
+                                        <?php if ($form->allow_dhis == 1): ?>
+                                            <th class="text-center">Dhis2 Data Element</th>
+                                        <?php endif; ?>
                                         <th class="text-center">Question/Label</th>
                                         <th class="text-center">Field Type</th>
                                         <th class="text-center">Chart use</th>
@@ -108,17 +116,17 @@
                                     <?php
 
                                     $form_specific_options = [
-                                        '' => "Select Option",
-                                        'male case' => "Male Case",
-                                        'male death' => "Male Death",
-                                        'female case' => "Female Case",
+                                        ''             => "Select Option",
+                                        'male case'    => "Male Case",
+                                        'male death'   => "Male Death",
+                                        'female case'  => "Female Case",
                                         'female death' => "Female Death"
                                     ];
 
-                                    $field_type_options = ['TEXT' => "Text", 'INT' => "Number",
-                                        "GPS" => "GPS Location", "DATE" => "DATE", "DALILI" => 'Dalili',
-                                        "LAT" => "Latitude", "LONG" => "Longitude",
-                                        "IDENTITY" => "Username/Identity", "IMAGE" => "Image"];
+                                    $field_type_options = ['TEXT'     => "Text", 'INT' => "Number",
+                                                           "GPS"      => "GPS Location", "DATE" => "DATE", "DALILI" => 'Dalili',
+                                                           "LAT"      => "Latitude", "LONG" => "Longitude",
+                                                           "IDENTITY" => "Username/Identity", "IMAGE" => "Image"];
 
                                     $use_in_chart_options = [1 => 'Yes', 0 => 'No'];
 
@@ -127,6 +135,9 @@
                                         echo "<tr>";
                                         echo "<td class='text-center'>" . form_checkbox("hide[]", $tf['id'], ($tf['hide'] == 1)) . "</td>";
                                         echo "<td><em>{$tf['col_name']}</em></td>";
+                                        if ($form->allow_dhis == 1) {
+                                            echo "<td>" . form_input("data_element[]", (!empty($tf['dhis_data_element']) ? $tf['dhis_data_element'] : null), 'class="form-control"') . "</td>";
+                                        }
                                         echo "<td>" . form_hidden("ids[]", $tf['id']) . " " . form_input("label[]", (!empty($tf['field_label']) ? $tf['field_label'] : $tf['field_name']), 'class="form-control"') . "</td>";
                                         echo "<td>" . form_dropdown("field_type[]", $field_type_options, $tf['field_type']) . "</td>";
                                         echo "<td>" . form_dropdown("chart_use[]", $use_in_chart_options, $tf['chart_use']) . "</td>";

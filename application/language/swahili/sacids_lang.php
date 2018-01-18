@@ -36,6 +36,7 @@ $lang['label_treatment'] = "Matibabu";
 $lang['label_question'] = "Swali";
 $lang['label_answer'] = "Jibu";
 $lang['label_access'] = "Upatikanaji";
+$lang['label_allow_dhis2'] = "Ruhusu mawasiliano na Dhis2";
 $lang['label_xml'] = "Faili la XML";
 $lang['label_form_xml_file'] = "XML faili ya fomu";
 $lang['label_action'] = "Tendo";

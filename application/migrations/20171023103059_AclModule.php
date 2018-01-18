@@ -91,4 +91,8 @@ class Migration_AclModule extends CI_Migration
 
         $this->db->query('ALTER TABLE acl_users_permissions ADD CONSTRAINT fk_acl_perm_id FOREIGN KEY(permission_id) REFERENCES acl_permissions(id) ON DELETE CASCADE ON UPDATE CASCADE;');
     }
+
+    public function down(){
+
+    }
 }

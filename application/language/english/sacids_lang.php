@@ -36,6 +36,7 @@ $lang['label_treatment'] = "Treatment";
 $lang['label_question'] = "Question";
 $lang['label_answer'] = "Answer";
 $lang['label_access'] = "Access";
+$lang['label_allow_dhis2'] = "Allow Dhis2 Integration";
 $lang['label_xml'] = "XML file";
 $lang['label_form_xml_file'] = "Form XML file";
 $lang['label_action'] = "Action";

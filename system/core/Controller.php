@@ -49,6 +49,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/general/controllers.html
  */
+
+/**
+ * @property Submission_model $Submission_model
+ * @property Xform_model $Xform_model
+ * @property User_model $User_model
+ * @property Feedback_model $Feedback_model
+ * @property Project_model $Project_model
+ * @property Campaign_model $Campaign_model
+ * @property Project_model $project_model
+ * @property Ohkr_model $Ohkr_model
+ * @property Whatsapp_model $Whatsapp_model
+ * @property Perm_model $Perm_model
+ * @property db_exp $db_exp
+ * @property Analyze_model $Analyze_model
+ * @property xform_comm $xform_comm
+ * @property Alert_model $Alert_model
+ * @property Barcode $barcode
+ * @property Ussd_model $Ussd_model
+ * @property Facilities_model $Facilities_model
+ * @property Model $model
+ * @property Acl_model $Acl_model
+ * @property Xformreader_model $Xformreader_model
+ * @property Dhis2_model $Dhis2_model
+ */
+
 class CI_Controller {
 
 	/**
