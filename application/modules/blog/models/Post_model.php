@@ -62,6 +62,14 @@ class Post_model extends CI_Model
     }
 
     /**
+     * @return mixed
+     */
+    function count_posts()
+    {
+        return $this->db->get(self::$table_name)->num_rows();
+    }
+
+    /**
      * @param int $limit
      * @param int $offset
      * @return mixed

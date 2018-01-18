@@ -117,4 +117,9 @@ class Welcome extends MX_Controller
     {
         $this->load->view('view');
     }
+
+    function email_view()
+    {
+        $this->load->view('email_view');
+    }
 }

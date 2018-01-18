@@ -1,4 +1,5 @@
-<section>
+<!-- Page Content -->
+<section class="page-wrapper">
     <div class="container">
         <div class="sign-up row">
 
@@ -66,4 +67,5 @@
 
         </div>
     </div>
+    <!-- /.container -->
 </section>
