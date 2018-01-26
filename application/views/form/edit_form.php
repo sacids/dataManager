@@ -22,6 +22,7 @@
                 <li class="active"><a data-toggle="tab" href="#form-details">Edit form details</a></li>
                 <li><a data-toggle="tab" href="#access-permissions">Manage Access Permissions</a></li>
                 <li><a data-toggle="tab" href="#map-columns"><?php echo "Map columns" ?></a></li>
+                <li><a data-toggle="tab" href="#dhis2"><?php echo "Dhis2" ?></a></li>
             </ul>
 
             <div class="tab-content">
@@ -53,12 +54,6 @@
                                     <label for="campus"><?php echo $this->lang->line("label_access") ?> :</label>
                                     <?php echo form_dropdown("access", array("private" => "Private", "public" => "Public"),
                                         set_value("access", $form->access), 'class="form-control"'); ?>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="Allow Dhis2 Integration"><?php echo $this->lang->line("label_allow_dhis2") ?>
-                                        :</label>
-                                    <?php echo form_checkbox("allow_dhis2", null, set_value("allow_dhis2", $form->allow_dhis)); ?>
                                 </div>
                             </div>
                         </div>
@@ -151,9 +146,68 @@
                     </div>
                 </div>
 
+                <div id="dhis2" class="tab-pane fade">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="">Dhis2</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="Allow Dhis2 Integration"><?php echo $this->lang->line("label_allow_dhis2") ?>
+                                    :</label>
+                                <?php echo form_checkbox("allow_dhis2", null, set_value("allow_dhis2", $form->allow_dhis), 'id="allowDhis2"'); ?>
+                            </div>
+
+                            <div id="dhis2Fields">
+                                <div class="form-group">
+                                    <?php echo form_label($this->lang->line("label_data_set"), " <span>*</span>"); ?>
+                                    <input type="text" name="data_set"
+                                           placeholder="<?= $this->lang->line("label_data_set") ?>"
+                                           class="form-control"
+                                           value="<?php echo set_value('data_set', $form->dhis_data_set); ?>">
+                                </div>
+                                <div class=""><?php echo form_error('data_set'); ?></div>
+
+                                <div class="form-group">
+                                    <?php echo form_label($this->lang->line("label_org_unit_id"), " <span>*</span>"); ?>
+                                    <input type="text" name="org_unit_id"
+                                           placeholder="<?= $this->lang->line("label_org_unit_id") ?>"
+                                           class="form-control"
+                                           value="<?php echo set_value('org_unit_id', $form->org_unit_id); ?>">
+                                </div>
+                                <div class=""><?php echo form_error('org_unit_id'); ?></div>
+
+                                <div class="form-group">
+                                    <label for="periodType"><?php echo $this->lang->line("label_period_type") ?>
+                                        :</label>
+                                    <?php echo form_dropdown("period_type", array("daily" => "Daily", "weekly" => "Weekly", "monthly" => "Monthly"),
+                                        set_value("period_type", $form->period_type), 'class="form-control"'); ?>
+                                </div>
+                                <div class=""><?php echo form_error('period_type'); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg">Save changes</button>
                 </div>
                 <?php echo form_close(); ?>
             </div>
         </div>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $("#dhis2Fields").hide();
+
+                $("#allowDhis2").is(":checked")
+                {
+                    $("#dhis2Fields").toggle();
+                }
+
+            });
+        </script>

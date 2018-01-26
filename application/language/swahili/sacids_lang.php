@@ -54,7 +54,12 @@ $lang['label_user'] = "Mpiga Soga";
 $lang['label_username'] = "Jina la mtumiaji";
 $lang['label_feedback_date'] = "Muda wa soga";
 $lang['label_status'] = "Hadhi";
-
+$lang['label_data_set'] = "Dhis2 Data set ID";
+$lang['label_org_unit_id'] = "Organization unit ID";
+$lang['label_period_type'] = "Period Type";//i.e daily, weekly, monthly
+$lang['validation_label_data_set'] = "Data set ID";
+$lang['validation_label_org_unit_id'] = "Organization unit ID";
+$lang['validation_label_period_type'] = "Reporting Period type";
 
 // Form management
 $lang['form_archived_successful'] = "Umefanikiwa kuweka fomu kwenye nyaraka/jalada";

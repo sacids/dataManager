@@ -197,7 +197,10 @@ class Xform extends CI_Controller
         $this->user_submitting_feedback_id = $user->id;
         $uploaded_filename = NULL;
 
-        //todo capture language in use from the app here.
+
+        if ($digest_parts['language']) {
+            $this->mobile_app_language = $digest_parts['language'];
+        }
 
         // show status header if user not available in database
         if (empty ($db_username)) {
@@ -842,10 +845,18 @@ class Xform extends CI_Controller
             }
         }
         $data['table_fields'] = $this->Xform_model->get_fieldname_map($form->form_id);
-        ///$data['table_fields'] = $db_table_fields;
+
+
+        $allow_dhis2_checked = (isset($_POST['allow_dhis2'])) ? 1 : 0;
 
         $this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required");
         $this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
+
+        if ($allow_dhis2_checked) {
+            $this->form_validation->set_rules("data_set", $this->lang->line("validation_label_data_set"), "required");
+            $this->form_validation->set_rules("org_unit_id", $this->lang->line("validation_label_org_unit_id"), "required");
+            $this->form_validation->set_rules("period_type", $this->lang->line("validation_label_period_type"), "required");
+        }
 
         if ($this->form_validation->run() === FALSE) {
             $users = $this->User_model->get_users(200);
@@ -887,15 +898,16 @@ class Xform extends CI_Controller
                     $new_perms_string = join(",", $new_perms);
                 }
 
-                $allow_dhis2_checked = (isset($_POST['allow_dhis2'])) ? 1 : 0;
-
                 $new_form_details = array(
-                    "title"        => $this->input->post("title"),
-                    "description"  => $this->input->post("description"),
-                    "access"       => $this->input->post("access"),
-                    "perms"        => $new_perms_string,
-                    "last_updated" => date("c"),
-                    "allow_dhis"   => $allow_dhis2_checked
+                    "title"         => $this->input->post("title"),
+                    "description"   => $this->input->post("description"),
+                    "access"        => $this->input->post("access"),
+                    "perms"         => $new_perms_string,
+                    "last_updated"  => date("c"),
+                    "allow_dhis"    => $allow_dhis2_checked,
+                    "dhis_data_set" => $this->input->post("data_set"),
+                    "period_type"   => $this->input->post("period_type"),
+                    "org_unit_id"   => $this->input->post("org_unit_id"),
                 );
 
                 $this->db->trans_start();
@@ -1038,6 +1050,7 @@ class Xform extends CI_Controller
             $config = array(
                 'base_url'    => $this->config->base_url("xform/form_data/" . $form_id),
                 'total_rows'  => $this->Xform_model->count_all_records($form->form_id),
+                //todo add count by row view permission
                 'uri_segment' => 4,
             );
 

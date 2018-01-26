@@ -54,6 +54,13 @@ $lang['label_user'] = "User";
 $lang['label_username'] = "Username";
 $lang['label_feedback_date'] = "Time";
 $lang['label_status'] = "Status";
+$lang['label_data_set'] = "Dhis2 Data set ID";
+$lang['label_org_unit_id'] = "Organization unit ID";
+$lang['label_period_type'] = "Period Type";//i.e daily, weekly, monthly
+$lang['validation_label_data_set'] = "Data set ID";
+$lang['validation_label_org_unit_id'] = "Organization unit ID";
+$lang['validation_label_period_type'] = "Reporting Period type";
+
 
 
 // Form management
