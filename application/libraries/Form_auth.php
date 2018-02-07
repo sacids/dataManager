@@ -26,9 +26,9 @@ class Form_auth
 		$qop = "auth";
 		//http_response_code(401);
 		header("HTTP/1.1 401 Unauthorized");
-		header('Content-Type: text/xml; charset=utf-8');
-		header('WWW-Authenticate: Digest realm="' . $realm . '",qop="auth",nonce="' . $nonce . '",opaque="' . $nonce . '"');
-		header('"HTTP_X_OPENROSA_VERSION": "1.0"');
+		header('Content-Type:text/xml; charset=utf-8');
+		header('WWW-Authenticate:Digest realm="' . $realm . '",qop="auth",nonce="' . $nonce . '",opaque="' . $nonce . '"');
+		header('HTTP_X_OPENROSA_VERSION:1.0');
 		header('X-OpenRosa-Version:1.0');
 	}
 
@@ -48,5 +48,4 @@ class Form_auth
 
 		return $needed_parts ? FALSE : $data;
 	}
-
 }

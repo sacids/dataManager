@@ -22,7 +22,7 @@
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = (ENVIRONMENT == 'development') ? '' : "http://sandbox.sacids.sacids";//http://localhost/afyadata
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol'] = 'REQUEST_URI';
 
 
 /*
@@ -62,7 +62,7 @@ $config['uri_protocol']	= 'REQUEST_URI';
 | This item determines where the files will be uploaded
 */
 
-//$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'research'.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'forms'.DIRECTORY_SEPARATOR;
+//$config['upload_path'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +86,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language'] = 'english';
 
 /*
 |--------------------------------------------------------------------------
@@ -146,7 +146,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = 'vendor/autoload.php';
+$config['composer_autoload'] = FCPATH.'/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -223,7 +223,7 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = array(1,2);
+$config['log_threshold'] = array(1, 2);
 
 /*
 |--------------------------------------------------------------------------
@@ -377,10 +377,10 @@ $config['encryption_key'] = 'sacids.org';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
+$config['sess_save_path'] = 'ci_sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
@@ -400,11 +400,11 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
-$config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+$config['cookie_prefix'] = '';
+$config['cookie_domain'] = '';
+$config['cookie_path'] = '/';
+$config['cookie_secure'] = FALSE;
+$config['cookie_httponly'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

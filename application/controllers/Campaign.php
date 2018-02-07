@@ -58,11 +58,7 @@ class Campaign extends CI_Controller
         $this->controller = $this->router->fetch_class();
     }
 
-    /**
-     * Check login
-     *
-     * @return response
-     */
+    //check login
     function _is_logged_in()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -82,116 +78,170 @@ class Campaign extends CI_Controller
         }
     }
 
-    /**
-     * Campaign List
-     */
+    //Listing campaign
     function lists()
     {
+        $this->data['title'] = "Campaign List";
+
         //check if logged in
         $this->_is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
-        $data['campaigns'] = $this->Campaign_model->get_campaign();
+        $config = array(
+            'base_url' => $this->config->base_url("campaign/lists"),
+            'total_rows' => $this->Campaign_model->count_active_campaign(),
+            'uri_segment' => 3,
+        );
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+        $this->data['campaign_list'] = $this->Campaign_model->get_campaign($this->pagination->per_page, $page);
+        $this->data["links"] = $this->pagination->create_links();
+
+        foreach ($this->data['campaign_list'] as $k => $value) {
+            $this->data['campaign_list'][$k]->xform = $this->Xform_model->get_form_by_jr_form_id($value->jr_form_id);
+        }
 
         //render view
-        $data['title'] = "Campaign List";
-        $this->load->view('header', $data);
-        $this->load->view("campaign/campaign_list");
+        $this->load->view('header', $this->data);
+        $this->load->view("campaign/list");
         $this->load->view('footer');
     }
 
 
-    /**
-     * Add new campaign
-     */
+    //add new campaign
     function add_new()
     {
+        $this->data['title'] = "Add new campaign";
         //check if logged in
         $this->_is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
-        $data['title'] = "Add new Campaign";
-        $data['forms'] = $this->Xform_model->get_form_list();
+        $this->data['form_list'] = $this->Xform_model->get_form_list();
 
-        $this->form_validation->set_rules("title", "Campaign Title", "required");
-        $this->form_validation->set_rules("icon", "Campaign Icon", "callback_upload_campaign_image");
-        $this->form_validation->set_rules("type", "Campaign Type", "required");
+        //form validation
+        $this->form_validation->set_rules("name", $this->lang->line("label_campaign_title"), "required");
+        $this->form_validation->set_rules("icon", "Icon", "callback_upload_campaign_image");
+        $this->form_validation->set_rules("type", $this->lang->line("label_campaign_type"), "required");
 
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('header', $data);
-            $this->load->view("campaign/add_new", $data);
-            $this->load->view('footer');
-        } else {
+        if ($this->form_validation->run() === TRUE) {
 
-            $campaign_details = array(
-                "title" => $this->input->post("title"),
+            $data = array(
+                "title" => $this->input->post("name"),
                 "description" => $this->input->post("description"),
                 "type" => $this->input->post("type"),
-                "jr_form_id" => $this->input->post("form_id"),
-                "featured" => $this->input->post("featured"),
+                "jr_form_id" => $this->input->post("jr_form_id"),
                 "date_created" => date("c"),
                 "icon" => $_POST['icon']
             );
+            $this->Campaign_model->create_campaign($data);
 
-            $this->Campaign_model->create_campaign($campaign_details);
-
-            $this->session->set_flashdata("message", display_message("Campaign successfully added"));
+            $this->session->set_flashdata("message", display_message("Campaign added"));
             redirect("campaign/lists", "refresh");
         }
+
+        //populate data
+        $this->data['name'] = array(
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('name'),
+            'class' => 'form-control',
+            'placeholder' => 'Enter campaign title'
+        );
+
+        $this->data['icon'] = array(
+            'name' => 'icon',
+            'id' => 'icon',
+            'type' => 'file',
+            'value' => $this->form_validation->set_value('icon'),
+        );
+
+        $this->data['description'] = array(
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text area',
+            'value' => $this->form_validation->set_value('description'),
+            'rows' => '5',
+            'class' => 'form-control',
+            'placeholder' => 'Enter campaign description'
+        );
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("campaign/add_new");
+        $this->load->view('footer');
     }
 
 
-    /**
-     * Edit campaign
-     * @param $campaign_id
-     */
+    //Edit campaign
     function edit($campaign_id)
     {
+        $this->data['title'] = "Edit Campaign";
+
         //check if logged in
         $this->_is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
-        $data['title'] = "Edit Campaign";
-        $data['forms'] = $this->Xform_model->get_form_list();
-        $data['campaign'] = $campaign = $this->Campaign_model->get_campaign_by_id($campaign_id);
+        $this->data['form_list'] = $this->Xform_model->get_form_list();
 
-        $this->form_validation->set_rules("title", $this->lang->line("label_campaign_title"), "required");
+        $campaign = $this->Campaign_model->get_campaign_by_id($campaign_id);
+        $this->data['campaign'] = $campaign;
+
+        //form validation
+        $this->form_validation->set_rules("name", $this->lang->line("label_campaign_title"), "required");
         $this->form_validation->set_rules("type", $this->lang->line("label_campaign_type"), "required");
 
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('header', $data);
-            $this->load->view("campaign/edit", $data);
-            $this->load->view('footer');
-        } else {
-
-            $campaign_details = array(
-                "title" => $this->input->post("title"),
+        if ($this->form_validation->run() === TRUE) {
+            $data = array(
+                "title" => $this->input->post("name"),
                 "description" => $this->input->post("description"),
                 "type" => $this->input->post("type"),
-                "featured" => $this->input->post("featured"),
-                "jr_form_id" => $this->input->post("form_id")
+                "jr_form_id" => $this->input->post("jr_form_id")
             );
 
-            $this->Campaign_model->update_campaign($campaign_id, $campaign_details);
+            $this->Campaign_model->update_campaign($campaign_id, $data);
 
-
-            $this->session->set_flashdata("message", display_message("Campaign successfully edited"));
+            $this->session->set_flashdata("message", display_message("Campaign updated"));
             redirect("campaign/lists", "refresh");
         }
+        //populate data
+        $this->data['name'] = array(
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('name', $campaign->title),
+            'class' => 'form-control'
+        );
+
+        $this->data['description'] = array(
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text area',
+            'value' => $this->form_validation->set_value('description', $campaign->description),
+            'rows' => '5',
+            'class' => 'form-control'
+        );
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("campaign/edit");
+        $this->load->view('footer');
     }
 
 
-    /**
-     * @param $campaign_id
-     */
+    //change icon
     function change_icon($campaign_id)
     {
+        $this->data['title'] = "Change campaign icon";
+
         //check if logged in
         $this->_is_logged_in();
 
@@ -201,7 +251,7 @@ class Campaign extends CI_Controller
         $this->data['campaign'] = $campaign = $this->Campaign_model->get_campaign_by_id($campaign_id);
 
         //form validation
-        $this->form_validation->set_rules("icon", "Campaign Icon", "callback_upload_campaign_image");
+        $this->form_validation->set_rules("icon", "Icon", "callback_upload_campaign_image");
 
         if ($this->form_validation->run() == true) {
             $data = array(
@@ -214,17 +264,29 @@ class Campaign extends CI_Controller
             delete_files($icon_path);
 
             //redirect with message
-            $this->session->set_flashdata('message', display_message('Campaign icon successfully changed'));
+            $this->session->set_flashdata('message', display_message('Icon changed'));
             redirect('campaign/lists', 'refresh');
         }
 
         //render view
-        $this->data['title'] = "Change campaign icon";
         $this->load->view('header', $this->data);
         $this->load->view("campaign/change_icon");
         $this->load->view('footer');
     }
 
+    //delete campaign
+    function delete($campaign_id)
+    {
+        $this->_is_logged_in();
+
+        $this->has_allowed_perm($this->router->fetch_method());
+
+        //delete college
+        $this->db->delete('campaign', array('id' => $campaign_id));
+
+        $this->session->set_flashdata('message', display_message('Campaign deleted', 'danger'));
+        redirect('campaign/lists', 'refresh');
+    }
 
     /**
      * upload campaign image

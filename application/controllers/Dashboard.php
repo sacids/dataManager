@@ -1,7 +1,7 @@
 <?php
 /**
  * AfyaData
- *  
+ *
  * An open source data collection and analysis tool.
  *
  * This content is released under the MIT License (MIT)
@@ -27,12 +27,12 @@
  * THE SOFTWARE.
  *
  *
- * @package	    AfyaData
- * @author	    AfyaData Dev Team
- * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
- * @license	    http://opensource.org/licenses/MIT	MIT License
- * @link	    https://afyadata.sacids.org
- * @since	    Version 1.0.0
+ * @package        AfyaData
+ * @author        AfyaData Dev Team
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @license        http://opensource.org/licenses/MIT	MIT License
+ * @link        https://afyadata.sacids.org
+ * @since        Version 1.0.0
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -42,7 +42,7 @@ class Dashboard extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model(array('User_model', 'Submission_model', 'Campaign_model', 'Feedback_model'));
+        $this->load->model(array('User_model', 'Submission_model', 'Campaign_model', 'Feedback_model', 'auth/Acl_model'));
     }
 
     /**
@@ -64,21 +64,43 @@ class Dashboard extends CI_Controller
         //check if logged in
         $this->_is_logged_in();
 
+        $filter_conditions = null;
+        if (!$this->ion_auth->is_admin())
+            $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Submission_model::$xform_table_name);
+
         //statistics
-        $this->data['active_users'] = $this->User_model->count_users();
+        $this->data['active_users'] = $this->User_model->count_data_collectors();
         $this->data['published_forms'] = $this->Submission_model->count_published_forms();
         $this->data['active_campaign'] = $this->Campaign_model->count_active_campaign();
         $this->data['new_feedback'] = $this->Feedback_model->count_new_feedback();
 
-        //submitted forms
-        $this->data['submitted_forms'] = $this->Submission_model->get_submitted_forms();
+        $form_title = array();
+        $overall_data = array();
+        $monthly_data = array();
+        $weekly_data = array();
+        $daily_data = array();
 
-        foreach ($this->data['submitted_forms'] as $k => $form) {
-            $this->data['submitted_forms'][$k]->overall_form = $this->Submission_model->count_overall_submitted_forms($form->form_id);
-            $this->data['submitted_forms'][$k]->monthly_form = $this->Submission_model->count_monthly_submitted_forms($form->form_id);
-            $this->data['submitted_forms'][$k]->weekly_form = $this->Submission_model->count_weekly_submitted_forms($form->form_id);
-            $this->data['submitted_forms'][$k]->daily_form = $this->Submission_model->count_daily_submitted_forms($form->form_id);
+        //submitted forms
+        $submitted_forms = $this->Submission_model->get_submitted_forms($filter_conditions);
+
+        $i = 0;
+        foreach ($submitted_forms as $value) {
+            $form_title[$i] = '<a href="' . site_url('xform/form_data/' . $value->id) . '" >' . $value->title . '</a>';;
+            $overall_data[$i] = $this->Submission_model->count_overall_submitted_forms($value->title);
+            $monthly_data[$i] = $this->Submission_model->count_monthly_submitted_forms($value->title);
+            $weekly_data[$i] = $this->Submission_model->count_weekly_submitted_forms($value->title);
+            $daily_data[$i] = $this->Submission_model->count_daily_submitted_forms($value->title);
+            $i++;
         }
+
+        $this->data['form_title'] = json_encode($form_title);
+        $this->data['overall_data'] = json_encode($overall_data);
+        $this->data['monthly_data'] = json_encode($monthly_data);
+        $this->data['weekly_data'] = json_encode($weekly_data);
+        $this->data['daily_data'] = json_encode($daily_data);
+
+        //feedback
+        $this->data['feedback'] = $this->Feedback_model->find_all(5, 0);
 
         $this->data['title'] = "Taarifa kwa wakati!";
         $this->load->view('header', $this->data);
@@ -87,6 +109,3 @@ class Dashboard extends CI_Controller
     }
 
 }
-
-/* End of file dashboard.php */
-/* Location: ./application/controllers/dashboard.php */

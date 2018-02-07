@@ -30,12 +30,15 @@ class Xform_comm
     private $jr_form_id;
     private $xarray;
     private $itext;
+    private $lang;
 
+    
     public function __construct()
     {
         $this->CI =& get_instance();
         log_message('debug', 'Xform_comm library initialized');
         $this->itext = array();
+        $this->lang = false;
     }
 
 
@@ -48,7 +51,6 @@ class Xform_comm
     {
 
     }
-
 
     /**
      * @param $filename
@@ -68,7 +70,6 @@ class Xform_comm
 
     public function get_defn()
     {
-
         return $this->xarray;
     }
 
@@ -186,16 +187,19 @@ class Xform_comm
 
         $tmp3 = $rxml->children [0]->children [1]->children[1]->children;
         //print_r($tmp3);
+	if($tmp3[0]->name != 'translation') $tmp3 = $rxml->children [0]->children [1]->children[2]->children;
 
         $tmp2 = $rxml->children [1]->children;
         // container
         $xarray = array();
+
 
         foreach ($tmp3 as $key => $val) {
 
             $attributes = $val->attributes;
             $lang = $attributes['lang'];
             $this->itext[$lang] = array();
+            if(!$this->lang)    $this->lang = $lang;
             $this->_iterate_itext($val->children, $lang);
         }
 
@@ -221,6 +225,8 @@ class Xform_comm
 
         $this->xarray = $xarray;
         $this->_iterate_defn_file($tmp2, false);
+
+        //echo '<pre>'; print_r($this->xarray);
         return $this->xarray;
     }
 
@@ -239,7 +245,7 @@ class Xform_comm
             $kk = explode(":", $k);
             $k = $kk[0];
             $l = $kk[1];
-            $this->itext[$lang][$k][$l] = $v;
+            $this->itext[$this->lang][$k][$l] = $v;
 
         }
 
@@ -247,7 +253,6 @@ class Xform_comm
 
     function _iterate_defn_file($arr, $ref = false)
     {
-
         $i = 0;
         foreach ($arr as $val) {
 
@@ -258,28 +263,23 @@ class Xform_comm
                     break;
                 case 'input':
                     $nodeset = $val->attributes['ref'];
-                    $this->xarray[$nodeset]['label'] = $this->itext['eng'][$nodeset]['label'];
+                    $this->xarray[$nodeset]['label'] = $this->itext[$this->lang][$nodeset]['label'];
                     break;
                 case 'select':
                 case 'select1':
                     $nodeset = $val->attributes['ref'];
-                    $this->xarray[$nodeset]['label'] = $this->itext['eng'][$nodeset]['label'];
+                    $this->xarray[$nodeset]['label'] = $this->itext[$this->lang][$nodeset]['label'];
                     $this->_iterate_defn_file($val->children, $nodeset);
                     break;
                 case 'item';
                     $v = $val->children[1]->content;
                     $opt = 'option' . $i++;
-                    $l = $this->itext['eng'][$ref][$opt];
+                    $l = $this->itext[$this->lang][$ref][$opt];
                     $this->xarray[$ref]['option'][$v] = $l;
                     break;
             }
         }
 
+
     }
-
-    /*
-     *
-     */
-
-
 }

@@ -2,7 +2,15 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Edit Symptom Details</h3>
+            <div id="header-title">
+                <h3 class="title">Edit clinical manifestation</h3>
+            </div>
+
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">Add clinical manifestation</li>
+            </ol>
 
             <?php
             if ($this->session->flashdata('message') != '') {

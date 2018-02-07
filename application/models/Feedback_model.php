@@ -29,7 +29,8 @@
  *
  * @package        AfyaData
  * @author        AfyaData Dev Team
- * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS
+ *     http://sacids.org)
  * @license        http://opensource.org/licenses/MIT	MIT License
  * @link        https://afyadata.sacids.org
  * @since        Version 1.0.0
@@ -47,7 +48,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Feedback_model extends CI_Model
 {
-
     /**
      * Feedback table name
      *
@@ -203,7 +203,6 @@ class Feedback_model extends CI_Model
             $this->db->group_start();
             foreach ($where_perm as $key => $value) {
                 $this->db->or_like("form_id", $value);
-                //$this->db->like("(form_id LIKE '$value' OR form_id LIKE '$value')");
             }
             $this->db->group_end();
         } else {
@@ -255,5 +254,15 @@ class Feedback_model extends CI_Model
     function get_form_details($table_name)
     {
         return $this->db->get_where(self::$table_name_xform, array('form_id' => $table_name))->row();
+    }
+
+    function find_by_xform_id($xform_id, $limit = 30, $offset = 0)
+    {
+        $this->db->select("f.*, u.first_name,u.last_name");
+        $this->db->limit($limit, $offset);
+        $this->db->where("form_id", $xform_id);
+        $this->db->order_by("id", "DESC");
+        $this->db->join(self::$table_name_users . " u", "u.id=f.user_id");
+        return $this->db->get(self::$table_name_feedback . " f")->result();
     }
 }

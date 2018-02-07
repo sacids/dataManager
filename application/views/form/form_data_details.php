@@ -45,24 +45,56 @@
 <div class="container body-content">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <div class="row" style="margin-bottom: 10px;">
-                <h3>Form data collected
-                    <span class="pull-right">
-                    <button type="button" class="btn btn-link" data-toggle="modal"
-                            data-target="#myModal">Set Filters</button></span>
-                </h3>
-			<span class="pull-right">
-				<?php echo anchor("xform/excel_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_drive-ms-excel.png" height="25"/>') ?>
-                <?php echo anchor("form_visualization/chart/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_office-25.png" height="25"/>') ?>
-                <?php echo anchor("form_visualization/map/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_location.png" height="25"/>') ?>
-			</span>
+            <div id="header-title">
+                <h3 class="title"><?= $title ?> - Form data collected</h3>
             </div>
-            <?php
-            if ($this->session->flashdata('message') != '') {
-                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-            }
-            echo validation_errors();
-            ?>
+
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active"><?= $title ?></li>
+            </ol>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="pull-left">
+                        <?php echo form_open(uri_string(), 'class="form-inline" role="form"'); ?>
+                        <div class="form-group">
+                            <?php
+                            $week_options = array();
+                            for ($i = 1; $i <= 52; $i++) {
+                                $week_options[$i] = $i;
+                            }
+                            $week_options = array('' => 'Week Number') + $week_options;
+                            echo form_dropdown('week', $week_options, set_value('week'), 'class="form-control"'); ?>
+                        </div>
+
+                        <div class="form-group">
+                            <?php echo form_submit("export", "Export", 'class="btn btn-primary"'); ?>
+                        </div>
+                        <?php echo form_close(); ?>
+                    </div>
+
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-link" data-toggle="modal"
+                                data-target="#myModal">Set Filters
+                        </button>
+                        <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_drive-ms-excel.png" height="25"/>') ?>
+                        <?php echo anchor("form_visualization/chart/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_office-25.png" height="25"/>') ?>
+                        <?php echo anchor("form_visualization/map/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_location.png" height="25"/>') ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php
+                    echo get_flashdata();
+                    echo validation_errors();
+                    ?>
+                </div>
+            </div>
+
             <div style="overflow-x: scroll;">
                 <?php echo form_open("xform/delete_entry/" . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>
                 <?php echo form_hidden("table_name", $form_id); ?>
@@ -77,8 +109,7 @@
                                 echo "<th>" . $column . "</th>";
                             }
                         } else {
-
-                            foreach ($table_fields as $key => $column) {
+                            foreach ($mapped_fields as $key => $column) {
                                 if (array_key_exists($column, $field_maps)) {
                                     echo "<th>" . $field_maps[$column] . "</th>";
                                 } else {

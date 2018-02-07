@@ -37,13 +37,14 @@
 
     <!-- Custom styles for this template -->
     <link href="<?= base_url() ?>assets/bootstrap/css/navbar-fixed-top.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/css/form.css" type="text/css">
 
     <!-- Font awesome css -->
     <link href="<?php echo base_url(); ?>assets/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
+    <script src="<?php echo base_url(); ?>assets/public/js/jquery-1.12.1.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -69,42 +70,37 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <?php if (perm_module('Xform')) { ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><?= $this->lang->line("nav_item_forms") ?> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><?php echo anchor('xform/forms', $this->lang->line("nav_item_list_forms")); ?></li>
-                            <li><?php echo anchor('xform/add_new', $this->lang->line("nav_item_add_new_form")); ?></li>
-                        </ul>
-                    </li>
-                <?php } ?>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><?= $this->lang->line("nav_item_projects") ?> <span
+                                class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
+                        <li><?php echo anchor('projects/add_new', $this->lang->line("nav_item_add_new_project")); ?></li>
+                    </ul>
+                </li>
 
-                <?php if ($this->ion_auth->is_admin()) { ?>
+                <?php /*if (perm_module('Xform')) { */ ?><!--
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><?= $this->lang->line("nav_item_manage_users") ?>
-                            <span class="caret"></span></a>
+                           aria-expanded="false"><? /*= $this->lang->line("nav_item_forms") */ ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><?php echo anchor('auth/users_list', $this->lang->line("nav_item_list_users")); ?></li>
-                            <li><?php echo anchor('auth/create_user', $this->lang->line("nav_item_create_user")); ?></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_user_groups") ?></li>
-                            <li><?php echo anchor('auth/group_list', $this->lang->line("nav_item_list_groups")); ?></li>
-                            <li><?php echo anchor('auth/create_group', $this->lang->line("nav_item_create_group")); ?></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_permission") ?></li>
-                            <li><?php echo anchor('auth/module_list', $this->lang->line("nav_item_list_module")); ?></li>
-                            <li><?php echo anchor('auth/permission_list', $this->lang->line("nav_item_list_permission")); ?></li>
+                            <li><?php /*echo anchor('xform/forms', $this->lang->line("nav_item_list_forms")); */ ?></li>
+                            <li><?php /*echo anchor('xform/add_new', $this->lang->line("nav_item_add_new_form")); */ ?></li>
+                            <li><?php /*echo anchor('xform/searchable_form_lists', $this->lang->line("nav_item_searchable_form")); */ ?></li>
                         </ul>
                     </li>
+                --><?php /*} */ ?>
+
+                <?php if (perm_module('Feedback')) { ?>
+                    <li><?php echo anchor('feedback/lists', $this->lang->line("nav_item_chats")); ?></li>
                 <?php } ?>
 
                 <?php if (perm_module('Ohkr')) { ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"><?= $this->lang->line("nav_item_ohkr") ?> <span
-                                class="caret"></span></a>
+                                    class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_diseases") ?></li>
                             <li><?php echo anchor('ohkr/disease_list', $this->lang->line("nav_item_list_disease")); ?></li>
@@ -133,8 +129,29 @@
                     </li>
                 <?php } ?>
 
+                <?php if (perm_module('Campaign')) { ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Newsletter Stories
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><?php echo anchor('blog/post/lists', 'Posts List'); ?></li>
+                            <li><?php echo anchor('blog/post/add_new', 'Add New Post'); ?></li>
+                            <li><?php echo anchor('blog/post/send_newsletter', 'Send Newsletter'); ?></li>
+                        </ul>
+                    </li>
+                <?php } ?>
+
                 <?php if (perm_module('Whatsapp')) { ?>
-                    <li><?php echo anchor('whatsapp/message_list', "WhatsApp db"); ?></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">WhatsApp db
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><?php echo anchor('whatsapp/message_list', 'List message'); ?></li>
+                            <li><?php echo anchor('whatsapp/import', 'Import file'); ?></li>
+                        </ul>
+                    </li>
                 <?php } ?>
 
                 <?php if (perm_module('Blog')) { ?>
@@ -151,17 +168,46 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <?php if (perm_module('Feedback')) { ?>
-                    <li><?php echo anchor('feedback/lists', $this->lang->line("nav_item_chats")); ?></li>
-                <?php } ?>
                 <li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Lang<span class="caret"></span></a>
+                       aria-expanded="false"><?= $this->lang->line("nav_item_language") ?> <span
+                                class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><?php echo anchor('languageChanger/switchLang/english', 'English'); ?></li>
                         <li><?php echo anchor('languageChanger/switchLang/swahili', 'Swahili'); ?></li>
                     </ul>
                 </li>
+
+                <?php if ($this->ion_auth->is_admin()) { ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><?= $this->lang->line("nav_item_manage_users") ?>
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><?php echo anchor('auth/users_list', $this->lang->line("nav_item_list_users")); ?></li>
+                            <li><?php echo anchor('auth/create_user', $this->lang->line("nav_item_create_user")); ?></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_facilities") ?></li>
+                            <li><?php echo anchor('facilities/lists', $this->lang->line("nav_item_list_facilities")); ?></li>
+                            <li><?php echo anchor('facilities/add_new', $this->lang->line("nav_item_add_facility")); ?></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_user_groups") ?></li>
+                            <li><?php echo anchor('auth/group_list', $this->lang->line("nav_item_list_groups")); ?></li>
+                            <li><?php echo anchor('auth/create_group', $this->lang->line("nav_item_create_group")); ?></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_permission") ?></li>
+                            <li><?php echo anchor('auth/module_list', $this->lang->line("nav_item_list_module")); ?></li>
+                            <li><?php echo anchor('auth/permission_list', $this->lang->line("nav_item_list_permission")); ?></li>
+                            <li class="dropdown-submenu">
+                                <?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl"), 'tabindex="-1"'); ?>
+                                <ul class="dropdown-menu">
+                                    <li><?php echo anchor('auth/accesscontrol', "Permissions" . $this->lang->line("")); ?></li>
+                                    <li><?php echo anchor('auth/accesscontrol/new_filter', "Add filter" . $this->lang->line("")); ?></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                <?php } ?>
 
                 <li class="">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"

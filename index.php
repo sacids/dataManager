@@ -60,9 +60,10 @@ if (isset($_SERVER['REQUEST_URI'])) {
 		define('ENVIRONMENT', 'testing');
 	} else
 		define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-} else
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-
+} else {
+    define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+}
+define('AFYADATA_MODE', isset($_SERVER['AD_MODE']) ? $_SERVER['AD_MODE'] : 'public');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

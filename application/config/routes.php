@@ -51,11 +51,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'welcome';
 $route['formList'] = 'xform/form_list';
-$route['testFormList'] = 'xform/testFormList';
 $route['submission'] = 'xform/submission';
+$route['about'] = 'welcome/about';
 $route['blog'] = 'blog/post';
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
+$route['open_source_licenses'] = 'welcome/open_source_licenses';
 
 //Forms controller
 //$route['xform/formList'] = 'xform/form_list';

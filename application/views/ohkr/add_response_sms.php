@@ -9,7 +9,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
-            <h3>Add New Disease Response SMS</h3>
+            <div id="header-title">
+                <h3 class="title">Add New Disease Response SMS</h3>
+            </div>
 
             <?php
             if ($this->session->flashdata('message') != '') {

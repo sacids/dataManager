@@ -1,8 +1,15 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
+            <div id="header-title">
+                <h3 class="title"><?php echo $disease->d_title; ?> clinical manifestation</h3>
+            </div>
 
-            <h3><?php echo $disease->d_title; ?> clinical manifestation</h3>
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">List clinical manifestation</li>
+            </ol>
 
             <?php
             if ($this->session->flashdata('message') != '') {

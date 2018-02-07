@@ -1,7 +1,18 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <h3>Form List</h3>
+            <div id="header-title">
+                <h3 class="title">Form List
+                    <span class="pull-right">
+                        <?= anchor("xform/add_new", 'Add new form', 'class="btn-link"') ?></span
+                </h3>
+            </div>
+
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li class="active">List forms</li>
+            </ol>
 
             <?php
             if ($this->session->flashdata('message') != '') {
@@ -34,11 +45,8 @@
             <?php echo validation_errors(); ?>
 
             <div class="">
-
                 <?php if (!empty($forms)) { ?>
-
-                    <table class="table table-striped table-responsive table-hover" cellspacing="0"
-                           cellpadding="0">
+                    <table class="table table-striped table-responsive table-hover" cellspacing="0" cellpadding="0">
                         <tr>
                             <th><?php echo $this->lang->line("label_form_name"); ?></th>
                             <!--								<th>-->
@@ -79,6 +87,7 @@
                                             <li><?php echo anchor("xform/form_data/" . $form->id, "Data list"); ?></li>
                                             <li><?php echo anchor("form_visualization/chart/" . $form->form_id, "View Chart"); ?></li>
                                             <li><?php echo anchor("form_visualization/map/" . $form->form_id, "View Map"); ?></li>
+                                            <li><?php echo anchor("xform/form_overview/" . $form->form_id, "Overview"); ?></li>
                                             <li><?php echo anchor_popup(base_url() . "assets/forms/definition/" . $form->filename, "Download XML file"); ?></li>
                                         </ul>
                                     </div>
@@ -106,7 +115,6 @@
                     <div class="fail_message">You don't have any form to display</div>
                 <?php } ?>
             </div>
-
         </div>
     </div>
 </div>

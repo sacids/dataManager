@@ -27,12 +27,13 @@
  * THE SOFTWARE.
  *
  *
- * @package	    AfyaData
- * @author	    AfyaData Dev Team
- * @copyright	Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS http://sacids.org)
- * @license	    http://opensource.org/licenses/MIT	MIT License
- * @link	    https://afyadata.sacids.org
- * @since	    Version 1.0.0
+ * @package        AfyaData
+ * @author        AfyaData Dev Team
+ * @copyright    Copyright (c) 2016. Southen African Center for Infectious disease Surveillance (SACIDS
+ *     http://sacids.org)
+ * @license        http://opensource.org/licenses/MIT	MIT License
+ * @link        https://afyadata.sacids.org
+ * @since        Version 1.0.0
  */
 
 /**
@@ -41,7 +42,6 @@
  * Date: 3/10/2016
  * Time: 9:51 AM
  */
-
 class Form extends CI_Controller
 {
 	public function __construct()
@@ -87,9 +87,9 @@ class Form extends CI_Controller
 
 			if ($form) {
 				$new_form_details = array(
-					"title" => $this->input->post("title"),
-					"description" => $this->input->post("description"),
-					"access" => $this->input->post("access"),
+					"title"        => $this->input->post("title"),
+					"description"  => $this->input->post("description"),
+					"access"       => $this->input->post("access"),
 					"last_updated" => date("c")
 				);
 
@@ -136,12 +136,12 @@ class Form extends CI_Controller
 
 			if (file_exists($file_to_move)) {
 
-				if (rename($file_to_move, $file_destination))
+				if (rename($file_to_move, $file_destination)) {
 					log_message("debug", "Move form definition file " . $xform->filename . " to " . $file_destination);
-				else
+				} else {
 					log_message("debug", "Failed to move form definition file " . $xform->filename);
+				}
 			}
-
 			$this->session->set_flashdata("message", $this->lang->line("form_delete_successful"));
 		} else {
 			$this->session->set_flashdata("message", $this->lang->line("error_failed_to_delete_form"));
@@ -151,7 +151,6 @@ class Form extends CI_Controller
 
 	function form_data($form_id)
 	{
-
 		if (!$form_id) {
 			$this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
 			redirect("xform/forms");
@@ -167,7 +166,6 @@ class Form extends CI_Controller
 			$data['form_data'] = $this->Xform_model->find_form_data($form->form_id);
 
 			$this->load->view("form/form_data_details", $data);
-
 		} else {
 			// form does not exist
 		}
@@ -210,12 +208,12 @@ class Form extends CI_Controller
 					//TODO Check if file already exist and prompt user.
 
 					$form_details = array(
-						"user_id" => $this->session->userdata("user_id"),
-						"title" => $this->input->post("title"),
-						"description" => $this->input->post("description"),
-						"filename" => $filename,
+						"user_id"      => $this->session->userdata("user_id"),
+						"title"        => $this->input->post("title"),
+						"description"  => $this->input->post("description"),
+						"filename"     => $filename,
 						"date_created" => date("c"),
-						"access" => $this->input->post("access")
+						"access"       => $this->input->post("access")
 					);
 
 					$this->db->trans_start();
