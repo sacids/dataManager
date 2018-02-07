@@ -417,13 +417,22 @@ class Xform_model extends CI_Model
 
     /**
      * @param $table_name
+     * @param null $perm_conditions
      * @return mixed
      */
-    public function count_all_records($table_name)
+    public function count_all_records($table_name, $perm_conditions = null)
     {
         $this->db->from($table_name);
+
+        if ($perm_conditions != null) {
+            if ($perm_conditions != null) {
+                $this->db->where($perm_conditions, "", false);
+            }
+        }
+
         return $this->db->count_all_results();
     }
+
 
 
     /**

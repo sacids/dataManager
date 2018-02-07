@@ -66,7 +66,6 @@ class Feedback extends CI_Controller
         $this->has_allowed_perm($this->router->fetch_method());
 
         if (isset($_POST['search'])) {
-            //TODO searching here
             $form_name = $this->input->post("name", NULL);
             $username = $this->input->post("username", NULL);
 
@@ -78,8 +77,8 @@ class Feedback extends CI_Controller
             }
         } else {
             $config = array(
-                'base_url' => $this->config->base_url("feedback/lists"),
-                'total_rows' => $this->Feedback_model->count_feedback(),
+                'base_url'    => $this->config->base_url("feedback/lists"),
+                'total_rows'  => $this->Feedback_model->count_feedback(),
                 'uri_segment' => 3,
             );
 
@@ -119,14 +118,14 @@ class Feedback extends CI_Controller
 
             //Insert data from ajax
             $feedback_details = array(
-                'form_id' => $feedback->form_id,
-                'message' => $message,
+                'form_id'      => $feedback->form_id,
+                'message'      => $message,
                 'date_created' => date('Y-m-d H:i:s'),
-                'instance_id' => $instance_id,
-                'user_id' => $feedback->user_id,
-                'sender' => 'server',
-                'status' => 'pending',
-                'reply_by' => $this->user_id
+                'instance_id'  => $instance_id,
+                'user_id'      => $feedback->user_id,
+                'sender'       => 'server',
+                'status'       => 'pending',
+                'reply_by'     => $this->user_id
             );
             $this->Feedback_model->create_feedback($feedback_details);
         }

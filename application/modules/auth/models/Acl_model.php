@@ -121,7 +121,7 @@ class Acl_model extends CI_Model
             foreach ($perms as $p) {
                 $condition .= $p->where_condition;
                 if ($count > 1 && $i < ($count - 1)) {
-                    $condition .= " AND ";
+                    $condition .= " OR ";
                 }
                 $i++;
             }

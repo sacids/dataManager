@@ -234,7 +234,7 @@ class Seeder extends CI_Controller
                 'Umri_idadi_vifo_idadi_vifo_vijana' => $this->faker->randomDigit,
                 'Umri_idadi_vifo_Idadi_vifo_wazee' => $this->faker->randomDigit,
                 'GPS_picha_ugonjwa_ugonjwa_unaodhaniwa' => $this->_get_random_value_from_array(array('Malaria', 'Cholera', 'Flue', 'ZIKA', 'Bird Flu')),
-                'GPS_picha_ugonjwa_picture' => "", //todo find a way to add random images
+                'GPS_picha_ugonjwa_picture' => $this->faker->image(),
                 'GPS_picha_ugonjwa_GPS' => $lat . " " . $lon . " " . $accuracy . " " . $altitude,
                 'GPS_picha_ugonjwa_GPS_lat' => $lat,
                 'GPS_picha_ugonjwa_GPS_lng' => $lon,

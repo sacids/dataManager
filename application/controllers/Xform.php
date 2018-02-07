@@ -1049,8 +1049,7 @@ class Xform extends CI_Controller
 
             $config = array(
                 'base_url'    => $this->config->base_url("xform/form_data/" . $form_id),
-                'total_rows'  => $this->Xform_model->count_all_records($form->form_id),
-                //todo add count by row view permission
+                'total_rows'  => $this->Xform_model->count_all_records($form->form_id, $where_condition),
                 'uri_segment' => 4,
             );
 
