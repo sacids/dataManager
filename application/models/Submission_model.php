@@ -84,8 +84,6 @@ class Submission_model extends CI_Model
      */
     function get_submitted_forms($filter_condition = null)
     {
-        //$this->where_condition('xforms', 'user_id');
-
         if ($filter_condition != null)
             $this->db->where($filter_condition, "", false);
 

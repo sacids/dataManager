@@ -159,7 +159,7 @@ class Post extends MX_Controller
                 "user_id" => $this->user_id,
                 "title" => $this->input->post("name"),
                 "image" => $_POST['attachment'],
-                "alias" => str_replace(array(" ", "&", "."), "-", $this->input->post("title")),
+                "alias" => str_replace(array(" ", "&", "."), "-", $this->input->post("name")),
                 "content" => $this->input->post("content"),
                 "status" => $this->input->post("status"),
                 "date_created" => date("c")
@@ -228,7 +228,7 @@ class Post extends MX_Controller
             $post_details = array(
                 "user_id" => $this->session->userdata("user_id"),
                 "title" => $this->input->post("name"),
-                "alias" => str_replace(array(" ", "&", "."), "-", $this->input->post("title")),
+                "alias" => str_replace(array(" ", "&", "."), "-", $this->input->post("name")),
                 "content" => $this->input->post("content"),
                 "status" => $this->input->post("status"),
                 "date_modified" => date("c")

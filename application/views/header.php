@@ -129,18 +129,18 @@
                     </li>
                 <?php } ?>
 
-                <?php //if (perm_module('Campaign')) { ?>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Newsletter Stories
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><?php echo anchor('blog/post/lists', 'Posts List'); ?></li>
-                        <li><?php echo anchor('blog/post/add_new', 'Add New Post'); ?></li>
-                        <li><?php echo anchor('blog/post/send_newsletter', 'Send Newsletter'); ?></li>
-                    </ul>
-                </li>
-                <?php //} ?>
+                <?php if (perm_module('Campaign')) { ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Newsletter Stories
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><?php echo anchor('blog/post/lists', 'Posts List'); ?></li>
+                            <li><?php echo anchor('blog/post/add_new', 'Add New Post'); ?></li>
+                            <li><?php echo anchor('blog/post/send_newsletter', 'Send Newsletter'); ?></li>
+                        </ul>
+                    </li>
+                <?php } ?>
 
                 <?php if (perm_module('Whatsapp')) { ?>
                     <li class="dropdown">

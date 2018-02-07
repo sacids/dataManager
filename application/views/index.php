@@ -43,7 +43,7 @@
 
                     <div class="col-sm-3">
                         <div class="" style="height: inherit;">
-                            <a href="<?php echo site_url('auth/users_list') ?>">
+                            <a href="<?= site_url('auth/users_list') ?>">
                                 <div class="panel panel-tile info-block">
                                     <div class="panel-body">
                                         <div class="row">
@@ -51,7 +51,7 @@
                                                 <i class="fa fa-users"></i>
                                             </div>
                                             <div class="col-xs-7">
-                                                <h2><?= $active_users; ?></h2>
+                                                <h2><?= (isset($active_users) ? $active_users : '0'); ?></h2>
                                                 <h6>Data collectors</h6>
                                             </div>
                                         </div>
@@ -59,7 +59,7 @@
                                 </div>
                             </a>
 
-                            <a href="<?php echo site_url('xform/forms') ?>">
+                            <a href="<?= site_url('xform/forms') ?>">
                                 <div class="panel panel-tile info-block">
                                     <div class="panel-body">
                                         <div class="row">
@@ -67,7 +67,7 @@
                                                 <i class="fa fa-file-excel-o"></i>
                                             </div>
                                             <div class="col-xs-7">
-                                                <h2><?= $published_forms; ?></h2>
+                                                <h2><?= (isset($published_forms) ? $published_forms : '0') ?></h2>
                                                 <h6>Published forms</h6>
                                             </div>
                                         </div>
@@ -75,7 +75,7 @@
                                 </div>
                             </a>
 
-                            <a href="<?php echo site_url('campaign/lists') ?>">
+                            <a href="<?= site_url('campaign/lists') ?>">
                                 <div class="panel panel-tile info-block">
                                     <div class="panel-body">
                                         <div class="row">
@@ -83,7 +83,7 @@
                                                 <i class="fa fa-bullhorn"></i>
                                             </div>
                                             <div class="col-xs-7">
-                                                <h2><?= $active_campaign; ?></h2>
+                                                <h2><?= (isset($active_campaign) ? $active_campaign : '0') ?></h2>
                                                 <h6>Active campaign</h6>
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@
                                 </div>
                             </a>
 
-                            <a href="<?php echo site_url('feedback/lists') ?>">
+                            <a href="<?= site_url('feedback/lists') ?>">
                                 <div class="panel panel-tile info-block">
                                     <div class="panel-body">
                                         <div class="row">
@@ -99,7 +99,7 @@
                                                 <i class="fa fa-comments"></i>
                                             </div>
                                             <div class="col-xs-7">
-                                                <h2><?= number_format($new_feedback); ?></h2>
+                                                <h2><?= (isset($new_feedback) ? number_format($new_feedback) : '0'); ?></h2>
                                                 <h6>User chats</h6>
                                             </div>
                                         </div>
