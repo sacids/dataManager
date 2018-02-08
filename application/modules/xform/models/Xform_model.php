@@ -171,7 +171,6 @@ class Xform_model extends CI_Model
         $user_perm = "P" . $user_id . "P";
 
         //check if user is in a group with permission to view the forms
-        $this->load->model("Ion_auth_model", "auth");
         $user_groups = $this->auth->get_users_groups($user_id)->result();
 
         if ($user_groups) {

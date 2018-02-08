@@ -26,7 +26,6 @@ class Welcome extends MX_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("Xform_model");
     }
 
     public function index()

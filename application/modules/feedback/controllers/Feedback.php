@@ -16,7 +16,6 @@ class Feedback extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Feedback_model', 'User_model', 'Xform_model'));
         $this->load->library('form_auth');
         $this->load->helper(array('url', 'string'));
         log_message('debug', 'Feedback controller initialized');

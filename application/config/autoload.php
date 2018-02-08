@@ -111,7 +111,7 @@ $autoload['config'] = array("sacids", "pagination", "sms");
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
 |
 */
-$autoload['language'] = array("sacids");
+$autoload['language'] = array();
 
 /*
 | -------------------------------------------------------------------
@@ -126,4 +126,7 @@ $autoload['language'] = array("sacids");
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('User_model');
+$autoload['model'] = array(
+    'auth/User_model', 'auth/Acl_model','auth/Ion_auth_model','auth/Perm_model','xform/Submission_model',
+    'campaign/Campaign_model','feedback/Feedback_model','xform/Xform_model', 'facilities/Facilities_model',
+    'ohkr/Ohkr_model', 'model','Alert_model', 'xform/Xformreader_model');
