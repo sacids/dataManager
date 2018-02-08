@@ -250,7 +250,7 @@ class Feedback extends REST_Controller
 
 
             if ($type == 'select1') {
-                print_r($val);
+                //print_r($val);
                 //$l = $val['option'][$l];
             }
 
