@@ -19,9 +19,6 @@ class WebForm extends MX_Controller
             exit;
         }
 
-        $this->load->model("Xform_model");
-        $this->load->model("XformReader_model");
-
         $this->data['title'] = "Web form";
     }
 

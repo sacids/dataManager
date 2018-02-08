@@ -18,7 +18,7 @@
                     } else if ($this->session->flashdata('message') != "") {
                         echo $this->session->flashdata('message');
                     } ?>
-                    <?php echo form_open_multipart('whatsapp/import', 'role="form"'); ?>
+                    <?php echo form_open_multipart('feedback/whatsapp/import', 'role="form"'); ?>
 
                     <div class="col-sm-6">
                         <div class="form-group">

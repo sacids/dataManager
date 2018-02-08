@@ -61,19 +61,6 @@ class Xform extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model(array(
-            'Xform_model',
-            'User_model',
-            'Feedback_model',
-            'facilities/Facilities_model',
-            'Submission_model',
-            'Ohkr_model',
-            'model',
-            'Alert_model',
-            'auth/Acl_model',
-            'webform/Xformreader_model'
-        ));
-
         $this->xFormReader = new Xformreader_model();
         $this->load->library('form_auth');
 

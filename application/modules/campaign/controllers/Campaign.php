@@ -51,14 +51,11 @@ class Campaign extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Campaign_model', 'Xform_model'));
-        log_message('debug', 'Campaign controller initialized');
-
+        $this->load->model(array('campaign/Campaign_model', 'Xform_model'));
         $this->imageUrl = base_url() . 'assets/forms/data/images/';
         $this->controller = $this->router->fetch_class();
     }
 
-    //check login
     function _is_logged_in()
     {
         if (!$this->ion_auth->logged_in()) {

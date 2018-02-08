@@ -49,7 +49,7 @@ class Whatsapp extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Whatsapp_model'));
+        $this->load->model(array('feedback/Whatsapp_model'));
         $this->load->library('upload');
 
 
@@ -106,13 +106,13 @@ class Whatsapp extends CI_Controller
             }
             //redirect
             $this->session->set_flashdata('message', display_message('Message file imported'));
-            redirect('whatsapp/message_list', 'refresh');
+            redirect('feedback/whatsapp/message_list', 'refresh');
         }
         //populate data
         $this->data['txt_file'] = array(
-            'name' => 'txt_file',
-            'id' => 'txt_file',
-            'type' => 'file',
+            'name'  => 'txt_file',
+            'id'    => 'txt_file',
+            'type'  => 'file',
             'value' => $this->form_validation->set_value('txt_file'),
         );
 
@@ -165,12 +165,12 @@ class Whatsapp extends CI_Controller
         //$date_obj = date_create_from_format('d/m/Y, H:i A',trim($date_sent_received));
 
         $chat = array(
-            "fullname" => trim($username),
-            "message" => trim($message),
+            "fullname"           => trim($username),
+            "message"            => trim($message),
             //"date_sent_received" => $date_obj->format('Y-m-d h:i'),
             "date_sent_received" => date('Y-m-d H:i:s', $date_obj),
-            "user_id" => $this->user_id,
-            "date_created" => date("c")
+            "user_id"            => $this->user_id,
+            "date_created"       => date("c")
         );
 
         log_message("debug", json_encode($chat));
@@ -207,8 +207,8 @@ class Whatsapp extends CI_Controller
         } else {
 
             $config = array(
-                'base_url' => $this->config->base_url("whatsapp/message_list"),
-                'total_rows' => $this->Whatsapp_model->count_message(),
+                'base_url'    => $this->config->base_url("feedback/whatsapp/message_list"),
+                'total_rows'  => $this->Whatsapp_model->count_message(),
                 'uri_segment' => 3,
             );
 
@@ -221,7 +221,7 @@ class Whatsapp extends CI_Controller
         //render view
         $data['title'] = "Message List";
         $this->load->view('header', $data);
-        $this->load->view("whatsapp/message_list", $data);
+        $this->load->view("feedback/whatsapp/message_list", $data);
         $this->load->view('footer');
     }
 

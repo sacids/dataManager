@@ -148,8 +148,8 @@
                            aria-expanded="false">WhatsApp db
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><?php echo anchor('whatsapp/message_list', 'List message'); ?></li>
-                            <li><?php echo anchor('whatsapp/import', 'Import file'); ?></li>
+                            <li><?php echo anchor('feedback/whatsapp/message_list', 'List message'); ?></li>
+                            <li><?php echo anchor('feedback/whatsapp/import', 'Import file'); ?></li>
                         </ul>
                     </li>
                 <?php } ?>

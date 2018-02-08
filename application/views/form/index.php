@@ -85,8 +85,8 @@
                                                 data-toggle="dropdown">View <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
                                             <li><?php echo anchor("xform/form_data/" . $form->id, "Data list"); ?></li>
-                                            <li><?php echo anchor("form_visualization/chart/" . $form->form_id, "View Chart"); ?></li>
-                                            <li><?php echo anchor("form_visualization/map/" . $form->form_id, "View Map"); ?></li>
+                                            <li><?php echo anchor("visualization/visualization/chart/" . $form->form_id, "View Chart"); ?></li>
+                                            <li><?php echo anchor("visualization/visualization/map/" . $form->form_id, "View Map"); ?></li>
                                             <li><?php echo anchor("xform/form_overview/" . $form->form_id, "Overview"); ?></li>
                                             <li><?php echo anchor_popup(base_url() . "assets/forms/definition/" . $form->filename, "Download XML file"); ?></li>
                                         </ul>
