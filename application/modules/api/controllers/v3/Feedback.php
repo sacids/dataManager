@@ -189,11 +189,9 @@ class Feedback extends REST_Controller
         $form_details = $this->model->get_by('form_id', $this->table_name);
 
         //set file defn
-        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $form_details->filename);
-        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
-        $form_definition = $this->xform_comm->get_defn();
-
-        //print_r($this->get_field_name_map($this->table_name));
+        $this->Xformreader_model->set_defn_file($this->config->item("form_definition_upload_dir") . $form_details->filename);
+        $this->Xformreader_model->load_xml_definition();
+        $form_definition = $this->Xformreader_model->get_defn();
 
         //get form data
         $form_data = $this->get_form_data($form_definition, $this->get_field_name_map($this->table_name));
