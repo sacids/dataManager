@@ -11,23 +11,28 @@ class Migration_Dhis2_Support extends CI_Migration
     public function up()
     {
         $add_field_to_xforms = [
-            'allow_dhis'    => array(
+            'allow_dhis'     => array(
                 'type'       => 'INT',
                 'constraint' => 1,
                 'default'    => 0
             ),
-            'dhis_data_set' => array(
+            'dhis_data_set'  => array(
                 'type'       => 'VARCHAR',
                 'constraint' => 150
             ),
-            'org_unit_id'   => array(
+            'org_unit_id'    => array(
                 'type'       => 'VARCHAR',
                 'constraint' => 150
             ),
-            'period_type'   => array(
+            'period_type'    => array(
                 'type'       => 'VARCHAR',
                 'constraint' => 20
             ),
+            'has_gps_points' => array(
+                'type'       => 'INT',
+                'constraint' => 1,
+                'default'    => 0
+            )
         ];
 
         $this->dbforge->add_column('xforms', $add_field_to_xforms);

@@ -56,7 +56,6 @@ class Projects extends MX_Controller
             redirect('auth/login', 'refresh');
         }
 
-        $this->load->model(array('Project_model', 'auth/Acl_model', 'Xform_model'));
         $this->user_id = $this->session->userdata("user_id");
         $this->controller = $this->router->fetch_class();
     }

@@ -177,6 +177,10 @@ class Auth extends MX_Controller
     // log the user out
     function login()
     {
+        if ($this->ion_auth->logged_in()) {
+            redirect('dashboard', 'refresh');
+        }
+
         $this->data['title'] = "Login";
 
         //validate form input
