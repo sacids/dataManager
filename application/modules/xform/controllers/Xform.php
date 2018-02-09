@@ -125,7 +125,7 @@ class Xform extends CI_Controller
         $uploaded_filename = NULL;
 
 
-        if ($digest_parts['language']) {
+        if (isset($digest_parts['language'])) {
             $this->mobile_app_language = $digest_parts['language'];
         }
 
