@@ -234,7 +234,55 @@ class Projects extends MX_Controller
                 echo json_encode(['status' => "success", "forms_count" => $project_forms_count]);
             }
         } else {
+
+            /*if (!$this->input->post("search")) {
+                $config = array(
+                    'base_url'    => $this->config->base_url("projects/forms"),
+                    'total_rows'  => $this->Xform_model->count_all_xforms("published"),
+                    'uri_segment' => 3,
+                );
+
+                $this->pagination->initialize($config);
+                $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+                if ($this->ion_auth->is_admin()) {
+                    $data['forms'] = $this->Xform_model->get_form_list(NULL, $this->pagination->per_page, $page, "published");
+                } else {
+                    if ($filter_conditions != null) {
+                        $data['forms'] = $this->Xform_model->get_form_list(null, $this->pagination->per_page, $page, "published", $filter_conditions);
+                    } else {
+                        $data['forms'] = $this->Xform_model->get_form_list($this->user_id, $this->pagination->per_page, $page, "published");
+                    }
+                }
+
+
+                $data["links"] = $this->pagination->create_links();
+
+            } else {
+                $form_name = $this->input->post("name", NULL);
+                $access = $this->input->post("access", NULL);
+                $status = $this->input->post("status", NULL);
+
+                if ($this->ion_auth->is_admin()) {
+                    $forms = $this->Xform_model->search_forms(NULL, $form_name, $access, $status);
+                } else {
+                    if ($filter_conditions != null)
+                        $forms = $this->Xform_model->search_forms(null, $form_name, $access, $status, 30, 0, $filter_conditions);
+                    else
+                        $forms = $this->Xform_model->search_forms($this->user_id, $form_name, $access, $status);
+                }
+
+                if ($forms) {
+                    $this->session->set_flashdata("message", display_message("Found " . count($forms) . " matching forms"));
+                    $data['forms'] = $forms;
+                }
+            }*/
+
             $this->data['forms'] = $project_forms;
+
+            $this->load->view('header');
+            $this->load->view("form/index",$this->data);
+            $this->load->view('footer');
         }
     }
 }

@@ -75,6 +75,17 @@
                        aria-expanded="false"><?= $this->lang->line("nav_item_projects") ?> <span
                                 class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <?php
+
+                        $projects = $this->session->userdata("projects");
+
+                        if (!empty($projects)) {
+                            foreach ($projects as $project) {
+                                echo "<li>" . anchor('projects/forms/' . $project->id, $project->title) . "</li>";
+                            }
+                        }
+
+                        ?>
                         <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
                         <li><?php echo anchor('projects/add_new', $this->lang->line("nav_item_add_new_project")); ?></li>
                     </ul>
