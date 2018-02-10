@@ -266,10 +266,9 @@ class Xform extends CI_Controller
 
             $district = $this->xFormReader->get_form_data()['taarifa_awali_Wilaya'];
 
-            $specie_id = 1; //todo get specie dynamically binadamu
-
+            $specie = $this->Ohkr_model->find_species_by_name("binadamu");
             $request_data = [
-                "specie_id" => $specie_id,
+                "specie_id" => $specie->id,
                 "symptoms"  => $symptoms_reported
             ];
 
