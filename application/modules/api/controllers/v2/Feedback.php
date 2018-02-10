@@ -11,9 +11,6 @@ class Feedback extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('Feedback_model', 'User_model', 'Xform_model', 'Perm_model'));
-		$this->load->library('Xform_comm');
-		log_message('debug', 'Feedback Api controller initialized');
 	}
 
 	/**
