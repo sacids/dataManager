@@ -1,6 +1,5 @@
 <phpunit
 	bootstrap="./Bootstrap.php"
-	backupGlobals="true"
 	colors="true">
 	<testsuites>
 		<testsuite name="CodeIgniter Application Test Suite">
