@@ -233,8 +233,8 @@ class Feedback extends REST_Controller
 
             //TODO : change way to get label
             if (array_key_exists($field_name, $map)) {
-                if (!empty($map[$field_name]['field_name'])) {
-                    $label = $map[$field_name]['field_name'];
+                if ($map[$field_name]['field_label'] != null) {
+                    $label = $map[$field_name]['field_label'];
                 } else {
                     if (!array_key_exists('label', $val))
                         $label = $field_name;
