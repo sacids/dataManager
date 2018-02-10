@@ -135,7 +135,7 @@ class Ohkr extends CI_Controller
             $this->db->trans_complete();
 
             if ($this->db->trans_status()) {
-                file_get_contents(base_url("api/v2/intel/set_epi_map"));
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("add_disease_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_disease")));
@@ -187,7 +187,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->update_disease($disease_id, $disease)) {
-                file_get_contents(base_url("api/v2/intel/set_epi_map"));
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("edit_disease_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_disease")));
@@ -215,7 +215,7 @@ class Ohkr extends CI_Controller
         }
 
         if ($this->Ohkr_model->delete_disease($disease_id)) {
-            file_get_contents(base_url("api/v2/intel/set_epi_map"));
+            file_get_contents(base_url("api/v3/intel/set_epi_map"));
             $this->session->set_flashdata("message", display_message($this->lang->line("delete_disease_successful")));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_disease")));
@@ -274,7 +274,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->add_specie($specie)) {
-                file_get_contents(base_url("api/v2/intel/set_epi_map"));
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("add_specie_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_specie")));
@@ -312,7 +312,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->update_specie($specie_id, $specie)) {
-                file_get_contents(base_url("api/v2/intel/set_epi_map"));
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("edit_specie_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_specie")));
@@ -336,7 +336,7 @@ class Ohkr extends CI_Controller
         }
 
         if ($this->Ohkr_model->delete_specie($specie_id)) {
-            file_get_contents(base_url("api/v2/intel/set_epi_map"));
+            file_get_contents(base_url("api/v3/intel/set_epi_map"));
             $this->session->set_flashdata("message", display_message($this->lang->line("delete_specie_successful")));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_specie")));
@@ -403,7 +403,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->add_symptom($symptoms)) {
-                file_get_contents(base_url("api/v2/intel/set_epi_map"));
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("add_symptom_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_symptom")));
@@ -447,7 +447,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->update_symptom($symptom_id, $symptoms)) {
-                file_get_contents(base_url("api/v2/intel/set_epi_map"));
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("edit_symptom_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_symptom")));
@@ -471,7 +471,7 @@ class Ohkr extends CI_Controller
         }
 
         if ($this->Ohkr_model->delete_symptom($symptom_id)) {
-            file_get_contents(base_url("api/v2/intel/set_epi_map"));
+            file_get_contents(base_url("api/v3/intel/set_epi_map"));
             $this->session->set_flashdata("message", display_message($this->lang->line("delete_symptom_successful")));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_symptom")));
@@ -531,7 +531,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->add_disease_symptom($symptoms)) {
-                file_get_contents(base_url("api/v2/intel/set_epi_map"));
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("add_symptom_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_symptom")));
@@ -579,7 +579,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->update_disease_symptom($disease_symptom_id, $symptoms)) {
-                file_get_contents(base_url("api/v2/intel/set_epi_map"));
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("edit_symptom_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_symptom")));
@@ -605,7 +605,7 @@ class Ohkr extends CI_Controller
 
 
         if ($this->Ohkr_model->delete_disease_symptom($disease_symptom_id)) {
-            file_get_contents(base_url("api/v2/intel/set_epi_map"));
+            file_get_contents(base_url("api/v3/intel/set_epi_map"));
             $this->session->set_flashdata("message", display_message($this->lang->line("delete_symptom_successful")));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_symptom")));
