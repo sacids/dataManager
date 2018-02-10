@@ -233,14 +233,16 @@ class Feedback extends REST_Controller
 
             //TODO : change way to get label
             if (array_key_exists($field_name, $map)) {
-                if (!empty($map[$field_name]['field_label'])) {
-                    $label = $map[$field_name]['field_label'];
+                if (!empty($map[$field_name]['field_name'])) {
+                    $label = $map[$field_name]['field_name'];
                 } else {
                     if (!array_key_exists('label', $val))
                         $label = $field_name;
                     else
                         $label = $val['label'];
                 }
+            } else {
+                $label = $field_name;
             }
 
             if (array_key_exists($field_name, $map)) {
@@ -284,7 +286,6 @@ class Feedback extends REST_Controller
     }
 
     //get field name map
-    private
     function get_field_name_map($table_name)
     {
         $tmp = $this->Xform_model->get_fieldname_map($table_name, '0');

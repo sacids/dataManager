@@ -52,14 +52,29 @@ class Reports extends REST_Controller
 
                 foreach ($form_data as $value) {
                     $this->model->set_table('feedback');
-                    $feedback = $this->model->count_by(array('form_id' => $v->form_id));
+                    $feedback = $this->model->count_by(array('instance_id' => $value->meta_instanceID));
 
-                    $label = '';
+                    //check for meta_instanceName
                     if (array_key_exists('meta_instanceName', $value))
                         $label = $value->meta_instanceName;
                     else
                         $label = $v->title;
 
+                    //check for username
+                    if (array_key_exists('meta_username', $value)) {
+                        //find user
+                        $user = $this->User_model->find_by_username($value->meta_username);
+
+                        if ($user)
+                            $user = $user->first_name . ' ' . $user->last_name;
+                        else
+                            $user = '';
+
+                    } else {
+                        $user = '';
+                    }
+
+                    //form array
                     $form[] = array(
                         'id' => $v->id,
                         'form_id' => $v->form_id,
@@ -68,7 +83,8 @@ class Reports extends REST_Controller
                         'title' => $v->title,
                         'created_at' => $v->date_created,
                         'jr_form_id' => $v->jr_form_id,
-                        'feedback' => $feedback
+                        'feedback' => $feedback,
+                        'user' => $user
                     );
                 }
             }
@@ -108,6 +124,36 @@ class Reports extends REST_Controller
             $this->response(array("status" => "failed", "message" => "No details found"), 202);
     }
 
+    //get feedback
+    function feedback_get()
+    {
+        if (!$this->get('instance_id')) {
+            $this->response(array('status' => 'failed', 'message' => 'Required parameter are missing'), 202);
+        }
+
+        //get feedback
+        $this->model->set_table('feedback');
+        $feedback = $this->model->get_many_by(array('instance_id' => $this->get('instance_id')));
+
+        if ($feedback) {
+            $feedback_array = array();
+            foreach ($feedback as $value) {
+                //feedback array
+                $feedback_array[] = array(
+                    'id' => $value->id,
+                    'form_id' => $value->form_id,
+                    'instance_id' => $value->instance_id,
+                    'message' => $value->message,
+                    'sender' => $value->sender,
+                    'date_created' => $value->date_created
+                );
+            }
+            $this->response(array("status" => "success", "form_details" => $feedback_array), 200);
+        } else {
+            $this->response(array("status" => "failed", "message" => "No feedback found"), 202);
+        }
+    }
+
 
     //get form data
     function get_form_data($structure, $map)
@@ -140,14 +186,16 @@ class Reports extends REST_Controller
 
             //TODO : change way to get label
             if (array_key_exists($field_name, $map)) {
-                if (!empty($map[$field_name]['field_label'])) {
-                    $label = $map[$field_name]['field_label'];
+                if (!empty($map[$field_name]['field_name'])) {
+                    $label = $map[$field_name]['field_name'];
                 } else {
                     if (!array_key_exists('label', $val))
                         $label = $field_name;
                     else
                         $label = $val['label'];
                 }
+            } else {
+                $label = $field_name;
             }
 
             if (array_key_exists($field_name, $map)) {

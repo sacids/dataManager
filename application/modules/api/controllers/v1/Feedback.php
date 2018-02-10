@@ -291,6 +291,7 @@ class Feedback extends CI_Controller
             $tmp = array();
             $field_name = $val['field_name'];
             $type = $val['type'];
+
             if (!array_key_exists('label', $val)) {
                 $label = $field_name;
             } else {

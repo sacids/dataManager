@@ -726,8 +726,8 @@ class Auth extends MX_Controller
         }
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
 
-        $this->form_validation->set_rules('district', 'District', 'required');
-        $this->form_validation->set_rules('facility', 'Health Facility', 'required');
+        //$this->form_validation->set_rules('district', 'District', 'required');
+        //$this->form_validation->set_rules('facility', 'Health Facility', 'required');
 
         $this->form_validation->set_rules('group', $this->lang->line('create_user_group_label'), 'required');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
@@ -747,8 +747,8 @@ class Auth extends MX_Controller
                 'last_name'       => $this->input->post('last_name'),
                 'phone'           => $this->input->post('phone'),
                 'digest_password' => $digest_password,
-                'district'        => $this->input->post('district'),
-                'facility'        => $this->input->post('facility')
+                //'district' => $this->input->post('district'),
+                //'facility' => $this->input->post('facility')
             );
         }
         if ($this->form_validation->run() == TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data, $groups)) {
@@ -874,8 +874,8 @@ class Auth extends MX_Controller
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
         $this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'required|valid_email');
 
-        $this->form_validation->set_rules('district', 'District', 'required');
-        $this->form_validation->set_rules('facility', 'Health Facility', 'required');
+        //$this->form_validation->set_rules('district', 'District', 'required');
+        //$this->form_validation->set_rules('facility', 'Health Facility', 'required');
 
         if (isset($_POST) && !empty($_POST)) {
 //            // do we have a valid request?
@@ -894,11 +894,12 @@ class Auth extends MX_Controller
 
                 $data = array(
                     'first_name' => $this->input->post('first_name'),
-                    'last_name'  => $this->input->post('last_name'),
-                    'email'      => $this->input->post('email'),
-                    'phone'      => $this->input->post('phone'),
-                    'district'   => $this->input->post('district'),
-                    'facility'   => $this->input->post('facility')
+                    'last_name' => $this->input->post('last_name'),
+                    'username' => $this->input->post('identity'),
+                    'email' => $this->input->post('email'),
+                    'phone' => $this->input->post('phone'),
+                    //'district' => $this->input->post('district'),
+                    //'facility' => $this->input->post('facility')
                 );
 
                 // update the password if it was posted
