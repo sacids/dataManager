@@ -17,9 +17,6 @@ class Feedback extends REST_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Feedback_model', 'User_model', 'Xform_model', 'Perm_model', 'model'));
-        $this->load->library('Xform_comm');
-        log_message('debug', 'Feedback Api controller initialized');
     }
 
     //get feedback list
@@ -296,5 +293,4 @@ class Feedback extends REST_Controller
         }
         return $map;
     }
-
 }

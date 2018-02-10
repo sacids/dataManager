@@ -164,7 +164,6 @@ class Visualization extends CI_Controller
         $table_name = $form_id;
         $map = $this->get_field_map($table_name);
 
-        $this->load->library("Xform_comm");
         $form_details = $this->Feedback_model->get_form_details($form_id);
         $file_name = $form_details->filename;
         $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);

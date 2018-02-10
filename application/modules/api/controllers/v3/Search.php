@@ -17,10 +17,7 @@ class Search extends REST_Controller
 
     function __construct()
     {
-        // load model
         parent::__construct();
-        $this->load->model(array('model', 'Xform_model', 'Perm_model'));
-        $this->load->library(array('Xform_comm'));
     }
 
     //search init
