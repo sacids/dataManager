@@ -89,3 +89,15 @@ assets/forms/definition/*.jpg
 /application/config/sms.php
 /composer.lock
 /vendor/
+application/modules/visualization/models/
+application/tests/_ci_phpunit_test/ChangeLog.md
+application/tests/_ci_phpunit_test/patcher/2.x/
+application/tests/_ci_phpunit_test/patcher/3.x/
+application/tests/_ci_phpunit_test/patcher/third_party/PHP-Parser-2.1.1/
+application/tests/_ci_phpunit_test/patcher/third_party/PHP-Parser-3.0.3/
+application/tests/_ci_phpunit_test/replacing/core/old/
+application/tests/_ci_phpunit_test/replacing/filelist.sh
+application/tests/_ci_phpunit_test/replacing/helpers/download_helper.php
+application/tests/_ci_phpunit_test/replacing/libraries/
+application/tests/_ci_phpunit_test/replacing/make-links.sh
+application/tests/_ci_phpunit_test/replacing/mv-current.sh
