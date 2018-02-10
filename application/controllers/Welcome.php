@@ -76,10 +76,10 @@ class Welcome extends MX_Controller
         log_message("debug", "Posted table name {$table_name}");
 
         $config = [
-            'base_url' => $this->config->base_url("welcome/get_events/"),
-            'total_rows' => $this->Xform_model->count_all_records($table_name),
+            'base_url'    => $this->config->base_url("welcome/get_events/"),
+            'total_rows'  => $this->Xform_model->count_all_records($table_name),
             'uri_segment' => 4,
-            'per_page' => 100,
+            'per_page'    => 100,
         ];
 
         $this->pagination->initialize($config);
@@ -90,10 +90,10 @@ class Welcome extends MX_Controller
 
         if ($this->input->is_ajax_request()) {
             $result = [
-                'status' => "success",
+                'status'       => "success",
                 "events_count" => $config['total_rows'],
-                "events" => $events,
-                "links" => $links
+                "events"       => $events,
+                "links"        => $links
             ];
             $result = array_utf8_encode($result);
             echo json_encode($result);
