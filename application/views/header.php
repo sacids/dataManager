@@ -212,8 +212,8 @@
                             <li class="dropdown-submenu">
                                 <?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl"), 'tabindex="-1"'); ?>
                                 <ul class="dropdown-menu">
-                                    <li><?php echo anchor('auth/accesscontrol', "Permissions" . $this->lang->line("")); ?></li>
-                                    <li><?php echo anchor('auth/accesscontrol/new_filter', "Add filter" . $this->lang->line("")); ?></li>
+                                    <li><?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_permissions")); ?></li>
+                                    <li><?php echo anchor('auth/accesscontrol/new_filter',$this->lang->line("nav_item_add_filter")); ?></li>
                                 </ul>
                             </li>
                         </ul>
