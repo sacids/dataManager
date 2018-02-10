@@ -20,7 +20,7 @@ before_install:
   - mv id_rsa ~/.ssh/id_rsa
   
 before_script:
-  - composer update
+  - composer install
   - chmod 0777 ./bin/test.sh
   - chmod 0777 ./bin/deploy.sh
 
