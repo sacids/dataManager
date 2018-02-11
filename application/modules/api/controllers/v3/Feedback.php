@@ -126,40 +126,33 @@ class Feedback extends REST_Controller
             $this->response(array('status' => 'failed', 'message' => 'Username is required'));
         }
 
-        //post data
-        $username = $this->post('username');
+        //get user details from database
+        $user = $this->User_model->find_by_username($this->post('username'));
 
-        //get user details
-        $this->model->set_table('users');
-        $user = $this->model->get_by('username', $username);
-
-        log_message("debug", "User posting feedback is " . $username);
+        log_message("debug", "User posting feedback is " . $user->username);
 
         if ($user) {
             //other post data
             $instance_id = $this->post('instance_id');
 
-            //query details from feedback
-            $this->model->set_table('feedback');
-            $feedback = $this->model->get_by('instance_id', $instance_id);
-
             //update all feedback from this user
             $this->Feedback_model->update_user_feedback($instance_id, 'server');
 
-            $f_data = array(
-                'user_id' => $feedback->user_id,
-                'instance_id' => $this->post('instance_id'),
-                'form_id' => $this->post('form_id'),
-                'message' => $this->post("message"),
-                'sender' => $this->post("sender"),
-                'date_created' => date('Y-m-d H:i:s'),
-                'status' => $this->post("status"),
-                'reply_by' => 0
+            $result = $this->db->insert('feedback',
+                array(
+                    'user_id' => $user->id,
+                    'instance_id' => $this->post('instance_id'),
+                    'form_id' => $this->post('form_id'),
+                    'message' => $this->post("message"),
+                    'sender' => $this->post("sender"),
+                    'date_created' => date('Y-m-d H:i:s'),
+                    'status' => $this->post("status"),
+                    'reply_by' => 0
+                )
             );
-            $id = $this->model->insert($f_data);
 
             //check if feedback inserted
-            if ($id)
+            if ($result)
                 $this->response(array('status' => 'success', 'message' => 'Feedback received'), 200);
             else
                 $this->response(array('status' => 'failed', 'message' => 'Unknown error occurred'), 202);
