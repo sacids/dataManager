@@ -16,10 +16,9 @@ class Intel extends REST_Controller{
         parent::__construct();
 
         $this->resp     = array();
-        $this->load->model("model");
     }
 
-    public function set_epi_map_post(){
+    public function set_epi_map_get(){
 
         $this->model->set_table('ohkr_disease_symptoms');
 
