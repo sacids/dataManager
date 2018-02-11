@@ -127,8 +127,16 @@ class Reports extends REST_Controller
     //get feedback
     function feedback_get()
     {
-        if (!$this->get('instance_id')) {
+        if (!$this->get('instance_id') || !$this->get('username')) {
             $this->response(array('status' => 'failed', 'message' => 'Required parameter are missing'), 202);
+        }
+
+        //get user details from database
+        $user = $this->User_model->find_by_username($this->get('username'));
+
+        //show status header if user not available in database
+        if (count($user) == 0) {
+            $this->response(array('status' => 'failed', 'message' => 'User not exist'), 202);
         }
 
         //get feedback
@@ -145,12 +153,57 @@ class Reports extends REST_Controller
                     'instance_id' => $value->instance_id,
                     'message' => $value->message,
                     'sender' => $value->sender,
+                    'reply_by' => $value->reply_by,
+                    'username' => $this->get('username'),
                     'date_created' => $value->date_created
                 );
             }
             $this->response(array("status" => "success", "form_details" => $feedback_array), 200);
         } else {
             $this->response(array("status" => "failed", "message" => "No feedback found"), 202);
+        }
+    }
+
+    //post feedback
+    function send_feedback_post()
+    {
+        if (!$this->post('username')) {
+            $this->response(array('status' => 'failed', 'message' => 'Username is required'));
+        }
+
+        //get user details from database
+        $user = $this->User_model->find_by_username($this->post('username'));
+
+        log_message("debug", "User posting feedback is " . $user->username);
+
+        if ($user) {
+            //other post data
+            $instance_id = $this->post('instance_id');
+
+            //update all feedback from this user
+            $this->Feedback_model->update_user_feedback($instance_id, 'server');
+
+            $result = $this->db->insert('feedback',
+                array(
+                    'user_id' => $user->id,
+                    'instance_id' => $this->post('instance_id'),
+                    'form_id' => $this->post('form_id'),
+                    'message' => $this->post("message"),
+                    'sender' => $this->post("sender"),
+                    'date_created' => date('Y-m-d H:i:s'),
+                    'status' => 'pending',
+                    'reply_by' => 0
+                )
+            );
+
+            //check if feedback inserted
+            if ($result)
+                $this->response(array('status' => 'success', 'message' => 'Feedback received'), 200);
+            else
+                $this->response(array('status' => 'failed', 'message' => 'Unknown error occurred'), 202);
+
+        } else {
+            $this->response(array('status' => 'failed', 'message' => 'User does not exist'), 203);
         }
     }
 
