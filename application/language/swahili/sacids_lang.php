@@ -127,11 +127,23 @@ $lang['label_campaign_created_date'] = "Tarehe ya kutengenezwa";
 
 
 //Dashboard
-$lang['label_read_more'] = "Soma zaidi";
-$lang['label_detected_disease'] = "Magonjwa yaliyotambulika";
-$lang['label_user_chats'] = "Majadiliano";
-$lang['label_graphical_submission'] = "Fomu zilizokusanywa";
-
+$lang['label_read_more']            = "Soma zaidi";
+$lang['label_detected_disease']     = "Magonjwa yaliyotambulika";
+$lang['label_user_chats']           = "Majadiliano";
+$lang['label_graphical_submission'] = "Taarifa zilizokusanywa hivi karibuni";
+$lang['label_recent_user_chats']    = 'Majadiliano ya hivi karibuni';
+$lang['label_active_campaigns']     = 'Kampeni hai';
+$lang['label_published_forms']      = 'Fomu za umma';
+$lang['label_data_collectors']      = 'Wakusanya Taarifa';
+$lang['label_frequently_detected_disease'] = "Magonjwa yaliyo dhaniwa mara nyingi";
+$lang['label_conversation']         = "Soga";
+$lang['label_graph_title']          = "Ujumla wa taarifa zilizotumwa";
+$lang['label_graph_series_name']    = "Fomu zilizowasilishwa";
+$lang['label_form_submitted']       = "Fomu zilizopokewa";
+$lang['label_graph_period_overall'] = "Kwa ujumla";
+$lang['label_graph_period_monthly'] = "Kwa mwezi";
+$lang['label_graph_period_weekly']  = "Kwa wiki";
+$lang['label_graph_period_daily']   = "Kwa siku";
 
 
 /* CHR Module */

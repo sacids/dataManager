@@ -127,11 +127,23 @@ $lang['label_campaign_created_date'] = "Created date";
 
 
 //Dashboard
-$lang['label_read_more'] = "Read more";
-$lang['label_detected_disease'] = "Mostly detected diseases";
-$lang['label_user_chats'] = "Recent user chats";
+$lang['label_read_more']            = "Read more";
+$lang['label_detected_disease']     = "Mostly detected diseases";
+$lang['label_user_chats']           = "User chats";
 $lang['label_graphical_submission'] = "Graphical recent submission";
-
+$lang['label_recent_user_chats']    = 'Recent user chats';
+$lang['label_active_campaigns']     = 'Active campaigns';
+$lang['label_published_forms']      = 'Public forms';
+$lang['label_data_collectors']      = 'Data collectors';
+$lang['label_frequently_detected_disease']= 'Frequently detected disease';
+$lang['label_conversation']         = "Conversation";
+$lang['label_graph_title']          = "Overall form submitted";
+$lang['label_graph_series_name']    = "Submitted forms";
+$lang['label_form_submitted']       = "Form submitted";
+$lang['label_graph_period_overall'] = "Overall";
+$lang['label_graph_period_monthly'] = "Monthly";
+$lang['label_graph_period_weekly']  = "Weekly";
+$lang['label_graph_period_daily']   = "Daily";
 
 
 /* CHR Module */
