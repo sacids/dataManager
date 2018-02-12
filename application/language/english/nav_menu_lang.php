@@ -74,3 +74,6 @@ $lang['nav_item_change_language'] = "Change language";
 $lang['nav_item_language_english'] = "English";
 $lang['nav_item_language_swahili'] = "Swahili";
 $lang['nav_item_language']      = "Lang";
+
+
+$lang['nav_item_dashboard'] = 'Dashboard';

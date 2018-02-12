@@ -61,8 +61,6 @@ $lang['validation_label_data_set'] = "Data set ID";
 $lang['validation_label_org_unit_id'] = "Organization unit ID";
 $lang['validation_label_period_type'] = "Reporting Period type";
 
-
-
 // Form management
 $lang['form_archived_successful'] = "Form was archived successful";
 $lang['form_restored_successful'] = "Form was restored from archive successful";
@@ -127,6 +125,7 @@ $lang['label_campaign_icon'] = "Icon";
 $lang['label_campaign_featured'] = "Featured";
 $lang['label_campaign_created_date'] = "Created date";
 
+
 //Dashboard
 $lang['label_read_more'] = "Read more";
 $lang['label_detected_disease'] = "Mostly detected diseases";
@@ -150,3 +149,31 @@ $lang['label_chr_to_year']       = 'To Year (or expected)';
 
 
 $lang['btn_add_chr']             = 'Add CHR';
+
+/*
+ * Project module
+ */
+$lang['title_add_new_project']         = 'Add new project';
+$lang['title_manage_project']          = 'Manage projects';
+$lang['label_project_title']           = 'Title';
+$lang['label_project_description']     = 'Description';
+$lang['label_project_created_date']    = 'Created date';
+$lang['label_action']                  = 'Action';
+$lang['label_edit']                    = 'Edit';
+$lang['placeholder_project_title']     = 'Enter project title';
+$lang['placeholder_project_description']= 'Enter project description';
+$lang['button_add_project']            = 'Save project';
+$lang['button_upload_new_form']        = 'Upload new form';
+
+$lang['title_list_projects']          = 'List Projects';
+$lang['label_select_project_to_list_forms']= 'Select project to see forms';
+$lang['title_project_forms']           = 'Project forms';
+
+$lang['title_edit_project']            = 'Edit Project';
+$lang['button_save_changes']           = 'Save Changes';
+
+$lang['message_project_added']         = 'Project added';
+$lang['message_project_not_added']     = 'Failed to add project';
+$lang['message_project_updated']       = 'Project updated';
+$lang['message_project_has_no_form']   = 'This project does not have any form';
+$lang['status_message_getting_forms']  = 'Getting project forms, please wait... ';

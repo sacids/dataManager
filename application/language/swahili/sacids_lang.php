@@ -131,3 +131,49 @@ $lang['label_read_more'] = "Soma zaidi";
 $lang['label_detected_disease'] = "Magonjwa yaliyotambulika";
 $lang['label_user_chats'] = "Majadiliano";
 $lang['label_graphical_submission'] = "Fomu zilizokusanywa";
+
+
+
+/* CHR Module */
+
+$lang['label_chr_first_name']    = 'Jina la kwanza';
+$lang['label_chr_last_name']     = 'Jina la mwisho';
+$lang['label_chr_email']         = 'Barua pepe';
+$lang['label_chr_phone']         = 'Namba ya simu';
+$lang['label_chr_school_college']= 'Shule au chuo';
+$lang['label_chr_field_study']   = 'Eneo ulilosomea';
+$lang['label_chr_grade']         = 'Daraja ua kufuzu';
+$lang['label_chr_activities']    = 'Shughuli na jamii';
+$lang['label_chr_from_year']     = 'Mwaka wa kuanza';
+$lang['label_chr_to_year']       = 'Mwaka wa kumaliza (au tarajiwa)';
+
+
+$lang['btn_add_chr']             = 'Ongeza muhudumu wa afya jamii';
+
+/*
+ * Project module
+ */
+$lang['title_add_new_project']         = 'Ogeza mradi';
+$lang['title_manage_project']          = 'Dhibiti miradi';
+$lang['label_project_title']           = 'Jina';
+$lang['label_project_description']     = 'Maelezo';
+$lang['label_project_created_date']    = 'Tarehe ya kutengenezwa';
+$lang['label_action']                  = 'Tendo';
+$lang['label_edit']                    = 'Hariri';
+$lang['placeholder_project_title']     = 'Ingiza jina la mradi hapa';
+$lang['placeholder_project_description']= 'Ingiza maelezo ya mradi hapa';
+$lang['button_add_project']            = 'Hifadhi mradi';
+$lang['button_upload_new_form']        = 'Weka form mpya';
+
+$lang['title_list_projects']           = 'Orodha ya miradi';
+$lang['label_select_project_to_list_forms']= 'Chagua mradi kuona fomu zake';
+$lang['title_project_forms']           = 'Fomu za mradi';
+
+$lang['title_edit_project']            = 'Hariri mradi';
+$lang['button_save_changes']           = 'Hifadhi mabadiliko';
+
+$lang['message_project_added']         = 'Umefanikiwa kuongeza mradi mpya';
+$lang['message_project_not_added']     = 'Imeshindikana kuongeza mradi';
+$lang['message_project_updated']       = 'Mradi umefanyiwa mabadiliko';
+$lang['message_project_has_no_form']   = 'Mradi hauna fomu yoyote';
+$lang['status_message_getting_forms']  = 'Tafadhali subiri, inatafuta fomu... ';
