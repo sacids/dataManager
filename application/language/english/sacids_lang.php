@@ -61,8 +61,6 @@ $lang['validation_label_data_set'] = "Data set ID";
 $lang['validation_label_org_unit_id'] = "Organization unit ID";
 $lang['validation_label_period_type'] = "Reporting Period type";
 
-
-
 // Form management
 $lang['form_archived_successful'] = "Form was archived successful";
 $lang['form_restored_successful'] = "Form was restored from archive successful";
@@ -127,12 +125,25 @@ $lang['label_campaign_icon'] = "Icon";
 $lang['label_campaign_featured'] = "Featured";
 $lang['label_campaign_created_date'] = "Created date";
 
-//Dashboard
-$lang['label_read_more'] = "Read more";
-$lang['label_detected_disease'] = "Mostly detected diseases";
-$lang['label_user_chats'] = "Recent user chats";
-$lang['label_graphical_submission'] = "Graphical recent submission";
 
+//Dashboard
+$lang['label_read_more']            = "Read more";
+$lang['label_detected_disease']     = "Mostly detected diseases";
+$lang['label_user_chats']           = "User chats";
+$lang['label_graphical_submission'] = "Graphical recent submission";
+$lang['label_recent_user_chats']    = 'Recent user chats';
+$lang['label_active_campaigns']     = 'Active campaigns';
+$lang['label_published_forms']      = 'Public forms';
+$lang['label_data_collectors']      = 'Data collectors';
+$lang['label_frequently_detected_disease']= 'Frequently detected disease';
+$lang['label_conversation']         = "Conversation";
+$lang['label_graph_title']          = "Overall form submitted";
+$lang['label_graph_series_name']    = "Submitted forms";
+$lang['label_form_submitted']       = "Form submitted";
+$lang['label_graph_period_overall'] = "Overall";
+$lang['label_graph_period_monthly'] = "Monthly";
+$lang['label_graph_period_weekly']  = "Weekly";
+$lang['label_graph_period_daily']   = "Daily";
 
 
 /* CHR Module */
@@ -150,3 +161,31 @@ $lang['label_chr_to_year']       = 'To Year (or expected)';
 
 
 $lang['btn_add_chr']             = 'Add CHR';
+
+/*
+ * Project module
+ */
+$lang['title_add_new_project']         = 'Add new project';
+$lang['title_manage_project']          = 'Manage projects';
+$lang['label_project_title']           = 'Title';
+$lang['label_project_description']     = 'Description';
+$lang['label_project_created_date']    = 'Created date';
+$lang['label_action']                  = 'Action';
+$lang['label_edit']                    = 'Edit';
+$lang['placeholder_project_title']     = 'Enter project title';
+$lang['placeholder_project_description']= 'Enter project description';
+$lang['button_add_project']            = 'Save project';
+$lang['button_upload_new_form']        = 'Upload new form';
+
+$lang['title_list_projects']          = 'List Projects';
+$lang['label_select_project_to_list_forms']= 'Select project to see forms';
+$lang['title_project_forms']           = 'Project forms';
+
+$lang['title_edit_project']            = 'Edit Project';
+$lang['button_save_changes']           = 'Save Changes';
+
+$lang['message_project_added']         = 'Project added';
+$lang['message_project_not_added']     = 'Failed to add project';
+$lang['message_project_updated']       = 'Project updated';
+$lang['message_project_has_no_form']   = 'This project does not have any form';
+$lang['status_message_getting_forms']  = 'Getting project forms, please wait... ';
