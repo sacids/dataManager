@@ -184,8 +184,8 @@
                        aria-expanded="false"><?= $this->lang->line("nav_item_language") ?> <span
                                 class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo anchor('languageChanger/switchLang/english', 'English'); ?></li>
-                        <li><?php echo anchor('languageChanger/switchLang/swahili', 'Swahili'); ?></li>
+                        <li><?php echo anchor('languageChanger/switchLang/english', $this->lang->line("nav_item_language_english")); ?></li>
+                        <li><?php echo anchor('languageChanger/switchLang/swahili', $this->lang->line("nav_item_language_swahili")); ?></li>
                     </ul>
                 </li>
 

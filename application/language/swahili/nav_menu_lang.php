@@ -70,10 +70,10 @@ $lang['nav_item_logout'] = "Toka";
 
 
 //Footer
-$lang['nav_item_change_language'] = "Badilisha Lugha";
-$lang['nav_item_language_english'] = "Kiingereza";
-$lang['nav_item_language_swahili'] = "Kiswahili";
-$lang['nav_item_language']      = "Lugha";
+$lang['nav_item_change_language']   = "Badilisha Lugha";
+$lang['nav_item_language_english']  = "Kiingereza";
+$lang['nav_item_language_swahili']  = "Kiswahili";
+$lang['nav_item_language']          = "Lugha";
 
 
-$lang['nav_item_dashboard'] = 'Ubao';
+$lang['nav_item_dashboard']         = 'Ubao';

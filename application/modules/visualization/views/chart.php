@@ -6,7 +6,7 @@
                     <ul>
                         <?php foreach ($xforms as $form) { ?>
                             <li>
-                                <?php echo anchor("_Visualization/chart/" . $form->form_id, $form->title); ?>
+                                <?php echo anchor("visualization/chart/" . $form->form_id, $form->title); ?>
                             </li>
                         <?php } ?>
                     </ul>
