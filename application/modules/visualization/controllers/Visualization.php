@@ -283,7 +283,8 @@ class Visualization extends CI_Controller
                 $group_by_column = ($enum_field != NULL) ? $enum_field : $field->name;
                 $function = "SUM";
                 break;
-            } elseif ($field->type == "varchar") {// && !$is_gps_field) { //Todo check here causes form jamii to bring errors
+            } elseif ($field->type == "varchar") {// && !$is_gps_field) {
+                //Todo check here causes form jamii to bring errors
                 //TODO Fix this condition here
                 //($field->name != "meta_deviceID" && $field->name != "meta_instanceID") &&
                 $axis_column = $field->name;
