@@ -274,9 +274,21 @@ class Reports extends REST_Controller
             if ($type == 'select') {
                 $tmp1 = explode(" ", $l);
                 $arr = array();
-                foreach ($tmp1 as $item) {
-                    $item = trim($item);
-                    array_push($arr, $val['option'][$item]);
+
+                foreach ($tmp1 as $value) {
+                    $code = trim($value);
+
+                    if (strpos($code, 'A') === false) {
+                        $item = $code;
+                    } else {
+                        $this->model->set_table('ohkr_symptoms');
+                        $symptom = $this->model->get_by('code', $code);
+                        if ($symptom)
+                            $item = $symptom->title;
+                        else
+                            $item = $code;
+                    }
+                    array_push($arr, $item);
                 }
                 $l = implode(",", $arr);
             }
