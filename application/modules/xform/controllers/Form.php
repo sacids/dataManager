@@ -47,11 +47,6 @@ class Form extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-
-		$this->load->model(array(
-			'Xform_model',
-			'User_model'
-		));
 	}
 
 	function index()

@@ -63,8 +63,8 @@ class Ohkr extends CI_Controller
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url' => $this->config->base_url("ohkr/disease_list"),
-            'total_rows' => $this->Ohkr_model->count_disease(),
+            'base_url'    => $this->config->base_url("ohkr/disease_list"),
+            'total_rows'  => $this->Ohkr_model->count_disease(),
             'uri_segment' => 3,
         );
 
@@ -109,9 +109,9 @@ class Ohkr extends CI_Controller
 
         } else {
             $disease = array(
-                "title" => $this->input->post("name"),
-                "specie_id" => $this->input->post("specie"),
-                "description" => $this->input->post("description"),
+                "title"        => $this->input->post("name"),
+                "specie_id"    => $this->input->post("specie"),
+                "description"  => $this->input->post("description"),
                 "date_created" => date("Y-m-d H:i:s")
             );
 
@@ -123,11 +123,11 @@ class Ohkr extends CI_Controller
 
             for ($i = 0; $i < count($alert_messages); $i++) {
                 $message = array(
-                    "disease_id" => $disease_id,
-                    "group_id" => $alert_groups[$i],
-                    "message" => $alert_messages[$i],
-                    "type" => "TEXT",
-                    "status" => "Enabled",
+                    "disease_id"   => $disease_id,
+                    "group_id"     => $alert_groups[$i],
+                    "message"      => $alert_messages[$i],
+                    "type"         => "TEXT",
+                    "status"       => "Enabled",
                     "date_created" => date("Y-m-d H:i:s")
                 );
                 $this->Ohkr_model->create_response_sms($message);
@@ -135,6 +135,7 @@ class Ohkr extends CI_Controller
             $this->db->trans_complete();
 
             if ($this->db->trans_status()) {
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("add_disease_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_disease")));
@@ -180,12 +181,13 @@ class Ohkr extends CI_Controller
             $this->load->view('footer');
         } else {
             $disease = array(
-                "title" => $this->input->post("name"),
-                "specie_id" => $this->input->post("specie"),
+                "title"       => $this->input->post("name"),
+                "specie_id"   => $this->input->post("specie"),
                 "description" => $this->input->post("description")
             );
 
             if ($this->Ohkr_model->update_disease($disease_id, $disease)) {
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("edit_disease_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_disease")));
@@ -213,6 +215,7 @@ class Ohkr extends CI_Controller
         }
 
         if ($this->Ohkr_model->delete_disease($disease_id)) {
+            file_get_contents(base_url("api/v3/intel/set_epi_map"));
             $this->session->set_flashdata("message", display_message($this->lang->line("delete_disease_successful")));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_disease")));
@@ -230,8 +233,8 @@ class Ohkr extends CI_Controller
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url' => $this->config->base_url("ohkr/species_list"),
-            'total_rows' => $this->Ohkr_model->count_species(),
+            'base_url'    => $this->config->base_url("ohkr/species_list"),
+            'total_rows'  => $this->Ohkr_model->count_species(),
             'uri_segment' => 3,
         );
 
@@ -271,6 +274,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->add_specie($specie)) {
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("add_specie_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_specie")));
@@ -308,6 +312,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->update_specie($specie_id, $specie)) {
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("edit_specie_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_specie")));
@@ -331,6 +336,7 @@ class Ohkr extends CI_Controller
         }
 
         if ($this->Ohkr_model->delete_specie($specie_id)) {
+            file_get_contents(base_url("api/v3/intel/set_epi_map"));
             $this->session->set_flashdata("message", display_message($this->lang->line("delete_specie_successful")));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_specie")));
@@ -351,8 +357,8 @@ class Ohkr extends CI_Controller
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url' => $this->config->base_url("ohkr/symptoms_list"),
-            'total_rows' => $this->Ohkr_model->count_symptoms(),
+            'base_url'    => $this->config->base_url("ohkr/symptoms_list"),
+            'total_rows'  => $this->Ohkr_model->count_symptoms(),
             'uri_segment' => 3,
         );
 
@@ -391,12 +397,13 @@ class Ohkr extends CI_Controller
             $this->load->view('footer');
         } else {
             $symptoms = array(
-                "title" => $this->input->post("name"),
-                "code" => $this->input->post("code"),
+                "title"       => $this->input->post("name"),
+                "code"        => $this->input->post("code"),
                 "description" => $this->input->post("description")
             );
 
             if ($this->Ohkr_model->add_symptom($symptoms)) {
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("add_symptom_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_symptom")));
@@ -434,12 +441,13 @@ class Ohkr extends CI_Controller
             $this->load->view('footer');
         } else {
             $symptoms = array(
-                "title" => $this->input->post("name"),
-                "code" => $this->input->post("code"),
+                "title"       => $this->input->post("name"),
+                "code"        => $this->input->post("code"),
                 "description" => $this->input->post("description")
             );
 
             if ($this->Ohkr_model->update_symptom($symptom_id, $symptoms)) {
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("edit_symptom_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_symptom")));
@@ -463,6 +471,7 @@ class Ohkr extends CI_Controller
         }
 
         if ($this->Ohkr_model->delete_symptom($symptom_id)) {
+            file_get_contents(base_url("api/v3/intel/set_epi_map"));
             $this->session->set_flashdata("message", display_message($this->lang->line("delete_symptom_successful")));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_symptom")));
@@ -522,6 +531,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->add_disease_symptom($symptoms)) {
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("add_symptom_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_symptom")));
@@ -569,6 +579,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->update_disease_symptom($disease_symptom_id, $symptoms)) {
+                file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("edit_symptom_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_symptom")));
@@ -594,6 +605,7 @@ class Ohkr extends CI_Controller
 
 
         if ($this->Ohkr_model->delete_disease_symptom($disease_symptom_id)) {
+            file_get_contents(base_url("api/v3/intel/set_epi_map"));
             $this->session->set_flashdata("message", display_message($this->lang->line("delete_symptom_successful")));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_symptom")));
@@ -648,8 +660,8 @@ class Ohkr extends CI_Controller
         } else {
             $faq = array(
                 "disease_id" => $disease_id,
-                "question" => $this->input->post("question"),
-                "answer" => $this->input->post("answer")
+                "question"   => $this->input->post("question"),
+                "answer"     => $this->input->post("answer")
             );
 
             if ($this->Ohkr_model->add_disease_faq($faq)) {
@@ -692,7 +704,7 @@ class Ohkr extends CI_Controller
         } else {
             $faq = array(
                 "question" => $this->input->post("question"),
-                "answer" => $this->input->post("answer")
+                "answer"   => $this->input->post("answer")
             );
 
             if ($this->Ohkr_model->update_disease_faq($faq_id, $faq)) {
@@ -824,11 +836,11 @@ class Ohkr extends CI_Controller
             $this->load->view('footer');
         } else {
             $message = array(
-                "disease_id" => $disease_id,
-                "group_id" => $this->input->post("group"),
-                "message" => $this->input->post("message"),
-                "type" => "TEXT",
-                "status" => "Enabled",
+                "disease_id"   => $disease_id,
+                "group_id"     => $this->input->post("group"),
+                "message"      => $this->input->post("message"),
+                "type"         => "TEXT",
+                "status"       => "Enabled",
                 "date_created" => date("Y-m-d H:i:s")
             );
 
@@ -869,9 +881,9 @@ class Ohkr extends CI_Controller
             $this->load->view('footer');
         } else {
             $message = array(
-                "group_id" => $this->input->post("group"),
-                "message" => $this->input->post("message"),
-                "status" => "Enabled",
+                "group_id"      => $this->input->post("group"),
+                "message"       => $this->input->post("message"),
+                "status"        => "Enabled",
                 "date_modified" => date("Y-m-d H:i:s")
             );
 

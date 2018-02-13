@@ -42,7 +42,7 @@
  * Date: 3/31/2016
  * Time: 10:10 AM
  */
-class Form_Visualization extends CI_Controller
+class Visualization extends CI_Controller
 {
 
     private $data;
@@ -55,13 +55,6 @@ class Form_Visualization extends CI_Controller
             // redirect them to the login page
             redirect('auth/login', 'refresh');
         }
-
-        $this->load->model(array(
-            'Xform_model',
-            'User_model',
-            'Submission_model',
-            'Feedback_model'
-        ));
 
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 
@@ -155,7 +148,7 @@ class Form_Visualization extends CI_Controller
             $data = $this->_load_default_graph_data($data, $xforms);
         }
         $this->load->view("header", $data);
-        $this->load->view("graph/chart", $data);
+        $this->load->view("chart", $data);
         $this->load->view("footer", $data);
     }
 
@@ -166,12 +159,11 @@ class Form_Visualization extends CI_Controller
     function _get_mapped_table_column_name($form_id)
     {
         if (!$form_id)
-            redirect("form_visualization");
+            redirect("visualization/visualization");
 
         $table_name = $form_id;
         $map = $this->get_field_map($table_name);
 
-        $this->load->library("Xform_comm");
         $form_details = $this->Feedback_model->get_form_details($form_id);
         $file_name = $form_details->filename;
         $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $file_name);
@@ -291,7 +283,8 @@ class Form_Visualization extends CI_Controller
                 $group_by_column = ($enum_field != NULL) ? $enum_field : $field->name;
                 $function = "SUM";
                 break;
-            } elseif ($field->type == "varchar") {// && !$is_gps_field) { //Todo check here causes form jamii to bring errors
+            } elseif ($field->type == "varchar") {// && !$is_gps_field) {
+                //Todo check here causes form jamii to bring errors
                 //TODO Fix this condition here
                 //($field->name != "meta_deviceID" && $field->name != "meta_instanceID") &&
                 $axis_column = $field->name;
@@ -325,7 +318,7 @@ class Form_Visualization extends CI_Controller
 
     public function layout()
     {
-        $this->load->view("graph/welcome_message");
+        $this->load->view("welcome_message");
     }
 
 
@@ -336,7 +329,7 @@ class Form_Visualization extends CI_Controller
             $data = $this->_load_points($form_id);
 
             $this->load->view("header");
-            $this->load->view("graph/map", $data);
+            $this->load->view("map", $data);
             $this->load->view("footer");
 
         } else {

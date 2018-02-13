@@ -66,7 +66,7 @@ class Ion_auth
 
 		$this->load->library('session');
 
-		$this->load->model('ion_auth_model');
+		$this->load->model('auth/ion_auth_model');
 
 		$this->_cache_user_in_group =& $this->ion_auth_model->_cache_user_in_group;
 
@@ -86,12 +86,16 @@ class Ion_auth
 		$this->ion_auth_model->trigger_events('library_constructor');
 	}
 
-	/**
-	 * __call
-	 *
-	 * Acts as a simple way to call model methods without loads of stupid alias'
-	 *
-	 **/
+    /**
+     * __call
+     *
+     * Acts as a simple way to call model methods without loads of stupid alias'
+     *
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     * @throws Exception
+     */
 	public function __call($method, $arguments)
 	{
 		if (!method_exists( $this->ion_auth_model, $method) )

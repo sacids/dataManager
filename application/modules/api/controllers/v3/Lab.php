@@ -12,7 +12,6 @@ class Lab extends CI_Controller
     {
         // load model
         parent::__construct();
-        $this->load->model(array('User_model', 'Xform_model', 'Perm_model'));
     }
 
     public function requests()
@@ -70,6 +69,4 @@ class Lab extends CI_Controller
         }
         echo json_encode($response);
     }
-
-
 }

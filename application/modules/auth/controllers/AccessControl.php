@@ -23,8 +23,6 @@ class AccessControl extends MX_Controller
             redirect('dashboard', 'refresh');
         }
 
-        $this->load->model("Acl_model");
-
         $this->data['title'] = "Access control list";
     }
 

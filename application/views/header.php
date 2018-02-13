@@ -75,6 +75,17 @@
                        aria-expanded="false"><?= $this->lang->line("nav_item_projects") ?> <span
                                 class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <?php
+
+                        $projects = $this->session->userdata("projects");
+
+                        if (!empty($projects)) {
+                            foreach ($projects as $project) {
+                                echo "<li>" . anchor('projects/forms/' . $project->id, $project->title) . "</li>";
+                            }
+                        }
+
+                        ?>
                         <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
                         <li><?php echo anchor('projects/add_new', $this->lang->line("nav_item_add_new_project")); ?></li>
                     </ul>
@@ -148,8 +159,8 @@
                            aria-expanded="false">WhatsApp db
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><?php echo anchor('whatsapp/message_list', 'List message'); ?></li>
-                            <li><?php echo anchor('whatsapp/import', 'Import file'); ?></li>
+                            <li><?php echo anchor('feedback/whatsapp/message_list', 'List message'); ?></li>
+                            <li><?php echo anchor('feedback/whatsapp/import', 'Import file'); ?></li>
                         </ul>
                     </li>
                 <?php } ?>
@@ -173,8 +184,8 @@
                        aria-expanded="false"><?= $this->lang->line("nav_item_language") ?> <span
                                 class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo anchor('languageChanger/switchLang/english', 'English'); ?></li>
-                        <li><?php echo anchor('languageChanger/switchLang/swahili', 'Swahili'); ?></li>
+                        <li><?php echo anchor('languageChanger/switchLang/english', $this->lang->line("nav_item_language_english")); ?></li>
+                        <li><?php echo anchor('languageChanger/switchLang/swahili', $this->lang->line("nav_item_language_swahili")); ?></li>
                     </ul>
                 </li>
 
@@ -201,8 +212,8 @@
                             <li class="dropdown-submenu">
                                 <?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl"), 'tabindex="-1"'); ?>
                                 <ul class="dropdown-menu">
-                                    <li><?php echo anchor('auth/accesscontrol', "Permissions" . $this->lang->line("")); ?></li>
-                                    <li><?php echo anchor('auth/accesscontrol/new_filter', "Add filter" . $this->lang->line("")); ?></li>
+                                    <li><?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_permissions")); ?></li>
+                                    <li><?php echo anchor('auth/accesscontrol/new_filter',$this->lang->line("nav_item_add_filter")); ?></li>
                                 </ul>
                             </li>
                         </ul>

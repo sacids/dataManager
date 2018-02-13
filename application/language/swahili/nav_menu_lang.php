@@ -33,6 +33,8 @@ $lang['nav_item_manage_permission'] = "Ruhusa ya watumiaji";
 $lang['nav_item_list_permission'] = "Orodhesha ruhusa";
 $lang['nav_item_create_permission'] = "Ongeza ruhusu";
 $lang['nav_item_acl']           = "Uthibiti wa upatikanaji";
+$lang['nav_item_permissions']   = "Ruhusa";
+$lang['nav_item_add_filter']   = "Ongeza vichujio";
 
 //Health Facilities
 $lang['nav_item_manage_facilities'] = "Vituo Vya Afya";
@@ -68,7 +70,10 @@ $lang['nav_item_logout'] = "Toka";
 
 
 //Footer
-$lang['nav_item_change_language'] = "Badilisha Lugha";
-$lang['nav_item_language_english'] = "Kiingereza";
-$lang['nav_item_language_swahili'] = "Kiswahili";
-$lang['nav_item_language']      = "Lugha";
+$lang['nav_item_change_language']   = "Badilisha Lugha";
+$lang['nav_item_language_english']  = "Kiingereza";
+$lang['nav_item_language_swahili']  = "Kiswahili";
+$lang['nav_item_language']          = "Lugha";
+
+
+$lang['nav_item_dashboard']         = 'Ubao';

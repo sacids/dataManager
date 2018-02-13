@@ -17,9 +17,6 @@ class Feedback extends REST_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Feedback_model', 'User_model', 'Xform_model', 'Perm_model', 'model'));
-        $this->load->library('Xform_comm');
-        log_message('debug', 'Feedback Api controller initialized');
     }
 
     //get feedback list
@@ -129,40 +126,33 @@ class Feedback extends REST_Controller
             $this->response(array('status' => 'failed', 'message' => 'Username is required'));
         }
 
-        //post data
-        $username = $this->post('username');
+        //get user details from database
+        $user = $this->User_model->find_by_username($this->post('username'));
 
-        //get user details
-        $this->model->set_table('users');
-        $user = $this->model->get_by('username', $username);
-
-        log_message("debug", "User posting feedback is " . $username);
+        log_message("debug", "User posting feedback is " . $user->username);
 
         if ($user) {
             //other post data
             $instance_id = $this->post('instance_id');
 
-            //query details from feedback
-            $this->model->set_table('feedback');
-            $feedback = $this->model->get_by('instance_id', $instance_id);
-
             //update all feedback from this user
             $this->Feedback_model->update_user_feedback($instance_id, 'server');
 
-            $f_data = array(
-                'user_id' => $feedback->user_id,
-                'instance_id' => $this->post('instance_id'),
-                'form_id' => $this->post('form_id'),
-                'message' => $this->post("message"),
-                'sender' => $this->post("sender"),
-                'date_created' => date('Y-m-d H:i:s'),
-                'status' => $this->post("status"),
-                'reply_by' => 0
+            $result = $this->db->insert('feedback',
+                array(
+                    'user_id' => $user->id,
+                    'instance_id' => $this->post('instance_id'),
+                    'form_id' => $this->post('form_id'),
+                    'message' => $this->post("message"),
+                    'sender' => $this->post("sender"),
+                    'date_created' => date('Y-m-d H:i:s'),
+                    'status' => $this->post("status"),
+                    'reply_by' => 0
+                )
             );
-            $id = $this->model->insert($f_data);
 
             //check if feedback inserted
-            if ($id)
+            if ($result)
                 $this->response(array('status' => 'success', 'message' => 'Feedback received'), 200);
             else
                 $this->response(array('status' => 'failed', 'message' => 'Unknown error occurred'), 202);
@@ -189,11 +179,9 @@ class Feedback extends REST_Controller
         $form_details = $this->model->get_by('form_id', $this->table_name);
 
         //set file defn
-        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $form_details->filename);
-        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
-        $form_definition = $this->xform_comm->get_defn();
-
-        //print_r($this->get_field_name_map($this->table_name));
+        $this->Xformreader_model->set_defn_file($this->config->item("form_definition_upload_dir") . $form_details->filename);
+        $this->Xformreader_model->load_xml_definition();
+        $form_definition = $this->Xformreader_model->get_defn();
 
         //get form data
         $form_data = $this->get_form_data($form_definition, $this->get_field_name_map($this->table_name));
@@ -235,7 +223,7 @@ class Feedback extends REST_Controller
 
             //TODO : change way to get label
             if (array_key_exists($field_name, $map)) {
-                if (!empty($map[$field_name]['field_label'])) {
+                if ($map[$field_name]['field_label'] != null) {
                     $label = $map[$field_name]['field_label'];
                 } else {
                     if (!array_key_exists('label', $val))
@@ -243,6 +231,8 @@ class Feedback extends REST_Controller
                     else
                         $label = $val['label'];
                 }
+            } else {
+                $label = $field_name;
             }
 
             if (array_key_exists($field_name, $map)) {
@@ -252,7 +242,7 @@ class Feedback extends REST_Controller
 
 
             if ($type == 'select1') {
-                print_r($val);
+                //print_r($val);
                 //$l = $val['option'][$l];
             }
 
@@ -268,9 +258,21 @@ class Feedback extends REST_Controller
             if ($type == 'select') {
                 $tmp1 = explode(" ", $l);
                 $arr = array();
-                foreach ($tmp1 as $item) {
-                    $item = trim($item);
-                    array_push($arr, $val['option'][$item]);
+
+                foreach ($tmp1 as $value) {
+                    $code = trim($value);
+
+                    if (strpos($code, 'A') === false) {
+                        $item = $code;
+                    } else {
+                        $this->model->set_table('ohkr_symptoms');
+                        $symptom = $this->model->get_by('code', $code);
+                        if ($symptom)
+                            $item = $symptom->title;
+                        else
+                            $item = $code;
+                    }
+                    array_push($arr, $item);
                 }
                 $l = implode(",", $arr);
             }
@@ -286,7 +288,6 @@ class Feedback extends REST_Controller
     }
 
     //get field name map
-    private
     function get_field_name_map($table_name)
     {
         $tmp = $this->Xform_model->get_fieldname_map($table_name, '0');
@@ -297,5 +298,4 @@ class Feedback extends REST_Controller
         }
         return $map;
     }
-
 }

@@ -61,19 +61,6 @@ class Xform extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model(array(
-            'Xform_model',
-            'User_model',
-            'Feedback_model',
-            'facilities/Facilities_model',
-            'Submission_model',
-            'Ohkr_model',
-            'model',
-            'Alert_model',
-            'auth/Acl_model',
-            'webform/Xformreader_model'
-        ));
-
         $this->xFormReader = new Xformreader_model();
         $this->load->library('form_auth');
 
@@ -94,66 +81,6 @@ class Xform extends CI_Controller
     public function index()
     {
         $this->forms();
-    }
-
-    /**
-     * List all available forms
-     */
-    function forms()
-    {
-        $this->_is_logged_in();
-
-        if (!$this->ion_auth->is_admin()) {
-            $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Xform_model::$xform_table_name);
-        }
-
-        $data['title'] = $this->lang->line("heading_form_list");
-
-        if (!$this->input->post("search")) {
-            $config = array(
-                'base_url'    => $this->config->base_url("xform/forms"),
-                'total_rows'  => $this->Xform_model->count_all_xforms("published"),
-                'uri_segment' => 3,
-            );
-
-            $this->pagination->initialize($config);
-            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-            if ($this->ion_auth->is_admin()) {
-                $data['forms'] = $this->Xform_model->get_form_list(NULL, $this->pagination->per_page, $page, "published");
-            } else {
-                if ($filter_conditions != null) {
-                    $data['forms'] = $this->Xform_model->get_form_list(null, $this->pagination->per_page, $page, "published", $filter_conditions);
-                } else {
-                    $data['forms'] = $this->Xform_model->get_form_list($this->user_id, $this->pagination->per_page, $page, "published");
-                }
-            }
-
-            $data["links"] = $this->pagination->create_links();
-
-        } else {
-            $form_name = $this->input->post("name", NULL);
-            $access = $this->input->post("access", NULL);
-            $status = $this->input->post("status", NULL);
-
-            if ($this->ion_auth->is_admin()) {
-                $forms = $this->Xform_model->search_forms(NULL, $form_name, $access, $status);
-            } else {
-                if ($filter_conditions != null)
-                    $forms = $this->Xform_model->search_forms(null, $form_name, $access, $status, 30, 0, $filter_conditions);
-                else
-                    $forms = $this->Xform_model->search_forms($this->user_id, $form_name, $access, $status);
-            }
-
-            if ($forms) {
-                $this->session->set_flashdata("message", display_message("Found " . count($forms) . " matching forms"));
-                $data['forms'] = $forms;
-            }
-        }
-
-        $this->load->view('header', $data);
-        $this->load->view("form/index");
-        $this->load->view('footer');
     }
 
     /**
@@ -198,7 +125,7 @@ class Xform extends CI_Controller
         $uploaded_filename = NULL;
 
 
-        if ($digest_parts['language']) {
+        if (isset($digest_parts['language'])) {
             $this->mobile_app_language = $digest_parts['language'];
         }
 
@@ -339,10 +266,9 @@ class Xform extends CI_Controller
 
             $district = $this->xFormReader->get_form_data()['taarifa_awali_Wilaya'];
 
-            $specie_id = 1; //todo get specie dynamically binadamu
-
+            $specie = $this->Ohkr_model->find_species_by_name("binadamu");
             $request_data = [
-                "specie_id" => $specie_id,
+                "specie_id" => $specie->id,
                 "symptoms"  => $symptoms_reported
             ];
 
@@ -819,7 +745,7 @@ class Xform extends CI_Controller
 
         if (!$xform_id) {
             $this->session->set_flashdata("message", $this->lang->line("select_form_to_edit"));
-            redirect("xform/forms");
+            redirect("projects");
             exit;
         }
 
@@ -940,7 +866,7 @@ class Xform extends CI_Controller
                 redirect("xform/edit_form/{$xform_id}");
             } else {
                 $this->session->set_flashdata("message", $this->lang->line("unknown_error_occurred"));
-                redirect("xform/forms");
+                redirect("projects");
             }
         }
     }
@@ -955,7 +881,7 @@ class Xform extends CI_Controller
 
         if (!$xform_id) {
             $this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
-            redirect("xform/forms");
+            redirect("projects");
             exit;
         }
 
@@ -964,7 +890,7 @@ class Xform extends CI_Controller
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_form"), "danger"));
         }
-        redirect("xform/forms");
+        redirect("projects");
     }
 
     /**
@@ -976,7 +902,7 @@ class Xform extends CI_Controller
 
         if (!$xform_id) {
             $this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
-            redirect("xform/forms");
+            redirect("projects");
             exit;
         }
 
@@ -985,7 +911,7 @@ class Xform extends CI_Controller
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_restore_form"), "danger"));
         }
-        redirect("xform/forms");
+        redirect("projects");
     }
 
     /**
@@ -997,7 +923,7 @@ class Xform extends CI_Controller
 
         if (!$form_id) {
             set_flashdata(display_message($this->lang->line("select_form_to_delete"), "error"));
-            redirect("xform/forms");
+            redirect("projects");
             exit;
         }
 
@@ -1445,7 +1371,7 @@ class Xform extends CI_Controller
     {
         if ($xform_id == NULL) {
             $this->session->set_flashdata("message", display_message("You must select a form", "danger"));
-            redirect("xform/forms");
+            redirect("projects");
         }
         $table_name = $xform_id;
         $query = $this->db->query("select * from {$table_name} order by id ASC ");
@@ -1474,7 +1400,7 @@ class Xform extends CI_Controller
     {
         if ($xform_id == NULL) {
             $this->session->set_flashdata("message", display_message("You must select a form", "danger"));
-            redirect("xform/forms");
+            redirect("projects");
         }
 
         $table_name = $xform_id;
@@ -1508,7 +1434,7 @@ class Xform extends CI_Controller
     {
         if (!$form_id) {
             set_flashdata(display_message("You must select a form", "danger"));
-            redirect("xform/forms");
+            redirect("projects");
         }
 
         $this->form_validation->set_rules("save", "Save changes", "required");

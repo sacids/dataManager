@@ -11,9 +11,6 @@ class Feedback extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model(array('Feedback_model', 'User_model', 'Xform_model', 'Perm_model'));
-        $this->load->library('Xform_comm');
-        log_message('debug', 'Feedback Api controller initialized');
     }
 
     /**
@@ -291,6 +288,7 @@ class Feedback extends CI_Controller
             $tmp = array();
             $field_name = $val['field_name'];
             $type = $val['type'];
+
             if (!array_key_exists('label', $val)) {
                 $label = $field_name;
             } else {

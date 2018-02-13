@@ -706,7 +706,7 @@ class Xformreader_model extends CI_Model
         print_r($form_definition);
         exit;*/
 
-        $web_form = form_open_multipart("webform/save");
+        $web_form = form_open_multipart("xform/save");
 
         foreach ($form_definition as $dfn) {
 

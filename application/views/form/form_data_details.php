@@ -80,8 +80,8 @@
                                 data-target="#myModal">Set Filters
                         </button>
                         <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_drive-ms-excel.png" height="25"/>') ?>
-                        <?php echo anchor("form_visualization/chart/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_office-25.png" height="25"/>') ?>
-                        <?php echo anchor("form_visualization/map/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_location.png" height="25"/>') ?>
+                        <?php echo anchor("visualization/visualization/chart/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_office-25.png" height="25"/>') ?>
+                        <?php echo anchor("visualization/visualization/map/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_location.png" height="25"/>') ?>
                     </div>
                 </div>
             </div>

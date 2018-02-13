@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 main">
                 <div id="header-title">
-                    <h3 class="title">Dashboard</h3>
+                    <h3 class="title"><?= $this->lang->line("nav_item_dashboard") ?></h3>
                 </div>
 
                 <div class="row">
@@ -11,14 +11,15 @@
                         <!-- Graphic timeline of submission -->
                         <div class="">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><b>Graphical recent submission</b></div>
+                                <div class="panel-heading"><b><?= $this->lang->line("label_graphical_submission") ?></b>
+                                </div>
                                 <div class="panel-body">
 
                                     <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" href="#overall">Overall</a></li>
-                                        <li><a data-toggle="tab" href="#monthly">Monthly</a></li>
-                                        <li><a data-toggle="tab" href="#weekly">Weekly</a></li>
-                                        <li><a data-toggle="tab" href="#daily">Daily</a></li>
+                                        <li class="active"><a data-toggle="tab" href="#overall"><?=$this->lang->line("label_graph_period_overall")?></a></li>
+                                        <li><a data-toggle="tab" href="#monthly"><?=$this->lang->line("label_graph_period_monthly")?></a></li>
+                                        <li><a data-toggle="tab" href="#weekly"><?=$this->lang->line("label_graph_period_weekly")?></a></li>
+                                        <li><a data-toggle="tab" href="#daily"><?=$this->lang->line("label_graph_period_daily")?></a></li>
                                     </ul>
 
                                     <div class="tab-content">
@@ -52,7 +53,7 @@
                                             </div>
                                             <div class="col-xs-7">
                                                 <h2><?= (isset($active_users) ? $active_users : '0'); ?></h2>
-                                                <h6>Data collectors</h6>
+                                                <h6><?= $this->lang->line("label_data_collectors") ?></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -68,7 +69,7 @@
                                             </div>
                                             <div class="col-xs-7">
                                                 <h2><?= (isset($published_forms) ? $published_forms : '0') ?></h2>
-                                                <h6>Published forms</h6>
+                                                <h6><?= $this->lang->line("label_published_forms") ?></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -84,7 +85,7 @@
                                             </div>
                                             <div class="col-xs-7">
                                                 <h2><?= (isset($active_campaign) ? $active_campaign : '0') ?></h2>
-                                                <h6>Active campaign</h6>
+                                                <h6><?= $this->lang->line("label_active_campaigns") ?></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -100,7 +101,7 @@
                                             </div>
                                             <div class="col-xs-7">
                                                 <h2><?= (isset($new_feedback) ? number_format($new_feedback) : '0'); ?></h2>
-                                                <h6>User chats</h6>
+                                                <h6><?= $this->lang->line("label_user_chats") ?></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +117,8 @@
                         <!-- Latest user chats -->
                         <div class="">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><b>Recent user chats</b></div>
+                                <div class="panel-heading"><b><?= $this->lang->line("label_recent_user_chats") ?></b>
+                                </div>
                                 <div class="panel-body">
                                     <div class="card-chat">
                                         <ul>
@@ -130,7 +132,7 @@
                                                             <br>
                                                             <span class="msg"><?= $value->message ?></span>
                                                             <br/><span
-                                                                    class="pull-right"><?= anchor('feedback/user_feedback/' . $value->instance_id, 'Conversation', 'class="btn btn-primary btn-xs"') ?></span>
+                                                                    class="pull-right"><?= anchor('feedback/user_feedback/' . $value->instance_id, $this->lang->line("label_conversation"), 'class="btn btn-primary btn-xs"') ?></span>
                                                         </div>
                                                     </div>
                                                     <hr>
@@ -149,7 +151,8 @@
                         <!-- Table timeline of submission -->
                         <div class="">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><b>Mostly detected diseases</b></div>
+                                <div class="panel-heading">
+                                    <b><?= $this->lang->line("label_frequently_detected_disease") ?></b></div>
                                 <div class="panel-body">
 
                                 </div>
@@ -180,18 +183,18 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Overall form submitted'
+                    text: '<?=$this->lang->line("label_graph_title")?>'
                 },
                 xAxis: {
                     categories: <?php echo $form_title;?>
                 },
                 yAxis: {
                     title: {
-                        text: 'Form submitted'
+                        text: '<?=$this->lang->line("label_form_submitted")?>'
                     }
                 },
                 series: [{
-                    name: '<?php echo 'Submitted forms'; ?>',
+                    name: '<?php echo $this->lang->line("label_graph_series_name"); ?>',
                     data: <?php echo $overall_data;?>
                 }],
                 credits: {

@@ -59,32 +59,6 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>District <span style="color: red;">*</span></label>
-                                <?php
-                                $district_options = array();
-                                foreach ($district_list as $v) {
-                                    $district_options[$v->id] = $v->name;
-                                }
-                                $district_options = array('' => 'Choose district') + $district_options;
-                                echo form_dropdown('district', $district_options, set_value('district'), 'class="form-control" id="district" onchange="suggest_facilities();"');
-                                ?>
-                            </div> <!-- /form-group -->
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Health Facility <span style="color: red;">*</span></label>
-                                <?php
-                                $facility_options = array('' => 'Choose facility');
-                                echo form_dropdown('facility', $facility_options, set_value('facility'), 'class="form-control" id="facility"');
-                                ?>
-                            </div>
-                        </div>
-                    </div> <!-- /.row -->
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
                                 <div class="form-group">
                                     <label>Username <span style="color: red;">*</span></label>
                                     <?php echo form_input($identity); ?>

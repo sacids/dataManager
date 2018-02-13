@@ -42,7 +42,6 @@ class Dashboard extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model(array('User_model', 'Submission_model', 'Campaign_model', 'Feedback_model', 'auth/Acl_model'));
     }
 
     /**
