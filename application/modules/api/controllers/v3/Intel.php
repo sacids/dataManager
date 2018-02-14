@@ -40,7 +40,6 @@ class Intel extends REST_Controller{
 
         $disease_map_json   = json_encode($disease_map);
         write_file(FCPATH.'assets/Intel/disease_map.json',$disease_map_json);
-
     }
 
 
@@ -81,7 +80,6 @@ class Intel extends REST_Controller{
 
             $symptoms   = "('" . implode("','",$symptoms) . "')";
 
-
         }else{
             $this->resp['status']   = '0';
             $this->resp['data']     = 'Symptoms not specified';
@@ -92,8 +90,6 @@ class Intel extends REST_Controller{
 
         $query  = "SELECT disease_id, sum(importance) as imp FROM ohkr_disease_symptoms WHERE symptom_id IN $symptoms AND disease_id IN $diseases GROUP BY disease_id ORDER BY imp DESC";
         $sql     = $this->db->query($query);
-
-        //echo $query;
 
         $disease_map_json   = file_get_contents(FCPATH.'assets/Intel/disease_map.json');
         $disease_map        = json_decode($disease_map_json,true);
@@ -118,7 +114,6 @@ class Intel extends REST_Controller{
             $tmp['score']       = $sc; // need to do error checking
 
             array_push($score,$tmp);
-
         }
 
         $this->resp['status']   = '1';
