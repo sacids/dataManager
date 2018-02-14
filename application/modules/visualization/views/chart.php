@@ -18,7 +18,7 @@
             <h1 class="page-header" id="xform-title"><?php echo $form_details->title ?></h1>
             <div class="" style="margin-bottom: 10px;">
                 <?php
-                echo form_open("_Visualization/chart/" . $form_details->form_id, 'class="form-inline" role="form"');
+                echo form_open("visualization/chart/" . $form_details->form_id, 'class="form-inline" role="form"');
 
                 $options = array("" => "Select column to plot");
                 foreach ($mapped_fields as $key => $value) {
