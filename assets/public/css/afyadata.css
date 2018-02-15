@@ -11,7 +11,7 @@ body {
 }
 
 body {
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
     font-size: 12px;
 }
 
@@ -27,27 +27,18 @@ a:focus {
     color: #781E14;
 }
 
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-}
-
-h3 {
-    font-size: 18px;
-}
-
-h3.title {
-    color: #3F3F3F;
-    background-color: transparent;
-    border-bottom: 1px solid #D0D0D0;
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0 0 14px 0;
-    padding: 10px 15px 10px 0px;
+    font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
 }
 
 p {
@@ -55,10 +46,77 @@ p {
     line-height: 1.5;
 }
 
+.text-faded {
+    color: rgba(255, 255, 255, .7);
+}
+
+.text-primary {
+    color: #781E14;
+}
+
+section {
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+}
+
+.hide {
+    display: none;
+}
+
+/**	17. Header
+ *************************************************** **/
+#header-title {
+    background-color: transparent;
+    border-bottom: 3px solid #D0D0D0;
+}
+
+h3.title {
+    color: #3F3F3F;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 14px 0;
+    padding: 0 15px 0 0;
+}
+
+h4.title {
+    background-color: transparent;
+    border-bottom: 3px solid #D0D0D0;
+    color: #3F3F3F;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 14px 0;
+    padding: 10px 15px 8px 0;
+}
+
+h5.title {
+    background-color: transparent;
+    border-bottom: 3px solid #D0D0D0;
+    color: #3F3F3F;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 14px 0;
+    padding: 10px 15px 8px 0;
+}
+
+h6.title {
+    background-color: transparent;
+    border-bottom: 2px solid #D0D0D0;
+    color: #3F3F3F;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 20px 0 14px 0;
+    padding: 5px 15px 3px 0;
+}
+
+/**	15. Background color
+ *************************************************** **/
 .bg-light-grey {
     background: #f5f5f5;
 }
 
+/**	navigation
+ *************************************************** **/
 .navbar-default .nav > li > a,
 .navbar-default .nav > li > a:focus {
     font-size: 13px;
@@ -67,7 +125,6 @@ p {
 
 @media (min-width: 768px) {
     .navbar-default {
-        background-color: transparent;
         background-color: #781E14;
         font-size: 13px;
     }
@@ -83,18 +140,8 @@ p {
     }
 }
 
-body {
-    webkit-tap-highlight-color: #222;
-}
-
-.form-control {
-    max-width: 400px;
-}
-
-/*
----------------------
-Info block
---------------------*/
+/**	16. Info
+ *************************************************** **/
 .info-block {
     color: #781E14;
 }
@@ -159,7 +206,6 @@ Info block
 
 /**	17. Panel
  *************************************************** **/
-/* pannel */
 .panel {
     position: relative;
     background: transparent;
@@ -269,9 +315,57 @@ Info block
     border-radius: 0;
 }
 
-/*********
-Chat card
-*********/
+/**	17. Custom table
+ *************************************************** **/
+table.table th, table.table td {
+    font-size: 12px;
+}
+
+table.table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    margin: 10px 0px 1em 1px;
+    width: 100%;
+}
+
+table.table th {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+    padding: 10px 10px;
+    background: #EEE;
+    border-bottom: 1px solid #E3E3E3;
+}
+
+table.table td {
+    vertical-align: top;
+    background: #FFF;
+    border-bottom: 1px solid #E3E3E3;
+    padding: 10px;
+}
+
+table.table td a {
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+
+table.table th a {
+    text-align: right;
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+
+.table tr:nth-child(odd) td {
+    background-color: #FAFAFA;
+}
+
+.table tr:nth-child(even) td {
+    background-color: #FFF;
+}
+
+/**	17. Chat
+ *************************************************** **/
 .card-chat {
     padding: 0;
 }
@@ -305,12 +399,11 @@ Chat card
     margin-top: 2px;
 }
 
-
 .dropdown-submenu {
     position: relative;
 }
 
-.dropdown-submenu>.dropdown-menu {
+.dropdown-submenu > .dropdown-menu {
     top: 0;
     left: 100%;
     margin-top: -6px;
@@ -320,11 +413,11 @@ Chat card
     border-radius: 0 6px 6px 6px;
 }
 
-.dropdown-submenu:hover>.dropdown-menu {
+.dropdown-submenu:hover > .dropdown-menu {
     display: block;
 }
 
-.dropdown-submenu>a:after {
+.dropdown-submenu > a:after {
     display: block;
     content: " ";
     float: right;
@@ -338,7 +431,7 @@ Chat card
     margin-right: -10px;
 }
 
-.dropdown-submenu:hover>a:after {
+.dropdown-submenu:hover > a:after {
     border-left-color: #fff;
 }
 
@@ -346,7 +439,7 @@ Chat card
     float: none;
 }
 
-.dropdown-submenu.pull-left>.dropdown-menu {
+.dropdown-submenu.pull-left > .dropdown-menu {
     left: -100%;
     margin-left: 10px;
     -webkit-border-radius: 6px 0 6px 6px;

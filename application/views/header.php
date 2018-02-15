@@ -17,7 +17,7 @@
     <link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Google fonts - witch you want to use - (rest you can just remove) -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,600,700' rel='stylesheet' type='text/css'>
 
     <!-- Leaflet, marker cluster js and css -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>
@@ -196,15 +196,12 @@
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><?php echo anchor('auth/users_list', $this->lang->line("nav_item_list_users")); ?></li>
-                            <li><?php echo anchor('auth/create_user', $this->lang->line("nav_item_create_user")); ?></li>
+                            <li><?php echo anchor('auth/group_list', $this->lang->line("nav_item_list_groups")); ?></li>
+                            <!--<li><?php echo anchor('auth/create_user', $this->lang->line("nav_item_create_user")); ?></li>
                             <li class="divider"></li>
                             <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_facilities") ?></li>
                             <li><?php echo anchor('facilities/lists', $this->lang->line("nav_item_list_facilities")); ?></li>
-                            <li><?php echo anchor('facilities/add_new', $this->lang->line("nav_item_add_facility")); ?></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_user_groups") ?></li>
-                            <li><?php echo anchor('auth/group_list', $this->lang->line("nav_item_list_groups")); ?></li>
-                            <li><?php echo anchor('auth/create_group', $this->lang->line("nav_item_create_group")); ?></li>
+                            <li><?php echo anchor('facilities/add_new', $this->lang->line("nav_item_add_facility")); ?></li>-->
                             <li class="divider"></li>
                             <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_permission") ?></li>
                             <li><?php echo anchor('auth/module_list', $this->lang->line("nav_item_list_module")); ?></li>
@@ -213,7 +210,7 @@
                                 <?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl"), 'tabindex="-1"'); ?>
                                 <ul class="dropdown-menu">
                                     <li><?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_permissions")); ?></li>
-                                    <li><?php echo anchor('auth/accesscontrol/new_filter',$this->lang->line("nav_item_add_filter")); ?></li>
+                                    <li><?php echo anchor('auth/accesscontrol/new_filter', $this->lang->line("nav_item_add_filter")); ?></li>
                                 </ul>
                             </li>
                         </ul>
