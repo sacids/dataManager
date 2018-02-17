@@ -44,9 +44,9 @@ class Campaign_model extends CI_Model
      */
     function count_active_campaign()
     {
-        $this->where_condition('campaign', 'owner');
+        $this->where_condition(self::$table_name, 'owner');
 
-        return $this->db->get('campaign')->num_rows();
+        return $this->db->get(self::$table_name)->num_rows();
     }
 
 
@@ -67,7 +67,7 @@ class Campaign_model extends CI_Model
      */
     public function get_campaign($num, $start)
     {
-        $this->where_condition('campaign', 'owner');
+        $this->where_condition(self::$table_name, 'owner');
 
         return $this->db
             ->limit($num, $start)

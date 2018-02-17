@@ -14,11 +14,10 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <?php if (validation_errors() != "") {
-                        echo '<div class="alert alert-danger fade in">' . validation_errors() . '</div>';
-                    } else if ($this->session->flashdata('message') != "") {
-                        echo $this->session->flashdata('message');
-                    } ?>
+                    <?php
+                    echo validation_errors();
+                    echo get_flashdata();
+                    ?>
 
                     <?= form_open('auth/create_user', 'role="form"'); ?>
                     <div class="col-sm-6">
@@ -75,8 +74,8 @@
                             <?php
                             $serial = 1;
                             foreach ($group_list as $group) { ?>
-                                <input type="checkbox" name="group_id[]"
-                                       value="<?= $group->id; ?>" <?= set_checkbox('group', $group->id); ?>>
+                                <input type="checkbox" name="group[]"
+                                       value="<?= $group->id; ?>" <?= set_checkbox('group_id', $group->id); ?>>
                                 <?= ucfirst($group->name) . '<br />';
                                 $serial++;
                             } ?>

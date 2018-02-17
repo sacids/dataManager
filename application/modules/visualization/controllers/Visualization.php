@@ -149,7 +149,7 @@ class Visualization extends CI_Controller
         }
         $this->load->view("header", $data);
         $this->load->view("chart", $data);
-        $this->load->view("footer", $data);
+        $this->load->view("layout/footer", $data);
     }
 
     /**
