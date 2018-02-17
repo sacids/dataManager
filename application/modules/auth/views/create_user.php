@@ -76,7 +76,7 @@
                             $serial = 1;
                             foreach ($group_list as $group) { ?>
                                 <input type="checkbox" name="group_id[]"
-                                       value="<?= $group->id; ?>" <?= set_checkbox('group_id', $group->id); ?>>
+                                       value="<?= $group->id; ?>" <?= set_checkbox('group', $group->id); ?>>
                                 <?= ucfirst($group->name) . '<br />';
                                 $serial++;
                             } ?>

@@ -129,15 +129,7 @@
                 <?php } ?>
 
                 <?php if (perm_module('Campaign')) { ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><?= $this->lang->line("nav_item_manage_campaign") ?>
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><?php echo anchor('campaign/lists', $this->lang->line("nav_item_list_campaign")); ?></li>
-                            <li><?php echo anchor('campaign/add_new', $this->lang->line("nav_item_create_campaign")); ?></li>
-                        </ul>
-                    </li>
+                    <li><?php echo anchor('campaign/lists', $this->lang->line("nav_item_manage_campaign")); ?></li>
                 <?php } ?>
 
                 <?php if (perm_module('Campaign')) { ?>
@@ -154,15 +146,7 @@
                 <?php } ?>
 
                 <?php if (perm_module('Whatsapp')) { ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">WhatsApp db
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><?php echo anchor('feedback/whatsapp/message_list', 'List message'); ?></li>
-                            <li><?php echo anchor('feedback/whatsapp/import', 'Import file'); ?></li>
-                        </ul>
-                    </li>
+                    <li><?php echo anchor('feedback/whatsapp/message_list', 'Whatsapp'); ?></li>
                 <?php } ?>
 
                 <?php if (perm_module('Blog')) { ?>

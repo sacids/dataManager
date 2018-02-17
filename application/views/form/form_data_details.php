@@ -57,7 +57,7 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="pull-left">
+                    <!--<div class="pull-left">
                         <?php echo form_open(uri_string(), 'class="form-inline" role="form"'); ?>
                         <div class="form-group">
                             <?php
@@ -73,7 +73,7 @@
                             <?php echo form_submit("export", "Export", 'class="btn btn-primary"'); ?>
                         </div>
                         <?php echo form_close(); ?>
-                    </div>
+                    </div>-->
 
                     <div class="pull-right">
                         <button type="button" class="btn btn-link" data-toggle="modal"

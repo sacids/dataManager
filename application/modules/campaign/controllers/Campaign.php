@@ -45,6 +45,7 @@
  */
 class Campaign extends CI_Controller
 {
+    private $data;
     private $imageUrl;
     private $controller;
 
@@ -149,13 +150,14 @@ class Campaign extends CI_Controller
             'type' => 'text',
             'value' => $this->form_validation->set_value('name'),
             'class' => 'form-control',
-            'placeholder' => 'Enter campaign title'
+            'placeholder' => 'Write campaign title ...'
         );
 
         $this->data['icon'] = array(
             'name' => 'icon',
             'id' => 'icon',
             'type' => 'file',
+            'class' => 'form-control',
             'value' => $this->form_validation->set_value('icon'),
         );
 

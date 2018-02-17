@@ -99,12 +99,11 @@ class Auth extends MX_Controller
         }
 
         if ($this->input->post("search")) {
-            $first_name = $this->input->post("firstname", null);
-            $last_name = $this->input->post("lastname", null);
+            $name = $this->input->post("name", null);
             $phone = $this->input->post("phone", null);
             $user_status = $this->input->post("status", null);
 
-            $this->data['user_list'] = $this->User_model->search_users($first_name, $last_name, $phone, $user_status);
+            $this->data['user_list'] = $this->User_model->search_users($name, $phone, $user_status);
             foreach ($this->data['user_list'] as $k => $user) {
                 $this->data['user_list'][$k]->groups = $this->ion_auth->get_users_groups($user->user_id)->result();
             }
@@ -711,7 +710,7 @@ class Auth extends MX_Controller
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
 
         if ($identity_column !== 'email') {
-            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required');
+            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required|is_unique[' . $tables['users'] . '.username]');
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
         } else {
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
@@ -1230,17 +1229,21 @@ class Auth extends MX_Controller
 
         //validate form input
         $this->form_validation->set_rules('name', 'Module', 'required');
-        $this->form_validation->set_rules('controller', 'Controller', 'required');
+        $this->form_validation->set_rules('controller', 'Controller', 'required|alpha_dash');
 
         if ($this->form_validation->run() == true) {
-            $data = array(
-                'name' => $this->input->post('name'),
-                'controller' => $this->input->post('controller')
-            );
-            $this->db->insert('perms_module', $data);
+            $result = $this->db->insert('perms_module',
+                array(
+                    'name' => $this->input->post('name'),
+                    'controller' => $this->input->post('controller')
+                ));
+
+            if ($result)
+                $this->session->set_flashdata("message", display_message("New module added"));
+            else
+                $this->session->set_flashdata("message", display_message("Failed to add module", 'warning'));
 
             //message and redirect
-            $this->session->set_flashdata("message", display_message("Module added successfully"));
             redirect('auth/add_module', 'refresh');
         }
 
@@ -1250,6 +1253,8 @@ class Auth extends MX_Controller
             'id' => 'name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('name'),
+            'class' => 'form-control',
+            'placeholder' => 'Write module name ..'
         );
 
         $this->data['controller'] = array(
@@ -1257,6 +1262,8 @@ class Auth extends MX_Controller
             'id' => 'controller',
             'type' => 'text',
             'value' => $this->form_validation->set_value('controller'),
+            'class' => 'form-control',
+            'placeholder' => 'Write controller ...'
         );
 
         //render view
@@ -1276,11 +1283,12 @@ class Auth extends MX_Controller
             redirect('auth/login', 'refresh');
         }
 
-        $this->data['module'] = $this->User_model->get_module_by_id($module_id);
+        $module = $this->User_model->get_module_by_id($module_id);
+        $this->data['module'] = $module;
 
         //validate form input
         $this->form_validation->set_rules('name', 'Module', 'required');
-        $this->form_validation->set_rules('controller', 'Controller', 'required');
+        $this->form_validation->set_rules('controller', 'Controller', 'required|alpha_dash');
 
         if ($this->form_validation->run() == true) {
             $data = array(
@@ -1289,9 +1297,26 @@ class Auth extends MX_Controller
             );
             $this->db->update('perms_module', $data, array('id' => $module_id));
 
-            $this->session->set_flashdata("message", display_message("Module edited successfully"));
+            $this->session->set_flashdata("message", display_message("Module edited"));
             redirect('auth/edit_module/' . $module_id, 'refresh');
         }
+
+        //populate data
+        $this->data['name'] = array(
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('name', $module->name),
+            'class' => 'form-control'
+        );
+
+        $this->data['controller'] = array(
+            'name' => 'controller',
+            'id' => 'controller',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('controller', $module->controller),
+            'class' => 'form-control'
+        );
 
         //render view
         $this->load->view('header', $this->data);
