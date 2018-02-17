@@ -89,6 +89,7 @@ assets/forms/definition/*.jpg
 /application/config/sms.php
 /composer.lock
 /vendor/
+application/tests
 !application/tests/controllers
 !application/tests/models
-application/tests/
+

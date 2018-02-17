@@ -46,7 +46,6 @@ class Feedback_model_test extends TestCase
     public function setUp()
     {
         $this->resetInstance();
-        $this->CI->load->model('Feedback_model');
         $this->obj = $this->CI->Feedback_model;
     }
 

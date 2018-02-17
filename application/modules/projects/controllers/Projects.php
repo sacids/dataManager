@@ -120,13 +120,15 @@ class Projects extends MX_Controller
         $this->form_validation->set_rules('description', $this->lang->line("label_project_description"), 'required|trim');
 
         if ($this->form_validation->run() == TRUE) {
-            $data = array(
+            $project_details = array(
                 'title'       => $this->input->post('name'),
                 'description' => $this->input->post('description'),
                 'created_at'  => date('Y-m-d H:i:s'),
                 'owner'       => $this->user_id
             );
-            $id = $this->db->insert('projects', $data);
+
+
+            $id = $this->Project_model->add_project($project_details);
 
             if ($id) {
                 $this->_update_session_projects();
