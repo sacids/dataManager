@@ -21,6 +21,7 @@ before_install:
   
 before_script:
   - composer install
+  - php vendor/kenjis/ci-phpunit-test/install.php
   - chmod 0777 ./bin/test.sh
   - chmod 0777 ./bin/deploy.sh
 
