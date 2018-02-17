@@ -1030,6 +1030,14 @@ class Xform extends CI_Controller
             $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form_id);
         }
 
+        /*$custom_maps = $this->Xform_model->get_fieldname_map($form_id);
+        foreach ($custom_maps as $f_map) {
+            if (array_key_exists($f_map['col_name'], $mapped_fields)) {
+                $mapped_fields[$f_map['col_name']] = $f_map['field_label'];
+            }
+        }*/
+
+
         //get form data
         if ($this->session->userdata("form_filters")) {
             $form_filters = $this->session->userdata("form_filters");
@@ -1044,7 +1052,7 @@ class Xform extends CI_Controller
         } else {
             //table fields
             $table_fields = $this->Xform_model->find_table_columns($form_id);
-            //mapping field
+
             $field_maps = $this->_get_mapped_table_column_name($form_id);
             $serial = 0;
             foreach ($table_fields as $key => $column) {

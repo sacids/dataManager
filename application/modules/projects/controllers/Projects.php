@@ -214,8 +214,10 @@ class Projects extends MX_Controller
         $this->load->view('footer');
     }
 
-    public function forms($project_id = NULL)
+    public function forms($project_id)
     {
+        $this->data['project_id'] = $project_id;
+
         $filter_conditions = null;
         if (!$this->ion_auth->is_admin()) {
             $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Xform_model::$xform_table_name);
