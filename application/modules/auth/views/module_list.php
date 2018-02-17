@@ -44,7 +44,7 @@
                                     <td><?= $serial ?></td>
                                     <td><?= $value->name; ?></td>
                                     <td><?= $value->controller; ?></td>
-                                    <td align="center"><?= anchor("auth/edit_module/" . $value->id, 'Edit', 'class="btn btn-primary btn-xs"'); ?></td>
+                                    <td align="center"><?= anchor("auth/edit_module/" . $value->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?></td>
                                 </tr>
                                 <?php
                                 $serial++;

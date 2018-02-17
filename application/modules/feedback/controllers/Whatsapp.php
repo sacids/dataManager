@@ -43,6 +43,7 @@
  */
 class Whatsapp extends CI_Controller
 {
+    private $data;
     private $controller;
     private $user_id;
 
@@ -62,7 +63,7 @@ class Whatsapp extends CI_Controller
      *
      * @return response
      */
-    function _is_logged_in()
+    function is_logged_in()
     {
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
@@ -86,7 +87,7 @@ class Whatsapp extends CI_Controller
     {
         $this->data['title'] = "Import message file";
 
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //form validation
         $this->form_validation->set_rules('txt_file', 'Message file', 'callback_upload_txt_file_path');
@@ -190,7 +191,7 @@ class Whatsapp extends CI_Controller
     public function message_list()
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
