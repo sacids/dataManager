@@ -15,5 +15,4 @@ class Welcome_test extends TestCase
         $this->request('GET', 'welcome/method_not_exist');
         $this->assertResponseCode(404);
     }
-
 }
