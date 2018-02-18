@@ -38,6 +38,7 @@ require dirname(__FILE__).'/Base.php';
  **/
 
 /**
+ * @property Ion_auth $ion_auth
  * @property Submission_model $Submission_model
  * @property Xform_model $Xform_model
  * @property User_model $User_model

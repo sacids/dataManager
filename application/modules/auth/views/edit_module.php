@@ -2,37 +2,46 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">Edit module</h3>
+                <h3 class="title">Edit Module</h3>
             </div>
 
-            <div class="col-sm-6">
-                <?php
-                if ($this->session->flashdata('message') != '') {
-                    echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-                } ?>
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('auth/module_list') ?>">Modules</a></li>
+                <li class="active">Edit module</li>
+            </ol>
 
-                <?php echo form_open('auth/edit_module/' . $module->id, 'class="form-horizontal" role="form"'); ?>
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php if (validation_errors() != "") {
+                        echo '<div class="alert alert-danger fade in">' . validation_errors() . '</div>';
+                    } else if ($this->session->flashdata('message') != "") {
+                        echo $this->session->flashdata('message');
+                    } ?>
 
-                <div class="form-group">
-                    <label>Module <span>*</span></label>
-                    <input type="text" name="name" placeholder="Enter module" class="form-control"
-                           value="<?php echo $module->name; ?>">
-                </div>
-                <div class="error" style="color: red"> <?php echo form_error('module'); ?></div>
+                    <?= form_open(uri_string(), 'class="form-horizontal" role="form"'); ?>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Module <span>*</span></label>
+                            <?= form_input($name) ?>
+                        </div><!-- /form-group -->
 
-                <div class="form-group">
-                    <label>Controller <span>*</span></label>
-                    <input type="text" name="controller" placeholder="Enter controller" class="form-control"
-                           value="<?php echo $module->controller; ?>">
-                </div>
-                <div class="error" style="color: red"> <?php echo form_error('controller'); ?></div>
+                        <div class="form-group">
+                            <label>Controller <span>*</span></label>
+                            <?= form_input($controller) ?>
+                        </div><!-- /form-group -->
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Edit</button>
-                </div>
+                        <div class="form-group">
+                            <?= form_submit('submit', 'Edit', array('class' => "btn btn-primary")); ?>
+                            <?= anchor('auth/module_list', 'Cancel', 'class="btn btn-warning"') ?>
+                        </div> <!-- /form-group -->
+                    </div><!--./col-md-6 -->
+                    <?= form_close() ?>
 
-                <?php echo form_close(); ?>
-            </div>
+                </div><!--./col-sm-12 -->
+            </div><!--./row -->
+
         </div>
-    </div>
-</div>
+    </div><!--./row -->
+</div><!--./container -->

@@ -130,7 +130,7 @@ class Xform_comm
         xml_parse_into_struct($parser, $xml, $tags);
         xml_parser_free($parser);
 
-        log_message("debug", "Tags => " . json_encode($tags));
+        //log_message("debug", "Tags => " . json_encode($tags));
         $elements = array(); // the currently filling [child] XmlElement array
         $stack = array();
         foreach ($tags as $tag) {

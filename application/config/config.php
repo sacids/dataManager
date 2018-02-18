@@ -22,7 +22,7 @@
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = (ENVIRONMENT == 'development') ? '' : "http://sandbox.sacids.sacids";//http://localhost/afyadata
+$config['base_url'] = (ENVIRONMENT == 'development') ? 'http://afyadata.local' : "http://sandbox.sacids.org";
 
 /*
 |--------------------------------------------------------------------------

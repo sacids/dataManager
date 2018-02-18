@@ -24,10 +24,6 @@ class Seeder extends CI_Controller
 
         // initiate faker
         $this->faker = Faker\Factory::create();
-
-        // load any required models
-        $this->load->model('Ohkr_model');
-        $this->load->model('Xform_model');
     }
 
     /**

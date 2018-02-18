@@ -452,7 +452,6 @@ class Xform_model extends CI_Model
         return $this->db->field_data($table_name);
     }
 
-
     /**
      * @param $table_name
      * @param int $limit

@@ -39,17 +39,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller
 {
+    private $data;
     function __construct()
     {
         parent::__construct();
     }
 
-    /**
-     * Check login
-     *
-     * @return response
-     */
-    function _is_logged_in()
+    //check login
+    function is_logged_in()
     {
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
@@ -61,7 +58,7 @@ class Dashboard extends CI_Controller
     public function index()
     {
         //check if logged in
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         $filter_conditions = null;
         if (!$this->ion_auth->is_admin())

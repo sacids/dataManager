@@ -120,13 +120,15 @@ class Projects extends MX_Controller
         $this->form_validation->set_rules('description', $this->lang->line("label_project_description"), 'required|trim');
 
         if ($this->form_validation->run() == TRUE) {
-            $data = array(
+            $project_details = array(
                 'title'       => $this->input->post('name'),
                 'description' => $this->input->post('description'),
                 'created_at'  => date('Y-m-d H:i:s'),
                 'owner'       => $this->user_id
             );
-            $id = $this->db->insert('projects', $data);
+
+
+            $id = $this->Project_model->add_project($project_details);
 
             if ($id) {
                 $this->_update_session_projects();
@@ -214,8 +216,10 @@ class Projects extends MX_Controller
         $this->load->view('footer');
     }
 
-    public function forms($project_id = NULL)
+    public function forms($project_id)
     {
+        $this->data['project_id'] = $project_id;
+
         $filter_conditions = null;
         if (!$this->ion_auth->is_admin()) {
             $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Xform_model::$xform_table_name);

@@ -8,7 +8,7 @@ mysql -u $DB_USER -e "CREATE DATABASE afyadata_test;"
 AD_MODE=public
 CI_ENV=testing php index.php migration latest
 #php index.php Seeder seed
-
+rm application/tests/controllers/Welcome_test.php
 cd application/tests/
 
 phpunit --coverage-text
