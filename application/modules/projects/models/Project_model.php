@@ -108,4 +108,9 @@ class Project_model extends CI_Model
         return $this->db->get_where(self::$table_name_forms, array('project_id' => $project_id))->num_rows();
     }
 
+    public function add_project($project_details)
+    {
+        return $this->db->insert(self::$table_name, $project_details);
+    }
+
 }

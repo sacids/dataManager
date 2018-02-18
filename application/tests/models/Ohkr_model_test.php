@@ -46,7 +46,6 @@ class Ohkr_model_test extends TestCase
     public function setUp()
     {
         $this->resetInstance();
-        $this->CI->load->model('Ohkr_model');
         $this->obj = $this->CI->Ohkr_model;
     }
 

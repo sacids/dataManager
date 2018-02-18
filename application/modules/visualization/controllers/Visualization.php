@@ -147,6 +147,7 @@ class Visualization extends CI_Controller
         } else {
             $data = $this->_load_default_graph_data($data, $xforms);
         }
+
         $this->load->view("header", $data);
         $this->load->view("chart", $data);
         $this->load->view("footer", $data);

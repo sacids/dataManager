@@ -38,7 +38,7 @@ class WebForm extends MX_Controller
 
         $this->data['form_title'] = $xForm->title;
 
-        $this->data['web_form'] = $this->XformReader_model->render_form($xForm->form_id,$xForm->filename);
+        $this->data['web_form'] = $this->Xformreader_model->render_form($xForm->form_id,$xForm->filename);
 
         $this->load->view("layout/header", $this->data);
         $this->load->view("render_form", $this->data);

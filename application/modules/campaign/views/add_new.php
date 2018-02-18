@@ -19,7 +19,7 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li><a href="<?= site_url('campaign/lists') ?>">Manage campaign</a></li>
+                <li><a href="<?= site_url('campaign/lists') ?>">Campaigns</a></li>
                 <li class="active">Add new campaign</li>
             </ol>
 
@@ -30,21 +30,25 @@
                     } else if ($this->session->flashdata('message') != "") {
                         echo $this->session->flashdata('message');
                     } ?>
-                    <?php echo form_open_multipart('campaign/add_new', 'role="form"'); ?>
+
+                    <?= form_open_multipart('campaign/add_new', 'role="form"'); ?>
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label><?= $this->lang->line("label_campaign_title"); ?></label>
+                            <label><?= $this->lang->line("label_campaign_title"); ?><span style="color: red;">*</span>
+                            </label>
                             <?php echo form_input($name); ?>
                         </div>
 
                         <div class="form-group">
-                            <label><?= $this->lang->line("label_campaign_icon"); ?></label>
+                            <label><?= $this->lang->line("label_campaign_icon"); ?><span
+                                        style="color: red;">*</span></label>
                             <?php echo form_input($icon); ?>
                         </div>
 
                         <div class="form-group">
-                            <label><?= $this->lang->line("label_campaign_type"); ?></label>
+                            <label><?= $this->lang->line("label_campaign_type"); ?><span
+                                        style="color: red;">*</span></label>
                             <br/><?php echo form_radio("type", "general", NULL, 'id = "general"', set_radio('type', 'general')); ?>
                             General Campaign
                             <br/><?php echo form_radio("type", "form", NULL, 'id = "form"', set_radio('type', 'form')); ?>
@@ -68,12 +72,11 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                            <?= form_submit('submit', 'Save', array('class' => "btn btn-primary")); ?>
+                            <?= anchor('campaign/lists', 'Cancel', 'class="btn btn-warning"') ?>
+                        </div> <!-- /form-group -->
                     </div>
-
-                    <div class="form-group"></div>
-                    <?php echo form_close(); ?>
+                    <?= form_close(); ?>
                 </div>
             </div>
         </div>

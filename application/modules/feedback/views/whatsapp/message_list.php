@@ -2,54 +2,56 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">List Message</h3>
+                <h3 class="title">Whatsapp Message List</h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="active">List message</li>
+                <li class="active">Whatsapp message list</li>
             </ol>
-
 
             <div class="row">
                 <div class="col-sm-12">
-                    <?php
-                    if ($this->session->flashdata('message') != '') {
-                        echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
+                    <?php if ($this->session->flashdata('message') != "") {
+                        echo $this->session->flashdata('message');
                     } ?>
 
-                    <div class="pull-left" style="margin-bottom: 10px;">
-                        <?php echo anchor("whatsapp/csv_export_data/", '<img src="' . base_url() . 'assets/public/images/csv-export.png" height="30px"/>') ?>
-                    </div>
-                    <div class="pull-right" style="margin-bottom: 10px;">
-                        <?php echo form_open("whatsapp/message_list", 'class="form-inline" role="form"'); ?>
+                    <div class="row" style="margin-top: 5px;">
+                        <div class="col-sm-12">
+                            <?php if ($this->ion_auth->is_admin()) { ?>
+                                <span class="pull-left" style="padding: 3px;">
+                                        <?= anchor('feedback/whatsapp/import', '<i class="fa fa-upload"></i> Import Messages', 'class="btn btn-sm btn-primary"') ?>
+                                    </span>
+                            <?php } ?>
 
-                        <div class="form-group">
-                            <input name="start_date" id="start_date" class="form-control" placeholder="Start Date"/>
-                        </div>
+                            <div class="pull-right">
+                                <?= form_open("feedback/whatsapp/message_list", 'class="form-inline" role="form"'); ?>
 
-                        <div class="form-group">
-                            <input name="end_date" id="end_date" class="form-control" placeholder="End Date"/>
-                        </div>
+                                <div class="form-group">
+                                    <?= form_input(array('name' => 'start_date', 'id' => 'start_date', 'class' => 'form-control', 'placeholder' => 'Start date')) ?>
+                                </div>
 
-                        <div class="form-group">
-                            <input name="keyword" id="keyword" class="form-control" placeholder="Enter Keyword"/>
-                        </div>
+                                <div class="form-group">
+                                    <?= form_input(array('name' => 'end_date', 'id' => 'end_date', 'class' => 'form-control', 'placeholder' => 'End date')) ?>
+                                </div>
 
-                        <div class="form-group">
-                            <div class="input-group">
-                                <?php echo form_submit("search", "Search", 'class="btn btn-primary"'); ?>
+                                <div class="form-group">
+                                    <?= form_input(array('name' => 'keyword', 'id' => 'keyword', 'class' => 'form-control', 'placeholder' => 'Keyword..')) ?>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <?= form_submit("search", "Search", 'class="btn btn-primary"'); ?>
+                                    </div>
+                                </div>
+                                <?= form_close(); ?>
                             </div>
-                        </div>
-                        <?php echo form_close(); ?>
+                        </div><!--./col-sm-12 -->
+                    </div><!--./row -->
 
-                        <?php echo validation_errors(); ?>
-                    </div>
-
-                    <?php if (!empty($messages)) { ?>
-
-                        <table class="table table-striped table-responsive table-hover">
+                    <?php if (isset($messages) && $messages) { ?>
+                        <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
                                 <th class="col-md-2">Sent Date</th>
                                 <th class="col-md-2">Full name</th>
@@ -73,11 +75,11 @@
                                 <div class="clearfix"></div>
                             </div>
                         <?php endif; ?>
-                    <?php } else { ?>
-                        <div class="fail_message">Nothing to display here!</div>
-                    <?php } ?>
-                </div>
-            </div>
+                    <?php } else {
+                        echo display_message('No any message found', 'warning');
+                    } ?>
+                </div><!--./col-sm-12 -->
+            </div><!--./row -->
         </div>
-    </div>
-</div>
+    </div><!--./row -->
+</div><!--./container -->

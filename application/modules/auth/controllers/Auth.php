@@ -99,18 +99,13 @@ class Auth extends MX_Controller
         }
 
         if ($this->input->post("search")) {
-            $first_name = $this->input->post("firstname", null);
-            $last_name = $this->input->post("lastname", null);
+            $name = $this->input->post("name", null);
             $phone = $this->input->post("phone", null);
             $user_status = $this->input->post("status", null);
 
-            $this->data['user_list'] = $this->User_model->search_users($first_name, $last_name, $phone, $user_status);
+            $this->data['user_list'] = $this->User_model->search_users($name, $phone, $user_status);
             foreach ($this->data['user_list'] as $k => $user) {
                 $this->data['user_list'][$k]->groups = $this->ion_auth->get_users_groups($user->user_id)->result();
-
-                //facility
-                $this->model->set_table('health_facilities');
-                $this->data['user_list'][$k]->facility = $this->model->get_by('id', $user->facility);
             }
 
         } else {
@@ -127,10 +122,6 @@ class Auth extends MX_Controller
             $this->data['user_list'] = $this->User_model->get_users_list($this->pagination->per_page, $page);
             foreach ($this->data['user_list'] as $k => $user) {
                 $this->data['user_list'][$k]->groups = $this->ion_auth->get_users_groups($user->user_id)->result();
-
-                //facility
-                $this->model->set_table('health_facilities');
-                $this->data['user_list'][$k]->facilities = $this->model->get_by('id', $user->facility);
             }
             $this->data["links"] = $this->pagination->create_links();
         }
@@ -201,7 +192,7 @@ class Auth extends MX_Controller
                     $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Project_model::$table_name);
                     $projects = $this->Project_model->get_project_list(10, 0, get_current_user_id(), $filter_conditions);
                 } else {
-                    $projects = $this->Project_model->get_project_list(10,0);
+                    $projects = $this->Project_model->get_project_list(10, 0);
                 }
                 $this->session->set_userdata(['projects' => $projects]);
 
@@ -282,9 +273,9 @@ class Auth extends MX_Controller
                 'placeholder' => 'Confirm new password'
             );
             $this->data['user_id'] = array(
-                'name'  => 'user_id',
-                'id'    => 'user_id',
-                'type'  => 'hidden',
+                'name' => 'user_id',
+                'id' => 'user_id',
+                'type' => 'hidden',
                 'value' => $user->id,
             );
 
@@ -354,7 +345,7 @@ class Auth extends MX_Controller
             $this->data['type'] = $this->config->item('identity', 'ion_auth');
             // setup the input
             $this->data['identity'] = array('name' => 'identity',
-                                            'id'   => 'identity',
+                'id' => 'identity',
             );
 
             if ($this->config->item('identity', 'ion_auth') != 'email') {
@@ -719,15 +710,12 @@ class Auth extends MX_Controller
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
 
         if ($identity_column !== 'email') {
-            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required');
+            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required|is_unique[' . $tables['users'] . '.username]');
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
         } else {
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
         }
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
-
-        //$this->form_validation->set_rules('district', 'District', 'required');
-        //$this->form_validation->set_rules('facility', 'Health Facility', 'required');
 
         $this->form_validation->set_rules('group', $this->lang->line('create_user_group_label'), 'required');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
@@ -747,8 +735,6 @@ class Auth extends MX_Controller
                 'last_name'       => $this->input->post('last_name'),
                 'phone'           => $this->input->post('phone'),
                 'digest_password' => $digest_password,
-                //'district' => $this->input->post('district'),
-                //'facility' => $this->input->post('facility')
             );
         }
         if ($this->form_validation->run() == TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data, $groups)) {
@@ -763,84 +749,77 @@ class Auth extends MX_Controller
 
             //populate data
             $this->data['first_name'] = array(
-                'name'        => 'first_name',
-                'id'          => 'first_name',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('first_name'),
-                'class'       => 'form-control',
+                'name' => 'first_name',
+                'id' => 'first_name',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('first_name'),
+                'class' => 'form-control',
                 'placeholder' => 'Enter first name'
             );
+
             $this->data['last_name'] = array(
-                'name'        => 'last_name',
-                'id'          => 'last_name',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('last_name'),
-                'class'       => 'form-control',
+                'name' => 'last_name',
+                'id' => 'last_name',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('last_name'),
+                'class' => 'form-control',
                 'placeholder' => 'Enter last name'
             );
+
             $this->data['identity'] = array(
-                'name'        => 'identity',
-                'id'          => 'identity',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('identity'),
-                'class'       => 'form-control',
+                'name' => 'identity',
+                'id' => 'identity',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('identity'),
+                'class' => 'form-control',
                 'placeholder' => 'Enter username'
             );
+
             $this->data['email'] = array(
-                'name'        => 'email',
-                'id'          => 'email',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('email'),
-                'class'       => 'form-control',
+                'name' => 'email',
+                'id' => 'email',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('email'),
+                'class' => 'form-control',
                 'placeholder' => 'Enter email address'
             );
+
             $this->data['group_id'] = array(
-                'name'  => 'group_id',
-                'id'    => 'group_id',
-                'type'  => 'select',
+                'name' => 'group_id',
+                'id' => 'group_id',
+                'type' => 'select',
                 'value' => $this->form_validation->set_value('group_id'),
                 'class' => 'form-control'
             );
-            $this->data['level_id'] = array(
-                'name'  => 'level_id',
-                'id'    => 'level_id',
-                'type'  => 'select',
-                'value' => $this->form_validation->set_value('level_id'),
-                'class' => 'form-control'
-            );
-            $this->data['user_level'] = array(
-                'name'  => 'user_level',
-                'id'    => 'user_level',
-                'type'  => 'select',
-                'value' => $this->form_validation->set_value('user_level'),
-                'class' => 'form-control'
-            );
+
             $this->data['phone'] = array(
-                'name'        => 'phone',
-                'id'          => 'phone',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('phone'),
-                'class'       => 'form-control',
+                'name' => 'phone',
+                'id' => 'phone',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('phone'),
+                'class' => 'form-control',
                 'placeholder' => 'Enter phone'
             );
+
             $this->data['password'] = array(
-                'name'        => 'password',
-                'id'          => 'password',
-                'type'        => 'password',
-                'value'       => $this->form_validation->set_value('password'),
-                'class'       => 'form-control',
+                'name' => 'password',
+                'id' => 'password',
+                'type' => 'password',
+                'value' => $this->form_validation->set_value('password'),
+                'class' => 'form-control',
                 'placeholder' => 'Enter password'
             );
+
             $this->data['password_confirm'] = array(
-                'name'        => 'password_confirm',
-                'id'          => 'password_confirm',
-                'type'        => 'password',
-                'value'       => $this->form_validation->set_value('password_confirm'),
-                'class'       => 'form-control',
+                'name' => 'password_confirm',
+                'id' => 'password_confirm',
+                'type' => 'password',
+                'value' => $this->form_validation->set_value('password_confirm'),
+                'class' => 'form-control',
                 'placeholder' => 'Confirm password'
             );
 
-            $this->data['district_list'] = $this->db->order_by('name', 'asc')->get('district')->result();
+            //group list
             $this->data['group_list'] = $this->db->order_by('name', 'asc')->get('groups')->result();
 
             //render view
@@ -874,9 +853,6 @@ class Auth extends MX_Controller
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
         $this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'required|valid_email');
 
-        //$this->form_validation->set_rules('district', 'District', 'required');
-        //$this->form_validation->set_rules('facility', 'Health Facility', 'required');
-
         if (isset($_POST) && !empty($_POST)) {
 //            // do we have a valid request?
 //            if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
@@ -897,9 +873,7 @@ class Auth extends MX_Controller
                     'last_name' => $this->input->post('last_name'),
                     'username' => $this->input->post('identity'),
                     'email' => $this->input->post('email'),
-                    'phone' => $this->input->post('phone'),
-                    //'district' => $this->input->post('district'),
-                    //'facility' => $this->input->post('facility')
+                    'phone' => $this->input->post('phone')
                 );
 
                 // update the password if it was posted
@@ -952,74 +926,54 @@ class Auth extends MX_Controller
 
         //populate data
         $this->data['first_name'] = array(
-            'name'  => 'first_name',
-            'id'    => 'first_name',
-            'type'  => 'text',
+            'name' => 'first_name',
+            'id' => 'first_name',
+            'type' => 'text',
             'value' => $this->form_validation->set_value('first_name', $user->first_name),
             'class' => 'form-control'
         );
         $this->data['last_name'] = array(
-            'name'  => 'last_name',
-            'id'    => 'last_name',
-            'type'  => 'text',
+            'name' => 'last_name',
+            'id' => 'last_name',
+            'type' => 'text',
             'value' => $this->form_validation->set_value('last_name', $user->last_name),
             'class' => 'form-control'
         );
 
         $this->data['identity'] = array(
-            'name'  => 'identity',
-            'id'    => 'identity',
-            'type'  => 'text',
+            'name' => 'identity',
+            'id' => 'identity',
+            'type' => 'text',
             'value' => $this->form_validation->set_value('identity', $user->username),
             'class' => 'form-control',
         );
         $this->data['email'] = array(
-            'name'  => 'email',
-            'id'    => 'email',
-            'type'  => 'text',
+            'name' => 'email',
+            'id' => 'email',
+            'type' => 'text',
             'value' => $this->form_validation->set_value('email', $user->email),
             'class' => 'form-control',
         );
 
-        $this->data['level_id'] = array(
-            'name'  => 'level_id',
-            'id'    => 'level_id',
-            'type'  => 'select',
-            'value' => $this->form_validation->set_value('level_id'),
-            'class' => 'form-control'
-        );
-        $this->data['user_level'] = array(
-            'name'  => 'user_level',
-            'id'    => 'user_level',
-            'type'  => 'select',
-            'value' => $this->form_validation->set_value('user_level'),
-            'class' => 'form-control'
-        );
-
         $this->data['phone'] = array(
-            'name'  => 'phone',
-            'id'    => 'phone',
-            'type'  => 'text',
+            'name' => 'phone',
+            'id' => 'phone',
+            'type' => 'text',
             'value' => $this->form_validation->set_value('phone', $user->phone),
             'class' => 'form-control'
         );
         $this->data['password'] = array(
-            'name'  => 'password',
-            'id'    => 'password',
-            'type'  => 'password',
+            'name' => 'password',
+            'id' => 'password',
+            'type' => 'password',
             'class' => 'form-control'
         );
         $this->data['password_confirm'] = array(
-            'name'  => 'password_confirm',
-            'id'    => 'password_confirm',
-            'type'  => 'password',
+            'name' => 'password_confirm',
+            'id' => 'password_confirm',
+            'type' => 'password',
             'class' => 'form-control'
         );
-
-        $this->data['district_list'] = $this->db->order_by('name', 'asc')->get('district')->result();
-
-        $this->model->set_table('health_facilities');
-        $this->data['facilities_list'] = $this->model->get_many_by('district', $user->district);
 
         //render view
         $this->load->view('header', $this->data);
@@ -1055,10 +1009,13 @@ class Auth extends MX_Controller
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
+        $this->data['title'] = 'Group List';
 
-        $data['title'] = 'Manage Groups';
-        $data['groups'] = $this->db->get('groups')->result();
-        $this->load->view('header', $data);
+        //groups
+        $this->data['group_list'] = $this->User_model->find_user_groups();
+
+        //render view
+        $this->load->view('header', $this->data);
         $this->load->view('auth/group_list');
         $this->load->view('footer');
     }
@@ -1090,20 +1047,20 @@ class Auth extends MX_Controller
             $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
             $this->data['group_name'] = array(
-                'name'        => 'group_name',
-                'id'          => 'group_name',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('group_name'),
-                'class'       => 'form-control',
+                'name' => 'group_name',
+                'id' => 'group_name',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('group_name'),
+                'class' => 'form-control',
                 'placeholder' => 'Enter group name'
             );
             $this->data['description'] = array(
-                'name'        => 'description',
-                'id'          => 'description',
-                'type'        => 'text area',
-                'rows'        => '5',
-                'value'       => $this->form_validation->set_value('description'),
-                'class'       => 'form-control',
+                'name' => 'description',
+                'id' => 'description',
+                'type' => 'text area',
+                'rows' => '5',
+                'value' => $this->form_validation->set_value('description'),
+                'class' => 'form-control',
                 'placeholder' => 'Enter group description'
             );
 
@@ -1156,18 +1113,18 @@ class Auth extends MX_Controller
         $readonly = $this->config->item('admin_group', 'ion_auth') === $group->name ? 'readonly' : '';
 
         $this->data['group_name'] = array(
-            'name'    => 'group_name',
-            'id'      => 'group_name',
-            'type'    => 'text',
-            'value'   => $this->form_validation->set_value('group_name', $group->name),
-            'class'   => 'form-control',
+            'name' => 'group_name',
+            'id' => 'group_name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('group_name', $group->name),
+            'class' => 'form-control',
             $readonly => $readonly,
         );
         $this->data['description'] = array(
-            'name'  => 'description',
-            'id'    => 'description',
-            'type'  => 'text area',
-            'rows'  => '5',
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text area',
+            'rows' => '5',
             'class' => 'form-control',
             'value' => $this->form_validation->set_value('description', $group->description),
         );
@@ -1242,15 +1199,15 @@ class Auth extends MX_Controller
         }
 
         $config = array(
-            'base_url'    => $this->config->base_url("auth/module_list"),
-            'total_rows'  => $this->User_model->count_module(),
+            'base_url' => $this->config->base_url("auth/module_list"),
+            'total_rows' => $this->User_model->count_module(),
             'uri_segment' => 3,
         );
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-        $this->data['module'] = $this->User_model->find_all_module($this->pagination->per_page, $page);
+        $this->data['module_list'] = $this->User_model->find_all_module($this->pagination->per_page, $page);
         $this->data["links"] = $this->pagination->create_links();
 
         //render data
@@ -1272,33 +1229,41 @@ class Auth extends MX_Controller
 
         //validate form input
         $this->form_validation->set_rules('name', 'Module', 'required');
-        $this->form_validation->set_rules('controller', 'Controller', 'required');
+        $this->form_validation->set_rules('controller', 'Controller', 'required|alpha_dash');
 
         if ($this->form_validation->run() == true) {
-            $data = array(
-                'name'       => $this->input->post('name'),
-                'controller' => $this->input->post('controller')
-            );
-            $this->db->insert('perms_module', $data);
+            $result = $this->db->insert('perms_module',
+                array(
+                    'name' => $this->input->post('name'),
+                    'controller' => $this->input->post('controller')
+                ));
+
+            if ($result)
+                $this->session->set_flashdata("message", display_message("New module added"));
+            else
+                $this->session->set_flashdata("message", display_message("Failed to add module", 'warning'));
 
             //message and redirect
-            $this->session->set_flashdata("message", display_message("Module added successfully"));
             redirect('auth/add_module', 'refresh');
         }
 
         //populate data
         $this->data['name'] = array(
-            'name'  => 'name',
-            'id'    => 'name',
-            'type'  => 'text',
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
             'value' => $this->form_validation->set_value('name'),
+            'class' => 'form-control',
+            'placeholder' => 'Write module name ..'
         );
 
         $this->data['controller'] = array(
-            'name'  => 'controller',
-            'id'    => 'controller',
-            'type'  => 'text',
+            'name' => 'controller',
+            'id' => 'controller',
+            'type' => 'text',
             'value' => $this->form_validation->set_value('controller'),
+            'class' => 'form-control',
+            'placeholder' => 'Write controller ...'
         );
 
         //render view
@@ -1318,22 +1283,40 @@ class Auth extends MX_Controller
             redirect('auth/login', 'refresh');
         }
 
-        $this->data['module'] = $this->User_model->get_module_by_id($module_id);
+        $module = $this->User_model->get_module_by_id($module_id);
+        $this->data['module'] = $module;
 
         //validate form input
         $this->form_validation->set_rules('name', 'Module', 'required');
-        $this->form_validation->set_rules('controller', 'Controller', 'required');
+        $this->form_validation->set_rules('controller', 'Controller', 'required|alpha_dash');
 
         if ($this->form_validation->run() == true) {
             $data = array(
-                'name'       => $this->input->post('name'),
+                'name' => $this->input->post('name'),
                 'controller' => $this->input->post('controller')
             );
             $this->db->update('perms_module', $data, array('id' => $module_id));
 
-            $this->session->set_flashdata("message", display_message("Module edited successfully"));
+            $this->session->set_flashdata("message", display_message("Module edited"));
             redirect('auth/edit_module/' . $module_id, 'refresh');
         }
+
+        //populate data
+        $this->data['name'] = array(
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('name', $module->name),
+            'class' => 'form-control'
+        );
+
+        $this->data['controller'] = array(
+            'name' => 'controller',
+            'id' => 'controller',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('controller', $module->controller),
+            'class' => 'form-control'
+        );
 
         //render view
         $this->load->view('header', $this->data);
@@ -1354,8 +1337,8 @@ class Auth extends MX_Controller
         }
 
         $config = array(
-            'base_url'    => $this->config->base_url("auth/permission_list/"),
-            'total_rows'  => $this->User_model->count_perms(),
+            'base_url' => $this->config->base_url("auth/permission_list/"),
+            'total_rows' => $this->User_model->count_perms(),
             'uri_segment' => 3,
         );
 
@@ -1389,7 +1372,7 @@ class Auth extends MX_Controller
 
         if ($this->form_validation->run() == true) {
             $data = array(
-                'name'      => $this->input->post('name'),
+                'name' => $this->input->post('name'),
                 'perm_slug' => $this->input->post('perm_slug'),
                 'module_id' => $this->input->post('module')
             );
@@ -1402,16 +1385,16 @@ class Auth extends MX_Controller
 
         //populate data
         $this->data['name'] = array(
-            'name'  => 'name',
-            'id'    => 'name',
-            'type'  => 'text',
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
             'value' => $this->form_validation->set_value('name'),
         );
 
         $this->data['perm_slug'] = array(
-            'name'  => 'perm_slug',
-            'id'    => 'perm_slug',
-            'type'  => 'text',
+            'name' => 'perm_slug',
+            'id' => 'perm_slug',
+            'type' => 'text',
             'value' => $this->form_validation->set_value('perm_slug'),
         );
 
@@ -1444,7 +1427,7 @@ class Auth extends MX_Controller
 
         if ($this->form_validation->run() == true) {
             $data = array(
-                'name'      => $this->input->post('name'),
+                'name' => $this->input->post('name'),
                 'perm_slug' => $this->input->post('perm_slug'),
                 'module_id' => $this->input->post('module')
             );

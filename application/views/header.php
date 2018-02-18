@@ -11,13 +11,13 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?php echo base_url(); ?>favicon.png"/>
 
-    <title>AfyaData - <?php if (!empty($title)) echo $title; else "Taarifa kwa wakati!"; ?></title>
+    <title>AfyaData - <?= (!empty($title)) ? $title : config_item("site_name"); ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Google fonts - witch you want to use - (rest you can just remove) -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,600,700' rel='stylesheet' type='text/css'>
 
     <!-- Leaflet, marker cluster js and css -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>
@@ -29,7 +29,6 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/public/css/afyadata.css" type="text/css">
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/public/js/afyadata.js"></script>
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -44,6 +43,7 @@
           type="text/css">
 
     <script src="<?php echo base_url(); ?>assets/public/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/public/js/afyadata.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -129,15 +129,7 @@
                 <?php } ?>
 
                 <?php if (perm_module('Campaign')) { ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><?= $this->lang->line("nav_item_manage_campaign") ?>
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><?php echo anchor('campaign/lists', $this->lang->line("nav_item_list_campaign")); ?></li>
-                            <li><?php echo anchor('campaign/add_new', $this->lang->line("nav_item_create_campaign")); ?></li>
-                        </ul>
-                    </li>
+                    <li><?php echo anchor('campaign/lists', $this->lang->line("nav_item_manage_campaign")); ?></li>
                 <?php } ?>
 
                 <?php if (perm_module('Campaign')) { ?>
@@ -154,15 +146,7 @@
                 <?php } ?>
 
                 <?php if (perm_module('Whatsapp')) { ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">WhatsApp db
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><?php echo anchor('feedback/whatsapp/message_list', 'List message'); ?></li>
-                            <li><?php echo anchor('feedback/whatsapp/import', 'Import file'); ?></li>
-                        </ul>
-                    </li>
+                    <li><?php echo anchor('feedback/whatsapp/message_list', 'Whatsapp'); ?></li>
                 <?php } ?>
 
                 <?php if (perm_module('Blog')) { ?>
@@ -196,15 +180,12 @@
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><?php echo anchor('auth/users_list', $this->lang->line("nav_item_list_users")); ?></li>
-                            <li><?php echo anchor('auth/create_user', $this->lang->line("nav_item_create_user")); ?></li>
+                            <li><?php echo anchor('auth/group_list', $this->lang->line("nav_item_list_groups")); ?></li>
+                            <!--<li><?php echo anchor('auth/create_user', $this->lang->line("nav_item_create_user")); ?></li>
                             <li class="divider"></li>
                             <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_facilities") ?></li>
                             <li><?php echo anchor('facilities/lists', $this->lang->line("nav_item_list_facilities")); ?></li>
-                            <li><?php echo anchor('facilities/add_new', $this->lang->line("nav_item_add_facility")); ?></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_user_groups") ?></li>
-                            <li><?php echo anchor('auth/group_list', $this->lang->line("nav_item_list_groups")); ?></li>
-                            <li><?php echo anchor('auth/create_group', $this->lang->line("nav_item_create_group")); ?></li>
+                            <li><?php echo anchor('facilities/add_new', $this->lang->line("nav_item_add_facility")); ?></li>-->
                             <li class="divider"></li>
                             <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_permission") ?></li>
                             <li><?php echo anchor('auth/module_list', $this->lang->line("nav_item_list_module")); ?></li>
@@ -213,7 +194,7 @@
                                 <?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl"), 'tabindex="-1"'); ?>
                                 <ul class="dropdown-menu">
                                     <li><?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_permissions")); ?></li>
-                                    <li><?php echo anchor('auth/accesscontrol/new_filter',$this->lang->line("nav_item_add_filter")); ?></li>
+                                    <li><?php echo anchor('auth/accesscontrol/new_filter', $this->lang->line("nav_item_add_filter")); ?></li>
                                 </ul>
                             </li>
                         </ul>

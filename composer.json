@@ -21,5 +21,6 @@
     "fzaninotto/Faker": "dev-master",
     "kenjis/ci-phpunit-test": "^0.15.0",
     "phpoffice/phpexcel": "1.8.1"
+
   }
 }

@@ -4,21 +4,17 @@
             <div id="header-title">
                 <h3 class="title">Form List
                     <span class="pull-right">
-                        <?= anchor("xform/add_new", 'Add new form', 'class="btn-link"') ?></span
+                        <?= anchor("xform/add_new/".$project_id, 'Add new form', 'class="btn-link"') ?></span
                 </h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><?=$this->lang->line("nav_item_dashboard")?></a></li>
                 <li class="active">List forms</li>
             </ol>
 
-            <?php
-            if ($this->session->flashdata('message') != '') {
-                echo $this->session->flashdata('message');
-            }
-            ?>
+            <?=get_flashdata()?>
 
             <div class="pull-right" style="margin-bottom: 10px;">
                 <?php echo form_open("xform/forms/", 'class="form-inline" role="form"'); ?>
