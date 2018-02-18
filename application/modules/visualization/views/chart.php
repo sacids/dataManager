@@ -44,7 +44,7 @@
                     <label for="Operation"></label>
                     <?php echo form_dropdown("function", array("COUNT" => "Count all", "SUM" => "Find summation"), "COUNT", 'class="form-control"'); ?>
                 </div>
-                
+
                 <div class="form-group">
                     <div class="input-group">
                         <?php echo form_submit("submit", "Submit", 'class="btn btn-primary"'); ?>
@@ -53,14 +53,52 @@
                 <?php echo form_close(); ?>
                 <?php echo validation_errors(); ?>
             </div>
-            <div id="graph-content">
-                <!--TODO Insert graph code here -->
-                <?php if (empty($icategories)) {
-                    $message = "<p class='text-center'>Select <strong>columns</strong> you want to plot against a group column and function you want to use, to see a chart here</p>";
-                    echo display_message($message, "info");
-                }
-                ?>
-            </div>
+            <div id="graph-content"></div>
+
+
+            <?php if (empty($categories)):
+                $message = "<p class='text-center'>Select <strong>columns</strong> you want to plot against a group column and function you want to use, to see a chart here</p>";
+                echo display_message($message, "info"); ?>
+            <?php else: ?>
+                <script type="text/javascript">
+
+                    $(document).ready(function () {
+                        $(function () {
+
+                            Highcharts.setOptions({
+                                lang: {
+                                    thousandsSep: ','
+                                }
+                            });
+
+                            $('#graph-content').highcharts({
+                                    chart: {
+                                        type: 'column'
+                                    },
+                                    title: {
+                                        text: '<?php echo $series['name']; ?>'
+                                    },
+                                    xAxis: {
+                                        categories: <?php echo $categories; ?>
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: '<?php echo !empty($chart_title) ? $chart_title : "Count"?>'
+                                        }
+                                    },
+                                    series: [{
+                                        name: '<?php echo $series['name']; ?>',
+                                        data: <?php echo str_replace('"', "", json_encode($series['data']));?>
+                                    }],
+                                    credits: {
+                                        enabled: false
+                                    }
+                                }
+                            );
+                        });
+                    });
+                </script>
+            <?php endif; ?>
         </div>
     </div>
 </div>
