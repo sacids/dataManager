@@ -2,19 +2,21 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">Form List
-                    <span class="pull-right">
-                        <?= anchor("xform/add_new/".$project_id, 'Add new form', 'class="btn-link"') ?></span
-                </h3>
+                <h3 class="title">Form List</h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><?=$this->lang->line("nav_item_dashboard")?></a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><?= $this->lang->line("nav_item_dashboard") ?></a></li>
                 <li class="active">List forms</li>
             </ol>
 
-            <?=get_flashdata()?>
+            <?= get_flashdata() ?>
+
+            <div class="pull-left">
+                <?= anchor("xform/add_new/" . $project_id, '<i class="fa fa-plus"></i> Add New Form', 'class="btn btn-primary btn-sm"') ?>
+            </div>
+
 
             <div class="pull-right" style="margin-bottom: 10px;">
                 <?php echo form_open("xform/forms/", 'class="form-inline" role="form"'); ?>
@@ -42,8 +44,10 @@
 
             <div class="">
                 <?php if (!empty($forms)) { ?>
-                    <table class="table table-striped table-responsive table-hover" cellspacing="0" cellpadding="0">
+                    <table class="table table-striped table-responsive table-hover table-bordered" cellspacing="0"
+                           cellpadding="0">
                         <tr>
+                            <th></th>
                             <th><?php echo $this->lang->line("label_form_name"); ?></th>
                             <!--								<th>-->
                             <?php //echo $this->lang->line("label_form_id"); ?><!--</th>-->
@@ -59,6 +63,7 @@
                         $serial = 1;
                         foreach ($forms as $form) { ?>
                             <tr>
+                                <td><?= $serial ?></td>
                                 <td><?php echo $form->title; ?></td>
                                 <!--									<td>-->
                                 <?php //echo anchor("xform/form_data/" . $form->id, $form->form_id); ?><!--</td>-->
@@ -89,11 +94,11 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <?php echo anchor("xform/edit_form/" . $form->id, "Edit"); ?> |
+                                    <?php echo anchor("xform/edit_form/" . $form->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?>
                                     <?php if ($form->status == "archived") {
-                                        echo anchor("xform/restore_from_archive/" . $form->id, "Restore", "class='unarchive'");
+                                        echo anchor("xform/restore_from_archive/" . $form->id, '<i class="fa fa-folder-open-o"></i> Restore', 'class="btn btn-warning btn-xs unarchive"');
                                     } else {
-                                        echo anchor("xform/archive_xform/" . $form->id, "Archive", "class='archive'");
+                                        echo anchor("xform/archive_xform/" . $form->id, '<i class="fa fa-archive"></i> Archive', 'class="btn btn-warning btn-xs archive"');
                                     } ?>
                                     <!--TODO Implement dynamic js prompt -->
                                 </td>

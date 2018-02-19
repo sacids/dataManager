@@ -30,9 +30,13 @@ class User_model extends CI_Model
     function count_data_collectors()
     {
         return $this->db
+            ->group_start()
+            ->where('groups.name', 'members')
+            ->or_where('groups.name', 'chr')
+            ->group_end()
             ->join('users_groups', 'users_groups.user_id = users.id')
             ->join('groups', 'groups.id = users_groups.group_id')
-            ->get_where('users', array('groups.name' => 'chr'))->num_rows();
+            ->get('users')->num_rows();
     }
 
     /**

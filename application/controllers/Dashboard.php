@@ -57,6 +57,8 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
+        $this->data['title'] = "Taarifa kwa wakati!";
+
         //check if logged in
         $this->is_logged_in();
 
@@ -98,7 +100,7 @@ class Dashboard extends CI_Controller
         //feedback
         $this->data['feedback'] = $this->Feedback_model->find_all(5, 0);
 
-        $this->data['title'] = "Taarifa kwa wakati!";
+        //render view
         $this->load->view('header', $this->data);
         $this->load->view('index');
         $this->load->view('footer');

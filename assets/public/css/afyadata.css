@@ -371,6 +371,12 @@ table.table th a {
     padding: 0;
 }
 
+.card-chat span.title {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #3F3F3F;
+}
+
 .card-chat span.name {
     font-size: 13px;
     color: #3F3F3F;

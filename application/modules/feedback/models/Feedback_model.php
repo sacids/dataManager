@@ -64,7 +64,7 @@ class Feedback_model extends CI_Model
 
     function count_new_feedback()
     {
-        return $this->db->get(self::$table_name_feedback)->num_rows();
+        return $this->db->get_where(self::$table_name_feedback, array('status' => 'pending'))->num_rows();
     }
 
     /**
