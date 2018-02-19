@@ -62,6 +62,7 @@ require dirname(__FILE__).'/Base.php';
  * @property Model $model
  * @property Acl_model $Acl_model
  * @property XformReader_model $XformReader_model
+ * @property CI_DB_mysql_driver $db
  */
 
 class MX_Controller 

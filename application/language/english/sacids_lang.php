@@ -189,3 +189,9 @@ $lang['message_project_not_added']     = 'Failed to add project';
 $lang['message_project_updated']       = 'Project updated';
 $lang['message_project_has_no_form']   = 'This project does not have any form';
 $lang['status_message_getting_forms']  = 'Getting project forms, please wait... ';
+
+$lang['label_manage_access_permissions']= 'Manage Access Permissions';
+$lang['label_map_columns']             = 'Map columns';
+$lang['label_dhis2_configurations']    = 'Dhis2 configurations';
+$lang['label_group_permissions']       = 'Group Permissions';
+$lang['label_user_permissions']        = "User permissions";

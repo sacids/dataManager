@@ -20,6 +20,7 @@ class Ohkr_model extends CI_Model
     private static $table_name_users = "users";
     private static $table_name_user_groups = "groups";
     private static $table_name_users_groups = "users_groups";
+    private static $table_name_districts = "district";
     private static $table_name_detected_diseases = "ohkr_detected_diseases";
 
     public function __construct()
@@ -350,8 +351,9 @@ class Ohkr_model extends CI_Model
         $this->db->join(self::$table_name_users_groups . " ug", "ug.group_id = rsms.group_id", 'LEFT');
         $this->db->join(self::$table_name_users . " u", "u.id = ug.user_id");
         $this->db->join(self::$table_name_user_groups . " g", "g.id = ug.group_id");
-        $this->db->group_by("username");
-        $this->db->where("u.district", $district);
+        $this->db->join(self::$table_name_districts . " ud", "ud.id = u.district");
+        $this->db->group_by("u.username");
+        $this->db->where("ud.name", $district);
         $this->db->where("rsms.disease_id", $disease_id);
         return $this->db->get()->result();
     }

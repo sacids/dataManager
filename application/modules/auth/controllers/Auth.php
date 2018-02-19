@@ -50,7 +50,6 @@ class Auth extends MX_Controller
         $this->load->database();
         $this->load->helper(array('url', 'language'));
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
-        $this->lang->load('auth');
 
         //variable
         $this->realm = 'Authorized users of Sacids Openrosa';
