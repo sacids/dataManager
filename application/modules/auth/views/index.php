@@ -56,6 +56,7 @@
                             <tr>
                                 <th width="3%"></th>
                                 <th width="12%">Name</th>
+                                <th width="8%">Username</th>
                                 <th width="8%"><?= lang('index_phone_th'); ?></th>
                                 <th width="10%"><?= lang('index_created_on_th'); ?></th>
                                 <th width="8%"><?= lang('index_groups_th'); ?></th>
@@ -69,6 +70,7 @@
                                 <tr>
                                     <td><?= $serial ?></td>
                                     <td><?= $user->first_name . ' ' . $user->last_name; ?></td>
+                                    <td><?= $user->username; ?></td>
                                     <td><?= $user->phone; ?></td>
                                     <td><?= date('d-m-Y H:i:s', $user->created_on); ?></td>
                                     <td>
