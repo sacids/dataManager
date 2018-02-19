@@ -18,8 +18,8 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li><a href="<?= site_url('campaign/lists') ?>">Manage campaign</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('campaign/lists') ?>">Campaigns</a></li>
                 <li class="active">Edit campaign</li>
             </ol>
 
@@ -30,24 +30,24 @@
                     } else if ($this->session->flashdata('message') != "") {
                         echo $this->session->flashdata('message');
                     } ?>
-                    <?php echo form_open(uri_string(), 'role="form"'); ?>
+                    <?= form_open(uri_string(), 'role="form"'); ?>
 
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label><?= $this->lang->line("label_campaign_title"); ?></label>
-                            <?php echo form_input($name); ?>
+                            <?= form_input($name); ?>
                         </div>
 
                         <div class="form-group">
                             <label><?= $this->lang->line("label_campaign_type"); ?></label>
                             <br/>
-                            <?php echo form_radio(array('name' => 'type', 'value' => 'general', 'checked' => ('general' == $campaign->type) ? TRUE : FALSE, 'id' => 'general')); ?>
+                            <?= form_radio(array('name' => 'type', 'value' => 'general', 'checked' => ('general' == $campaign->type) ? TRUE : FALSE, 'id' => 'general')); ?>
                             General Campaign
-                            <br/><?php echo form_radio(array('name' => 'type', 'value' => 'form', 'checked' => ('form' == $campaign->type) ? TRUE : FALSE, 'id' => 'form')); ?>
+                            <br/><?= form_radio(array('name' => 'type', 'value' => 'form', 'checked' => ('form' == $campaign->type) ? TRUE : FALSE, 'id' => 'form')); ?>
                             Form Campaign
                         </div>
 
-                        <div id="div1" class="form-group">
+                        <div id="div1" style="display: none" class="form-group">
                             <label><?= $this->lang->line("label_form_name"); ?></label>
                             <?php
                             $form_options = array();
@@ -58,18 +58,18 @@
                             echo form_dropdown('jr_form_id', $form_options, set_value('jr_form_id'), 'class="form-control"'); ?>
                         </div>
 
+
                         <div class="form-group">
-                            <label><?php echo $this->lang->line("label_description") ?></label>
-                            <?php echo form_textarea($description); ?>
+                            <label><?= $this->lang->line("label_description") ?></label>
+                            <?= form_textarea($description); ?>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                            <?= form_submit('submit', 'Save', array('class' => "btn btn-primary")); ?>
+                            <?= anchor('campaign/lists', 'Cancel', 'class="btn btn-warning"') ?>
+                        </div> <!-- /form-group -->
                     </div>
-
-                    <div class="form-group"></div>
-                    <?php echo form_close(); ?>
+                    <?= form_close(); ?>
                 </div>
             </div>
         </div>

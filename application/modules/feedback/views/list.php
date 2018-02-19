@@ -2,76 +2,54 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">List Feedback</h3>
+                <h3 class="title">Feedback Messages List</h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="active">List feedback</li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li class="active">Feedback List</li>
             </ol>
 
             <div class="row">
                 <div class="col-sm-12">
                     <div class="pull-right" style="margin-bottom: 10px;">
 
-                        <?php echo form_open("feedback/lists", 'class="form-inline" role="form"'); ?>
+                        <?= form_open("feedback/lists", 'class="form-inline" role="form"'); ?>
+                        <div class="form-group">
+                            <?= form_input(array('name' => 'name', 'id' => 'name', 'class' => "form-control", 'placeholder' => "Form title")); ?>
+                        </div><!--./form-group -->
 
                         <div class="form-group">
-
-                            <?php
-                            $data_name = array(
-                                'name' => 'name',
-                                'id' => 'name',
-                                'class' => "form-control",
-                                'placeholder' => "Search by form title"
-                            );
-                            echo form_input($data_name); ?>
-                        </div>
-
-                        <div class="form-group">
-                            <?php
-                            $username = array(
-                                'name' => 'username',
-                                'id' => 'username',
-                                'class' => "form-control",
-                                'placeholder' => "Search by username"
-                            );
-                            echo form_input($username); ?>
-                        </div>
+                            <?= form_input(array('name' => 'username', 'id' => 'username', 'class' => "form-control", 'placeholder' => "Username")); ?>
+                        </div><!--./form-group -->
 
 
                         <div class="form-group">
                             <div class="input-group">
-                                <?php echo form_submit("search", "Search", 'class="btn btn-primary"'); ?>
+                                <?= form_submit("search", "Search", 'class="btn btn-primary"'); ?>
                             </div>
-                        </div>
-                        <?php echo form_close(); ?>
-
-                        <?php echo validation_errors(); ?>
+                        </div><!--./form-group -->
+                        <?= form_close(); ?>
                     </div>
 
-                    <?php if (!empty($feedback)) { ?>
+                    <?php if (isset($feedback_list) && $feedback_list) { ?>
 
-                        <table class="table table-striped table-responsive table-hover">
+                        <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
-                                <th width="15%"><?php echo $this->lang->line("label_form_name"); ?></th>
-                                <th width="15%"><?php echo $this->lang->line("label_user"); ?></th>
-                                <th width="50%"><?php echo $this->lang->line("label_message"); ?></th>
-                                <th width="12%"><?php echo $this->lang->line("label_feedback_date"); ?></th>
-                                <th width="6%"></th>
+                                <th width="80%">Feedback Description</th>
                             </tr>
 
                             <?php
                             $serial = 1;
-                            foreach ($feedback as $value) { ?>
+                            foreach ($feedback_list as $value) { ?>
                                 <tr>
-                                    <td><?php echo $value->title; ?></td>
-                                    <td><?php echo ucfirst($value->first_name) . ' ' . ucfirst($value->last_name); ?></td>
-                                    <td><?php echo ucfirst($value->message); ?></td>
-                                    <td><?php echo date('d-m-Y H:i:s', strtotime($value->date_created)); ?></td>
                                     <td>
-                                        <?php echo anchor("feedback/user_feedback/" . $value->instance_id, "Conversation", 'class = "btn btn-primary btn-xs"'); ?>
+                                        <?= '<h5>' . strtoupper($value->title) . '</h5>'; ?>
+                                        <?= '<p><h5 class="text-primary">' . ucfirst($value->first_name) . ' ' . ucfirst($value->last_name) . '</h5></p>'; ?>
+                                        <?= '<p>' . ucfirst($value->message) . '</p>' ?>
+                                        <?= '<i class="fa fa-clock-o"></i><span class="text-primary">' . date('jS F, Y H:i:s', strtotime($value->date_created)) . '</span>'; ?>
+                                        <span style="float: right"><?= anchor("feedback/user_feedback/" . $value->instance_id, '<i class="fa fa-comments-o fa-lg"></i>', ''); ?></span>
                                     </td>
                                 </tr>
                                 <?php $serial++;
@@ -83,10 +61,9 @@
                                 <div class="clearfix"></div>
                             </div>
                         <?php endif; ?>
-
-                    <?php } else { ?>
-                        <div class="fail_message">You don't have any recent chat.</div>
-                    <?php } ?>
+                    <?php } else {
+                        echo display_message('You don\'t have any recent chat.', 'warning');
+                    } ?>
                 </div>
             </div>
         </div>

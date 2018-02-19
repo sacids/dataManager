@@ -7,7 +7,7 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li class="active">Group List</li>
             </ol>
 
@@ -45,8 +45,8 @@
                                     <td><?= ucfirst($values->name); ?></td>
                                     <td><?= $values->description; ?></td>
                                     <td>
-                                        <?= anchor("auth/edit_group/" . $values->id, lang('edit_group_heading'), array("class" => 'btn btn-primary btn-xs')); ?>
-                                        <?= anchor("auth/perms_group/" . $values->id, 'Assign Permission', array("class" => 'btn btn-warning btn-xs')); ?>
+                                        <?= anchor("auth/edit_group/" . $values->id, '<i class="fa fa-pencil"></i> ' . lang('edit_group_heading'), array("class" => 'btn btn-primary btn-xs')); ?>
+                                        <?= anchor("auth/perms_group/" . $values->id, '<i class="fa fa-group"></i> Assign Permission', array("class" => 'btn btn-warning btn-xs')); ?>
                                     </td>
                                 </tr>
                                 <?php

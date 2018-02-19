@@ -7,7 +7,7 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li class="active">Users List</li>
             </ol>
 
@@ -56,12 +56,12 @@
                             <tr>
                                 <th width="3%"></th>
                                 <th width="12%">Name</th>
-                                <th width="8%">Username</th>
-                                <th width="8%"><?= lang('index_phone_th'); ?></th>
+                                <th width="5%">Username</th>
+                                <th width="5%"><?= lang('index_phone_th'); ?></th>
                                 <th width="10%"><?= lang('index_created_on_th'); ?></th>
                                 <th width="8%"><?= lang('index_groups_th'); ?></th>
                                 <th width="5%"><?= lang('index_status_th'); ?></th>
-                                <th width="12%"></th>
+                                <th width="15%"></th>
                             </tr>
 
                             <?php
@@ -85,7 +85,7 @@
                                             anchor("auth/activate/" . $user->id, lang('index_inactive_link'), array("class" => 'btn btn-danger btn-xs')); ?>
                                     </td>
                                     <td>
-                                        <?= anchor("auth/edit_user/" . $user->id, lang('edit_user_heading'), array("class" => 'btn btn-primary btn-xs')); ?>
+                                        <?= anchor("auth/edit_user/" . $user->id, '<i class="fa fa-pencil"></i> ' . lang('edit_user_heading'), array("class" => 'btn btn-primary btn-xs')); ?>
                                         <?= anchor("auth/accesscontrol/assign_permission/" . $user->id, lang('edit_user_assign_permission'), array("class" => 'btn btn-warning btn-xs')); ?>
                                     </td>
                                 </tr>

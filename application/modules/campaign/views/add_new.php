@@ -18,7 +18,7 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li><a href="<?= site_url('campaign/lists') ?>">Campaigns</a></li>
                 <li class="active">Add new campaign</li>
             </ol>
@@ -37,13 +37,13 @@
                         <div class="form-group">
                             <label><?= $this->lang->line("label_campaign_title"); ?><span style="color: red;">*</span>
                             </label>
-                            <?php echo form_input($name); ?>
+                            <?= form_input($name); ?>
                         </div>
 
                         <div class="form-group">
                             <label><?= $this->lang->line("label_campaign_icon"); ?><span
                                         style="color: red;">*</span></label>
-                            <?php echo form_input($icon); ?>
+                            <?= form_input($icon); ?>
                         </div>
 
                         <div class="form-group">
@@ -51,7 +51,7 @@
                                         style="color: red;">*</span></label>
                             <br/><?php echo form_radio("type", "general", NULL, 'id = "general"', set_radio('type', 'general')); ?>
                             General Campaign
-                            <br/><?php echo form_radio("type", "form", NULL, 'id = "form"', set_radio('type', 'form')); ?>
+                            <br/><?= form_radio("type", "form", NULL, 'id = "form"', set_radio('type', 'form')); ?>
                             Form Campaign
                         </div>
 
@@ -68,7 +68,7 @@
 
                         <div class="form-group">
                             <label><?php echo $this->lang->line("label_description") ?></label>
-                            <?php echo form_textarea($description); ?>
+                            <?= form_textarea($description); ?>
                         </div>
 
                         <div class="form-group">

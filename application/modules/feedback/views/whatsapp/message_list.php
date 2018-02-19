@@ -7,8 +7,8 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="active">Whatsapp message list</li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li class="active">Message list</li>
             </ol>
 
             <div class="row">
@@ -62,9 +62,9 @@
                             $serial = 1;
                             foreach ($messages as $message) { ?>
                                 <tr>
-                                    <td><?php echo date('j F Y, H:i:s', strtotime($message->date_sent_received)); ?></td>
-                                    <td><?php echo $message->fullname; ?></td>
-                                    <td><?php echo $message->message; ?></td>
+                                    <td><?= date('j F Y, H:i:s', strtotime($message->date_sent_received)); ?></td>
+                                    <td><?= $message->fullname; ?></td>
+                                    <td><?= $message->message; ?></td>
                                 </tr>
                                 <?php $serial++;
                             } ?>

@@ -8,6 +8,7 @@
  */
 class Ohkr extends CI_Controller
 {
+    private $data;
     private $controller;
 
     public function __construct()
@@ -26,7 +27,7 @@ class Ohkr extends CI_Controller
      *
      * @return response
      */
-    function _is_logged_in()
+    function is_logged_in()
     {
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
@@ -52,19 +53,19 @@ class Ohkr extends CI_Controller
     }
 
     //list diseases
-    public function disease_list()
+    function disease_list()
     {
-        $this->data['title'] = "List diseases";
+        $this->data['title'] = "Diseases List";
 
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url'    => $this->config->base_url("ohkr/disease_list"),
-            'total_rows'  => $this->Ohkr_model->count_disease(),
+            'base_url' => $this->config->base_url("ohkr/disease_list"),
+            'total_rows' => $this->Ohkr_model->count_disease(),
             'uri_segment' => 3,
         );
 
@@ -80,13 +81,11 @@ class Ohkr extends CI_Controller
         $this->load->view('footer');
     }
 
-    /**
-     * add new disease
-     */
+    //add new disease
     public function add_new_disease()
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -109,9 +108,9 @@ class Ohkr extends CI_Controller
 
         } else {
             $disease = array(
-                "title"        => $this->input->post("name"),
-                "specie_id"    => $this->input->post("specie"),
-                "description"  => $this->input->post("description"),
+                "title" => $this->input->post("name"),
+                "specie_id" => $this->input->post("specie"),
+                "description" => $this->input->post("description"),
                 "date_created" => date("Y-m-d H:i:s")
             );
 
@@ -123,11 +122,11 @@ class Ohkr extends CI_Controller
 
             for ($i = 0; $i < count($alert_messages); $i++) {
                 $message = array(
-                    "disease_id"   => $disease_id,
-                    "group_id"     => $alert_groups[$i],
-                    "message"      => $alert_messages[$i],
-                    "type"         => "TEXT",
-                    "status"       => "Enabled",
+                    "disease_id" => $disease_id,
+                    "group_id" => $alert_groups[$i],
+                    "message" => $alert_messages[$i],
+                    "type" => "TEXT",
+                    "status" => "Enabled",
                     "date_created" => date("Y-m-d H:i:s")
                 );
                 $this->Ohkr_model->create_response_sms($message);
@@ -152,7 +151,7 @@ class Ohkr extends CI_Controller
     public function edit_disease($disease_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -181,8 +180,8 @@ class Ohkr extends CI_Controller
             $this->load->view('footer');
         } else {
             $disease = array(
-                "title"       => $this->input->post("name"),
-                "specie_id"   => $this->input->post("specie"),
+                "title" => $this->input->post("name"),
+                "specie_id" => $this->input->post("specie"),
                 "description" => $this->input->post("description")
             );
 
@@ -203,7 +202,7 @@ class Ohkr extends CI_Controller
     function delete_disease($disease_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -227,14 +226,14 @@ class Ohkr extends CI_Controller
     public function species_list()
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url'    => $this->config->base_url("ohkr/species_list"),
-            'total_rows'  => $this->Ohkr_model->count_species(),
+            'base_url' => $this->config->base_url("ohkr/species_list"),
+            'total_rows' => $this->Ohkr_model->count_species(),
             'uri_segment' => 3,
         );
 
@@ -254,7 +253,7 @@ class Ohkr extends CI_Controller
     public function add_new_specie()
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -286,7 +285,7 @@ class Ohkr extends CI_Controller
     public function edit_specie($specie_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -324,7 +323,7 @@ class Ohkr extends CI_Controller
     function delete_specie($specie_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -351,14 +350,14 @@ class Ohkr extends CI_Controller
     public function symptoms_list()
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url'    => $this->config->base_url("ohkr/symptoms_list"),
-            'total_rows'  => $this->Ohkr_model->count_symptoms(),
+            'base_url' => $this->config->base_url("ohkr/symptoms_list"),
+            'total_rows' => $this->Ohkr_model->count_symptoms(),
             'uri_segment' => 3,
         );
 
@@ -375,18 +374,16 @@ class Ohkr extends CI_Controller
         $this->load->view('footer');
     }
 
-    /**
-     * add new symptom
-     */
-    public function add_new_symptom()
+    //add new symptom
+    function add_new_symptom()
     {
+        $data['title'] = "Add Clinical Manifestation";
+
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
-
-        $data['title'] = "Add new symptom";
 
         $this->form_validation->set_rules("name", $this->lang->line("label_symptom_name"), "required");
         $this->form_validation->set_rules("code", $this->lang->line("label_symptom_code"), "required");
@@ -397,8 +394,8 @@ class Ohkr extends CI_Controller
             $this->load->view('footer');
         } else {
             $symptoms = array(
-                "title"       => $this->input->post("name"),
-                "code"        => $this->input->post("code"),
+                "title" => $this->input->post("name"),
+                "code" => $this->input->post("code"),
                 "description" => $this->input->post("description")
             );
 
@@ -419,10 +416,10 @@ class Ohkr extends CI_Controller
     public function edit_symptom($symptom_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
+        //$this->has_allowed_perm($this->router->fetch_method());
 
         if (!$symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_edit")));
@@ -441,8 +438,8 @@ class Ohkr extends CI_Controller
             $this->load->view('footer');
         } else {
             $symptoms = array(
-                "title"       => $this->input->post("name"),
-                "code"        => $this->input->post("code"),
+                "title" => $this->input->post("name"),
+                "code" => $this->input->post("code"),
                 "description" => $this->input->post("description")
             );
 
@@ -459,7 +456,7 @@ class Ohkr extends CI_Controller
     function delete_symptom($symptom_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -484,7 +481,7 @@ class Ohkr extends CI_Controller
     public function disease_symptoms_list($disease_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -501,7 +498,7 @@ class Ohkr extends CI_Controller
     public function add_disease_symptom($disease_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -543,7 +540,7 @@ class Ohkr extends CI_Controller
     public function edit_disease_symptom($disease_id, $disease_symptom_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -592,7 +589,7 @@ class Ohkr extends CI_Controller
     function delete_disease_symptom($disease_id, $disease_symptom_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -618,7 +615,7 @@ class Ohkr extends CI_Controller
     public function disease_faq($disease_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -636,7 +633,7 @@ class Ohkr extends CI_Controller
     public function add_disease_faq($disease_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -660,8 +657,8 @@ class Ohkr extends CI_Controller
         } else {
             $faq = array(
                 "disease_id" => $disease_id,
-                "question"   => $this->input->post("question"),
-                "answer"     => $this->input->post("answer")
+                "question" => $this->input->post("question"),
+                "answer" => $this->input->post("answer")
             );
 
             if ($this->Ohkr_model->add_disease_faq($faq)) {
@@ -677,7 +674,7 @@ class Ohkr extends CI_Controller
     public function edit_disease_faq($disease_id, $faq_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -704,7 +701,7 @@ class Ohkr extends CI_Controller
         } else {
             $faq = array(
                 "question" => $this->input->post("question"),
-                "answer"   => $this->input->post("answer")
+                "answer" => $this->input->post("answer")
             );
 
             if ($this->Ohkr_model->update_disease_faq($faq_id, $faq)) {
@@ -720,7 +717,7 @@ class Ohkr extends CI_Controller
     function delete_disease_faq($disease_id, $faq_id)
     {
         //check login
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -809,7 +806,7 @@ class Ohkr extends CI_Controller
     public function add_new_response_sms($disease_id)
     {
 
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -836,11 +833,11 @@ class Ohkr extends CI_Controller
             $this->load->view('footer');
         } else {
             $message = array(
-                "disease_id"   => $disease_id,
-                "group_id"     => $this->input->post("group"),
-                "message"      => $this->input->post("message"),
-                "type"         => "TEXT",
-                "status"       => "Enabled",
+                "disease_id" => $disease_id,
+                "group_id" => $this->input->post("group"),
+                "message" => $this->input->post("message"),
+                "type" => "TEXT",
+                "status" => "Enabled",
                 "date_created" => date("Y-m-d H:i:s")
             );
 
@@ -856,7 +853,7 @@ class Ohkr extends CI_Controller
     public function edit_response_sms($sms_id)
     {
 
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -881,9 +878,9 @@ class Ohkr extends CI_Controller
             $this->load->view('footer');
         } else {
             $message = array(
-                "group_id"      => $this->input->post("group"),
-                "message"       => $this->input->post("message"),
-                "status"        => "Enabled",
+                "group_id" => $this->input->post("group"),
+                "message" => $this->input->post("message"),
+                "status" => "Enabled",
                 "date_modified" => date("Y-m-d H:i:s")
             );
 

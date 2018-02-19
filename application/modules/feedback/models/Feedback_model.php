@@ -144,10 +144,9 @@ class Feedback_model extends CI_Model
      */
     function get_feedback_by_instance($instance_id)
     {
-        $this->db->order_by('feedback.date_created', 'ASC');
-        return $this->db->get_where(self::$table_name_feedback . " feedback", array('instance_id' => $instance_id))->result();
-
-
+        return $this->db
+            ->order_by('feedback.date_created', 'ASC')
+            ->get_where(self::$table_name_feedback . " feedback", array('instance_id' => $instance_id))->result();
     }
 
     //function to update user feedback

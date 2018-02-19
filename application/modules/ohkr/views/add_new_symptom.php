@@ -3,13 +3,13 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">Add clinical manifestation</h3>
+                <h3 class="title">Add Clinical Manifestation</h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="active">Add new clinical manifestation</li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li class="active">Add Clinical Manifestation</li>
             </ol>
 
             <?php

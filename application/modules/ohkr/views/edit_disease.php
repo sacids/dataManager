@@ -1,4 +1,4 @@
-<script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
+<script src="<?= base_url('assets/public/ckeditor/ckeditor.js') ?>"></script>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -8,7 +8,8 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('ohkr/disease_list') ?>">Diseases</a></li>
                 <li class="active">Edit disease</li>
             </ol>
 
@@ -20,7 +21,7 @@
                         echo $this->session->flashdata('message');
                     } ?>
 
-                    <?php echo form_open('ohkr/edit_disease/' . $disease->id, 'role="form"'); ?>
+                    <?= form_open('ohkr/edit_disease/' . $disease->id, 'role="form"'); ?>
 
                     <div>
                         <!-- Nav tabs -->

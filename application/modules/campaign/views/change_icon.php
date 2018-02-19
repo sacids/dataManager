@@ -7,8 +7,8 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li><a href="<?= site_url('campaign/lists') ?>">Manage campaign</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('campaign/lists') ?>">Campaigns</a></li>
                 <li class="active">Change icon</li>
             </ol>
 

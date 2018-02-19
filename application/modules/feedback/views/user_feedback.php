@@ -1,6 +1,5 @@
-<link rel="stylesheet" type="text/css" href="<?php echo site_url(); ?>assets/public/css/chat.css">
-<script src="<?php echo site_url(); ?>assets/public/js/chat.js"></script>
-
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/public/css/chat.css'); ?>">
+<script src="<?= base_url('assets/public/js/chat.js '); ?>"></script>
 
 <div class="container">
     <div class="row">
@@ -11,7 +10,8 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('feedback/lists') ?>">Feedback Messages</a></li>
                 <li class="active">Conversation</li>
             </ol>
 
@@ -29,17 +29,16 @@
                             </li>
                         <?php } ?>
                     </ol>
-                </div>
+                </div><!-- ./col-sm-12 -->
 
-                <form method="post" id="form" class="feedback_form">
-                    <input class="textarea" type="text" name="message" id="message" placeholder="Type feedback here!"
-                           required/>
-                    <input type="hidden" name="instance_id" id="instance_id" value=""/>
-                    <button type="submit" name="submit" class="submit btn btn-primary">Send
-                    </button>
-                </form>
+                <?= form_open('', 'class="feedback_form" id="form"') ?>
+                <input class="textarea" type="text" name="message" id="message" placeholder="Type feedback here!"
+                       required/>
+                <button type="submit" name="submit" class="submit btn btn-primary">Send
+                </button>
+                <?= form_close() ?>
 
-            </div>
-        </div>
-    </div>
-</div>
+            </div><!--./row -->
+        </div><!--./col-sm-12 -->
+    </div><!--./row -->
+</div><!--./container -->
