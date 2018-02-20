@@ -276,33 +276,35 @@ class Xform extends MX_Controller
             }
 
             $specie = $this->Ohkr_model->find_species_by_name($species_name);
-            $request_data = [
-                "specie_id" => $specie->id,
-                "symptoms"  => $symptoms_reported
-            ];
+            if ($specie) {
+                $request_data = [
+                    "specie_id" => $specie->id,
+                    "symptoms"  => $symptoms_reported
+                ];
 
-            $result = $this->Alert_model->send_post_symptoms_request(json_encode($request_data));
-            $json_object = json_decode($result);
+                $result = $this->Alert_model->send_post_symptoms_request(json_encode($request_data));
+                $json_object = json_decode($result);
 
-            if (isset($json_object->status) && $json_object->status == 1) {
-                $detected_diseases = [];
+                if (isset($json_object->status) && $json_object->status == 1) {
+                    $detected_diseases = [];
 
-                foreach ($json_object->data as $disease) {
-                    $ungonjwa = $this->Ohkr_model->find_by_disease_name($disease->title);
+                    foreach ($json_object->data as $disease) {
+                        $ungonjwa = $this->Ohkr_model->find_by_disease_name($disease->title);
 
-                    $detected_diseases[] = [
-                        "form_id"       => $this->xFormReader->get_table_name(),
-                        "disease_id"    => $ungonjwa->id,
-                        "location"      => $district,
-                        "instance_id"   => $this->xFormReader->get_form_data()['meta_instanceID'],
-                        "date_detected" => date("Y-m-d H:i:s")
-                    ];
+                        $detected_diseases[] = [
+                            "form_id"       => $this->xFormReader->get_table_name(),
+                            "disease_id"    => $ungonjwa->id,
+                            "location"      => $district,
+                            "instance_id"   => $this->xFormReader->get_form_data()['meta_instanceID'],
+                            "date_detected" => date("Y-m-d H:i:s")
+                        ];
+                    }
+                    $this->Ohkr_model->save_detected_diseases($detected_diseases);
                 }
-                $this->Ohkr_model->save_detected_diseases($detected_diseases);
             }
 
             if (count($symptoms_reported) > 0) {
-                $message_sender_name = "AfyaData";
+                $message_sender_name = config_item("sms_sender_id");
                 $request_url_endpoint = "sms/1/text/single";
 
                 $suspected_diseases_array = array();
@@ -796,7 +798,7 @@ class Xform extends MX_Controller
         }
 
         if ($this->form_validation->run() === FALSE) {
-            $users = $this->User_model->get_users(200);
+            $users = $this->User_model->get_users(300);
             $groups = $this->User_model->find_user_groups();
 
             $available_group_permissions = [];

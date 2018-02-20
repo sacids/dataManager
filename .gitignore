@@ -93,3 +93,4 @@ application/tests
 !application/tests/controllers
 !application/tests/models
 
+*.sql
