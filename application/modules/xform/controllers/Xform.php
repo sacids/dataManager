@@ -46,7 +46,7 @@ defined('BASEPATH') or exit ('No direct script access allowed');
  * @author   Eric Beda
  * @link     http://sacids.org
  */
-class Xform extends CI_Controller
+class Xform extends MX_Controller
 {
     private $xFormReader;
 
@@ -169,8 +169,8 @@ class Xform extends CI_Controller
                     $path = $this->config->item("form_data_upload_dir") . $file_name;
                     // insert form details in database
                     $data = array(
-                        'file_name' => $file_name,
-                        'user_id' => $user->id,
+                        'file_name'    => $file_name,
+                        'user_id'      => $user->id,
                         "submitted_on" => date("Y-m-d h:i:s")
                     );
 
@@ -244,56 +244,67 @@ class Xform extends CI_Controller
             }
 
             $data_set_values = [
-                "dataSet" => $xForm_form->dhis_data_set,
+                "dataSet"      => $xForm_form->dhis_data_set,
                 "completeDate" => date("Y-m-d"),
-                "period" => date("Yd"),
-                "orgUnit" => $xForm_form->org_unit_id,
-                "name" => $xForm_form->title,
-                "periodType" => $xForm_form->period_type,
-                'dataValues' => $prepare_data_set_array
+                "period"       => date("Yd"),
+                "orgUnit"      => $xForm_form->org_unit_id,
+                "name"         => $xForm_form->title,
+                "periodType"   => $xForm_form->period_type,
+                'dataValues'   => $prepare_data_set_array
             ];
-
-            log_message("debug", "Prepared data set values " . json_encode($data_set_values));
 
             $this->load->model("dhis2/Dhis2_model");
             $response = $this->Dhis2_model->post_data("api/dataSets", $data_set_values);
             log_message("debug", "Dhis2 server response " . $response);
         }
 
-        //TODO Improve to be able to get dalili field dynamically
-        if ($insert_result && isset($this->xFormReader->get_form_data()['Dalili_Dalili'])) {
-            $symptoms_reported = explode(" ", $this->xFormReader->get_form_data()['Dalili_Dalili']);
+        if ($xForm_form->has_symptoms_field == 1 && $insert_result) {
 
-            $district = $this->xFormReader->get_form_data()['taarifa_awali_Wilaya'];
+            $symptoms_column_name = $this->Xform_model->find_form_map_by_field_type($xForm_form->form_id, "DALILI")->col_name;
+            $district_column_name = $this->Xform_model->find_form_map_by_field_type($xForm_form->form_id, "DISTRICT")->col_name;
 
-            $specie = $this->Ohkr_model->find_species_by_name("binadamu");
-            $request_data = [
-                "specie_id" => $specie->id,
-                "symptoms" => $symptoms_reported
-            ];
+            $inserted_form_data = $this->Xform_model->find_form_data_by_id($xForm_form->form_id, $insert_result);
+            $symptoms_reported = explode(" ", $inserted_form_data->$symptoms_column_name);
 
-            $result = $this->Alert_model->send_post_symptoms_request(json_encode($request_data));
-            $json_object = json_decode($result);
+            $district = $inserted_form_data->$district_column_name;
 
-            if (isset($json_object->status) && $json_object->status == 1) {
-                $detected_diseases = [];
+            if ($xForm_form->has_specie_type_field) {
+                $species_column_name = $this->Xform_model->find_form_map_by_field_type($xForm_form->form_id, "SPECIE")->col_name;
+                $species_name = $inserted_form_data->$species_column_name;
+            } else {
+                $species_name = "binadamu";
+            }
 
-                foreach ($json_object->data as $disease) {
-                    $ungonjwa = $this->Ohkr_model->find_by_disease_name($disease->title);
+            $specie = $this->Ohkr_model->find_species_by_name($species_name);
+            if ($specie) {
+                $request_data = [
+                    "specie_id" => $specie->id,
+                    "symptoms"  => $symptoms_reported
+                ];
 
-                    $detected_diseases[] = [
-                        "form_id" => $this->xFormReader->get_table_name(),
-                        "disease_id" => $ungonjwa->id,
-                        "location" => $district,
-                        "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
-                        "date_detected" => date("Y-m-d H:i:s")
-                    ];
+                $result = $this->Alert_model->send_post_symptoms_request(json_encode($request_data));
+                $json_object = json_decode($result);
+
+                if (isset($json_object->status) && $json_object->status == 1) {
+                    $detected_diseases = [];
+
+                    foreach ($json_object->data as $disease) {
+                        $ungonjwa = $this->Ohkr_model->find_by_disease_name($disease->title);
+
+                        $detected_diseases[] = [
+                            "form_id"       => $this->xFormReader->get_table_name(),
+                            "disease_id"    => $ungonjwa->id,
+                            "location"      => $district,
+                            "instance_id"   => $this->xFormReader->get_form_data()['meta_instanceID'],
+                            "date_detected" => date("Y-m-d H:i:s")
+                        ];
+                    }
+                    $this->Ohkr_model->save_detected_diseases($detected_diseases);
                 }
-                $this->Ohkr_model->save_detected_diseases($detected_diseases);
             }
 
             if (count($symptoms_reported) > 0) {
-                $message_sender_name = "AfyaData";
+                $message_sender_name = config_item("sms_sender_id");
                 $request_url_endpoint = "sms/1/text/single";
 
                 $suspected_diseases_array = array();
@@ -310,11 +321,11 @@ class Xform extends CI_Controller
                         $suspected_diseases_list .= $i . "." . $disease->disease_name . "\n<br/>";
 
                         $suspected_diseases_array[$i - 1] = array(
-                            "form_id" => $this->xFormReader->get_table_name(),
-                            "disease_id" => $disease->disease_id,
-                            "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
+                            "form_id"       => $this->xFormReader->get_table_name(),
+                            "disease_id"    => $disease->disease_id,
+                            "instance_id"   => $this->xFormReader->get_form_data()['meta_instanceID'],
                             "date_detected" => date("Y-m-d H:i:s"),
-                            "location" => $district
+                            "location"      => $district
                         );
 
                         if (ENVIRONMENT == 'development' || ENVIRONMENT == "testing") {
@@ -326,7 +337,7 @@ class Xform extends CI_Controller
                             }
 
                             $response_messages = $this->Ohkr_model->find_response_messages_and_groups($disease->disease_id,
-                                $district);
+                                str_ireplace("_", " ", $district));
 
                             $counter = 1;
                             if ($response_messages) {
@@ -346,33 +357,33 @@ class Xform extends CI_Controller
                 }
 
                 $feedback = array(
-                    "user_id" => $this->user_submitting_feedback_id,
-                    "form_id" => $this->xFormReader->get_table_name(),
-                    "message" => $suspected_diseases_list,
+                    "user_id"      => $this->user_submitting_feedback_id,
+                    "form_id"      => $this->xFormReader->get_table_name(),
+                    "message"      => $suspected_diseases_list,
                     "date_created" => date('Y-m-d H:i:s'),
-                    "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
-                    "sender" => "server",
-                    "status" => "pending"
+                    "instance_id"  => $this->xFormReader->get_form_data()['meta_instanceID'],
+                    "sender"       => "server",
+                    "status"       => "pending"
                 );
-                log_message("debug", "Load translated message " . $suspected_diseases_list);
+
                 $this->Feedback_model->create_feedback($feedback);
             } else {
                 log_message("debug", "No symptom reported");
             }
         } else {
 
+            log_message("debug", "Form does not have symptoms field or sysmptoms field is not specified in " . base_url("xform/edit_form/" . $xForm_form->id));
+
             $feedback = array(
-                "user_id" => $this->user_submitting_feedback_id,
-                "form_id" => $this->xFormReader->get_table_name(),
-                "message" => $this->lang->line("message_feedback_data_received"),
+                "user_id"      => $this->user_submitting_feedback_id,
+                "form_id"      => $this->xFormReader->get_table_name(),
+                "message"      => $this->lang->line("message_feedback_data_received"),
                 "date_created" => date('Y-m-d H:i:s'),
-                "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
-                "sender" => "server",
-                "status" => "pending"
+                "instance_id"  => $this->xFormReader->get_form_data()['meta_instanceID'],
+                "sender"       => "server",
+                "status"       => "pending"
             );
-            log_message("debug", "Load translated feedback message " . $this->lang->line("message_feedback_data_received"));
             $this->Feedback_model->create_feedback($feedback);
-            log_message("debug", "Dalili_Dalili index is not set implement dynamic way of getting dalili field");
         }
         return $insert_result;
     }
@@ -390,9 +401,9 @@ class Xform extends CI_Controller
     {
         $sms_to_send = array(
             "response_msg_id" => $response_msg_id,
-            "phone_number" => $phone,
-            "date_sent" => date("Y-m-d h:i:s"),
-            "status" => "PENDING"
+            "phone_number"    => $phone,
+            "date_sent"       => date("Y-m-d h:i:s"),
+            "status"          => "PENDING"
         );
 
         if ($msg_id = $this->Ohkr_model->create_send_sms($sms_to_send)) {
@@ -400,7 +411,7 @@ class Xform extends CI_Controller
             $sms_text = "Ndugu " . $first_name . ",\n" . $message;
             $sms_info = array(
                 "from" => $message_sender_name,
-                "to" => $phone,
+                "to"   => $phone,
                 "text" => $sms_text
             );
 
@@ -408,14 +419,16 @@ class Xform extends CI_Controller
             if ($send_result = $this->Alert_model->send_alert_sms($request_url_endpoint, $sms_info)) {
                 $infobip_response = json_decode($send_result);
                 $message = (array)$infobip_response->messages;
-                $message = array_shift($message);
-                $sms_updates = array(
-                    "status" => "SENT",
-                    "date_sent" => date("Y-m-d H:i:s"),
-                    "infobip_msg_id" => $message->messageId,
-                    "infobip_response" => $send_result
-                );
-                $this->Alert_model->update_sms_status($msg_id, $sms_updates);
+                if (is_array($message)) {
+                    $message = array_shift($message);
+                    $sms_updates = array(
+                        "status"           => "SENT",
+                        "date_sent"        => date("Y-m-d H:i:s"),
+                        "infobip_msg_id"   => $message->messageId,
+                        "infobip_response" => $send_result
+                    );
+                    $this->Alert_model->update_sms_status($msg_id, $sms_updates);
+                }
             }
         }
     }
@@ -617,16 +630,16 @@ class Xform extends CI_Controller
                         if ($create_table_result) {
 
                             $form_details = array(
-                                "user_id" => get_current_user_id(),
-                                "form_id" => $this->xFormReader->get_table_name(),
-                                "jr_form_id" => $this->xFormReader->get_jr_form_id(),
-                                "title" => $this->input->post("title"),
-                                "description" => $this->input->post("description"),
-                                "filename" => $filename,
+                                "user_id"      => get_current_user_id(),
+                                "form_id"      => $this->xFormReader->get_table_name(),
+                                "jr_form_id"   => $this->xFormReader->get_jr_form_id(),
+                                "title"        => $this->input->post("title"),
+                                "description"  => $this->input->post("description"),
+                                "filename"     => $filename,
                                 "date_created" => date("Y-m-d H:i:s"),
-                                "access" => $this->input->post("access"),
-                                "perms" => $all_permissions,
-                                "project_id" => $project_id
+                                "access"       => $this->input->post("access"),
+                                "perms"        => $all_permissions,
+                                "project_id"   => $project_id
                             );
 
                             //TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
@@ -666,8 +679,8 @@ class Xform extends CI_Controller
         //$this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url' => $this->config->base_url("xform/searchable_form_lists"),
-            'total_rows' => $this->Xform_model->count_searchable_form(),
+            'base_url'    => $this->config->base_url("xform/searchable_form_lists"),
+            'total_rows'  => $this->Xform_model->count_searchable_form(),
             'uri_segment' => 3,
         );
 
@@ -699,9 +712,9 @@ class Xform extends CI_Controller
 
         if ($this->form_validation->run() === TRUE) {
             $data = array(
-                "xform_id" => $this->input->post("form_id"),
+                "xform_id"      => $this->input->post("form_id"),
                 "search_fields" => $this->input->post("search_field"),
-                "user_id" => $this->user_id
+                "user_id"       => $this->user_id
             );
             $this->db->insert('xforms_config', $data);
 
@@ -761,9 +774,9 @@ class Xform extends CI_Controller
             foreach ($table_fields as $tf) {
                 if (!$this->Xform_model->xform_table_column_exists($form->form_id, $tf)) {
                     $details = [
-                        "table_name" => $form->form_id,
-                        "col_name" => $tf,
-                        "field_name" => $tf,
+                        "table_name"  => $form->form_id,
+                        "col_name"    => $tf,
+                        "field_name"  => $tf,
                         "field_label" => str_replace("_", " ", $tf)
                     ];
                     $this->Xform_model->create_field_name_map($details);
@@ -785,7 +798,7 @@ class Xform extends CI_Controller
         }
 
         if ($this->form_validation->run() === FALSE) {
-            $users = $this->User_model->get_users(200);
+            $users = $this->User_model->get_users(300);
             $groups = $this->User_model->find_user_groups();
 
             $available_group_permissions = [];
@@ -825,15 +838,15 @@ class Xform extends CI_Controller
                 }
 
                 $new_form_details = array(
-                    "title" => $this->input->post("title"),
-                    "description" => $this->input->post("description"),
-                    "access" => $this->input->post("access"),
-                    "perms" => $new_perms_string,
-                    "last_updated" => date("c"),
-                    "allow_dhis" => $allow_dhis2_checked,
+                    "title"         => $this->input->post("title"),
+                    "description"   => $this->input->post("description"),
+                    "access"        => $this->input->post("access"),
+                    "perms"         => $new_perms_string,
+                    "last_updated"  => date("c"),
+                    "allow_dhis"    => $allow_dhis2_checked,
                     "dhis_data_set" => $this->input->post("data_set"),
-                    "period_type" => $this->input->post("period_type"),
-                    "org_unit_id" => $this->input->post("org_unit_id"),
+                    "period_type"   => $this->input->post("period_type"),
+                    "org_unit_id"   => $this->input->post("org_unit_id"),
                 );
 
                 $this->db->trans_start();
@@ -974,8 +987,8 @@ class Xform extends CI_Controller
             $data['mapped_fields'] = $mapped_fields;
 
             $config = array(
-                'base_url' => $this->config->base_url("xform/form_data/" . $form_id),
-                'total_rows' => $this->Xform_model->count_all_records($form->form_id, $where_condition),
+                'base_url'    => $this->config->base_url("xform/form_data/" . $form_id),
+                'total_rows'  => $this->Xform_model->count_all_records($form->form_id, $where_condition),
                 'uri_segment' => 4,
             );
 
@@ -1030,21 +1043,10 @@ class Xform extends CI_Controller
             $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form_id);
         }
 
-        /*$custom_maps = $this->Xform_model->get_fieldname_map($form_id);
-        foreach ($custom_maps as $f_map) {
-            if (array_key_exists($f_map['col_name'], $mapped_fields)) {
-                $mapped_fields[$f_map['col_name']] = $f_map['field_label'];
-            }
-        }*/
-
-
-        //get form data
         if ($this->session->userdata("form_filters")) {
             $form_filters = $this->session->userdata("form_filters");
             $serial = 0;
             foreach ($form_filters as $column_name) {
-                //todo map fields
-
                 $inc = 1;
                 $column_title = $this->xFormReader->getColumnLetter($serial);
                 $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
@@ -1291,14 +1293,14 @@ class Xform extends CI_Controller
         // set headers
         $header = 'A3:ET6';
         $header_style = array(
-            'fill' => array(
-                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            'fill'      => array(
+                'type'  => PHPExcel_Style_Fill::FILL_SOLID,
                 'color' => array('rgb' => '83C9FC')
 
             ),
-            'font' => array(
-                'bold' => false,
-                'size' => '12',
+            'font'      => array(
+                'bold'  => false,
+                'size'  => '12',
                 'color' => array('rgb' => '000000')
             ),
             'alignment' => array(
@@ -1442,10 +1444,10 @@ class Xform extends CI_Controller
         $this->load->helper('file');
         $this->load->helper('download');
         $config = array(
-            'root' => 'afyadata',
+            'root'    => 'afyadata',
             'element' => 'form_data',
             'newline' => "\n",
-            'tab' => "\t"
+            'tab'     => "\t"
         );
         $data = $this->dbutil->xml_from_result($query, $config);
         force_download($filename, $data);
@@ -1635,7 +1637,7 @@ class Xform extends CI_Controller
         }
         $data['categories'] = json_encode($categories);
         $data['series'] = array(
-            "name" => "Data submissions",
+            "name"   => "Data submissions",
             "series" => str_replace('"', "", json_encode($series))
         );
         $data['report_title'] = "Last 7 Days submissions";
@@ -1650,7 +1652,7 @@ class Xform extends CI_Controller
         }
         $data['current_year_categories'] = json_encode($current_year_categories);
         $data['current_year_series'] = array(
-            "name" => "Data submissions",
+            "name"   => "Data submissions",
             "series" => str_replace('"', "", json_encode($current_year_series))
         );
 

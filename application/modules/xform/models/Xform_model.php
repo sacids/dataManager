@@ -433,7 +433,6 @@ class Xform_model extends CI_Model
     }
 
 
-
     /**
      * @param $table_name
      * @return mixed return an object of fields of the specified table
@@ -756,6 +755,6 @@ class Xform_model extends CI_Model
     {
         $this->db->where("table_name", $table_name);
         $this->db->where("field_type", $field_type);
-        $this->db->get(self::$xform_fieldname_map_table_name)->row();
+        return $this->db->get(self::$xform_fieldname_map_table_name)->row();
     }
 }

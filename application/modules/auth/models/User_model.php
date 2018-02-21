@@ -30,9 +30,13 @@ class User_model extends CI_Model
     function count_data_collectors()
     {
         return $this->db
+            ->group_start()
+            ->where('groups.name', 'members')
+            ->or_where('groups.name', 'chr')
+            ->group_end()
             ->join('users_groups', 'users_groups.user_id = users.id')
             ->join('groups', 'groups.id = users_groups.group_id')
-            ->get_where('users', array('groups.name' => 'chr'))->num_rows();
+            ->get('users')->num_rows();
     }
 
     /**
@@ -67,12 +71,6 @@ class User_model extends CI_Model
         return $users;
     }
 
-    function get_user_details($username)
-    {
-        $query = $this->db->get_where('users', array('username' => $username));
-        return $query->row();
-    }
-
     function delete_user($user_id)
     {
         $this->db->delete('users', array('users.id' => $user_id));
@@ -92,7 +90,7 @@ class User_model extends CI_Model
      * @param $user_id
      * @return string
      */
-    function _user_details($user_id)
+    function get_user_details($user_id)
     {
         $query = $this->db->get_where(self::$table_name, array('id' => $user_id))->row();
         return ($query) ? $query->first_name . ' ' . $query->last_name : FALSE;

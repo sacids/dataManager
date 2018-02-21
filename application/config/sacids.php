@@ -35,3 +35,5 @@ $config['video_data_upload_dir']        = FCPATH. "assets/forms/data/video/";
 
 $config['xform_tables_prefix']          = "ad_";
 // Tables
+
+$config['sms_sender_id']             = "AfyaData";

@@ -50,7 +50,6 @@ class Auth extends MX_Controller
         $this->load->database();
         $this->load->helper(array('url', 'language'));
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
-        $this->lang->load('auth');
 
         //variable
         $this->realm = 'Authorized users of Sacids Openrosa';
@@ -717,7 +716,7 @@ class Auth extends MX_Controller
         }
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
 
-        $this->form_validation->set_rules('group', $this->lang->line('create_user_group_label'), 'required');
+        $this->form_validation->set_rules('group[]', $this->lang->line('create_user_group_label'), 'required');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 

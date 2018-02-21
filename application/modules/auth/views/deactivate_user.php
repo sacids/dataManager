@@ -7,7 +7,7 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li><a href="<?= site_url('auth/users_list') ?>">Users</a></li>
                 <li class="active">Deactivate User</li>
             </ol>

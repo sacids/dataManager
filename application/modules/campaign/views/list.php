@@ -7,7 +7,7 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li class="active">Campaign List</li>
             </ol>
 
@@ -31,6 +31,7 @@
                     <?php if (isset($campaign_list) && count($campaign_list) > 0) { ?>
                         <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
+                                <th width="3%"></th>
                                 <th width="15%"><?= $this->lang->line("label_campaign_title"); ?></th>
                                 <th width="8%"><?= $this->lang->line("label_campaign_type"); ?></th>
                                 <th width="16%"><?= $this->lang->line("label_form_name"); ?></th>
@@ -43,6 +44,7 @@
                             $serial = 1;
                             foreach ($campaign_list as $campaign) { ?>
                                 <tr>
+                                    <td><?= $serial ?></td>
                                     <td><?= $campaign->title; ?></td>
                                     <td><?= ucfirst($campaign->type); ?></td>
                                     <td><?php if (count($campaign->xform) > 0)

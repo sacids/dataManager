@@ -8,7 +8,8 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('ohkr/disease_list') ?>">Diseases</a></li>
                 <li class="active">Add new disease</li>
             </ol>
 

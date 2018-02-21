@@ -189,3 +189,9 @@ $lang['message_project_not_added']     = 'Imeshindikana kuongeza mradi';
 $lang['message_project_updated']       = 'Mradi umefanyiwa mabadiliko';
 $lang['message_project_has_no_form']   = 'Mradi hauna fomu yoyote';
 $lang['status_message_getting_forms']  = 'Tafadhali subiri, inatafuta fomu... ';
+
+$lang['label_manage_access_permissions']= 'Thibiti ruhusa ya upatikanaji';
+$lang['label_map_columns']             = 'Weka safu sambamba';
+$lang['label_dhis2_configurations']    = 'Mipangilio ya Dhis2';
+$lang['label_group_permissions']       = 'Ruhusa kwa mkundi';
+$lang['label_user_permissions']        = "Ruhusa kwa mtumiaji";
