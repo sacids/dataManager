@@ -7,35 +7,37 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="active">List clinical manifestation</li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li class="active">Clinical Manifestation</li>
             </ol>
 
-            <?php
-            if ($this->session->flashdata('message') != '') {
-                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-            } ?>
+            <?php get_flashdata() ?>
 
             <div class="row">
                 <div class="col-sm-12">
-                    <?php if (!empty($symptoms)) { ?>
+                    <span class="pull-left" style="padding: 3px;">
+                        <?= anchor('ohkr/add_new_symptom', '<i class="fa fa-plus"></i> Add Clinical Manifestation', 'class="btn btn-sm btn-primary"') ?>
+                    </span>
 
-                        <table class="table table-striped table-responsive table-hover">
+                    <?php if (isset($symptoms) && $symptoms) { ?>
+                        <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
-                                <th><?php echo $this->lang->line("label_symptom_name"); ?></th>
-                                <th><?php echo $this->lang->line("label_symptom_code"); ?></th>
-                                <th><?php echo $this->lang->line("label_action"); ?></th>
+                                <th></th>
+                                <th><?= $this->lang->line("label_symptom_name"); ?></th>
+                                <th><?= $this->lang->line("label_symptom_code"); ?></th>
+                                <th><?= $this->lang->line("label_action"); ?></th>
                             </tr>
 
                             <?php
                             $serial = 1;
                             foreach ($symptoms as $symptom) { ?>
                                 <tr>
-                                    <td><?php echo $symptom->title; ?></td>
-                                    <td><?php echo $symptom->code; ?></td>
+                                    <td><?= $serial ?></td>
+                                    <td><?= $symptom->title; ?></td>
+                                    <td><?= $symptom->code; ?></td>
                                     <td>
-                                        <?php echo anchor("ohkr/edit_symptom/" . $symptom->id, "Edit"); ?> |
-                                        <?php echo anchor("ohkr/delete_symptom/" . $symptom->id, "Delete", "class='delete'"); ?>
+                                        <?= anchor("ohkr/edit_symptom/" . $symptom->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?>
+                                        <?= anchor("ohkr/delete_symptom/" . $symptom->id, '<i class="fa fa-trash"></i> Delete', 'class="btn btn-danger btn-xs delete"'); ?>
                                     </td>
                                 </tr>
                                 <?php $serial++;
@@ -47,10 +49,11 @@
                                 <div class="clearfix"></div>
                             </div>
                         <?php endif; ?>
-                    <?php } else { ?>
-                        <div class="fail_message">No clinical manifestation has been found</div>
-                    <?php } ?>
+                    <?php } else {
+                        echo display_message('No clinical manifestation has been found', 'warning');
+                    } ?>
                 </div>
             </div>
         </div>
     </div>
+</div>

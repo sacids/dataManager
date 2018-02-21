@@ -3,26 +3,25 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
             <div id="header-title">
-                <h3 class="title">Edit form</h3>
+                <h3 class="title"><?= $this->lang->line("heading_edit_form") ?></h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="active">Edit form</li>
+                <li><a href="<?= site_url('dashboard') ?>"><?= $this->lang->line("nav_item_dashboard") ?></a></li>
+                <li class="active"><?= $this->lang->line("heading_edit_form") ?></li>
             </ol>
 
-            <?php
-            if ($this->session->flashdata('message') != '') {
-                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-            }
-            ?>
+            <?= get_flashdata() ?>
+
             <?php echo form_open_multipart('xform/edit_form/' . $form->id, 'class="form-vertical" role="form"'); ?>
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#form-details">Edit form details</a></li>
-                <li><a data-toggle="tab" href="#access-permissions">Manage Access Permissions</a></li>
-                <li><a data-toggle="tab" href="#map-columns"><?php echo "Map columns" ?></a></li>
-                <li><a data-toggle="tab" href="#dhis2"><?php echo "Dhis2" ?></a></li>
+                <li class="active"><a data-toggle="tab"
+                                      href="#form-details"><?= $this->lang->line("heading_edit_form") ?></a></li>
+                <li><a data-toggle="tab"
+                       href="#access-permissions"><?= $this->lang->line("label_manage_access_permissions") ?></a></li>
+                <li><a data-toggle="tab" href="#map-columns"><?= $this->lang->line("label_map_columns") ?></a></li>
+                <li><a data-toggle="tab" href="#dhis2"><?= $this->lang->line("label_dhis2_configurations") ?></a></li>
             </ul>
 
             <div class="tab-content">
@@ -30,9 +29,6 @@
                 <div id="form-details" class="tab-pane fade in active">
                     <div class="">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="">Edit form details</h3>
-                            </div>
                             <div class="panel-body">
 
                                 <div class="form-group">
@@ -63,12 +59,12 @@
                     <div class="">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="">Manage Access Permissions</h3>
+                                <h3 class=""><?= $this->lang->line("label_manage_access_permissions") ?></h3>
                             </div>
                             <div class="panel-body">
 
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                    <h4>Group Permissions</h4>
+                                    <h4><?= $this->lang->line("label_group_permissions") ?></h4>
                                     <?php
                                     foreach ($group_perms as $key => $value) {
                                         echo form_checkbox("perms[]", $key, (in_array($key, $current_perms)) ? TRUE : FALSE);
@@ -76,7 +72,7 @@
                                     } ?>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                    <h4>User Permissions</h4>
+                                    <h4><?= $this->lang->line("label_user_permissions") ?></h4>
                                     <?php
                                     foreach ($user_perms as $key => $value) {
                                         echo form_checkbox("perms[]", $key, (in_array($key, $current_perms)) ? TRUE : FALSE);
@@ -92,7 +88,7 @@
                     <div class="">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="">Map columns</h3>
+                                <h3 class=""><?= $this->lang->line("label_map_columns") ?></h3>
                             </div>
                             <div class="panel-body">
 
@@ -118,13 +114,22 @@
                                         'female death' => "Female Death"
                                     ];
 
-                                    $field_type_options = ['TEXT'     => "Text", 'INT' => "Number",
-                                                           "GPS"      => "GPS Location", "DATE" => "DATE", "DALILI" => 'Dalili',
-                                                           "LAT"      => "Latitude", "LONG" => "Longitude",
-                                                           "IDENTITY" => "Username/Identity", "IMAGE" => "Image"];
+                                    $field_type_options = [
+                                        'TEXT'     => "Text",
+                                        'INT'
+                                                   => "Number",
+                                        "GPS"      => "GPS Location",
+                                        "DATE"     => "DATE",
+                                        "DALILI"   => 'Dalili',
+                                        "LAT"      => "Latitude",
+                                        "LONG"     => "Longitude",
+                                        "IDENTITY" => "Username/Identity",
+                                        "IMAGE"    => "Image",
+                                        "DISTRICT" => "District",
+                                        "SPECIE" => "Specie",
+                                    ];
 
                                     $use_in_chart_options = [1 => 'Yes', 0 => 'No'];
-
 
                                     foreach ($table_fields as $tf) {
                                         echo "<tr>";
@@ -150,7 +155,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="">Dhis2</h3>
+                            <h3 class=""><?=$this->lang->line("label_dhis2_configurations")?></h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
@@ -192,7 +197,8 @@
 
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg">Save changes</button>
+                    <button type="submit"
+                            class="btn btn-primary btn-lg"><?= $this->lang->line("button_save_changes") ?></button>
                 </div>
                 <?php echo form_close(); ?>
             </div>

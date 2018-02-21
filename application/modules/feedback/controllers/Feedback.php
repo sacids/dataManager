@@ -8,8 +8,9 @@
  * @author      Renfrid Ngolongolo
  * @link        http://sacids.org
  */
-class Feedback extends CI_Controller
+class Feedback extends MX_Controller
 {
+    private $data;
     private $user_id;
     private $controller;
 
@@ -24,12 +25,8 @@ class Feedback extends CI_Controller
         $this->controller = $this->router->fetch_class();
     }
 
-    /**
-     * Check login
-     *
-     * @return response
-     */
-    function _is_logged_in()
+    //check login user
+    function is_logged_in()
     {
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
@@ -59,7 +56,7 @@ class Feedback extends CI_Controller
         $this->data['title'] = "Feedback List";
 
         //check if logged in
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
@@ -76,15 +73,15 @@ class Feedback extends CI_Controller
             }
         } else {
             $config = array(
-                'base_url'    => $this->config->base_url("feedback/lists"),
-                'total_rows'  => $this->Feedback_model->count_feedback(),
+                'base_url' => $this->config->base_url("feedback/lists"),
+                'total_rows' => $this->Feedback_model->count_feedback(),
                 'uri_segment' => 3,
             );
 
             $this->pagination->initialize($config);
             $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-            $this->data['feedback'] = $this->Feedback_model->find_all($this->pagination->per_page, $page);
+            $this->data['feedback_list'] = $this->Feedback_model->find_all($this->pagination->per_page, $page);
             $this->data["links"] = $this->pagination->create_links();
         }
 
@@ -101,50 +98,56 @@ class Feedback extends CI_Controller
      */
     function user_feedback($instance_id)
     {
+        $this->data['title'] = "Feedback Conversation";
+
         //check if logged in
-        $this->_is_logged_in();
+        $this->is_logged_in();
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
+        $feedback = $this->Feedback_model->get_feedback_by_instance($instance_id);
+        if (count($feedback) == 0) {
+            show_error("User conversation not exists");
+        }
+        $this->data['feedback'] = $feedback;
+        $this->data['instance_id'] = $instance_id;
+
+        foreach ($this->data['feedback'] as $k => $feedback) {
+            if ($feedback->sender == 'user')
+                $this->data['feedback'][$k]->sender_name = $this->User_model->get_user_details($feedback->user_id);
+            else
+                $this->data['feedback'][$k]->sender_name = $this->User_model->get_user_details($feedback->reply_by);
+        }
+
         //update all feedback from android app using instance_id
         $this->Feedback_model->update_user_feedback($instance_id, 'user');
 
-
         if ($_POST) {
             $message = $this->input->post('message');
-            $feedback = $this->Feedback_model->get_feedback_details_by_instance($instance_id);
+            $fb = $this->Feedback_model->get_feedback_details_by_instance($instance_id);
 
             //Insert data from ajax
-            $feedback_details = array(
-                'form_id'      => $feedback->form_id,
-                'message'      => $message,
+            $result = $this->Feedback_model->create_feedback(array(
+                'form_id' => $fb->form_id,
+                'message' => $message,
                 'date_created' => date('Y-m-d H:i:s'),
-                'instance_id'  => $instance_id,
-                'user_id'      => $feedback->user_id,
-                'sender'       => 'server',
-                'status'       => 'pending',
-                'reply_by'     => $this->user_id
-            );
-            $this->Feedback_model->create_feedback($feedback_details);
-        }
+                'instance_id' => $instance_id,
+                'user_id' => $fb->user_id,
+                'sender' => 'server',
+                'status' => 'pending',
+                'reply_by' => $this->user_id
+            ));
 
-        $data['feedback'] = $this->Feedback_model->get_feedback_by_instance($instance_id);
-
-        foreach ($data['feedback'] as $k => $feedback) {
-            if ($feedback->sender == 'user') {
-                $data['feedback'][$k]->sender_name = $this->User_model->_user_details($feedback->user_id);
-            } else {
-                $data['feedback'][$k]->sender_name = $this->User_model->_user_details($feedback->reply_by);
-            }
+            if ($result)
+                redirect('feedback/user_feedback/' . $instance_id, 'refresh');
+            else
+                redirect('feedback/user_feedback/' . $instance_id, 'refresh');
         }
 
         //render view
-        $data['instance_id'] = $instance_id;
-
-        $data['title'] = "Feedback List";
-        $this->load->view('header', $data);
-        $this->load->view("feedback/user_feedback");
+        $this->load->view('header', $this->data);
+        $this->load->view("user_feedback");
         $this->load->view('footer');
     }
 }

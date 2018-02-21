@@ -113,17 +113,9 @@
                            aria-expanded="false"><?= $this->lang->line("nav_item_ohkr") ?> <span
                                     class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_diseases") ?></li>
                             <li><?php echo anchor('ohkr/disease_list', $this->lang->line("nav_item_list_disease")); ?></li>
-                            <li><?php echo anchor('ohkr/add_new_disease', $this->lang->line("nav_item_add_disease")); ?></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_symptoms") ?></li>
                             <li><?php echo anchor('ohkr/symptoms_list', $this->lang->line("nav_item_list_symptoms")); ?></li>
-                            <li><?php echo anchor('ohkr/add_new_symptom', $this->lang->line("nav_item_create_symptom")); ?></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_species") ?></li>
                             <li><?php echo anchor('ohkr/species_list', $this->lang->line("nav_item_list_species")); ?></li>
-                            <li><?php echo anchor('ohkr/add_new_specie', $this->lang->line("nav_item_create_species")); ?></li>
                         </ul>
                     </li>
                 <?php } ?>

@@ -7,7 +7,8 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('feedback/whatsapp/message_list') ?>">Messages</a></li>
                 <li class="active">Import file</li>
             </ol>
 
@@ -18,25 +19,24 @@
                     } else if ($this->session->flashdata('message') != "") {
                         echo $this->session->flashdata('message');
                     } ?>
-                    <?php echo form_open_multipart('feedback/whatsapp/import', 'role="form"'); ?>
 
+                    <?= form_open_multipart('feedback/whatsapp/import', 'role="form"'); ?>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Message File</label>
-                            <?php echo form_input($txt_file); ?>
+                            <?= form_input($txt_file); ?>
                         </div>
 
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Import</button>
+                            <?= form_submit('submit', 'Import', 'class="btn btn-primary btn-sm"') ?>
+                            <?= anchor('feedback/whatsapp/message_list', 'Cancel', 'class="btn btn-warning btn-sm"') ?>
                         </div>
-                    </div>
-
-                    <div class="form-group"></div>
-                    <?php echo form_close(); ?>
-                </div>
-            </div>
+                    </div><!--./col-sm-6 -->
+                    <?= form_close(); ?>
+                </div><!--./col-sm-12 -->
+            </div><!--./row -->
         </div>
-    </div>
-</div>
+    </div><!--./row -->
+</div><!--./container -->
 

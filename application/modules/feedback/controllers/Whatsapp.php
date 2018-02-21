@@ -41,7 +41,7 @@
  * Date: 4/21/2016
  * Time: 5:17 PM
  */
-class Whatsapp extends CI_Controller
+class Whatsapp extends MX_Controller
 {
     private $data;
     private $controller;
@@ -111,10 +111,11 @@ class Whatsapp extends CI_Controller
         }
         //populate data
         $this->data['txt_file'] = array(
-            'name'  => 'txt_file',
-            'id'    => 'txt_file',
-            'type'  => 'file',
+            'name' => 'txt_file',
+            'id' => 'txt_file',
+            'type' => 'file',
             'value' => $this->form_validation->set_value('txt_file'),
+            'class' => 'form-control'
         );
 
         //render view
@@ -166,27 +167,17 @@ class Whatsapp extends CI_Controller
         //$date_obj = date_create_from_format('d/m/Y, H:i A',trim($date_sent_received));
 
         $chat = array(
-            "fullname"           => trim($username),
-            "message"            => trim($message),
+            "fullname" => trim($username),
+            "message" => trim($message),
             //"date_sent_received" => $date_obj->format('Y-m-d h:i'),
             "date_sent_received" => date('Y-m-d H:i:s', $date_obj),
-            "user_id"            => $this->user_id,
-            "date_created"       => date("c")
+            "user_id" => $this->user_id,
+            "date_created" => date("c")
         );
 
         log_message("debug", json_encode($chat));
         return $chat;
     }
-
-    function test()
-    {
-        //echo strtotime(str_replace("/","-","25/02/2016, 3:07 PM"));
-        $date = date_create_from_format('d/m/Y, H:i A', "25/02/2016, 3:07 PM");
-        echo "<pre>";
-        print_r($date);
-        echo $date->format('Y-m-d h:i:s');
-    }
-
 
     public function message_list()
     {
@@ -208,8 +199,8 @@ class Whatsapp extends CI_Controller
         } else {
 
             $config = array(
-                'base_url'    => $this->config->base_url("feedback/whatsapp/message_list"),
-                'total_rows'  => $this->Whatsapp_model->count_message(),
+                'base_url' => $this->config->base_url("feedback/whatsapp/message_list"),
+                'total_rows' => $this->Whatsapp_model->count_message(),
                 'uri_segment' => 3,
             );
 

@@ -16,10 +16,18 @@
                                 <div class="panel-body">
 
                                     <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" href="#overall"><?=$this->lang->line("label_graph_period_overall")?></a></li>
-                                        <li><a data-toggle="tab" href="#monthly"><?=$this->lang->line("label_graph_period_monthly")?></a></li>
-                                        <li><a data-toggle="tab" href="#weekly"><?=$this->lang->line("label_graph_period_weekly")?></a></li>
-                                        <li><a data-toggle="tab" href="#daily"><?=$this->lang->line("label_graph_period_daily")?></a></li>
+                                        <li class="active"><a data-toggle="tab"
+                                                              href="#overall"><?= $this->lang->line("label_graph_period_overall") ?></a>
+                                        </li>
+                                        <li><a data-toggle="tab"
+                                               href="#monthly"><?= $this->lang->line("label_graph_period_monthly") ?></a>
+                                        </li>
+                                        <li><a data-toggle="tab"
+                                               href="#weekly"><?= $this->lang->line("label_graph_period_weekly") ?></a>
+                                        </li>
+                                        <li><a data-toggle="tab"
+                                               href="#daily"><?= $this->lang->line("label_graph_period_daily") ?></a>
+                                        </li>
                                     </ul>
 
                                     <div class="tab-content">
@@ -44,69 +52,61 @@
 
                     <div class="col-sm-3">
                         <div class="" style="height: inherit;">
-                            <a href="<?= site_url('auth/users_list') ?>">
-                                <div class="panel panel-tile info-block">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-xs-5 ph10 text-center ">
-                                                <i class="fa fa-users"></i>
-                                            </div>
-                                            <div class="col-xs-7">
-                                                <h2><?= (isset($active_users) ? $active_users : '0'); ?></h2>
-                                                <h6><?= $this->lang->line("label_data_collectors") ?></h6>
-                                            </div>
+                            <div class="panel panel-tile info-block">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-5 ph10 text-center ">
+                                            <i class="fa fa-users"></i>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <h2><?= (isset($active_users) ? $active_users : '0'); ?></h2>
+                                            <h6><?= $this->lang->line("label_data_collectors") ?></h6>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </div><!--./panel -->
 
-                            <a href="<?= site_url('xform/forms') ?>">
-                                <div class="panel panel-tile info-block">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-xs-5 text-center ">
-                                                <i class="fa fa-file-excel-o"></i>
-                                            </div>
-                                            <div class="col-xs-7">
-                                                <h2><?= (isset($published_forms) ? $published_forms : '0') ?></h2>
-                                                <h6><?= $this->lang->line("label_published_forms") ?></h6>
-                                            </div>
+                            <div class="panel panel-tile info-block">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-5 text-center ">
+                                            <i class="fa fa-file-excel-o"></i>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <h2><?= (isset($published_forms) ? $published_forms : '0') ?></h2>
+                                            <h6><?= $this->lang->line("label_published_forms") ?></h6>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </div><!--./panel -->
 
-                            <a href="<?= site_url('campaign/lists') ?>">
-                                <div class="panel panel-tile info-block">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-xs-5 ph10 text-center ">
-                                                <i class="fa fa-bullhorn"></i>
-                                            </div>
-                                            <div class="col-xs-7">
-                                                <h2><?= (isset($active_campaign) ? $active_campaign : '0') ?></h2>
-                                                <h6><?= $this->lang->line("label_active_campaigns") ?></h6>
-                                            </div>
+                            <div class="panel panel-tile info-block">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-5 ph10 text-center ">
+                                            <i class="fa fa-bullhorn"></i>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <h2><?= (isset($active_campaign) ? $active_campaign : '0') ?></h2>
+                                            <h6><?= $this->lang->line("label_active_campaigns") ?></h6>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </div><!--./panel -->
 
-                            <a href="<?= site_url('feedback/lists') ?>">
-                                <div class="panel panel-tile info-block">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-xs-5 ph10 text-center ">
-                                                <i class="fa fa-comments"></i>
-                                            </div>
-                                            <div class="col-xs-7">
-                                                <h2><?= (isset($new_feedback) ? number_format($new_feedback) : '0'); ?></h2>
-                                                <h6><?= $this->lang->line("label_user_chats") ?></h6>
-                                            </div>
+                            <div class="panel panel-tile info-block">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-5 ph10 text-center ">
+                                            <i class="fa fa-comments"></i>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <h2><?= (isset($new_feedback) ? number_format($new_feedback) : '0'); ?></h2>
+                                            <h6><?= $this->lang->line("label_user_chats") ?></h6>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </div><!--./panel -->
                         </div>
                     </div>
                 </div>
@@ -126,13 +126,15 @@
                                                 <li>
                                                     <div class="row">
                                                         <div class="col-sm-12">
-                                                            <span class="name"><?= $value->first_name . ' ' . $value->last_name ?></span>
+                                                            <span class="title"><?= strtoupper($value->title) ?></span>
+                                                            <br>
+                                                            <span class="name"><?= ucfirst($value->first_name) . ' ' . ucfirst($value->last_name) ?></span>
                                                             <span
-                                                                    class="time"><?= time_ago($value->date_created); ?></span>
+                                                                    class="time"><?= '<i class="fa fa-clock-o"></i> ' . time_ago($value->date_created); ?></span>
                                                             <br>
                                                             <span class="msg"><?= $value->message ?></span>
                                                             <br/><span
-                                                                    class="pull-right"><?= anchor('feedback/user_feedback/' . $value->instance_id, $this->lang->line("label_conversation"), 'class="btn btn-primary btn-xs"') ?></span>
+                                                                    class="pull-right"><?= anchor('feedback/user_feedback/' . $value->instance_id, '<i class="fa fa-comments-o fa-lg "></i>') ?></span>
                                                         </div>
                                                     </div>
                                                     <hr>
@@ -142,9 +144,7 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
 
                     <div class="col-sm-3">

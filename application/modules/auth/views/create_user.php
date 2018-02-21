@@ -7,7 +7,7 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li><a href="<?= site_url('auth/users_list') ?>">Users</a></li>
                 <li class="active"><?= $this->lang->line("create_user_heading") ?></li>
             </ol>
@@ -75,7 +75,7 @@
                             $serial = 1;
                             foreach ($group_list as $group) { ?>
                                 <input type="checkbox" name="group[]"
-                                       value="<?= $group->id; ?>" <?= set_checkbox('group_id', $group->id); ?>>
+                                       value="<?= $group->id; ?>" <?= set_checkbox('group', $group->id); ?>>
                                 <?= ucfirst($group->name) . '<br />';
                                 $serial++;
                             } ?>
