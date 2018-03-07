@@ -61,12 +61,12 @@
                         <?php echo form_open(uri_string(), 'class="form-inline" role="form"'); ?>
                         <div class="form-group">
                             <?php
-                            $week_options = array();
-                            for ($i = 1; $i <= 52; $i++) {
-                                $week_options[$i] = $i;
-                            }
-                            $week_options = array('' => 'Week Number') + $week_options;
-                            echo form_dropdown('week', $week_options, set_value('week'), 'class="form-control"'); ?>
+                    $week_options = array();
+                    for ($i = 1; $i <= 52; $i++) {
+                        $week_options[$i] = $i;
+                    }
+                    $week_options = array('' => 'Week Number') + $week_options;
+                    echo form_dropdown('week', $week_options, set_value('week'), 'class="form-control"'); ?>
                         </div>
 
                         <div class="form-group">
@@ -79,9 +79,9 @@
                         <button type="button" class="btn btn-link" data-toggle="modal"
                                 data-target="#myModal">Set Filters
                         </button>
-                        <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_drive-ms-excel.png" height="25"/>') ?>
-                        <?php echo anchor("visualization/visualization/chart/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_office-25.png" height="25"/>') ?>
-                        <?php echo anchor("visualization/visualization/map/" . $form_id, '<img src="' . base_url() . 'assets/public/images/icon_location.png" height="25"/>') ?>
+                        <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Export XLS"') ?>
+                        <?php echo anchor("visualization/visualization/chart/" . $form_id, '<i class="fa fa-bar-chart-o fa-lg"></i>&nbsp;&nbsp;', 'title="Visualization"') ?>
+                        <?php echo anchor("visualization/visualization/map/" . $form_id, '<i class="fa fa-map-marker fa-lg"></i>', 'title="View Map"') ?>
                     </div>
                 </div>
             </div>
