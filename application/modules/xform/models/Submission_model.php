@@ -69,11 +69,13 @@ class Submission_model extends CI_Model
     }
 
     /**
+     * @param null $filter_condition
      * @return mixed
      */
-    function count_published_forms()
+    function count_published_forms($filter_condition = null)
     {
-        $this->where_condition('xforms', 'user_id');
+        if ($filter_condition != null)
+            $this->db->where($filter_condition, "", false);
 
         return $this->db->get_where('xforms', array('status' => 'published'))->num_rows();
     }
