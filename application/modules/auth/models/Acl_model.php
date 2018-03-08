@@ -110,7 +110,7 @@ class Acl_model extends CI_Model
         }
 
         $this->db->limit($limit, $offset);
-        $this->db->order_by('date_created', 'DESC');
+        $this->db->order_by('date_added', 'DESC');
         return $this->db->get(self::$table_name_filters)->result();
     }
 
