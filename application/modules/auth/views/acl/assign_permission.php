@@ -1,13 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: akyoo
- * Date: 31/10/2017
- * Time: 07:45
- */
-
-?>
-
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
@@ -18,30 +8,50 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><?= anchor('dashboard', 'Dashboard') ?></li>
-                <li><?= anchor('auth', 'Auth') ?></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('auth/users_list') ?>">Users</a></li>
                 <li class="active">Assign Permissions</li>
             </ol>
 
+
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
-                    <?= get_flashdata() ?>
-                    <?= form_open("auth/accesscontrol/assign_permission/" . $user->id) ?>
-                    <?= form_hidden("user_id", $user->id) ?>
-                    <?php
-                    foreach ($permissions as $permission) {
-                        echo "<label>";
-                        echo form_checkbox("permissions[]", $permission->id) . "&nbsp;";
-                        echo $permission->title. "&nbsp;&nbsp;&nbsp;</label>";
-                    }
-                    ?>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Assign Permissions</button>
-                    </div>
-                    <?= form_close() ?>
-                </div>
-            </div>
 
+                    <?php if (validation_errors() != "") {
+                        echo '<div class="alert alert-danger fade in">' . validation_errors() . '</div>';
+                    } else if ($this->session->flashdata('message') != "") {
+                        echo $this->session->flashdata('message');
+                    } ?>
+
+                    <?php if (isset($permissions_list) && count($permissions_list) > 0) { ?>
+                        <?= form_open(uri_string()); ?>
+                        <?= form_hidden("user_id", $user->id) ?>
+                        <table>
+                            <tr>
+                                <?php
+                                $serial = 0;
+                                foreach ($permissions_list as $key => $value) {
+                                    if (($serial % 4) == 0) {
+                                        echo '</tr><tr>';
+                                    } ?>
+                                    <td>
+                                        <?= form_checkbox("permissions[]", $value->id, (in_array($value->id, $assigned_perms)) ? TRUE : FALSE); ?>
+                                        <label><?= $value->title ?></label>&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <?php $serial++;
+                                } ?>
+                            </tr>
+                        </table>
+
+                        <?= form_submit('save', 'Assign', array('class' => "btn btn-primary")); ?>
+                        <?= anchor('auth/users_list', 'Cancel', 'class="btn btn-warning"'); ?>
+
+                        <?= form_close(); ?>
+                    <?php } else {
+                        echo display_message('No filter found', 'warning');
+                    } ?>
+                </div><!--./col-sm-12 -->
+            </div><!--./row -->
         </div>
     </div>
 </div>

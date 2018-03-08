@@ -8,7 +8,7 @@
 
 //Projects
 $lang['nav_item_projects'] = "Projects";
-$lang['nav_item_list_projects'] = "projects List";
+$lang['nav_item_list_projects'] = "Projects List";
 $lang['nav_item_add_new_project'] = "Add new project";
 
 //Forms

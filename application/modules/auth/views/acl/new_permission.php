@@ -1,46 +1,46 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Godluck Akyoo
- * Date: 25/10/2017
- * Time: 15:22
- */
-
-?>
-
-<?php
-/**
- * Created by PhpStorm.
- * User: Godlcuk Akyoo
- * Date: 25/10/2017
- * Time: 12:08
- */ ?>
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-            <h3><i class="fa fa-key"></i> New Permission</h3>
-            <hr/>
-            <?= get_flashdata() ?>
-
-            <?= form_open("auth/accesscontrol/new_permission", 'class="form-horizontal" role="form"') ?>
-            <div class="form-group">
-                <label>Permission name <span>*</span></label>
-                <input type="text" id="permissionName" name="permission" placeholder="Enter permission name"
-                       class="form-control"
-                       value="<?php echo set_value('permission'); ?>">
-                <div class="error" style="color: red"> <?php echo form_error('permission'); ?></div>
+        <div class="col-sm-12 col-md-12 col-lg-12 main">
+            <div id="header-title">
+                <h3 class="title">Add New Permission</h3>
             </div>
 
-            <div class="form-group">
-                <label>Description</label>
-                <?= form_textarea(["id" => "permissionDescription", "name" => "description", "placeholder" => "Enter permission short description here", "class" => "form-control"], set_value('description')) ?>
-                <div class="error" style="color: red"> <?php echo form_error('description'); ?></div>
-            </div>
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('auth/accesscontrol') ?>">User Permissions</a></li>
+                <li class="active">Add New Permission</li>
+            </ol>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-            <?= form_close() ?>
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php if (validation_errors() != "") {
+                        echo '<div class="alert alert-danger fade in">' . validation_errors() . '</div>';
+                    } else if ($this->session->flashdata('message') != "") {
+                        echo $this->session->flashdata('message');
+                    } ?>
+
+                    <?= form_open("auth/accesscontrol/new_permission") ?>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Permission name <span style="color: red">*</span></label>
+                            <?= form_input($name) ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <?= form_textarea($description) ?>
+                        </div>
+
+                        <div class="form-group">
+                            <?= form_submit('submit', 'Save', array('class' => "btn btn-primary")); ?>
+                            <?= anchor('auth/accesscontrol', 'Cancel', 'class="btn btn-warning"') ?>
+                        </div> <!-- /form-group -->
+                    </div><!--./col-md-6 -->
+                    <?= form_close() ?>
+
+                </div><!--./col-sm-12 -->
+            </div><!--./row -->
         </div>
-    </div>
-</div>
+    </div><!--./row -->
+</div><!--./container -->
