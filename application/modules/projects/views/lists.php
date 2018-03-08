@@ -2,13 +2,13 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title"><?=$this->lang->line("title_list_projects")?></h3>
+                <h3 class="title"><?= $this->lang->line("title_list_projects") ?></h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><?=$this->lang->line("nav_item_dashboard")?></a></li>
-                <li class="active"><?=$this->lang->line("title_list_projects")?></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li class="active"><?= $this->lang->line("title_list_projects") ?></li>
             </ol>
 
             <div class="row">
@@ -23,10 +23,10 @@
                     <?php if (count($project_list) > 0) { ?>
                         <table class="table table-responsive table-hover table-bordered">
                             <tr>
-                                <th width="12%"><?=$this->lang->line("label_project_title")?></th>
-                                <th width="65%"><?=$this->lang->line("label_project_description")?></th>
-                                <th width="15%"><?=$this->lang->line("label_project_created_date")?></th>
-                                <th width="8%" colspan="2"><?=$this->lang->line("label_action")?></th>
+                                <th width="25%"><?= $this->lang->line("label_project_title") ?></th>
+                                <th width="40%"><?= $this->lang->line("label_project_description") ?></th>
+                                <th width="20%"><?= $this->lang->line("label_project_created_date") ?></th>
+                                <th width="12%"><?= $this->lang->line("label_action") ?></th>
                             </tr>
 
                             <?php
@@ -36,7 +36,7 @@
                                     <td><?php echo $project->title; ?></td>
                                     <td><?php echo $project->description; ?></td>
                                     <td><?php echo date('d-m-Y H:i:s', strtotime($project->created_at)); ?></td>
-                                    <td><?php echo anchor("projects/edit/" . $project->id, $this->lang->line("label_edit")); ?></td>
+                                    <td><?php echo anchor("projects/edit/" . $project->id, '<i class="fa fa-pencil"></i> ' . $this->lang->line("label_edit"), 'class="btn btn-primary btn-xs"'); ?></td>
                                 </tr>
                                 <?php $serial++;
                             } ?>
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="col-sm-12 col-md-6 col-lg-6">
-                    <div id="notificationBar"><?=$this->lang->line("label_select_project_to_list_forms")?></div>
+                    <div id="notificationBar"><?= $this->lang->line("label_select_project_to_list_forms") ?></div>
                     <div id="formsListArea"></div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
     $(document).ready(function () {
         $('tr.projectRow').on('click', function () {
             var projectId = $(this).attr('id');
-           
+
             $.ajax({
                 url: "<?= base_url("projects/forms") ?>/" + projectId,
                 type: "post",
@@ -76,7 +76,7 @@
                 },
                 success: function (data) {
                     $("#notificationBar").html("");
-                    var html = '<h3 class="title"><?=$this->lang->line("title_project_forms")?> <span class="small pull-right"><a href="<?= base_url('xform/add_new')?>/' + projectId + '"><?=$this->lang->line("button_upload_new_form")?></a></span></h3>';
+                    var html = '<h3 class="title"><?=$this->lang->line("title_project_forms")?> <span class="pull-right"><a class="btn btn-primary btn-xs" href="<?= base_url('xform/add_new')?>/' + projectId + '"><i class="fa fa-plus"></i> <?=$this->lang->line("button_upload_new_form")?></a></span></h3>';
 
                     if (data.status == "success" && data.forms_count > 0) {
                         var forms = data.forms;
@@ -91,27 +91,28 @@
                             }
 
                             html += "<div><h4>" + form.title + form_status + "</h4><span class='small'>" + form.description
-                                    + "</span><span class='pull-right'><a href='<?= base_url('xform/edit_form/')?>/" + form.id + "'><?=$this->lang->line("label_edit")?></a></span>"
-                                    + "<p>" +
-                                    "<a href='<?=base_url("xform/form_overview")?>/" + form.form_id + "' class='mr-3'>Overview</a>&nbsp;&nbsp;" +
-                                    "<a href='<?=base_url("xform/form_data")?>/" + form.id + "' target='_blank' class='mr-3'>Form Data</a>&nbsp;&nbsp;" +
-                                    "<a href='<?=base_url("visualization/visualization/chart")?>/" + form.form_id + "' target='_blank' class='mr-3'>Chart</a>&nbsp;&nbsp;" +
-                                    "<a href='<?=base_url("visualization/visualization/map")?>/" + form.form_id + "' target='_blank' >Map</a>" +
-                                    "</p></div>";
+                                + "</span><span class='pull-right'><a class='btn btn-primary btn-xs' href='<?= base_url('xform/edit_form/')?>/" + form.id + "'><i class='fa fa-pencil'></i> <?=$this->lang->line("label_edit")?></a></span>"
+                                + "<p>" +
+                                "<a href='<?=base_url("xform/form_overview")?>/" + form.form_id + "' class='mr-3'>Overview</a>&nbsp;&nbsp;" +
+                                "<a href='<?=base_url("xform/form_data")?>/" + form.id + "' target='_blank' class='mr-3'>Form Data</a>&nbsp;&nbsp;" +
+                                "<a href='<?=base_url("visualization/visualization/chart")?>/" + form.form_id + "' target='_blank' class='mr-3'>Chart</a>&nbsp;&nbsp;" +
+                                "<a href='<?=base_url("visualization/visualization/map")?>/" + form.form_id + "' target='_blank' >Map</a><hr>" +
+                                "</p></div>";
                         });
                     }
 
                     if (data.status == "success" && data.forms_count == 0) {
                         $("#notificationBar").html('<?=display_message($this->lang->line("message_project_has_no_form"), "info")?>');
-                        html = "<div><a href='<?= base_url('xform/add_new')?>/" + projectId + "'><?=$this->lang->line("button_upload_new_form")?></a></div>";
+                        html = "<div><a class='btn btn-primary btn-xs' href='<?= base_url('xform/add_new')?>/" + projectId + "'><i class='fa fa-plus'></i> <?=$this->lang->line("button_upload_new_form")?></a></div>";
                     }
                     $("#formsListArea").html(html);
                 },
-                beforeSend(){
+                beforeSend() {
                     $("#formsListArea").html("");
-                    $("#notificationBar").html('<?=display_message("<i class=\"fa fa-spinner fa-refresh fa-spin fa-1x\" aria-hidden=\"true\"></i> ".$this->lang->line("status_message_getting_forms"))?>');
+                    $("#notificationBar").html('<?=display_message("<i class=\"fa fa-spinner fa-refresh fa-spin fa-1x\" aria-hidden=\"true\"></i> " . $this->lang->line("status_message_getting_forms"))?>');
                 },
-                error(){}
+                error() {
+                }
             });
         });
     });

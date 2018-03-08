@@ -33,12 +33,22 @@ class Acl_model extends CI_Model
     }
 
     /**
+     * @param $permission
+     * @param $id
+     * @return mixed
+     */
+    public function update_permission($permission, $id)
+    {
+        return $this->db->update(self::$table_name_permissions, $permission, array('id' => $id));
+    }
+
+    /**
      * @param $users_permissions
      * @return mixed
      */
     public function assign_users_permissions($users_permissions)
     {
-        return $this->db->insert_batch(self::$table_name_users_permissions, $users_permissions);
+        return $this->db->insert(self::$table_name_users_permissions, $users_permissions);
     }
 
     /**
@@ -46,10 +56,14 @@ class Acl_model extends CI_Model
      * @param $permission_id
      * @return mixed
      */
-    public function delete_user_permission($user_id, $permission_id)
+    public function delete_user_permission($user_id = null, $permission_id = null)
     {
-        $this->db->where("user_id", $user_id);
-        $this->db->where("permission_id", $permission_id);
+        if ($user_id != null)
+            $this->db->where("user_id", $user_id);
+
+        if ($permission_id != null)
+            $this->db->where("permission_id", $permission_id);
+
         return $this->db->delete(self::$table_name_users_permissions);
     }
 
@@ -61,7 +75,17 @@ class Acl_model extends CI_Model
     public function find_permissions($limit = 100, $offset = 0)
     {
         $this->db->limit($limit, $offset);
+        $this->db->order_by('date_created', 'DESC');
         return $this->db->get(self::$table_name_permissions)->result();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    function find_permission_by_id($id)
+    {
+        return $this->db->get_where(self::$table_name_permissions, array('id' => $id))->row();
     }
 
     /**
@@ -84,7 +108,9 @@ class Acl_model extends CI_Model
         if ($permission_id != null) {
             $this->db->where("permission_id", $permission_id);
         }
+
         $this->db->limit($limit, $offset);
+        $this->db->order_by('date_created', 'DESC');
         return $this->db->get(self::$table_name_filters)->result();
     }
 

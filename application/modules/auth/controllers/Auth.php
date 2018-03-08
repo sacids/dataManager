@@ -110,8 +110,8 @@ class Auth extends MX_Controller
         } else {
 
             $config = array(
-                'base_url'    => $this->config->base_url("auth/users_list"),
-                'total_rows'  => $this->User_model->count_users(),
+                'base_url' => $this->config->base_url("auth/users_list"),
+                'total_rows' => $this->User_model->count_users(),
                 'uri_segment' => 3,
             );
 
@@ -208,18 +208,18 @@ class Auth extends MX_Controller
             // set the flash data error message if there is one
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
-            $this->data['identity'] = array('name'        => 'identity',
-                                            'id'          => 'identity',
-                                            'type'        => 'text',
-                                            'value'       => $this->form_validation->set_value('identity'),
-                                            'class'       => 'form-control',
-                                            'placeholder' => 'Enter username'
+            $this->data['identity'] = array('name' => 'identity',
+                'id' => 'identity',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('identity'),
+                'class' => 'form-control',
+                'placeholder' => 'Enter username'
             );
-            $this->data['password'] = array('name'        => 'password',
-                                            'id'          => 'password',
-                                            'type'        => 'password',
-                                            'class'       => 'form-control',
-                                            'placeholder' => 'Enter password'
+            $this->data['password'] = array('name' => 'password',
+                'id' => 'password',
+                'type' => 'password',
+                'class' => 'form-control',
+                'placeholder' => 'Enter password'
             );
 
             //render view
@@ -249,26 +249,26 @@ class Auth extends MX_Controller
 
             $this->data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
             $this->data['old_password'] = array(
-                'name'        => 'old',
-                'id'          => 'old',
-                'type'        => 'password',
-                'class'       => 'form-control',
+                'name' => 'old',
+                'id' => 'old',
+                'type' => 'password',
+                'class' => 'form-control',
                 'placeholder' => 'Enter old password'
             );
             $this->data['new_password'] = array(
-                'name'        => 'new',
-                'id'          => 'new',
-                'type'        => 'password',
-                'pattern'     => '^.{' . $this->data['min_password_length'] . '}.*$',
-                'class'       => 'form-control',
+                'name' => 'new',
+                'id' => 'new',
+                'type' => 'password',
+                'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
+                'class' => 'form-control',
                 'placeholder' => 'Enter new password'
             );
             $this->data['new_password_confirm'] = array(
-                'name'        => 'new_confirm',
-                'id'          => 'new_confirm',
-                'type'        => 'password',
-                'pattern'     => '^.{' . $this->data['min_password_length'] . '}.*$',
-                'class'       => 'form-control',
+                'name' => 'new_confirm',
+                'id' => 'new_confirm',
+                'type' => 'password',
+                'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
+                'class' => 'form-control',
                 'placeholder' => 'Confirm new password'
             );
             $this->data['user_id'] = array(
@@ -411,21 +411,21 @@ class Auth extends MX_Controller
 
                 $this->data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
                 $this->data['new_password'] = array(
-                    'name'    => 'new',
-                    'id'      => 'new',
-                    'type'    => 'password',
+                    'name' => 'new',
+                    'id' => 'new',
+                    'type' => 'password',
                     'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
                 );
                 $this->data['new_password_confirm'] = array(
-                    'name'    => 'new_confirm',
-                    'id'      => 'new_confirm',
-                    'type'    => 'password',
+                    'name' => 'new_confirm',
+                    'id' => 'new_confirm',
+                    'type' => 'password',
                     'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
                 );
                 $this->data['user_id'] = array(
-                    'name'  => 'user_id',
-                    'id'    => 'user_id',
-                    'type'  => 'hidden',
+                    'name' => 'user_id',
+                    'id' => 'user_id',
+                    'type' => 'hidden',
                     'value' => $user->id,
                 );
                 $this->data['csrf'] = $this->_get_csrf_nonce();
@@ -604,10 +604,10 @@ class Auth extends MX_Controller
             $digest_password = md5("{$identity}:{$this->realm}:{$password}");
 
             $additional_data = array(
-                'first_name'      => $this->input->post('first_name'),
-                'last_name'       => $this->input->post('last_name'),
-                'phone'           => $this->input->post('phone'),
-                'company'         => $this->input->post('organization'),
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'phone' => $this->input->post('phone'),
+                'company' => $this->input->post('organization'),
                 'digest_password' => $digest_password
             );
         }
@@ -622,63 +622,63 @@ class Auth extends MX_Controller
             $this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
 
             $this->data['first_name'] = array(
-                'name'        => 'first_name',
-                'id'          => 'first_name',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('first_name'),
-                'class'       => 'form-control',
+                'name' => 'first_name',
+                'id' => 'first_name',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('first_name'),
+                'class' => 'form-control',
                 'placeholder' => 'First name e.g Eric'
             );
             $this->data['last_name'] = array(
-                'name'        => 'last_name',
-                'id'          => 'last_name',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('last_name'),
-                'class'       => 'form-control',
+                'name' => 'last_name',
+                'id' => 'last_name',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('last_name'),
+                'class' => 'form-control',
                 'placeholder' => 'Last name e.g Beda'
             );
 
             $this->data['organization'] = array(
-                'name'        => 'organization',
-                'id'          => 'organization',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('organization'),
-                'class'       => 'form-control',
+                'name' => 'organization',
+                'id' => 'organization',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('organization'),
+                'class' => 'form-control',
                 'placeholder' => 'Organization e.g SACIDS Tanzania'
             );
 
             $this->data['phone'] = array(
-                'name'        => 'phone',
-                'id'          => 'phone',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('phone'),
-                'class'       => 'form-control',
+                'name' => 'phone',
+                'id' => 'phone',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('phone'),
+                'class' => 'form-control',
                 'placeholder' => 'Phone number e.g 255717705746'
             );
 
             $this->data['email'] = array(
-                'name'        => 'email',
-                'id'          => 'email',
-                'type'        => 'text',
-                'value'       => $this->form_validation->set_value('email'),
-                'class'       => 'form-control',
+                'name' => 'email',
+                'id' => 'email',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('email'),
+                'class' => 'form-control',
                 'placeholder' => 'Email e.g afyadata@sacids.org'
             );
 
             $this->data['password'] = array(
-                'name'        => 'password',
-                'id'          => 'password',
-                'type'        => 'password',
-                'value'       => $this->form_validation->set_value('password'),
-                'class'       => 'form-control',
+                'name' => 'password',
+                'id' => 'password',
+                'type' => 'password',
+                'value' => $this->form_validation->set_value('password'),
+                'class' => 'form-control',
                 'placeholder' => 'Password {at lease 8 character}'
             );
             $this->data['password_confirm'] = array(
-                'name'        => 'password_confirm',
-                'id'          => 'password_confirm',
-                'type'        => 'password',
-                'value'       => $this->form_validation->set_value('password_confirm'),
-                'class'       => 'form-control',
+                'name' => 'password_confirm',
+                'id' => 'password_confirm',
+                'type' => 'password',
+                'value' => $this->form_validation->set_value('password_confirm'),
+                'class' => 'form-control',
                 'placeholder' => 'Confirm password'
             );
 
@@ -730,9 +730,9 @@ class Auth extends MX_Controller
             $digest_password = md5("{$identity}:{$this->realm}:{$password}");
 
             $additional_data = array(
-                'first_name'      => $this->input->post('first_name'),
-                'last_name'       => $this->input->post('last_name'),
-                'phone'           => $this->input->post('phone'),
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'phone' => $this->input->post('phone'),
                 'digest_password' => $digest_password,
             );
         }
@@ -1356,7 +1356,7 @@ class Auth extends MX_Controller
     //add new perms
     function add_perm()
     {
-        $this->data['title'] = "Add Perm";
+        $this->data['title'] = "Add Permission";
 
         //check login
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
@@ -1388,6 +1388,8 @@ class Auth extends MX_Controller
             'id' => 'name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('name'),
+            'class' => 'form-control',
+            'placeholder' => 'Write permission name ...'
         );
 
         $this->data['perm_slug'] = array(
@@ -1395,9 +1397,12 @@ class Auth extends MX_Controller
             'id' => 'perm_slug',
             'type' => 'text',
             'value' => $this->form_validation->set_value('perm_slug'),
+            'class' => 'form-control',
+            'placeholder' => 'Write permission slug ...'
         );
 
         $this->data['module'] = $this->User_model->find_all_module(30, 0);
+
         //render view
         $this->load->view('header', $this->data);
         $this->load->view("auth/add_perm");
@@ -1414,10 +1419,8 @@ class Auth extends MX_Controller
             //redirect them to the login page
             redirect('auth/login', 'refresh');
         }
-
-        $this->data['perm'] = $perm = $this->User_model->get_perm_by_id($perm_id);
-
-        $this->data['module_name'] = $this->User_model->get_module_by_id($perm->module_id)->name;
+        $perm = $this->User_model->get_perm_by_id($perm_id);
+        $this->data['perm'] = $perm;
 
         //validate form input
         $this->form_validation->set_rules('name', 'Perm name', 'required');
@@ -1436,7 +1439,27 @@ class Auth extends MX_Controller
             redirect('auth/edit_perm/' . $perm_id, 'refresh');
         }
 
+        //populate data
+        $this->data['name'] = array(
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('name', $perm->name),
+            'class' => 'form-control',
+            'placeholder' => 'Write permission name ...'
+        );
+
+        $this->data['perm_slug'] = array(
+            'name' => 'perm_slug',
+            'id' => 'perm_slug',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('perm_slug', $perm->perm_slug),
+            'class' => 'form-control',
+            'placeholder' => 'Write permission slug ...'
+        );
+
         $this->data['module'] = $this->User_model->find_all_module(30, 0);
+
         //render view
         $this->load->view('header', $this->data);
         $this->load->view("auth/edit_perm");

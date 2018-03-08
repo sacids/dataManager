@@ -54,6 +54,10 @@ p {
     color: #781E14;
 }
 
+.text-white {
+    color: #ffffff;
+}
+
 section {
     width: 100%;
     min-height: 100%;

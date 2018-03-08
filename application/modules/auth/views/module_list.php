@@ -7,7 +7,7 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li class="active">Modules List</li>
             </ol>
 
@@ -44,7 +44,7 @@
                                     <td><?= $serial ?></td>
                                     <td><?= $value->name; ?></td>
                                     <td><?= $value->controller; ?></td>
-                                    <td align="center"><?= anchor("auth/edit_module/" . $value->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?></td>
+                                    <td><?= anchor("auth/edit_module/" . $value->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?></td>
                                 </tr>
                                 <?php
                                 $serial++;

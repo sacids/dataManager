@@ -7,8 +7,9 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><?= $this->lang->line("nav_item_dashboard") ?></a></li>
-                <li class="active">List forms</li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
+                <li class="active">Forms List</li>
             </ol>
 
             <?= get_flashdata() ?>

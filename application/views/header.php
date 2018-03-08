@@ -182,13 +182,7 @@
                             <li class="dropdown-header"><?= $this->lang->line("nav_item_manage_permission") ?></li>
                             <li><?php echo anchor('auth/module_list', $this->lang->line("nav_item_list_module")); ?></li>
                             <li><?php echo anchor('auth/permission_list', $this->lang->line("nav_item_list_permission")); ?></li>
-                            <li class="dropdown-submenu">
-                                <?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl"), 'tabindex="-1"'); ?>
-                                <ul class="dropdown-menu">
-                                    <li><?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_permissions")); ?></li>
-                                    <li><?php echo anchor('auth/accesscontrol/new_filter', $this->lang->line("nav_item_add_filter")); ?></li>
-                                </ul>
-                            </li>
+                            <li><?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl")); ?></li>
                         </ul>
                     </li>
                 <?php } ?>

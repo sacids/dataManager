@@ -7,16 +7,16 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="active">List permissions</li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li class="active">Permissions List</li>
             </ol>
 
             <div class="row" style="margin-top: 5px;">
                 <div class="col-sm-12">
                     <?php if ($this->ion_auth->is_admin()) { ?>
                         <span class="pull-left" style="padding: 3px;">
-                                        <?= anchor('auth/add_perm', '<i class="fa fa-plus"></i> Add Permission', 'class="btn btn-sm btn-primary"') ?>
-                                    </span>
+                            <?= anchor('auth/add_perm', '<i class="fa fa-plus"></i> Add Permission', 'class="btn btn-sm btn-primary"') ?>
+                        </span>
                     <?php } ?>
                 </div><!--./col-sm-12 -->
             </div><!--./row -->
@@ -26,6 +26,7 @@
                     <?php if (isset($perms) && $perms) { ?>
                         <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
+                                <th width="3%"></th>
                                 <th>Module</th>
                                 <th>Name</th>
                                 <th>Slug</th>
@@ -36,6 +37,7 @@
                             $serial = 1;
                             foreach ($perms as $value):?>
                                 <tr>
+                                    <td><?= $serial; ?></td>
                                     <td><?= $value->m_name; ?></td>
                                     <td><?= $value->p_name; ?></td>
                                     <td><?= $value->perm_slug; ?></td>

@@ -7,9 +7,9 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li><a href="<?= site_url('auth/module_list') ?>">Modules</a></li>
-                <li class="active">Edit module</li>
+                <li class="active">Edit Module</li>
             </ol>
 
             <div class="row">

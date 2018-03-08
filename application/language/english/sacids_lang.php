@@ -177,7 +177,7 @@ $lang['placeholder_project_description']= 'Enter project description';
 $lang['button_add_project']            = 'Save project';
 $lang['button_upload_new_form']        = 'Upload new form';
 
-$lang['title_list_projects']          = 'List Projects';
+$lang['title_list_projects']          = 'Projects List';
 $lang['label_select_project_to_list_forms']= 'Select project to see forms';
 $lang['title_project_forms']           = 'Project forms';
 
