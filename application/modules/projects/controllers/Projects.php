@@ -74,7 +74,7 @@ class Projects extends MX_Controller
     //list projects
     function lists()
     {
-        $this->data['title'] = "List projects";
+        $this->data['title'] = "Projects List";
 
         //check permission
         //$this->has_allowed_perm($this->router->fetch_method());
@@ -218,6 +218,8 @@ class Projects extends MX_Controller
 
     public function forms($project_id)
     {
+        $this->data['title'] = "Forms List";
+
         $this->data['project_id'] = $project_id;
 
         $filter_conditions = null;
@@ -285,8 +287,9 @@ class Projects extends MX_Controller
 
             $this->data['forms'] = $project_forms;
 
-            $this->load->view('header');
-            $this->load->view("form/index", $this->data);
+            //render view
+            $this->load->view('header', $this->data);
+            $this->load->view("form/index");
             $this->load->view('footer');
         }
     }

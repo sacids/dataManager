@@ -75,6 +75,7 @@ class Acl_model extends CI_Model
     public function find_permissions($limit = 100, $offset = 0)
     {
         $this->db->limit($limit, $offset);
+        $this->db->order_by('date_created', 'DESC');
         return $this->db->get(self::$table_name_permissions)->result();
     }
 
@@ -107,7 +108,9 @@ class Acl_model extends CI_Model
         if ($permission_id != null) {
             $this->db->where("permission_id", $permission_id);
         }
+
         $this->db->limit($limit, $offset);
+        $this->db->order_by('date_created', 'DESC');
         return $this->db->get(self::$table_name_filters)->result();
     }
 
