@@ -133,6 +133,7 @@
                             <li><?php echo anchor('newsletters/edition_lists', 'Editions'); ?></li>
                             <li><?php echo anchor('newsletters/lists', 'Stories'); ?></li>
                             <li><?php echo anchor('newsletters/send_newsletter', 'Send Newsletter'); ?></li>
+                            <li><?php echo anchor('newsletters/media/lists', 'Media Manager'); ?></li>
                         </ul>
                     </li>
                 <?php } ?>
