@@ -192,7 +192,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><?= anchor("about", "About AfyaData", 'class="page-scroll"') ?></li>
-                <li><?= anchor("blog", "Newsletter Stories", 'class="page-scroll"') ?></li>
+                <li><?= anchor("newsletters/stories", "Newsletter Stories", 'class="page-scroll"') ?></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
