@@ -26,9 +26,9 @@
                 <hr>
 
                 <!-- Preview Image -->
-                <?php if (file_exists('./assets/uploads/media/thumb_' . $story->media)) { ?>
+                <?php if (file_exists('./assets/uploads/media/' . $story->media)) { ?>
                     <img class="img-fluid rounded"
-                         src="<?= base_url('./assets/uploads/media/thumb_' . $story->media) ?>"
+                         src="<?= base_url('./assets/uploads/media/' . $story->media) ?>"
                          alt="<?= $story->title ?>">
                 <?php } else { ?>
                     <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="<?= $story->title ?>">

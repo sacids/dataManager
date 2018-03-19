@@ -119,7 +119,7 @@ class Media extends MX_Controller
 
         // we first load the upload library
         $config['upload_path'] = './assets/uploads/media';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = '1000000';
         $config['overwrite'] = TRUE;
         $config['remove_spaces'] = TRUE;

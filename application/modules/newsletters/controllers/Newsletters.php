@@ -418,7 +418,7 @@ class Newsletters extends MX_Controller
     function upload_attachment()
     {
         $config['upload_path'] = './assets/uploads/media';
-        $config['allowed_types'] = '*';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = '100000';
         $config['overwrite'] = TRUE;
         $config['remove_spaces'] = TRUE;
@@ -437,17 +437,15 @@ class Newsletters extends MX_Controller
                 $_POST['attachment'] = $upload_data['file_name'];
 
                 //Image Resizing
-                if ($upload_data['is_image'] == 1) {
-                    $resize_conf['source_image'] = $this->upload->upload_path . $this->upload->file_name;
-                    $resize_conf['new_image'] = $this->upload->upload_path . 'thumb_' . $this->upload->file_name;
-                    $resize_conf['maintain_ratio'] = FALSE;
-                    $resize_conf['width'] = 800;
-                    $resize_conf['height'] = 340;
+                $resize_conf['source_image'] = $this->upload->upload_path . $this->upload->file_name;
+                $resize_conf['new_image'] = $this->upload->upload_path . 'thumb_' . $this->upload->file_name;
+                $resize_conf['maintain_ratio'] = FALSE;
+                $resize_conf['width'] = 800;
+                $resize_conf['height'] = 340;
 
-                    // initializing image_lib
-                    $this->image_lib->initialize($resize_conf);
-                    $this->image_lib->resize();
-                }
+                // initializing image_lib
+                $this->image_lib->initialize($resize_conf);
+                $this->image_lib->resize();
 
                 return TRUE;
             } else {
@@ -460,6 +458,6 @@ class Newsletters extends MX_Controller
             $this->form_validation->set_message('upload_attachment', "Please, include media attachment");
             return FALSE;
         }
-    }
+}
 
 }
