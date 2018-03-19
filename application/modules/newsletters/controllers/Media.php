@@ -64,6 +64,10 @@ class Media extends MX_Controller
                     );
                     $this->Media_model->create_media($data);
                 }
+
+                //create json file
+                $this->json_lists();
+
                 //redirect
                 $this->session->set_flashdata("message", display_message("Media uploaded"));
                 redirect("newsletters/media/lists", "refresh");
@@ -76,7 +80,24 @@ class Media extends MX_Controller
         $this->load->view('footer');
     }
 
+    //create  media json
+    function json_lists()
+    {
+        $media_list = $this->Media_model->find_all_media();
 
+        if ($media_list) {
+            foreach ($media_list as $value) {
+                $posts[] = array('image' => base_url('assets/uploads/media/' . $value->name), 'folder' => './assets/uploads/media');
+            }
+            $fp = fopen('./assets/uploads/media/image_lists.json', 'w');
+            fwrite($fp, json_encode($posts));
+            fclose($fp);
+        }
+    }
+
+    /*============================================================
+       CALLBACK FUNCTIONS
+       =============================================================*/
     // now the callback validation that deals with the upload of files
     function upload_attachments()
     {

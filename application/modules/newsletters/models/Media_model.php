@@ -43,4 +43,14 @@ class Media_model extends CI_Model
             ->get('media')->result();
     }
 
+    /**
+     * @return array
+     */
+    function find_all_media()
+    {
+        return $this->db
+            ->order_by('date_created', 'DESC')
+            ->get('media')->result();
+    }
+
 }

@@ -1,4 +1,5 @@
-<script src="<?php echo base_url('assets/public/ckeditor/ckeditor.js') ?>"></script>
+<script src="<?= base_url('assets/public/ckeditor/ckeditor.js') ?>"></script>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
@@ -58,13 +59,17 @@
                     </div><!--./row -->
 
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Story Content <span
                                             style="color: red;">*</span></label>
                                 <?= form_textarea($story_content); ?>
                                 <script>
-                                    CKEDITOR.replace('story_content');
+                                    CKEDITOR.replace('story_content', {
+                                        height: '500px',
+                                        "extraPlugins": 'imagebrowser',
+                                        "imageBrowser_listUrl": "<?= base_url('assets/uploads/media/image_lists.json')?>"
+                                    });
                                 </script>
                             </div>
                         </div>

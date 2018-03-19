@@ -58,6 +58,7 @@ class Newsletters extends MX_Controller
     //add new story
     function add_new()
     {
+
         $this->data['title'] = 'Add Newsletter Story';
         $this->data['edition_list'] = $this->Newsletter_model->find_all_edition();
 
