@@ -14,6 +14,7 @@ class Forms extends REST_Controller
     {
         parent::__construct();
         $this->load->model(array('model'));
+        //$this->load->library(array(''));
 
         $this->xFormReader = new Xformreader_model();
     }
