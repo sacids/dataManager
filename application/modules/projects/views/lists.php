@@ -85,18 +85,18 @@
 
                             var form_status = null;
                             if (form.access == "private") {
-                                form_status = "<span class='label label-warning pull-right small text-white'>" + form.access + "</span>";
+                                form_status = "<span class='pull-right small'>Private</span>";
                             } else {
-                                form_status = "<span class='label label-success pull-right small text-white'>" + form.access + "</span>";
+                                form_status = "<span class='pull-right small'>Public</span>";
                             }
 
                             html += "<div><h4>" + form.title + form_status + "</h4><span class='small'>" + form.description
                                 + "</span><span class='pull-right'><a class='btn btn-primary btn-xs' href='<?= base_url('xform/edit_form/')?>/" + form.id + "'><i class='fa fa-pencil'></i> <?=$this->lang->line("label_edit")?></a></span>"
                                 + "<p>" +
                                 "<a href='<?=base_url("xform/form_overview")?>/" + form.form_id + "' class='mr-3'>Overview</a>&nbsp;&nbsp;" +
-                                "<a href='<?=base_url("xform/form_data")?>/" + form.id + "' target='_blank' class='mr-3'>Form Data</a>&nbsp;&nbsp;" +
-                                "<a href='<?=base_url("visualization/visualization/chart")?>/" + form.form_id + "' target='_blank' class='mr-3'>Chart</a>&nbsp;&nbsp;" +
-                                "<a href='<?=base_url("visualization/visualization/map")?>/" + form.form_id + "' target='_blank' >Map</a><hr>" +
+                                "<a href='<?=base_url("xform/form_data")?>/" + projectId + "/" + form.id + "'' class='mr-3'>Form Data</a>&nbsp;&nbsp;" +
+                                "<a href='<?=base_url("visualization/visualization/chart")?>/" + form.form_id + "' class='mr-3'>Chart</a>&nbsp;&nbsp;" +
+                                "<a href='<?=base_url("visualization/visualization/map")?>/" + form.form_id + "' >Map</a><hr>" +
                                 "</p></div>";
                         });
                     }

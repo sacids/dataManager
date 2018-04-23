@@ -60,6 +60,7 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
                 <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?> Forms</a></li>
                 <li class="active"><?= $title ?></li>
             </ol>

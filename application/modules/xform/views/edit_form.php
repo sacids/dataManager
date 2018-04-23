@@ -8,7 +8,7 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><?= $this->lang->line("nav_item_dashboard") ?></a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li class="active"><?= $this->lang->line("heading_edit_form") ?></li>
             </ol>
 
@@ -107,24 +107,24 @@
                                     <?php
 
                                     $form_specific_options = [
-                                        ''             => "Select Option",
-                                        'male case'    => "Male Case",
-                                        'male death'   => "Male Death",
-                                        'female case'  => "Female Case",
+                                        '' => "Select Option",
+                                        'male case' => "Male Case",
+                                        'male death' => "Male Death",
+                                        'female case' => "Female Case",
                                         'female death' => "Female Death"
                                     ];
 
                                     $field_type_options = [
-                                        'TEXT'     => "Text",
+                                        'TEXT' => "Text",
                                         'INT'
-                                                   => "Number",
-                                        "GPS"      => "GPS Location",
-                                        "DATE"     => "DATE",
-                                        "DALILI"   => 'Dalili',
-                                        "LAT"      => "Latitude",
-                                        "LONG"     => "Longitude",
+                                        => "Number",
+                                        "GPS" => "GPS Location",
+                                        "DATE" => "DATE",
+                                        "DALILI" => 'Dalili',
+                                        "LAT" => "Latitude",
+                                        "LONG" => "Longitude",
                                         "IDENTITY" => "Username/Identity",
-                                        "IMAGE"    => "Image",
+                                        "IMAGE" => "Image",
                                         "DISTRICT" => "District",
                                         "SPECIE" => "Specie",
                                     ];
@@ -155,7 +155,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class=""><?=$this->lang->line("label_dhis2_configurations")?></h3>
+                            <h3 class=""><?= $this->lang->line("label_dhis2_configurations") ?></h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
