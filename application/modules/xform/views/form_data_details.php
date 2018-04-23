@@ -61,7 +61,7 @@
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
-                <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?> Forms</a></li>
+                <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?></a></li>
                 <li class="active"><?= $title ?></li>
             </ol>
 
@@ -90,8 +90,8 @@
                                 data-target="#myModal">Set Filters
                         </button>
                         <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Export XLS"') ?>
-                        <?php echo anchor("visualization/visualization/chart/" . $form_id, '<i class="fa fa-bar-chart-o fa-lg"></i>&nbsp;&nbsp;', 'title="Visualization"') ?>
-                        <?php echo anchor("visualization/visualization/map/" . $form_id, '<i class="fa fa-map-marker fa-lg"></i>', 'title="View Map"') ?>
+                        <?php echo anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, '<i class="fa fa-bar-chart-o fa-lg"></i>&nbsp;&nbsp;', 'title="Visualization"') ?>
+                        <?php echo anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, '<i class="fa fa-map-marker fa-lg"></i>', 'title="View Map"') ?>
                     </div>
                 </div>
             </div>

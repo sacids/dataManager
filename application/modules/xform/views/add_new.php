@@ -10,7 +10,8 @@
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
-                <li class="active"><?= $this->lang->line("title_add_new_project") ?></li>
+                <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?></a></li>
+                <li class="active">Add New Form</li>
             </ol>
 
             <?php

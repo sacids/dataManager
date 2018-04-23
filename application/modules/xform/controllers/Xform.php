@@ -561,6 +561,13 @@ class Xform extends MX_Controller
         }
 
         $data['title'] = $this->lang->line("heading_add_new_form");
+
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (count($project) == 0) {
+            show_error("Project not exist", 500);
+        }
+        $data['project'] = $project;
         $data['project_id'] = $project_id;
 
         $this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");

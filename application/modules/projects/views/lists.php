@@ -95,8 +95,8 @@
                                 + "<p>" +
                                 "<a href='<?=base_url("xform/form_overview")?>/" + form.form_id + "' class='mr-3'>Overview</a>&nbsp;&nbsp;" +
                                 "<a href='<?=base_url("xform/form_data")?>/" + projectId + "/" + form.id + "'' class='mr-3'>Form Data</a>&nbsp;&nbsp;" +
-                                "<a href='<?=base_url("visualization/visualization/chart")?>/" + form.form_id + "' class='mr-3'>Chart</a>&nbsp;&nbsp;" +
-                                "<a href='<?=base_url("visualization/visualization/map")?>/" + form.form_id + "' >Map</a><hr>" +
+                                "<a href='<?=base_url("visualization/visualization/chart")?>/" + projectId + "/" + form.id + "' class='mr-3'>Chart</a>&nbsp;&nbsp;" +
+                                "<a href='<?=base_url("visualization/visualization/map")?>/" + projectId + "/" + form.id + "' >Map</a><hr>" +
                                 "</p></div>";
                         });
                     }

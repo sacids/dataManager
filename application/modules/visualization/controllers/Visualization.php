@@ -62,20 +62,26 @@ class Visualization extends CI_Controller
         $this->data['title'] = "Data Visualizations";
     }
 
-    public function index()
+    //charts
+    public function chart($project_id, $form_id)
     {
-        $this->chart();
-    }
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+            exit;
+        }
 
-    public function chart($form_id = NULL)
-    {
+        $project = $this->Project_model->get_project_by_id($project_id);
+        if (count($project) == 0) {
+            show_error("Project not exist", 500);
+        }
+        $data['project'] = $project;
         $data['xforms'] = $xforms = $this->Xform_model->get_form_list();
 
-        if ($form_id != NULL) {
-
+        $form = $this->Xform_model->find_by_id($form_id);
+        if ($form) {
             // Capture selected x and y fields
             // Capture dates ranges if selected
-            $form_details = $this->Xform_model->find_by_xform_id($form_id);
+            $form_details = $this->Xform_model->find_by_xform_id($form->form_id);
             $data['form_details'] = $form_details;
 
             $table_name = $form_details->form_id;
@@ -148,6 +154,9 @@ class Visualization extends CI_Controller
             $data = $this->_load_default_graph_data($data, $xforms);
         }
 
+        $data['title'] = 'Chart';
+
+        //render view
         $this->load->view("header", $data);
         $this->load->view("chart", $data);
         $this->load->view("footer", $data);
@@ -322,17 +331,29 @@ class Visualization extends CI_Controller
         $this->load->view("welcome_message");
     }
 
-
-    public function map($form_id = NULL)
+    //map
+    public function map($project_id, $form_id = NULL)
     {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+            exit;
+        }
 
-        if ($form_id != NULL) {
-            $data = $this->_load_points($form_id);
+        $project = $this->Project_model->get_project_by_id($project_id);
+        if (count($project) == 0) {
+            show_error("Project not exist", 500);
+        }
+        $data['project'] = $project;
 
-            $this->load->view("header");
-            $this->load->view("map", $data);
+        $form = $this->Xform_model->find_by_id($form_id);
+        $data['form'] = $form;
+
+        if ($form) {
+            $map_data = $this->_load_points($form->form_id);
+
+            $this->load->view("header", $data);
+            $this->load->view("map", $map_data);
             $this->load->view("footer");
-
         } else {
             // Display some error message or rather get default form
         }
@@ -340,7 +361,6 @@ class Visualization extends CI_Controller
 
     private function _load_points($form_id)
     {
-
         $xform = $this->Xform_model->find_by_xform_id($form_id);
 
         // TODO - enable limits/conditions for loading data
