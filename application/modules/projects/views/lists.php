@@ -91,7 +91,7 @@
                             }
 
                             html += "<div><h4>" + form.title + form_status + "</h4><span class='small'>" + form.description
-                                + "</span><span class='pull-right'><a class='btn btn-primary btn-xs' href='<?= base_url('xform/edit_form/')?>/" + form.id + "'><i class='fa fa-pencil'></i> <?=$this->lang->line("label_edit")?></a></span>"
+                                + "</span><span class='pull-right'><a class='btn btn-primary btn-xs' href='<?= base_url('xform/edit_form/')?>/" + projectId + "/" + form.id + "'><i class='fa fa-pencil'></i> <?=$this->lang->line("label_edit")?></a></span>"
                                 + "<p>" +
                                 "<a href='<?=base_url("xform/form_overview")?>/" + form.form_id + "' class='mr-3'>Overview</a>&nbsp;&nbsp;" +
                                 "<a href='<?=base_url("xform/form_data")?>/" + projectId + "/" + form.id + "'' class='mr-3'>Form Data</a>&nbsp;&nbsp;" +

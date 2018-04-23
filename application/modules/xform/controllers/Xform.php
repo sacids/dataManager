@@ -758,20 +758,27 @@ class Xform extends MX_Controller
     }
 
     /**
-     * @param $xform_id
+     * @param $form_id
+     * @param $project_id
      */
-    function edit_form($xform_id)
+    function edit_form($project_id, $form_id)
     {
         $this->_is_logged_in();
-
-        if (!$xform_id) {
-            $this->session->set_flashdata("message", $this->lang->line("select_form_to_edit"));
-            redirect("projects");
-            exit;
-        }
-
         $data['title'] = $this->lang->line("heading_edit_form");
-        $data['form'] = $form = $this->Xform_model->find_by_id($xform_id);
+
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (count($project) == 0) {
+            show_error("Project not exist", 500);
+        }
+        $data['project'] = $project;
+
+        //forms
+        $form = $this->Xform_model->find_by_id($form_id);
+        if (!$form_id) {
+            show_error("Form does not exist", 500);
+        }
+        $data['form'] = $form;
 
         // TODO
         // Search field by table name from mapping fields
@@ -858,7 +865,7 @@ class Xform extends MX_Controller
                 );
 
                 $this->db->trans_start();
-                $this->Xform_model->update_form($xform_id, $new_form_details);
+                $this->Xform_model->update_form($form_id, $new_form_details);
 
                 $mapped_fields = [];
                 $i = 0;
@@ -884,7 +891,7 @@ class Xform extends MX_Controller
                 } else {
                     $this->session->set_flashdata("message", display_message($this->lang->line("form_update_failed"), "warning"));
                 }
-                redirect("xform/edit_form/{$xform_id}");
+                redirect("xform/edit_form/{$project_id}/{$form_id}");
             } else {
                 $this->session->set_flashdata("message", $this->lang->line("unknown_error_occurred"));
                 redirect("projects");

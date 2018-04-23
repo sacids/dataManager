@@ -1,20 +1,21 @@
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title"><?= $this->lang->line("heading_edit_form") ?></h3>
+                <h3 class="title"><?= $this->lang->line("heading_edit_form") . ' : ' . $form->title ?></h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li class="active"><?= $this->lang->line("heading_edit_form") ?></li>
+                <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
+                <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?></a></li>
+                <li class="active">Edit Form : <?= $form->title ?></li>
             </ol>
 
             <?= get_flashdata() ?>
 
-            <?php echo form_open_multipart('xform/edit_form/' . $form->id, 'class="form-vertical" role="form"'); ?>
+            <?php echo form_open_multipart(uri_string(), 'class="form-vertical" role="form"'); ?>
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab"
                                       href="#form-details"><?= $this->lang->line("heading_edit_form") ?></a></li>
