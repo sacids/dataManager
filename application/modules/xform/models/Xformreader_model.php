@@ -580,8 +580,10 @@ class Xformreader_model extends CI_Model
                 $statement .= "," . $col_name . "_alt DECIMAL(38,10) $required ";
             }
 
+
             $statement .= "\n";
         }
+        $statement .= "," . "submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP";
 
         $statement .= ")";
         return $statement;
