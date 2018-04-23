@@ -189,6 +189,7 @@ class Xform_model extends CI_Model
      * @param int $limit
      * @param int $offset
      * @param null $status
+     * @return mixed
      */
     public function get_form_list_by_perms($perms, $limit = 30, $offset = 0, $status = NULL)
     {
