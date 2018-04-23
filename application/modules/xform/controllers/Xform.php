@@ -48,6 +48,7 @@ defined('BASEPATH') or exit ('No direct script access allowed');
  */
 class Xform extends MX_Controller
 {
+    private $data;
     private $xFormReader;
 
     private $user_id;
@@ -169,8 +170,8 @@ class Xform extends MX_Controller
                     $path = $this->config->item("form_data_upload_dir") . $file_name;
                     // insert form details in database
                     $data = array(
-                        'file_name'    => $file_name,
-                        'user_id'      => $user->id,
+                        'file_name' => $file_name,
+                        'user_id' => $user->id,
                         "submitted_on" => date("Y-m-d h:i:s")
                     );
 
@@ -244,13 +245,13 @@ class Xform extends MX_Controller
             }
 
             $data_set_values = [
-                "dataSet"      => $xForm_form->dhis_data_set,
+                "dataSet" => $xForm_form->dhis_data_set,
                 "completeDate" => date("Y-m-d"),
-                "period"       => date("Yd"),
-                "orgUnit"      => $xForm_form->org_unit_id,
-                "name"         => $xForm_form->title,
-                "periodType"   => $xForm_form->period_type,
-                'dataValues'   => $prepare_data_set_array
+                "period" => date("Yd"),
+                "orgUnit" => $xForm_form->org_unit_id,
+                "name" => $xForm_form->title,
+                "periodType" => $xForm_form->period_type,
+                'dataValues' => $prepare_data_set_array
             ];
 
             $this->load->model("dhis2/Dhis2_model");
@@ -279,7 +280,7 @@ class Xform extends MX_Controller
             if ($specie) {
                 $request_data = [
                     "specie_id" => $specie->id,
-                    "symptoms"  => $symptoms_reported
+                    "symptoms" => $symptoms_reported
                 ];
 
                 $result = $this->Alert_model->send_post_symptoms_request(json_encode($request_data));
@@ -292,10 +293,10 @@ class Xform extends MX_Controller
                         $ungonjwa = $this->Ohkr_model->find_by_disease_name($disease->title);
 
                         $detected_diseases[] = [
-                            "form_id"       => $this->xFormReader->get_table_name(),
-                            "disease_id"    => $ungonjwa->id,
-                            "location"      => $district,
-                            "instance_id"   => $this->xFormReader->get_form_data()['meta_instanceID'],
+                            "form_id" => $this->xFormReader->get_table_name(),
+                            "disease_id" => $ungonjwa->id,
+                            "location" => $district,
+                            "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
                             "date_detected" => date("Y-m-d H:i:s")
                         ];
                     }
@@ -321,11 +322,11 @@ class Xform extends MX_Controller
                         $suspected_diseases_list .= $i . "." . $disease->disease_name . "\n<br/>";
 
                         $suspected_diseases_array[$i - 1] = array(
-                            "form_id"       => $this->xFormReader->get_table_name(),
-                            "disease_id"    => $disease->disease_id,
-                            "instance_id"   => $this->xFormReader->get_form_data()['meta_instanceID'],
+                            "form_id" => $this->xFormReader->get_table_name(),
+                            "disease_id" => $disease->disease_id,
+                            "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
                             "date_detected" => date("Y-m-d H:i:s"),
-                            "location"      => $district
+                            "location" => $district
                         );
 
                         if (ENVIRONMENT == 'development' || ENVIRONMENT == "testing") {
@@ -357,13 +358,13 @@ class Xform extends MX_Controller
                 }
 
                 $feedback = array(
-                    "user_id"      => $this->user_submitting_feedback_id,
-                    "form_id"      => $this->xFormReader->get_table_name(),
-                    "message"      => $suspected_diseases_list,
+                    "user_id" => $this->user_submitting_feedback_id,
+                    "form_id" => $this->xFormReader->get_table_name(),
+                    "message" => $suspected_diseases_list,
                     "date_created" => date('Y-m-d H:i:s'),
-                    "instance_id"  => $this->xFormReader->get_form_data()['meta_instanceID'],
-                    "sender"       => "server",
-                    "status"       => "pending"
+                    "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
+                    "sender" => "server",
+                    "status" => "pending"
                 );
 
                 $this->Feedback_model->create_feedback($feedback);
@@ -375,13 +376,13 @@ class Xform extends MX_Controller
             log_message("debug", "Form does not have symptoms field or sysmptoms field is not specified in " . base_url("xform/edit_form/" . $xForm_form->id));
 
             $feedback = array(
-                "user_id"      => $this->user_submitting_feedback_id,
-                "form_id"      => $this->xFormReader->get_table_name(),
-                "message"      => $this->lang->line("message_feedback_data_received"),
+                "user_id" => $this->user_submitting_feedback_id,
+                "form_id" => $this->xFormReader->get_table_name(),
+                "message" => $this->lang->line("message_feedback_data_received"),
                 "date_created" => date('Y-m-d H:i:s'),
-                "instance_id"  => $this->xFormReader->get_form_data()['meta_instanceID'],
-                "sender"       => "server",
-                "status"       => "pending"
+                "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
+                "sender" => "server",
+                "status" => "pending"
             );
             $this->Feedback_model->create_feedback($feedback);
         }
@@ -401,9 +402,9 @@ class Xform extends MX_Controller
     {
         $sms_to_send = array(
             "response_msg_id" => $response_msg_id,
-            "phone_number"    => $phone,
-            "date_sent"       => date("Y-m-d h:i:s"),
-            "status"          => "PENDING"
+            "phone_number" => $phone,
+            "date_sent" => date("Y-m-d h:i:s"),
+            "status" => "PENDING"
         );
 
         if ($msg_id = $this->Ohkr_model->create_send_sms($sms_to_send)) {
@@ -411,7 +412,7 @@ class Xform extends MX_Controller
             $sms_text = "Ndugu " . $first_name . ",\n" . $message;
             $sms_info = array(
                 "from" => $message_sender_name,
-                "to"   => $phone,
+                "to" => $phone,
                 "text" => $sms_text
             );
 
@@ -422,9 +423,9 @@ class Xform extends MX_Controller
                 if (is_array($message)) {
                     $message = array_shift($message);
                     $sms_updates = array(
-                        "status"           => "SENT",
-                        "date_sent"        => date("Y-m-d H:i:s"),
-                        "infobip_msg_id"   => $message->messageId,
+                        "status" => "SENT",
+                        "date_sent" => date("Y-m-d H:i:s"),
+                        "infobip_msg_id" => $message->messageId,
                         "infobip_response" => $send_result
                     );
                     $this->Alert_model->update_sms_status($msg_id, $sms_updates);
@@ -567,7 +568,7 @@ class Xform extends MX_Controller
 
         if ($this->form_validation->run() === FALSE) {
 
-            $users = $this->User_model->get_users();
+            $users = $this->User_model->find_all();
             $groups = $this->User_model->find_user_groups();
 
             $group_permissions = array();
@@ -588,7 +589,7 @@ class Xform extends MX_Controller
                 $this->load->view("form/add_new", $data);
             } else {
                 $this->load->view('header', $data);
-                $this->load->view("form/add_new");
+                $this->load->view("add_new");
                 $this->load->view('footer');
             }
         } else {
@@ -630,16 +631,16 @@ class Xform extends MX_Controller
                         if ($create_table_result) {
 
                             $form_details = array(
-                                "user_id"      => get_current_user_id(),
-                                "form_id"      => $this->xFormReader->get_table_name(),
-                                "jr_form_id"   => $this->xFormReader->get_jr_form_id(),
-                                "title"        => $this->input->post("title"),
-                                "description"  => $this->input->post("description"),
-                                "filename"     => $filename,
+                                "user_id" => get_current_user_id(),
+                                "form_id" => $this->xFormReader->get_table_name(),
+                                "jr_form_id" => $this->xFormReader->get_jr_form_id(),
+                                "title" => $this->input->post("title"),
+                                "description" => $this->input->post("description"),
+                                "filename" => $filename,
                                 "date_created" => date("Y-m-d H:i:s"),
-                                "access"       => $this->input->post("access"),
-                                "perms"        => $all_permissions,
-                                "project_id"   => $project_id
+                                "access" => $this->input->post("access"),
+                                "perms" => $all_permissions,
+                                "project_id" => $project_id
                             );
 
                             //TODO Check if form is built from ODK Aggregate Build to avoid errors during initialization
@@ -679,8 +680,8 @@ class Xform extends MX_Controller
         //$this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url'    => $this->config->base_url("xform/searchable_form_lists"),
-            'total_rows'  => $this->Xform_model->count_searchable_form(),
+            'base_url' => $this->config->base_url("xform/searchable_form_lists"),
+            'total_rows' => $this->Xform_model->count_searchable_form(),
             'uri_segment' => 3,
         );
 
@@ -696,7 +697,7 @@ class Xform extends MX_Controller
 
         //render view
         $this->load->view('header', $this->data);
-        $this->load->view("form/searchable_form_list");
+        $this->load->view("searchable_form_list");
         $this->load->view('footer');
     }
 
@@ -712,9 +713,9 @@ class Xform extends MX_Controller
 
         if ($this->form_validation->run() === TRUE) {
             $data = array(
-                "xform_id"      => $this->input->post("form_id"),
+                "xform_id" => $this->input->post("form_id"),
                 "search_fields" => $this->input->post("search_field"),
-                "user_id"       => $this->user_id
+                "user_id" => $this->user_id
             );
             $this->db->insert('xforms_config', $data);
 
@@ -727,7 +728,7 @@ class Xform extends MX_Controller
 
         //render view
         $this->load->view('header', $this->data);
-        $this->load->view("form/add_searchable_form");
+        $this->load->view("add_searchable_form");
         $this->load->view('footer');
     }
 
@@ -774,9 +775,9 @@ class Xform extends MX_Controller
             foreach ($table_fields as $tf) {
                 if (!$this->Xform_model->xform_table_column_exists($form->form_id, $tf)) {
                     $details = [
-                        "table_name"  => $form->form_id,
-                        "col_name"    => $tf,
-                        "field_name"  => $tf,
+                        "table_name" => $form->form_id,
+                        "col_name" => $tf,
+                        "field_name" => $tf,
                         "field_label" => str_replace("_", " ", $tf)
                     ];
                     $this->Xform_model->create_field_name_map($details);
@@ -798,7 +799,7 @@ class Xform extends MX_Controller
         }
 
         if ($this->form_validation->run() === FALSE) {
-            $users = $this->User_model->get_users(300);
+            $users = $this->User_model->find_all(500);
             $groups = $this->User_model->find_user_groups();
 
             $available_group_permissions = [];
@@ -818,7 +819,7 @@ class Xform extends MX_Controller
             $data['current_perms'] = $current_permissions;
 
             $this->load->view('header', $data);
-            $this->load->view("form/edit_form", $data);
+            $this->load->view("edit_form", $data);
             $this->load->view('footer');
         } else {
             $hides = $this->input->post("hide[]");
@@ -838,15 +839,15 @@ class Xform extends MX_Controller
                 }
 
                 $new_form_details = array(
-                    "title"         => $this->input->post("title"),
-                    "description"   => $this->input->post("description"),
-                    "access"        => $this->input->post("access"),
-                    "perms"         => $new_perms_string,
-                    "last_updated"  => date("c"),
-                    "allow_dhis"    => $allow_dhis2_checked,
+                    "title" => $this->input->post("title"),
+                    "description" => $this->input->post("description"),
+                    "access" => $this->input->post("access"),
+                    "perms" => $new_perms_string,
+                    "last_updated" => date("c"),
+                    "allow_dhis" => $allow_dhis2_checked,
                     "dhis_data_set" => $this->input->post("data_set"),
-                    "period_type"   => $this->input->post("period_type"),
-                    "org_unit_id"   => $this->input->post("org_unit_id"),
+                    "period_type" => $this->input->post("period_type"),
+                    "org_unit_id" => $this->input->post("org_unit_id"),
                 );
 
                 $this->db->trans_start();
@@ -928,15 +929,23 @@ class Xform extends MX_Controller
     }
 
     /**
+     * @param $project_id
      * @param $form_id
      */
-    function form_data($form_id)
+    function form_data($project_id, $form_id)
     {
         $this->_is_logged_in();
 
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (count($project) == 0) {
+            show_error("Project not exist", 500);
+        }
+        $data['project'] = $project;
+
         if (!$form_id) {
             set_flashdata(display_message($this->lang->line("select_form_to_delete"), "error"));
-            redirect("projects");
+            redirect('xform/form_data/' . $project_id . '/' . $form_id, 'refresh');
             exit;
         }
 
@@ -953,7 +962,7 @@ class Xform extends MX_Controller
             //check if week number selected
             if ($this->input->post('week') == null) {
                 set_flashdata(display_message('You should select week number', 'danger'));
-                redirect('xform/form_data/' . $form_id, 'refresh');
+                redirect('xform/form_data/' . $project_id . '/' . $form_id, 'refresh');
             }
 
             //week number
@@ -987,13 +996,13 @@ class Xform extends MX_Controller
             $data['mapped_fields'] = $mapped_fields;
 
             $config = array(
-                'base_url'    => $this->config->base_url("xform/form_data/" . $form_id),
-                'total_rows'  => $this->Xform_model->count_all_records($form->form_id, $where_condition),
-                'uri_segment' => 4,
+                'base_url' => $this->config->base_url("xform/form_data/" . $project_id . '/' . $form_id),
+                'total_rows' => $this->Xform_model->count_all_records($form->form_id, $where_condition),
+                'uri_segment' => 5,
             );
 
             $this->pagination->initialize($config);
-            $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+            $page = ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
             $data['form_id'] = $form->form_id;
 
             //Prevents the filters from applying to a different form
@@ -1022,7 +1031,7 @@ class Xform extends MX_Controller
             $data["links"] = $this->pagination->create_links();
 
             $this->load->view('header', $data);
-            $this->load->view("form/form_data_details");
+            $this->load->view("form_data_details");
             $this->load->view('footer');
         } else {
             $this->session->set_flashdata("message", display_message("Form does not exists", "danger"));
@@ -1293,14 +1302,14 @@ class Xform extends MX_Controller
         // set headers
         $header = 'A3:ET6';
         $header_style = array(
-            'fill'      => array(
-                'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+            'fill' => array(
+                'type' => PHPExcel_Style_Fill::FILL_SOLID,
                 'color' => array('rgb' => '83C9FC')
 
             ),
-            'font'      => array(
-                'bold'  => false,
-                'size'  => '12',
+            'font' => array(
+                'bold' => false,
+                'size' => '12',
                 'color' => array('rgb' => '000000')
             ),
             'alignment' => array(
@@ -1444,10 +1453,10 @@ class Xform extends MX_Controller
         $this->load->helper('file');
         $this->load->helper('download');
         $config = array(
-            'root'    => 'afyadata',
+            'root' => 'afyadata',
             'element' => 'form_data',
             'newline' => "\n",
-            'tab'     => "\t"
+            'tab' => "\t"
         );
         $data = $this->dbutil->xml_from_result($query, $config);
         force_download($filename, $data);
@@ -1470,7 +1479,7 @@ class Xform extends MX_Controller
             $data['field_maps'] = $field_maps = $this->Xform_model->get_fieldname_map($form_id);
 
             $this->load->view('header', $data);
-            $this->load->view("form/map_form_fields");
+            $this->load->view("map_form_fields");
             $this->load->view('footer');
         } else {
             $fields = $this->input->post();
@@ -1539,10 +1548,11 @@ class Xform extends MX_Controller
     }
 
     /**
+     * @param $project_id
      * @param $xform_id
      * Deletes as single or multiple entries for a given form table and id(s)
      */
-    function delete_entry($xform_id)
+    function delete_entry($project_id, $xform_id)
     {
         $this->form_validation->set_rules("entry_id[]", "Entry ID", "required");
         if ($this->form_validation->run() === FALSE) {
@@ -1559,7 +1569,7 @@ class Xform extends MX_Controller
             }
             $message = ($deleted_entry_count == 1) ? "entry" : "entries";
             $this->session->set_flashdata("message", display_message($deleted_entry_count . " " . $message . " deleted successfully"));
-            redirect("xform/form_data/" . $xform_id, "refresh");
+            redirect("xform/form_data/" . $project_id . '/' . $xform_id, "refresh");
         }
     }
 
@@ -1637,7 +1647,7 @@ class Xform extends MX_Controller
         }
         $data['categories'] = json_encode($categories);
         $data['series'] = array(
-            "name"   => "Data submissions",
+            "name" => "Data submissions",
             "series" => str_replace('"', "", json_encode($series))
         );
         $data['report_title'] = "Last 7 Days submissions";
@@ -1652,7 +1662,7 @@ class Xform extends MX_Controller
         }
         $data['current_year_categories'] = json_encode($current_year_categories);
         $data['current_year_series'] = array(
-            "name"   => "Data submissions",
+            "name" => "Data submissions",
             "series" => str_replace('"', "", json_encode($current_year_series))
         );
 
@@ -1662,7 +1672,7 @@ class Xform extends MX_Controller
         $data['load_map'] = TRUE;
 
         $this->load->view("header", $data);
-        $this->load->view("form/form_overview", $data);
+        $this->load->view("form_overview", $data);
         $this->load->view("footer", $data);
     }
 }
