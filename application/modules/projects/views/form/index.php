@@ -14,9 +14,11 @@
 
             <?= get_flashdata() ?>
 
-            <div class="pull-left">
-                <?= anchor("xform/add_new/" . $project_id, '<i class="fa fa-plus"></i> Add New Form', 'class="btn btn-primary btn-sm"') ?>
-            </div>
+            <?php if ($this->ion_auth->is_admin()) { ?>
+                <div class="pull-left">
+                    <?= anchor("xform/add_new/" . $project_id, '<i class="fa fa-plus"></i> Add New Form', 'class="btn btn-primary btn-sm"') ?>
+                </div>
+            <?php } ?>
 
 
             <div class="pull-right" style="margin-bottom: 10px;">

@@ -189,9 +189,10 @@ class Xform_model extends CI_Model
      * @param int $limit
      * @param int $offset
      * @param null $status
+     * @param null $push
      * @return mixed
      */
-    public function get_form_list_by_perms($perms, $limit = 30, $offset = 0, $status = NULL)
+    public function get_form_list_by_perms($perms, $limit = 30, $offset = 0, $status = NULL, $push = NULL)
     {
         if (is_array($perms)) {
             foreach ($perms as $key => $value) {
@@ -200,8 +201,13 @@ class Xform_model extends CI_Model
         } else {
             $this->db->where("perms", $perms);
         }
+
         if ($status != NULL)
             $this->db->where("status", $status);
+
+        if ($push != NULL)
+            $this->db->where("push", 1);
+
         $this->db->limit($limit, $offset);
         return $this->db->get(self::$xform_table_name)->result();
     }

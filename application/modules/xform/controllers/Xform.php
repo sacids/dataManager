@@ -614,7 +614,7 @@ class Xform extends MX_Controller
 
                 if (!$this->upload->do_upload("userfile")) {
                     set_flashdata(display_message($this->upload->display_errors("", ""), "error"));
-                    redirect("xform/add_new/{$project_id}");
+                    redirect("xform/add_new/{$project_id}", 'refresh');
                 } else {
                     $xml_data = $this->upload->data();
                     $filename = $xml_data['file_name'];
@@ -646,6 +646,7 @@ class Xform extends MX_Controller
                                 "filename" => $filename,
                                 "date_created" => date("Y-m-d H:i:s"),
                                 "access" => $this->input->post("access"),
+                                "push" => $this->input->post("push"),
                                 "perms" => $all_permissions,
                                 "project_id" => $project_id
                             );
@@ -856,6 +857,7 @@ class Xform extends MX_Controller
                     "title" => $this->input->post("title"),
                     "description" => $this->input->post("description"),
                     "access" => $this->input->post("access"),
+                    "push" => $this->input->post("push"),
                     "perms" => $new_perms_string,
                     "last_updated" => date("c"),
                     "allow_dhis" => $allow_dhis2_checked,

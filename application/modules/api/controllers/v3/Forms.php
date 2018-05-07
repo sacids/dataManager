@@ -14,8 +14,6 @@ class Forms extends REST_Controller
     {
         parent::__construct();
         $this->load->model(array('model'));
-        //$this->load->library(array(''));
-
         $this->xFormReader = new Xformreader_model();
     }
 
@@ -39,7 +37,7 @@ class Forms extends REST_Controller
                 $i++;
             }
 
-            $forms = $this->Xform_model->get_form_list_by_perms($user_perms);
+            $forms = $this->Xform_model->get_form_list_by_perms($user_perms, 30, 0, "published", 1);
             $forms_array = array();
             if ($forms) {
                 foreach ($forms as $form) {

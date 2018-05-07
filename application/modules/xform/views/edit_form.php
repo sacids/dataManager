@@ -52,6 +52,13 @@
                                     <?php echo form_dropdown("access", array("private" => "Private", "public" => "Public"),
                                         set_value("access", $form->access), 'class="form-control"'); ?>
                                 </div>
+
+                                <div class="form-group">
+                                    <label>Push</label><br>
+                                    <?php
+                                    echo form_checkbox('push', 1, ($form->push == 1) ? TRUE : FALSE);
+                                    echo form_label('Yes', 'push'); ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -72,13 +79,24 @@
                                         echo ucfirst($value) . "</br>";
                                     } ?>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                     <h4><?= $this->lang->line("label_user_permissions") ?></h4>
-                                    <?php
-                                    foreach ($user_perms as $key => $value) {
-                                        echo form_checkbox("perms[]", $key, (in_array($key, $current_perms)) ? TRUE : FALSE);
-                                        echo ucfirst($value) . "</br>";
-                                    } ?>
+                                    <table>
+                                        <tr>
+                                            <?php
+                                            $serial = 0;
+                                            foreach ($user_perms as $key => $value) {
+                                                if (($serial % 4) == 0) {
+                                                    echo '</tr><tr>';
+                                                } ?>
+                                                <td>
+                                                    <?= form_checkbox("perms[]", $key, (in_array($key, $current_perms)) ? TRUE : FALSE); ?>
+                                                    <?= ucfirst($value); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                </td>
+                                                <?php $serial++;
+                                            } ?>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -199,7 +217,8 @@
 
                 <div class="form-group">
                     <button type="submit"
-                            class="btn btn-primary btn-lg"><?= $this->lang->line("button_save_changes") ?></button>
+                            class="btn btn-primary btn-sm">Save
+                    </button>
                 </div>
                 <?php echo form_close(); ?>
             </div>
