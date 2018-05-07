@@ -93,51 +93,47 @@ class Submission_model extends CI_Model
     }
 
     /**
-     * @param $form
+     * @param $table_name
      * @return mixed
      */
-    function count_overall_submitted_forms($form)
+    function count_overall_submitted_forms($table_name)
     {
         return $this->db
-            ->like('file_name', $form)
-            ->get('submission_form')->num_rows();
+            ->get($table_name)->num_rows();
     }
 
     /**
-     * @param $form
+     * @param $table_name
      * @return int
      */
-    function count_monthly_submitted_forms($form)
+    function count_monthly_submitted_forms($table_name)
     {
         return $this->db
-            ->like('file_name', $form)
-            ->get_where('submission_form', array('MONTH(submitted_on)' => date('m')))->num_rows();
+            ->get_where($table_name, array('MONTH(submitted_at)' => date('m')))->num_rows();
     }
 
     /**
-     * @param $form
+     * @param $table_name
      * @return mixed
      */
-    function count_weekly_submitted_forms($form)
+    function count_weekly_submitted_forms($table_name)
     {
         $today = date('Y-m-d');
         $last = date('Y-m-d', strtotime("-7 day", strtotime($today)));
 
         return $this->db
-            ->like('file_name', $form)
-            ->where("submitted_on BETWEEN '$last%' AND '$today%'", NULL, FALSE)
-            ->get('submission_form')->num_rows();
+            ->where("submitted_at BETWEEN '$last%' AND '$today%'", NULL, FALSE)
+            ->get($table_name)->num_rows();
     }
 
     /**
-     * @param $form
+     * @param $table_name
      * @return int
      */
-    function count_daily_submitted_forms($form)
+    function count_daily_submitted_forms($table_name)
     {
         return $this->db
-            ->like('file_name', $form)
-            ->get_where('submission_form', array('DATE(submitted_on)' => date('Y-m-d')))->num_rows();
+            ->get_where($table_name, array('DATE(submitted_at)' => date('Y-m-d')))->num_rows();
     }
 
 

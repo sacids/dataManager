@@ -40,6 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dashboard extends CI_Controller
 {
     private $data;
+
     function __construct()
     {
         parent::__construct();
@@ -63,8 +64,9 @@ class Dashboard extends CI_Controller
         $this->is_logged_in();
 
         $filter_conditions = null;
-        if (!$this->ion_auth->is_admin())
-            $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Submission_model::$xform_table_name);
+        if (!$this->ion_auth->is_admin()) {
+            $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Xform_model::$xform_table_name);
+        }
 
         //statistics
         $this->data['active_users'] = $this->User_model->count_data_collectors();
@@ -84,10 +86,10 @@ class Dashboard extends CI_Controller
         $i = 0;
         foreach ($submitted_forms as $value) {
             $form_title[$i] = '<a href="' . site_url('xform/form_data/' . $value->id) . '" >' . $value->title . '</a>';;
-            $overall_data[$i] = $this->Submission_model->count_overall_submitted_forms($value->title);
-            $monthly_data[$i] = $this->Submission_model->count_monthly_submitted_forms($value->title);
-            $weekly_data[$i] = $this->Submission_model->count_weekly_submitted_forms($value->title);
-            $daily_data[$i] = $this->Submission_model->count_daily_submitted_forms($value->title);
+            $overall_data[$i] = $this->Submission_model->count_overall_submitted_forms($value->form_id);
+            $monthly_data[$i] = $this->Submission_model->count_monthly_submitted_forms($value->form_id);
+            $weekly_data[$i] = $this->Submission_model->count_weekly_submitted_forms($value->form_id);
+            $daily_data[$i] = $this->Submission_model->count_daily_submitted_forms($value->form_id);
             $i++;
         }
 
