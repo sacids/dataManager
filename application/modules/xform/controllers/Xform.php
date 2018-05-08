@@ -64,6 +64,7 @@ class Xform extends MX_Controller
 
         $this->xFormReader = new Xformreader_model();
         $this->load->library('form_auth');
+        $this->load->dbforge();
 
         $this->user_id = $this->session->userdata("user_id");
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><i class="fa fa-warning"></i>.', '</div>');
@@ -899,6 +900,44 @@ class Xform extends MX_Controller
                 redirect("projects");
             }
         }
+    }
+
+    /**
+     * @param $form_id
+     * @param $project_id
+     */
+    function delete_form($project_id, $form_id)
+    {
+        $this->_is_logged_in();
+        $data['title'] = 'delete form';
+
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (count($project) == 0) {
+            show_error("Project not exist", 500);
+        }
+
+        //forms
+        $form = $this->Xform_model->find_by_id($form_id);
+        if (!$form) {
+            show_error("Form does not exist", 500);
+        }
+
+        //unlink file
+        if (file_exists('./assets/forms/definition/' . $form->filename))
+            unlink('./assets/forms/definition/' . $form->filename);
+
+        //DROP TABLE IF EXISTS table_name
+        $this->dbforge->drop_table($form->form_id, TRUE);
+
+        //delete form
+        $result = $this->db->delete('xforms', array('id' => $form_id));
+
+        if ($result)
+            $this->session->set_flashdata('message', display_message('Form deleted', 'danger'));
+
+        //redirect
+        redirect('projects/forms/' . $project_id, 'refresh');
     }
 
     /**

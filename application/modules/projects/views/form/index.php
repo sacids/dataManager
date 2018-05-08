@@ -64,7 +64,9 @@
 
                         <?php
                         $serial = 1;
-                        foreach ($forms as $form) { ?>
+                        foreach ($forms
+
+                                 as $form) { ?>
                             <tr>
                                 <td><?= $serial ?></td>
                                 <td><?php echo $form->title; ?></td>
@@ -96,15 +98,18 @@
                                         </ul>
                                     </div>
                                 </td>
-                                <td class="text-center">
-                                    <?php echo anchor("xform/edit_form/" . $project_id . '/' . $form->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?>
-                                    <?php if ($form->status == "archived") {
-                                        echo anchor("xform/restore_from_archive/" . $form->id, '<i class="fa fa-folder-open-o"></i> Restore', 'class="btn btn-warning btn-xs unarchive"');
-                                    } else {
-                                        echo anchor("xform/archive_xform/" . $form->id, '<i class="fa fa-archive"></i> Archive', 'class="btn btn-warning btn-xs archive"');
-                                    } ?>
-                                    <!--TODO Implement dynamic js prompt -->
-                                </td>
+                                <?php if ($this->ion_auth->is_admin()) { ?>
+                                    <td class="text-center">
+                                        <?php echo anchor("xform/edit_form/" . $project_id . '/' . $form->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?>
+                                        <?php if ($form->status == "archived") {
+                                            echo anchor("xform/restore_from_archive/" . $form->id, '<i class="fa fa-folder-open-o"></i> Restore', 'class="btn btn-warning btn-xs unarchive"');
+                                        } else {
+                                            echo anchor("xform/archive_xform/" . $form->id, '<i class="fa fa-archive"></i> Archive', 'class="btn btn-warning btn-xs archive"');
+                                        } ?>
+                                        <!--TODO Implement dynamic js prompt -->
+                                        <?php echo anchor("xform/delete_form/" . $project_id . '/' . $form->id, '<i class="fa fa-trash"></i> Delete', 'class="btn btn-danger btn-xs delete"'); ?>
+                                    </td>
+                                <?php } ?>
                             </tr>
                             <?php $serial++;
                         } ?>
