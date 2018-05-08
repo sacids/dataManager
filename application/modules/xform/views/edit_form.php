@@ -1,20 +1,21 @@
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title"><?= $this->lang->line("heading_edit_form") ?></h3>
+                <h3 class="title"><?= $this->lang->line("heading_edit_form") . ' : ' . $form->title ?></h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><?= $this->lang->line("nav_item_dashboard") ?></a></li>
-                <li class="active"><?= $this->lang->line("heading_edit_form") ?></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
+                <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?></a></li>
+                <li class="active">Edit Form : <?= $form->title ?></li>
             </ol>
 
             <?= get_flashdata() ?>
 
-            <?php echo form_open_multipart('xform/edit_form/' . $form->id, 'class="form-vertical" role="form"'); ?>
+            <?php echo form_open_multipart(uri_string(), 'class="form-vertical" role="form"'); ?>
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab"
                                       href="#form-details"><?= $this->lang->line("heading_edit_form") ?></a></li>
@@ -51,6 +52,13 @@
                                     <?php echo form_dropdown("access", array("private" => "Private", "public" => "Public"),
                                         set_value("access", $form->access), 'class="form-control"'); ?>
                                 </div>
+
+                                <div class="form-group">
+                                    <label>Push</label><br>
+                                    <?php
+                                    echo form_checkbox('push', 1, ($form->push == 1) ? TRUE : FALSE);
+                                    echo form_label('Yes', 'push'); ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -71,13 +79,24 @@
                                         echo ucfirst($value) . "</br>";
                                     } ?>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                     <h4><?= $this->lang->line("label_user_permissions") ?></h4>
-                                    <?php
-                                    foreach ($user_perms as $key => $value) {
-                                        echo form_checkbox("perms[]", $key, (in_array($key, $current_perms)) ? TRUE : FALSE);
-                                        echo ucfirst($value) . "</br>";
-                                    } ?>
+                                    <table>
+                                        <tr>
+                                            <?php
+                                            $serial = 0;
+                                            foreach ($user_perms as $key => $value) {
+                                                if (($serial % 4) == 0) {
+                                                    echo '</tr><tr>';
+                                                } ?>
+                                                <td>
+                                                    <?= form_checkbox("perms[]", $key, (in_array($key, $current_perms)) ? TRUE : FALSE); ?>
+                                                    <?= ucfirst($value); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                </td>
+                                                <?php $serial++;
+                                            } ?>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -107,24 +126,24 @@
                                     <?php
 
                                     $form_specific_options = [
-                                        ''             => "Select Option",
-                                        'male case'    => "Male Case",
-                                        'male death'   => "Male Death",
-                                        'female case'  => "Female Case",
+                                        '' => "Select Option",
+                                        'male case' => "Male Case",
+                                        'male death' => "Male Death",
+                                        'female case' => "Female Case",
                                         'female death' => "Female Death"
                                     ];
 
                                     $field_type_options = [
-                                        'TEXT'     => "Text",
+                                        'TEXT' => "Text",
                                         'INT'
-                                                   => "Number",
-                                        "GPS"      => "GPS Location",
-                                        "DATE"     => "DATE",
-                                        "DALILI"   => 'Dalili',
-                                        "LAT"      => "Latitude",
-                                        "LONG"     => "Longitude",
+                                        => "Number",
+                                        "GPS" => "GPS Location",
+                                        "DATE" => "DATE",
+                                        "DALILI" => 'Dalili',
+                                        "LAT" => "Latitude",
+                                        "LONG" => "Longitude",
                                         "IDENTITY" => "Username/Identity",
-                                        "IMAGE"    => "Image",
+                                        "IMAGE" => "Image",
                                         "DISTRICT" => "District",
                                         "SPECIE" => "Specie",
                                     ];
@@ -155,7 +174,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class=""><?=$this->lang->line("label_dhis2_configurations")?></h3>
+                            <h3 class=""><?= $this->lang->line("label_dhis2_configurations") ?></h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
@@ -198,7 +217,8 @@
 
                 <div class="form-group">
                     <button type="submit"
-                            class="btn btn-primary btn-lg"><?= $this->lang->line("button_save_changes") ?></button>
+                            class="btn btn-primary btn-sm">Save
+                    </button>
                 </div>
                 <?php echo form_close(); ?>
             </div>

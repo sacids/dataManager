@@ -11,34 +11,42 @@
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Select data filtering fields</h4>
+                <h4 class="modal-title">SELECT DATA FILTERING FIELDS</h4>
             </div>
             <div class="modal-body">
+                <?= form_open(uri_string(), 'class="form-horizontal" role="form"') ?>
+                <div class="row">
+                    <div class="col-lg-offset-1 col-sm-11">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <?php
+                                    foreach ($mapped_fields as $key => $value) {
+                                        echo '<div class="checkbox"><label>';
+                                        echo form_checkbox($key, $value) . $value . "</label></div>";
+                                    }
+                                    ?>
+                                </div><!-- .end of form-group -->
+                            </div>
+                        </div><!-- /.row -->
 
-                <?php echo form_open("xform/form_data/" . $form->id, 'class="form-horizontal" role="form"') ?>
-
-                <?php
-                foreach ($mapped_fields as $key => $value) {
-                    echo '<div class="checkbox"><label>';
-                    echo form_checkbox($key, $value) . $value . "</label></div>";
-                }
-                ?>
-
-                <input type="submit" name="apply" value="Apply filters" class="btn btn-primary col-lg-offset-1"/>
-
-                <?php echo form_close(); ?>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <?= form_submit('apply', 'Apply Filters', array('class' => "btn btn-primary")); ?>
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                                </div><!-- .end of form-group -->
+                            </div>
+                        </div> <!-- /.row -->
+                    </div>
+                </div><!-- ./row -->
+                <?= form_close(); ?>
+            </div><!-- ./modal-body -->
         </div>
-
     </div>
 </div>
 
@@ -46,12 +54,14 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title"><?= $title ?> - Form data collected</h3>
+                <h3 class="title"><?= $project->title . ' : ' . $title ?> data collected</h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
+                <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?></a></li>
                 <li class="active"><?= $title ?></li>
             </ol>
 
@@ -80,8 +90,8 @@
                                 data-target="#myModal">Set Filters
                         </button>
                         <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Export XLS"') ?>
-                        <?php echo anchor("visualization/visualization/chart/" . $form_id, '<i class="fa fa-bar-chart-o fa-lg"></i>&nbsp;&nbsp;', 'title="Visualization"') ?>
-                        <?php echo anchor("visualization/visualization/map/" . $form_id, '<i class="fa fa-map-marker fa-lg"></i>', 'title="View Map"') ?>
+                        <?php echo anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, '<i class="fa fa-bar-chart-o fa-lg"></i>&nbsp;&nbsp;', 'title="Visualization"') ?>
+                        <?php echo anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, '<i class="fa fa-map-marker fa-lg"></i>', 'title="View Map"') ?>
                     </div>
                 </div>
             </div>
@@ -95,14 +105,13 @@
                 </div>
             </div>
 
+            <?= form_open("xform/delete_entry/" . $project->id . '/' . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>
+            <?= form_hidden("table_name", $form_id); ?>
             <div style="overflow-x: scroll;">
-                <?php echo form_open("xform/delete_entry/" . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>
-                <?php echo form_hidden("table_name", $form_id); ?>
-
-                <table class="table table_list table-bordered table-striped table-hover table-condensed">
+                <table class="table table_list table-bordered table-striped table-hover">
                     <tr>
                         <?php
-                        echo "<th class='text-center'>Select All<br/>" . form_checkbox(array("id" => "selectAll")) . "</th>";
+                        echo "<th class='text-center'>" . form_checkbox(array("id" => "selectAll")) . "</th>";
 
                         if (isset($selected_columns)) {
                             foreach ($selected_columns as $column) {
@@ -140,13 +149,14 @@
                     }
                     ?>
                 </table>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <input type="submit" name="delete" value="Delete Selected" class="btn btn-danger delete">
-                    </div>
-                </div>
-                <?php echo form_close(); ?>
             </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <input type="submit" name="delete" value="Delete Selected" class="btn btn-danger btn-sm delete">
+                </div>
+            </div>
+            <?= form_close(); ?>
 
             <?php if (!empty($links)): ?>
                 <div class="widget-foot">

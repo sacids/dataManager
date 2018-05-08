@@ -41,13 +41,10 @@ class User_model extends CI_Model
 
     /**
      * @return mixed
-     * @param $limit
-     * @param $offset
      */
-    function get_users($limit = 100, $offset = 0)
+    function find_all()
     {
         $users = $this->db
-            ->limit($limit, $offset)
             ->get(self::$table_name)->result();
         return $users;
     }
@@ -65,7 +62,11 @@ class User_model extends CI_Model
             ->get(self::$table_name)->result();
     }
 
-    function get_user($user_id)
+    /**
+     * @param $user_id
+     * @return mixed
+     */
+    function get_user_by_id($user_id)
     {
         $users = $this->db->get_where('users', array('users.id' => $user_id))->row();
         return $users;

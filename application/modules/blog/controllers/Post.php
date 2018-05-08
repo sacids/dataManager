@@ -54,8 +54,6 @@ class Post extends MX_Controller
         parent::__construct();
         $this->load->library(array('upload', 'MailChimp'));
         $this->load->model(array("Post_model"));
-
-        $this->form_validation->CI =& $this;
         $this->user_id = $this->session->userdata("user_id");
 
         $this->list_id = '5a798801f2';

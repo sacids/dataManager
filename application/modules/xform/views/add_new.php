@@ -8,8 +8,10 @@
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="active">Add new form</li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
+                <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?></a></li>
+                <li class="active">Add New Form</li>
             </ol>
 
             <?php
@@ -46,8 +48,8 @@
 
                                 <div class="form-group">
                                     <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label>
-                        <textarea class="form-control" name="description" rows="5"
-                                  id="description"><?php echo set_value('description'); ?></textarea>
+                                    <textarea class="form-control" name="description" rows="5"
+                                              id="description"><?php echo set_value('description'); ?></textarea>
                                 </div>
                                 <?php echo form_error('description'); ?>
 
@@ -56,6 +58,13 @@
                                     <?php echo form_dropdown("access", array("private" => "Private", "public" => "Public"), set_value("access", ""), 'class="form-control"'); ?>
                                 </div>
                                 <?php echo form_error('access'); ?>
+
+                                <div class="form-group">
+                                    <label>Push</label><br>
+                                    <?php
+                                    echo form_checkbox('push', 1, set_checkbox('push', 1), 'id="push"');
+                                    echo form_label('Yes', 'push'); ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,20 +83,31 @@
                                     echo ucfirst($value) . "</br>";
                                 } ?>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                                 <h4>User Permissions</h4>
-                                <?php
-                                foreach ($user_perms as $key => $value) {
-                                    echo form_checkbox("perms[]", $key, FALSE);
-                                    echo ucfirst($value) . "</br>";
-                                } ?>
+                                <table>
+                                    <tr>
+                                        <?php
+                                        $serial = 0;
+                                        foreach ($user_perms as $key => $value) {
+                                            if (($serial % 4) == 0) {
+                                                echo '</tr><tr>';
+                                            } ?>
+                                            <td>
+                                                <?= form_checkbox("perms[]", $key, FALSE); ?>
+                                                <?= ucfirst($value); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </td>
+                                            <?php $serial++;
+                                        } ?>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
             </div>
             <?php echo form_close(); ?>
         </div>

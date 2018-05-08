@@ -1,27 +1,22 @@
-<div class="container-fluid">
+<div class="container body-content">
     <div class="row">
-
-        <?php if (!$this->ion_auth->is_admin()): ?>
-            <!--<div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a>
-                        <ul>
-                            <?php /*foreach ($xforms as $form) { */?>
-                                <li>
-                                    <?php /*echo anchor("visualization/chart/" . $form->form_id, $form->title); */?>
-                                </li>
-                            <?php /*} */?>
-                        </ul>
-                    </li>
-                </ul>
-            </div>-->
-        <?php endif; ?>
-
         <div class="col-sm-12 col-md-12 main">
-            <h1 class="page-header" id="xform-title"><?php echo $form_details->title ?></h1>
-            <div class="" style="margin-bottom: 10px;">
+            <div id="header-title">
+                <h3 class="title"><?= $project->title . ' : ' . $form_details->title ?> Charts</h3>
+            </div>
+
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+                <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
+                <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?></a></li>
+                <li class="active"><?= $form_details->title ?> Chart</li>
+            </ol>
+
+
+            <div class="pull-right" style="margin-bottom: 10px;">
                 <?php
-                echo form_open("visualization/chart/" . $form_details->form_id, 'class="form-inline" role="form"');
+                echo form_open(uri_string(), 'class="form-inline" role="form"');
 
                 $options = array("" => "Select column to plot");
                 foreach ($mapped_fields as $key => $value) {
