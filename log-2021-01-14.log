@@ -1,0 +1,1870 @@
+DEBUG - 14-01-2021 00:00:31 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:00:31 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:00:31 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 00:01:04 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:01:04 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 00:01:04 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 00:01:04 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 00:01:04 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 00:01:04 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:01:04 --> Xform_comm library initialized
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 00:01:04 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 00:01:04 --> Form_auth library initialized
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 00:01:04 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 00:01:04 --> password  1234
+DEBUG - 14-01-2021 00:01:04 --> Total execution time: 0.0172
+DEBUG - 14-01-2021 00:01:59 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:01:59 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 00:01:59 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 00:01:59 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 00:01:59 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 00:01:59 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:01:59 --> Xform_comm library initialized
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 00:01:59 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 00:01:59 --> Form_auth library initialized
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 00:01:59 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 00:01:59 --> age  52
+DEBUG - 14-01-2021 00:01:59 --> Total execution time: 0.0182
+DEBUG - 14-01-2021 00:02:40 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:02:40 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:02:40 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:05:15 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:05:15 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:05:15 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:06:23 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:06:23 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:06:23 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:09:36 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:09:36 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 00:09:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 00:09:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 00:09:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 00:09:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:09:36 --> Xform_comm library initialized
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 00:09:36 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 00:09:36 --> Form_auth library initialized
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 00:09:36 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 00:09:36 --> password  Erick
+DEBUG - 14-01-2021 00:09:36 --> Total execution time: 0.0185
+DEBUG - 14-01-2021 00:09:56 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:09:56 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 00:09:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 00:09:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 00:09:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 00:09:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:09:56 --> Xform_comm library initialized
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 00:09:56 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 00:09:56 --> Form_auth library initialized
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 00:09:56 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 00:09:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/rest.php
+DEBUG - 14-01-2021 00:09:56 --> username getting forms feedback is 255782311978
+DEBUG - 14-01-2021 00:09:56 --> Total execution time: 0.0936
+DEBUG - 14-01-2021 00:10:32 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:10:32 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:10:32 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 00:12:40 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:12:40 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:12:40 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:13:56 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:13:56 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 00:13:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 00:13:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 00:13:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 00:13:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:13:56 --> Xform_comm library initialized
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 00:13:56 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 00:13:56 --> Form_auth library initialized
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 00:13:56 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 00:13:56 --> password  2000
+DEBUG - 14-01-2021 00:13:56 --> Total execution time: 0.0235
+DEBUG - 14-01-2021 00:15:15 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:15:15 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:15:15 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:16:23 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:16:23 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:16:23 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:25:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:25:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:25:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:26:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:26:24 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:26:24 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:35:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:35:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:35:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:36:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:36:24 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:36:24 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:38:19 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:38:19 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 00:38:19 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 00:38:19 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 00:38:19 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 00:38:19 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:38:19 --> Xform_comm library initialized
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 00:38:19 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 00:38:19 --> Form_auth library initialized
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 00:38:19 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 00:38:19 --> Config file loaded: /var/www/html/afyadata/live/application/config/rest.php
+DEBUG - 14-01-2021 00:38:19 --> username getting forms feedback is 255782311978
+DEBUG - 14-01-2021 00:38:19 --> Total execution time: 0.0914
+DEBUG - 14-01-2021 00:45:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:45:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:45:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:46:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:46:24 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:46:24 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:49:33 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:49:33 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 00:49:33 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 00:49:33 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 00:49:33 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 00:49:33 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:49:33 --> Xform_comm library initialized
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 00:49:33 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 00:49:33 --> Form_auth library initialized
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 00:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 00:49:33 --> password  Sophia
+DEBUG - 14-01-2021 00:49:33 --> Total execution time: 0.0169
+DEBUG - 14-01-2021 00:55:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:55:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:55:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 00:56:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 00:56:24 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 00:56:24 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:00:13 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:00:13 --> No URI present. Default controller set.
+DEBUG - 14-01-2021 01:00:13 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 01:00:13 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 01:00:13 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 01:00:13 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 01:00:13 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:00:13 --> Xform_comm library initialized
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 01:00:13 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 01:00:13 --> Form_auth library initialized
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/views/web/index.php
+DEBUG - 14-01-2021 01:00:13 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 01:00:13 --> Total execution time: 0.0172
+DEBUG - 14-01-2021 01:05:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:05:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:05:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:06:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:06:24 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:06:24 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:06:42 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:06:42 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 01:06:42 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 01:06:42 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 01:06:42 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 01:06:42 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:06:42 --> Xform_comm library initialized
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 01:06:42 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 01:06:42 --> Form_auth library initialized
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 01:06:42 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 01:06:42 --> Config file loaded: /var/www/html/afyadata/live/application/config/rest.php
+DEBUG - 14-01-2021 01:06:42 --> username getting forms feedback is 255782311978
+DEBUG - 14-01-2021 01:06:42 --> Total execution time: 0.0923
+DEBUG - 14-01-2021 01:09:07 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:09:07 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:09:07 --> 404 Page Not Found: /index
+DEBUG - 14-01-2021 01:15:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:15:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:15:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:16:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:16:24 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:16:24 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:25:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:25:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:25:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:26:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:26:24 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:26:24 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:26:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:26:24 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 01:26:24 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 01:26:24 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 01:26:24 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 01:26:24 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:26:24 --> Xform_comm library initialized
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 01:26:24 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 01:26:24 --> Form_auth library initialized
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 01:26:24 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 01:26:24 --> password  5878
+DEBUG - 14-01-2021 01:26:24 --> Total execution time: 0.0178
+DEBUG - 14-01-2021 01:35:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:35:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:35:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:35:34 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:35:34 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 01:35:34 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 01:35:34 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 01:35:34 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 01:35:34 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:35:34 --> Xform_comm library initialized
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 01:35:34 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 01:35:34 --> Form_auth library initialized
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 01:35:34 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 01:35:34 --> Config file loaded: /var/www/html/afyadata/live/application/config/rest.php
+DEBUG - 14-01-2021 01:35:34 --> username getting forms feedback is 255782311978
+DEBUG - 14-01-2021 01:35:34 --> Total execution time: 0.0904
+DEBUG - 14-01-2021 01:36:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:36:24 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:36:24 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:43:57 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:43:57 --> No URI present. Default controller set.
+DEBUG - 14-01-2021 01:43:57 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 01:43:57 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 01:43:57 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 01:43:57 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 01:43:57 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:43:57 --> Xform_comm library initialized
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 01:43:57 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 01:43:57 --> Form_auth library initialized
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/views/web/index.php
+DEBUG - 14-01-2021 01:43:57 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 01:43:57 --> Total execution time: 0.0131
+DEBUG - 14-01-2021 01:45:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:45:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:45:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:46:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:46:24 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:46:24 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 01:49:33 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:49:33 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 01:49:33 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 01:49:33 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 01:49:33 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 01:49:33 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:49:33 --> Xform_comm library initialized
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 01:49:33 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 01:49:33 --> Form_auth library initialized
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 01:49:33 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 01:49:33 --> password  MATOKEO YA KIDATO CHA NNE 2020
+DEBUG - 14-01-2021 01:49:33 --> Total execution time: 0.0192
+DEBUG - 14-01-2021 01:50:31 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:50:31 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 01:50:31 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 01:50:31 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 01:50:31 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 01:50:31 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:50:31 --> Xform_comm library initialized
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 01:50:31 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 01:50:31 --> Form_auth library initialized
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 01:50:31 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 01:50:31 --> password  2000
+DEBUG - 14-01-2021 01:50:31 --> Total execution time: 0.0226
+DEBUG - 14-01-2021 01:51:45 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:51:45 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 01:51:45 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 01:51:45 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 01:51:45 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 01:51:45 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:51:45 --> Xform_comm library initialized
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 01:51:45 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 01:51:45 --> Form_auth library initialized
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 01:51:45 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 01:51:45 --> password  NECTA
+DEBUG - 14-01-2021 01:51:45 --> Total execution time: 0.0198
+DEBUG - 14-01-2021 01:55:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 01:55:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 01:55:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 02:01:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 02:01:44 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 02:01:44 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 02:01:44 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 02:01:44 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 02:01:44 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 02:01:44 --> Xform_comm library initialized
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 02:01:44 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 02:01:44 --> Form_auth library initialized
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 02:01:44 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 02:01:44 --> Config file loaded: /var/www/html/afyadata/live/application/config/rest.php
+DEBUG - 14-01-2021 02:01:44 --> username getting forms feedback is 255782311978
+DEBUG - 14-01-2021 02:01:44 --> Total execution time: 0.0945
+DEBUG - 14-01-2021 02:05:16 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 02:05:16 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 02:05:16 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 02:15:17 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 02:15:17 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 02:15:17 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 02:25:17 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 02:25:17 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 02:25:17 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 02:31:45 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 02:31:45 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 02:31:45 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 02:31:45 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 02:31:45 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 02:31:45 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 02:31:45 --> Xform_comm library initialized
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 02:31:45 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 02:31:45 --> Form_auth library initialized
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 02:31:45 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 02:31:45 --> Config file loaded: /var/www/html/afyadata/live/application/config/rest.php
+DEBUG - 14-01-2021 02:31:45 --> username getting forms feedback is 255782311978
+DEBUG - 14-01-2021 02:31:45 --> Total execution time: 0.0941
+DEBUG - 14-01-2021 02:32:41 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 02:32:41 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 02:32:41 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 02:32:41 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 02:32:41 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 02:32:41 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 02:32:41 --> Xform_comm library initialized
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 02:32:41 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 02:32:41 --> Form_auth library initialized
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 02:32:41 --> Stories MX_Controller Initialized
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/views/stories/post.php
+DEBUG - 14-01-2021 02:32:41 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 02:32:41 --> Total execution time: 0.0185
+DEBUG - 14-01-2021 02:35:17 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 02:35:17 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 02:35:17 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 03:02:43 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 03:02:43 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 03:02:43 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 03:02:43 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 03:02:43 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 03:02:43 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 03:02:43 --> Xform_comm library initialized
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 03:02:43 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 03:02:43 --> Form_auth library initialized
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 03:02:43 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 03:02:43 --> Config file loaded: /var/www/html/afyadata/live/application/config/rest.php
+DEBUG - 14-01-2021 03:02:43 --> username getting forms feedback is 255782311978
+DEBUG - 14-01-2021 03:02:43 --> Total execution time: 0.0929
+DEBUG - 14-01-2021 05:20:13 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:13 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 05:20:13 --> 404 Page Not Found: /index
+DEBUG - 14-01-2021 05:20:27 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:27 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 05:20:27 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 05:20:27 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 05:20:27 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 05:20:27 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:27 --> Xform_comm library initialized
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 05:20:27 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 05:20:27 --> Form_auth library initialized
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/views/web/about.php
+DEBUG - 14-01-2021 05:20:27 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 05:20:27 --> Total execution time: 0.0149
+DEBUG - 14-01-2021 05:20:29 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:29 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 05:20:29 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 05:20:29 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 05:20:29 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 05:20:29 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:29 --> Xform_comm library initialized
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 05:20:29 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 05:20:29 --> Form_auth library initialized
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/views/web/analyze_data.php
+DEBUG - 14-01-2021 05:20:29 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 05:20:29 --> Total execution time: 0.0122
+DEBUG - 14-01-2021 05:20:37 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:37 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 05:20:37 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 05:20:37 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 05:20:37 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 05:20:37 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:37 --> Xform_comm library initialized
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 05:20:37 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 05:20:37 --> Form_auth library initialized
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 05:20:37 --> Auth MX_Controller Initialized
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/views/login.php
+DEBUG - 14-01-2021 05:20:37 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 05:20:37 --> Total execution time: 0.0195
+DEBUG - 14-01-2021 05:20:39 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:39 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 05:20:39 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 05:20:39 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 05:20:39 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 05:20:39 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:39 --> Xform_comm library initialized
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 05:20:39 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 05:20:39 --> Form_auth library initialized
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/views/web/collect_data.php
+DEBUG - 14-01-2021 05:20:39 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 05:20:39 --> Total execution time: 0.0124
+DEBUG - 14-01-2021 05:20:42 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:42 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 05:20:42 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 05:20:42 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 05:20:42 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 05:20:42 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:42 --> Xform_comm library initialized
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 05:20:42 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 05:20:42 --> Form_auth library initialized
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/views/web/create_project.php
+DEBUG - 14-01-2021 05:20:42 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 05:20:42 --> Total execution time: 0.0127
+DEBUG - 14-01-2021 05:20:46 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:46 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 05:20:46 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 05:20:46 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 05:20:46 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 05:20:46 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:46 --> Xform_comm library initialized
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 05:20:46 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 05:20:46 --> Form_auth library initialized
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 05:20:46 --> Stories MX_Controller Initialized
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/views/stories/index.php
+DEBUG - 14-01-2021 05:20:46 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 05:20:46 --> Total execution time: 0.0171
+DEBUG - 14-01-2021 05:20:48 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:48 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 05:20:48 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 05:20:48 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 05:20:48 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 05:20:48 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:48 --> Xform_comm library initialized
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 05:20:48 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 05:20:48 --> Form_auth library initialized
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 05:20:48 --> Stories MX_Controller Initialized
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/views/stories/post.php
+DEBUG - 14-01-2021 05:20:48 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 05:20:48 --> Total execution time: 0.0173
+DEBUG - 14-01-2021 05:20:51 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 05:20:51 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 05:20:51 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 05:20:51 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 05:20:51 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:51 --> Xform_comm library initialized
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 05:20:51 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 05:20:51 --> Form_auth library initialized
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 05:20:51 --> Stories MX_Controller Initialized
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/views/stories/post.php
+DEBUG - 14-01-2021 05:20:51 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 05:20:51 --> Total execution time: 0.0168
+DEBUG - 14-01-2021 05:20:53 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:53 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 05:20:53 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 05:20:53 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 05:20:53 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 05:20:53 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:53 --> Xform_comm library initialized
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 05:20:53 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 05:20:53 --> Form_auth library initialized
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 05:20:53 --> Stories MX_Controller Initialized
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/views/stories/post.php
+DEBUG - 14-01-2021 05:20:53 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 05:20:53 --> Total execution time: 0.0142
+DEBUG - 14-01-2021 05:20:56 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 05:20:56 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 05:20:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 05:20:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 05:20:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 05:20:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:56 --> Xform_comm library initialized
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 05:20:56 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 05:20:56 --> Form_auth library initialized
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 05:20:56 --> Stories MX_Controller Initialized
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/views/stories/post.php
+DEBUG - 14-01-2021 05:20:56 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 05:20:56 --> Total execution time: 0.0165
+DEBUG - 14-01-2021 06:07:58 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 06:07:58 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 06:07:58 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 06:07:58 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 06:07:58 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 06:07:58 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 06:07:58 --> Xform_comm library initialized
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 06:07:58 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 06:07:58 --> Form_auth library initialized
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 06:07:58 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 06:07:58 --> password  2005
+DEBUG - 14-01-2021 06:07:58 --> Total execution time: 0.0203
+DEBUG - 14-01-2021 06:14:57 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 06:14:57 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 06:14:57 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 06:14:57 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 06:14:57 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 06:14:57 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 06:14:57 --> Xform_comm library initialized
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 06:14:57 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 06:14:57 --> Form_auth library initialized
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 06:14:57 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 06:14:57 --> password  2569
+DEBUG - 14-01-2021 06:14:57 --> Total execution time: 0.0141
+DEBUG - 14-01-2021 06:22:38 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 06:22:38 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 06:22:38 --> 404 Page Not Found: /index
+DEBUG - 14-01-2021 06:46:21 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 06:46:21 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 06:46:21 --> 404 Page Not Found: /index
+DEBUG - 14-01-2021 07:31:36 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 07:31:36 --> No URI present. Default controller set.
+DEBUG - 14-01-2021 07:31:36 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 07:31:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 07:31:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 07:31:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 07:31:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 07:31:36 --> Xform_comm library initialized
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 07:31:36 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 07:31:36 --> Form_auth library initialized
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/views/web/index.php
+DEBUG - 14-01-2021 07:31:36 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 07:31:36 --> Total execution time: 0.0118
+DEBUG - 14-01-2021 07:32:30 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 07:32:30 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 07:32:30 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 07:32:30 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 07:32:30 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 07:32:30 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 07:32:30 --> Xform_comm library initialized
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 07:32:30 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 07:32:30 --> Form_auth library initialized
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 07:32:30 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 07:32:30 --> password  1110
+DEBUG - 14-01-2021 07:32:30 --> Total execution time: 0.0211
+DEBUG - 14-01-2021 07:42:56 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 07:42:56 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 07:42:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 07:42:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 07:42:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 07:42:56 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 07:42:56 --> Xform_comm library initialized
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 07:42:56 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 07:42:56 --> Form_auth library initialized
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 07:42:56 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 07:42:56 --> password  2327
+DEBUG - 14-01-2021 07:42:56 --> Total execution time: 0.0161
+DEBUG - 14-01-2021 07:53:23 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 07:53:23 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 07:53:23 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 07:53:23 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 07:53:23 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 07:53:23 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 07:53:23 --> Xform_comm library initialized
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 07:53:23 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 07:53:23 --> Form_auth library initialized
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 07:53:23 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 07:53:23 --> password  2000
+DEBUG - 14-01-2021 07:53:23 --> Total execution time: 0.0230
+DEBUG - 14-01-2021 08:40:23 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 08:40:23 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 08:40:23 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 08:40:23 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 08:40:23 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 08:40:23 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 08:40:23 --> Xform_comm library initialized
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 08:40:23 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 08:40:23 --> Form_auth library initialized
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 08:40:23 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 08:40:23 --> password  2580
+DEBUG - 14-01-2021 08:40:23 --> Total execution time: 0.0167
+DEBUG - 14-01-2021 08:41:38 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 08:41:38 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 08:41:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 08:41:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 08:41:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 08:41:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 08:41:38 --> Xform_comm library initialized
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 08:41:38 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 08:41:38 --> Form_auth library initialized
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 08:41:38 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 08:41:38 --> password  2003
+DEBUG - 14-01-2021 08:41:38 --> Total execution time: 0.0187
+DEBUG - 14-01-2021 08:44:43 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 08:44:43 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 08:44:43 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 08:46:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 08:46:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 08:46:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 08:47:00 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 08:47:00 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 08:47:00 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 08:47:00 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 08:47:00 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 08:47:00 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 08:47:00 --> Xform_comm library initialized
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 08:47:00 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 08:47:00 --> Form_auth library initialized
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 08:47:00 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 08:47:00 --> password  matokeo
+DEBUG - 14-01-2021 08:47:00 --> Total execution time: 0.0195
+DEBUG - 14-01-2021 08:49:31 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 08:49:31 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 08:49:31 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 08:49:31 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 08:49:31 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 08:49:31 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 08:49:31 --> Xform_comm library initialized
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 08:49:31 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 08:49:31 --> Form_auth library initialized
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 08:49:31 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 08:49:31 --> password  2000
+DEBUG - 14-01-2021 08:49:31 --> Total execution time: 0.0167
+DEBUG - 14-01-2021 08:54:43 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 08:54:43 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 08:54:43 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 08:56:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 08:56:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 08:56:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 09:04:43 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:04:43 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:04:43 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 09:06:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:06:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:06:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 09:14:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:14:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:14:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 09:16:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:16:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:16:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 09:24:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:24:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:24:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 09:26:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:26:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:26:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 09:28:05 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:28:05 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:28:05 --> 404 Page Not Found: /index
+DEBUG - 14-01-2021 09:30:36 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:30:36 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 09:30:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 09:30:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 09:30:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 09:30:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:30:36 --> Xform_comm library initialized
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 09:30:36 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 09:30:36 --> Form_auth library initialized
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 09:30:36 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 09:30:36 --> password  2005
+DEBUG - 14-01-2021 09:30:36 --> Total execution time: 0.0199
+DEBUG - 14-01-2021 09:32:43 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:32:43 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 09:32:43 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 09:32:43 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 09:32:43 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 09:32:43 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:32:43 --> Xform_comm library initialized
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 09:32:43 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 09:32:43 --> Form_auth library initialized
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 09:32:43 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 09:32:43 --> password  1000
+DEBUG - 14-01-2021 09:32:43 --> Total execution time: 0.0192
+DEBUG - 14-01-2021 09:32:55 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:32:55 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 09:32:55 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 09:32:55 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 09:32:55 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 09:32:55 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:32:55 --> Xform_comm library initialized
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 09:32:55 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 09:32:55 --> Form_auth library initialized
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 09:32:55 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 09:32:55 --> password  1234
+DEBUG - 14-01-2021 09:32:55 --> Total execution time: 0.0244
+DEBUG - 14-01-2021 09:33:24 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:33:24 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 09:33:24 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 09:33:24 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 09:33:24 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 09:33:24 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:33:24 --> Xform_comm library initialized
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 09:33:24 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 09:33:24 --> Form_auth library initialized
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 09:33:24 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 09:33:24 --> age  15
+DEBUG - 14-01-2021 09:33:24 --> Total execution time: 0.0161
+DEBUG - 14-01-2021 09:34:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:34:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:34:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 09:36:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:36:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:36:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 09:40:38 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:40:38 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 09:40:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 09:40:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 09:40:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 09:40:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:40:38 --> Xform_comm library initialized
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 09:40:38 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 09:40:38 --> Form_auth library initialized
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/views/web/header.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/views/web/about.php
+DEBUG - 14-01-2021 09:40:38 --> File loaded: /var/www/html/afyadata/live/application/views/web/footer.php
+DEBUG - 14-01-2021 09:40:38 --> Total execution time: 0.0227
+DEBUG - 14-01-2021 09:44:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:44:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:44:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 09:46:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:46:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:46:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 09:54:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:54:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:54:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 09:56:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:56:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 09:56:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 09:56:58 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 09:56:58 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 09:56:58 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 09:56:58 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 09:56:58 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 09:56:58 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:56:58 --> Xform_comm library initialized
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 09:56:58 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 09:56:58 --> Form_auth library initialized
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 09:56:58 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 09:56:58 --> password  2001
+DEBUG - 14-01-2021 09:56:58 --> Total execution time: 0.0184
+DEBUG - 14-01-2021 10:01:17 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:01:17 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:01:17 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:01:17 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:01:17 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:01:17 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:01:17 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:01:17 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:01:17 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:01:17 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:01:17 --> password  1234
+DEBUG - 14-01-2021 10:01:17 --> Total execution time: 0.0198
+DEBUG - 14-01-2021 10:02:03 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:02:03 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:02:03 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:02:03 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:02:03 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:02:03 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:02:03 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:02:03 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:02:03 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:02:03 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:02:03 --> age  40
+DEBUG - 14-01-2021 10:02:03 --> Total execution time: 0.0155
+DEBUG - 14-01-2021 10:04:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:04:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:04:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 10:06:22 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:06:22 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:06:22 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:06:22 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:06:22 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:06:22 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:06:22 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:06:22 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:06:22 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:06:22 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:06:22 --> password  WWWW
+DEBUG - 14-01-2021 10:06:22 --> Total execution time: 0.0154
+DEBUG - 14-01-2021 10:06:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:06:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:06:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 10:07:06 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:07:06 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:07:06 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:07:06 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:07:06 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:07:06 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:07:06 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:07:06 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:07:06 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:07:06 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:07:06 --> password  2022
+DEBUG - 14-01-2021 10:07:06 --> Total execution time: 0.0132
+DEBUG - 14-01-2021 10:11:39 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:11:39 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:11:39 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:11:39 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:11:39 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:11:39 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:11:39 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:11:39 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:11:39 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:11:39 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:11:39 --> password  1234
+DEBUG - 14-01-2021 10:11:39 --> Total execution time: 0.0166
+DEBUG - 14-01-2021 10:12:36 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:12:36 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:12:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:12:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:12:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:12:36 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:12:36 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:12:36 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:12:36 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:12:36 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:12:36 --> password  1234
+DEBUG - 14-01-2021 10:12:36 --> Total execution time: 0.0164
+DEBUG - 14-01-2021 10:13:07 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:13:07 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:13:07 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:13:07 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:13:07 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:13:07 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:13:07 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:13:07 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:13:07 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:13:07 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:13:07 --> age  56
+DEBUG - 14-01-2021 10:13:07 --> Total execution time: 0.0181
+DEBUG - 14-01-2021 10:14:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:14:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:14:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 10:16:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:16:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:16:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 10:18:07 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:18:07 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:18:07 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:18:07 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:18:07 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:18:07 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:18:07 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:18:07 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:18:07 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:18:07 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:18:07 --> password  3112
+DEBUG - 14-01-2021 10:18:07 --> Total execution time: 0.0233
+DEBUG - 14-01-2021 10:20:46 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:20:46 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:20:46 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 10:24:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:24:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:24:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 10:26:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:26:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:26:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 10:28:22 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:28:22 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:28:22 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:28:22 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:28:22 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:28:22 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:28:22 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:28:22 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:28:22 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:28:22 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:28:22 --> password  2000
+DEBUG - 14-01-2021 10:28:22 --> Total execution time: 0.0184
+DEBUG - 14-01-2021 10:30:46 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:30:46 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:30:46 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 10:32:49 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:32:49 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:32:49 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:32:49 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:32:49 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:32:49 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:32:49 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:32:49 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:32:49 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:32:49 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:32:49 --> password  2001
+DEBUG - 14-01-2021 10:32:49 --> Total execution time: 0.0149
+DEBUG - 14-01-2021 10:32:54 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:32:54 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:32:54 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:32:54 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:32:54 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:32:54 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:32:54 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:32:54 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:32:54 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:32:54 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:32:54 --> password  2345
+DEBUG - 14-01-2021 10:32:54 --> Total execution time: 0.0181
+DEBUG - 14-01-2021 10:33:00 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:33:00 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:33:00 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:33:00 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:33:00 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:33:00 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:33:00 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:33:00 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:33:00 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:33:00 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:33:00 --> password  Mrema
+DEBUG - 14-01-2021 10:33:00 --> Total execution time: 0.0199
+DEBUG - 14-01-2021 10:34:38 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:34:38 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:34:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:34:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:34:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:34:38 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:34:38 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:34:38 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:34:38 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:34:38 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:34:38 --> password  MRM
+DEBUG - 14-01-2021 10:34:38 --> Total execution time: 0.0146
+DEBUG - 14-01-2021 10:34:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:34:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:34:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 10:36:50 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:36:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:36:50 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 10:37:40 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:37:40 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:37:40 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:37:40 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:37:40 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:37:40 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:37:40 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:37:40 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:37:40 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:37:40 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:37:40 --> password  20000
+DEBUG - 14-01-2021 10:37:40 --> Total execution time: 0.0199
+DEBUG - 14-01-2021 10:40:46 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:40:46 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:40:46 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 10:44:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:44:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:44:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 10:46:53 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:46:53 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:46:53 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 10:50:46 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:50:46 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:50:46 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 10:54:44 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:54:44 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:54:44 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/fao_data
+DEBUG - 14-01-2021 10:56:53 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:56:53 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 10:56:53 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa
+DEBUG - 14-01-2021 10:57:05 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:57:05 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:57:05 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:57:05 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:57:05 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:57:05 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:57:05 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:57:05 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:57:05 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:57:05 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:57:05 --> password  1234
+DEBUG - 14-01-2021 10:57:05 --> Total execution time: 0.0164
+DEBUG - 14-01-2021 10:57:28 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:57:28 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:57:28 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:57:28 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:57:28 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:57:28 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:57:28 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:57:28 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:57:28 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:57:28 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:57:28 --> age  30
+DEBUG - 14-01-2021 10:57:28 --> Total execution time: 0.0157
+DEBUG - 14-01-2021 10:59:04 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:59:04 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:59:04 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:59:04 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:59:04 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:59:04 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:59:04 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:59:04 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:59:04 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:59:04 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:59:04 --> password  1234
+DEBUG - 14-01-2021 10:59:04 --> Total execution time: 0.0146
+DEBUG - 14-01-2021 10:59:17 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 10:59:17 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 14-01-2021 10:59:17 --> Config file loaded: /var/www/html/afyadata/live/application/config/sacids.php
+DEBUG - 14-01-2021 10:59:17 --> Config file loaded: /var/www/html/afyadata/live/application/config/pagination.php
+DEBUG - 14-01-2021 10:59:17 --> Config file loaded: /var/www/html/afyadata/live/application/config/sms.php
+DEBUG - 14-01-2021 10:59:17 --> Config file loaded: /var/www/html/afyadata/live/application/config/ion_auth.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:59:17 --> Xform_comm library initialized
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/User_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Acl_model.php
+DEBUG - 14-01-2021 10:59:17 --> File already loaded: /var/www/html/afyadata/live/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/auth/models/Perm_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Submission_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/campaign/models/Campaign_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/feedback/models/Feedback_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xform_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/facilities/models/Facilities_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/xform/models/Xformreader_model.php
+DEBUG - 14-01-2021 10:59:17 --> Form_auth library initialized
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/projects/models/Project_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Newsletter_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/newsletters/models/Media_model.php
+DEBUG - 14-01-2021 10:59:17 --> File loaded: /var/www/html/afyadata/live/application/modules/api/models/Ussd_model.php
+DEBUG - 14-01-2021 10:59:17 --> age  30
+DEBUG - 14-01-2021 10:59:17 --> Total execution time: 0.0185
+DEBUG - 14-01-2021 11:00:47 --> UTF-8 Support Enabled
+DEBUG - 14-01-2021 11:00:47 --> Global POST, GET and COOKIE data sanitized
+ERROR - 14-01-2021 11:00:47 --> 404 Page Not Found: ../modules/api/controllers/v3/Ussd/afya_taarifa

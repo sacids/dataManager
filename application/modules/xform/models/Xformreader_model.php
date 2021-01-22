@@ -6,7 +6,7 @@
  * Date: 09/10/2017
  * Time: 10:25
  */
-class XmlElement
+class eXmlElement
 {
     var $name;
     var $attributes;
@@ -172,6 +172,12 @@ class Xformreader_model extends CI_Model
         $prefix = $this->config->item("xform_tables_prefix");
         //log_message("debug", "Table prefix during creation " . $prefix);
         $jr_form_id = $instance->attributes ['id'];
+
+        //if (array_key_exists('id', $instance->attributes))
+            //$jr_form_id = $instance->attributes ['id']; //
+        //else
+            //$jr_form_id = 'xlsform' . mt_rand();
+
         $table_name = $prefix . str_replace("-", "_", $jr_form_id);
 
         // get array rep of xform
@@ -241,7 +247,7 @@ class Xformreader_model extends CI_Model
 
             $index = count($elements);
             if ($tag ['type'] == "complete" || $tag ['type'] == "open") {
-                $elements [$index] = new XmlElement ();
+                $elements [$index] = new eXmlElement ();
                 $elements [$index]->name = $tag ['tag'];
 
                 if (!empty ($tag ['attributes'])) {
@@ -293,9 +299,9 @@ class Xformreader_model extends CI_Model
         } else {
             $column_name = substr($name, 1);
             //shorten long column names
-            if (strlen($column_name) > 64) {
-                $column_name = shorten_column_name($column_name);
-            }
+            //if (strlen($column_name) > 64) {
+            //    $column_name = shorten_column_name($column_name);
+            //}
             $this->form_data [$column_name] = $obj->content;
         }
     }
@@ -343,7 +349,7 @@ class Xformreader_model extends CI_Model
             }
 
             array_push($col_names, $cn);
-            array_push($col_values, $cv);
+            array_push($col_values, $this->db->escape($cv));
 
             if ($type == 'select') {
                 $options = explode(' ', $cv);
@@ -365,23 +371,25 @@ class Xformreader_model extends CI_Model
                 $has_geopoint = TRUE;
                 $geopoints = explode(" ", $cv);
 
-                $lat = $geopoints [0];
+                $lat1 = $geopoints [0];
+                $lat = $this->db->escape($geopoints [0]);
                 array_push($col_values, $lat);
                 array_push($col_names, $cn . '_lat');
 
-                $lng = $geopoints [1];
+                $lng1 = $geopoints [1];
+                $lng = $this->db->escape($geopoints [1]);
                 array_push($col_values, $lng);
                 array_push($col_names, $cn . '_lng');
 
-                $alt = $geopoints [2];
+                $alt = $this->db->escape($geopoints [2]);
                 array_push($col_values, $alt);
                 array_push($col_names, $cn . '_alt');
 
-                $acc = $geopoints [3];
+                $acc = $this->db->escape($geopoints [3]);
                 array_push($col_values, $acc);
                 array_push($col_names, $cn . '_acc');
 
-                $point = "GeomFromText('POINT($lat $lng)')";
+                $point = "GeomFromText('POINT($lat1 $lng1)')";
                 array_push($points_v, $point);
                 array_push($points_n, $cn . '_point');
             }
@@ -390,11 +398,14 @@ class Xformreader_model extends CI_Model
         if ($has_geopoint) {
             $field_names = "(`" . implode("`,`", $col_names) . "`,`" . implode("`,`", $points_n) . "`)";
             $field_values = "('" . implode("','", $col_values) . "'," . implode("`,`", $points_v) . ")";
+            $field_values = "(" . implode(",", $col_values) . "," . implode("`,`", $points_v) . ")";
         } else {
             $field_names = "(`" . implode("`,`", $col_names) . "`)";
             $field_values = "('" . implode("','", $col_values) . "')";
+            $field_values = "(" . implode(",", $col_values) . ")";
         }
 
+	echo count($col_names);
         $query = "INSERT INTO {$table_name} {$field_names} VALUES {$field_values}";
 
         return $query;
@@ -517,8 +528,11 @@ class Xformreader_model extends CI_Model
                 $required = '';
             }
 
+            // fixing default values issue, when sections are skipped
+            $required = '';
+
             if ($type == 'string' || $type == 'binary' || $type == 'barcode') {
-                $statement .= ", $col_name VARCHAR(300) $required";
+                $statement .= ", $col_name VARCHAR(300) $required  DEFAULT 'NA' ";
 
             }
 
@@ -526,15 +540,15 @@ class Xformreader_model extends CI_Model
                 // Mysql recommended way of handling single quotes for queries is by using two single quotes at once.
                 if (!$val['option']) {
                     // itemset
-                    $statement .= ", $col_name  VARCHAR(300) $required";
+                    $statement .= ", $col_name  VARCHAR(300) $required DEFAULT 'NA' ";
                 } else {
                     $tmp3 = array_keys($val ['option']);
-                    $statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $tmp3)) . "') $required";
+                    $statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $tmp3)) . "','NA' ) $required  DEFAULT 'NA' ";
                 }
             }
 
             if ($type == 'select') {
-                $statement .= ", $col_name TEXT $required ";
+                $statement .= ", $col_name VARCHAR(500) $required DEFAULT 'NA'  ";
 
                 foreach ($val['option'] as $key => $select_opts) {
 
@@ -572,12 +586,12 @@ class Xformreader_model extends CI_Model
 
             if ($type == 'geopoint') {
 
-                $statement .= "," . $col_name . " VARCHAR(150) $required ";
+                $statement .= "," . $col_name . " VARCHAR(150) $required  DEFAULT 'NA' ";
                 $statement .= "," . $col_name . "_point POINT $required ";
-                $statement .= "," . $col_name . "_lat DECIMAL(38,10) $required ";
-                $statement .= "," . $col_name . "_lng DECIMAL(38,10) $required ";
-                $statement .= "," . $col_name . "_acc DECIMAL(38,10) $required ";
-                $statement .= "," . $col_name . "_alt DECIMAL(38,10) $required ";
+                $statement .= "," . $col_name . "_lat DECIMAL(38,10) $required  DEFAULT '0' ";
+                $statement .= "," . $col_name . "_lng DECIMAL(38,10) $required  DEFAULT '0' ";
+                $statement .= "," . $col_name . "_acc DECIMAL(38,10) $required  DEFAULT '0' ";
+                $statement .= "," . $col_name . "_alt DECIMAL(38,10) $required  DEFAULT '0' ";
             }
 
 

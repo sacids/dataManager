@@ -138,14 +138,25 @@ class Newsletters extends MX_Controller
         //form validation
         $this->form_validation->set_rules("name", "Title", "required|trim");
         $this->form_validation->set_rules("edition_id", "Edition", "required|trim");
+
+        if ($this->input->post('change_image') == 1)
+            $this->form_validation->set_rules("attachment", "Media", "callback_upload_attachment|trim");
+
         $this->form_validation->set_rules("story_content", "Story Content", "required|trim");
         $this->form_validation->set_rules("status", "Status", "trim");
 
         if ($this->form_validation->run($this) === TRUE) {
+            //profile photo
+            if (isset($_POST['attachment']) != '')
+                $media = $_POST['attachment'];
+            else
+                $media = $story->media;
+
             $data = array(
                 "title" => $this->input->post("name"),
                 "edition_id" => $this->input->post("edition_id"),
                 "alias" => strtolower(str_replace(array(" ", "&", "."), "-", $this->input->post("name"))),
+                "media" => $media,
                 "story" => $this->input->post("story_content"),
                 "status" => $this->input->post("status")
             );
@@ -166,6 +177,14 @@ class Newsletters extends MX_Controller
             'value' => $this->form_validation->set_value('name', $story->title),
             'class' => 'form-control',
             'placeholder' => 'Write story title ...'
+        );
+
+        $this->data['attachment'] = array(
+            'name' => 'attachment',
+            'id' => 'attachment',
+            'type' => 'file',
+            'value' => $this->form_validation->set_value('attachment'),
+            'class' => 'form-control'
         );
 
         $this->data['story_content'] = array(
@@ -440,8 +459,8 @@ class Newsletters extends MX_Controller
                 $resize_conf['source_image'] = $this->upload->upload_path . $this->upload->file_name;
                 $resize_conf['new_image'] = $this->upload->upload_path . 'thumb_' . $this->upload->file_name;
                 $resize_conf['maintain_ratio'] = FALSE;
-                $resize_conf['width'] = 800;
-                $resize_conf['height'] = 340;
+                $resize_conf['width'] = 500;
+                $resize_conf['height'] = 325;
 
                 // initializing image_lib
                 $this->image_lib->initialize($resize_conf);
@@ -455,9 +474,9 @@ class Newsletters extends MX_Controller
             }
         } else {
             // throw an error because nothing was uploaded
-            $this->form_validation->set_message('upload_attachment', "Please, include media attachment");
+            $this->form_validation->set_message('upload_attachment', "Please, include featured image");
             return FALSE;
         }
-}
+    }
 
 }

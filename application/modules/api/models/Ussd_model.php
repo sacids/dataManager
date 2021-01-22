@@ -38,50 +38,93 @@
 
 /**
  * Created by PhpStorm.
- * User: Godluck Akyoo
  * Date: 23-Mar-17
  * Time: 09:11
  */
 class Ussd_model extends CI_Model
 {
-	private $api_key;
-	private $sms_push_url;
-	private $user;
-	private $sms_sender_id;
+    const MOBILE_SERVICE_ID = 93;
 
-	function __construct()
-	{
-		parent::__construct();
+    private $api_key;
+    private $sms_push_url;
+    private $user;
+    private $sms_sender_id;
 
-		$this->api_key = $this->config->item("ega_api_key");
-		$this->user = $this->config->item("ega_api_user");
-		$this->sms_push_url = $this->config->item("ega_api_sms_push_url");
-		$this->sms_sender_id = $this->config->item("ega_api_sms_sender_id");
-	}
+    function __construct()
+    {
+        parent::__construct();
 
-	public function send_push_sms($post_data)
-	{
-		if (!is_array($post_data)) {
-			log_message("error", "Data received is not array");
-			return FALSE;
-		}
+        $this->sms_sender_id = '15200';
+        $this->api_key = '7jl4QjSEKLwBAYWa0Z5YNn5FUdnrxkeY0CYkxIt8';
+        $this->user = 'afyadata@sacids.org';
+        $this->sms_push_url = 'http://154.118.230.108/msdg/public/quick_sms';
+    }
 
-		//HASH the JSON with the generated user API key using SHA-256 method.
-		$hash = hash_hmac('sha256', $post_data['data'], $this->api_key, TRUE);
+    //push message
+    function push($recipients, $message)
+    {
+        $date_time = date('Y-m-d H:i:s');
+        $message = array(
+            'recipients' => $recipients,
+            'message' => $message,
+            'datetime' => $date_time,
+            'sender_id' => $this->sms_sender_id,
+            'mobile_service_id' => self::MOBILE_SERVICE_ID
+        );
 
-		$http_header = array(
-			'X-Auth-Request-Hash:' . base64_encode($hash),
-			'X-Auth-Request-Id:' . $this->user,
-			'X-Auth-Request-Type:api'
-		);
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $this->sms_push_url);
-		curl_setopt($ch, CURLOPT_POST, TRUE);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-		$response = curl_exec($ch);
-		log_message("info", "http response code " . curl_getinfo($ch, CURLINFO_HTTP_CODE));
-		curl_close($ch);
-	}
+        $post_data = array('data' => json_encode($message), 'datetime' => $date_time);
+        log_message("DEBUG", json_encode($post_data));
+        echo $post_data['data'];
+
+        if (!is_array($post_data)) {
+            log_message("error", "Data received is not array");
+            return FALSE;
+        }
+
+        //HASH the JSON with the generated user API key using SHA-256 method.
+        $hash = hash_hmac('sha256', $post_data['data'], $this->api_key, TRUE);
+
+        $http_header = array(
+            'X-Auth-Request-Hash:' . base64_encode($hash),
+            'X-Auth-Request-Id:' . $this->user,
+            'X-Auth-Request-Type:api'
+        );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->sms_push_url);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        $response = curl_exec($ch);
+        //echo "http response code " . curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        log_message("info", "http response code " . curl_getinfo($ch, CURLINFO_HTTP_CODE));
+        curl_close($ch);
+    }
+
+    //push sms
+    public function send_push_sms($post_data)
+    {
+        if (!is_array($post_data)) {
+            log_message("error", "Data received is not array");
+            return FALSE;
+        }
+
+        //HASH the JSON with the generated user API key using SHA-256 method.
+        $hash = hash_hmac('sha256', $post_data['data'], $this->api_key, TRUE);
+
+        $http_header = array(
+            'X-Auth-Request-Hash:' . base64_encode($hash),
+            'X-Auth-Request-Id:' . $this->user,
+            'X-Auth-Request-Type:api'
+        );
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->sms_push_url);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        $response = curl_exec($ch);
+        log_message("info", "http response code " . curl_getinfo($ch, CURLINFO_HTTP_CODE));
+        curl_close($ch);
+    }
 }

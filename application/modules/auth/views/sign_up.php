@@ -1,71 +1,106 @@
-<!-- Page Content -->
-<section class="page-wrapper">
-    <div class="container">
-        <div class="sign-up row">
+<section class="bg-grey">
+    <div class="container" style="min-height: 450px;">
+        <div class="row">
+            <div class="col-md-4 col-sm-3 col-xs-12 col-lg-4"></div>
+            <div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">
+                <div class="default-padding">
 
-            <div class="left-col col-lg-7">
-                <h2>AFYADATA - Taarifa kwa wakati!</h2>
+                    <div class="panel panel-default ">
+                        <div class="panel-heading">
+                            <i class="fa fa-user-plus"></i>
+                            SIGN UP
+                        </div>
 
-                <p>Afyadata Manager is a tool that analyzes all the data collected from the field
-                    and intelligently sends feedback to the data collector and sends an alert to higher authority
-                    officials if any abnormal pattern is discovered in the data collected.</p>
-                <p>This tool provides a graphical
-                    user interface for involved health stakeholders to analyze and visualizing data collected via
-                    Afyadata
-                    mobile app for android.</p>
-            </div>
+                        <div class="panel-body">
+                            <?php if ($message != "") {
+                                echo '<span class="red">' . $message . '</span>';
+                            } ?>
 
-            <div class="right-col col-lg-5">
-                <form action="<?php echo site_url('auth/sign_up'); ?>" class="form-horizontal" role="form"
-                      method="post" accept-charset="utf-8">
-                    <div class="pure-form">
-                        <h2>Sign up to Afyadata</h2>
-
-                        <?php if ($message != "") {
-                            echo '<div style="color: red; font-size: 11px;">' . $message . '</div>';
-                        } ?>
-
-                        <div class="col-lg-12" style="margin-top: 10px;">
+                            <?= form_open('auth/sign_up', 'class="form-horizontal"') ?>
                             <div class="form-group">
-                                <?php echo form_input($first_name); ?>
-                            </div> <!-- /form-group -->
+                                <div class="col-lg-12">
+                                    <label>First name <span class="red">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <?= form_input($first_name); ?>
+                                    </div>
+                                </div>
+                            </div><!--./form-group -->
 
                             <div class="form-group">
-                                <?php echo form_input($last_name); ?>
-                            </div> <!-- /form-group -->
+                                <div class="col-lg-12">
+                                    <label>Last name <span class="red">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <?= form_input($last_name); ?>
+                                    </div>
+                                </div>
+                            </div><!--./form-group -->
 
                             <div class="form-group">
-                                <?= form_input($organization) ?>
-                            </div>
+                                <div class="col-lg-12">
+                                    <label>Organization <span class="red">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-building"></i></span>
+                                        <?= form_input($organization); ?>
+                                    </div>
+                                </div>
+                            </div><!--./form-group -->
 
                             <div class="form-group">
-                                <?= form_input($email) ?>
-                            </div>
+                                <div class="col-lg-12">
+                                    <label>Email <span class="red">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                        <?= form_input($email); ?>
+                                    </div>
+                                </div>
+                            </div><!--./form-group -->
 
                             <div class="form-group">
-                                <?= form_input($phone) ?>
-                            </div>
+                                <div class="col-lg-12">
+                                    <label>Phone <span class="red">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                        <?= form_input($phone); ?>
+                                    </div>
+                                </div>
+                            </div><!--./form-group -->
 
                             <div class="form-group">
-                                <?= form_password($password) ?>
-                            </div>
+                                <div class="col-lg-12">
+                                    <label>Password <span class="red">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                        <?= form_input($password); ?>
+                                    </div>
+                                </div>
+                            </div><!--./form-group -->
 
                             <div class="form-group">
-                                <?= form_password($password_confirm) ?>
-                            </div>
+                                <div class="col-lg-12">
+                                    <label>Password Confirm<span class="red">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                        <?= form_input($password_confirm); ?>
+                                    </div>
+                                </div>
+                            </div><!--./form-group -->
 
-                            <?php echo form_hidden('group[]', '8'); ?>
+                            <?= form_hidden('group[]', '8'); ?>
 
                             <div class="form-group last">
-                                <?php echo form_submit('submit', 'Sign up', array('class' => "btn btn-maroon")); ?>
-                            </div>
-                        </div>
-                        <div class="form-group"></div>
-                    </div>
-                </form>
-            </div>
+                                <div class="col-lg-6">
+                                    <?= form_submit('submit', 'Sign up', array('class' => "btn btn-maroon btn-large btn-block")); ?>
+                                </div>
+                            </div><!-- form-group -->
+                            <?= form_close() ?>
 
-        </div>
-    </div>
-    <!-- /.container -->
+                        </div><!--./panel-body -->
+                    </div><!--./panel -->
+                </div>
+            </div><!--./col-md-4 -->
+            <div class="col-md-2"></div>
+        </div><!--./row -->
+    </div><!--./container -->
 </section>

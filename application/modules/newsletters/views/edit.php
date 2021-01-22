@@ -21,7 +21,7 @@
                         echo $this->session->flashdata('message');
                     } ?>
 
-                    <?= form_open(uri_string(), 'role="form"'); ?>
+                    <?= form_open_multipart(uri_string(), 'role="form"'); ?>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -48,6 +48,25 @@
                         </div>
                     </div><!--./row -->
 
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Change Featured Image</label><br>
+                                <?php
+                                echo form_checkbox('change_image', 1, set_checkbox('change_image', 1));
+                                echo form_label('Yes', 'change_image'); ?>
+                            </div>
+                        </div>
+                    </div> <!-- /.row -->
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Featured Image <span style="color: red;">*</span></label>
+                                <?= form_upload($attachment) ?>
+                            </div>
+                        </div>
+                    </div><!--./row -->
 
                     <div class="row">
                         <div class="col-sm-8">

@@ -85,7 +85,7 @@ class Dashboard extends CI_Controller
 
         $i = 0;
         foreach ($submitted_forms as $value) {
-            $form_title[$i] = '<a href="' . site_url('xform/form_data/' . $value->id) . '" >' . $value->title . '</a>';;
+            $form_title[$i] = '<a href="' . site_url('xform/form_data/' . $value->project_id.'/'.$value->id) . '" >' . $value->title . '</a>';
             $overall_data[$i] = $this->Submission_model->count_overall_submitted_forms($value->form_id);
             $monthly_data[$i] = $this->Submission_model->count_monthly_submitted_forms($value->form_id);
             $weekly_data[$i] = $this->Submission_model->count_weekly_submitted_forms($value->form_id);
@@ -101,6 +101,19 @@ class Dashboard extends CI_Controller
 
         //feedback
         $this->data['feedback'] = $this->Feedback_model->find_all(5, 0);
+
+        //detected diseases
+        $this->model->set_table('ohkr_detected_diseases');
+
+        $this->db->group_by('disease_id');
+        $detected_diseases = $this->model->order_by('date_detected', 'DESC')->limit(10)->get_all();
+        $this->data['detected_diseases'] = $detected_diseases;
+
+        foreach ($this->data['detected_diseases'] as $k => $v) {
+            //disease
+            $this->model->set_table('ohkr_diseases');
+            $this->data['detected_diseases'][$k]->disease = $this->model->get($v->disease_id);
+        }
 
         //render view
         $this->load->view('header', $this->data);

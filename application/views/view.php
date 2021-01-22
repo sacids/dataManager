@@ -109,7 +109,7 @@
     <div class="container text-center">
         <div class="call-to-action">
             <h2>Get involved with AfyaData.</h2>
-            <a href="https://play.google.com/store/apps/details?id=org.sacids.afyadata"
+            <a href="<?= base_url('afyadataV1.3.apk')?>"
                class="btn btn-dark-orange btn-xl">
                 <i class="fa fa-android fa-lg"></i> Download App Now!</a>
 

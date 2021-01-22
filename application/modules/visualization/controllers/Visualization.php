@@ -372,10 +372,10 @@ class Visualization extends CI_Controller
 
         $gps_prefix = substr($point_field, 0, -6);
 
-        $form_data = $this->Xform_model->get_geospatial_data($form_id);
+        $form_data = $this->Xform_model->get_geospatial_data($form_id, 500);
 
         //todo Finish
-        /*$field_maps = $this->_get_mapped_table_column_name($form_id);
+        $field_maps = $this->_get_mapped_table_column_name($form_id);
         $data['mapped_fields'] = [];
         foreach ($form_data as $key => $value) {
             if (array_key_exists($key, $field_maps)) {
@@ -384,20 +384,31 @@ class Visualization extends CI_Controller
                 $data['mapped_fields'][$key] = $value;
             }
         }
-        $form_data = $data['mapped_fields'];*/
+
+	//echo '<pre>';print_r($field_maps);echo '</pre>'; exit();
+        //$form_data = $data['mapped_fields'];*/
+
+
+
+
 
         $addressPoints = '<script type="text/javascript"> var addressPoints = [';
         $first = 0;
 
-        foreach ($form_data as $val) {
-            $data_string = "<h3>" . $xform->title . "</h3>";
+        foreach ($form_data as $i => $val) {
+            $data_string = "<h4>" . $xform->title . "</h4><small>".$form_data[$i]['submitted_at']."</small><br><br>";
 
             foreach ($val as $key => $value) {
                 if (!strpos($key, '_point')) {
                     if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) {
                         $data_string .= str_replace('"', '\'', '<img src = "' . base_url() . 'assets/forms/data/images/' . $value . '" width="350" /><br/>');
                     } else {
-                        $data_string .= $key . " : " . str_replace('"', '', str_replace("'", "\'", $value)) . "<br/>";
+			if(array_key_exists($key,$field_maps) && substr($key,0,4) == '_xf_'){
+				$key =  $field_maps[$key];
+			}else{
+				continue;
+			}
+                        $data_string .= $key . " : <b>" . str_replace('"', '', str_replace("'", "\'", urlencode(trim($value)))) . "</b><br/>";
                     }
                 }
             }

@@ -76,8 +76,10 @@
                                     <td>
                                         <?php
                                         $i = 1;
+                                        $names = array();
                                         foreach ($user->groups as $group) {
                                             echo $i . '. ' . ucfirst(str_replace('_', ' ', $group->name)) . "<br/>";
+                                            array_push($names, $group->name);
                                             $i++;
                                         } ?>
                                     </td>
@@ -85,8 +87,15 @@
                                             anchor("auth/activate/" . $user->id, lang('index_inactive_link'), array("class" => 'btn btn-danger btn-xs')); ?>
                                     </td>
                                     <td>
-                                        <?= anchor("auth/edit_user/" . $user->id, '<i class="fa fa-pencil"></i> ' . lang('edit_user_heading'), array("class" => 'btn btn-primary btn-xs')); ?>
-                                        <?= anchor("auth/accesscontrol/assign_permission/" . $user->id, lang('edit_user_assign_permission'), array("class" => 'btn btn-warning btn-xs')); ?>
+                                        <?= anchor("auth/edit_user/" . $user->id, '<i class="fa fa-pencil"></i> Edit', array("class" => 'btn btn-primary btn-xs')) . '&nbsp;&nbsp;'; ?>
+
+                                        <?php
+                                        if (in_array('DMO_DVO', $names) || in_array('LFO', $names) || in_array('Mikumi', $names)) {
+                                            echo anchor("auth/mapping/" . $user->id, 'Mapping', array("class" => 'btn btn-info btn-xs')) . '&nbsp;&nbsp;';
+                                            echo anchor("auth/accesscontrol/assign_permission/" . $user->id, 'Permission', array("class" => 'btn btn-warning btn-xs'));
+                                        }
+
+                                        ?>
                                     </td>
                                 </tr>
                                 <?php

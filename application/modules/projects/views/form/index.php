@@ -2,21 +2,22 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">Form List</h3>
+                <h3 class="title"><?= isset($project) ? $project->title : '' ?> Forms</h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
-                <li class="active">Forms List</li>
+                <li class="active"><?= isset($project) ? $project->title : '' ?> Forms</li>
             </ol>
 
             <?= get_flashdata() ?>
 
-            <?php if ($this->ion_auth->is_admin()) { ?>
+            <?php if ($this->ion_auth->in_group('admin')) { ?>
                 <div class="pull-left">
                     <?= anchor("xform/add_new/" . $project_id, '<i class="fa fa-plus"></i> Add New Form', 'class="btn btn-primary btn-sm"') ?>
+                    <?= anchor('projects/edit/' . $project->id, '<i class="fa fa-pencil"></i> Edit Project', 'class="btn btn-sm btn-warning"') ?>
                 </div>
             <?php } ?>
 
@@ -52,11 +53,7 @@
                         <tr>
                             <th></th>
                             <th><?php echo $this->lang->line("label_form_name"); ?></th>
-                            <!--								<th>-->
-                            <?php //echo $this->lang->line("label_form_id"); ?><!--</th>-->
-                            <th><?php echo $this->lang->line("label_description"); ?></th>
-                            <!--								<th>-->
-                            <?php //echo $this->lang->line("label_xml"); ?><!--</th>-->
+                            <th>Sent Forms</th>
                             <th><?php echo $this->lang->line("label_access"); ?></th>
                             <th><?php echo $this->lang->line("label_date_created"); ?></th>
                             <th colspan="3" class="text-center"><?php echo $this->lang->line("label_action"); ?></th>
@@ -64,15 +61,15 @@
 
                         <?php
                         $serial = 1;
-                        foreach ($forms
-
-                                 as $form) { ?>
+                        foreach ($forms as $form) { ?>
                             <tr>
                                 <td><?= $serial ?></td>
-                                <td><?php echo $form->title; ?></td>
-                                <!--									<td>-->
-                                <?php //echo anchor("xform/form_data/" . $form->id, $form->form_id); ?><!--</td>-->
-                                <td><?php echo $form->description; ?></td>
+                                <td>
+                                    <?php echo '<strong>' . $form->title . '</strong>'; ?>
+                                    <?php echo '<p>' . $form->description . '</p>'; ?>
+
+                                </td>
+                                <td align="center"><?= $form->sent_forms ?></td>
                                 <td>
                                     <?php
                                     if ($form->access == "private") {
@@ -90,15 +87,20 @@
                                         <button class="btn btn-danger dropdown-toggle" type="button"
                                                 data-toggle="dropdown">View <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
-                                            <li><?php echo anchor("xform/form_data/" . $project_id . '/' . $form->id, "Data list"); ?></li>
-                                            <li><?php echo anchor("visualization/visualization/chart/" . $project_id . '/' . $form->id, "View Chart"); ?></li>
-                                            <li><?php echo anchor("visualization/visualization/map/" . $project_id . '/' . $form->id, "View Map"); ?></li>
-                                            <li><?php echo anchor("xform/form_overview/" . $form->form_id, "Overview"); ?></li>
-                                            <li><?php echo anchor_popup(base_url() . "assets/forms/definition/" . $form->filename, "Download XML file"); ?></li>
+                                            <?php if ($form->form_type == 'USSD') { ?>
+                                                <li><?php echo anchor("xform/ussd_form_data/" . $project_id . '/' . $form->id, "Data list"); ?></li>
+                                                <?php
+                                            } else { ?>
+                                                <li><?php echo anchor("xform/form_data/" . $project_id . '/' . $form->id, "Data list"); ?></li>
+                                                <li><?php echo anchor("visualization/visualization/chart/" . $project_id . '/' . $form->id, "View Chart"); ?></li>
+                                                <li><?php echo anchor("visualization/visualization/map/" . $project_id . '/' . $form->id, "View Map"); ?></li>
+                                                <li><?php echo anchor("xform/form_overview/" . $form->form_id, "Overview"); ?></li>
+                                                <li><?php echo anchor_popup(base_url() . "assets/forms/definition/" . $form->filename, "Download XML file"); ?></li>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </td>
-                                <?php if ($this->ion_auth->is_admin()) { ?>
+                                <?php if ($this->ion_auth->in_group('admin')) { ?>
                                     <td class="text-center">
                                         <?php echo anchor("xform/edit_form/" . $project_id . '/' . $form->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?>
                                         <?php if ($form->status == "archived") {

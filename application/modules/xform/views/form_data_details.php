@@ -89,6 +89,7 @@
                         <button type="button" class="btn btn-link" data-toggle="modal"
                                 data-target="#myModal">Set Filters
                         </button>
+                        <?php echo anchor("xform/csv_export_form_data/" . $form_id, '<i class="fa fa-file fa-lg"></i>&nbsp;&nbsp;', 'title="Export CSV"') ?>
                         <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Export XLS"') ?>
                         <?php echo anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, '<i class="fa fa-bar-chart-o fa-lg"></i>&nbsp;&nbsp;', 'title="Visualization"') ?>
                         <?php echo anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, '<i class="fa fa-map-marker fa-lg"></i>', 'title="View Map"') ?>

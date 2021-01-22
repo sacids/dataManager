@@ -41,7 +41,7 @@ class Project_model extends CI_Model
             $this->db->where($filter_condition, "", false);
 
         if ($owner != null)
-            $this->db->where('owner', $owner);
+            $this->db->where('created_by', $owner);
 
         return $this->db->get(self::$table_name)->num_rows();
     }
@@ -56,14 +56,14 @@ class Project_model extends CI_Model
     function get_project_list($num, $start, $owner = null, $filter_condition = null)
     {
         if ($filter_condition != null && $owner != null) {
-            $this->db->where('owner', $owner);
+            $this->db->where('created_by', $owner);
             $this->db->or_where($filter_condition, "", false);
         } else {
             if ($owner != null)
-                $this->db->where('owner', $owner);
+                $this->db->where('created_by', $owner);
 
             if ($filter_condition != null)
-                $this->db->where('owner', $owner);
+                $this->db->where('created_by', $owner);
         }
 
         return $this->db

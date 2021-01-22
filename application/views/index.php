@@ -154,7 +154,13 @@
                                 <div class="panel-heading">
                                     <b><?= $this->lang->line("label_frequently_detected_disease") ?></b></div>
                                 <div class="panel-body">
-
+                                        <?php if (isset($detected_diseases) && $detected_diseases) { ?>
+                                        <ul class="list-group">
+                                            <?php foreach ($detected_diseases as $value) { ?>
+                                                <li class="list-group-item"><?= $value->disease->title ?></li>
+                                            <?php } ?>
+                                        </ul>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

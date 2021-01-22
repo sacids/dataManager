@@ -167,9 +167,9 @@ class Auth extends MX_Controller
     // log the user out
     function login()
     {
-        if ($this->ion_auth->logged_in()) {
-            redirect('dashboard', 'refresh');
-        }
+//        if ($this->ion_auth->logged_in()) {
+//            redirect('dashboard', 'refresh');
+//        }
 
         $this->data['title'] = "Login";
 
@@ -189,9 +189,9 @@ class Auth extends MX_Controller
                 $filter_conditions = null;
                 if (!$this->ion_auth->is_admin()) {
                     $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Project_model::$table_name);
-                    $projects = $this->Project_model->get_project_list(10, 0, get_current_user_id(), $filter_conditions);
+                    $projects = $this->Project_model->get_project_list(50, 0, get_current_user_id(), $filter_conditions);
                 } else {
-                    $projects = $this->Project_model->get_project_list(10, 0);
+                    $projects = $this->Project_model->get_project_list(50, 0);
                 }
                 $this->session->set_userdata(['projects' => $projects]);
 
@@ -213,19 +213,19 @@ class Auth extends MX_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('identity'),
                 'class' => 'form-control',
-                'placeholder' => 'Enter username'
+                'placeholder' => 'Write username...'
             );
             $this->data['password'] = array('name' => 'password',
                 'id' => 'password',
                 'type' => 'password',
                 'class' => 'form-control',
-                'placeholder' => 'Enter password'
+                'placeholder' => 'Write password...'
             );
 
             //render view
-            $this->load->view('layout/header', $this->data);
+            $this->load->view('web/header', $this->data);
             $this->_render_page('auth/login');
-            $this->load->view('layout/footer');
+            $this->load->view('web/footer');
         }
     }
 
@@ -321,7 +321,7 @@ class Auth extends MX_Controller
     {
         $this->data['title'] = "Logout";
         // log the user out
-        $logout = $this->ion_auth->logout();
+        //$logout = $this->ion_auth->logout();
 
         // redirect them to the login page
         $this->session->set_flashdata('message', $this->ion_auth->messages());
@@ -683,9 +683,9 @@ class Auth extends MX_Controller
             );
 
             //render view
-            $this->load->view('layout/header', $this->data);
+            $this->load->view('web/header', $this->data);
             $this->_render_page('auth/sign_up');
-            $this->load->view('layout/footer');
+            $this->load->view('web/footer');
         }
     }
 
@@ -977,6 +977,59 @@ class Auth extends MX_Controller
         //render view
         $this->load->view('header', $this->data);
         $this->_render_page('auth/edit_user');
+        $this->load->view('footer');
+    }
+
+    function mapping($id)
+    {
+        $this->data['title'] = "Mapping User";
+
+        if (!$this->ion_auth->logged_in() || (!$this->ion_auth->is_admin() && !($this->ion_auth->user()->row()->id == $id))) {
+            redirect('auth', 'refresh');
+        }
+
+        $user = $this->ion_auth->user($id)->row();
+
+        //users lists
+        $this->data['users_lists'] = $this->User_model->find_all();
+        $this->data['user'] = $user;
+
+        //mapped users
+        $this->model->set_table('feedback_user_map');
+        $assigned_users = $this->model->get_by(array('user_id' => $id));
+
+        if ($assigned_users)
+            $this->data['mapped_users'] = explode(',', $assigned_users->users);
+        else
+            $this->data['mapped_users'] = array();
+
+        if (isset($_POST['save'])) {
+            $new_users = $this->input->post("users");
+
+            $new_users_string = "";
+            if (count($new_users) > 0) {
+                $new_users_string = join(",", $new_users);
+            }
+
+            //check if user exists
+            if ($assigned_users) {
+                //save mapped users
+                $this->model->update_by(array('user_id' => $id),
+                    array('users' => $new_users_string));
+            } else {
+                $this->model->insert(
+                    array('user_id' => $id, 'users' => $new_users_string)
+                );
+            }
+
+            //redirect
+            $this->session->set_flashdata('message', display_message("Users mapped successfully"));
+            redirect('auth/mapping/' . $id, 'refresh');
+        }
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->_render_page('auth/mapping');
         $this->load->view('footer');
     }
 

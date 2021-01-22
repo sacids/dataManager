@@ -85,17 +85,17 @@ class Search extends REST_Controller
     //form search
     public function form_get()
     {
-        if (!$this->get('field') || !$this->get('search_for') || !$this->get('form_id')) {
+        if (!$this->get('field') || !$this->get('search_for') || !$this->get('jr_form_id')) {
             $this->response(array('status' => 'failed', 'message' => 'Parameters are missing'), 202);
         }
 
         //get variable
-        $form_id = $this->get('form_id');
+        $jr_form_id = $this->get('jr_form_id');
         $this->label = $this->get('field');
         $this->search_value = $this->get('search_for');
 
         $this->model->set_table('xforms');
-        $xform = $this->model->get_by('id', $form_id);
+        $xform = $this->model->get_by('jr_form_id', $jr_form_id);
 
         //table name
         $this->table_name = $xform->form_id;

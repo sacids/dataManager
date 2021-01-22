@@ -15,6 +15,29 @@ class Stories extends MX_Controller
         parent::__construct();
     }
 
+    function update_mazingira()
+    {
+        //select first table
+        $this->model->set_table('ad_build_Mazingira_1478257420');
+        $table1 = $this->model->get_all();
+
+
+        foreach ($table1 as $v) {
+            //update another table
+            $this->db->query('UPDATE ad_build_Mazingira_1478257430 SET _xf_ed3f8102f0c3aa15639195672f767940_point = ST_PointFromText(' . $v->Viashiria_Gps_point . ') WHERE meta_instanceID = ' . $v->meta_instanceID);
+
+
+//            $this->model->set_table('ad_build_Mazingira_1478257430');
+//            $this->model->update_by(['meta_instanceID' => $v->meta_instanceID],
+//                [
+//                    '_xf_ed3f8102f0c3aa15639195672f767940_point' => $v->Viashiria_Gps_point,
+//                ]
+//            );
+        }
+
+        echo 'success';
+    }
+
     //stories
     function index()
     {
@@ -56,9 +79,9 @@ class Stories extends MX_Controller
 
 
         //render view
-        $this->load->view("layout/header", $this->data);
+        $this->load->view("web/header", $this->data);
         $this->load->view("stories/index");
-        $this->load->view("layout/footer");
+        $this->load->view("web/footer");
     }
 
     //newsletter story
@@ -82,9 +105,9 @@ class Stories extends MX_Controller
         $this->data['recent_posts'] = $this->Newsletter_model->get_newsletter_stories_list(5, 0);
 
         //render view
-        $this->load->view("layout/header", $this->data);
+        $this->load->view("web/header", $this->data);
         $this->load->view("stories/post");
-        $this->load->view("layout/footer");
+        $this->load->view("web/footer");
     }
 
     //email stories

@@ -37,9 +37,10 @@
                                     <td><?= $disease->disease_title ?></td>
                                     <td><?= $disease->specie_title; ?></td>
                                     <td>
+                                        <?= anchor("ohkr/disease_symptoms_list/" . $disease->id, '<i class="fa fa-pencil-square"></i> Symptoms', 'class="btn btn-default btn-xs"'); ?>
                                         <?= anchor("ohkr/edit_disease/" . $disease->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?>
                                         <?= anchor("ohkr/delete_disease/" . $disease->id, '<i class="fa fa-trash"></i> Delete', 'class="btn btn-danger btn-xs delete"'); ?>
-                                        <?php //echo anchor("ohkr/disease_symptoms_list/" . $disease->id, "Symptoms"); ?>
+
                                     </td>
                                 </tr>
                                 <?php

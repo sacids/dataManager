@@ -89,8 +89,8 @@ class Projects extends MX_Controller
         }
 
         $config = array(
-            'base_url'    => $this->config->base_url("projects/lists"),
-            'total_rows'  => $total_rows,
+            'base_url' => $this->config->base_url("projects/lists"),
+            'total_rows' => $total_rows,
             'uri_segment' => 3,
         );
 
@@ -121,10 +121,10 @@ class Projects extends MX_Controller
 
         if ($this->form_validation->run() == TRUE) {
             $project_details = array(
-                'title'       => $this->input->post('name'),
+                'title' => $this->input->post('name'),
                 'description' => $this->input->post('description'),
-                'created_at'  => date('Y-m-d H:i:s'),
-                'owner'       => $this->user_id
+                'created_at' => date('Y-m-d H:i:s'),
+                'created_by' => $this->user_id
             );
 
 
@@ -142,21 +142,21 @@ class Projects extends MX_Controller
 
         //populate data
         $this->data['name'] = array(
-            'name'        => 'name',
-            'id'          => 'name',
-            'type'        => 'text',
-            'value'       => $this->form_validation->set_value('name'),
-            'class'       => 'form-control',
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('name'),
+            'class' => 'form-control',
             'placeholder' => $this->lang->line("placeholder_project_title")
         );
 
         $this->data['description'] = array(
-            'name'        => 'description',
-            'id'          => 'description',
-            'type'        => 'text area',
-            'value'       => $this->form_validation->set_value('description'),
-            'rows'        => '5',
-            'class'       => 'form-control',
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text area',
+            'value' => $this->form_validation->set_value('description'),
+            'rows' => '5',
+            'class' => 'form-control',
             'placeholder' => $this->lang->line("placeholder_project_description")
         );
 
@@ -183,30 +183,30 @@ class Projects extends MX_Controller
 
         if ($this->form_validation->run() == TRUE) {
             $data = array(
-                'title'       => $this->input->post('name'),
+                'title' => $this->input->post('name'),
                 'description' => $this->input->post('description')
             );
             $this->db->update('projects', $data, array('id' => $project_id));
 
             $this->session->set_flashdata('message', display_message($this->lang->line("message_project_updated")));
-            redirect('projects/lists', 'refresh');
+            redirect('projects/forms/' . $project_id, 'refresh');
         }
 
         //populate data
         $this->data['name'] = array(
-            'name'  => 'name',
-            'id'    => 'name',
-            'type'  => 'text',
+            'name' => 'name',
+            'id' => 'name',
+            'type' => 'text',
             'value' => $this->form_validation->set_value('name', $project->title),
             'class' => 'form-control'
         );
 
         $this->data['description'] = array(
-            'name'  => 'description',
-            'id'    => 'description',
-            'type'  => 'text area',
+            'name' => 'description',
+            'id' => 'description',
+            'type' => 'text area',
             'value' => $this->form_validation->set_value('description', $project->description),
-            'rows'  => '5',
+            'rows' => '5',
             'class' => 'form-control'
         );
 
@@ -216,10 +216,18 @@ class Projects extends MX_Controller
         $this->load->view('footer');
     }
 
+    //project details
     public function forms($project_id)
     {
-        $this->data['title'] = "Forms List";
+        $this->data['title'] = "Project Form Lists";
 
+        $this->model->set_table('projects');
+        $project = $this->model->get_by(array('id' => $project_id));
+
+        if (count($project) == 0) {
+            show_error("Project not exists", 500);
+        }
+        $this->data['project'] = $project;
         $this->data['project_id'] = $project_id;
 
         $filter_conditions = null;
@@ -286,6 +294,12 @@ class Projects extends MX_Controller
             }*/
 
             $this->data['forms'] = $project_forms;
+
+            //count sent forms
+            foreach ($this->data['forms'] as $k => $v) {
+                $this->model->set_table($v->form_id);
+                $this->data['forms'][$k]->sent_forms = $this->model->count_all();
+            }
 
             //render view
             $this->load->view('header', $this->data);

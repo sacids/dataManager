@@ -195,9 +195,11 @@ class Xform_model extends CI_Model
     public function get_form_list_by_perms($perms, $limit = 30, $offset = 0, $status = NULL, $push = NULL)
     {
         if (is_array($perms)) {
+            $this->db->group_start();
             foreach ($perms as $key => $value) {
                 $this->db->or_like("perms", $value);
             }
+            $this->db->group_end();
         } else {
             $this->db->where("perms", $perms);
         }
@@ -206,7 +208,7 @@ class Xform_model extends CI_Model
             $this->db->where("status", $status);
 
         if ($push != NULL)
-            $this->db->where("push", 1);
+            $this->db->where("push", $push);
 
         $this->db->limit($limit, $offset);
         return $this->db->get(self::$xform_table_name)->result();
@@ -580,10 +582,10 @@ class Xform_model extends CI_Model
      */
     public function xform_table_column_exists($table_name, $column_name)
     {
-        $this->db->where("table_name", $table_name);
-        $this->db->where("col_name", $column_name);
-        //$this->db->limit(1);
-        return ($this->db->get(self::$xform_fieldname_map_table_name)->num_rows() > 0) ? TRUE : FALSE;
+        return $this->db
+            ->where("table_name", $table_name)
+            ->where("col_name", $column_name)
+            ->get(self::$xform_fieldname_map_table_name)->num_rows();
     }
 
     /**

@@ -52,7 +52,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Media <span style="color: red;">*</span></label>
+                                <label>Featured Image <span style="color: red;">*</span></label>
                                 <?= form_upload($attachment) ?>
                             </div>
                         </div>

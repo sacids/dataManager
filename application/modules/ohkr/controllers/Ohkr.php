@@ -6,7 +6,7 @@
  * Date: 2/29/2016
  * Time: 4:17 PM
  */
-class Ohkr extends CI_Controller
+class Ohkr extends MX_Controller
 {
     private $data;
     private $controller;
@@ -15,7 +15,7 @@ class Ohkr extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model(array("Ohkr_model", "Perm_model", "User_model"));
+        $this->load->model(array("Ohkr_model", "Perm_model", "User_model", "Disease_model", "Symptom_model", "Specie_model"));
         log_message('debug', 'Ohkr controller initialized');
         //$this->load->library("Db_exp");
 
@@ -41,9 +41,9 @@ class Ohkr extends CI_Controller
      */
     function has_allowed_perm($method_name)
     {
-        if (!perms_role($this->controller, $method_name)) {
-            show_error("You are not allowed to view this page", 401, "Unauthorized");
-        }
+//        if (!perms_role($this->controller, $method_name)) {
+//            show_error("You are not allowed to view this page", 401, "Unauthorized");
+//        }
     }
 
 
@@ -97,8 +97,8 @@ class Ohkr extends CI_Controller
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
         $this->form_validation->set_rules("specie", $this->lang->line("label_specie_name"), "required");
         $this->form_validation->set_rules("description", $this->lang->line("label_description"), "required");
-        $this->form_validation->set_rules("group[]", $this->lang->line("label_recipient_group"), "required");
-        $this->form_validation->set_rules("message[]", $this->lang->line("label_alert_message"), "required");
+        //$this->form_validation->set_rules("group[]", $this->lang->line("label_recipient_group"), "required");
+       // $this->form_validation->set_rules("message[]", $this->lang->line("label_alert_message"), "required");
 
         if ($this->form_validation->run() === FALSE) {
 
@@ -110,8 +110,7 @@ class Ohkr extends CI_Controller
             $disease = array(
                 "title" => $this->input->post("name"),
                 "specie_id" => $this->input->post("specie"),
-                "description" => $this->input->post("description"),
-                "date_created" => date("Y-m-d H:i:s")
+                "description" => $this->input->post("description")
             );
 
             $alert_groups = $this->input->post("group");
@@ -120,21 +119,21 @@ class Ohkr extends CI_Controller
             $this->db->trans_start();
             $disease_id = $this->Ohkr_model->add_disease($disease);
 
-            for ($i = 0; $i < count($alert_messages); $i++) {
-                $message = array(
-                    "disease_id" => $disease_id,
-                    "group_id" => $alert_groups[$i],
-                    "message" => $alert_messages[$i],
-                    "type" => "TEXT",
-                    "status" => "Enabled",
-                    "date_created" => date("Y-m-d H:i:s")
-                );
-                $this->Ohkr_model->create_response_sms($message);
-            }
+            // for ($i = 0; $i < count($alert_messages); $i++) {
+            //     $message = array(
+            //         "disease_id" => $disease_id,
+            //         "group_id" => $alert_groups[$i],
+            //         "message" => $alert_messages[$i],
+            //         "type" => "TEXT",
+            //         "status" => "Enabled",
+            //         "date_created" => date("Y-m-d H:i:s")
+            //     );
+            //     $this->Ohkr_model->create_response_sms($message);
+            // }
             $this->db->trans_complete();
 
             if ($this->db->trans_status()) {
-                file_get_contents(base_url("api/v3/intel/set_epi_map"));
+                //file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("add_disease_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_disease")));
@@ -170,8 +169,8 @@ class Ohkr extends CI_Controller
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
         $this->form_validation->set_rules("specie", $this->lang->line("label_specie_name"), "required");
         $this->form_validation->set_rules("description", $this->lang->line("label_description"), "required");
-        $this->form_validation->set_rules("group", $this->lang->line("label_recipient_group"), "required");
-        $this->form_validation->set_rules("message", $this->lang->line("label_alert_message"), "required");
+        //$this->form_validation->set_rules("group", $this->lang->line("label_recipient_group"), "required");
+        //$this->form_validation->set_rules("message", $this->lang->line("label_alert_message"), "required");
 
         if ($this->form_validation->run() === FALSE) {
 
@@ -186,7 +185,7 @@ class Ohkr extends CI_Controller
             );
 
             if ($this->Ohkr_model->update_disease($disease_id, $disease)) {
-                file_get_contents(base_url("api/v3/intel/set_epi_map"));
+                //file_get_contents(base_url("api/v3/intel/set_epi_map"));
                 $this->session->set_flashdata("message", display_message($this->lang->line("edit_disease_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_edit_disease")));
@@ -480,76 +479,173 @@ class Ohkr extends CI_Controller
     //disease symptoms
     public function disease_symptoms_list($disease_id)
     {
-        //check login
         $this->is_logged_in();
+        $data['title'] = "Disease Symptoms";
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
-        $data['title'] = "Disease Symptoms";
-        $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
-        $data['symptoms'] = $this->Ohkr_model->find_disease_symptoms($disease_id);
+        $disease = $this->Ohkr_model->get_disease_by_id($disease_id);
+        if (count($disease) == 0) {
+            show_error("Disease not found", 500);
+        }
+        $data['disease'] = $disease;
 
+        //disease symptoms
+        $this->model->set_table('ohkr_disease_symptoms');
+        $diseases_symptoms = $this->model->get_many_by(['disease_id' => $disease_id]);
+        $data['diseases_symptoms'] = $diseases_symptoms;
+
+        foreach ($data['diseases_symptoms'] as $k => $v) {
+            $data['diseases_symptoms'][$k]->disease = $this->Disease_model->get_disease_by_id($v->disease_id);
+            $data['diseases_symptoms'][$k]->symptom = $this->Symptom_model->get_symptom_by_id($v->symptom_id);
+            $data['diseases_symptoms'][$k]->specie = $this->Specie_model->get_specie_by_id($v->specie_id);
+        }
+
+        //render view
         $this->load->view('header', $data);
-        $this->load->view("ohkr/disease_symptoms_list");
+        $this->load->view("ohkr/list_disease_symptoms");
         $this->load->view('footer');
     }
 
+    //add disease symptom
     public function add_disease_symptom($disease_id)
     {
-        //check login
         $this->is_logged_in();
+        $data['title'] = "Add Disease Symptom";
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
-        if (!$disease_id) {
-            $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_add")));
-            redirect("ohkr/disease_symptoms_list/" . $disease_id);
-            exit;
+        $disease = $this->Ohkr_model->get_disease_by_id($disease_id);
+        if (count($disease) == 0) {
+            show_error("Disease not found", 500);
+        }
+        $data['disease'] = $disease;
+
+         //form validation
+        $this->form_validation->set_rules("symptom_id", $this->lang->line("label_symptom_name"), "required");
+        $this->form_validation->set_rules("specie_id[]", "Specie", "required");
+        $this->form_validation->set_rules("importance", "Importance", "required");
+
+        if ($this->form_validation->run() === TRUE) {
+            //insert data
+            $this->model->set_table('ohkr_disease_symptoms');
+
+            foreach ($this->input->post('specie_id') as $specie_id) {
+                $id = $this->model->insert(
+                    [
+                        "disease_id" => $disease_id,
+                        "specie_id" => $specie_id,
+                        "symptom_id" => $this->input->post("symptom_id"),
+                        "importance" => $this->input->post("importance")
+                    ]
+                );
+
+                if ($id)
+                    file_get_contents(base_url("api/v3/intel/set_epi_map"));
+            }
+
+            $this->session->set_flashdata("message", display_message($this->lang->line("add_symptom_successful")));
+            redirect("ohkr/disease_symptoms_list/" . $disease_id, "refresh");
         }
 
-        $data['title'] = "Add Disease Symptom";
-        $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
-        $data['symptoms'] = $this->Ohkr_model->find_all_symptoms(100, 0);
+        //populate data
+        $data['importance'] = array(
+            'name' => 'importance',
+            'id' => 'importance',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('importance'),
+            'class' => 'form-control',
+            'placeholder' => 'Write  system importance...'
+        );
 
+        //symptoms
+        $this->model->set_table('ohkr_symptoms');
+        $data['symptoms'] = $this->model->order_by('code', 'ASC')->get_all();
+
+        //species
+        $this->model->set_table('ohkr_species');
+        $data['species'] = $this->model->get_all();
+
+        //render view
+        $this->load->view('header', $data);
+        $this->load->view("ohkr/add_disease_symptom");
+        $this->load->view('footer');
+    }
+
+    //edit disease symptom
+    public function edit_disease_symptom($disease_id, $disease_symptom_id)
+    {
+        $this->is_logged_in();
+        $data['title'] = "Add Disease Symptom";
+
+        //check permission
+        $this->has_allowed_perm($this->router->fetch_method());
+
+        $disease = $this->Ohkr_model->get_disease_by_id($disease_id);
+        if (count($disease) == 0) {
+            show_error("Disease not found", 500);
+        }
+        $data['disease'] = $disease;
+
+        //disease symptoms
+        $disease_symptom = $this->Ohkr_model->get_disease_symptom_by_id($disease_symptom_id);
+        $data['disease_symptom'] = $disease_symptom;
+
+        //symptoms
+        $data['symptoms_list'] = $this->Ohkr_model->find_all_symptoms(100, 0);
+
+        //form validation
         $this->form_validation->set_rules("symptom", $this->lang->line("label_symptom_name"), "required");
         $this->form_validation->set_rules("importance", "Importance", "required");
 
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('header', $data);
-            $this->load->view("ohkr/add_disease_symptom");
-            $this->load->view('footer');
-        } else {
+        if ($this->form_validation->run() === TRUE) {
             $symptoms = array(
                 "symptom_id" => $this->input->post("symptom"),
                 "disease_id" => $disease_id,
                 "importance" => $this->input->post("importance")
             );
 
-            if ($this->Ohkr_model->add_disease_symptom($symptoms)) {
+            if ($this->Ohkr_model->update_disease_symptom($disease_symptom_id, $symptoms)) {
                 file_get_contents(base_url("api/v3/intel/set_epi_map"));
-                $this->session->set_flashdata("message", display_message($this->lang->line("add_symptom_successful")));
+                $this->session->set_flashdata("message", display_message($this->lang->line("edit_symptom_successful")));
             } else {
                 $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_add_symptom")));
             }
             redirect("ohkr/disease_symptoms_list/" . $disease_id, "refresh");
         }
+
+        //populate data
+        $data['importance'] = array(
+            'name' => 'importance',
+            'id' => 'importance',
+            'type' => 'text',
+            'value' => $this->form_validation->set_value('importance', $disease_symptom->importance),
+            'class' => 'form-control',
+            'placeholder' => 'Write  system importance...'
+        );
+
+        //render view
+        $this->load->view('header', $data);
+        $this->load->view("ohkr/edit_disease_symptom");
+        $this->load->view('footer');
     }
 
-    public function edit_disease_symptom($disease_id, $disease_symptom_id)
+    //edit disease symptoms
+    public function edit_disease_symptom1($disease_id, $disease_symptom_id)
     {
-        //check login
         $this->is_logged_in();
+        $data['title'] = "Edit Disease Symptom";
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
-        if (!$disease_symptom_id) {
-            $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_edit")));
-            redirect("ohkr/disease_symptoms_list/" . $disease_id);
-            exit;
+        $disease = $this->Ohkr_model->get_disease_by_id($disease_id);
+        if (count($disease) == 0) {
+            show_error("Disease not found", 500);
         }
+        $data['disease'] = $disease;
 
         $data['title'] = "Edit Disease Symptom";
         $data['symptoms'] = $this->Ohkr_model->find_all_symptoms(100, 0);
@@ -585,25 +681,25 @@ class Ohkr extends CI_Controller
         }
     }
 
-
+    //delete disease symptoms
     function delete_disease_symptom($disease_id, $disease_symptom_id)
     {
-        //check login
         $this->is_logged_in();
+        $data['title'] = "Delete Disease Symptom";
 
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
-        if (!$disease_symptom_id) {
-            $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_delete")));
-            redirect("ohkr/disease_symptoms_list/" . $disease_id);
-            exit;
+        $disease = $this->Ohkr_model->get_disease_by_id($disease_id);
+        if (count($disease) == 0) {
+            show_error("Disease not found", 500);
         }
+        $data['disease'] = $disease;
 
-
+        //delete
         if ($this->Ohkr_model->delete_disease_symptom($disease_symptom_id)) {
             file_get_contents(base_url("api/v3/intel/set_epi_map"));
-            $this->session->set_flashdata("message", display_message($this->lang->line("delete_symptom_successful")));
+            $this->session->set_flashdata("message", display_message($this->lang->line("delete_symptom_successful"), 'danger'));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_symptom")));
         }
@@ -803,9 +899,9 @@ class Ohkr extends CI_Controller
         }
     }
 
+    //add response message
     public function add_new_response_sms($disease_id)
     {
-
         $this->is_logged_in();
 
         //check permission
@@ -850,9 +946,9 @@ class Ohkr extends CI_Controller
         }
     }
 
+    //Edit response message
     public function edit_response_sms($sms_id)
     {
-
         $this->is_logged_in();
 
         //check permission

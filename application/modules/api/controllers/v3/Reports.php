@@ -24,8 +24,10 @@ class Reports extends REST_Controller
             $this->response(array('status' => 'failed', 'message' => 'Required parameter are missing'), 202);
         }
 
+        $username = $this->get('username');
+
         //get user details from database
-        $user = $this->User_model->find_by_username($this->get('username'));
+        $user = $this->User_model->find_by_username($username);
 
         //show status header if user not available in database
         if (count($user) == 0) {
@@ -48,7 +50,7 @@ class Reports extends REST_Controller
             foreach ($forms as $v) {
                 //form data
                 $this->model->set_table($v->form_id);
-                $form_data = $this->model->get_all();
+                $form_data = $this->model->order_by('id', 'desc')->limit(50)->get_all();
 
                 foreach ($form_data as $value) {
                     $this->model->set_table('feedback');
@@ -90,7 +92,7 @@ class Reports extends REST_Controller
             }
             $this->response(array("status" => "success", "forms" => $form), 200);
         } else {
-            $this->response(array('status' => 'failed', 'message' => 'No campaign found'), 202);
+            $this->response(array('status' => 'failed', 'message' => 'No report at the moment found'), 202);
         }
     }
 

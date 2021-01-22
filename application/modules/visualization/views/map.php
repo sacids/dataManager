@@ -29,7 +29,7 @@
                 }),
                 latlng = L.latLng(<?php echo $latlon; ?>);
 
-            var map = L.map("map", {center: latlng, zoom: 13, layers: [tiles]});
+            var map = L.map("map", {center: [-6.40177, 34.99269], zoom: 6, layers: [tiles]});
 
             var markers = L.markerClusterGroup();
 

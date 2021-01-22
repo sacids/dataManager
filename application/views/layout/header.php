@@ -202,7 +202,7 @@
 
                 <?php if (!$this->ion_auth->logged_in()): ?>
                     <li class="btn-link"><?= anchor("auth/login", 'Login', 'class="btn btn-sm btn-dark-orange"') ?></li>
-                    <li class="btn-link"><?= anchor("auth/sign_up", 'Sign up', 'class="btn btn-sm btn-maroon"') ?></li>
+                    <!--<li class="btn-link"><?= anchor("auth/sign_up", 'Sign up', 'class="btn btn-sm btn-maroon"') ?></li>-->
                 <?php else: ?>
                     <li class="btn-link"><?= anchor("auth/logout", 'Logout', 'class="btn btn-sm btn-maroon"') ?></li>
                 <?php endif; ?>
