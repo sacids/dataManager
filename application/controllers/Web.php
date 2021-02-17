@@ -20,8 +20,8 @@ class Web extends CI_Controller
     {
         $this->data['title'] = 'Taarifa kwa wakati!';
 
-        $stories_lists = [];
-        $this->data['stories_lists'] = $stories_lists;
+        $stories = [];
+        $this->data['stories'] = $stories;
 
         //render view
         $this->load->view('web/header', $this->data);

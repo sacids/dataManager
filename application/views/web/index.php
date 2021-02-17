@@ -54,8 +54,8 @@
         <div class="row text-center">
 
             <?php
-            if (isset($stories_lists)) {
-                foreach ($stories_lists as $post) { ?>
+            if (isset($stories)) {
+                foreach ($stories as $post) { ?>
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card">
                             <?php if (file_exists('./assets/uploads/media/thumb_' . $post->media)) { ?>
