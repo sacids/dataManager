@@ -429,8 +429,6 @@ class Xformreader_model extends CI_Model
         // get the body section of xform
         $tmp2 = $rxml->children [0]->children [1]->children [1]->children [0]->children;
         $tmp2 = $rxml->children [1]->children;
-
-        
         // container
         $xarray = array();
 

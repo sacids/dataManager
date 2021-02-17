@@ -20,7 +20,7 @@ class Web extends CI_Controller
     {
         $this->data['title'] = 'Taarifa kwa wakati!';
 
-        $stories_lists = $this->Newsletter_model->get_newsletter_stories_list(4, 0);
+        $stories_lists = [];
         $this->data['stories_lists'] = $stories_lists;
 
         //render view
