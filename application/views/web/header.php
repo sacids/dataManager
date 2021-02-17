@@ -71,7 +71,7 @@
             <ul class="nav navbar-nav">
                 <li><?= anchor("about", "About AfyaData", 'class="page-scroll"') ?></li>
                 <li><?= anchor("about", "Public Forms", 'class="page-scroll"') ?></li>
-                <li><?= anchor("newsletters/stories", "Newsletter Stories", 'class="page-scroll"') ?></li>
+                <li><?= anchor("about", "Success Stories", 'class="page-scroll"') ?></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
