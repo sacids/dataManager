@@ -186,14 +186,14 @@ class Auth extends MX_Controller
                 //if the login is successful
                 //redirect them back to the home page
 
-                $filter_conditions = null;
-                if (!$this->ion_auth->is_admin()) {
-                    $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Project_model::$table_name);
-                    $projects = $this->Project_model->get_project_list(50, 0, get_current_user_id(), $filter_conditions);
-                } else {
-                    $projects = $this->Project_model->get_project_list(50, 0);
-                }
-                $this->session->set_userdata(['projects' => $projects]);
+                // $filter_conditions = null;
+                // if (!$this->ion_auth->is_admin()) {
+                //     $filter_conditions = $this->Acl_model->find_user_permissions(get_current_user_id(), Project_model::$table_name);
+                //     $projects = $this->Project_model->get_project_list(50, 0, get_current_user_id(), $filter_conditions);
+                // } else {
+                //     $projects = $this->Project_model->get_project_list(50, 0);
+                // }
+                // $this->session->set_userdata(['projects' => $projects]);
 
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
                 redirect('auth/index', 'refresh');

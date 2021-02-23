@@ -8,7 +8,7 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li class="active">Users List</li>
+                <li class="active">Users List </li>
             </ol>
 
             <div class="row">

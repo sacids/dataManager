@@ -105,8 +105,8 @@ class Dashboard extends CI_Controller
         //detected diseases
         $this->model->set_table('ohkr_detected_diseases');
 
-        $this->db->group_by('disease_id');
-        $detected_diseases = $this->model->order_by('date_detected', 'DESC')->limit(10)->get_all();
+        //$this->db->group_by('disease_id');
+        $detected_diseases = $this->model->order_by('created_at', 'DESC')->limit(10)->get_all();
         $this->data['detected_diseases'] = $detected_diseases;
 
         foreach ($this->data['detected_diseases'] as $k => $v) {
