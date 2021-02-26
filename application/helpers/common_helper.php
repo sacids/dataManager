@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * Created by PhpStorm.
  * User: Renfrid-Sacids
@@ -15,28 +15,23 @@
  * @return boolean TRUE or FALSE
  */
 
-if (!function_exists("perm_module")) {
-
-    function perm_module($controller)
+if (!function_exists("display_projects")) {
+    function display_projects()
     {
-        $CI = &get_instance();
-        $user_id = $CI->session->userdata('user_id');
-        $user_group = $CI->ion_auth_model->get_users_groups($user_id)->row();
+        $ci = &get_instance();
+        $filter_conditions = null;
+        if (!$ci->ion_auth->is_admin()) {
+            $filter_conditions = $ci->Acl_model->find_user_permissions(get_current_user_id(), Project_model::$table_name);
+            $projects = $ci->Project_model->get_project_list(50, 0, get_current_user_id(), $filter_conditions);
+        } else {
+            $projects = $ci->Project_model->get_project_list(50, 0);
+        }
 
-        //get perm_module details
-        $module = $CI->db->get_where('perms_module', array('controller' => $controller))->row();
-
-        if (count($module) > 0) {
-            //get access level
-            $check = $CI->db->get_where('perms_group',
-                array('group_id' => $user_group->id, 'module_id' => $module->id, 'allow' => 1))->num_rows();
-
-            //check if query exceed 0
-            if ($check > 0) {
-                return TRUE;
+        if (!empty($projects)) {
+            foreach ($projects as $project) {
+                echo "<li>" . anchor('projects/forms/' . $project->id, $project->title) . "</li>";
             }
         }
-        return FALSE;
     }
 }
 
@@ -62,8 +57,10 @@ if (!function_exists("perms_role")) {
 
         if (count($module) > 0) {
             //get access level
-            $check = $CI->db->get_where('perms_group',
-                array('group_id' => $user_group->id, 'module_id' => $module->id, 'perm_slug' => $perm_slug, 'allow' => 1))->num_rows();
+            $check = $CI->db->get_where(
+                'perms_group',
+                array('group_id' => $user_group->id, 'module_id' => $module->id, 'perm_slug' => $perm_slug, 'allow' => 1)
+            )->num_rows();
 
             if ($check > 0) {
                 return TRUE;
@@ -71,7 +68,6 @@ if (!function_exists("perms_role")) {
         }
         return FALSE;
     }
-
 }
 
 if (!function_exists("display_message")) {

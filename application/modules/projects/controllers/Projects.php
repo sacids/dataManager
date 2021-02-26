@@ -112,7 +112,6 @@ class Projects extends MX_Controller
     function add_new()
     {
         $this->data['title'] = $this->lang->line("title_add_new_project");
-        //check permission
         //$this->has_allowed_perm($this->router->fetch_method());
 
         //form validation

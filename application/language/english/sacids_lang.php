@@ -162,6 +162,11 @@ $lang['label_chr_to_year']       = 'To Year (or expected)';
 
 $lang['btn_add_chr']             = 'Add CHR';
 
+/*button*/
+$lang['button_save']            = 'Save';
+$lang['button_cancel']          = 'Cancel';
+
+
 /*
  * Project module
  */

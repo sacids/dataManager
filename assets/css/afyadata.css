@@ -78,10 +78,11 @@ section {
     margin-bottom: 10px;
 }
 
-h3.title {
-    color: #3F3F3F;
+#header-title h3.title {
+    color: #424242;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 800;
+    text-transform: uppercase;
     margin: 0 0 8px 0;
     padding: 0 15px 0 0;
 }
@@ -122,6 +123,10 @@ h6.title {
     background: #f5f5f5;
 }
 
+.bg-white {
+    background: #ffffff;
+}
+
 /**	navigation
  *************************************************** **/
 .navbar-default {
@@ -133,10 +138,6 @@ h6.title {
     font-size: 13px;
     color: #FFFFFF;
     font-weight: 600;
-}
-
-.navbar .nav .dropdown-menu a {
-    font-size: 13px;
 }
 
 @media (min-width: 768px) {
@@ -153,18 +154,22 @@ h6.title {
     }
 
     .navbar .nav .dropdown-menu a {
-        font-size: 13px;
+        padding: 8px 10px;
+        color: #424242;
+        font-size: 12px;
+        font-weight: 600;
     }
 }
 
 /**	16. Info
  *************************************************** **/
 .info-block {
-    color: #428499;
+    background-color: #428499 !important;
+    color: #fff;
 }
 
 .info-block a {
-    color: #428499;
+    color: #fff;
 }
 
 .info-block i {
@@ -175,7 +180,7 @@ h6.title {
 
 .info-block h2,
 .info-block h6 {
-    color: #3F3F3F;
+    color: #fff;
     font-weight: 400;
 }
 
@@ -225,7 +230,7 @@ h6.title {
  *************************************************** **/
 .panel {
     position: relative;
-    background: transparent;
+    background-color: inherit;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
@@ -316,7 +321,7 @@ h6.title {
 }
 
 .panel-body {
-    background-color: #fff;
+    background-color: inherit;
     padding: 15px;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;

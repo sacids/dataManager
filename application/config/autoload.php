@@ -128,7 +128,15 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array(
-    'auth/User_model', 'auth/Acl_model', 'auth/Ion_auth_model', 'auth/Perm_model', 'xform/Submission_model',
-    'campaign/Campaign_model', 'feedback/Feedback_model', 'xform/Xform_model', 'facilities/Facilities_model',
-    'ohkr/Ohkr_model', 'model', 'Alert_model', 'xform/Xformreader_model', 'projects/Project_model',
-    'newsletters/Newsletter_model', 'newsletters/Media_model');
+    'auth/User_model', 
+    'auth/Acl_model', 
+    'auth/Ion_auth_model', 
+    'auth/Perm_model', 
+    'xform/Submission_model',
+    'feedback/Feedback_model', 
+    'xform/Xform_model', 
+    'ohkr/Ohkr_model', 'model', 
+    'Alert_model', 
+    'xform/Xformreader_model', 
+    'projects/Project_model'
+);
