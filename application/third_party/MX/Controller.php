@@ -47,6 +47,9 @@ require dirname(__FILE__) . '/Base.php';
  * @property Campaign_model $Campaign_model
  * @property Project_model $project_model
  * @property Ohkr_model $Ohkr_model
+ * @property Disease_model $Disease_model
+ * @property Disease_model $Symptom_model
+ * @property Specie_model $Specie_model
  * @property Whatsapp_model $Whatsapp_model
  * @property Perm_model $Perm_model
  * @property db_exp $db_exp
@@ -61,6 +64,10 @@ require dirname(__FILE__) . '/Base.php';
  * @property Post_model $Post_model
  * @property Model $model
  * @property Acl_model $Acl_model
+ * @property Users_group_model $users_group_model
+ * @property Perms_class_model $perms_class_model
+ * @property Perms_method_model $perms_method_model
+ * @property Perms_group_model $perms_group_model
  * @property XformReader_model $XformReader_model
  * @property Newsletter_model $Newsletter_model
  * @property Media_model $Media_model

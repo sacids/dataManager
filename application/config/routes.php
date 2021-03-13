@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -61,6 +61,22 @@ $route['blog'] = 'blog/post';
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
 $route['open_source_licenses'] = 'welcome/open_source_licenses';
+
+//ohkr
+$route['ohkr/diseases'] = 'ohkr/disease_list';
+$route['ohkr/diseases/add_new'] = 'ohkr/add_new_disease';
+$route['ohkr/diseases/edit/(:num)'] = 'ohkr/edit_disease/$1';
+$route['ohkr/diseases/delete/(:num)'] = 'ohkr/delete_disease/$1';
+
+$route['ohkr/species'] = 'ohkr/species_list';
+$route['ohkr/species/add_new'] = 'ohkr/add_new_specie';
+$route['ohkr/species/edit/(:num)'] = 'ohkr/edit_specie/$1';
+$route['ohkr/species/delete/(:num)'] = 'ohkr/delete_specie/$1';
+
+$route['ohkr/symptoms'] = 'ohkr/symptoms_list';
+$route['ohkr/symptoms/add_new'] = 'ohkr/add_new_symptom';
+$route['ohkr/symptoms/edit/(:num)'] = 'ohkr/edit_symptom/$1';
+$route['ohkr/symptoms/delete/(:num)'] = 'ohkr/delete_symptom/$1';
 
 //Forms controller
 //$route['xform/formList'] = 'xform/form_list';

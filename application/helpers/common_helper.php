@@ -35,40 +35,6 @@ if (!function_exists("display_projects")) {
     }
 }
 
-/**
- *  Check if user has roles
- * has_role function
- *
- * @param  int    module_id    Input int
- * @param  String role_link    Input string
- * @return boolean TRUE or FALSE
- */
-
-if (!function_exists("perms_role")) {
-
-    function perms_role($controller, $perm_slug)
-    {
-        $CI = &get_instance();
-        $user_id = $CI->session->userdata('user_id');
-        $user_group = $CI->ion_auth_model->get_users_groups($user_id)->row();
-
-        //get perm_module details
-        $module = $CI->db->get_where('perms_module', array('controller' => $controller))->row();
-
-        if (count($module) > 0) {
-            //get access level
-            $check = $CI->db->get_where(
-                'perms_group',
-                array('group_id' => $user_group->id, 'module_id' => $module->id, 'perm_slug' => $perm_slug, 'allow' => 1)
-            )->num_rows();
-
-            if ($check > 0) {
-                return TRUE;
-            }
-        }
-        return FALSE;
-    }
-}
 
 if (!function_exists("display_message")) {
     function display_message($message, $message_type = "success")

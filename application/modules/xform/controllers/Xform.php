@@ -76,7 +76,7 @@ class Xform extends MX_Controller
         $this->user_id = $this->session->userdata("user_id");
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><i class="fa fa-warning"></i>.', '</div>');
 
-        $this->objPHPExcel = new PHPExcel();
+        //$this->objPHPExcel = new PHPExcel();
 
         //todo: remove this when finish implementation
         $this->sms_sender_id = '15200';
@@ -648,11 +648,11 @@ class Xform extends MX_Controller
 
         $data['title'] = $this->lang->line("heading_add_new_form");
 
+        //project
         $project = $this->Project_model->get_project_by_id($project_id);
-
-        if (count($project) == 0) {
+        if (!$project) 
             show_error("Project not exist", 500);
-        }
+        
         $data['project'] = $project;
         $data['project_id'] = $project_id;
 

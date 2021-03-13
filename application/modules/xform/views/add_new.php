@@ -33,23 +33,19 @@
                             </div>
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label><?php echo $this->lang->line("label_form_title") ?> <span>*</span></label>
-                                    <input type="text" name="title" placeholder="Enter form title"
-                                           class="form-control"
-                                           value="<?php echo set_value('title'); ?>">
+                                    <label><?php echo $this->lang->line("label_form_title") ?><span class="red"> *</span></label>
+                                    <input type="text" name="title" placeholder="Enter form title" class="form-control" value="<?php echo set_value('title'); ?>">
                                 </div>
                                 <?php echo form_error('title'); ?>
 
                                 <div class="form-group">
-                                    <label for=""><?php echo $this->lang->line("label_form_xml_file") ?>
-                                        <span>*</span></label>
+                                    <label for=""><?php echo $this->lang->line("label_form_xml_file") ?><span class="red"> *</span></label>
                                     <?= form_upload("userfile", "", 'class="form-control"') ?>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="campus"><?php echo $this->lang->line("label_description") ?> :</label>
-                                    <textarea class="form-control" name="description" rows="5"
-                                              id="description"><?php echo set_value('description'); ?></textarea>
+                                    <textarea class="form-control" name="description" rows="5" id="description"><?php echo set_value('description'); ?></textarea>
                                 </div>
                                 <?php echo form_error('description'); ?>
 
@@ -97,7 +93,7 @@
                                                 <?= form_checkbox("perms[]", $key, FALSE); ?>
                                                 <?= ucfirst($value); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             </td>
-                                            <?php $serial++;
+                                        <?php $serial++;
                                         } ?>
                                     </tr>
                                 </table>

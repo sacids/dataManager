@@ -53,13 +53,13 @@ class Feedback extends MX_Controller
      */
     function lists()
     {
-        $this->data['title'] = "Feedback List";
+        $this->data['title'] = "Feedback";
 
         //check if logged in
         $this->is_logged_in();
 
         //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
+        //$this->has_allowed_perm($this->router->fetch_method());
 
         if (isset($_POST['search'])) {
             $form_name = $this->input->post("name", NULL);

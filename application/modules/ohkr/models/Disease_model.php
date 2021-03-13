@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: administrator
@@ -8,6 +9,7 @@
 
 class Disease_model extends CI_Model
 {
+    public $table = 'ohkr_diseases';
 
     function __construct()
     {
@@ -18,9 +20,9 @@ class Disease_model extends CI_Model
      * @param $data
      * @return int
      */
-    function create_disease($data)
+    function insert($data)
     {
-        $result = $this->db->insert('ohkr_diseases', $data);
+        $result = $this->db->insert($this->table, $data);
 
         if ($result)
             return $this->db->insert_id();
@@ -31,27 +33,45 @@ class Disease_model extends CI_Model
      * @param $id
      * @return bool
      */
-    function update_disease($data, $id)
+    function update($data, $id)
     {
-        return $this->db->update('ohkr_diseases', $data, array('id' => $id));
+        return $this->db->update($this->table, $data, array('id' => $id));
+    }
+
+    /**
+     * @param $data
+     * @param $id
+     * @return bool
+     */
+    function update_by($data, $where)
+    {
+        return $this->db->update($this->table, $data, $where);
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    function delete_disease($id)
+    function delete($id)
     {
-        return $this->db->delete('ohkr_diseases', array('id' => $id));
+        return $this->db->delete($this->table, array('id' => $id));
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    function delete_by($where)
+    {
+        return $this->db->delete($this->table, $where);
     }
 
     /**
      * @return mixed
      */
-    function count_diseases()
+    function count_all()
     {
-        return $this->db
-            ->get('ohkr_diseases')->num_rows();
+        return $this->db->get($this->table)->num_rows();
     }
 
     /**
@@ -59,12 +79,12 @@ class Disease_model extends CI_Model
      * @param $start
      * @return array
      */
-    function get_diseases_list($num, $start)
+    function get_all($num, $start)
     {
         return $this->db
             ->order_by('title', 'ASC')
             ->limit($num, $start)
-            ->get('ohkr_diseases')->result();
+            ->get($this->table)->result();
     }
 
     /**
@@ -74,27 +94,35 @@ class Disease_model extends CI_Model
     {
         return $this->db
             ->order_by('title', 'ASC')
-            ->get('ohkr_diseases')->result();
+            ->get($this->table)->result();
     }
 
     /**
-     * @param $id
-     * @return mixed
+     * @return array
      */
-    function get_disease_by_id($id)
+    function get_many($where)
     {
         return $this->db
-            ->get_where('ohkr_diseases', array('id' => $id))->row();
+            ->order_by('title', 'ASC')
+            ->get_where($this->table, $where)->result();
     }
 
     /**
-     * @param $name
-     * @return mixed
+     * @return array
      */
-    function get_disease_by_name($name)
+    function get($id)
     {
         return $this->db
-            ->get_where('ohkr_diseases', array('title' => $name))->row();
+            ->get_where($this->table, ['id' => $id])->row();
     }
 
+    /**
+     * @return array
+     */
+    function get_by($where)
+    {
+        return $this->db
+            ->order_by('title', 'ASC')
+            ->get_where($this->table, $where)->row();
+    }
 }

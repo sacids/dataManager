@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: administrator
@@ -8,6 +9,8 @@
 
 class Symptom_model extends CI_Model
 {
+    public $table = 'ohkr_symptoms';
+
     function __construct()
     {
         parent::__construct();
@@ -17,9 +20,9 @@ class Symptom_model extends CI_Model
      * @param $data
      * @return int
      */
-    function create_symptom($data)
+    function insert($data)
     {
-        $result = $this->db->insert('ohkr_symptoms', $data);
+        $result = $this->db->insert($this->table, $data);
 
         if ($result)
             return $this->db->insert_id();
@@ -30,27 +33,53 @@ class Symptom_model extends CI_Model
      * @param $id
      * @return bool
      */
-    function update_symptom($data, $id)
+    function update($data, $id)
     {
-        return $this->db->update('ohkr_symptoms', $data, array('id' => $id));
+        return $this->db->update($this->table, $data, array('id' => $id));
+    }
+
+    /**
+     * @param $data
+     * @param $id
+     * @return bool
+     */
+    function update_by($data, $where)
+    {
+        return $this->db->update($this->table, $data, $where);
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    function delete_symptom($id)
+    function delete($id)
     {
-        return $this->db->delete('ohkr_symptoms', array('id' => $id));
+        return $this->db->delete($this->table, array('id' => $id));
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    function delete_by($where)
+    {
+        return $this->db->delete($this->table, $where);
     }
 
     /**
      * @return mixed
      */
-    function count_symptoms()
+    function count_all()
     {
-        return $this->db
-            ->get('ohkr_symptoms')->num_rows();
+        return $this->db->get($this->table)->num_rows();
+    }
+
+    /**
+     * @return mixed
+     */
+    function count_many($where)
+    {
+        return $this->db->get($this->table, $where)->num_rows();
     }
 
     /**
@@ -58,12 +87,12 @@ class Symptom_model extends CI_Model
      * @param $start
      * @return array
      */
-    function get_symptoms_list($num, $start)
+    function get_all($num, $start)
     {
         return $this->db
             ->order_by('title', 'ASC')
             ->limit($num, $start)
-            ->get('ohkr_symptoms')->result();
+            ->get($this->table)->result();
     }
 
     /**
@@ -73,17 +102,35 @@ class Symptom_model extends CI_Model
     {
         return $this->db
             ->order_by('title', 'ASC')
-            ->get('ohkr_symptoms')->result();
+            ->get($this->table)->result();
     }
 
     /**
-     * @param $id
-     * @return mixed
+     * @return array
      */
-    function get_symptom_by_id($id)
+    function get_many($where)
     {
         return $this->db
-            ->get_where('ohkr_symptoms', array('id' => $id))->row();
+            ->order_by('title', 'ASC')
+            ->get_where($this->table, $where)->result();
     }
 
+    /**
+     * @return array
+     */
+    function get($id)
+    {
+        return $this->db
+            ->get_where($this->table, ['id' => $id])->row();
+    }
+
+    /**
+     * @return array
+     */
+    function get_by($where)
+    {
+        return $this->db
+            ->order_by('title', 'ASC')
+            ->get_where($this->table, $where)->row();
+    }
 }

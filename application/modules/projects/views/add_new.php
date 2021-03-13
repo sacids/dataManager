@@ -4,7 +4,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 main">
                 <div id="header-title">
                     <h3 class="title"><?= $this->lang->line("title_add_new_project") ?></h3>
-                </div>
+                </div><!--./title -->
 
                 <!-- Breadcrumb -->
                 <ol class="breadcrumb">

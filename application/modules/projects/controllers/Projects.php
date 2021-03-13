@@ -74,7 +74,7 @@ class Projects extends MX_Controller
     //list projects
     function lists()
     {
-        $this->data['title'] = "Projects List";
+        $this->data['title'] = "Projects";
 
         //check permission
         //$this->has_allowed_perm($this->router->fetch_method());
@@ -223,9 +223,9 @@ class Projects extends MX_Controller
         $this->model->set_table('projects');
         $project = $this->model->get_by(array('id' => $project_id));
 
-        if (count($project) == 0) {
+        if (!$project) 
             show_error("Project not exists", 500);
-        }
+        
         $this->data['project'] = $project;
         $this->data['project_id'] = $project_id;
 

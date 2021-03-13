@@ -2,29 +2,38 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">Species List</h3>
+                <h3 class="title">Species</h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li class="active">Species List</li>
+                <li class="active">Species</li>
             </ol>
 
-            <?php get_flashdata() ?>
+            <?php
+            if ($this->session->flashdata('message') != '') {
+                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
+            } ?>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="pull-left" style="padding: 3px;">
+                        <?= anchor('ohkr/add_new_specie', '<i class="fa fa-plus"></i> Add Specie', 'class="btn btn-xs btn-primary"') ?>
+                    </div>
+                </div>
+                <!--./col-md-12 -->
+            </div>
+            <!--./row -->
 
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="pull-left" style="padding: 3px;">
-                        <?= anchor('ohkr/add_new_specie', '<i class="fa fa-plus"></i> Add Specie', 'class="btn btn-sm btn-primary"') ?>
-                    </span>
-
                     <?php if (isset($species) && $species) { ?>
                         <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
-                                <th></th>
-                                <th><?= $this->lang->line("label_specie_name"); ?></th>
-                                <th><?= $this->lang->line("label_action"); ?></th>
+                                <th width="3%"></th>
+                                <th width="80%"><?= $this->lang->line("label_specie_name"); ?></th>
+                                <th width="10%"><?= $this->lang->line("label_action"); ?></th>
                             </tr>
 
                             <?php
@@ -34,14 +43,14 @@
                                     <td><?= $serial; ?></td>
                                     <td><?= $specie->title; ?></td>
                                     <td>
-                                        <?= anchor("ohkr/edit_specie/" . $specie->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?>
-                                        <?= anchor("ohkr/delete_specie/" . $specie->id, '<i class="fa fa-trash"></i> Delete', 'class="btn btn-danger btn-xs delete"'); ?>
+                                        <?= anchor("ohkr/species/edit/" . $specie->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"'); ?>
+                                        <?= anchor("ohkr/species/delete/" . $specie->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
                                     </td>
                                 </tr>
-                                <?php $serial++;
+                            <?php $serial++;
                             } ?>
                         </table>
-                        <?php if (!empty($links)): ?>
+                        <?php if (!empty($links)) : ?>
                             <div class="widget-foot">
                                 <?= $links ?>
                                 <div class="clearfix"></div>
