@@ -70,7 +70,7 @@
                     <li><?php echo anchor('feedback/lists', $this->lang->line("nav_item_chats")); ?></li>
                     <?php //} 
                     ?>
-
+                    
                     <?php //if (perms_class('Ohkr')) { 
                     ?>
                     <li class="dropdown">
