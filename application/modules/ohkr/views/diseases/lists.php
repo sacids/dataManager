@@ -46,7 +46,7 @@
                                     <td><?= $disease->title ?></td>
                                     <td><?= $disease->species; ?></td>
                                     <td>
-                                        <?= anchor("ohkr/disease_symptoms_list/" . $disease->id, 'Symptoms', 'class="btn btn-default btn-xs"'); ?>
+                                        <?= anchor("ohkr/disease_symptoms/" . $disease->id, 'Symptoms', 'class="btn btn-default btn-xs"'); ?>
                                         <?= anchor("ohkr/diseases/edit/" . $disease->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"'); ?>
                                         <?= anchor("ohkr/diseases/delete/" . $disease->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
 

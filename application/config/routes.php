@@ -78,6 +78,8 @@ $route['ohkr/symptoms/add_new'] = 'ohkr/add_new_symptom';
 $route['ohkr/symptoms/edit/(:num)'] = 'ohkr/edit_symptom/$1';
 $route['ohkr/symptoms/delete/(:num)'] = 'ohkr/delete_symptom/$1';
 
+$route['ohkr/disease_symptoms/(:num)'] = 'ohkr/disease_symptoms_list/$1';
+
 //Forms controller
 //$route['xform/formList'] = 'xform/form_list';
 
