@@ -13,6 +13,11 @@
                 <li class="active">Add new disease</li>
             </ol>
 
+            <?php
+            if ($this->session->flashdata('message') != '') {
+                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
+            } ?>
+
 
             <div class="row">
                 <div class="col-sm-12">
@@ -45,12 +50,10 @@
                                         <div class="form-group">
                                             <label><?php echo $this->lang->line("label_specie_name") ?> <span class="red"> * </span></label>
                                             <?php
-                                            $species_options = array("" => "Choose species");
-
                                             foreach ($species as $specie) {
                                                 $species_options[$specie->id] = $specie->title;
                                             }
-                                            echo form_dropdown("specie", $species_options, set_value("specie"), array("id" => "specie", "class" => "form-control"))
+                                            echo form_dropdown("specie[]", $species_options, set_value("specie"), 'class="form-control chosen-select" data-placeholder="-- Select --" multiple')
                                             ?>
                                         </div>
                                         <div class="error" style="color: red"><?php echo form_error('specie'); ?></div>

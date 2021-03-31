@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="pull-left" style="padding: 3px;">
-                        <?= anchor('ohkr/add_new_specie', '<i class="fa fa-plus"></i> Add Specie', 'class="btn btn-xs btn-primary"') ?>
+                        <?= anchor('ohkr/add_new_specie', '<i class="fa fa-plus"></i> Add New', 'class="btn btn-sm btn-primary"') ?>
                     </div>
                 </div>
                 <!--./col-md-12 -->
@@ -31,7 +31,7 @@
                     <?php if (isset($species) && $species) { ?>
                         <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
-                                <th width="3%"></th>
+                                <th width="3%">#</th>
                                 <th width="80%"><?= $this->lang->line("label_specie_name"); ?></th>
                                 <th width="10%"><?= $this->lang->line("label_action"); ?></th>
                             </tr>

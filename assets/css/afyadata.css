@@ -340,7 +340,7 @@ h6.title {
 /**	17. Custom table
  *************************************************** **/
 table.table th, table.table td {
-    font-size: 12px;
+    font-size: 13px;
 }
 
 table.table {
@@ -351,8 +351,8 @@ table.table {
 }
 
 table.table th {
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 600;
     text-align: left;
     color: #333;
     padding: 10px 10px;

@@ -20,6 +20,9 @@
     <!-- Font awesome css -->
     <link href="<?= base_url('assets/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css">
 
+    <!--chosen select -->
+    <link href="<?= base_url('assets/plugins/chosen_v1.8.7/chosen.css') ?>" rel="stylesheet">
+
     <!-- Google fonts - witch you want to use - (rest you can just remove) -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,600,700' rel='stylesheet' type='text/css'>
 
@@ -38,6 +41,18 @@
     <!--js -->
     <script src="<?= base_url('assets/js/jquery-1.12.1.min.js'); ?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/afyadata.js'); ?>"></script>
+
+    <!-- Chosen JavaScript -->
+    <script type="text/javascript" src="<?= base_url('assets/plugins/chosen_v1.8.7/chosen.jquery.js') ?>"></script>
+
+    <script type="application/javascript">
+        $(document).ready(function() {
+            $('.chosen-select').chosen();
+            $('.chosen-select-deselect').chosen({
+                allow_single_deselect: true
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -70,7 +85,7 @@
                     <li><?php echo anchor('feedback/lists', $this->lang->line("nav_item_chats")); ?></li>
                     <?php //} 
                     ?>
-                    
+
                     <?php //if (perms_class('Ohkr')) { 
                     ?>
                     <li class="dropdown">

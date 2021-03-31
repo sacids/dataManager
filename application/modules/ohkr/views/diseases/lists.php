@@ -11,12 +11,15 @@
                 <li class="active">Diseases</li>
             </ol>
 
-            <?php get_flashdata() ?>
+            <?php
+            if ($this->session->flashdata('message') != '') {
+                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
+            } ?>
 
             <div class="row">
                 <div class="col-md-12">
                     <div class="pull-left" style="padding: 3px;">
-                        <?= anchor('ohkr/diseases/add_new', '<i class="fa fa-plus"></i> Add New Disease', 'class="btn btn-xs btn-primary"') ?>
+                        <?= anchor('ohkr/diseases/add_new', '<i class="fa fa-plus"></i> Add New', 'class="btn btn-sm btn-primary"') ?>
                     </div>
                 </div>
                 <!--./col-md-12 -->
@@ -29,7 +32,7 @@
 
                         <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
-                                <th width="3%"></th>
+                                <th width="3%">#</th>
                                 <th width="40%"><?= $this->lang->line("label_disease_name"); ?></th>
                                 <th width="30%"><?= $this->lang->line("label_specie_name"); ?></th>
                                 <th width="15%"><?= $this->lang->line("label_action"); ?></th>
@@ -53,6 +56,7 @@
                                 $serial++;
                             } ?>
                         </table>
+
                         <?php if (!empty($links)) : ?>
                             <div class="widget-foot">
                                 <?= $links ?>

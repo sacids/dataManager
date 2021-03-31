@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="pull-left" style="padding: 3px;">
-                        <?= anchor('ohkr/add_new_symptom', '<i class="fa fa-plus"></i> Add Clinical Manifestation', 'class="btn btn-xs btn-primary"') ?>
+                        <?= anchor('ohkr/add_new_symptom', '<i class="fa fa-plus"></i> Add New', 'class="btn btn-sm btn-primary"') ?>
                     </div>
                 </div>
                 <!--./col-md-12 -->
@@ -31,7 +31,7 @@
                     <?php if (isset($symptoms) && $symptoms) { ?>
                         <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
-                                <th width="3%"></th>
+                                <th width="3%">#</th>
                                 <th width="60%"><?= $this->lang->line("label_symptom_name"); ?></th>
                                 <th width="30%"><?= $this->lang->line("label_symptom_code"); ?></th>
                                 <th width="10%"><?= $this->lang->line("label_action"); ?></th>
