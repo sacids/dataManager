@@ -23,7 +23,7 @@
                     <?php if (count($project_list) > 0) { ?>
                         <table class="table table-responsive table-hover table-bordered">
                             <tr>
-                                <th width="5%"></th>
+                                <th width="5%">#</th>
                                 <th width="25%"><?= $this->lang->line("label_project_title") ?></th>
                                 <th width="40%"><?= $this->lang->line("label_project_description") ?></th>
                                 <th width="20%"><?= $this->lang->line("label_project_created_date") ?></th>

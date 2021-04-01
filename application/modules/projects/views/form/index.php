@@ -56,12 +56,13 @@
                 <?php if (!empty($forms)) { ?>
                     <table class="table table-striped table-responsive table-hover table-bordered" cellspacing="0" cellpadding="0">
                         <tr>
-                            <th></th>
-                            <th><?php echo $this->lang->line("label_form_name"); ?></th>
-                            <th>Sent Forms</th>
-                            <th><?php echo $this->lang->line("label_access"); ?></th>
-                            <th><?php echo $this->lang->line("label_date_created"); ?></th>
-                            <th colspan="3" class="text-center"><?php echo $this->lang->line("label_action"); ?></th>
+                            <th width="3%">#</th>
+                            <th width="40%"><?php echo $this->lang->line("label_form_name"); ?></th>
+                            <th width="10%">Sent Forms</th>
+                            <th width="10%"><?php echo $this->lang->line("label_access"); ?></th>
+                            <th width="12%"><?php echo $this->lang->line("label_date_created"); ?></th>
+                            <th style="width: 60px;" class="text-center"><?php echo $this->lang->line("label_action"); ?></th>
+                            <th style="width: 60px;" class="text-center"><?php echo $this->lang->line("label_action"); ?></th>
                         </tr>
 
                         <?php
@@ -83,7 +84,7 @@
                                     }
                                     ?>
                                 </td>
-                                <td><?php echo date('d-m-Y H:i:s', strtotime($form->date_created)); ?></td>
+                                <td><?php echo date('d-m-Y H:i:s', strtotime($form->created_at)); ?></td>
                                 <td class="text-center">
                                     <div class="dropdown">
                                         <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">View <span class="caret"></span></button>
@@ -103,14 +104,14 @@
                                 </td>
                                 <?php if ($this->ion_auth->in_group('admin')) { ?>
                                     <td class="text-center">
-                                        <?php echo anchor("xform/edit_form/" . $project_id . '/' . $form->id, '<i class="fa fa-pencil"></i> Edit', 'class="btn btn-primary btn-xs"'); ?>
+                                        <?php echo anchor("xform/edit_form/" . $project_id . '/' . $form->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"'); ?>
                                         <?php if ($form->status == "archived") {
-                                            echo anchor("xform/restore_from_archive/" . $form->id, '<i class="fa fa-folder-open-o"></i> Restore', 'class="btn btn-warning btn-xs unarchive"');
+                                            echo anchor("xform/restore_from_archive/" . $form->id, '<i class="fa fa-folder-open-o"></i>', 'class="btn btn-warning btn-xs unarchive"');
                                         } else {
-                                            echo anchor("xform/archive_xform/" . $form->id, '<i class="fa fa-archive"></i> Archive', 'class="btn btn-warning btn-xs archive"');
+                                            echo anchor("xform/archive_xform/" . $form->id, '<i class="fa fa-archive"></i>', 'class="btn btn-warning btn-xs archive"');
                                         } ?>
                                         <!--TODO Implement dynamic js prompt -->
-                                        <?php echo anchor("xform/delete_form/" . $project_id . '/' . $form->id, '<i class="fa fa-trash"></i> Delete', 'class="btn btn-danger btn-xs delete"'); ?>
+                                        <?php echo anchor("xform/delete_form/" . $project_id . '/' . $form->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
                                     </td>
                                 <?php } ?>
                             </tr>

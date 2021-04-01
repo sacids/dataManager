@@ -708,7 +708,7 @@ class Xform extends MX_Controller
                     $perms = $this->input->post("perms");
 
                     $all_permissions = "";
-                    if (count($perms) > 0) {
+                    if ($perms) {
                         $all_permissions = join(",", $perms);
                     }
 
@@ -724,17 +724,18 @@ class Xform extends MX_Controller
                         if ($create_table_result) {
 
                             $form_details = array(
-                                "user_id" => get_current_user_id(),
                                 "form_id" => $this->xFormReader->get_table_name(),
                                 "jr_form_id" => $this->xFormReader->get_jr_form_id(),
+                                "project_id" => $project_id,
                                 "title" => $this->input->post("title"),
                                 "description" => $this->input->post("description"),
                                 "filename" => $filename,
-                                "date_created" => date("Y-m-d H:i:s"),
                                 "access" => $this->input->post("access"),
                                 "push" => $this->input->post("push"),
+                                "status" => 1,
                                 "perms" => $all_permissions,
-                                "project_id" => $project_id
+                                "created_by" => get_current_user_id(),
+                                "created_at" => date("Y-m-d H:i:s"),      
                             );
 
                             //todo: Check if form is built from ODK Aggregate Build to avoid errors during initialization
@@ -855,7 +856,7 @@ class Xform extends MX_Controller
 
         $project = $this->Project_model->get_project_by_id($project_id);
 
-        if (count($project) == 0) {
+        if (!$project) {
             show_error("Project not exist", 500);
         }
         $data['project'] = $project;
@@ -1120,7 +1121,7 @@ class Xform extends MX_Controller
 
         $project = $this->Project_model->get_project_by_id($project_id);
 
-        if (count($project) == 0) {
+        if (!$project) {
             show_error("Project not exist", 500);
         }
         $data['project'] = $project;
