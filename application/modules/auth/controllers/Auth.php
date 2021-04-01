@@ -232,6 +232,8 @@ class Auth extends MX_Controller
     // change password
     function change_password()
     {
+        $this->data['title'] = "Change Password";
+        
         $this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
         $this->form_validation->set_rules('new', $this->lang->line('change_password_validation_new_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
         $this->form_validation->set_rules('new_confirm', $this->lang->line('change_password_validation_new_password_confirm_label'), 'required');
@@ -278,12 +280,10 @@ class Auth extends MX_Controller
                 'value' => $user->id,
             );
 
-            // render
-            $this->data['title'] = "Change Password";
+            // render view
             $this->load->view('header', $this->data);
             $this->_render_page('profile/change_password');
             $this->load->view('footer');
-            //$this->_render_page('auth/change_password', $this->data);
         } else {
             $identity = $this->session->userdata('identity');
 

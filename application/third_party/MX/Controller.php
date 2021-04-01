@@ -42,6 +42,7 @@ require dirname(__FILE__) . '/Base.php';
  * @property Submission_model $Submission_model
  * @property Xform_model $Xform_model
  * @property User_model $User_model
+ * @property Group_model $Group_model
  * @property Feedback_model $Feedback_model
  * @property Project_model $Project_model
  * @property Campaign_model $Campaign_model

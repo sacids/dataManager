@@ -129,6 +129,7 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array(
     'auth/User_model',
+    'auth/Group_model',
     'auth/users_group_model',
     'auth/perms_class_model',
     'auth/perms_method_model',

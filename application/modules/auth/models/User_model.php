@@ -107,14 +107,6 @@ class User_model extends CI_Model
         return $query->row();
     }
 
-    /**
-     * Initializes table names from configuration files
-     */
-    private function initialize_table()
-    {
-        self::$xform_table_name = $this->config->item("table_users");
-    }
-
     public function find_user_groups()
     {
         return $this->db->get(self::$groups_table_name)->result();
@@ -285,6 +277,104 @@ class User_model extends CI_Model
     {
         return $this->db->get_where("perms", array('perms.id' => $perm_id))->row();
     }
+
+
+    /**
+	 * @param type
+	 * @return int
+	 */
+	function count_all()
+	{
+		//$this->where_condition();
+
+		return $this->db
+			->group_by('users.id')
+			->join('users_groups', 'users_groups.user_id = users.id')
+			->get('users')->num_rows();
+	}
+
+	/**
+	 * @param $num
+	 * @param $start
+	 * @return mixed
+	 */
+	function get_all($num = null, $start = null)
+	{
+		//$this->where_condition();
+
+		if ($num != null && $start != null)
+			$this->db->limit($num, $start);
+
+		return $this->db
+			->select('*, users.id as user_id')
+			->order_by('users.first_name')
+			->get('users')->result();
+	}
+
+	/**
+	 * @param null $group_id
+	 * @param null $keyword
+	 * @return mixed
+	 */
+	function search_all($group_id = null, $keyword = null)
+	{
+		//$this->where_condition();
+
+		if ($group_id != null)
+			$this->db->where('users_groups.group_id', $group_id);
+
+		if ($keyword != NULL) {
+			$this->db->group_start();
+			$this->db->like('users.first_name', $keyword);
+			$this->db->or_like('users.last_name', $keyword);
+			$this->db->or_like('users.username', $keyword);
+			$this->db->group_end();
+		}
+
+		return $this->db
+			->select('*, users.id as user_id')
+			->group_by('users.id')
+			->order_by('users.first_name')
+			->join('users_groups', 'users_groups.user_id = users.id')
+			->get('users')->result();
+	}
+
+	/**
+	 * @param $group_id
+	 * @return mixed
+	 */
+	function get_users_by_group_id($group_id)
+	{
+		//$this->where_condition();
+
+		return $this->db
+			->select('*, users.id as user_id')
+			->order_by('users.first_name', 'asc')
+			->group_by('users.id')
+			->join('users_groups', 'users_groups.user_id = users.id')
+			->get_where('users', array('users_groups.group_id' => $group_id))->result();
+	}
+
+	/**
+	 * @param $where_ids
+	 * @return mixed
+	 */
+	function get_users_by_ids($where_ids)
+	{
+		//$this->where_condition();
+
+		return $query = $this->db
+			->order_by('first_name', 'asc')
+			->where_in('id', $where_ids)
+			->get($this->table)
+			->result();
+	}
+
+	//get by
+	function get_by($where)
+	{
+		return $this->db->get_where($this->table, $where)->row();
+	}
 }
 
 /* End of file users_model.php */

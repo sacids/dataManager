@@ -101,21 +101,21 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="">
+                    <!--<li class="">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->lang->line("nav_item_language") ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><i class="fa fa-user-circle" aria-hidden="true"></i> <?php echo anchor('languageChanger/switchLang/english', $this->lang->line("nav_item_language_english")); ?></li>
-                            <li><?php echo anchor('languageChanger/switchLang/swahili', $this->lang->line("nav_item_language_swahili")); ?></li>
+                            <li><?php echo anchor('languageChanger/switchLang/swahili', $this->lang->line("nav_item_language_swahili")); ?></li> 
                         </ul>
-                    </li>
+                    </li>-->
 
                     <?php if ($this->ion_auth->is_admin()) { ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->lang->line("nav_item_manage_users") ?>
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><?php echo anchor('auth/users_list', $this->lang->line("nav_item_list_users")); ?></li>
-                                <li><?php echo anchor('auth/group_list', $this->lang->line("nav_item_list_groups")); ?></li>
+                                <li><?php echo anchor('auth/users/lists', $this->lang->line("nav_item_list_users")); ?></li>
+                                <li><?php echo anchor('auth/groups/lists', $this->lang->line("nav_item_list_groups")); ?></li>
                                 <li class="divider"></li>
                                 <li><?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl")); ?></li>
                             </ul>
