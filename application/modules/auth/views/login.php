@@ -48,7 +48,7 @@
 
                             <div class="form-group last">
                                 <div class="col-lg-12">
-                                	<button type="submit" class="btn btn-maroon btn-block text-uppercase">
+                                	<button type="submit" class="btn btn-primary btn-block text-uppercase">
                                     Login <i class="fa fa-chevron-circle-right"></i>
                                 </button>
                                 </div>

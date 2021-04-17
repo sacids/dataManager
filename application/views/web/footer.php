@@ -7,7 +7,7 @@
                 <p>This is open source tools for collecting, submitting data from health facilities to the main server and receiving feedback from main server.</p>
                 <p>
                     <a href="<?= site_url('about') ?>"
-                       class="btn btn-dark-orange btn-sm">Read More <i class="fa fa-angle-double-right"></i>
+                       class="btn btn-primary btn-sm">Read More <i class="fa fa-angle-double-right"></i>
                     </a></p>
             </div>
 
@@ -38,7 +38,7 @@
                 <h6 class="text-uppercase mb-4">Social Media Links</h6>
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
-                        <a class="btn btn-dark-orange btn-social text-center rounded-circle"
+                        <a class="btn btn-primary btn-social text-center rounded-circle"
                            href="https://web.facebook.com/SACIDS/"
                            target="_blank">
                             <i class="fa fa-lg fa-facebook"></i>
@@ -46,7 +46,7 @@
                     </li>
 
                     <li class="list-inline-item">
-                        <a class="btn btn-dark-orange btn-social text-center rounded-circle"
+                        <a class="btn btn-primary btn-social text-center rounded-circle"
                            href="https://twitter.com/sacids" target="_blank">
                             <i class="fa fa-lg fa-twitter"></i>
                         </a>

@@ -7,7 +7,7 @@
                 <h4 class="text-center"> Create Project</h4>
                 <p class="text-center">
                     <a href="<?= site_url('create-project') ?>"
-                       class="btn btn-maroon btn-sm">Read More <i class="fa fa-angle-double-right"></i>
+                       class="btn btn-primary btn-sm">Read More <i class="fa fa-angle-double-right"></i>
                     </a></p>
             </div>
 
@@ -15,7 +15,7 @@
                 <img src="<?= base_url('assets/public/images/collect_data.png') ?>" width="100%"/>
                 <h4 class="text-center">Collect online/offline data</h4>
                 <p class="text-center"><a href="<?= site_url('collect-data') ?>"
-                                          class="btn btn-maroon btn-sm">Read More <i
+                                          class="btn btn-primary btn-sm">Read More <i
                                 class="fa fa-angle-double-right"></i>
                     </a></p>
             </div>
@@ -24,7 +24,7 @@
                 <img src="<?= base_url('assets/public/images/visualize.png') ?>" width="100%"/>
                 <h4 class="text-center">Visualize and Analyse data</h4>
                 <p class="text-center"><a href="<?= site_url('analyze-data') ?>"
-                                          class="btn btn-maroon btn-sm">Read More <i
+                                          class="btn btn-primary btn-sm">Read More <i
                                 class="fa fa-angle-double-right"></i>
                     </a></p>
             </div>
