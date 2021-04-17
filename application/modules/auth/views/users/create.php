@@ -121,7 +121,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <?php echo form_submit('submit', 'Save', array('class' => "btn btn-primary")); ?>
-                                    <?= anchor('auth/users/lists', 'Cancel', 'class="btn btn-warning"') ?>
+                                    <?= anchor('auth/users/lists', 'Cancel', 'class="btn btn-danger"') ?>
                                 </div>
                             </div>
                         </div>

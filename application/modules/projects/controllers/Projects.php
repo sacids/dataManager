@@ -132,7 +132,7 @@ class Projects extends MX_Controller
             if ($id) {
                 $this->_update_session_projects();
                 $this->session->set_flashdata('message', display_message($this->lang->line("message_project_added")));
-                redirect('projects/lists', 'refresh');
+                redirect('projects/forms/' . $id, 'refresh');
             } else {
                 $this->session->set_flashdata('message', display_message($this->lang->line("message_project_not_added"), 'danger'));
                 redirect('projects/add_new', 'refresh');

@@ -134,32 +134,20 @@ h6.title {
 }
 
 .navbar-default .nav > li > a,
-.navbar-default .nav > li > a:focus {
+.navbar-default .nav > li > a:focus,
+.navbar-default .nav > li > a:hover {
     font-size: 13px;
     color: #FFFFFF;
     font-weight: 600;
 }
 
-@media (min-width: 768px) {
-    .navbar-default {
-        background-color: #428499;
-    }
-
-    .navbar-default .nav > li > a,
-    .navbar-default .nav > li > a:focus,
-    .navbar-default .nav > li > a:hover {
-        font-size: 13px;
-        color: #FFFFFF;
-        font-weight: 600;
-    }
-
-    .navbar .nav .dropdown-menu a {
-        padding: 8px 10px;
-        color: #424242;
-        font-size: 12px;
-        font-weight: 600;
-    }
+.navbar .nav .dropdown-menu a {
+    padding: 8px 10px;
+    color: #424242;
+    font-size: 12px;
+    font-weight: 600;
 }
+
 
 /**	16. Info
  *************************************************** **/
@@ -339,10 +327,6 @@ h6.title {
 
 /**	17. Custom table
  *************************************************** **/
-table.table th, table.table td {
-    font-size: 13px;
-}
-
 table.table {
     border-collapse: collapse;
     border-spacing: 0px;
@@ -365,6 +349,7 @@ table.table td {
     background: #FFF;
     border-bottom: 1px solid #E3E3E3;
     padding: 10px;
+    font-size: 13px;
 }
 
 table.table td a {
@@ -473,4 +458,45 @@ table.table th a {
     -webkit-border-radius: 6px 0 6px 6px;
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
+}
+
+/*==================================================
+Button
+===================================================*/
+.btn.btn-primary {
+    background: #428499;
+    font-weight: 500;
+    color: #fff;
+    border: 1px solid #428499;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus,
+.btn.btn-primary:active,
+.btn.btn-primary.active {
+    background: #428499;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+
+.btn.btn-secondary {
+    background: #00695C;
+    color: #fff;
+    font-weight: 500;
+    border: 1px solid #00695C;
+}
+
+.btn.btn-secondary:hover,
+.btn.btn-secondary:focus,
+.btn.btn-secondary:active,
+.btn.btn-secondary.active {
+    background: #00695C;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
 }

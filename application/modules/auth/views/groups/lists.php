@@ -32,9 +32,9 @@
                         <table class="table table-striped table-responsive table-bordered table-hover">
                             <tr>
                                 <th width="3%">#</th>
-                                <th width="25%">Group Name</th>
-                                <th width="45%">Group Description</th>
-                                <th width="6%">Action</th>
+                                <th width="15%">Group Name</th>
+                                <th width="70%">Group Description</th>
+                                <th width="10%">Action</th>
                             </tr>
                             <?php
                             $serial = 1;
@@ -42,12 +42,12 @@
                                 ?>
                                 <tr>
                                     <td><?= $serial; ?></td>
-                                    <td><?= ucfirst($values->name); ?></td>
+                                    <td><?= $values->name; ?></td>
                                     <td><?= $values->description; ?></td>
                                     <td>
                                     <?php
                                     //if ($this->ion_auth->is_admin() || perms_role('groups', 'edit'))
-                                        echo anchor("auth/groups/edit/" . $values->id, '<i class="fa fa-pencil"></i>', array("class" => 'btn btn-primary btn-xs')) . '&nbsp;&nbsp;&nbsp;&nbsp;';
+                                        echo anchor("auth/groups/edit/" . $values->id, '<i class="fa fa-pencil"></i>', array("class" => 'btn btn-primary btn-xs')) . '&nbsp;&nbsp;';
 
                                     //if ($this->ion_auth->is_admin() || perms_role('groups', 'assign_perms'))
                                         echo anchor('auth/groups/perms/' . $values->id, '<i class="fa fa-user-secret"></i>', array("class" => 'btn btn-warning btn-xs'));

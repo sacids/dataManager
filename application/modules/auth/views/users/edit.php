@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
@@ -134,7 +134,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <?= form_submit('submit', 'Save', array('class' => "btn btn-primary")); ?>
-                                    <?= anchor('auth/users/lists', 'Cancel', 'class="btn btn-warning"') ?>
+                                    <?= anchor('auth/users/lists', 'Cancel', 'class="btn btn-danger"') ?>
                                 </div>
                             </div>
                         </div>

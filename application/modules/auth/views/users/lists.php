@@ -74,7 +74,7 @@
                                         <td>
                                             <?php
                                             if ($this->ion_auth->is_admin() || perms_role('users', 'edit'))
-                                                echo anchor('auth/users/edit/' . $values->user_id, '<i class="fa fa-pencil fa-lg"></i>', '');
+                                                echo anchor('auth/users/edit/' . $values->user_id, '<i class="fa fa-pencil fa-lg"></i>', array("class" => 'btn btn-primary btn-xs'));
                                             ?></td>
                                     </tr>
                                 <?php
