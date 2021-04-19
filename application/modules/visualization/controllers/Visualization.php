@@ -71,9 +71,9 @@ class Visualization extends CI_Controller
         }
 
         $project = $this->Project_model->get_project_by_id($project_id);
-        if (count($project) == 0) {
+        if (!$project) 
             show_error("Project not exist", 500);
-        }
+        
         $data['project'] = $project;
         $data['xforms'] = $xforms = $this->Xform_model->get_form_list();
 
@@ -280,7 +280,7 @@ class Visualization extends CI_Controller
 
         foreach ($table_fields_data as $field) {
 
-            $is_gps_field = (strpos($field->name, $gps_fields_initial == FALSE)) ? FALSE : TRUE;
+            //$is_gps_field = (strpos($field->name, $gps_fields_initial == FALSE)) ? FALSE : TRUE;
 
             if ($field->type == "enum") {
                 $axis_column = $field->name;
@@ -340,9 +340,9 @@ class Visualization extends CI_Controller
         }
 
         $project = $this->Project_model->get_project_by_id($project_id);
-        if (count($project) == 0) {
+        if (!$project) 
             show_error("Project not exist", 500);
-        }
+        
         $data['project'] = $project;
 
         $form = $this->Xform_model->find_by_id($form_id);
@@ -374,6 +374,10 @@ class Visualization extends CI_Controller
 
         $form_data = $this->Xform_model->get_geospatial_data($form_id, 500);
 
+        if(!$form_data){
+            
+        }
+
         //todo Finish
         $field_maps = $this->_get_mapped_table_column_name($form_id);
         $data['mapped_fields'] = [];
@@ -385,12 +389,8 @@ class Visualization extends CI_Controller
             }
         }
 
-	//echo '<pre>';print_r($field_maps);echo '</pre>'; exit();
+	    //echo '<pre>';print_r($field_maps);echo '</pre>'; exit();
         //$form_data = $data['mapped_fields'];*/
-
-
-
-
 
         $addressPoints = '<script type="text/javascript"> var addressPoints = [';
         $first = 0;

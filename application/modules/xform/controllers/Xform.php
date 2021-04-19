@@ -605,17 +605,15 @@ class Xform extends MX_Controller
             $i++;
         }
 
+        //forms
         $forms = $this->Xform_model->get_form_list_by_perms($user_perms, 30, 0, "published", 0);
-
-        print_r($forms);
-        exit();
 
         $xml = '<xforms xmlns="http://openrosa.org/xforms/xformsList">';
 
         foreach ($forms as $form) {
 
             // used to notify if anything has changed with the form, so that it may be updated on download
-            $hash = md5($form->form_id . $form->date_created . $form->filename . $form->id . $form->title . $form->last_updated);
+            $hash = md5($form->form_id . $form->created_at . $form->filename . $form->id . $form->title . $form->last_updated);
 
             $xml .= '<xform>';
             $xml .= '<formID>' . $form->form_id . '</formID>';
@@ -628,7 +626,7 @@ class Xform extends MX_Controller
         }
         $xml .= '</xforms>';
 
-        $content_length = sizeof($xml);
+        $content_length = '';//sizeof($xml);
         //set header response
         header('Content-Type:text/xml; charset=utf-8');
         header('HTTP_X_OPENROSA_VERSION:1.0');
@@ -735,7 +733,7 @@ class Xform extends MX_Controller
                                 "filename" => $filename,
                                 "access" => $this->input->post("access"),
                                 "push" => $this->input->post("push"),
-                                "status" => 1,
+                                "status" => "published",
                                 "perms" => $all_permissions,
                                 "created_by" => get_current_user_id(),
                                 "created_at" => date("Y-m-d H:i:s"),      
