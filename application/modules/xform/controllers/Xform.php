@@ -607,6 +607,9 @@ class Xform extends MX_Controller
 
         $forms = $this->Xform_model->get_form_list_by_perms($user_perms, 30, 0, "published", 0);
 
+        print_r($forms);
+        exit();
+
         $xml = '<xforms xmlns="http://openrosa.org/xforms/xformsList">';
 
         foreach ($forms as $form) {

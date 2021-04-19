@@ -432,7 +432,7 @@ class Users extends MX_Controller
     {
         if ($str != "") {
             $str = str_replace(' ', '', trim($str));
-            $user = $this->user_model->get_by(['username', $str]);
+            $user = $this->User_model->get_by(['username', $str]);
 
             if ($user) {
                 $this->form_validation->set_message('valid_user', "%s already exist");
@@ -444,8 +444,7 @@ class Users extends MX_Controller
     }
 
 
-    public
-    function _get_csrf_nonce()
+    public function _get_csrf_nonce()
     {
         $this->load->helper('string');
         $key = random_string('alnum', 8);
@@ -456,8 +455,7 @@ class Users extends MX_Controller
         return array($key => $value);
     }
 
-    public
-    function _valid_csrf_nonce()
+    public function _valid_csrf_nonce()
     {
         $csrfkey = $this->input->post($this->session->flashdata('csrfkey'));
         if ($csrfkey && $csrfkey == $this->session->flashdata('csrfvalue')) {

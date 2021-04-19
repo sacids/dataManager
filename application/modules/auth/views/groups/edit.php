@@ -3,14 +3,14 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">Edit Group</h3>
+                <h3 class="title">Edit role</h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?= site_url('auth/groups/lists') ?>">Groups</a></li>
-                <li class="breadcrumb-item active">Edit Group</li>
+                <li class="breadcrumb-item"><a href="<?= site_url('auth/groups/lists') ?>">Role</a></li>
+                <li class="breadcrumb-item active">Edit role</li>
             </ol>
 
 

@@ -9,8 +9,8 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?= site_url('auth/groups/lists') ?>">Groups</a></li>
-                <li class="breadcrumb-item active">Create New</li>
+                <li class="breadcrumb-item"><a href="<?= site_url('auth/groups/lists') ?>">Roles</a></li>
+                <li class="breadcrumb-item active">Create new</li>
             </ol>
 
             <div class="row">
@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Group <span style="color: red;">*</span></label>
+                                    <label>Role <span style="color: red;">*</span></label>
                                     <?= form_input($group_name); ?>
                                     <span class="red"><?= form_error('group_name'); ?></span>
                                 </div>

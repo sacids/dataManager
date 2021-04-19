@@ -366,14 +366,20 @@ class User_model extends CI_Model
 		return $query = $this->db
 			->order_by('first_name', 'asc')
 			->where_in('id', $where_ids)
-			->get($this->table)
+			->get("users")
 			->result();
+	}
+
+    //get
+	function get($id)
+	{
+		return $this->db->get_where("users", ['id' => $id])->row();
 	}
 
 	//get by
 	function get_by($where)
 	{
-		return $this->db->get_where($this->table, $where)->row();
+		return $this->db->get_where("users", $where)->row();
 	}
 }
 

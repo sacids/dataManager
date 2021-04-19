@@ -595,6 +595,9 @@ class Ohkr extends MX_Controller
         //species
         $data['species'] = $this->Specie_model->get_all(1000, 0);
 
+        //assigned species
+        $assigned_species = [];
+
         //form validation
         $this->form_validation->set_rules("symptom", $this->lang->line("label_symptom_name"), "required");
         $this->form_validation->set_rules("importance", "Importance", "required");

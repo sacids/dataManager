@@ -9,7 +9,7 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?= site_url('groups/lists') ?>">Roles</a></li>
+                <li class="breadcrumb-item"><a href="<?= site_url('auth/groups/lists') ?>">Roles</a></li>
                 <li class="breadcrumb-item active">Assign Permission</li>
             </ol>
 

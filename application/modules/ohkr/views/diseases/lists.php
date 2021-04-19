@@ -43,11 +43,11 @@
                             foreach ($diseases as $disease) { ?>
                                 <tr>
                                     <td><?= $serial ?></td>
-                                    <td><?= $disease->title ?></td>
+                                    <td><?= anchor("ohkr/disease_symptoms/" . $disease->id, '<b>'.$disease->title.'</b>', '') ?></td>
                                     <td><?= $disease->species; ?></td>
                                     <td>
-                                        <?= anchor("ohkr/disease_symptoms/" . $disease->id, 'Symptoms', 'class="btn btn-default btn-xs"'); ?>
-                                        <?= anchor("ohkr/diseases/edit/" . $disease->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"'); ?>
+                                        <?= anchor("ohkr/disease_symptoms/" . $disease->id, '<i class="fa fa-stethoscope"></i>', 'class="btn btn-primary btn-xs"'); ?>
+                                        <?= anchor("ohkr/diseases/edit/" . $disease->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-secondary btn-xs"'); ?>
                                         <?= anchor("ohkr/diseases/delete/" . $disease->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
 
                                     </td>
