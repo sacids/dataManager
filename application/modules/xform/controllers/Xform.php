@@ -537,7 +537,7 @@ class Xform extends MX_Controller
                     <message nature="submit_success">' . $response_message . '</message>
                     </OpenRosaResponse>';
 
-        $content_length = sizeof($response);
+        $content_length = '';//sizeof($response);
         // set header response
         header("X-OpenRosa-Version:1.0");
         header("X-OpenRosa-Accept-Content-Length:" . $content_length);
