@@ -95,7 +95,7 @@ class Xform extends MX_Controller
 
     public function index()
     {
-        $this->forms();
+        //$this->forms();
     }
 
     /**
@@ -108,6 +108,8 @@ class Xform extends MX_Controller
     {
         // Form Received in openrosa server
         $http_response_code = 201;
+
+        log_message("DEBUG","diggest => " . $_SERVER ['PHP_AUTH_DIGEST']);
 
         // Get the digest from the http header
         if (isset($_SERVER ['PHP_AUTH_DIGEST']))
@@ -272,29 +274,11 @@ class Xform extends MX_Controller
 
         $xForm_form = $this->Xform_model->find_by_xform_id($this->xFormReader->get_table_name());
 
-         //todo : improve this => send message
-        if ($xForm_form->send_sms == 1 && $insert_result) {
-            //for now just query specific table
-            $result = $this->db
-                ->get_where('ad_build_Sample_results_form_1589715082020', ['id' => $insert_result])->row();
-            log_message("DEBUG", "result => " . json_encode($insert_result));
+         //todo : if you want to send sms to specific user
+        // if ($xForm_form->send_sms == 1 && $insert_result) {
+        //     //for now just query specific table
 
-            //health facility
-            $facility = $this->db
-                ->get_where('health_facilities', ['code' => substr($result->_xf_271560175ee2e3a0fc421a63cb30724a, 0, 3)])->row();
-
-            $phones = explode(',', $facility->phone);
-
-            //logs
-            log_message("DEBUG", "phones => " . $facility->phone);
-            log_message("DEBUG", "exploded phones => " . $phones);
-
-            foreach ($phones as $phone) {
-                log_message("DEBUG", "phone => " . $phone);
-                $message = 'Brucella: Majibu ya maabara ya SUA tayari, ingia katika Afyadata kuangalia';
-                $this->push($phone, $message);
-            }
-        }
+        // }
 
         //deals with dhis2
         if ($xForm_form->allow_dhis == 1 && $insert_result) {

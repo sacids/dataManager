@@ -389,7 +389,7 @@ class Xformreader_model extends CI_Model
                 array_push($col_values, $acc);
                 array_push($col_names, $cn . '_acc');
 
-                $point = "GeomFromText('POINT($lat1 $lng1)')";
+                $point = "ST_GeomFromText('POINT($lat1 $lng1)')"; //change to GeomFromText if mysql < version 5.7
                 array_push($points_v, $point);
                 array_push($points_n, $cn . '_point');
             }
