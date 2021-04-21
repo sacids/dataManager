@@ -156,3 +156,18 @@ if (!function_exists("get_current_user_id")) {
         return $CI->session->userdata("user_id");
     }
 }
+
+//display name from phone
+if(!function_exists('get_collector_name_from_phone')){
+    function get_collector_name_from_phone($phone){
+        $CI = &get_instance();
+
+        $User = $CI->User_model->get_by(['username' => $phone]);
+        if($User)
+            $name = ucfirst($User->first_name) . ' ' . ucfirst($User->last_name);
+        else
+            $name = "";  
+
+        return $name;
+    }
+}

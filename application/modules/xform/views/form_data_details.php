@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Godluck Akyoo
@@ -71,12 +72,12 @@
                         <?php echo form_open(uri_string(), 'class="form-inline" role="form"'); ?>
                         <div class="form-group">
                             <?php
-                    $week_options = array();
-                    for ($i = 1; $i <= 52; $i++) {
-                        $week_options[$i] = $i;
-                    }
-                    $week_options = array('' => 'Week Number') + $week_options;
-                    echo form_dropdown('week', $week_options, set_value('week'), 'class="form-control"'); ?>
+                            $week_options = array();
+                            for ($i = 1; $i <= 52; $i++) {
+                                $week_options[$i] = $i;
+                            }
+                            $week_options = array('' => 'Week Number') + $week_options;
+                            echo form_dropdown('week', $week_options, set_value('week'), 'class="form-control"'); ?>
                         </div>
 
                         <div class="form-group">
@@ -86,8 +87,7 @@
                     </div>-->
 
                     <div class="pull-right">
-                        <button type="button" class="btn btn-link" data-toggle="modal"
-                                data-target="#myModal">Set Filters
+                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Set Filters
                         </button>
                         <?php echo anchor("xform/csv_export_form_data/" . $form_id, '<i class="fa fa-file fa-lg"></i>&nbsp;&nbsp;', 'title="Export CSV"') ?>
                         <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Export XLS"') ?>
@@ -110,7 +110,7 @@
             <?= form_hidden("table_name", $form_id); ?>
             <div style="overflow-x: scroll;">
                 <table class="table table_list table-bordered table-striped table-hover">
-                    <tr>
+                    <tr style="position: sticky; top: 0;">
                         <?php
                         echo "<th class='text-center'>" . form_checkbox(array("id" => "selectAll")) . "</th>";
 
@@ -132,7 +132,6 @@
 
                     <?php
                     foreach ($form_data as $data) {
-
                         echo "<tr>";
                         foreach ($data as $key => $entry) {
 
@@ -140,10 +139,14 @@
                                 echo "<td class='text-center'>" . form_checkbox("entry_id[]", $entry) . "</td>";
                             }
 
-                            if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                                echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                            if ($key == "meta_username") {
+                                echo "<td class='text-center'>" . get_collector_name_from_phone($entry) . "</td>";
                             } else {
-                                echo "<td>" . $entry . "</td>";
+                                if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                                    echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                                } else {
+                                    echo "<td>" . $entry . "</td>";
+                                }
                             }
                         }
                         echo "</tr>";
@@ -159,7 +162,7 @@
             </div>
             <?= form_close(); ?>
 
-            <?php if (!empty($links)): ?>
+            <?php if (!empty($links)) : ?>
                 <div class="widget-foot">
                     <?= $links ?>
                     <div class="clearfix"></div>
@@ -170,13 +173,13 @@
 </div>
 
 <script type="text/javascript">
-    $("#selectAll").change(function () {
+    $("#selectAll").change(function() {
         $("input:checkbox").prop('checked', $(this).prop("checked"));
     });
 
-    $(function () {
+    $(function() {
         var imageTitle;
-        var showModal = function () {
+        var showModal = function() {
 
             imageTitle = $(this).closest('tr').find('td:eq(5)').text();
 

@@ -109,7 +109,7 @@ class Xform extends MX_Controller
         // Form Received in openrosa server
         $http_response_code = 201;
 
-        log_message("DEBUG","diggest => " . $_SERVER ['PHP_AUTH_DIGEST']);
+        //log_message("DEBUG","diggest => " . $_SERVER ['PHP_AUTH_DIGEST']);
 
         // Get the digest from the http header
         if (isset($_SERVER ['PHP_AUTH_DIGEST']))
@@ -1191,11 +1191,14 @@ class Xform extends MX_Controller
                     $this->session->set_userdata(array("form_filters" => $selected_columns));
                 }
                 $data['selected_columns'] = $selected_columns;
-                $data['form_data'] = $this->Xform_model->find_form_data_by_fields($form->form_id, $selected_columns, $this->pagination->per_page, $page, $where_condition);
+                $form_data = $this->Xform_model->find_form_data_by_fields($form->form_id, $selected_columns, $this->pagination->per_page, $page, $where_condition);
             } else {
-                $data['form_data'] = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page, $where_condition);
+                $form_data = $this->Xform_model->find_form_data($form->form_id, $this->pagination->per_page, $page, $where_condition);
             }
+            //form data
+            $data['form_data'] = $form_data;
 
+            //pagination
             $data["links"] = $this->pagination->create_links();
 
             $this->load->view('header', $data);
