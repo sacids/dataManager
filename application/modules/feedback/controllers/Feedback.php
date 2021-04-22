@@ -104,7 +104,7 @@ class Feedback extends MX_Controller
         $this->is_logged_in();
 
         //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
+        //$this->has_allowed_perm($this->router->fetch_method());
 
         $feedback = $this->Feedback_model->get_feedback_by_instance($instance_id);
         if (count($feedback) == 0) {
