@@ -182,11 +182,6 @@ class Auth extends MX_Controller
     // log the user out
     function login()
     {
-        //check if user login
-        if ($this->ion_auth->logged_in()) {
-            redirect('auth/index', 'refresh');
-        }
-
         //title
         $this->data['title'] = "Login";
 
