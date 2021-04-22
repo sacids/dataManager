@@ -1,5 +1,4 @@
 /application/logs
-/application/config
 /assets/whatsapp
 ### CodeIgniter template
 */config/development
