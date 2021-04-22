@@ -865,7 +865,7 @@ class Xform extends MX_Controller
             $available_user_permissions = [];
 
             foreach ($groups as $group) {
-                $available_group_permissions['G' . $group->id . 'G'] = $group->name;
+                $available_group_permissions['G' . $group->id . 'G'] = $group->description;
             }
             $data['group_perms'] = $available_group_permissions;
 
