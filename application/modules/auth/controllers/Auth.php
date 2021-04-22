@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AfyaData
  *
@@ -35,7 +36,7 @@
  * @since        Version 1.0.0
  */
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends MX_Controller
 {
@@ -64,10 +65,25 @@ class Auth extends MX_Controller
             // redirect them to the login page
             redirect('auth/login', 'refresh');
         } else {
-            // redirect them to the home page because they must be an administrator to view this
-            redirect('dashboard', 'refresh');
-        }
+            $user_id = get_current_user_id();
 
+            //check user group
+            $groups = $this->ion_auth->get_users_groups($user_id)->result();
+
+            if (count($groups) > 1) {
+                //redirect to dashboard
+                redirect('dashboard', 'refresh');
+            } else if (count($groups) == 1) {
+                if ($groups[0]->name == 'data_collectors') {
+                    //redirect with message
+                    $this->session->set_flashdata('message', "You are not allowed to login here!");
+                    redirect('auth/login', 'refresh');
+                } else {
+                    //redirect to dashboard
+                    redirect('dashboard', 'refresh');
+                }
+            }
+        }
     }
 
     /**
@@ -106,7 +122,6 @@ class Auth extends MX_Controller
             foreach ($this->data['user_list'] as $k => $user) {
                 $this->data['user_list'][$k]->groups = $this->ion_auth->get_users_groups($user->user_id)->result();
             }
-
         } else {
 
             $config = array(
@@ -131,14 +146,14 @@ class Auth extends MX_Controller
         $this->load->view('footer');
     }
 
-    function _render_page($view, $data = NULL, $returnhtml = FALSE)//I think this makes more sense
+    function _render_page($view, $data = NULL, $returnhtml = FALSE) //I think this makes more sense
     {
 
         $this->viewdata = (empty($data)) ? $this->data : $data;
 
         $view_html = $this->load->view($view, $this->viewdata, $returnhtml);
 
-        if ($returnhtml) return $view_html;//This will return html on 3rd argument being true
+        if ($returnhtml) return $view_html; //This will return html on 3rd argument being true
     }
 
     /**
@@ -167,10 +182,12 @@ class Auth extends MX_Controller
     // log the user out
     function login()
     {
-//        if ($this->ion_auth->logged_in()) {
-//            redirect('dashboard', 'refresh');
-//        }
+        //check if user login
+        if ($this->ion_auth->logged_in()) {
+            redirect('auth/index', 'refresh');
+        }
 
+        //title
         $this->data['title'] = "Login";
 
         //validate form input
@@ -208,14 +225,16 @@ class Auth extends MX_Controller
             // set the flash data error message if there is one
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
-            $this->data['identity'] = array('name' => 'identity',
+            $this->data['identity'] = array(
+                'name' => 'identity',
                 'id' => 'identity',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('identity'),
                 'class' => 'form-control',
                 'placeholder' => 'Write username...'
             );
-            $this->data['password'] = array('name' => 'password',
+            $this->data['password'] = array(
+                'name' => 'password',
                 'id' => 'password',
                 'type' => 'password',
                 'class' => 'form-control',
@@ -233,7 +252,7 @@ class Auth extends MX_Controller
     function change_password()
     {
         $this->data['title'] = "Change Password";
-        
+
         $this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
         $this->form_validation->set_rules('new', $this->lang->line('change_password_validation_new_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
         $this->form_validation->set_rules('new_confirm', $this->lang->line('change_password_validation_new_password_confirm_label'), 'required');
@@ -343,7 +362,8 @@ class Auth extends MX_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->data['type'] = $this->config->item('identity', 'ion_auth');
             // setup the input
-            $this->data['identity'] = array('name' => 'identity',
+            $this->data['identity'] = array(
+                'name' => 'identity',
                 'id' => 'identity',
             );
 
@@ -441,7 +461,6 @@ class Auth extends MX_Controller
                     $this->ion_auth->clear_forgotten_password_code($code);
 
                     show_error($this->lang->line('error_csrf'));
-
                 } else {
                     // finally change the password
                     $identity = $user->{$this->config->item('identity', 'ion_auth')};
@@ -496,7 +515,8 @@ class Auth extends MX_Controller
 
     function _valid_csrf_nonce()
     {
-        if ($this->input->post($this->session->flashdata('csrfkey')) !== FALSE &&
+        if (
+            $this->input->post($this->session->flashdata('csrfkey')) !== FALSE &&
             $this->input->post($this->session->flashdata('csrfkey')) == $this->session->flashdata('csrfvalue')
         ) {
             return TRUE;
@@ -551,7 +571,6 @@ class Auth extends MX_Controller
             $this->load->view('header', $this->data);
             $this->_render_page('auth/deactivate_user');
             $this->load->view('footer');
-
         } else {
             // do we really want to deactivate?
             if ($this->input->post('confirm') == 'yes') {
@@ -585,10 +604,10 @@ class Auth extends MX_Controller
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
         $this->form_validation->set_rules('organization', 'Organization', 'required');
 
-//        if ($identity_column !== 'email') {
-//            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required');
-//            $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
-//        } else {
+        //        if ($identity_column !== 'email') {
+        //            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'required');
+        //            $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
+        //        } else {
         $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|numeric|min_length[9]|max_length[13] ');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
@@ -853,10 +872,10 @@ class Auth extends MX_Controller
         $this->form_validation->set_rules('email', $this->lang->line('edit_user_validation_email_label'), 'required|valid_email');
 
         if (isset($_POST) && !empty($_POST)) {
-//            // do we have a valid request?
-//            if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
-//                show_error($this->lang->line('error_csrf'));
-//            }
+            //            // do we have a valid request?
+            //            if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
+            //                show_error($this->lang->line('error_csrf'));
+            //            }
 
             // update the password if it was posted
             if ($this->input->post('password')) {
@@ -897,7 +916,6 @@ class Auth extends MX_Controller
                         foreach ($groupData as $grp) {
                             $this->ion_auth->add_to_group($grp, $id);
                         }
-
                     }
                 }
 
@@ -906,9 +924,7 @@ class Auth extends MX_Controller
                     // redirect them back to the admin page if admin, or to the base url if non admin
                     $this->session->set_flashdata('message', display_message("User Saved"));
                     redirect('auth/edit_user/' . $id, 'refresh');
-
                 }
-
             }
         }
 
@@ -1014,8 +1030,10 @@ class Auth extends MX_Controller
             //check if user exists
             if ($assigned_users) {
                 //save mapped users
-                $this->model->update_by(array('user_id' => $id),
-                    array('users' => $new_users_string));
+                $this->model->update_by(
+                    array('user_id' => $id),
+                    array('users' => $new_users_string)
+                );
             } else {
                 $this->model->insert(
                     array('user_id' => $id, 'users' => $new_users_string)
@@ -1210,17 +1228,21 @@ class Auth extends MX_Controller
 
             foreach ($perms[1] as $key => $value) {
 
-                foreach ($value as $k => $v):
+                foreach ($value as $k => $v) :
 
                     if ($this->input->post('module_' . $v[0] . '_' . $v[1])) {
 
-                        $check = $this->db->get_where('perms_group',
-                            array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k))->row();
+                        $check = $this->db->get_where(
+                            'perms_group',
+                            array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k)
+                        )->row();
 
                         if (count($check) == 1) {
-                            $this->db->update('perms_group',
+                            $this->db->update(
+                                'perms_group',
                                 array('allow' => $this->input->post('module_' . $v[0] . '_' . $v[1])),
-                                array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k));
+                                array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k)
+                            );
                         } else {
                             $this->db->insert('perms_group', array('group_id' => $group_id, 'module_id' => $v[0], 'perm_slug' => $k, 'allow' => 1));
                         }
@@ -1284,11 +1306,13 @@ class Auth extends MX_Controller
         $this->form_validation->set_rules('controller', 'Controller', 'required|alpha_dash');
 
         if ($this->form_validation->run() == true) {
-            $result = $this->db->insert('perms_module',
+            $result = $this->db->insert(
+                'perms_module',
                 array(
                     'name' => $this->input->post('name'),
                     'controller' => $this->input->post('controller')
-                ));
+                )
+            );
 
             if ($result)
                 $this->session->set_flashdata("message", display_message("New module added"));
@@ -1518,5 +1542,4 @@ class Auth extends MX_Controller
         $this->load->view("auth/edit_perm");
         $this->load->view('footer');
     }
-
 }

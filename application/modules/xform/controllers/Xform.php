@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AfyaData
  *
@@ -36,7 +37,7 @@
  * @since        Version 1.0.0
  */
 
-defined('BASEPATH') or exit ('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * XForm Class
@@ -58,7 +59,7 @@ class Xform extends MX_Controller
 
     private $objPHPExcel;
 
-     //todo: remove this when finish implementation
+    //todo: remove this when finish implementation
     const MOBILE_SERVICE_ID = 93;
     private $sms_sender_id;
     private $api_key;
@@ -112,26 +113,26 @@ class Xform extends MX_Controller
         //log_message("DEBUG","diggest => " . $_SERVER ['PHP_AUTH_DIGEST']);
 
         // Get the digest from the http header
-        if (isset($_SERVER ['PHP_AUTH_DIGEST']))
-            $digest = $_SERVER ['PHP_AUTH_DIGEST'];
+        if (isset($_SERVER['PHP_AUTH_DIGEST']))
+            $digest = $_SERVER['PHP_AUTH_DIGEST'];
 
         // server realm and unique id
         $realm = $this->config->item("realm");
         $nonce = md5(uniqid());
 
         // Check if there was no digest, show login
-        if (empty ($digest)) {
+        if (empty($digest)) {
             // populate login form if no digest authenticate
             $this->form_auth->require_login_prompt($realm, $nonce);
             log_message('debug', 'exiting, digest was not found');
-            exit ();
+            exit();
         }
 
         // http_digest_parse
         $digest_parts = $this->form_auth->http_digest_parse($digest);
 
         // username obtained from http digest
-        $username = $digest_parts ['username'];
+        $username = $digest_parts['username'];
 
         // get user details from database
         $user = $this->User_model->find_by_username($username);
@@ -147,10 +148,10 @@ class Xform extends MX_Controller
         }
 
         // show status header if user not available in database
-        if (empty ($db_username)) {
+        if (empty($db_username)) {
             // populate login form if no digest authenticate
             $this->form_auth->require_login_prompt($realm, $nonce);
-            exit ();
+            exit();
         }
 
         // Based on all the info we gathered we can figure out what the response should be
@@ -159,20 +160,20 @@ class Xform extends MX_Controller
         $calculated_response = md5("{$A1}:{$digest_parts['nonce']}:{$digest_parts['nc']}:{$digest_parts['cnonce']}:{$digest_parts['qop']}:{$A2}");
 
         // If digest fails, show login
-        if ($digest_parts ['response'] != $calculated_response) {
+        if ($digest_parts['response'] != $calculated_response) {
             // populate login form if no digest authenticate
             $this->form_auth->require_login_prompt($realm, $nonce);
-            exit ();
+            exit();
         }
 
         // IF passes authentication
-        if ($_SERVER ['REQUEST_METHOD'] === "HEAD") {
+        if ($_SERVER['REQUEST_METHOD'] === "HEAD") {
             $http_response_code = 204;
-        } elseif ($_SERVER ['REQUEST_METHOD'] === "POST") {
+        } elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             foreach ($_FILES as $file) {
                 // File details
-                $file_name = $file ['name'];
+                $file_name = $file['name'];
 
                 // check file extension
                 $value = explode('.', $file_name);
@@ -193,7 +194,6 @@ class Xform extends MX_Controller
 
                     $inserted_form_id = $this->Submission_model->create($data);
                     log_message("debug", "submission inserted => " . $inserted_form_id);
-
                 } elseif ($file_extension == 'jpg' or $file_extension == 'jpeg' or $file_extension == 'png') {
                     // path to store images
                     $path = $this->config->item("images_data_upload_dir") . $file_name;
@@ -202,19 +202,18 @@ class Xform extends MX_Controller
                 } elseif ($file_extension == '3gpp' or $file_extension == 'amr') {
                     // path to store audio
                     $path = $this->config->item("audio_data_upload_dir") . $file_name;
-
                 } elseif ($file_extension == '3gp' or $file_extension == 'mp4') {
                     // path to store video
                     $path = $this->config->item("video_data_upload_dir") . $file_name;
                 }
 
                 // upload file to the server
-                move_uploaded_file($file ['tmp_name'], $path);
+                move_uploaded_file($file['tmp_name'], $path);
             }
             // call function to insert xform data in a database
             if (!$this->insert_data($uploaded_filename)) {
                 $this->Submission_model->delete_submission($inserted_form_id);
-                   // @unlink($path);
+                // @unlink($path);
             }
         }
 
@@ -245,7 +244,7 @@ class Xform extends MX_Controller
 
         $xForm_form = $this->Xform_model->find_by_xform_id($this->xFormReader->get_table_name());
 
-         //todo : if you want to send sms to specific user
+        //todo : if you want to send sms to specific user
         // if ($xForm_form->send_sms == 1 && $insert_result) {
         //     //for now just query specific table
 
@@ -348,7 +347,7 @@ class Xform extends MX_Controller
                 $suspected_diseases = $this->Ohkr_model->find_diseases_by_symptoms_code($symptoms_reported);
 
                 $message = $this->lang->line("message_data_received");
-                $suspected_diseases_list = $message . "<br/>";
+                $suspected_diseases_list = "Recebemos o seu formulário, esta é uma lista de doenças suspeitas com base nas informações que você enviou<br/>";
 
                 if ($suspected_diseases) {
 
@@ -365,28 +364,40 @@ class Xform extends MX_Controller
                             "location" => $district
                         );
 
-                        if (ENVIRONMENT == 'development' || ENVIRONMENT == "testing" || ENVIRONMENT == "production") {
-                            //get response message
-                            $this->model->set_table('ohkr_response_sms');
-                            //$sender_msg = $this->model->get_by(['disease_id' => $disease->disease_id, 'group_id' => 4]);
+                        //get response message
+                        //$this->model->set_table('ohkr_response_sms');
+                        //$sender_msg = $this->model->get_by(['disease_id' => $disease->disease_id, 'group_id' => 4]);
 
-                            $sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
+                        $sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
 
-                            if ($sender_msg) {
-                                $this->_save_msg_and_send($sender_msg->id, $this->sender->phone, $sender_msg->message,
-                                    $this->sender->first_name, $message_sender_name, $request_url_endpoint);
-                            }
+                        if ($sender_msg) {
+                            $this->_save_msg_and_send(
+                                $sender_msg->id,
+                                $this->sender->phone,
+                                $sender_msg->message,
+                                $this->sender->first_name,
+                                $message_sender_name,
+                                $request_url_endpoint
+                            );
+                        }
 
-                            $response_messages = $this->Ohkr_model->find_response_messages_and_groups($disease->disease_id,
-                                str_ireplace("_", " ", $district));
+                        $response_messages = $this->Ohkr_model->find_response_messages_and_groups(
+                            $disease->disease_id,
+                            str_ireplace("_", " ", $district)
+                        );
 
-                            $counter = 1;
-                            if ($response_messages) {
-                                foreach ($response_messages as $sms) {
-                                    $this->_save_msg_and_send($sms->rsms_id, $sms->phone, $sms->message, $sms->first_name,
-                                        $message_sender_name, $request_url_endpoint);
-                                    $counter++;
-                                }
+                        $counter = 1;
+                        if ($response_messages) {
+                            foreach ($response_messages as $sms) {
+                                $this->_save_msg_and_send(
+                                    $sms->rsms_id,
+                                    $sms->phone,
+                                    $sms->message,
+                                    $sms->first_name,
+                                    $message_sender_name,
+                                    $request_url_endpoint
+                                );
+                                $counter++;
                             }
                         }
                         $i++;
@@ -394,7 +405,8 @@ class Xform extends MX_Controller
 
                     $this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
                 } else {
-                    $suspected_diseases_list = $this->lang->line("message_auto_detect_disease_failed");
+                    $suspected_diseases_list = 'Recebemos suas informações, infelizmente, o sistema não pode detectar automaticamente doenças mais prováveis
+                    por favor, procure mais conselhos de nossos especialistas';
                 }
 
                 $feedback = array(
@@ -417,7 +429,7 @@ class Xform extends MX_Controller
             $feedback = array(
                 "user_id" => $this->user_submitting_feedback_id,
                 "form_id" => $this->xFormReader->get_table_name(),
-                "message" => $this->lang->line("message_feedback_data_received"),
+                "message" => 'Obrigado pelo envio das informações, Recebemos o seu formulário.',
                 "date_created" => date('Y-m-d H:i:s'),
                 "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
                 "sender" => "server",
@@ -491,7 +503,7 @@ class Xform extends MX_Controller
                     <message nature="submit_success">' . $response_message . '</message>
                     </OpenRosaResponse>';
 
-        $content_length = '';//sizeof($response);
+        $content_length = ''; //sizeof($response);
         // set header response
         header("X-OpenRosa-Version:1.0");
         header("X-OpenRosa-Accept-Content-Length:" . $content_length);
@@ -580,7 +592,7 @@ class Xform extends MX_Controller
         }
         $xml .= '</xforms>';
 
-        $content_length = '';//sizeof($xml);
+        $content_length = ''; //sizeof($xml);
         //set header response
         header('Content-Type:text/xml; charset=utf-8');
         header('HTTP_X_OPENROSA_VERSION:1.0');
@@ -605,9 +617,9 @@ class Xform extends MX_Controller
 
         //project
         $project = $this->Project_model->get_project_by_id($project_id);
-        if (!$project) 
+        if (!$project)
             show_error("Project not exist", 500);
-        
+
         $data['project'] = $project;
         $data['project_id'] = $project_id;
 
@@ -690,7 +702,7 @@ class Xform extends MX_Controller
                                 "status" => "published",
                                 "perms" => $all_permissions,
                                 "created_by" => get_current_user_id(),
-                                "created_at" => date("Y-m-d H:i:s"),      
+                                "created_at" => date("Y-m-d H:i:s"),
                             );
 
                             //todo: Check if form is built from ODK Aggregate Build to avoid errors during initialization
@@ -1026,7 +1038,7 @@ class Xform extends MX_Controller
         redirect("projects");
     }
 
-        /**
+    /**
      * @param $project_id
      * @param $form_id
      */
@@ -1380,12 +1392,12 @@ class Xform extends MX_Controller
             ->setCellValue('F2', 'Submitted At');
 
         //set column dimensions
-//        //$this->objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
-//        $this->objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-//        $this->objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-//        $this->objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-//        $this->objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-//        $this->objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+        //        //$this->objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+        //        $this->objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+        //        $this->objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+        //        $this->objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+        //        $this->objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+        //        $this->objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
 
         // set headers
         $header = 'A2:F2';
@@ -1571,7 +1583,6 @@ class Xform extends MX_Controller
                         $this->objPHPExcel->getActiveSheet()->mergeCells($r);
                         $v = ($k % 2) ? ' > 5 yrs ' : ' < 5 yrs';
                         $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i + $k * 4) . '4', $v);
-
                     }
                     //$nne .= '<td colspan="4">  < 5 yrs </td><td colspan="4">  > 5 yrs </td>';
 
@@ -1584,7 +1595,6 @@ class Xform extends MX_Controller
                             $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i + $k * 2) . '5', $v);
                         }
                     }
-
                 }
             }
 
@@ -1728,31 +1738,31 @@ class Xform extends MX_Controller
     /**
      * @param null $xform_id
      */
-//    function csv_export_form_data($xform_id = NULL)
-//    {
-//        if ($xform_id == NULL) {
-//            $this->session->set_flashdata("message", display_message("You must select a form", "danger"));
-//            redirect("projects");
-//        }
-//        $table_name = $xform_id;
-//        $query = $this->db->query("select * from {$table_name} order by id ASC ");
-//        $this->_force_csv_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".csv");
-//    }
+    //    function csv_export_form_data($xform_id = NULL)
+    //    {
+    //        if ($xform_id == NULL) {
+    //            $this->session->set_flashdata("message", display_message("You must select a form", "danger"));
+    //            redirect("projects");
+    //        }
+    //        $table_name = $xform_id;
+    //        $query = $this->db->query("select * from {$table_name} order by id ASC ");
+    //        $this->_force_csv_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".csv");
+    //    }
 
     /**
      * @param $query
      * @param string $filename
      */
-//    function _force_csv_download($query, $filename = '.csv')
-//    {
-//        $this->load->dbutil();
-//        $this->load->helper('file');
-//        $this->load->helper('download');
-//        $delimiter = ",";
-//        $newline = "\r\n";
-//        $data = $this->dbutil->csv_from_result($query, $delimiter, $newline);
-//        force_download($filename, $data);
-//    }
+    //    function _force_csv_download($query, $filename = '.csv')
+    //    {
+    //        $this->load->dbutil();
+    //        $this->load->helper('file');
+    //        $this->load->helper('download');
+    //        $delimiter = ",";
+    //        $newline = "\r\n";
+    //        $data = $this->dbutil->csv_from_result($query, $delimiter, $newline);
+    //        force_download($filename, $data);
+    //    }
 
     /**
      * @param null $xform_id
@@ -2002,7 +2012,7 @@ class Xform extends MX_Controller
         $this->load->view("footer", $data);
     }
 
-       //push message
+    //push message
     function push($recipients, $message)
     {
         $date_time = date('Y-m-d H:i:s');
