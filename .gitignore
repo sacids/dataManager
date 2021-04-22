@@ -87,6 +87,7 @@ assets/forms/definition/archive/*.xml
 assets/forms/definition/*.jpg
 /composer.lock
 /vendor/
+application/logs
 application/tests
 !application/tests/controllers
 !application/tests/models
