@@ -31,7 +31,7 @@ class User_model extends CI_Model
     {
         return $this->db
             ->group_start()
-            ->where('groups.name', 'members')
+            ->where('groups.name', 'data_collectors')
             ->or_where('groups.name', 'chr')
             ->group_end()
             ->join('users_groups', 'users_groups.user_id = users.id')

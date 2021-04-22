@@ -59,7 +59,7 @@
                                             <i class="fa fa-users"></i>
                                         </div>
                                         <div class="col-xs-7">
-                                            <h2><?= (isset($active_users) ? $active_users : '0'); ?></h2>
+                                            <h2><?= (isset($data_collectors) ? $data_collectors : '0'); ?></h2>
                                             <h6><?= $this->lang->line("label_data_collectors") ?></h6>
                                         </div>
                                     </div>
