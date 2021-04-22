@@ -367,7 +367,6 @@ class Xformreader_model extends CI_Model
             }
 
             if ($type == 'geopoint') {
-
                 $has_geopoint = TRUE;
                 $geopoints = explode(" ", $cv);
 

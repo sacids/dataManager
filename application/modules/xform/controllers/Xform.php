@@ -340,7 +340,7 @@ class Xform extends MX_Controller
                 }
             }
 
-            if (count($symptoms_reported) > 0) {
+            if ($symptoms_reported) {
                 $message_sender_name = config_item("sms_sender_id");
                 $request_url_endpoint = "sms/1/text/single";
 
@@ -893,7 +893,7 @@ class Xform extends MX_Controller
                 $new_perms = $this->input->post("perms");
 
                 $new_perms_string = "";
-                if (count($new_perms) > 0) {
+                if ($new_perms) {
                     $new_perms_string = join(",", $new_perms);
                 }
 
@@ -956,7 +956,7 @@ class Xform extends MX_Controller
 
         $project = $this->Project_model->get_project_by_id($project_id);
 
-        if (count($project) == 0) {
+        if (!$project) {
             show_error("Project not exist", 500);
         }
 
@@ -1036,7 +1036,7 @@ class Xform extends MX_Controller
 
         $project = $this->Project_model->get_project_by_id($project_id);
 
-        if (count($project) == 0) {
+        if (!$project) {
             show_error("Project not exist", 500);
         }
         $data['project'] = $project;
