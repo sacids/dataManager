@@ -147,7 +147,8 @@
                                 } else {
                                     echo "<td>" . $entry . "</td>";
                                 }
-                            }
+                            }    
+                            
                         }
                         echo "</tr>";
                     }
