@@ -1,4 +1,3 @@
-/application/logs
 /assets/whatsapp
 ### CodeIgniter template
 */config/development
@@ -86,7 +85,6 @@ assets/forms/definition/archive/*.xml
 !assets/forms/definition/archive/index.html
 
 assets/forms/definition/*.jpg
-/application/config/sms.php
 /composer.lock
 /vendor/
 application/tests

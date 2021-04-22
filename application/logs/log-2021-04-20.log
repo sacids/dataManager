@@ -1,0 +1,1092 @@
+DEBUG - 2021-04-20 05:19:39 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:19:39 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:19:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:19:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:19:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:19:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:19:39 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:19:39 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:19:39 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:19:39 --> Xform MX_Controller Initialized
+ERROR - 2021-04-20 05:19:39 --> Severity: Notice --> Undefined index: PHP_AUTH_DIGEST /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/controllers/Xform.php 112
+DEBUG - 2021-04-20 05:19:39 --> diggest => 
+DEBUG - 2021-04-20 05:19:39 --> exiting, digest was not found
+DEBUG - 2021-04-20 05:19:39 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:19:39 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:19:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:19:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:19:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:19:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:19:39 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:19:39 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:19:39 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:19:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:19:39 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:19:39 --> diggest => username="255717705746", realm="Authorized users of Sacids Openrosa", nonce="0783a34325fdbb1d1b3e499597e8b344", uri="/sacids/afyadata/submission?deviceID=android_id%3A3260f467d30038f9", response="49d08efb0b1c46d4cdb6d8e24e926f13", qop=auth, nc=00000001, cnonce="66f76a47e15bc402", algorithm=MD5, opaque="0783a34325fdbb1d1b3e499597e8b344"
+DEBUG - 2021-04-20 05:19:39 --> Total execution time: 0.0073
+DEBUG - 2021-04-20 05:20:28 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:20:28 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:20:28 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:20:28 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:20:28 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:20:28 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:20:28 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:20:28 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:20:28 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:20:28 --> Xform MX_Controller Initialized
+ERROR - 2021-04-20 05:20:28 --> Severity: Notice --> Undefined index: PHP_AUTH_DIGEST /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/controllers/Xform.php 112
+DEBUG - 2021-04-20 05:20:28 --> diggest => 
+DEBUG - 2021-04-20 05:20:28 --> exiting, digest was not found
+DEBUG - 2021-04-20 05:20:28 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:20:28 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:20:28 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:20:28 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:20:28 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:20:28 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:20:28 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:20:28 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:20:28 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:20:28 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:20:28 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:20:28 --> diggest => username="255717705746", realm="Authorized users of Sacids Openrosa", nonce="b5138db028087c1bb885b1aa97264172", uri="/sacids/afyadata/submission?deviceID=android_id%3A3260f467d30038f9", response="6939bfb92e9770bda02aefa2b66b105b", qop=auth, nc=00000001, cnonce="d83af66fcd20095f", algorithm=MD5, opaque="b5138db028087c1bb885b1aa97264172"
+DEBUG - 2021-04-20 05:20:28 --> Total execution time: 0.0078
+DEBUG - 2021-04-20 05:21:08 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:21:08 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:21:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:21:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:21:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:21:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:21:08 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:21:08 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:21:08 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:21:08 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:21:08 --> exiting, digest was not found
+DEBUG - 2021-04-20 05:21:08 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:21:08 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:21:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:21:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:21:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:21:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:21:08 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:21:08 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:21:08 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:21:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:21:08 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:21:08 --> Total execution time: 0.0072
+DEBUG - 2021-04-20 05:22:02 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:22:02 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:22:02 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:22:02 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:22:02 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:22:02 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:22:02 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:22:02 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:22:02 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:22:02 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:22:02 --> exiting, digest was not found
+DEBUG - 2021-04-20 05:22:02 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:22:02 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:22:02 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:22:02 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:22:02 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:22:02 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:22:02 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:22:02 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:22:02 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:22:02 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:22:02 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:22:02 --> Total execution time: 0.0116
+DEBUG - 2021-04-20 05:22:57 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:22:57 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:22:57 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:22:57 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:22:57 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:22:57 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:22:57 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:22:57 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:22:57 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:22:57 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:22:57 --> exiting, digest was not found
+DEBUG - 2021-04-20 05:22:57 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:22:57 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:22:57 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:22:57 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:22:57 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:22:57 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:22:57 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:22:57 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:22:57 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:22:57 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:22:57 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:22:57 --> Total execution time: 0.0093
+DEBUG - 2021-04-20 05:23:06 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:23:06 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:23:06 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:23:06 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:23:06 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:23:06 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:23:06 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:23:06 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:23:06 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:23:06 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:23:06 --> exiting, digest was not found
+DEBUG - 2021-04-20 05:23:06 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:23:06 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:23:06 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:23:06 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:23:06 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:23:06 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:23:06 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:23:06 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:23:06 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:23:06 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:23:06 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:23:06 --> Total execution time: 0.0075
+DEBUG - 2021-04-20 05:26:23 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:26:23 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:26:23 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:26:23 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:26:23 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:26:23 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:26:23 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:26:23 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:26:23 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:26:23 --> Projects MX_Controller Initialized
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/views/form/index.php
+DEBUG - 2021-04-20 05:26:23 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 05:26:23 --> Total execution time: 0.0594
+DEBUG - 2021-04-20 05:27:29 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:27:29 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:27:29 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:27:29 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:27:29 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:27:29 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:27:29 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:27:29 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:27:29 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:27:29 --> Projects MX_Controller Initialized
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/views/form/index.php
+DEBUG - 2021-04-20 05:27:29 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 05:27:29 --> Total execution time: 0.0231
+DEBUG - 2021-04-20 05:27:33 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:27:33 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:27:33 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:27:33 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:27:33 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:27:33 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:27:33 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:27:33 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:27:33 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:27:33 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/views/form_data_details.php
+DEBUG - 2021-04-20 05:27:33 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 05:27:33 --> Total execution time: 0.0537
+DEBUG - 2021-04-20 05:45:08 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 05:45:08 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 05:45:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 05:45:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 05:45:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 05:45:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:45:08 --> Xform_comm library initialized
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 05:45:08 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 05:45:08 --> Form_auth library initialized
+DEBUG - 2021-04-20 05:45:08 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 05:45:08 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 05:45:08 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 05:45:08 --> Total execution time: 0.0908
+DEBUG - 2021-04-20 06:15:14 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 06:15:14 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 06:15:14 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 06:15:14 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 06:15:14 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 06:15:14 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 06:15:14 --> Xform_comm library initialized
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 06:15:14 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 06:15:14 --> Form_auth library initialized
+DEBUG - 2021-04-20 06:15:14 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 06:15:14 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 06:15:14 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 06:15:14 --> Total execution time: 0.1629
+DEBUG - 2021-04-20 06:16:22 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 06:16:22 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 06:16:22 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 06:16:22 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 06:16:22 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 06:16:22 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 06:16:22 --> Xform_comm library initialized
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 06:16:22 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 06:16:22 --> Form_auth library initialized
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 06:16:22 --> Projects MX_Controller Initialized
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/views/form/index.php
+DEBUG - 2021-04-20 06:16:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 06:16:22 --> Total execution time: 0.0603
+DEBUG - 2021-04-20 06:16:26 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 06:16:26 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 06:16:26 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 06:16:26 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 06:16:26 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 06:16:26 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 06:16:26 --> Xform_comm library initialized
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 06:16:26 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 06:16:26 --> Form_auth library initialized
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 06:16:26 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/views/form_data_details.php
+DEBUG - 2021-04-20 06:16:26 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 06:16:26 --> Total execution time: 0.0615
+DEBUG - 2021-04-20 08:01:20 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 08:01:20 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 08:01:20 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 08:01:20 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 08:01:20 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 08:01:21 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 08:01:21 --> Xform_comm library initialized
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 08:01:21 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 08:01:21 --> Form_auth library initialized
+DEBUG - 2021-04-20 08:01:21 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 08:01:21 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 08:01:21 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 08:01:21 --> Total execution time: 0.0515
+DEBUG - 2021-04-20 08:01:55 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 08:01:55 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 08:01:55 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 08:01:55 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 08:01:55 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 08:01:55 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 08:01:55 --> Xform_comm library initialized
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 08:01:55 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 08:01:55 --> Form_auth library initialized
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 08:01:55 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/views/form_data_details.php
+DEBUG - 2021-04-20 08:01:55 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 08:01:55 --> Total execution time: 0.0328
+DEBUG - 2021-04-20 08:24:24 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 08:24:24 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 08:24:24 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 08:24:24 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 08:24:24 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 08:24:24 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 08:24:24 --> Xform_comm library initialized
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 08:24:24 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 08:24:24 --> Form_auth library initialized
+DEBUG - 2021-04-20 08:24:24 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 08:24:24 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 08:24:24 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 08:24:24 --> Total execution time: 0.0382
+DEBUG - 2021-04-20 08:24:54 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 08:24:54 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 08:24:54 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 08:24:54 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 08:24:54 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 08:24:54 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 08:24:54 --> Xform_comm library initialized
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 08:24:54 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 08:24:54 --> Form_auth library initialized
+DEBUG - 2021-04-20 08:24:54 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 08:24:54 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 08:24:54 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 08:24:54 --> Total execution time: 0.0195
+DEBUG - 2021-04-20 09:10:09 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 09:10:09 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 09:10:09 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 09:10:09 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 09:10:09 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 09:10:09 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 09:10:09 --> Xform_comm library initialized
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 09:10:09 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 09:10:09 --> Form_auth library initialized
+DEBUG - 2021-04-20 09:10:09 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 09:10:09 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 09:10:09 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 09:10:09 --> Total execution time: 0.0256
+DEBUG - 2021-04-20 09:26:50 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 09:26:50 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 09:26:50 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 09:26:50 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 09:26:50 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 09:26:50 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 09:26:50 --> Xform_comm library initialized
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 09:26:50 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 09:26:50 --> Form_auth library initialized
+DEBUG - 2021-04-20 09:26:50 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 09:26:50 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 09:26:50 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 09:26:50 --> Total execution time: 0.0154
+DEBUG - 2021-04-20 09:29:13 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 09:29:13 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 09:29:13 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 09:29:13 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 09:29:13 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 09:29:13 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 09:29:13 --> Xform_comm library initialized
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 09:29:13 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 09:29:13 --> Form_auth library initialized
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 09:29:13 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/views/form_data_details.php
+DEBUG - 2021-04-20 09:29:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 09:29:13 --> Total execution time: 0.0293
+DEBUG - 2021-04-20 10:04:39 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 10:04:39 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 10:04:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 10:04:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 10:04:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 10:04:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:04:39 --> Xform_comm library initialized
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 10:04:39 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 10:04:39 --> Form_auth library initialized
+DEBUG - 2021-04-20 10:04:39 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 10:04:39 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 10:04:39 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 10:04:39 --> Total execution time: 0.0218
+DEBUG - 2021-04-20 10:13:41 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 10:13:41 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 10:13:41 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 10:13:41 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 10:13:41 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 10:13:41 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:13:41 --> Xform_comm library initialized
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 10:13:41 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 10:13:41 --> Form_auth library initialized
+DEBUG - 2021-04-20 10:13:41 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 10:13:41 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 10:13:41 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 10:13:41 --> Total execution time: 0.0278
+DEBUG - 2021-04-20 10:14:00 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 10:14:00 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 10:14:00 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 10:14:00 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 10:14:00 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 10:14:00 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:14:00 --> Xform_comm library initialized
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 10:14:00 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 10:14:00 --> Form_auth library initialized
+DEBUG - 2021-04-20 10:14:00 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 10:14:00 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 10:14:13 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 10:14:13 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 10:14:13 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 10:14:13 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 10:14:13 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 10:14:13 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:14:13 --> Xform_comm library initialized
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 10:14:13 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 10:14:13 --> Form_auth library initialized
+DEBUG - 2021-04-20 10:14:13 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 10:14:13 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 10:27:51 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 10:27:51 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 10:27:52 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 10:27:52 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 10:27:52 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 10:27:52 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:27:52 --> Xform_comm library initialized
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 10:27:52 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 10:27:52 --> Form_auth library initialized
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 10:27:52 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/views/form_data_details.php
+DEBUG - 2021-04-20 10:27:52 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 10:27:52 --> Total execution time: 0.0495
+DEBUG - 2021-04-20 10:28:35 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 10:28:35 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 10:28:35 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 10:28:35 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 10:28:35 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 10:28:35 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:28:35 --> Xform_comm library initialized
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 10:28:35 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 10:28:35 --> Form_auth library initialized
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 10:28:35 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/views/form_data_details.php
+DEBUG - 2021-04-20 10:28:35 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 10:28:35 --> Total execution time: 0.0187
+DEBUG - 2021-04-20 10:29:07 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 10:29:07 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 10:29:07 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 10:29:07 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 10:29:07 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 10:29:07 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:29:07 --> Xform_comm library initialized
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 10:29:07 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 10:29:07 --> Form_auth library initialized
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 10:29:07 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/views/form_data_details.php
+DEBUG - 2021-04-20 10:29:07 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 10:29:07 --> Total execution time: 0.0180
+DEBUG - 2021-04-20 10:32:01 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 10:32:01 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 10:32:01 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 10:32:01 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 10:32:01 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 10:32:01 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:32:01 --> Xform_comm library initialized
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 10:32:01 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 10:32:01 --> Form_auth library initialized
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 10:32:01 --> Xform MX_Controller Initialized
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/header.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/views/form_data_details.php
+DEBUG - 2021-04-20 10:32:01 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/views/footer.php
+DEBUG - 2021-04-20 10:32:01 --> Total execution time: 0.0306
+DEBUG - 2021-04-20 10:51:22 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 10:51:22 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 10:51:22 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 10:51:22 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 10:51:22 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 10:51:22 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:51:22 --> Xform_comm library initialized
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 10:51:22 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 10:51:22 --> Form_auth library initialized
+DEBUG - 2021-04-20 10:51:22 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 10:51:22 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 10:51:22 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 10:51:22 --> Total execution time: 0.1434
+DEBUG - 2021-04-20 12:21:53 --> UTF-8 Support Enabled
+DEBUG - 2021-04-20 12:21:53 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2021-04-20 12:21:53 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sacids.php
+DEBUG - 2021-04-20 12:21:53 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/pagination.php
+DEBUG - 2021-04-20 12:21:53 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/sms.php
+DEBUG - 2021-04-20 12:21:53 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/ion_auth.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 12:21:53 --> Xform_comm library initialized
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/User_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Group_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Users_group_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_class_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_method_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perms_group_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Acl_model.php
+DEBUG - 2021-04-20 12:21:53 --> File already loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Ion_auth_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/auth/models/Perm_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Submission_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/feedback/models/Feedback_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xform_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Ohkr_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Disease_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Symptom_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/ohkr/models/Specie_model.php
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/xform/models/Xformreader_model.php
+DEBUG - 2021-04-20 12:21:53 --> Form_auth library initialized
+DEBUG - 2021-04-20 12:21:53 --> File loaded: /Users/renfrid/Sites/sacids/afyadata/application/modules/projects/models/Project_model.php
+DEBUG - 2021-04-20 12:21:53 --> Config file loaded: /Users/renfrid/Sites/sacids/afyadata/application/config/rest.php
+DEBUG - 2021-04-20 12:21:53 --> username getting forms feedback is 255717705746
+DEBUG - 2021-04-20 12:21:53 --> Total execution time: 0.0361
