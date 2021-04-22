@@ -2,13 +2,13 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title"><?= $this->lang->line("title_list_projects") ?></h3>
+                <h3 class="title">Projects</h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li class="active"><?= $this->lang->line("title_list_projects") ?></li>
+                <li class="active">Projects</li>
             </ol>
 
             <div class="row">
