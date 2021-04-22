@@ -922,7 +922,7 @@ class Xform extends MX_Controller
                     $mapped_fields[$i]["chart_use"] = $chart_use[$i];
                     $mapped_fields[$i]["type"] = $type_option[$i];
                     $mapped_fields[$i]["hide"] = 0;
-                    $mapped_fields[$i]["dhis_data_element"] = $dhis2_data_element[$i];
+                    //$mapped_fields[$i]["dhis_data_element"] = $dhis2_data_element[$i];
 
                     if (!empty($hides) && in_array($ids[$i], $hides)) {
                         $mapped_fields[$i]["hide"] = 1;
