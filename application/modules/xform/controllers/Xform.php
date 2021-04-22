@@ -222,35 +222,6 @@ class Xform extends MX_Controller
         echo $this->_get_response($http_response_code);
     }
 
-	public function insert_data_mig(){
-		
-		$path	= "/var/www/html/afyadata/live/mig-1/";
-		if($handle = opendir($path)){
-			$i = 0;
-			while(false !== ($file = readdir($handle))){
-				if('.' === $file) continue;
-				if('..' === $file) continue;
-				
-				//$datafile = $this->config->item("form_data_upload_dir") . $file;
-				$datafile = $path.$file;
-        			$this->xFormReader->set_data_file($datafile);
-        			$this->xFormReader->load_xml_data();
-
-        			$statement = $this->xFormReader->get_insert_form_data_query();
-        			//log_message('debug', $statement);
-        			$insert_result = $this->Xform_model->insert_data($statement);
-        			log_message('debug',"insert mig". $insert_result);
-				echo json_encode($file.' :NEW: '.$insert_result)." \n";
-
-				if($i++ == 200){
-					sleep(1);
-				}
-			}
-			closedir($handle);
-		}
-
-		exit();
-	}
     /**
      * inserts xform into database table
      * Author : Eric Beda
@@ -315,7 +286,7 @@ class Xform extends MX_Controller
         }
 
         //deals with symptoms
-        if ($xForm_form->has_symptoms_field == 99 && $insert_result) {
+        if ($xForm_form->has_symptoms_field == 1 && $insert_result) {
             $symptoms_column_name = $this->Xform_model->find_form_map_by_field_type($xForm_form->form_id, "DALILI")->col_name;
             log_message("debug", "symptoms column name => " . json_encode($symptoms_column_name));
 
@@ -397,9 +368,9 @@ class Xform extends MX_Controller
                         if (ENVIRONMENT == 'development' || ENVIRONMENT == "testing" || ENVIRONMENT == "production") {
                             //get response message
                             $this->model->set_table('ohkr_response_sms');
-                            $sender_msg = $this->model->get_by(['disease_id' => $disease->disease_id, 'group_id' => 4]);
+                            //$sender_msg = $this->model->get_by(['disease_id' => $disease->disease_id, 'group_id' => 4]);
 
-                            //$sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
+                            $sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
 
                             if ($sender_msg) {
                                 $this->_save_msg_and_send($sender_msg->id, $this->sender->phone, $sender_msg->message,
@@ -441,7 +412,6 @@ class Xform extends MX_Controller
                 log_message("debug", "No symptom reported");
             }
         } else {
-
             log_message("debug", "Form does not have symptoms field or symptoms field is not specified in " . base_url("xform/edit_form/" . $xForm_form->id));
 
             $feedback = array(
