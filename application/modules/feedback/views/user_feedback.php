@@ -27,7 +27,7 @@
 
                     <div class="tab-content">
                         <div id="data-details" class="tab-pane fade in">
-                            <?php if (isset($form_data) & $form_data) { ?>
+                            <?php if (isset($form_data) && $form_data) { ?>
                                 <table class="table table-bordered">
                                     <?php foreach ($form_data as $val) { ?>
                                         <tr>
