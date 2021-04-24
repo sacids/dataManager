@@ -139,16 +139,19 @@
                                 echo "<td class='text-center'>" . form_checkbox("entry_id[]", $entry) . "</td>";
                             }
 
-                            if ($key == "meta_username") {
-                                echo "<td class='text-center'>" . get_collector_name_from_phone($entry) . "</td>";
+                            if ($key == "meta_instanceID") {
+                                echo '<td><a href="' . site_url('feedback/user_feedback/' . $entry) . '"><b>' . $entry . '</b></a></td>';
                             } else {
-                                if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                                    echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                                if ($key == "meta_username") {
+                                    echo "<td class='text-center'>" . get_collector_name_from_phone($entry) . "</td>";
                                 } else {
-                                    echo "<td>" . $entry . "</td>";
+                                    if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                                        echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                                    } else {
+                                        echo "<td>" . $entry . "</td>";
+                                    }
                                 }
-                            }    
-                            
+                            }
                         }
                         echo "</tr>";
                     }

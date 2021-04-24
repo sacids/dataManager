@@ -11,7 +11,7 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li><a href="<?= site_url('feedback/lists') ?>">Feedback Messages</a></li>
+                <li><a href="<?= site_url('feedback/lists') ?>">Messages</a></li>
                 <li class="active">Conversation</li>
             </ol>
 
@@ -21,16 +21,28 @@
                 <div class="col-md-12">
 
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#data-details">Data Information</a></li>
-                        <li><a data-toggle="tab" href="#chats">Chats</a></li>
+                        <li><a data-toggle="tab" href="#data-details">Submitted Data</a></li>
+                        <li class="active"><a data-toggle="tab" href="#chats">Chats</a></li>
                     </ul>
 
                     <div class="tab-content">
-                        <div id="data-details" class="tab-pane fade in active">
+                        <div id="data-details" class="tab-pane fade in">
+                            <?php if (isset($form_data) & $form_data) { ?>
+                                <table class="table table-bordered">
+                                    <?php foreach ($form_data as $val) { ?>
+                                        <tr>
+                                        <td><?= $val['label'] ?></td>
+                                        <td><?= $val['value'] ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                </table>
+                            <?php } else {
+                                echo "<div class='alert alert-warning'>Nothing to display</div>";
+                            } ?>
                         </div>
                         <!--./data -->
 
-                        <div id="chats" class="tab-pane fade in">
+                        <div id="chats" class="tab-pane fade in active">
                             <ol class="chat">
                                 <?php foreach ($feedback as $values) {
                                     if ($values->sender == "user") $class = "self";
@@ -43,7 +55,8 @@
                                         </div>
                                     </li>
                                 <?php } ?>
-                            </ol><!--./ol -->
+                            </ol>
+                            <!--./ol -->
 
                             <?= form_open('', 'class="feedback_form" id="form"') ?>
                             <input class="textarea" type="text" name="message" id="message" placeholder="Type feedback here!" required />
@@ -54,8 +67,6 @@
                         <!--./feedback -->
                     </div>
                     <!--./tab-content -->
-
-
                 </div>
                 <!--./col-md-12 -->
             </div>

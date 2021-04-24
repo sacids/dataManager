@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  *Form Feedback Class
@@ -13,6 +13,9 @@ class Feedback extends MX_Controller
     private $data;
     private $user_id;
     private $controller;
+
+    private $label;
+    private $search_value;
 
     function __construct()
     {
@@ -68,9 +71,10 @@ class Feedback extends MX_Controller
             //search feedback
             $feedback = $this->Feedback_model->search_feedback($form_name, $username);
 
-            if ($feedback) {
-                $this->data['feedback'] = $feedback;
-            }
+            if ($feedback)
+                $this->data['feedback_lists'] = $feedback;
+            else
+                $this->data['feedback_lists'] = [];
         } else {
             $config = array(
                 'base_url' => $this->config->base_url("feedback/lists"),
@@ -81,7 +85,7 @@ class Feedback extends MX_Controller
             $this->pagination->initialize($config);
             $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-            $this->data['feedback_list'] = $this->Feedback_model->find_all($this->pagination->per_page, $page);
+            $this->data['feedback_lists'] = $this->Feedback_model->find_all($this->pagination->per_page, $page);
             $this->data["links"] = $this->pagination->create_links();
         }
 
@@ -106,10 +110,13 @@ class Feedback extends MX_Controller
         //check permission
         //$this->has_allowed_perm($this->router->fetch_method());
 
+        //feedback
         $feedback = $this->Feedback_model->get_feedback_by_instance($instance_id);
-        if (count($feedback) == 0) {
+
+        if (!$feedback)
             show_error("User conversation not exists");
-        }
+
+        //pass variables
         $this->data['feedback'] = $feedback;
         $this->data['instance_id'] = $instance_id;
 
@@ -123,6 +130,27 @@ class Feedback extends MX_Controller
         //update all feedback from android app using instance_id
         $this->Feedback_model->update_user_feedback($instance_id, 'user');
 
+        //form data
+        $this->model->set_table('xforms');
+        $xform = $this->model->get_by(['form_id' => $feedback->form_id]);
+
+        $this->table_name = $xform->form_id;
+        $this->label = 'meta_instanceID';
+        $this->search_value = $instance_id;
+
+        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $xform->filename);
+        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+        $form_definition = $this->xform_comm->get_defn();
+
+        //get form data
+        $form_data = $this->get_form_data($form_definition, $this->get_fieldname_map($this->table_name));
+
+        if ($form_data)
+            $this->data['form_data'] = $form_data;
+        else
+            $this->data['form_data'] = [];
+
+        //submit data
         if ($_POST) {
             $message = $this->input->post('message');
             $fb = $this->Feedback_model->get_feedback_details_by_instance($instance_id);
@@ -140,14 +168,102 @@ class Feedback extends MX_Controller
             ));
 
             if ($result)
-                redirect('feedback/user_feedback/' . $instance_id, 'refresh');
+                redirect('feedback/user_feedback/' . $instance_id . '/#chats', 'refresh');
             else
-                redirect('feedback/user_feedback/' . $instance_id, 'refresh');
+                redirect('feedback/user_feedback/' . $instance_id . '/#chats', 'refresh');
         }
 
         //render view
         $this->load->view('header', $this->data);
         $this->load->view("user_feedback");
         $this->load->view('footer');
+    }
+
+    //get form data
+    function get_form_data($structure, $map)
+    {
+        //get feedback form details
+        $this->model->set_table($this->table_name);
+        $data = $this->model->get_by($this->label, $this->search_value);
+
+        if (!$data) return false;
+        $holder = array();
+
+        $ext_dirs = array(
+            'jpg' => "images",
+            'jpeg' => "images",
+            'png' => "images",
+            '3gpp' => 'audio',
+            'amr' => 'audio',
+            '3gp' => 'video',
+            'mp4' => 'video'
+        );
+
+        $c = 1;
+        $id = $data->id;
+
+        foreach ($structure as $val) {
+            $tmp = array();
+            $field_name = $val['field_name'];
+            $type = $val['type'];
+
+            //TODO : change way to get label
+            if (array_key_exists($field_name, $map)) {
+                if (!empty($map[$field_name]['field_label'])) {
+                    $label = $map[$field_name]['field_label'];
+                } else {
+                    if (!array_key_exists('label', $val))
+                        $label = $field_name;
+                    else
+                        $label = $val['label'];
+                }
+            }
+
+            if (array_key_exists($field_name, $map)) {
+                $field_name = $map[$field_name]['col_name'];
+            }
+            $l = $data->$field_name;
+
+
+            if ($type == 'select1') {
+                //$l = $val['option'][$l];
+            }
+            if ($type == 'binary') {
+                // check file extension
+                $value = explode('.', $l);
+                $file_extension = end($value);
+                if (array_key_exists($file_extension, $ext_dirs)) {
+                    $l = site_url('assets/forms/data') . '/' . $ext_dirs[$file_extension] . '/' . $l;
+                }
+            }
+            if ($type == 'select') {
+                $tmp1 = explode(" ", $l);
+                $arr = array();
+                foreach ($tmp1 as $item) {
+                    $item = trim($item);
+                    array_push($arr, $val['option'][$item]);
+                }
+                $l = implode(",", $arr);
+            }
+            if (substr($label, 0, 5) == 'meta_') continue;
+            $tmp['id'] = $id . $c++;
+            $tmp['label'] = $label;
+            $tmp['type'] = $type;
+            $tmp['value'] = $l;
+            array_push($holder, $tmp);
+        }
+        return $holder;
+    }
+
+    //get fieldname map
+    private function get_fieldname_map($table_name)
+    {
+        $tmp = $this->Xform_model->get_fieldname_map($table_name);
+        $map = array();
+        foreach ($tmp as $part) {
+            $key = $part['field_name'];
+            $map[$key] = $part;
+        }
+        return $map;
     }
 }

@@ -1106,20 +1106,7 @@ class Xform extends MX_Controller
             $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form->form_id);
         }
 
-        //if $_POST['export']
-        //todo add a check if is idwe form
-        if (isset($_POST['export'])) {
-            //check if week number selected
-            if ($this->input->post('week') == null) {
-                set_flashdata(display_message('You should select week number', 'danger'));
-                redirect('xform/form_data/' . $project_id . '/' . $form_id, 'refresh');
-            }
-
-            //week number
-            $week_number = $this->input->post('week');
-            $this->export_IDWE($form_id, $week_number);
-        }
-
+        //check for form
         if ($form) {
             $data['title'] = $form->title . " form";
             $data['form'] = $form;

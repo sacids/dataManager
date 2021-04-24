@@ -39,7 +39,7 @@
             </div>
             <!--./row -->
 
-            <?php if (isset($feedback_list) && $feedback_list) { ?>
+            <?php if (isset($feedback_lists) && $feedback_lists) { ?>
                 <table class="table table-striped table-responsive table-hover table-bordered">
                     <tr>
                         <th width="80%">Feedback Description</th>
@@ -47,7 +47,7 @@
 
                     <?php
                     $serial = 1;
-                    foreach ($feedback_list as $value) { ?>
+                    foreach ($feedback_lists as $value) { ?>
                         <tr>
                             <td>
                                 <?= '<h5>' . strtoupper($value->title) . '</h5>'; ?>
@@ -67,7 +67,7 @@
                     </div>
                 <?php endif; ?>
             <?php } else {
-                echo display_message('You don\'t have any recent chat.', 'warning');
+                echo display_message('No any chat at the moment.', 'warning');
             } ?>
         </div>
     </div>
