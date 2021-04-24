@@ -241,7 +241,9 @@ class Feedback extends MX_Controller
                 $arr = array();
                 foreach ($tmp1 as $item) {
                     $item = trim($item);
-                    array_push($arr, $val['option'][$item]);
+
+                    if($item != "NA")
+                        array_push($arr, $val['option'][$item]);
                 }
                 $l = implode(",", $arr);
             }
