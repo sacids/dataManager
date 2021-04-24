@@ -257,12 +257,6 @@ class Xform extends MX_Controller
 
         $xForm_form = $this->Xform_model->find_by_xform_id($this->xFormReader->get_table_name());
 
-        //todo : if you want to send sms to specific user
-        // if ($xForm_form->send_sms == 1 && $insert_result) {
-        //     //for now just query specific table
-
-        // }
-
         //deals with dhis2
         if ($xForm_form->allow_dhis == 1 && $insert_result) {
             $dhis_data_elements = $this->Xform_model->get_fieldname_map($this->xFormReader->get_table_name());
@@ -315,7 +309,7 @@ class Xform extends MX_Controller
                 $species_column_name = $this->Xform_model->find_form_map_by_field_type($xForm_form->form_id, "SPECIE")->col_name;
                 $species_name = $inserted_form_data->$species_column_name;
             } else {
-                $species_name = "binadamu";
+                $species_name = "Humano";
             }
             log_message("debug", "specie => " . $species_name);
 
@@ -363,7 +357,6 @@ class Xform extends MX_Controller
                 $suspected_diseases_list = "Recebemos o seu formulário, esta é uma lista de doenças suspeitas com base nas informações que você enviou<br/>";
 
                 if ($suspected_diseases) {
-
                     $i = 1;
                     foreach ($suspected_diseases as $disease) {
 
