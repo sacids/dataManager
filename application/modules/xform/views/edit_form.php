@@ -59,10 +59,25 @@
                                     echo form_checkbox('push', 1, ($form->push == 1) ? TRUE : FALSE);
                                     echo form_label('Yes', 'push'); ?>
                                 </div>
-                            </div>
+
+                                <div class="form-group">
+                                    <label>Has Symptoms</label><br>
+                                    <?php
+                                    echo form_checkbox('has_symptoms_field', 1, ($form->has_symptoms_field == 1) ? TRUE : FALSE);
+                                    echo form_label('Yes', 'has_symptoms_field'); ?>
+                                </div><!--./has symptom -->
+
+                                <div class="form-group">
+                                    <label>Has Specie</label><br>
+                                    <?php
+                                    echo form_checkbox('has_specie_type_field', 1, ($form->has_specie_type_field == 1) ? TRUE : FALSE);
+                                    echo form_label('Yes', 'has_specie_type_field'); ?>
+                                </div><!--./has species -->
+                            </div><!--./panel body -->
                         </div>
                     </div>
-                </div>
+                </div><!--./form-details -->
+
                 <div id="access-permissions" class="tab-pane fade">
                     <div class="">
                         <div class="panel panel-default">
@@ -101,7 +116,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><!--./access-permission -->
 
                 <div id="map-columns" class="tab-pane fade">
                     <div class="">
@@ -135,11 +150,10 @@
 
                                     $field_type_options = [
                                         'TEXT' => "Text",
-                                        'INT'
-                                        => "Number",
+                                        'INT'=> "Number",
                                         "GPS" => "GPS Location",
                                         "DATE" => "DATE",
-                                        "DALILI" => 'Dalili',
+                                        "DALILI" => 'Symptoms',
                                         "LAT" => "Latitude",
                                         "LONG" => "Longitude",
                                         "IDENTITY" => "Username/Identity",
@@ -168,10 +182,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><!--./mapping -->
 
                 <div id="dhis2" class="tab-pane fade">
-
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class=""><?= $this->lang->line("label_dhis2_configurations") ?></h3>
@@ -212,28 +225,23 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><!--./dhis2 -->
 
 
                 <div class="form-group">
-                    <button type="submit"
-                            class="btn btn-primary btn-sm">Save
-                    </button>
-                </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div><!--./form-group -->
                 <?php echo form_close(); ?>
             </div>
         </div>
 
         <script type="text/javascript">
-
             $(document).ready(function () {
-
                 $("#dhis2Fields").hide();
 
                 $("#allowDhis2").is(":checked")
                 {
                     $("#dhis2Fields").toggle();
                 }
-
             });
         </script>

@@ -924,6 +924,8 @@ class Xform extends MX_Controller
                     "description" => $this->input->post("description"),
                     "access" => $this->input->post("access"),
                     "push" => $this->input->post("push"),
+                    "has_symptoms_field" => $this->input->post("has_symptoms_field"),
+                    "has_specie_type_field" => $this->input->post("has_specie_type_field"),
                     "perms" => $new_perms_string,
                     "last_updated" => date("c"),
                     "allow_dhis" => $allow_dhis2_checked,
