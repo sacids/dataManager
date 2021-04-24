@@ -2,15 +2,15 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title">User Mapping
-                    to <?= $user->first_name . " " . $user->last_name ?></h3>
+                <h3 class="title">Assign Data Access
+                    to <?= $user->first_name . " " . $user->last_name . " - " . $user_groups ?></h3>
             </div>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li><a href="<?= site_url('auth/users_list') ?>">Users</a></li>
-                <li class="active">User Mapping</li>
+                <li><a href="<?= site_url('auth/users/lists') ?>">Users</a></li>
+                <li class="active">Data Access</li>
             </ol>
 
 
@@ -23,28 +23,28 @@
                         echo $this->session->flashdata('message');
                     } ?>
 
-                    <?php if (isset($users_lists) && count($users_lists) > 0) { ?>
+                    <?php if (isset($permissions_list) && count($permissions_list) > 0) { ?>
                         <?= form_open(uri_string()); ?>
                         <?= form_hidden("user_id", $user->id) ?>
                         <table>
                             <tr>
                                 <?php
                                 $serial = 0;
-                                foreach ($users_lists as $key => $value) {
-                                    if (($serial % 5) == 0) {
+                                foreach ($permissions_list as $key => $value) {
+                                    if (($serial % 4) == 0) {
                                         echo '</tr><tr>';
                                     } ?>
                                     <td>
-                                        <?= form_checkbox("users[]", $value->id, (in_array($value->id, $mapped_users)) ? TRUE : FALSE); ?>
-                                        <?= $value->first_name . ' ' . $value->last_name ?>&nbsp;&nbsp;
+                                        <?= form_checkbox("permissions[]", $value->id, (in_array($value->id, $assigned_perms)) ? TRUE : FALSE); ?>
+                                        <?= $value->title ?>&nbsp;&nbsp;&nbsp;
                                     </td>
                                     <?php $serial++;
                                 } ?>
                             </tr>
                         </table>
-
-                        <?= form_submit('save', 'Map', array('class' => "btn btn-primary")); ?>
-                        <?= anchor('auth/users_list', 'Cancel', 'class="btn btn-warning"'); ?>
+                        <div style="margin-top: 15px;"></div>
+                        <?= form_submit('save', 'Assign', array('class' => "btn btn-primary font-weing-bold")); ?>
+                        <?= anchor('auth/users/lists', 'Cancel', 'class="btn btn-warning"'); ?>
 
                         <?= form_close(); ?>
                     <?php } else {

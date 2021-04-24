@@ -19,7 +19,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="pull-left" style="padding: 3px;">
-                        <?= anchor('ohkr/add_new_specie', '<i class="fa fa-plus"></i> Add New', 'class="btn btn-sm btn-primary"') ?>
+                        <?php
+                        if (perms_role('Ohkr', 'add_new_specie'))
+                            echo anchor('ohkr/add_new_specie', '<i class="fa fa-plus"></i> Add New', 'class="btn btn-sm btn-primary"') ?>
                     </div>
                 </div>
                 <!--./col-md-12 -->
@@ -43,8 +45,13 @@
                                     <td><?= $serial; ?></td>
                                     <td><?= $specie->title; ?></td>
                                     <td>
-                                        <?= anchor("ohkr/species/edit/" . $specie->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"'); ?>
-                                        <?= anchor("ohkr/species/delete/" . $specie->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
+                                        <?php
+                                        if (perms_role('Ohkr', 'edit_specie'))
+                                            echo anchor("ohkr/species/edit/" . $specie->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"');
+
+                                        if (perms_role('Ohkr', 'delete_specie'))
+                                            echo anchor("ohkr/species/delete/" . $specie->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"');
+                                        ?>
                                     </td>
                                 </tr>
                             <?php $serial++;

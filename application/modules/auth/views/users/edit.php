@@ -9,7 +9,7 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?= site_url('users/lists') ?>">Users</a></li>
+                <li class="breadcrumb-item"><a href="<?= site_url('auth/users/lists') ?>">Users</a></li>
                 <li class="breadcrumb-item active">Edit user</li>
             </ol>
 

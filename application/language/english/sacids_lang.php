@@ -13,7 +13,7 @@
  */
 
 // Form upload
-$lang['heading_form_list'] = 'Forms list';
+$lang['heading_form_list'] = 'Forms';
 $lang['heading_add_new_form'] = 'Add new form';
 $lang['heading_edit_form'] = 'Edit form';
 $lang['validation_label_form_title'] = 'Form title';
@@ -45,7 +45,7 @@ $lang['label_post_title'] = "Title";
 $lang['label_content'] = "Content";
 $lang['label_status'] = "Status";
 
-$lang['nav_item_form_list'] = "Form List";
+$lang['nav_item_form_list'] = "Form";
 $lang['nav_item_form_add_new'] = "Add new form";
 
 $lang['label_instance_id'] = "Instance Id";
@@ -182,7 +182,7 @@ $lang['placeholder_project_description']= 'Enter project description';
 $lang['button_add_project']            = 'Save project';
 $lang['button_upload_new_form']        = 'Upload new form';
 
-$lang['title_list_projects']          = 'Projects List';
+$lang['title_list_projects']          = 'Projects';
 $lang['label_select_project_to_list_forms']= 'Select project to see forms';
 $lang['title_project_forms']           = 'Project forms';
 

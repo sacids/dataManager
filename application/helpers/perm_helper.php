@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: renfrid
@@ -19,26 +20,22 @@ if (!function_exists("perms_class")) {
         if ($class) {
             $user_groups = $CI->users_group_model->find_all(['user_id' => $user_id]);
 
-            $class_array = [];
-            foreach ($user_groups as $group) {
+            foreach ($user_groups as $val) {
                 //perms_groups
-                $perm_group = $CI->perms_group_model->get_by(['group_id' => $group->group_id]);
+                $perm_group = $CI->perms_group_model->get_by(['group_id' => $val->group_id]);
 
                 if ($perm_group) {
                     $classes = explode(',', $perm_group->classes);
 
-                    if (in_array($class->id, $classes))
-                        array_push($class_array, $class->id);
-
+                    if (in_array($class->id, $classes)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 } else {
                     return false;
                 }
             }
-            //check for class array
-            if ($class_array)
-                return true;
-            else
-                return false;
         } else {
             return false;
         }
@@ -63,7 +60,6 @@ if (!function_exists("perms_role")) {
             if ($method) {
                 $user_groups = $CI->users_group_model->find_all(['user_id' => $user_id]);
 
-                $method_array = [];
                 foreach ($user_groups as $group) {
                     //perms_groups
                     $perm_group = $CI->perms_group_model->get_by(['group_id' => $group->group_id]);
@@ -71,18 +67,15 @@ if (!function_exists("perms_role")) {
                     if ($perm_group) {
                         $perms = explode(',', $perm_group->perms);
 
-                        if (in_array($method->id, $perms))
-                            array_push($method_array, $method->id);
+                        if (in_array($method->id, $perms)) {
+                            return true;
+                        } else {
+                            return false;
+                        }
                     } else {
                         return false;
                     }
                 }
-
-                //check for method array
-                if ($method_array)
-                    return true;
-                else
-                    return false;
             } else {
                 return false;
             }

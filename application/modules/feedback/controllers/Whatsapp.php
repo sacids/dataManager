@@ -37,7 +37,6 @@
 
 /**
  * Created by PhpStorm.
- * User: Godluck Akyoo
  * Date: 4/21/2016
  * Time: 5:17 PM
  */
@@ -88,6 +87,7 @@ class Whatsapp extends MX_Controller
         $this->data['title'] = "Import message file";
 
         $this->is_logged_in();
+        $this->has_allowed_perm($this->router->fetch_method());
 
         //form validation
         $this->form_validation->set_rules('txt_file', 'Message file', 'callback_upload_txt_file_path');
@@ -124,14 +124,13 @@ class Whatsapp extends MX_Controller
         $this->load->view('footer');
     }
 
+    //index
     public function index()
     {
-
         if ($this->form_validation->run()) {
             $this->_show_upload_form();
         } else {
             $file_upload_path = APPPATH . DS . ".." . DS . "assets" . DS . "whatsapp";
-
 
             $handle = fopen($file_upload_path . DS . "WhatsAppChatwithWanaCHRsNgorongoro.txt", "r");
             if ($handle) {
@@ -146,6 +145,7 @@ class Whatsapp extends MX_Controller
         }
     }
 
+    //show upload
     function _show_upload_form()
     {
         echo form_open_multipart("whatsapp");
@@ -153,6 +153,7 @@ class Whatsapp extends MX_Controller
         echo form_close();
     }
 
+    //extrct line message
     function _extract_line_message($line)
     {
         //TODO Check if all three parts are in array to avoid undefined index errors
@@ -179,12 +180,13 @@ class Whatsapp extends MX_Controller
         return $chat;
     }
 
+    //message lists
     public function message_list()
     {
+        $data['title'] = "Message List";
+
         //check login
         $this->is_logged_in();
-
-        //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
         if (isset($_POST['search'])) {
@@ -195,7 +197,6 @@ class Whatsapp extends MX_Controller
 
             //search
             $data['messages'] = $this->Whatsapp_model->search_message($start_date, $end_date, $keyword);
-
         } else {
 
             $config = array(
@@ -211,12 +212,12 @@ class Whatsapp extends MX_Controller
         }
 
         //render view
-        $data['title'] = "Message List";
         $this->load->view('header', $data);
         $this->load->view("feedback/whatsapp/message_list", $data);
         $this->load->view('footer');
     }
 
+    //export csv
     function csv_export_data()
     {
         //check permission
@@ -227,6 +228,7 @@ class Whatsapp extends MX_Controller
         $this->_force_csv_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".csv");
     }
 
+    //force download
     function _force_csv_download($query, $filename = '.csv')
     {
         $this->load->dbutil();

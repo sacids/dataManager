@@ -32,8 +32,8 @@
                         <table class="table table-striped table-responsive table-bordered table-hover">
                             <tr>
                                 <th width="3%">#</th>
-                                <th width="15%">Group Name</th>
-                                <th width="70%">Group Description</th>
+                                <th width="15%">Role Name</th>
+                                <th width="70%">Description</th>
                                 <th width="10%">Action</th>
                             </tr>
                             <?php

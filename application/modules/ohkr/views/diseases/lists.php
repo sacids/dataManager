@@ -19,7 +19,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="pull-left" style="padding: 3px;">
-                        <?= anchor('ohkr/diseases/add_new', '<i class="fa fa-plus"></i> Add New', 'class="btn btn-sm btn-primary"') ?>
+                        <?php
+                        if (perms_role('Ohkr', 'add_new_disease'))
+                            echo anchor('ohkr/diseases/add_new', '<i class="fa fa-plus"></i> Add New', 'class="btn btn-sm btn-primary"') ?>
                     </div>
                 </div>
                 <!--./col-md-12 -->
@@ -43,12 +45,17 @@
                             foreach ($diseases as $disease) { ?>
                                 <tr>
                                     <td><?= $serial ?></td>
-                                    <td><?= anchor("ohkr/disease_symptoms/" . $disease->id, '<b>'.$disease->title.'</b>', '') ?></td>
+                                    <td><?= anchor("ohkr/disease_symptoms/" . $disease->id, '<b>' . $disease->title . '</b>', '') ?></td>
                                     <td><?= $disease->species; ?></td>
                                     <td>
-                                        <?= anchor("ohkr/disease_symptoms/" . $disease->id, '<i class="fa fa-stethoscope"></i>', 'class="btn btn-primary btn-xs"'); ?>
-                                        <?= anchor("ohkr/diseases/edit/" . $disease->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-secondary btn-xs"'); ?>
-                                        <?= anchor("ohkr/diseases/delete/" . $disease->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
+                                        <?php
+                                        if (perms_role('Ohkr', 'disease_symptoms_list'))
+                                            echo anchor("ohkr/disease_symptoms/" . $disease->id, '<i class="fa fa-stethoscope"></i>', 'class="btn btn-primary btn-xs"').'&nbsp;';
+                                        if (perms_role('Ohkr', 'edit_disease'))
+                                            echo anchor("ohkr/diseases/edit/" . $disease->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-secondary btn-xs"').'&nbsp;';
+                                        if (perms_role('Ohkr', 'delete_disease'))    
+                                            echo anchor("ohkr/diseases/delete/" . $disease->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); 
+                                        ?>
 
                                     </td>
                                 </tr>

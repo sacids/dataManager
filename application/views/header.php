@@ -71,51 +71,72 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->lang->line("nav_item_projects") ?> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <?= display_projects() ?>
-                            <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
-                            <li><?php echo anchor('projects/add_new', $this->lang->line("nav_item_add_new_project")); ?></li>
-                        </ul>
-                    </li>
+                    <?php if (perms_class('Projects')) {  ?>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->lang->line("nav_item_projects") ?> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <?php if (perms_role('Projects', 'forms')) { ?>
+                                    <?= display_projects() ?>
+                                <?php } ?>
+                                <?php if (perms_role('Projects', 'lists')) { ?>
+                                    <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
+                                <?php } ?>
+                                <?php if (perms_role('Projects', 'add_new')) { ?>
+                                    <li><?php echo anchor('projects/add_new', $this->lang->line("nav_item_add_new_project")); ?></li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                    <?php } ?>
 
-                    <?php //if (perms_class('Feedback')) { 
-                    ?>
-                    <li><?php echo anchor('feedback/lists', $this->lang->line("nav_item_chats")); ?></li>
-                    <?php //} 
-                    ?>
+                    <?php if (perms_class('Ohkr')) { ?>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->lang->line("nav_item_ohkr") ?> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <?php if (perms_role('Ohkr', 'species_list')) { ?>
+                                    <li><?php echo anchor('ohkr/species', $this->lang->line("nav_item_list_species")); ?></li>
+                                <?php } ?>
 
-                    <?php //if (perms_class('Ohkr')) { 
-                    ?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->lang->line("nav_item_ohkr") ?> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><?php echo anchor('ohkr/diseases', $this->lang->line("nav_item_list_disease")); ?></li>
-                            <li><?php echo anchor('ohkr/symptoms', $this->lang->line("nav_item_list_symptoms")); ?></li>
-                            <li><?php echo anchor('ohkr/species', $this->lang->line("nav_item_list_species")); ?></li>
-                        </ul>
-                    </li>
-                    <?php //} 
-                    ?>
+                                <?php if (perms_role('Ohkr', 'disease_list')) { ?>
+                                    <li><?php echo anchor('ohkr/diseases', $this->lang->line("nav_item_list_disease")); ?></li>
+                                <?php } ?>
+
+                                <?php if (perms_role('Ohkr', 'symptoms_list')) { ?>
+                                    <li><?php echo anchor('ohkr/symptoms', $this->lang->line("nav_item_list_symptoms")); ?></li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                    <?php }  ?>
+
+                    <?php if (perms_role('Feedback', 'lists')) {  ?>
+                        <li><?php echo anchor('feedback/lists', $this->lang->line("nav_item_chats")); ?></li>
+                    <?php }  ?>
+
+                    <?php if (perms_role('Whatsapp', 'message_list')) {  ?>
+                        <li><?= anchor('feedback/whatsapp/message_list', 'Whatsapp') ?></li>
+                    <?php }  ?>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <!--<li class="">
+                    <li class="">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->lang->line("nav_item_language") ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><i class="fa fa-user-circle" aria-hidden="true"></i> <?php echo anchor('languageChanger/switchLang/english', $this->lang->line("nav_item_language_english")); ?></li>
-                            <li><?php echo anchor('languageChanger/switchLang/swahili', $this->lang->line("nav_item_language_swahili")); ?></li> 
+                            <li><a href="#">Portuguese</a></li>
                         </ul>
-                    </li>-->
+                    </li>
 
                     <?php if ($this->ion_auth->is_admin()) { ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->lang->line("nav_item_manage_users") ?>
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><?php echo anchor('auth/users/lists', $this->lang->line("nav_item_list_users")); ?></li>
-                                <li><?php echo anchor('auth/groups/lists', $this->lang->line("nav_item_list_groups")); ?></li>
+                                <?php if (perms_role('Users', 'lists')) {  ?>
+                                    <li><?php echo anchor('auth/users/lists', $this->lang->line("nav_item_list_users")); ?></li>
+                                <?php }  ?>
+
+                                <?php if (perms_role('Groups', 'lists')) {  ?>
+                                    <li><?php echo anchor('auth/groups/lists', $this->lang->line("nav_item_list_groups")); ?></li>
+                                <?php }  ?>
                                 <li class="divider"></li>
                                 <li><?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl")); ?></li>
                             </ul>

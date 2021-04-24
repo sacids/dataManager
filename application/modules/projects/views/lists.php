@@ -12,6 +12,18 @@
             </ol>
 
             <div class="row">
+                <div class="col-md-4">
+                    <div class="pull-left">
+                        <?php if (perms_role('Projects', 'add_new')) { ?>
+                            <?= anchor("projects/add_new/", '<i class="fa fa-plus"></i> Add New', 'class="btn btn-primary btn-sm"') ?>
+                        <?php } ?>
+                    </div>
+                </div>
+                <!--./col-md-4 -->
+            </div>
+            <!--./row -->
+
+            <div class="row">
                 <?php
                 if ($this->session->flashdata('message') != '') {
                     echo '<div class="col-sm-12 col-md-12 col-lg-12">';
@@ -35,13 +47,19 @@
                             foreach ($project_list as $project) { ?>
                                 <tr class="projectRow" id="<?= $project->id ?>">
                                     <td><?php echo $serial; ?></td>
-                                    <td><?php echo anchor("projects/forms/" . $project->id, '<b>'.$project->title.'</b>'); ?></td>
+                                    <td><?php echo anchor("projects/forms/" . $project->id, '<b>' . $project->title . '</b>'); ?></td>
                                     <td><?php echo $project->description; ?></td>
                                     <td><?php echo date('d-m-Y H:i:s', strtotime($project->created_at)); ?></td>
                                     <td>
-                                        <?php echo anchor("projects/forms/" . $project->id, '<i class="fa fa-folder-open"></i>', ['class' => 'btn btn-primary btn-xs']); ?>&nbsp;
-                                        <?php echo anchor("projects/edit/" . $project->id, '<i class="fa fa-pencil"></i>', ['class' => 'btn btn-secondary btn-xs']); ?>&nbsp;
-                                        <?php echo anchor("projects/lists/#", '<i class="fa fa-trash"></i>', ['class' => 'btn btn-danger btn-xs']); ?>
+                                        <?php if (perms_role('Projects', 'forms')) { ?>
+                                            <?php echo anchor("projects/forms/" . $project->id, '<i class="fa fa-folder-open"></i>', ['class' => 'btn btn-primary btn-xs']); ?>&nbsp;
+                                        <?php } ?>
+                                        <?php if (perms_role('Projects', 'edit')) { ?>
+                                            <?php echo anchor("projects/edit/" . $project->id, '<i class="fa fa-pencil"></i>', ['class' => 'btn btn-secondary btn-xs']); ?>&nbsp;
+                                        <?php } ?>
+                                        <?php if (perms_role('Projects', 'delete')) { ?>
+                                            <?php echo anchor("projects/lists/#", '<i class="fa fa-trash"></i>', ['class' => 'btn btn-danger btn-xs']); ?>
+                                        <?php } ?>
                                     </td>
                                 </tr>
                             <?php $serial++;

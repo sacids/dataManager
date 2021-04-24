@@ -17,8 +17,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="pull-left">
-                        <?= anchor("xform/add_new/" . $project_id, '<i class="fa fa-plus"></i> Add New Form', 'class="btn btn-primary btn-sm"') ?>
-                        <?= anchor('projects/edit/' . $project->id, '<i class="fa fa-pencil"></i> Edit Project', 'class="btn btn-sm btn-warning"') ?>
+                        <?php if (perms_role('Xform', 'add_new')) { ?>
+                            <?= anchor("xform/add_new/" . $project_id, '<i class="fa fa-plus"></i> Add New Form', 'class="btn btn-primary btn-sm"') ?>
+                        <?php } ?>
+
+                        <?php if (perms_role('Projects', 'edit')) { ?>
+                            <?= anchor('projects/edit/' . $project->id, '<i class="fa fa-pencil"></i> Edit Project', 'class="btn btn-sm btn-warning"') ?>
+                        <?php } ?>
                     </div>
                 </div>
                 <!--./col-md-4 -->
@@ -86,34 +91,35 @@
                                 </td>
                                 <td><?php echo date('d-m-Y H:i:s', strtotime($form->created_at)); ?></td>
                                 <td class="text-center">
-                                    <div class="dropdown">
-                                        <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">View <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                            <?php if ($form->form_type == 'USSD') { ?>
-                                                <li><?php echo anchor("xform/ussd_form_data/" . $project_id . '/' . $form->id, "Data list"); ?></li>
-                                            <?php
-                                            } else { ?>
+                                    <?php if (perms_role('Xform', 'form_data')) { ?>
+                                        <div class="dropdown">
+                                            <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">View <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
                                                 <li><?php echo anchor("xform/form_data/" . $project_id . '/' . $form->id, "Data list"); ?></li>
                                                 <li><?php echo anchor("visualization/visualization/chart/" . $project_id . '/' . $form->id, "View Chart"); ?></li>
                                                 <li><?php echo anchor("visualization/visualization/map/" . $project_id . '/' . $form->id, "View Map"); ?></li>
                                                 <li><?php echo anchor("xform/form_overview/" . $form->form_id, "Overview"); ?></li>
                                                 <li><?php echo anchor_popup(base_url() . "assets/forms/definition/" . $form->filename, "Download XML file"); ?></li>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
+                                            </ul>
+                                        </div>
+                                    <?php } ?>
                                 </td>
-                                <?php if ($this->ion_auth->in_group('admin')) { ?>
-                                    <td class="text-center">
+                                <td class="text-center">
+                                    <?php if (perms_role('Xform', 'edit_form')) { ?>
                                         <?php echo anchor("xform/edit_form/" . $project_id . '/' . $form->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"'); ?>
-                                        <?php if ($form->status == "archived") {
-                                            echo anchor("xform/restore_from_archive/" . $form->id, '<i class="fa fa-folder-open-o"></i>', 'class="btn btn-warning btn-xs unarchive"');
-                                        } else {
-                                            echo anchor("xform/archive_xform/" . $form->id, '<i class="fa fa-archive"></i>', 'class="btn btn-warning btn-xs archive"');
-                                        } ?>
-                                        <!--TODO Implement dynamic js prompt -->
-                                        <?php echo anchor("xform/delete_form/" . $project_id . '/' . $form->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
-                                    </td>
-                                <?php } ?>
+                                    <?php } ?>
+                                    <?php if ($form->status == "archived") {
+                                        if (perms_role('Xform', 'restore_from_archive'))
+                                            echo anchor("xform/restore_from_archive/" . $project_id . '/' . $form->id, '<i class="fa fa-folder-open-o"></i>', 'class="btn btn-warning btn-xs unarchive"');
+                                    } else {
+                                        if (perms_role('Xform', 'archive_xform'))
+                                            echo anchor("xform/archive_xform/" . $project_id . '/' . $form->id, '<i class="fa fa-archive"></i>', 'class="btn btn-warning btn-xs archive"');
+                                    } ?>
+                                    <!--TODO Implement dynamic js prompt -->
+                                    <?php
+                                    if (perms_role('Xform', 'delete_form'))
+                                        echo anchor("xform/delete_form/" . $project_id . '/' . $form->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
+                                </td>
                             </tr>
                         <?php $serial++;
                         } ?>

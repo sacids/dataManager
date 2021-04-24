@@ -24,20 +24,19 @@
                         <?php if (isset($perms) && $perms) {
                             foreach ($perms as $key => $value) { ?>
                                 <h5 class="title"> <?= $key; ?></h5>
-
                                 <?= form_hidden('classes[]', $key) ?>
                                 <table>
                                     <tr>
                                         <?php
                                         $serial = 0;
                                         foreach ($value as $k => $v) :
-                                            if (($serial % 10) == 0) {
+                                            if (($serial % 5) == 0) {
                                                 echo "</tr><tr>";
                                             } ?>
                                             <td>
                                                 <?php
                                                 echo form_checkbox("perms[]", $v[1], (in_array($v[1], $assigned_perms)) ? TRUE : FALSE);
-                                                echo '<label>' . $v[2] . '</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                                                echo '<span>' . $v[2] . '</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
                                                 ?>
                                             </td>
                                             <?php
@@ -48,8 +47,8 @@
                         <?php }
                         } ?>
 
-                        <div class="row">
-                            <div class="col-sm-6">
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-6">
                                 <?= form_submit('save', 'Save', array('class' => "btn btn-primary btn-sm")); ?>
                                 <?= anchor('auth/groups/lists', 'Cancel', 'class="btn btn-danger btn-sm"') ?>
                             </div><!-- end of col-sm-10 -->

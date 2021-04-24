@@ -1,7 +1,6 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Godluck Akyoo
  * Date: 09/10/2017
  * Time: 09:54
  */

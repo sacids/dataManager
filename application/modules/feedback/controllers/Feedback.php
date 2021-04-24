@@ -25,7 +25,7 @@ class Feedback extends MX_Controller
         log_message('debug', 'Feedback controller initialized');
 
         $this->user_id = $this->session->userdata("user_id");
-        $this->controller = $this->router->fetch_class();
+        $this->controller = "Feedback";
     }
 
     //check login user
@@ -60,9 +60,7 @@ class Feedback extends MX_Controller
 
         //check if logged in
         $this->is_logged_in();
-
-        //check permission
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         if (isset($_POST['search'])) {
             $form_name = $this->input->post("name", NULL);
@@ -102,13 +100,11 @@ class Feedback extends MX_Controller
      */
     function user_feedback($instance_id)
     {
-        $this->data['title'] = "Feedback Conversation";
+        $this->data['title'] = "Chat Conversation";
 
         //check if logged in
         $this->is_logged_in();
-
-        //check permission
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         //feedback
         $feedback = $this->Feedback_model->get_feedback_by_instance($instance_id);

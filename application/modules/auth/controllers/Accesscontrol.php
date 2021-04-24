@@ -39,7 +39,7 @@ class AccessControl extends MX_Controller
     //create new permission
     function new_permission()
     {
-        $this->data['title'] = "Add Perm";
+        $this->data['title'] = "Add New";
 
         //check login
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
@@ -163,7 +163,7 @@ class AccessControl extends MX_Controller
         }
         $perm = $this->Acl_model->find_permission_by_id($permission_id);
 
-        if (count($perm) == 0) {
+        if (!$perm) {
             set_flashdata(display_message("Select a permission to add a new filter", "error"));
             redirect("auth/accesscontrol");
         }
@@ -172,6 +172,9 @@ class AccessControl extends MX_Controller
 
         $this->data['permission_id'] = $permission_id;
         $this->data['permissions'] = $this->Acl_model->find_permissions();
+
+        //filters
+        $this->data['filters'] = $this->Acl_model->find_filters(100, 0, $permission_id);
 
         //form validation
         $this->form_validation->set_rules("filter", "Filter name", "required|trim");
@@ -188,14 +191,6 @@ class AccessControl extends MX_Controller
 
             $condition = null;
             $condition .= " " . $filter_column . " " . $filter_operator . " '" . $filter_value . "' ";
-
-//            for ($i = 0; $i < $filters_count; $i++) {
-//                $condition .= " " . $filter_column[$i] . " " . $filter_operator[$i] . " '" . $filter_value[$i] . "' ";
-//
-//                if ($i < ($filters_count - 1)) {
-//                    $condition .= " AND ";
-//                }
-//            }
 
             $filter = [
                 "permission_id" => $permission_id,
@@ -233,26 +228,15 @@ class AccessControl extends MX_Controller
             'placeholder' => 'Write filter value ...'
         );
 
+        
+
         //render view
         $this->load->view("header", $this->data);
         $this->load->view("acl/new_filter", $this->data);
         $this->load->view("footer");
     }
 
-
-    public function get_table_columns($table_name)
-    {
-        $table_columns = $this->db->list_fields($table_name);
-
-        if ($table_columns) {
-            foreach ($table_columns as $column_name) {
-                echo '<option value="' . $column_name . '" ' . set_value("column[]", $column_name) . '>' . $column_name . '</option>';
-            }
-        } else {
-            echo '<option value="">Choose column</option>';
-        }
-    }
-
+    //filters
     public function filters($permission_id)
     {
         $permission_filters = NULL;
@@ -272,79 +256,19 @@ class AccessControl extends MX_Controller
         }
     }
 
-    //assign permission
-    public function assign_permission($user_id)
+    /*========================================================
+    filter functions
+    ========================================================*/
+    public function get_table_columns($table_name)
     {
-        $this->data['title'] = "Assign User Permission";
+        $table_columns = $this->db->list_fields($table_name);
 
-        //check login
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            //redirect them to the login page
-            redirect('auth/login', 'refresh');
-        }
-
-        if (!$user_id) {
-            set_flashdata(display_message("Select user to assign permission", "warning"));
-            redirect("auth/users_list");
-        }
-
-        //find user perms
-        $this->data['user'] = $this->User_model->find_by_id($user_id);
-        $groups = $this->User_model->get_user_groups_by_id($user_id);
-
-        $this->data['user_groups'] = "{ ";
-        $i = 0;
-        $count = count($groups);
-
-        foreach ($groups as $group) {
-            $this->data['user_groups'] .= ucfirst($group->name) . " " . $group->description;
-            if ($i < ($count - 1)) {
-                $this->data['user_groups'] .= " , ";
+        if ($table_columns) {
+            foreach ($table_columns as $column_name) {
+                echo '<option value="' . $column_name . '" ' . set_value("column[]", $column_name) . '>' . $column_name . '</option>';
             }
-            $i++;
+        } else {
+            echo '<option value="">-- Select --</option>';
         }
-        $this->data['user_groups'] .= " }";
-        $this->data['permissions_list'] = $this->Acl_model->find_permissions();
-
-        //assigned members
-        $perms = array();
-        $assigned_perms_list = $this->db
-            ->get_where('acl_users_permissions', array('user_id' => $user_id))->result();
-
-        foreach ($assigned_perms_list as $v) {
-            array_push($perms, $v->permission_id);
-        }
-        $this->data['assigned_perms'] = $perms;
-
-        //if user prefer to assign
-        if (isset($_POST['save'])) {
-            if (empty($_POST['permissions'])) {
-                //redirect with message
-                $this->session->set_flashdata('message', display_message('No permission selected', 'danger'));
-                redirect('auth/accesscontrol/assign_permission/' . $user_id, 'refresh');
-            } else {
-                //delete all user permission
-                $this->Acl_model->delete_user_permission($user_id);
-
-                foreach ($_POST['permissions'] as $perm_id) {
-                    //insert perms
-                    $users_permissions = [
-                        "user_id" => $user_id,
-                        "permission_id" => $perm_id,
-                        "date_added" => date("Y-m-d H:i:s")
-                    ];
-                    $this->Acl_model->assign_users_permissions($users_permissions);
-                }
-            }
-
-            //redirect with message
-            $this->session->set_flashdata('message', display_message('You have assigned permission(s) successfully'));
-            redirect("auth/accesscontrol/assign_permission/" . $user_id);
-        }
-
-        //render view
-        $this->load->view("header", $this->data);
-        $this->load->view("acl/assign_permission", $this->data);
-        $this->load->view("footer");
     }
 }

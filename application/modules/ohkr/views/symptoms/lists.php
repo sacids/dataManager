@@ -19,7 +19,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="pull-left" style="padding: 3px;">
-                        <?= anchor('ohkr/add_new_symptom', '<i class="fa fa-plus"></i> Add New', 'class="btn btn-sm btn-primary"') ?>
+                        <?php
+                        if (perms_role('Ohkr', 'add_new_symptom'))
+                            echo anchor('ohkr/add_new_symptom', '<i class="fa fa-plus"></i> Add New', 'class="btn btn-sm btn-primary"') ?>
                     </div>
                 </div>
                 <!--./col-md-12 -->
@@ -45,8 +47,13 @@
                                     <td><?= $symptom->title; ?></td>
                                     <td><?= $symptom->code; ?></td>
                                     <td>
-                                        <?= anchor("ohkr/symptoms/edit/" . $symptom->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"'); ?>
-                                        <?= anchor("ohkr/symptoms/delete/" . $symptom->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
+                                        <?php
+                                        if (perms_role('Ohkr', 'edit_symptom'))
+                                            echo anchor("ohkr/symptoms/edit/" . $symptom->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"');
+
+                                        if (perms_role('Ohkr', 'delete_symptom'))
+                                            anchor("ohkr/symptoms/delete/" . $symptom->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"');
+                                        ?>
                                     </td>
                                 </tr>
                             <?php $serial++;

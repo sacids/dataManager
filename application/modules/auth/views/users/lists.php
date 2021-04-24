@@ -43,8 +43,8 @@
                                     <th width="10%">Phone</th>
                                     <th width="10%">Username</th>
                                     <th width="13%">Groups</th>
-                                    <th width="10%">Status</th>
-                                    <th width="6%"></th>
+                                    <th width="8%">Status</th>
+                                    <th width="10%"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,18 +63,25 @@
                                             $grp_array = [];
                                             foreach ($values->groups as $group) {
                                                 echo $group->name . ', ';
+                                                array_push($grp_array, $group->name);
                                                 $i++;
                                             } ?>
                                         </td>
                                         <td>
-                                            <?php
-                                                echo ($values->active == 1) ?  '<span class="label label-primary">Active</span>' : '<span class="label label-danger">Inactive</span>';
-                                             ?>
+                                            <?= ($values->active == 1) ?  '<span class="label label-success">Active</span>' : '<span class="label label-danger">Inactive</span>'; ?>
                                         </td>
                                         <td>
                                             <?php
-                                            if ($this->ion_auth->is_admin() || perms_role('users', 'edit'))
-                                                echo anchor('auth/users/edit/' . $values->user_id, '<i class="fa fa-pencil fa-lg"></i>', array("class" => 'btn btn-primary btn-xs'));
+                                            if ($this->ion_auth->is_admin() || perms_role('users', 'edit')) {
+                                                echo anchor('auth/users/edit/' . $values->user_id, '<i class="fa fa-pencil"></i>', array("class" => 'btn btn-primary btn-xs')) . '&nbsp;';
+
+                                                if (count($grp_array) == 1 && $grp_array[0] == 'data_collectors') {
+                                                    //do nothing
+                                                } else {
+                                                    echo anchor("auth/users/mapping/" . $values->user_id, '<i class="fa fa-id-card" aria-hidden="true"></i>', array("class" => 'btn btn-info btn-xs')) . '&nbsp;';
+                                                    echo anchor("auth/users/data_access/" . $values->user_id, '<i class="fa fa-key" aria-hidden="true"></i>', array("class" => 'btn btn-warning btn-xs'));
+                                                }
+                                            }
                                             ?></td>
                                     </tr>
                                 <?php

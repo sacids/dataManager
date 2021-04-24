@@ -19,7 +19,7 @@ class Ohkr extends MX_Controller
         log_message('debug', 'Ohkr controller initialized');
         //$this->load->library("Db_exp");
 
-        $this->controller = $this->router->fetch_class();
+        $this->controller = "Ohkr";
 
         if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
@@ -51,7 +51,7 @@ class Ohkr extends MX_Controller
     function disease_list()
     {
         $this->data['title'] = "Diseases";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
             'base_url' => $this->config->base_url("ohkr/diseases"),
@@ -85,7 +85,7 @@ class Ohkr extends MX_Controller
     public function add_new_disease()
     {
         $data['title'] = "Add new";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         //populate data
         $data['species'] = $this->Specie_model->get_all(100, 0);
@@ -129,7 +129,7 @@ class Ohkr extends MX_Controller
     public function edit_disease($id)
     {
         $data['title'] = "Edit Disease";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         if (!$id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_edit")));
@@ -193,7 +193,7 @@ class Ohkr extends MX_Controller
      */
     function delete_disease($id)
     {
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         if (!$id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_delete")));
@@ -223,7 +223,7 @@ class Ohkr extends MX_Controller
     public function species_list()
     {
         $data['title'] = "Species";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
             'base_url' => $this->config->base_url("ohkr/species"),
@@ -247,7 +247,7 @@ class Ohkr extends MX_Controller
     public function add_new_specie()
     {
         $data['title'] = "Add new specie";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         //validation
         $this->form_validation->set_rules(
@@ -281,7 +281,7 @@ class Ohkr extends MX_Controller
     public function edit_specie($specie_id)
     {
         $data['title'] = "Edit specie";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         if (!$specie_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_specie_to_edit")));
@@ -323,8 +323,7 @@ class Ohkr extends MX_Controller
     //delete species
     function delete_specie($specie_id)
     {
-        //check permission
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         if (!$specie_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_specie_to_delete")));
@@ -355,7 +354,7 @@ class Ohkr extends MX_Controller
     public function symptoms_list()
     {
         $data['title'] = "Symptoms";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
             'base_url' => $this->config->base_url("ohkr/symptoms"),
@@ -379,7 +378,7 @@ class Ohkr extends MX_Controller
     function add_new_symptom()
     {
         $data['title'] = "Add Symptom";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         //validation
         $this->form_validation->set_rules("name", $this->lang->line("label_symptom_name"), "required");
@@ -414,7 +413,7 @@ class Ohkr extends MX_Controller
     public function edit_symptom($symptom_id)
     {
         $data['title'] = "Edit symptom";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         if (!$symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_edit")));
@@ -459,7 +458,7 @@ class Ohkr extends MX_Controller
     //delete
     function delete_symptom($symptom_id)
     {
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         if (!$symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_delete")));
@@ -490,7 +489,7 @@ class Ohkr extends MX_Controller
     public function disease_symptoms_list($disease_id)
     {
         $data['title'] = "Disease Symptoms";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         //disease
         $disease = $this->Disease_model->get($disease_id);
@@ -570,9 +569,7 @@ class Ohkr extends MX_Controller
     public function edit_disease_symptom($disease_id, $disease_symptom_id)
     {
         $data['title'] = "Edit Disease Symptom";
-
-        //check permission
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $disease = $this->Disease_model->get($disease_id);
         if (!$disease)
@@ -638,8 +635,6 @@ class Ohkr extends MX_Controller
     public function edit_disease_symptom1($disease_id, $disease_symptom_id)
     {
         $data['title'] = "Edit Disease Symptom";
-
-        //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
         $disease = $this->Disease_model->get($disease_id);
@@ -686,9 +681,7 @@ class Ohkr extends MX_Controller
     function delete_disease_symptom($disease_id, $disease_symptom_id)
     {
         $data['title'] = "Delete Disease Symptom";
-
-        //check permission
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $disease = $this->Disease_model->get($disease_id);
         if (!$disease)

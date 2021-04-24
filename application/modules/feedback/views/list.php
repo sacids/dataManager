@@ -3,7 +3,8 @@
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
                 <h3 class="title">Feedback Messages</h3>
-            </div><!--./header-title -->
+            </div>
+            <!--./header-title -->
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
@@ -54,7 +55,11 @@
                                 <?= '<p><h5 class="text-primary">' . ucfirst($value->first_name) . ' ' . ucfirst($value->last_name) . '</h5></p>'; ?>
                                 <?= '<p>' . ucfirst($value->message) . '</p>' ?>
                                 <?= '<i class="fa fa-clock-o"></i><span class="text-primary">' . date('jS F, Y H:i:s', strtotime($value->date_created)) . '</span>'; ?>
-                                <span style="float: right"><?= anchor("feedback/user_feedback/" . $value->instance_id, '<i class="fa fa-comments-o fa-lg"></i>', ''); ?></span>
+                                <span style="float: right">
+                                    <?php
+                                    if (perms_role('Feedback', 'user_feedback'))
+                                        echo anchor("feedback/user_feedback/" . $value->instance_id, '<i class="fa fa-comments-o fa-lg"></i>', ''); ?>
+                                </span>
                             </td>
                         </tr>
                     <?php $serial++;

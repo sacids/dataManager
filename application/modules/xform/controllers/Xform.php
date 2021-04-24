@@ -49,6 +49,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Xform extends MX_Controller
 {
+    private $controller;
     private $data;
     private $xFormReader;
 
@@ -75,6 +76,7 @@ class Xform extends MX_Controller
         $this->load->dbforge();
 
         $this->user_id = $this->session->userdata("user_id");
+        $this->controller = "Xform";
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><i class="fa fa-warning"></i>.', '</div>');
 
         //$this->objPHPExcel = new PHPExcel();
@@ -91,6 +93,17 @@ class Xform extends MX_Controller
         if (!$this->ion_auth->logged_in()) {
             redirect('auth/login', 'refresh');
             exit;
+        }
+    }
+
+        /**
+     * @param $method_name
+     * Check if user has permission
+     */
+    function has_allowed_perm($method_name)
+    {
+        if (!perms_role($this->controller, $method_name)) {
+            show_error("You are not allowed to view this page", 401, "Unauthorized");
         }
     }
 
@@ -614,6 +627,7 @@ class Xform extends MX_Controller
         }
 
         $data['title'] = $this->lang->line("heading_add_new_form");
+        $this->has_allowed_perm($this->router->fetch_method());
 
         //project
         $project = $this->Project_model->get_project_by_id($project_id);
@@ -819,6 +833,9 @@ class Xform extends MX_Controller
     function edit_form($project_id, $form_id)
     {
         $this->_is_logged_in();
+        $this->has_allowed_perm($this->router->fetch_method());
+
+        //title
         $data['title'] = $this->lang->line("heading_edit_form");
 
         $project = $this->Project_model->get_project_by_id($project_id);
@@ -964,7 +981,7 @@ class Xform extends MX_Controller
     function delete_form($project_id, $form_id)
     {
         $this->_is_logged_in();
-        $data['title'] = 'delete form';
+        $this->has_allowed_perm($this->router->fetch_method());
 
         $project = $this->Project_model->get_project_by_id($project_id);
 
@@ -999,43 +1016,57 @@ class Xform extends MX_Controller
      * @param $xform_id
      * Archives the uploaded xforms so that they do not appear at first on the form lists page
      */
-    function archive_xform($xform_id)
+    function archive_xform($project_id, $form_id)
     {
         $this->_is_logged_in();
+        $this->has_allowed_perm($this->router->fetch_method());
 
-        if (!$xform_id) {
-            $this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
-            redirect("projects");
-            exit;
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (!$project) {
+            show_error("Project not exist", 500);
         }
 
-        if ($this->Xform_model->archive_form($xform_id)) {
+        //forms
+        $form = $this->Xform_model->find_by_id($form_id);
+        if (!$form) {
+            show_error("Form does not exist", 500);
+        }
+
+        if ($this->Xform_model->archive_form($form_id)) {
             $this->session->set_flashdata("message", display_message($this->lang->line("form_archived_successful")));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_delete_form"), "danger"));
         }
-        redirect("projects");
+        redirect('projects/forms/' . $project_id, 'refresh');
     }
 
     /**
      * @param $xform_id
      */
-    function restore_from_archive($xform_id)
+    function restore_from_archive($project_id, $form_id)
     {
         $this->_is_logged_in();
+        $this->has_allowed_perm($this->router->fetch_method());
 
-        if (!$xform_id) {
-            $this->session->set_flashdata("message", $this->lang->line("select_form_to_delete"));
-            redirect("projects");
-            exit;
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (!$project) {
+            show_error("Project not exist", 500);
         }
 
-        if ($this->Xform_model->restore_xform_from_archive($xform_id)) {
+        //forms
+        $form = $this->Xform_model->find_by_id($form_id);
+        if (!$form) {
+            show_error("Form does not exist", 500);
+        }
+
+        if ($this->Xform_model->restore_xform_from_archive($form_id)) {
             $this->session->set_flashdata("message", display_message($this->lang->line("form_restored_successful")));
         } else {
             $this->session->set_flashdata("message", display_message($this->lang->line("error_failed_to_restore_form"), "danger"));
         }
-        redirect("projects");
+        redirect('projects/forms/' . $project_id, 'refresh');
     }
 
     /**

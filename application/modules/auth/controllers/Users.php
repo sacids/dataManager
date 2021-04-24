@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: administrator
@@ -28,7 +29,7 @@ class Users extends MX_Controller
         //variables
         $this->controller = $this->router->class;
         $this->realm = 'Authorized users of Sacids Openrosa';
-  
+
         if (!$this->ion_auth->logged_in())
             redirect('auth/login', 'refresh');
     }
@@ -247,7 +248,6 @@ class Users extends MX_Controller
                     // redirect them back to the admin page if admin, or to the base url if non admin
                     $this->session->set_flashdata('message', display_message('User updated'));
                     redirect('auth/users/lists', 'refresh');
-
                 } else {
                     // redirect them back to the admin page if admin, or to the base url if non admin
                     $this->session->set_flashdata('message', display_message('Failed to update user', 'danger'));
@@ -388,7 +388,6 @@ class Users extends MX_Controller
             $this->load->view('header', $this->data);
             $this->load->view('users/deactivate');
             $this->load->view('footer');
-
         } else {
             // do we really want to deactivate?
             if ($this->input->post('confirm') == 'yes') {
@@ -407,6 +406,135 @@ class Users extends MX_Controller
             // redirect them back to the auth page
             redirect('auth/users/lists', 'refresh');
         }
+    }
+
+    //users mapping
+    function mapping($id)
+    {
+        $this->data['title'] = "Mapping User";
+
+        $user = $this->ion_auth->user($id)->row();
+
+        if (!$user)
+            show_error("No any user associated", 404);
+
+        $this->data['user'] = $user;
+
+        //users lists
+        $this->data['users'] = $this->User_model->get_data_collectors();
+
+        //mapped users
+        $this->model->set_table('feedback_user_map');
+        $assigned_users = $this->model->get_by(array('user_id' => $id));
+
+        if ($assigned_users)
+            $this->data['mapped_users'] = explode(',', $assigned_users->users);
+        else
+            $this->data['mapped_users'] = array();
+
+        if (isset($_POST['save'])) {
+            $new_users = $this->input->post("users");
+
+            $new_users_string = "";
+            if (count($new_users) > 0) {
+                $new_users_string = join(",", $new_users);
+            }
+
+            //check if user exists
+            if ($assigned_users) {
+                //save mapped users
+                $this->model->update_by(
+                    array('user_id' => $id),
+                    array('users' => $new_users_string)
+                );
+            } else {
+                $this->model->insert(
+                    array('user_id' => $id, 'users' => $new_users_string)
+                );
+            }
+
+            //redirect
+            $this->session->set_flashdata('message', display_message("Users mapped successfully"));
+            redirect('auth/users/mapping/' . $id, 'refresh');
+        }
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view('auth/users/mapping');
+        $this->load->view('footer');
+    }
+
+
+    //data access
+    public function data_access($id)
+    {
+        $this->data['title'] = "Data Access";
+        $this->has_allowed_perm('activate');
+
+        //find user perms
+        $user = $this->ion_auth->user($id)->row();
+
+        if (!$user)
+            show_error("No any user associated", 404);
+
+        $this->data['user'] = $user;
+
+        //groups
+        $groups = $this->User_model->get_user_groups_by_id($id);
+
+        $this->data['user_groups'] = "{ ";
+        $i = 0;
+        $count = count($groups);
+
+        foreach ($groups as $group) {
+            $this->data['user_groups'] .= ucfirst($group->name) . " " . $group->description;
+            if ($i < ($count - 1)) {
+                $this->data['user_groups'] .= " , ";
+            }
+            $i++;
+        }
+        $this->data['user_groups'] .= " }";
+        $this->data['permissions_list'] = $this->Acl_model->find_permissions();
+
+        //assigned members
+        $perms = array();
+        $assigned_perms_list = $this->db->get_where('acl_users_permissions', array('user_id' => $id))->result();
+
+        foreach ($assigned_perms_list as $v) {
+            array_push($perms, $v->permission_id);
+        }
+        $this->data['assigned_perms'] = $perms;
+
+        //if user prefer to assign
+        if (isset($_POST['save'])) {
+            if (empty($_POST['permissions'])) {
+                //redirect with message
+                $this->session->set_flashdata('message', display_message('No permission selected', 'danger'));
+                redirect(uri_string(), 'refresh');
+            } else {
+                //delete all user permission
+                $this->Acl_model->delete_user_permission($id);
+
+                foreach ($_POST['permissions'] as $perm_id) {
+                    //insert perms
+                    $users_permissions = [
+                        "user_id" => $id,
+                        "permission_id" => $perm_id,
+                        "date_added" => date("Y-m-d H:i:s")
+                    ];
+                    $this->Acl_model->assign_users_permissions($users_permissions);
+                }
+            }
+
+            //redirect with message
+            $this->session->set_flashdata('message', display_message('You have assigned permission(s) successfully'));
+            redirect(uri_string(), 'refresh');
+        }
+
+        //render view
+        $this->load->view("header", $this->data);
+        $this->load->view("users/data_access", $this->data);
+        $this->load->view("footer");
     }
 
 

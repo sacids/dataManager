@@ -38,7 +38,6 @@
 
 /**
  * Created by PhpStorm.
- * User: Godluck Akyoo
  * Date: 3/10/2016
  * Time: 9:51 AM
  */

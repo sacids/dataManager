@@ -16,65 +16,66 @@
                 echo $this->session->flashdata('message');
             } ?>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="pure-form">
-
-                        <?= form_open(uri_string(), 'role="form"'); ?>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group">
-                                    <label>Clinical Manifestation <span style="color: red;">*</span></label>
-                                    <?php
-                                    $symptoms_options = array();
-                                    foreach ($symptoms as $value) {
-                                        $symptoms_options[$value->id] = $value->code . '. ' . $value->title;
-                                    }
-                                    $symptoms_options = array('' => 'Choose Symptoms') + $symptoms_options;
-                                    echo form_dropdown('symptom_id', $symptoms_options, set_value('symptom_id'), 'class="form-control"');
-                                    ?>
-                                    <span class="form-text text-danger"><?= form_error('symptom_id') ?></span>
+            <?php if (perms_role('Ohkr', 'add_disease_symptoms')) { ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pure-form">
+                            <?= form_open(uri_string(), 'role="form"'); ?>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>Clinical Manifestation <span style="color: red;">*</span></label>
+                                        <?php
+                                        $symptoms_options = array();
+                                        foreach ($symptoms as $value) {
+                                            $symptoms_options[$value->id] = $value->code . '. ' . $value->title;
+                                        }
+                                        $symptoms_options = array('' => 'Choose Symptoms') + $symptoms_options;
+                                        echo form_dropdown('symptom_id', $symptoms_options, set_value('symptom_id'), 'class="form-control"');
+                                        ?>
+                                        <span class="form-text text-danger"><?= form_error('symptom_id') ?></span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group">
-                                    <label>Species <span style="color: red;">*</span></label><br />
-                                    <?php
-                                    foreach ($species as $specie) {
-                                        $species_options[$specie->id] = $specie->title;
-                                    }
-                                    echo form_dropdown("specie_id[]", $species_options, set_value("specie_id"), 'class="form-control chosen-select" data-placeholder="-- Select --" multiple');
-                                    ?>
-                                    <span class="form-text text-danger"><?= form_error('specie_id[]') ?></span>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>Species <span style="color: red;">*</span></label><br />
+                                        <?php
+                                        foreach ($species as $specie) {
+                                            $species_options[$specie->id] = $specie->title;
+                                        }
+                                        echo form_dropdown("specie_id[]", $species_options, set_value("specie_id"), 'class="form-control chosen-select" data-placeholder="-- Select --" multiple');
+                                        ?>
+                                        <span class="form-text text-danger"><?= form_error('specie_id[]') ?></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <!--./col-md-4 -->
+                                <!--./col-md-4 -->
 
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group">
-                                    <label>Importance (%) <span style="color: red;">*</span></label>
-                                    <?= form_input($importance); ?>
-                                    <span class="form-text text-danger"><?= form_error('importance') ?></span>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        <label>Importance (%) <span style="color: red;">*</span></label>
+                                        <?= form_input($importance); ?>
+                                        <span class="form-text text-danger"><?= form_error('importance') ?></span>
+                                    </div>
                                 </div>
-                            </div>
-                        </div> <!-- /.row -->
+                            </div> <!-- /.row -->
 
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <?= form_submit('save', 'Save', array('class' => "btn btn-primary")); ?>
-                                </div> <!-- /form-group -->
-                            </div>
-                        </div> <!-- /.row -->
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <?= form_submit('save', 'Save', array('class' => "btn btn-primary")); ?>
+                                    </div> <!-- /form-group -->
+                                </div>
+                            </div> <!-- /.row -->
 
-                        <?= form_close() ?>
+                            <?= form_close() ?>
+                        </div>
+                        <!--./pure-form -->
                     </div>
-                    <!--./pure-form -->
+                    <!--./col-md-12 -->
                 </div>
-                <!--./col-md-12 -->
-            </div>
-            <!--./row -->
+                <!--./row -->
+            <?php } ?>
 
             <div class="row">
                 <div class="col-sm-12">
@@ -97,8 +98,9 @@
                                     <td><?php echo $value->symptom->title . ' (' . $value->symptom->code . ')'; ?></td>
                                     <td><?php echo $value->importance; ?></td>
                                     <td>
-                                        <?php echo anchor("ohkr/edit_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"'); ?>
-                                        <?php echo anchor("ohkr/delete_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
+                                        <?php
+                                        echo anchor("ohkr/edit_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"');
+                                        echo anchor("ohkr/delete_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"'); ?>
                                     </td>
                                 </tr>
                             <?php $serial++;
