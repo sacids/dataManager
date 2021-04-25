@@ -47,7 +47,7 @@
                                     <td>
                                         <?php
                                         if (perms_role('Ohkr', 'edit_specie'))
-                                            echo anchor("ohkr/species/edit/" . $specie->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"');
+                                            echo anchor("ohkr/species/edit/" . $specie->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;';
 
                                         if (perms_role('Ohkr', 'delete_specie'))
                                             echo anchor("ohkr/species/delete/" . $specie->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"');
