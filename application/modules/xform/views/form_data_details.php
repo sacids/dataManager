@@ -67,114 +67,144 @@
             </ol>
 
             <div class="row">
-                <div class="col-sm-12">
-                    <!--<div class="pull-left">
-                        <?php echo form_open(uri_string(), 'class="form-inline" role="form"'); ?>
-                        <div class="form-group">
-                            <?php
-                            $week_options = array();
-                            for ($i = 1; $i <= 52; $i++) {
-                                $week_options[$i] = $i;
-                            }
-                            $week_options = array('' => 'Week Number') + $week_options;
-                            echo form_dropdown('week', $week_options, set_value('week'), 'class="form-control"'); ?>
-                        </div>
+                <div class="col-md-12">
+                    <div class="pure-form">
+                        <?php echo form_open(uri_string(), 'class="form-inlin" role="form"'); ?>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <?php echo form_input(array('name' => 'start_at', 'id' => 'start_at', 'class' => "form-control", 'type' => 'date')); ?>
+                                </div>
+                                <!--./form-group -->
+                            </div>
+                            <!--./col-md-4 -->
 
-                        <div class="form-group">
-                            <?php echo form_submit("export", "Export", 'class="btn btn-primary"'); ?>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <?php echo form_input(array('name' => 'end_at', 'id' => 'end_at', 'class' => "form-control", 'type' => 'date')); ?>
+                                </div>
+                                <!--./form-group -->
+                            </div>
+                            <!--./col-md-4 -->
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button type="submit" name="search" class="btn btn-primary" style="width: 100px !important;">
+                                        <i class="fa fa-search"></i> Filter
+                                    </button>
+                                </div>
+                                <!--./form-group -->
+                            </div>
+                            <!--./col-md-4 -->
                         </div>
+                        <!--./row-->
                         <?php echo form_close(); ?>
-                    </div>-->
+                    </div>
+                </div>
+                <!--./col-md-12 -->
+            </div>
+            <!--./row -->
 
+            <div class="row">
+                <div class="col-md-12">
                     <div class="pull-right">
                         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Set Filters
                         </button>
-                        <?php echo anchor("xform/csv_export_form_data/" . $form_id, '<i class="fa fa-file fa-lg"></i>&nbsp;&nbsp;', 'title="Export CSV"') ?>
-                        <?php echo anchor("xform/excel_export_form_data/" . $form_id, '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Export XLS"') ?>
+                        <?php echo anchor("xform/csv_export_form_data/" . $form_id, '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Export XLS"') ?>
                         <?php echo anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, '<i class="fa fa-bar-chart-o fa-lg"></i>&nbsp;&nbsp;', 'title="Visualization"') ?>
                         <?php echo anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, '<i class="fa fa-map-marker fa-lg"></i>', 'title="View Map"') ?>
                     </div>
                 </div>
+                <!--./col-md-12 -->
             </div>
+            <!--./row -->
 
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-md-12">
                     <?php
                     echo get_flashdata();
                     echo validation_errors();
                     ?>
                 </div>
+                <!--./col-md-12 -->
             </div>
+            <!--./row -->
 
-            <?= form_open("xform/delete_entry/" . $project->id . '/' . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>
-            <?= form_hidden("table_name", $form_id); ?>
-            <div style="overflow-x: scroll;">
-                <table class="table table_list table-bordered table-striped table-hover">
-                    <tr style="position: sticky; top: 0;">
-                        <?php
-                        echo "<th class='text-center'>" . form_checkbox(array("id" => "selectAll")) . "</th>";
+            <?php if (isset($form_data) && $form_data) { ?>
 
-                        if (isset($selected_columns)) {
-                            foreach ($selected_columns as $column) {
-                                echo "<th>" . $column . "</th>";
-                            }
-                        } else {
-                            foreach ($mapped_fields as $key => $column) {
-                                if (array_key_exists($column, $field_maps)) {
-                                    echo "<th>" . $field_maps[$column] . "</th>";
-                                } else {
+                <?= form_open("xform/delete_entry/" . $project->id . '/' . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>
+                <?= form_hidden("table_name", $form_id); ?>
+                <div style="overflow-x: scroll;">
+                    <table class="table table_list table-bordered table-striped table-hover">
+                        <tr style="position: sticky; top: 0;">
+                            <?php
+                            echo "<th class='text-center'>" . form_checkbox(array("id" => "selectAll")) . "</th>";
+
+                            if (isset($selected_columns)) {
+                                foreach ($selected_columns as $column) {
                                     echo "<th>" . $column . "</th>";
                                 }
-                            }
-                        }
-                        ?>
-                    </tr>
-
-                    <?php
-                    foreach ($form_data as $data) {
-                        echo "<tr>";
-                        foreach ($data as $key => $entry) {
-
-                            if ($key == "id") {
-                                echo "<td class='text-center'>" . form_checkbox("entry_id[]", $entry) . "</td>";
-                            }
-
-                            if ($key == "meta_instanceID") {
-                                echo '<td><a href="' . site_url('feedback/user_feedback/' . $entry) . '"><b>' . $entry . '</b></a></td>';
                             } else {
-                                if ($key == "meta_username") {
-                                    echo "<td class='text-center'>" . get_collector_name_from_phone($entry) . "</td>";
-                                } else {
-                                    if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                                        echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                                foreach ($mapped_fields as $key => $column) {
+                                    if (array_key_exists($column, $field_maps)) {
+                                        echo "<th>" . $field_maps[$column] . "</th>";
                                     } else {
-                                        echo "<td>" . $entry . "</td>";
+                                        echo "<th>" . $column . "</th>";
                                     }
                                 }
                             }
+                            ?>
+                        </tr>
+
+                        <?php
+                        foreach ($form_data as $data) {
+                            echo "<tr>";
+                            foreach ($data as $key => $entry) {
+
+                                if ($key == "id") {
+                                    echo "<td class='text-center'>" . form_checkbox("entry_id[]", $entry) . "</td>";
+                                }
+
+                                if ($key == "meta_instanceID") {
+                                    echo '<td><a href="' . site_url('feedback/user_feedback/' . $entry) . '"><b>' . $entry . '</b></a></td>';
+                                } else {
+                                    if ($key == "meta_username") {
+                                        echo "<td class='text-center'>" . get_collector_name_from_phone($entry) . "</td>";
+                                    } else {
+                                        if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                                            echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                                        } else {
+                                            echo "<td>" . $entry . "</td>";
+                                        }
+                                    }
+                                }
+                            }
+                            echo "</tr>";
                         }
-                        echo "</tr>";
-                    }
-                    ?>
-                </table>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <input type="submit" name="delete" value="Delete Selected" class="btn btn-danger btn-sm delete">
+                        ?>
+                    </table>
                 </div>
-            </div>
-            <?= form_close(); ?>
+                <!--./div -->
 
-            <?php if (!empty($links)) : ?>
-                <div class="widget-foot">
-                    <?= $links ?>
-                    <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <input type="submit" name="delete" value="Delete Selected" class="btn btn-danger delete">
+                    </div>
                 </div>
-            <?php endif; ?>
-        </div>
-    </div>
-</div>
+                <?= form_close(); ?>
+
+                <?php if (!empty($links)) : ?>
+                    <div class="widget-foot">
+                        <?= $links ?>
+                        <div class="clearfix"></div>
+                    </div>
+                <?php endif; ?>
+            <?php } else { 
+                echo "<div class='alert alert-danger'>No any form data</div>";
+             } ?>
+        </div><!--./col-md-12 -->
+    </div><!--./row -->
+</div><!--./container -->
 
 <script type="text/javascript">
     $("#selectAll").change(function() {

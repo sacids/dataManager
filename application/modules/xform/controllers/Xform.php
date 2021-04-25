@@ -96,7 +96,7 @@ class Xform extends MX_Controller
         }
     }
 
-        /**
+    /**
      * @param $method_name
      * Check if user has permission
      */
@@ -1114,50 +1114,85 @@ class Xform extends MX_Controller
 
         $project = $this->Project_model->get_project_by_id($project_id);
 
-        if (!$project) {
+        if (!$project)
             show_error("Project not exist", 500);
-        }
+
         $data['project'] = $project;
 
-        if (!$form_id) {
-            set_flashdata(display_message($this->lang->line("select_form_to_delete"), "error"));
-            redirect('xform/form_data/' . $project_id . '/' . $form_id, 'refresh');
-            exit;
-        }
-
+        //form
         $form = $this->Xform_model->find_by_id($form_id);
+
+        if (!$form)
+            show_error("Form not exist", 500);
+
+        $data['title'] = $form->title . " form";
+        $data['form'] = $form;
+        $data['form_id'] = $form->form_id;
 
         $where_condition = null;
         if (!$this->ion_auth->is_admin()) {
             $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form->form_id);
         }
 
-        //check for form
-        if ($form) {
-            $data['title'] = $form->title . " form";
-            $data['form'] = $form;
-            $data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
-            $data['field_maps'] = $this->_get_mapped_table_column_name($form->form_id);
+        //table fields
+        $data['table_fields'] = $this->Xform_model->find_table_columns($form->form_id);
+        $data['field_maps'] = $this->_get_mapped_table_column_name($form->form_id);
 
-            $mapped_fields = array();
-            foreach ($data['table_fields'] as $key => $column) {
-                if (array_key_exists($column, $data['field_maps'])) {
-                    $mapped_fields[$column] = $data['field_maps'][$column];
+        $mapped_fields = array();
+        foreach ($data['table_fields'] as $key => $column) {
+            if (array_key_exists($column, $data['field_maps'])) {
+                $mapped_fields[$column] = $data['field_maps'][$column];
+            } else {
+                $mapped_fields[$column] = $column;
+            }
+        }
+
+        $custom_maps = $this->Xform_model->get_fieldname_map($form->form_id);
+
+        foreach ($custom_maps as $f_map) {
+            if (array_key_exists($f_map['col_name'], $mapped_fields)) {
+                $mapped_fields[$f_map['col_name']] = $f_map['field_label'];
+            }
+        }
+
+        $data['mapped_fields'] = $mapped_fields;
+
+        //Prevents the filters from applying to a different form
+        if ($this->session->userdata("filters_form_id") != $form_id) {
+            $this->session->unset_userdata("filters_form_id");
+            $this->session->unset_userdata("form_filters");
+        }
+
+        //apply search
+        if (isset($_POST['search'])) {
+            $start_at = $this->input->post('start_at');
+            $end_at = $this->input->post('end_at');
+
+            //set field keys
+            if (isset($_POST["apply"]) || $this->session->userdata("form_filters")) {
+                if (!isset($_POST["apply"])) {
+                    $selected_columns = $this->session->userdata("form_filters");
                 } else {
-                    $mapped_fields[$column] = $column;
+                    $selected_columns = $_POST;
+                    $selected_columns = array('id' => "ID") + $selected_columns;
+
+                    unset($selected_columns['apply']);
+                    $this->session->set_userdata("filters_form_id", $form_id);
+                    $this->session->set_userdata(array("form_filters" => $selected_columns));
                 }
+                $data['selected_columns'] = $selected_columns;
+                $form_data = $this->Xform_model->search_form_data_by_fields($form->form_id, $selected_columns, $where_condition, $start_at, $end_at);
+            } else {
+                $form_data = $this->Xform_model->search_form_data($form->form_id, $where_condition, $start_at, $end_at);
             }
 
-            $custom_maps = $this->Xform_model->get_fieldname_map($form->form_id);
-
-            foreach ($custom_maps as $f_map) {
-                if (array_key_exists($f_map['col_name'], $mapped_fields)) {
-                    $mapped_fields[$f_map['col_name']] = $f_map['field_label'];
-                }
+            if ($form_data) {
+                $data['form_data'] = $form_data;
+            } else {
+                $data['form_data'] = [];
             }
-
-            $data['mapped_fields'] = $mapped_fields;
-
+        } else {
+            //pagination
             $config = array(
                 'base_url' => $this->config->base_url("xform/form_data/" . $project_id . '/' . $form_id),
                 'total_rows' => $this->Xform_model->count_all_records($form->form_id, $where_condition),
@@ -1166,14 +1201,8 @@ class Xform extends MX_Controller
 
             $this->pagination->initialize($config);
             $page = ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
-            $data['form_id'] = $form->form_id;
 
-            //Prevents the filters from applying to a different form
-            if ($this->session->userdata("filters_form_id") != $form_id) {
-                $this->session->unset_userdata("filters_form_id");
-                $this->session->unset_userdata("form_filters");
-            }
-
+            //set field keys
             if (isset($_POST["apply"]) || $this->session->userdata("form_filters")) {
                 if (!isset($_POST["apply"])) {
                     $selected_columns = $this->session->userdata("form_filters");
@@ -1192,17 +1221,13 @@ class Xform extends MX_Controller
             }
             //form data
             $data['form_data'] = $form_data;
-
-            //pagination
             $data["links"] = $this->pagination->create_links();
-
-            $this->load->view('header', $data);
-            $this->load->view("form_data_details");
-            $this->load->view('footer');
-        } else {
-            $this->session->set_flashdata("message", display_message("Form does not exists", "danger"));
-            redirect("projects/lists");
         }
+
+        //render view
+        $this->load->view('header', $data);
+        $this->load->view("form_data_details");
+        $this->load->view('footer');
     }
 
     /**
@@ -1470,226 +1495,6 @@ class Xform extends MX_Controller
         // Redirect output to a client’s web browser (Excel2007)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="submission-form.xlsx"');
-        header('Cache-Control: max-age=0');
-        // If you're serving to IE 9, then the following may be needed
-        header('Cache-Control: max-age=1');
-
-        // If you're serving to IE over SSL, then the following may be needed
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-        header('Pragma: public'); // HTTP/1.0
-
-        $objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');
-        $objWriter->save('php://output');
-        exit;
-    }
-
-    //exporting Zanzibar IDWE
-    public function export_IDWE($form_id, $week_number)
-    {
-        //form details
-        $this->model->set_table('xforms');
-        $xform = $this->model->get_by('id', $form_id);
-
-        //table fields
-        $table_fields = $this->Xform_model->find_table_columns($xform->form_id);
-
-        $columns = count($table_fields);
-
-        $last_column = $this->xFormReader->columnLetter($columns);
-
-        //variable html1
-        $html1 = '';
-
-        // Set some content to print
-        $html1 .= "INFECTIOUS DISEASE WEEK ENDING REPORT (IDWE)\r";
-        $html1 .= $week_number . "th WK  BY HEALTH FACILITIES AND DISTRICTS IN ZANZIBAR.\r";
-
-        // Set document properties
-        $this->objPHPExcel->getProperties()
-            ->setCreator("Sacids")
-            ->setLastModifiedBy("Renfrid")
-            ->setTitle("AfyaData IDWE Report")
-            ->setSubject("Zanzibar IDWE")
-            ->setDescription("Infectious Disease Week Ending Report")
-            ->setKeywords("IDWE, Zanzibar")
-            ->setCategory("IDWE REPORT");
-
-        //activate worksheet number 1
-        $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', $html1);
-        $this->objPHPExcel->setActiveSheetIndex(0)->mergeCells('A1:' . $last_column . '1');
-        $this->objPHPExcel->getActiveSheet()->getRowDimension('1')->setRowHeight(50);
-
-        $this->objPHPExcel->getActiveSheet()->getStyle('A1')->applyFromArray(
-            array('font' => array("bold" => true))
-        );
-        $this->objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setWrapText(true);
-
-
-        //Header Columns
-        $this->objPHPExcel->getActiveSheet()->mergeCells('A3:A6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('A3', 'Week Number');
-        $this->objPHPExcel->getActiveSheet()->getStyle('A3')->getAlignment()->setTextRotation(90);
-
-        $this->objPHPExcel->getActiveSheet()->mergeCells('B3:B6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('B3', 'Year');
-        $this->objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-        $this->objPHPExcel->getActiveSheet()->getStyle('B3')->getAlignment()->setTextRotation(90);
-
-        $this->objPHPExcel->getActiveSheet()->mergeCells('C3:C6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('C3', 'Region');
-        $this->objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-        $this->objPHPExcel->getActiveSheet()->getStyle('C3')->getAlignment()->setTextRotation(90);
-
-        $this->objPHPExcel->getActiveSheet()->mergeCells('D3:D6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('D3', 'District');
-        $this->objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-        $this->objPHPExcel->getActiveSheet()->getStyle('D3')->getAlignment()->setTextRotation(90);
-
-        $this->objPHPExcel->getActiveSheet()->mergeCells('E3:E6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('E3', 'S/N');
-
-        $this->objPHPExcel->getActiveSheet()->mergeCells('F3:F6');
-        $this->objPHPExcel->getActiveSheet()->setCellValue('F3', 'Health Facilities');
-        $this->objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
-        $this->objPHPExcel->getActiveSheet()->getStyle('F3')->getAlignment()->setTextRotation(90);
-
-        $this->objPHPExcel->getActiveSheet()->freezePane('G7');
-
-        $diseases = array(
-            'Malaria',
-            'Cholera',
-            'Bloody Diarrhoea',
-            'Animal Bites',
-            'Measles',
-            'CS Meningitis',
-            'Yellow Fever',
-            'AFP',
-            'Dengue Fever',
-            'Neonatal Tetanus',
-            'Plague',
-            'Rabies',
-            'Small Pox',
-            'Trypanosomiasis',
-            'Viral Haemorrhagic Fevers',
-            'Keratoconjuctivitis',
-            'Human Influenza Sari',
-            'Anthrax'
-        );
-
-        $d = 0;
-
-        for ($i = 6, $c = 0; $i < 150; $i++, $c++) {
-
-            if (!($c % 8)) {
-                $r = $this->xFormReader->columnLetter($i) . '3:' . $this->xFormReader->columnLetter($i + 7) . '3';
-                $this->objPHPExcel->getActiveSheet()->mergeCells($r);
-                $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i) . '3', $diseases[$d]);
-                //echo " " . $c . ":" . $d;
-                $d++;
-
-                if (!($c % 4)) {
-
-                    for ($k = 0; $k < 2; $k++) {
-                        $r = $this->xFormReader->columnLetter($i + $k * 4) . '4:' . $this->xFormReader->columnLetter($i + $k * 4 + 3) . '4';
-                        $this->objPHPExcel->getActiveSheet()->mergeCells($r);
-                        $v = ($k % 2) ? ' > 5 yrs ' : ' < 5 yrs';
-                        $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i + $k * 4) . '4', $v);
-                    }
-                    //$nne .= '<td colspan="4">  < 5 yrs </td><td colspan="4">  > 5 yrs </td>';
-
-                    if (!($c % 2)) {
-
-                        for ($k = 0; $k < 4; $k++) {
-                            $r = $this->xFormReader->columnLetter($i + $k * 2) . '5:' . $this->xFormReader->columnLetter($i + $k * 2 + 1) . '5';
-                            $this->objPHPExcel->getActiveSheet()->mergeCells($r);
-                            $v = ($k % 2) ? 'C' : 'D';
-                            $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i + $k * 2) . '5', $v);
-                        }
-                    }
-                }
-            }
-
-            $v = ($c % 2) ? 'F' : 'M';
-            $this->objPHPExcel->getActiveSheet()->setCellValue($this->xFormReader->columnLetter($i) . '6', $v);
-        }
-
-
-        // get values from DB
-        $this->model->set_table($xform->form_id);
-        $this->model->order_by('_xf_da0f48ffc452923e77a8c70e393ed5ac', 'ASC');
-        $this->model->order_by('_xf_0c37672a5ed28b81b30d37d52b20f57e', 'ASC');
-        $this->model->order_by('_xf_3b4caf4273007b260d666188609c6e2a', 'ASC');
-        $data = $this->model->as_array()->get_many_by('_xf_20de688d974183449850b0d32a15de47', $week_number);
-
-        $idwe_data = array();
-        $sn = 1;
-        foreach ($data as $row) {
-            $c = 0;
-            $tmp = array();
-            foreach ($row as $k => $v) {
-                if ($c == 0) {
-                    array_push($tmp, $row['_xf_20de688d974183449850b0d32a15de47']);
-                    array_push($tmp, date('Y', strtotime($row['_xf_1e0b70ceccc8a5457221fb938ee70caf'])));
-                    array_push($tmp, ucfirst(str_replace('_', ' ', $row['_xf_da0f48ffc452923e77a8c70e393ed5ac'])));
-                    array_push($tmp, ucfirst(str_replace('_', ' ', $row['_xf_0c37672a5ed28b81b30d37d52b20f57e'])));
-                    array_push($tmp, $sn++);
-                    array_push($tmp, ucfirst(str_replace('_', ' ', $row['_xf_3b4caf4273007b260d666188609c6e2a'])));
-                }
-                //print data
-                if ($c > 6) {
-                    if (substr($k, 0, 4) == '_xf_') array_push($tmp, $v);
-                }
-                $c++;
-            }
-            array_push($idwe_data, $tmp);
-        }
-
-        $this->objPHPExcel->getActiveSheet()->fromArray($idwe_data, 0, 'A7', true);
-
-        // set headers
-        $header = 'A3:ET6';
-        $header_style = array(
-            'fill' => array(
-                'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                'color' => array('rgb' => '83C9FC')
-
-            ),
-            'font' => array(
-                'bold' => false,
-                'size' => '12',
-                'color' => array('rgb' => '000000')
-            ),
-            'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-            )
-        );
-        $this->objPHPExcel->getActiveSheet()->getStyle($header)->applyFromArray($header_style);
-
-        // set boarders
-        $borders = array(
-            'borders' => array(
-                'allborders' => array(
-                    'style' => PHPExcel_Style_Border::BORDER_THIN
-                )
-            )
-        );
-        $c = sizeof($idwe_data) + 6;
-        $range = 'A3:ET' . $c;
-        $this->objPHPExcel->getActiveSheet()->getStyle($range)->applyFromArray($borders);
-
-        // Rename worksheet
-        $this->objPHPExcel->getActiveSheet()->setTitle('FORM REPORT');
-
-        $filename = date("Y") . "_WEEK_" . $week_number . ".xlsx"; //save our workbook as this file name
-
-        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
-        $this->objPHPExcel->setActiveSheetIndex(0);
-
-        // Redirect output to a client’s web browser (Excel2007)
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
