@@ -54,7 +54,7 @@ class Ohkr extends MX_Controller
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url' => $this->config->base_url("ohkr/diseases"),
+            'base_url' => $this->config->base_url("ohkr/diseases/"),
             'total_rows' => $this->Disease_model->count_all(),
             'uri_segment' => 3,
         );
@@ -226,7 +226,7 @@ class Ohkr extends MX_Controller
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url' => $this->config->base_url("ohkr/species"),
+            'base_url' => $this->config->base_url("ohkr/species/"),
             'total_rows' => $this->Specie_model->count_all(),
             'uri_segment' => 3,
         );
@@ -357,7 +357,7 @@ class Ohkr extends MX_Controller
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
-            'base_url' => $this->config->base_url("ohkr/symptoms"),
+            'base_url' => $this->config->base_url("ohkr/symptoms/"),
             'total_rows' => $this->Symptom_model->count_all(),
             'uri_segment' => 3,
         );
