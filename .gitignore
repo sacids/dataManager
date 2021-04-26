@@ -85,6 +85,7 @@ assets/forms/definition/archive/*.xml
 !assets/forms/definition/archive/index.html
 
 assets/forms/definition/*.jpg
+assets/Intel/
 /composer.lock
 /vendor/
 application/logs
