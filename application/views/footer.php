@@ -60,19 +60,19 @@
 
     //no filter dataTable
     $(document).ready(function() {
-        $('#myTable').DataTable({
-            "paging": true,
-            "ordering": true,
-            "info": true,
-            "bFilter": true,
-            "bLengthChange": false,
-            "bInfo": false,
-            "pageLength": 50,
-            language: {
-                searchPlaceholder: "Search Records",
-                search: ""
-            }
-        });
+        // $('#myTable').DataTable({
+        //     "paging": true,
+        //     "ordering": true,
+        //     "info": true,
+        //     "bFilter": true,
+        //     "bLengthChange": false,
+        //     "bInfo": false,
+        //     "pageLength": 50,
+        //     language: {
+        //         searchPlaceholder: "Search Records",
+        //         search: ""
+        //     }
+        // });
     });
 
     // dTable = $('#my-table').DataTable({
