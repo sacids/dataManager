@@ -1,4 +1,4 @@
-<div class="container-fluid body-content">
+<div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 main">
             <div id="header-title">
@@ -12,37 +12,42 @@
                 <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?></a></li>
                 <li class="active"><?= $form->title ?> Map</li>
             </ol>
-        </div>
-    </div>
-</div>
+        </div><!--./col-md-12 -->
+    </div><!--./row -->
+</div><!--./container -->
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
+        <div class="col-md-12">
+            <div style="width: 100%; min-height: 600px; height: auto" id="map"></div>
+            <?php echo $addressPoints; ?>
+            <script type="text/javascript">
+                var tiles = L.tileLayer("https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+                        maxZoom: 18,
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+                    }),
+                    latlng = L.latLng(<?php echo $latlon; ?>);
 
-        <div style="width: 100%; min-height: 600px; height: auto" id="map"></div>
-        <?php echo $addressPoints; ?>
-        <script type="text/javascript">
+                var map = L.map("map", {
+                    center: [-6.40177, 34.99269],
+                    zoom: 6,
+                    layers: [tiles]
+                });
 
-            var tiles = L.tileLayer("https://{s}.tile.osm.org/{z}/{x}/{y}.png", {
-                    maxZoom: 18,
-                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
-                }),
-                latlng = L.latLng(<?php echo $latlon; ?>);
+                var markers = L.markerClusterGroup();
 
-            var map = L.map("map", {center: [-6.40177, 34.99269], zoom: 6, layers: [tiles]});
+                for (var i = 0; i < addressPoints.length; i++) {
+                    var a = addressPoints[i];
+                    var title = a[2];
+                    var marker = L.marker(new L.LatLng(a[0], a[1], {
+                        title: title
+                    }));
+                    marker.bindPopup(title);
+                    markers.addLayer(marker);
+                }
 
-            var markers = L.markerClusterGroup();
-
-            for (var i = 0; i < addressPoints.length; i++) {
-                var a = addressPoints[i];
-                var title = a[2];
-                var marker = L.marker(new L.LatLng(a[0], a[1], {title: title}));
-                marker.bindPopup(title);
-                markers.addLayer(marker);
-            }
-
-            map.addLayer(markers);
-
-        </script>
-    </div>
-</div>
+                map.addLayer(markers);
+            </script>
+        </div><!--./col-md-12 -->
+    </div><!--./row -->
+</div><!--./container -->
