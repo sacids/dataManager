@@ -29,7 +29,7 @@
                     latlng = L.latLng(<?php echo $latlon; ?>);
 
                 var map = L.map("map", {
-                    center: [-6.40177, 34.99269],
+                    center: [-18.6696553, 35.5273354],
                     zoom: 6,
                     layers: [tiles]
                 });
