@@ -24,7 +24,7 @@
     <link href="<?= base_url('assets/plugins/chosen_v1.8.7/chosen.css') ?>" rel="stylesheet">
 
     <!-- Google fonts - witch you want to use - (rest you can just remove) -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,600,700' rel='stylesheet' type='text/css'>
 
     <!-- Leaflet, marker cluster js and css -->
     <link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
