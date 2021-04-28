@@ -134,61 +134,64 @@
 
                 <?= form_open("xform/delete_entry/" . $project->id . '/' . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>
                 <?= form_hidden("table_name", $form_id); ?>
-                <div style="overflow-x: scroll;">
-                    <table class="table table_list table-bordered table-striped table-hover">
-                        <tr style="position: sticky; top: 0;">
-                            <?php
-                            echo "<th class='text-center'>" . form_checkbox(array("id" => "selectAll")) . "</th>";
+                <div style="overflow: scroll;">
+                    <table class="table table_list table-bordered table-striped table-hover tableFixHead">
+                        <thead>
+                                <?php
+                                echo "<th class='text-center'>" . form_checkbox(array("id" => "selectAll")) . "</th>";
 
-                            if (isset($selected_columns)) {
-                                foreach ($selected_columns as $column) {
-                                    echo "<th>" . $column . "</th>";
-                                }
-                            } else {
-                                foreach ($mapped_fields as $key => $column) {
-                                    if (array_key_exists($column, $field_maps)) {
-                                        echo "<th>" . $field_maps[$column] . "</th>";
-                                    } else {
+                                if (isset($selected_columns)) {
+                                    foreach ($selected_columns as $column) {
                                         echo "<th>" . $column . "</th>";
                                     }
-                                }
-                            }
-                            ?>
-                        </tr>
-
-                        <?php
-                        foreach ($form_data as $data) {
-                            echo "<tr>";
-                            foreach ($data as $key => $entry) {
-
-                                if ($key == "id") {
-                                    echo "<td class='text-center'>" . form_checkbox("entry_id[]", $entry) . "</td>";
-                                }
-
-                                if ($key == "meta_instanceID") {
-                                    echo '<td><a href="' . site_url('feedback/user_feedback/' . $entry) . '"><b>' . $entry . '</b></a></td>';
                                 } else {
-                                    if ($key == "meta_username") {
-                                        echo "<td>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
-                                    } else {
-                                        if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                                            echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                                    foreach ($mapped_fields as $key => $column) {
+                                        if (array_key_exists($column, $field_maps)) {
+                                            echo "<th>" . $field_maps[$column] . "</th>";
                                         } else {
-                                            echo "<td>" . $entry . "</td>";
+                                            echo "<th>" . $column . "</th>";
                                         }
                                     }
                                 }
+                                ?>
+                                </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            foreach ($form_data as $data) {
+                                echo "<tr>";
+                                foreach ($data as $key => $entry) {
+
+                                    if ($key == "id") {
+                                        echo "<td class='text-center'>" . form_checkbox("entry_id[]", $entry) . "</td>";
+                                    }
+
+                                    if ($key == "meta_instanceID") {
+                                        echo '<td><a href="' . site_url('feedback/user_feedback/' . $entry) . '"><b>' . $entry . '</b></a></td>';
+                                    } else {
+                                        if ($key == "meta_username") {
+                                            echo "<td>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
+                                        } else {
+                                            if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                                                echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                                            } else {
+                                                echo "<td>" . $entry . "</td>";
+                                            }
+                                        }
+                                    }
+                                }
+                                echo "</tr>";
                             }
-                            echo "</tr>";
-                        }
-                        ?>
+                            ?>
+                        </tbody>
                     </table>
                 </div>
                 <!--./div -->
 
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <input type="submit" name="delete" value="Delete Selected" class="btn btn-danger delete">
+                        <input type="submit" name="delete" value="Delete Selected" class="btn btn-danger btn-xs delete">
                     </div>
                 </div>
                 <?= form_close(); ?>
