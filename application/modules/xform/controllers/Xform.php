@@ -47,6 +47,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @author   Eric Beda
  * @link     http://sacids.org
  */
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
 class Xform extends MX_Controller
 {
     private $controller;
@@ -58,7 +62,7 @@ class Xform extends MX_Controller
     private $sender; //Object
     private $mobile_app_language = "swahili";
 
-    private $objPHPExcel;
+    private $spreadsheet;
 
     //todo: remove this when finish implementation
     const MOBILE_SERVICE_ID = 93;
@@ -79,13 +83,14 @@ class Xform extends MX_Controller
         $this->controller = "Xform";
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><i class="fa fa-warning"></i>.', '</div>');
 
-        //$this->objPHPExcel = new PHPExcel();
-
         //todo: remove this when finish implementation
         $this->sms_sender_id = '15200';
         $this->api_key = '7jl4QjSEKLwBAYWa0Z5YNn5FUdnrxkeY0CYkxIt8';
         $this->user = 'afyadata@sacids.org';
         $this->sms_push_url = 'http://154.118.230.108/msdg/public/quick_sms';
+
+        //create XLS
+        $this->spreadsheet = new Spreadsheet();
     }
 
     function _is_logged_in()
@@ -1236,12 +1241,27 @@ class Xform extends MX_Controller
      *
      * @param null $form_id
      */
-    function excel_export_form_data($form_id)
+    function xls_export_form_data($form_id)
     {
         $where_condition = null;
         if (!$this->ion_auth->is_admin()) {
             $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form_id);
         }
+
+        //variable html1
+        $html1 = '';
+
+        // Set some content to print
+        $html1 .= "Afyadata\r";
+
+        // Set document properties
+        $this->spreadsheet->getProperties()->setCreator("Renfrid Ngolongolo")
+            ->setLastModifiedBy("Renfrid Ngolongolo")
+            ->setTitle("Sacids Foundation for OneHealth")
+            ->setSubject("Afyadata")
+            ->setDescription("Afyadata")
+            ->setKeywords("Afyadata")
+            ->setCategory("Afyadata");
 
         if ($this->session->userdata("form_filters")) {
             $form_filters = $this->session->userdata("form_filters");
@@ -1249,7 +1269,8 @@ class Xform extends MX_Controller
             foreach ($form_filters as $column_name) {
                 $inc = 1;
                 $column_title = $this->xFormReader->getColumnLetter($serial);
-                $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
+                //activate worksheet number 1
+                $this->spreadsheet->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
                 $serial++;
             }
             $form_data = $this->Xform_model->find_form_data_by_fields($form_id, $form_filters, 5000, 0, $where_condition);
@@ -1283,7 +1304,7 @@ class Xform extends MX_Controller
                 else
                     $column_name = $column;
 
-                $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
+                $this->spreadsheet->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
                 $serial++;
             }
             $form_data = $this->Xform_model->find_form_data($form_id, 5000, 0, $where_condition);
@@ -1294,35 +1315,45 @@ class Xform extends MX_Controller
             $serial = 0;
             foreach ($data as $key => $entry) {
                 $column_title = $this->xFormReader->getColumnLetter($serial);
-                if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                    $column_value = '';
+                if ($key == "meta_username") {
+                    $column_value = get_collector_name_from_phone($entry) . ' - ' . $entry;
                 } else {
-                    $column_value = $entry;
+                    if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                        $column_value = '';
+                    } else {
+                        $column_value = $entry;
+                    }
                 }
-
-                $this->objPHPExcel->getActiveSheet()->setCellValue($column_title . $inc, $column_value);
+                $this->spreadsheet->getActiveSheet()->setCellValue($column_title . $inc, $column_value);
                 $serial++;
             }
             $inc++;
         }
 
-        //name the worksheet
-        $this->objPHPExcel->getActiveSheet()->setTitle("Form Data");
+        // Rename worksheet
+        $this->spreadsheet->getActiveSheet()->setTitle('Form Report');
+
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $this->spreadsheet->setActiveSheetIndex(0);
 
         $filename = "Exported_" . $form_id . "_" . date("Y-m-d") . ".xlsx"; //save our workbook as this file name
 
-        //header
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Cache-Control: post-check=0, pre-check=0", FALSE);
-        header("Pragma: no-cache");
-        header('Content-type: application/vnd.ms-excel');
+        // Redirect output to a client’s web browser (Excel2007)
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
 
-        $objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');
-        ob_end_clean();
+        // If you're serving to IE over SSL, then the following may be needed
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
 
+        $objWriter = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($this->spreadsheet, 'Xlsx');
         $objWriter->save('php://output');
+        exit;
     }
 
     //export csv data
@@ -1390,197 +1421,6 @@ class Xform extends MX_Controller
         exit;
     }
 
-
-    //function to export
-    function export_submission_form()
-    {
-        //variable html1
-        $html1 = '';
-
-        // Set some content to print
-        $html1 .= "SACIDS TANZANIA\r";
-        $html1 .= "SUBMISSION FORM REPORT\r";
-
-        // Set document properties
-        $this->objPHPExcel->getProperties()->setCreator("Renfrid Ngolongolo")
-            ->setLastModifiedBy("Renfrid Ngolongolo")
-            ->setTitle("Sacids Tanzania")
-            ->setSubject("Submission Form")
-            ->setDescription("Submission Form Report")
-            ->setKeywords("Submission Form")
-            ->setCategory("Submission Form");
-
-        //activate worksheet number 1
-        $this->objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', $html1);
-        $this->objPHPExcel->setActiveSheetIndex(0)->mergeCells('A1:F1');
-        $this->objPHPExcel->getActiveSheet()->getRowDimension('1')->setRowHeight(50);
-
-        $this->objPHPExcel->getActiveSheet()->getStyle('A1')->applyFromArray(
-            array('font' => array("bold" => true))
-        );
-        $this->objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setWrapText(true);
-
-        // Add some data
-        $this->objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A2', 'S/n')
-            ->setCellValue('B2', 'UserId')
-            ->setCellValue('C2', 'Name')
-            ->setCellValue('D2', 'Phone')
-            ->setCellValue('E2', 'Filename')
-            ->setCellValue('F2', 'Submitted At');
-
-        //set column dimensions
-        //        //$this->objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
-        //        $this->objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-        //        $this->objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-        //        $this->objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-        //        $this->objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-        //        $this->objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
-
-        // set headers
-        $header = 'A2:F2';
-        $header_style = array(
-            'fill' => array(
-                'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                'color' => array('rgb' => '83C9FC')
-
-            ),
-            'font' => array(
-                'bold' => false,
-                'size' => '12',
-                'color' => array('rgb' => '000000')
-            ),
-            'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-            )
-        );
-        $this->objPHPExcel->getActiveSheet()->getStyle($header)->applyFromArray($header_style);
-
-        //submission list
-        $this->model->set_table('submission_form');
-        $submission_list = $this->model->order_by('id', 'DESC')->get_all();
-
-        $serial = 1;
-        $inc = 3;
-        foreach ($submission_list as $value) {
-            $this->model->set_table('users');
-            $user = $this->model->get_by(array('id' => $value->user_id));
-
-            if ($user) {
-                $name = $user->first_name . ' ' . $user->last_name;
-                $phone = $user->phone;
-            } else {
-                $name = '';
-                $phone = '';
-            }
-
-            //data
-            $this->objPHPExcel->getActiveSheet()->setCellValue('A' . $inc, $serial);
-            $this->objPHPExcel->getActiveSheet()->setCellValue('B' . $inc, $value->user_id);
-            $this->objPHPExcel->getActiveSheet()->setCellValue('C' . $inc, $name);
-            $this->objPHPExcel->getActiveSheet()->setCellValue('D' . $inc, $phone);
-            $this->objPHPExcel->getActiveSheet()->setCellValue('E' . $inc, $value->file_name);
-            $this->objPHPExcel->getActiveSheet()->setCellValue('F' . $inc, $value->submitted_on);
-            $inc++;
-            $serial++;
-        }
-
-        // Rename worksheet
-        $this->objPHPExcel->getActiveSheet()->setTitle('SUBMISSION FORM REPORT');
-
-
-        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
-        $this->objPHPExcel->setActiveSheetIndex(0);
-
-        // Redirect output to a client’s web browser (Excel2007)
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="submission-form.xlsx"');
-        header('Cache-Control: max-age=0');
-        // If you're serving to IE 9, then the following may be needed
-        header('Cache-Control: max-age=1');
-
-        // If you're serving to IE over SSL, then the following may be needed
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-        header('Pragma: public'); // HTTP/1.0
-
-        $objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');
-        $objWriter->save('php://output');
-        exit;
-    }
-
-    //get health Facility name
-    function get_health_facility_details($username = null)
-    {
-        if ($username != null) {
-            $user = $this->User_model->find_by_username($username);
-
-            if ($user->facility != null) {
-                $facility = $this->Facilities_model->get_facility_by_id($user->facility);
-
-                if ($facility)
-                    return $facility->name;
-                else
-                    return '';
-            } else {
-                return '';
-            }
-        } else {
-            return '';
-        }
-    }
-
-    //get health Facility name
-    function get_district_details($username = null)
-    {
-        if ($username != null) {
-            $user = $this->User_model->find_by_username($username);
-
-            if ($user->district != null) {
-                $this->model->set_table('district');
-                $district = $this->model->get_by('id', $user->district);
-
-                if ($district)
-                    return $district->name;
-                else
-                    return '';
-            } else {
-                return '';
-            }
-        } else {
-            return '';
-        }
-    }
-
-    /**
-     * @param null $xform_id
-     */
-    //    function csv_export_form_data($xform_id = NULL)
-    //    {
-    //        if ($xform_id == NULL) {
-    //            $this->session->set_flashdata("message", display_message("You must select a form", "danger"));
-    //            redirect("projects");
-    //        }
-    //        $table_name = $xform_id;
-    //        $query = $this->db->query("select * from {$table_name} order by id ASC ");
-    //        $this->_force_csv_download($query, "Exported_CSV_for_" . $table_name . "_" . date("Y-m-d") . ".csv");
-    //    }
-
-    /**
-     * @param $query
-     * @param string $filename
-     */
-    //    function _force_csv_download($query, $filename = '.csv')
-    //    {
-    //        $this->load->dbutil();
-    //        $this->load->helper('file');
-    //        $this->load->helper('download');
-    //        $delimiter = ",";
-    //        $newline = "\r\n";
-    //        $data = $this->dbutil->csv_from_result($query, $delimiter, $newline);
-    //        force_download($filename, $data);
-    //    }
 
     /**
      * @param null $xform_id

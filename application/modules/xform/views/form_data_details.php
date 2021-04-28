@@ -110,7 +110,7 @@
                     <div class="pull-right">
                         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">Set Filters
                         </button>
-                        <?php echo anchor("xform/csv_export_form_data/" . $form_id, '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Export XLS"') ?>
+                        <?php echo anchor("xform/xls_export_form_data/" . $form_id, '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Export XLS"') ?>
                         <?php echo anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, '<i class="fa fa-bar-chart-o fa-lg"></i>&nbsp;&nbsp;', 'title="Visualization"') ?>
                         <?php echo anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, '<i class="fa fa-map-marker fa-lg"></i>', 'title="View Map"') ?>
                     </div>
@@ -169,7 +169,7 @@
                                     echo '<td><a href="' . site_url('feedback/user_feedback/' . $entry) . '"><b>' . $entry . '</b></a></td>';
                                 } else {
                                     if ($key == "meta_username") {
-                                        echo "<td class='text-center'>" . get_collector_name_from_phone($entry) . "</td>";
+                                        echo "<td>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
                                     } else {
                                         if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
                                             echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
@@ -199,12 +199,15 @@
                         <div class="clearfix"></div>
                     </div>
                 <?php endif; ?>
-            <?php } else { 
+            <?php } else {
                 echo "<div class='alert alert-danger'>No any form data</div>";
-             } ?>
-        </div><!--./col-md-12 -->
-    </div><!--./row -->
-</div><!--./container -->
+            } ?>
+        </div>
+        <!--./col-md-12 -->
+    </div>
+    <!--./row -->
+</div>
+<!--./container -->
 
 <script type="text/javascript">
     $("#selectAll").change(function() {
