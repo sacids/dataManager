@@ -27,7 +27,7 @@ class Ohkr extends REST_Controller
             $this->response(array('status' => 'success', 'disease' => $diseases), 200);
 
         } else {
-            $this->response(array('status' => 'failed', 'message' => 'No disease found'), 202);
+            $this->response(array('status' => 'failed', 'message' => 'Nenhuma doença encontrada'), 202);
         }
     }
 
@@ -41,7 +41,7 @@ class Ohkr extends REST_Controller
             $this->response(array('status' => 'success', 'symptom' => $symptoms), 200);
 
         } else {
-            $this->response(array('status' => 'failed', 'message' => 'No symptom found'), 204);
+            $this->response(array('status' => 'failed', 'message' => 'Nenhum sintoma encontrado'), 204);
         }
 
     }
