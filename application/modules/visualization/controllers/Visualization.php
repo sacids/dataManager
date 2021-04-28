@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AfyaData
  *
@@ -71,9 +72,9 @@ class Visualization extends CI_Controller
         }
 
         $project = $this->Project_model->get_project_by_id($project_id);
-        if (!$project) 
+        if (!$project)
             show_error("Project not exist", 500);
-        
+
         $data['project'] = $project;
         $data['xforms'] = $xforms = $this->Xform_model->get_form_list();
 
@@ -146,7 +147,6 @@ class Visualization extends CI_Controller
                 $series["data"] = $series_data;
                 $data['categories'] = json_encode($categories);
                 $data['series'] = $series;
-
             } else {
                 $data = $this->_load_default_graph_data($data, $xforms, $table_name);
             }
@@ -158,8 +158,8 @@ class Visualization extends CI_Controller
 
         //render view
         $this->load->view("header", $data);
-        $this->load->view("chart", $data);
-        $this->load->view("footer", $data);
+        $this->load->view("chart");
+        $this->load->view("footer");
     }
 
     /**
@@ -293,7 +293,7 @@ class Visualization extends CI_Controller
                 $group_by_column = ($enum_field != NULL) ? $enum_field : $field->name;
                 $function = "SUM";
                 break;
-            } elseif ($field->type == "varchar") {// && !$is_gps_field) {
+            } elseif ($field->type == "varchar") { // && !$is_gps_field) {
                 //Todo check here causes form jamii to bring errors
                 //TODO Fix this condition here
                 //($field->name != "meta_deviceID" && $field->name != "meta_instanceID") &&
@@ -316,6 +316,7 @@ class Visualization extends CI_Controller
         $function = strtolower($function);
         foreach ($results as $result) {
             log_message("debug", "Result " . json_encode($result));
+
             $categories[$i] = $result->$group_by_column;
             $series_data[$i] = $result->$function;
             $i++;
@@ -323,6 +324,7 @@ class Visualization extends CI_Controller
         $series["data"] = $series_data;
         $data['categories'] = json_encode($categories);
         $data['series'] = $series;
+
         return $data;
     }
 
@@ -343,9 +345,9 @@ class Visualization extends CI_Controller
 
         //project
         $project = $this->Project_model->get_project_by_id($project_id);
-        if (!$project) 
+        if (!$project)
             show_error("Project not exist", 500);
-        
+
         $data['project'] = $project;
 
         $form = $this->Xform_model->find_by_id($form_id);
@@ -378,8 +380,7 @@ class Visualization extends CI_Controller
 
         $form_data = $this->Xform_model->get_geospatial_data($form_id, 500);
 
-        if(!$form_data){
-            
+        if (!$form_data) {
         }
 
         //todo Finish
@@ -393,25 +394,25 @@ class Visualization extends CI_Controller
             }
         }
 
-	    //echo '<pre>';print_r($field_maps);echo '</pre>'; exit();
+        //echo '<pre>';print_r($field_maps);echo '</pre>'; exit();
         //$form_data = $data['mapped_fields'];*/
 
         $addressPoints = '<script type="text/javascript"> var addressPoints = [';
         $first = 0;
 
         foreach ($form_data as $i => $val) {
-            $data_string = "<h4>" . $xform->title . "</h4><small>".$form_data[$i]['submitted_at']."</small><br><br>";
+            $data_string = "<h4>" . $xform->title . "</h4><small>" . $form_data[$i]['submitted_at'] . "</small><br><br>";
 
             foreach ($val as $key => $value) {
                 if (!strpos($key, '_point')) {
                     if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) {
                         $data_string .= str_replace('"', '\'', '<img src = "' . base_url() . 'assets/forms/data/images/' . $value . '" width="350" /><br/>');
                     } else {
-			if(array_key_exists($key,$field_maps) && substr($key,0,4) == '_xf_'){
-				$key =  $field_maps[$key];
-			}else{
-				continue;
-			}
+                        if (array_key_exists($key, $field_maps) && substr($key, 0, 4) == '_xf_') {
+                            $key =  $field_maps[$key];
+                        } else {
+                            continue;
+                        }
                         $data_string .= $key . " : <b>" . str_replace('"', '', str_replace("'", "\'", urlencode(trim($value)))) . "</b><br/>";
                     }
                 }
