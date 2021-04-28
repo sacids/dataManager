@@ -19,7 +19,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div style="min-height: 600px; height: auto; margin-bottom: 20px;" id="map"></div>
+            <div style="min-height: 800px; height: auto; margin-bottom: 20px;" id="map"></div>
             <?php echo $addressPoints; ?>
             <script type="text/javascript">
                 // initialize the map
