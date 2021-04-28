@@ -338,7 +338,10 @@ class Visualization extends CI_Controller
             redirect('auth/login', 'refresh');
             exit;
         }
+        //title
+        $data['title'] = 'Map';
 
+        //project
         $project = $this->Project_model->get_project_by_id($project_id);
         if (!$project) 
             show_error("Project not exist", 500);
@@ -351,6 +354,7 @@ class Visualization extends CI_Controller
         if ($form) {
             $map_data = $this->_load_points($form->form_id);
 
+            //render view
             $this->load->view("header", $data);
             $this->load->view("map", $map_data);
             $this->load->view("footer");

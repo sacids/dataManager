@@ -29,11 +29,12 @@
     <!-- Leaflet, marker cluster js and css -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
 
     <!--./marker -->
-    <script type="text/javascript" src="<?php echo base_url('assets/public/leaflet/dist/leaflet.markercluster-src.js'); ?>"></script>
-    <link rel="stylesheet" href="<?php echo base_url('assets/public/leaflet/dist/MarkerCluster.css'); ?>" />
-    <link rel="stylesheet" href="<?php echo base_url('assets/public/leaflet/dist/MarkerCluster.Default.css'); ?>" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.0/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/afyadata.css'); ?>" type="text/css">
