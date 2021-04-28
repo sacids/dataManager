@@ -135,7 +135,7 @@
                 <?= form_open("xform/delete_entry/" . $project->id . '/' . $form->id, array("class" => "form-horizontal", "role" => "form")); ?>
                 <?= form_hidden("table_name", $form_id); ?>
                 <div style="overflow: scroll;">
-                    <table class="table table_list table-bordered table-striped table-hover tableFixHead">
+                    <table class="table table_list table-bordered table-striped table-hover table-fixed">
                         <thead>
                                 <?php
                                 echo "<th class='text-center'>" . form_checkbox(array("id" => "selectAll")) . "</th>";
