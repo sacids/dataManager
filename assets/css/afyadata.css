@@ -373,7 +373,7 @@ table.table th a {
     background-color: #FFF;
 }
 
-.tableFixHead          { overflow: auto; height: 600px; }
+.tableFixHead          { overflow: auto; height: 200px; }
 .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
 
 /**	17. Chat
