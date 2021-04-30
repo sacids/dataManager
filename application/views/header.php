@@ -74,21 +74,8 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <?php if (perms_class('Projects')) {  ?>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->lang->line("nav_item_projects") ?> <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <?php if (perms_role('Projects', 'forms')) { ?>
-                                    <?= display_projects() ?>
-                                <?php } ?>
-                                <?php if (perms_role('Projects', 'lists')) { ?>
-                                    <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
-                                <?php } ?>
-                                <?php if (perms_role('Projects', 'add_new')) { ?>
-                                    <li><?php echo anchor('projects/add_new', $this->lang->line("nav_item_add_new_project")); ?></li>
-                                <?php } ?>
-                            </ul>
-                        </li>
+                    <?php if (perms_role('Projects', 'lists')) { ?>
+                        <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
                     <?php } ?>
 
                     <?php if (perms_class('Ohkr')) { ?>

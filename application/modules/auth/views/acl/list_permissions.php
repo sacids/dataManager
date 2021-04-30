@@ -47,6 +47,7 @@
                                             <td><?= date('d-m-Y H:i:s', strtotime($perm->date_added)); ?></td>
                                             <td>
                                             <?= anchor("auth/accesscontrol/edit_permission/" . $perm->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"'); ?>&nbsp;
+                                            <?= anchor("auth/accesscontrol/delete_permission/" . $perm->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs"'); ?>&nbsp;
                                             <?= anchor("auth/accesscontrol/new_filter/" . $perm->id, '<i class="fa fa-plus-square" aria-hidden="true"></i>', 'class="btn btn-secondary btn-xs"'); ?>
                                             </td>
                                         </tr>

@@ -9,7 +9,7 @@
             <ol class="breadcrumb">
                 <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <li><a href="<?= site_url('auth/accesscontrol') ?>">Access Control</a></li>
-                <li class="active">Filters</li>
+                <li class="active">Edit Filter</li>
             </ol>
 
             <div class="row">
@@ -52,7 +52,7 @@
                                     $tables_options = array_combine($tables, $tables);
                                     $tables_options[''] = "-- Select --";
 
-                                    echo form_dropdown("table", $tables_options, set_value("table"), 'class="form-control" id="tablesList"') ?>
+                                    echo form_dropdown("table", $tables_options, set_value("table", $filter_table), 'class="form-control" id="tablesList"') ?>
                                 </div>
                                 <!--./form-group -->
                             </div>
@@ -106,43 +106,6 @@
                 <!--./col-md-12 -->
             </div>
             <!--./row -->
-
-            <div class="row">
-                <div class="col-md-12">
-                    <?php if (isset($filters) && $filters) { ?>
-                        <table class="table table-responsive table-hover table-bordered">
-                            <tr>
-                                <th width="3%">#</th>
-                                <th width="20%">Title</th>
-                                <th width="25%">Table Name</th>
-                                <th width="25%">Condition</th>
-                                <th width="5%">Action</th>
-                            </tr>
-
-                            <?php
-                            $serial = 1;
-                            foreach ($filters as $val) { ?>
-                                <tr>
-                                    <td><?= $serial ?></td>
-                                    <td><?= $val->name ?></td>
-                                    <td><?= $val->table_name ?></td>
-                                    <td><?= $val->where_condition ?></td>
-                                    <td>
-                                        <?= anchor("auth/accesscontrol/delete_filter/" . $val->permission_id . '/' . $val->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs"'); ?>&nbsp;
-                                    </td>
-                                </tr>
-                            <?php
-                                $serial++;
-                            } ?>
-                        </table>
-                    <?php } else {
-                        echo '<div class="alert alert-warning">No any access control filter</div>';
-                    } ?>
-                </div>
-                <!--./col-md-12 -->
-            </div>
-            <!--./row -->
-
         </div>
         <!--./col-md-12 -->
     </div>

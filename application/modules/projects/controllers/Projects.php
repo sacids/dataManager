@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AfyaData
  *
@@ -215,6 +216,32 @@ class Projects extends MX_Controller
         $this->load->view('footer');
     }
 
+    //delete project
+    function delete($project_id)
+    {
+        $this->data['title'] = "Delete Project";
+        $this->has_allowed_perm($this->router->fetch_method());
+
+        $this->model->set_table('projects');
+        $project = $this->model->get_by(array('id' => $project_id));
+
+        if (!$project)
+            show_error("Project not exists", 500);
+
+
+        //delete
+        if ($this->db->delete('projects', ['id' => $project_id])) {
+            //delete forms
+            $this->db->delete('xforms', ['project_id' => $project_id]);
+
+            //message
+            $this->session->set_flashdata('message', display_message('Project deleted'));
+        } else {
+            $this->session->set_flashdata('message', display_message('Failed to delete project', 'danger'));
+        }
+        redirect('projects/lists', 'refresh');
+    }
+
     //project details
     public function forms($project_id)
     {
@@ -224,9 +251,9 @@ class Projects extends MX_Controller
         $this->model->set_table('projects');
         $project = $this->model->get_by(array('id' => $project_id));
 
-        if (!$project) 
+        if (!$project)
             show_error("Project not exists", 500);
-        
+
         $this->data['project'] = $project;
         $this->data['project_id'] = $project_id;
 

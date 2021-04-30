@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: akyoo
@@ -120,7 +121,7 @@ class AccessControl extends MX_Controller
             if ($this->Acl_model->update_permission($permission, $permission_id)) {
                 set_flashdata(display_message("Permission was successfully updated"));
             } else {
-                set_flashdata(display_message("Failed to create permission", "error"));
+                set_flashdata(display_message("Failed to update permission", "error"));
             }
             redirect("auth/accesscontrol");
         }
@@ -151,6 +152,34 @@ class AccessControl extends MX_Controller
         $this->load->view("footer");
     }
 
+    //delete permission
+    function delete_permission($permission_id)
+    {
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+
+        $perm = $this->Acl_model->find_permission_by_id($permission_id);
+
+        if (!$perm)
+            show_error('Permission not found', 500);
+
+        //delete perms
+        if ($this->db->delete('acl_permissions', array('id' => $permission_id))) {
+            //delete filters
+            $this->db->delete('acl_filters', ['permission_id' => $permission_id]);
+
+            set_flashdata(display_message("Permission was successfully deleted"));
+        } else {
+            set_flashdata(display_message("Failed to delete permission", "error"));
+        }
+        redirect("auth/accesscontrol");
+    }
+
+
+    /*========== Permission Filters===========*/
     //add new filter
     function new_filter($permission_id)
     {
@@ -228,12 +257,40 @@ class AccessControl extends MX_Controller
             'placeholder' => 'Write filter value ...'
         );
 
-        
-
         //render view
         $this->load->view("header", $this->data);
         $this->load->view("acl/new_filter", $this->data);
         $this->load->view("footer");
+    }
+
+    //delete
+    function delete_filter($permission_id, $filter_id)
+    {
+        //check login
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            //redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+        $perm = $this->Acl_model->find_permission_by_id($permission_id);
+
+        if (!$perm) {
+            set_flashdata(display_message("Select a permission to add a new filter", "error"));
+            redirect("auth/accesscontrol");
+        }
+
+        //filter
+        $filter = $this->db->get_where('acl_filters', ['id' => $filter_id])->row();
+
+        if (!$filter)
+            show_error('Filter not exists', 500);
+
+        //delete perms
+        if ($this->db->delete('acl_filters', ['id' => $filter_id])) {
+            set_flashdata(display_message("Permission filter was successfully deleted"));
+        } else {
+            set_flashdata(display_message("Failed to delete permission filter", "error"));
+        }
+        redirect("auth/accesscontrol/new_filter/" . $permission_id);
     }
 
     //filters
