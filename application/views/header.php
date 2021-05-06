@@ -12,7 +12,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?php echo base_url(); ?>favicon.png" />
 
-    <title>AfyaData - <?= (!empty($title)) ? $title : config_item("site_name"); ?></title>
+    <title>AfyaData Moçambique - <?= (!empty($title)) ? $title : config_item("site_name"); ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
