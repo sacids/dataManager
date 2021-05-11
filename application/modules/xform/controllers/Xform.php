@@ -239,6 +239,37 @@ class Xform extends MX_Controller
         echo $this->_get_response($http_response_code);
     }
 
+    //insert migration file
+    public function insert_data_mig(){
+		
+		$path	= "/var/www/afyadata/dataManager/mig-1/";
+		if($handle = opendir($path)){
+			$i = 0;
+			while(false !== ($file = readdir($handle))){
+				if('.' === $file) continue;
+				if('..' === $file) continue;
+				
+				//$datafile = $this->config->item("form_data_upload_dir") . $file;
+				$datafile = $path.$file;
+        			$this->xFormReader->set_data_file($datafile);
+        			$this->xFormReader->load_xml_data();
+
+        			$statement = $this->xFormReader->get_insert_form_data_query();
+        			//log_message('debug', $statement);
+        			$insert_result = $this->Xform_model->insert_data($statement);
+        			log_message('debug',"insert mig". $insert_result);
+				echo json_encode($file.' :NEW: '.$insert_result)." \n";
+
+				if($i++ == 200){
+					sleep(1);
+				}
+			}
+			closedir($handle);
+		}
+
+		exit();
+	}
+
     /**
      * inserts xform into database table
      * Author : Eric Beda
