@@ -242,7 +242,6 @@ class Xform extends MX_Controller
     //insert migration file
     public function insert_data_mig()
     {
-
         $path    = "/var/www/afyadata/dataManager/mig-1/";
         if ($handle = opendir($path)) {
             $i = 0;
@@ -282,7 +281,7 @@ class Xform extends MX_Controller
                 'field_name' => $value->field_name,
                 'field_label' => $value->field_name,
             ];
-            $this->db->update('xform_fieldname_map', $data, ['table_name' => '','col_name' => $value->col_name]);
+            $this->db->update('xform_fieldname_map', $data, ['table_name' => '', 'col_name' => $value->col_name]);
         }
         echo "Success";
     }
@@ -1280,6 +1279,41 @@ class Xform extends MX_Controller
         //render view
         $this->load->view('header', $data);
         $this->load->view("form_data_details");
+        $this->load->view('footer');
+    }
+
+    //submission stats
+    function submission_stats($project_id, $form_id)
+    {
+        $this->_is_logged_in();
+        $data['title'] = "Form Submission Stats";
+
+        //project
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (!$project)
+            show_error("Project not exist", 500);
+
+        $data['project'] = $project;
+
+        //form
+        $form = $this->Xform_model->find_by_id($form_id);
+
+        if (!$form)
+            show_error("Form not exist", 500);
+
+        $data['form'] = $form;
+
+        //data collectors
+        $data['data_collectors'] =  $this->User_model->get_data_collectors();
+
+        foreach($data['data_collectors'] as $k => $v){
+            $data['data_collectors'][$k]->submission = $this->Submission_model->get_submitted_forms_by_CHW($form->form_id,$v->username);
+        }
+
+        //render view
+        $this->load->view('header', $data);
+        $this->load->view("submission_stats");
         $this->load->view('footer');
     }
 

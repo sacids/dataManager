@@ -43,7 +43,7 @@ class User_model extends CI_Model
     function get_data_collectors()
     {
         return $this->db
-            ->select('users.id, users.first_name, users.last_name')
+            ->select('users.id, users.first_name, users.last_name, users.username, users.phone')
             ->group_start()
             ->where('groups.name', 'data_collectors')
             ->or_where('groups.name', 'chr')
