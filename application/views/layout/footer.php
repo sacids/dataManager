@@ -10,7 +10,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">AfyaData. &copy; <?= date('Y')?> -  All Rights Reserved</p>
+            <p class="m-0 text-center text-white">AfyaData Moçambique. &copy; <?= date('Y')?> -  Todos direitos reservados</p>
         </div>
         <!-- /.container -->
     </footer>

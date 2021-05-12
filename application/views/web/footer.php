@@ -63,8 +63,8 @@
                 <h6 class="text-uppercase mb-4">Contactos</h6>
                 <strong>Moçambique</strong>
                 <p><i class="fa fa-envelope"></i>&nbsp;&nbsp;afyadata@ins.gov.mz </p>
-                <p><i class="fa fa-phone"></i>&nbsp;&nbsp; +258 </p>
-                 <hr />
+                <!--                <p><i class="fa fa-phone"></i>&nbsp;&nbsp; +258 </p>-->
+                <hr />
                 <strong>Tanzania</strong>
                 <p><i class="fa fa-envelope"></i>&nbsp;&nbsp; afyadata@sacids.org </p>
                 <p><i class="fa fa-phone"></i>&nbsp;&nbsp; +255 783 555 386 </p>

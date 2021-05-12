@@ -20,8 +20,8 @@
                     <i>feedback</i> de forma inteligente e retroalimentação da informação para responder eventos de saúde
                     pública.</p>
 
-                    AfyaData possui soluções para melhorar a detecção precoce, produção e emissão de relatórios
-                    oportunos e estabelecimento de resposta rápida, por meio do aplicativo móvel Afyadata na plaraforma Android.
+                AfyaData possui soluções para melhorar a detecção precoce, produção e emissão de relatórios
+                oportunos e estabelecimento de resposta rápida, por meio do aplicativo móvel Afyadata na plaraforma Android.
                 </p>
 
                 <h4>Como funciona o Painel de Gestão?</h4>
@@ -72,7 +72,7 @@
                             <br>
                             <i class="fa fa-envelope hue"></i> <a
                                     href="mailto:afyadata@ins.gov.mz">afyadata@ins.gov.mz</a><br/>
-                            <i class="fa fa-phone hue"></i> +258
+                            <!--                            <i class="fa fa-phone hue"></i> +258-->
                         </p>
                         <hr />
                         <p>

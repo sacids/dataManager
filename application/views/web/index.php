@@ -4,27 +4,27 @@
 
             <div class="col-lg-4">
                 <img src="<?= base_url('assets/public/images/upload_new_form.png') ?>" width="100%"/>
-                <h4 class="text-center"> Create Project</h4>
+                <h4 class="text-center"> Criar Projecto</h4>
                 <p class="text-center">
                     <a href="<?= site_url('create-project') ?>"
-                       class="btn btn-primary btn-sm">Read More <i class="fa fa-angle-double-right"></i>
+                       class="btn btn-primary btn-sm">Ler mais <i class="fa fa-angle-double-right"></i>
                     </a></p>
             </div>
 
             <div class="col-lg-4">
                 <img src="<?= base_url('assets/public/images/collect_data.png') ?>" width="100%"/>
-                <h4 class="text-center">Collect online/offline data</h4>
+                <h4 class="text-center">Colectar dados online/offline</h4>
                 <p class="text-center"><a href="<?= site_url('collect-data') ?>"
-                                          class="btn btn-primary btn-sm">Read More <i
+                                          class="btn btn-primary btn-sm">Ler mais <i
                                 class="fa fa-angle-double-right"></i>
                     </a></p>
             </div>
 
             <div class="col-lg-4">
                 <img src="<?= base_url('assets/public/images/visualize.png') ?>" width="100%"/>
-                <h4 class="text-center">Visualize and Analyse data</h4>
+                <h4 class="text-center">Visualizar e Analisar dados</h4>
                 <p class="text-center"><a href="<?= site_url('analyze-data') ?>"
-                                          class="btn btn-primary btn-sm">Read More <i
+                                          class="btn btn-primary btn-sm">Ler mais <i
                                 class="fa fa-angle-double-right"></i>
                     </a></p>
             </div>
@@ -43,7 +43,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h4>Success Stories</h4>
+                <h4>Histórias de sucesso</h4>
                 <hr class="primary">
             </div>
         </div>
@@ -72,7 +72,7 @@
                                 <p class="card-text"><?= strip_tags(word_limiter($post->story, 10)) ?></p>
 
                                 <a href="<?= site_url('newsletters/stories/post/' . $post->alias) ?>"
-                                   class="btn btn-default btn-sm">Read More <i class="fa fa-angle-double-right"></i>
+                                   class="btn btn-default btn-sm">Ler Mais <i class="fa fa-angle-double-right"></i>
                                 </a>
                             </div>
                         </div>
@@ -87,14 +87,14 @@
 <section class="bg-primary">
     <div class="container text-center">
         <div class="call-to-action">
-            <h4>Get involved with AfyaData.</h4>
+            <h4>Mais sobre AfyaData</h4>
             <hr class="white">
-            <a href="https://play.google.com/store/apps/details?id=org.sacids.app.afyadata"
+            <a href="https://play.google.com/store/apps/details?id=org.sacids.app.afyadata" target="_blank"
                class="btn btn-blue btn-xl">
-                <i class="fa fa-android fa-lg"></i> Download App!</a>&nbsp;&nbsp;
+                <i class="fa fa-android fa-lg"></i> Baixar App!</a>&nbsp;&nbsp;
 
-            <a href="https://github.com/sacids/dataManager" class="btn btn-blue btn-xl">
-                <i class="fa fa-github fa-lg"></i> Github Repository</a>
+            <a href="https://github.com/sacids/dataManager" target="_blank" class="btn btn-blue btn-xl">
+                <i class="fa fa-github fa-lg"></i> Repositório Github</a>
         </div>
     </div>
 </section>

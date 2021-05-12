@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>AfyaData - <?= isset($title) ? $title : 'Taarifa Kwa Wakati!' ?></title>
+    <title>AfyaData Moçambique- <?= isset($title) ? $title : 'Descobrir, Entender e Informar' ?></title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="<?= base_url('favicon.png') ?>"/>
@@ -63,19 +63,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?= anchor("", '<img src="' . base_url('assets/public/images/logo_default.png') . '" alt="AfyaData" height="30"/>', 'class="navbar-brand"') ?>
+            <?= anchor("", '<img src="' . base_url('assets/public/images/logo_default.png') . '" alt="AfyaData Moçambique" height="30"/>', 'class="navbar-brand"') ?>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><?= anchor("about", "About AfyaData", 'class="page-scroll"') ?></li>
-                <li><?= anchor("about", "Public Forms", 'class="page-scroll"') ?></li>
-                <li><?= anchor("about", "Success Stories", 'class="page-scroll"') ?></li>
+                <li><?= anchor("about", "Sobre nós", 'class="page-scroll"') ?></li>
+<!--                <li>--><?//= anchor("about", "Public Forms", 'class="page-scroll"') ?><!--</li>-->
+                <li><?= anchor("about", "Contactos", 'class="page-scroll"') ?></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li class="btn-link"><?= anchor("auth/login", '<i class="fa fa-sign-in"></i> Login', 'class="btn btn-primary"') ?></li>
+                <li class="btn-link"><?= anchor("auth/login", '<i class="fa fa-sign-in"></i> Entrar', 'class="btn btn-primary"') ?></li>
                 <!--<li class="btn-link"><?= anchor("auth/sign_up", '<i class="fa fa-user-plus"></i> Sign up', 'class="btn btn-maroon"') ?></li>-->
             </ul>
         </div>
