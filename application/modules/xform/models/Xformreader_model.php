@@ -166,11 +166,14 @@ class Xformreader_model extends CI_Model
         $xml = file_get_contents($file_name);
         $rxml = $this->xml_to_object($xml);
 
+        //echo "<pre>";
+        //print_r($rxml);
+        //exit();
+
         // TODO reference by names instead of integer keys
         $instance = $rxml->children [0]->children [1]->children [0]->children [0];
 
         $prefix = $this->config->item("xform_tables_prefix");
-        //log_message("debug", "Table prefix during creation " . $prefix);
         $jr_form_id = $instance->attributes ['id'];
 
         //if (array_key_exists('id', $instance->attributes))
@@ -459,7 +462,6 @@ class Xformreader_model extends CI_Model
      */
     function _iterate_defn_file($arr, $ref = FALSE)
     {
-
         $i = 0;
         foreach ($arr as $val) {
 

@@ -57,8 +57,8 @@
                                         <?php if (perms_role('Projects', 'edit')) { ?>
                                             <?php echo anchor("projects/edit/" . $project->id, '<i class="fa fa-pencil"></i>', ['class' => 'btn btn-secondary btn-xs']); ?>&nbsp;
                                         <?php } ?>
-                                        <?php if (perms_role('Projects', 'delete')) { ?>
-                                            <?php echo anchor("projects/lists/#", '<i class="fa fa-trash"></i>', ['class' => 'btn btn-danger btn-xs']); ?>
+                                        <?php if ($this->ion_auth->is_admin()) { ?>
+                                            <a href="<?= site_url("projects/delete/" . $project->id) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete?');"><i class="fa fa-trash"></i></a>
                                         <?php } ?>
                                     </td>
                                 </tr>

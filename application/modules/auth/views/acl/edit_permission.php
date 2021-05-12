@@ -21,7 +21,7 @@
                     } ?>
 
                     <div class="pure-form">
-                        <?= form_open("auth/accesscontrol/new_permission") ?>
+                        <?= form_open(uri_string()) ?>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

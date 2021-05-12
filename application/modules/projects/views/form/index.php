@@ -79,7 +79,7 @@
                                     <?php echo '<strong>' . $form->title . '</strong>'; ?>
                                     <?php echo '<p>' . $form->description . '</p>'; ?>
                                 </td>
-                                <td align="center"><?= $form->sent_forms ?></td>
+                                <td align="center"><?= anchor('xform/submission_stats/' . $project_id . '/' . $form->id, $form->sent_forms, ['class' => 'btn btn-success btn-sm']); ?></td>
                                 <td>
                                     <?php
                                     if ($form->access == "private") {

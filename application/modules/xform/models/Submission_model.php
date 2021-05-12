@@ -136,5 +136,13 @@ class Submission_model extends CI_Model
             ->get_where($table_name, array('DATE(submitted_at)' => date('Y-m-d')))->num_rows();
     }
 
-
+    //get submitted forms
+    function get_submitted_forms_by_CHW($table_name, $meta_username)
+    {
+        if ($this->db->field_exists('meta_username', $table_name)) {
+            return $this->db->get_where($table_name, ['meta_username' => $meta_username])->num_rows();
+        } else {
+            return 0;
+        }
+    }
 }

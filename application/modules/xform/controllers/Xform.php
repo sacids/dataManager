@@ -239,6 +239,53 @@ class Xform extends MX_Controller
         echo $this->_get_response($http_response_code);
     }
 
+    // //insert migration file
+    // public function insert_data_mig()
+    // {
+    //     $path    = "/var/www/afyadata/dataManager/mig-1/";
+    //     if ($handle = opendir($path)) {
+    //         $i = 0;
+    //         while (false !== ($file = readdir($handle))) {
+    //             if ('.' === $file) continue;
+    //             if ('..' === $file) continue;
+
+    //             //$datafile = $this->config->item("form_data_upload_dir") . $file;
+    //             $datafile = $path . $file;
+    //             $this->xFormReader->set_data_file($datafile);
+    //             $this->xFormReader->load_xml_data();
+
+    //             $statement = $this->xFormReader->get_insert_form_data_query();
+    //             //log_message('debug', $statement);
+    //             $insert_result = $this->Xform_model->insert_data($statement);
+    //             log_message('debug', "insert mig" . $insert_result);
+    //             echo json_encode($file . ' :NEW: ' . $insert_result) . " \n";
+
+    //             if ($i++ == 200) {
+    //                 sleep(1);
+    //             }
+    //         }
+    //         closedir($handle);
+    //     }
+
+    //     exit();
+    // }
+
+    //fix issue
+    // function mapping_table_fields()
+    // {
+    //     $field_maps = $this->db->get_where('xform_fieldname_map', ['table_name' => 'ad_build_AfyaData_Mocambique_chw_003'])->result();
+
+    //     foreach ($field_maps as $value) {
+    //         //check if exists
+    //         $data = [
+    //             'field_name' => $value->field_name,
+    //             'field_label' => $value->field_name,
+    //         ];
+    //         $this->db->update('xform_fieldname_map', $data, ['table_name' => '', 'col_name' => $value->col_name]);
+    //     }
+    //     echo "Success";
+    // }
+
     /**
      * inserts xform into database table
      * Author : Eric Beda
@@ -1232,6 +1279,41 @@ class Xform extends MX_Controller
         //render view
         $this->load->view('header', $data);
         $this->load->view("form_data_details");
+        $this->load->view('footer');
+    }
+
+    //submission stats
+    function submission_stats($project_id, $form_id)
+    {
+        $this->_is_logged_in();
+        $data['title'] = "Form Submission Stats";
+
+        //project
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (!$project)
+            show_error("Project not exist", 500);
+
+        $data['project'] = $project;
+
+        //form
+        $form = $this->Xform_model->find_by_id($form_id);
+
+        if (!$form)
+            show_error("Form not exist", 500);
+
+        $data['form'] = $form;
+
+        //data collectors
+        $data['data_collectors'] =  $this->User_model->get_data_collectors();
+
+        foreach($data['data_collectors'] as $k => $v){
+            $data['data_collectors'][$k]->submission = $this->Submission_model->get_submitted_forms_by_CHW($form->form_id,$v->username);
+        }
+
+        //render view
+        $this->load->view('header', $data);
+        $this->load->view("submission_stats");
         $this->load->view('footer');
     }
 
