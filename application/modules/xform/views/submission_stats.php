@@ -36,7 +36,7 @@
                                     <td><?= $serial ?></td>
                                     <td><?= $val->first_name . ' ' . $val->last_name; ?></td>
                                     <td><?= $val->username; ?></td>
-                                    <td><?= number_format($val->submission) ?></td>
+                                    <td align="right"><b><?= number_format($val->submission) ?></b></td>
                                 </tr>
                             <?php $serial++;
                             } ?>
