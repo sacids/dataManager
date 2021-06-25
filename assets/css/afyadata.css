@@ -27,7 +27,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #428499;
+    color: #781E14;
 }
 
 a:hover,
@@ -54,7 +54,7 @@ p {
 }
 
 .text-primary {
-    color: #428499;
+    color: #781E14;
 }
 
 .text-white {
@@ -131,7 +131,7 @@ h6.title {
 /**	navigation
  *************************************************** **/
 .navbar-default {
-    background-color: #428499;
+    background-color: #781E14;
 }
 
 .navbar-default .nav > li > a,
@@ -153,7 +153,7 @@ h6.title {
 /**	16. Info
  *************************************************** **/
 .info-block {
-    background-color: #428499 !important;
+    background-color: #781E14 !important;
     color: #fff;
 }
 
@@ -466,17 +466,17 @@ table.table th a {
 Button
 ===================================================*/
 .btn.btn-primary {
-    background: #428499;
+    background: #781E14;
     font-weight: 500;
     color: #fff;
-    border: 1px solid #428499;
+    border: 1px solid #781E14;
 }
 
 .btn.btn-primary:hover,
 .btn.btn-primary:focus,
 .btn.btn-primary:active,
 .btn.btn-primary.active {
-    background: #428499;
+    background: #781E14;
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;

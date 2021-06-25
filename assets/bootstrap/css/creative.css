@@ -22,7 +22,7 @@ body {
 
 hr.primary {
     max-width: 80px;
-    border: 2px solid #428499;
+    border: 2px solid #781E14;
 }
 
 hr.white {
@@ -56,7 +56,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #428499;
+    color: #781E14;
 }
 
 h1,
@@ -80,7 +80,7 @@ p {
 }
 
 .bg-primary {
-    background-color: #428499;
+    background-color: #781E14;
 }
 
 .bg-white {
@@ -176,12 +176,12 @@ Navigation Menu
 }
 
 .navbar .navbar-header .navbar-brand {
-    color: #428499;
+    color: #781E14;
 }
 
 .navbar .navbar-header .navbar-brand:hover,
 .navbar .navbar-header .navbar-brand:focus {
-    color: #428499;
+    color: #781E14;
 }
 
 .navbar .navbar-toggle:hover,
@@ -195,7 +195,7 @@ Navigation Menu
 
 .navbar .navbar-collapse,
 .navbar .navbar-form {
-    border-color: #428499;
+    border-color: #781E14;
 }
 
 .navbar .navbar-nav > .open > a,
@@ -212,7 +212,7 @@ Navigation Menu
 .navbar .nav > li > a:active,
 .navbar .nav > li > a:hover,
 .navbar .nav > li > a:focus:hover {
-    color: #428499;
+    color: #781E14;
 }
 
 @media (min-width: 768px) {
@@ -230,7 +230,7 @@ Navigation Menu
     .navbar .nav > li > a:active,
     .navbar .nav > li > a:hover,
     .navbar .nav > li > a:focus:hover {
-        color: #428499;
+        color: #781E14;
     }
 
     .navbar .nav .dropdown-menu a {
@@ -335,8 +335,8 @@ header .header-content .header-content-inner p {
     -moz-transition: all .2s;
     -webkit-transition: all .2s;
     background: #eee;
-    border: 2px solid #428499;
-    color: #428499;
+    border: 2px solid #781E14;
+    color: #781E14;
     display: inline-block;
     font-size: 18px;
     padding: 10px 20px;
@@ -354,7 +354,7 @@ header .header-content .header-content-inner p {
     top: 50%;
     width: 100%;
     height: 1px;
-    background: #428499;
+    background: #781E14;
 }
 
 .service-box {
@@ -384,7 +384,7 @@ header .header-content .header-content-inner p {
 }
 
 .text-primary {
-    color: #428499;
+    color: #781E14;
 }
 
 .no-gutter > [class*=col-] {
@@ -419,16 +419,16 @@ img::-moz-selection {
 Button
 ===================================================*/
 .btn.btn-maroon {
-    background: #428499;
+    background: #781E14;
     color: #fff;
-    border: 1px solid #428499;
+    border: 1px solid #781E14;
 }
 
 .btn.btn-maroon:hover,
 .btn.btn-maroon:focus,
 .btn.btn-maroon:active,
 .btn.btn-maroon.active {
-    background: #428499;
+    background: #781E14;
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
