@@ -78,6 +78,14 @@
                         <li><?php echo anchor('projects/lists', $this->lang->line("nav_item_list_projects")); ?></li>
                     <?php } ?>
 
+                    <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brucella <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?= site_url('brucella/lists') ?>">Stats</a></li>
+                                <li><a href="<?= site_url('brucella/lists') ?>">Lab Results</a></li>
+                            </ul>
+                        </li>
+
                     <?php if (perms_class('Ohkr')) { ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $this->lang->line("nav_item_ohkr") ?> <span class="caret"></span></a>
