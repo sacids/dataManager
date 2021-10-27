@@ -239,37 +239,6 @@ class Xform extends MX_Controller
         echo $this->_get_response($http_response_code);
     }
 
-    // //insert migration file
-    // public function insert_data_mig()
-    // {
-    //     $path    = "/var/www/afyadata/dataManager/mig-1/";
-    //     if ($handle = opendir($path)) {
-    //         $i = 0;
-    //         while (false !== ($file = readdir($handle))) {
-    //             if ('.' === $file) continue;
-    //             if ('..' === $file) continue;
-
-    //             //$datafile = $this->config->item("form_data_upload_dir") . $file;
-    //             $datafile = $path . $file;
-    //             $this->xFormReader->set_data_file($datafile);
-    //             $this->xFormReader->load_xml_data();
-
-    //             $statement = $this->xFormReader->get_insert_form_data_query();
-    //             //log_message('debug', $statement);
-    //             $insert_result = $this->Xform_model->insert_data($statement);
-    //             log_message('debug', "insert mig" . $insert_result);
-    //             echo json_encode($file . ' :NEW: ' . $insert_result) . " \n";
-
-    //             if ($i++ == 200) {
-    //                 sleep(1);
-    //             }
-    //         }
-    //         closedir($handle);
-    //     }
-
-    //     exit();
-    // }
-
     //fix issue
     // function mapping_table_fields()
     // {
@@ -499,6 +468,95 @@ class Xform extends MX_Controller
         log_message("debug", "Insert => " . $insert_result);
         return $insert_result;
     }
+
+
+    //script for insert OHKR DATA
+    function update_inserted_data()
+    {
+        $table_name = 'ad_build_Dalili_Binadamu_Skolls_A_146771260209';
+        $xForm_form = $this->Xform_model->find_by_xform_id($table_name);
+
+        //deals with symptoms
+        if ($xForm_form->has_symptoms_field == 1) {
+            //symptoms 
+            $symptoms_column_name = $this->Xform_model->find_form_map_by_field_type($xForm_form->form_id, "DALILI")->col_name;
+            log_message("debug", "symptoms column name => " . json_encode($symptoms_column_name));
+
+            //district
+            $district_column_name = $this->Xform_model->find_form_map_by_field_type($xForm_form->form_id, "DISTRICT")->col_name;
+            log_message("debug", "district column name => " . json_encode($district_column_name));
+
+            //specie
+            $species_name = "Humano";
+            log_message("debug", "specie => " . $species_name);
+
+            $specie = $this->Ohkr_model->find_species_by_name($species_name);
+            log_message("debug", "specie db => " . json_encode($specie));
+
+
+            //get all data specific table
+            $form_data = $this->db->get($table_name)->result();
+
+            if ($form_data) {
+                foreach ($form_data as $values) {
+                    $symptoms_reported = explode(" ", $values->$symptoms_column_name);
+                    $district = $values->$district_column_name;
+
+                    //check for specie
+                    if ($specie) {
+                        $request_data = [
+                            "specie_id" => $specie->id,
+                            "symptoms" => $symptoms_reported
+                        ];
+
+                        $result = $this->Alert_model->send_post_symptoms_request(json_encode($request_data));
+                        $json_object = json_decode($result);
+
+                        log_message("debug", "requested_data => " . json_encode($request_data));
+                        log_message("debug", "results => " . $result);
+
+                        if (isset($json_object->status) && $json_object->status == 1) {
+                            $detected_diseases = [];
+
+                            foreach ($json_object->data as $disease) {
+                                $ungonjwa = $this->Ohkr_model->find_by_disease_name($disease->title);
+
+                                $detected_diseases[] = [
+                                    "form_id" => $xForm_form->form_id,
+                                    "disease_id" => $ungonjwa->id,
+                                    "location" => $district,
+                                    "instance_id" => $values->meta_instanceID,
+                                    "created_at" => date("Y-m-d H:i:s")
+                                ];
+                            }
+                            $this->Ohkr_model->save_detected_diseases($detected_diseases);
+                        }
+                    }
+
+                    //check for symptoms
+                    $suspected_diseases_array = array();
+                    $suspected_diseases = $this->Ohkr_model->find_diseases_by_symptoms_code($symptoms_reported);
+
+                    if ($suspected_diseases) {
+                        $i = 1;
+                        foreach ($suspected_diseases as $disease) {
+                            $suspected_diseases_array[$i - 1] = array(
+                                "form_id" => $xForm_form->form_id,
+                                "disease_id" => $disease->disease_id,
+                                "instance_id" => $values->meta_instanceID,
+                                "created_at" => date("Y-m-d H:i:s"),
+                                "location" => $district
+                            );
+                        }
+                        $this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
+                    }
+                }
+            }
+
+            echo json_encode(['error' => FALSE, 'message' => 'Data inserted']);
+        }
+    }
+
 
     /**
      * @param $response_msg_id
@@ -1307,8 +1365,8 @@ class Xform extends MX_Controller
         //data collectors
         $data['data_collectors'] =  $this->User_model->get_data_collectors();
 
-        foreach($data['data_collectors'] as $k => $v){
-            $data['data_collectors'][$k]->submission = $this->Submission_model->get_submitted_forms_by_CHW($form->form_id,$v->username);
+        foreach ($data['data_collectors'] as $k => $v) {
+            $data['data_collectors'][$k]->submission = $this->Submission_model->get_submitted_forms_by_CHW($form->form_id, $v->username);
         }
 
         //render view

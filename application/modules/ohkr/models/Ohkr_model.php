@@ -332,12 +332,13 @@ class Ohkr_model extends CI_Model
         if (!is_array($code)) {
             return FALSE;
         } else {
-            $this->db->select("d.title as disease_name, count(d.title) as occurrence_count, d.id as disease_id, sds.*,ds.*");
+            $this->db->select("d.title as disease_name, d.id as disease_id");
             $this->db->from(self::$table_disease_symptoms . " sds");
             $this->db->join(self::$table_name_diseases . " d", "d.id = sds.disease_id");
             $this->db->join(self::$table_name_symptoms . " ds", "ds.id = sds.symptom_id");
             $this->db->where_in("code", $code);
             $this->db->group_by("d.title");
+            $this->db->group_by("d.id");
             return $this->db->get()->result();
         }
     }
