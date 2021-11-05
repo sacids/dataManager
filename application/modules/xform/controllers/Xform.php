@@ -473,7 +473,7 @@ class Xform extends MX_Controller
     //script for insert OHKR DATA
     function update_inserted_data()
     {
-        $table_name = 'ad_build_Dalili_Binadamu_Skolls_A_146771260209';
+        $table_name = 'ad_build_afyadata_mocambique_chw_002';
         $xForm_form = $this->Xform_model->find_by_xform_id($table_name);
 
         //deals with symptoms
