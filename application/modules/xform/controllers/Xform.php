@@ -361,7 +361,7 @@ class Xform extends MX_Controller
                 $species_column_name = $this->Xform_model->find_form_map_by_field_type($xForm_form->form_id, "SPECIE")->col_name;
                 $species_name = $inserted_form_data->$species_column_name;
             } else {
-                $species_name = "Humano";
+                $species_name = "binadamu";
             }
             log_message("debug", "specie => " . $species_name);
 
@@ -406,7 +406,7 @@ class Xform extends MX_Controller
                 $suspected_diseases = $this->Ohkr_model->find_diseases_by_symptoms_code($symptoms_reported);
 
                 $message = $this->lang->line("message_data_received");
-                $suspected_diseases_list = "Recebemos o seu formulário, esta é uma lista de doenças suspeitas com base nas informações que você enviou<br/>";
+                $suspected_diseases_list = $message . "<br/>";
 
                 if ($suspected_diseases) {
                     $i = 1;
@@ -463,8 +463,7 @@ class Xform extends MX_Controller
 
                     $this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
                 } else {
-                    $suspected_diseases_list = 'Recebemos suas informações, infelizmente, o sistema não pode detectar automaticamente doenças mais prováveis
-                    por favor, procure mais conselhos de nossos especialistas';
+                    $suspected_diseases_list = $this->lang->line("message_auto_detect_disease_failed");
                 }
 
                 $feedback = array(
@@ -554,7 +553,7 @@ class Xform extends MX_Controller
      *            Input string
      * @return string response
      */
-    function _get_response($http_response_code, $response_message = "Obrigado pelo envio das informações, Recebemos o seu formulário.")
+    function _get_response($http_response_code, $response_message = "Asante, Fomu imepokelewa")
     {
         // OpenRosa Success Response
         $response = '<OpenRosaResponse xmlns="http://openrosa.org/http/response">
