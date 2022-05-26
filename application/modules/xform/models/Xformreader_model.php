@@ -533,7 +533,7 @@ class Xformreader_model extends CI_Model
             $required = '';
 
             if ($type == 'string' || $type == 'binary' || $type == 'barcode') {
-                $statement .= ", $col_name TEXT $required  DEFAULT 'NA' ";
+                $statement .= ", $col_name VARCHAR(300) $required  DEFAULT 'NA' ";
 
             }
 
@@ -541,7 +541,7 @@ class Xformreader_model extends CI_Model
                 // Mysql recommended way of handling single quotes for queries is by using two single quotes at once.
                 if (!$val['option']) {
                     // itemset
-                    $statement .= ", $col_name  TEXT $required DEFAULT 'NA' ";
+                    $statement .= ", $col_name  VARCHAR(300) $required DEFAULT 'NA' ";
                 } else {
                     $tmp3 = array_keys($val ['option']);
                     $statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $tmp3)) . "','NA' ) $required  DEFAULT 'NA' ";
@@ -549,7 +549,7 @@ class Xformreader_model extends CI_Model
             }
 
             if ($type == 'select') {
-                $statement .= ", $col_name TEXT $required DEFAULT 'NA'  ";
+                $statement .= ", $col_name VARCHAR(500) $required DEFAULT 'NA'  ";
 
                 foreach ($val['option'] as $key => $select_opts) {
 
