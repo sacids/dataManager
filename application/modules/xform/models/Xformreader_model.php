@@ -586,8 +586,7 @@ class Xformreader_model extends CI_Model
             }
 
             if ($type == 'geopoint') {
-
-                $statement .= "," . $col_name . " VARCHAR(150) $required  DEFAULT 'NA' ";
+                $statement .= "," . $col_name . " TEXT $required  DEFAULT 'NA' ";
                 $statement .= "," . $col_name . "_point POINT $required ";
                 $statement .= "," . $col_name . "_lat DECIMAL(38,10) $required  DEFAULT '0' ";
                 $statement .= "," . $col_name . "_lng DECIMAL(38,10) $required  DEFAULT '0' ";
