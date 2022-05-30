@@ -533,7 +533,7 @@ class Xformreader_model extends CI_Model
             $required = '';
 
             if ($type == 'string' || $type == 'binary' || $type == 'barcode') {
-                $statement .= ", $col_name TEXT $required  DEFAULT 'NA' ";
+                $statement .= ", $col_name TEXT $required  NULL";
 
             }
 
@@ -541,7 +541,7 @@ class Xformreader_model extends CI_Model
                 // Mysql recommended way of handling single quotes for queries is by using two single quotes at once.
                 if (!$val['option']) {
                     // itemset
-                    $statement .= ", $col_name  TEXT $required DEFAULT 'NA' ";
+                    $statement .= ", $col_name  TEXT $required NULL";
                 } else {
                     $tmp3 = array_keys($val ['option']);
                     $statement .= ", $col_name ENUM('" . implode("','", str_replace("'", "''", $tmp3)) . "','NA' ) $required  DEFAULT 'NA' ";
@@ -549,7 +549,7 @@ class Xformreader_model extends CI_Model
             }
 
             if ($type == 'select') {
-                $statement .= ", $col_name TEXT $required DEFAULT 'NA'  ";
+                $statement .= ", $col_name TEXT $required NULL";
 
                 foreach ($val['option'] as $key => $select_opts) {
 
@@ -586,7 +586,7 @@ class Xformreader_model extends CI_Model
             }
 
             if ($type == 'geopoint') {
-                $statement .= "," . $col_name . " TEXT $required  DEFAULT 'NA' ";
+                $statement .= "," . $col_name . " TEXT $required  NULL ";
                 $statement .= "," . $col_name . "_point POINT $required ";
                 $statement .= "," . $col_name . "_lat DECIMAL(38,10) $required  DEFAULT '0' ";
                 $statement .= "," . $col_name . "_lng DECIMAL(38,10) $required  DEFAULT '0' ";
