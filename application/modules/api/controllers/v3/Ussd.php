@@ -681,4 +681,39 @@ class Ussd extends CI_Controller
         }
         echo json_encode($response);
     }
+
+    /*=================================================
+    TRAKOMA USSD SETIINGS
+    =================================================*/
+    //insert tb data
+    function trakoma_mda_data()
+    {
+        //receive as json
+        $post_data = file_get_contents("php://input");
+        log_message("debug", 'TRAKOMA DATA  =>' . $post_data);
+
+        $value = json_decode($post_data, TRUE);
+
+        //post data to server
+
+        //response
+        $response = array(
+            'status' => TRUE,
+            'sms_reply' => FALSE,
+            'sms_text' => 'Taarifa zako zimetufikia'
+        );
+
+
+        //   if ($result) {
+        //       //response
+        //       $response = array(
+        //           'status' => TRUE,
+        //           'sms_reply' => FALSE,
+        //           'sms_text' => 'Taarifa zako zimetufikia'
+        //       );
+        //   } else {
+        //       $response = array('success' => FALSE);
+        //   }
+        echo json_encode($response);
+    }
 }
