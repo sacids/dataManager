@@ -553,7 +553,7 @@ class Xform extends MX_Controller
      *            Input string
      * @return string response
      */
-    function _get_response($http_response_code, $response_message = "Asante, Fomu imepokelewa")
+    function _get_response($http_response_code, $response_message = "Asante, Fomu imepokelewa!")
     {
         // OpenRosa Success Response
         $response = '<OpenRosaResponse xmlns="http://openrosa.org/http/response">
