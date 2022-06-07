@@ -740,11 +740,11 @@ class Ussd extends CI_Controller
 
         //post data to server
         $arr_data = [
-            'Text' => $value['menu_tukio'],
-            'Village' => $value['tukio_kijiji'],
-            'Ward' => $value['tukio_kata'],
-            'Date' => $value['tukio_tarehe'],
-            'Sector' => $sector
+            'text' => $value['menu_tukio'],
+            'village' => $value['tukio_kijiji'],
+            'ward' => $value['tukio_kata'],
+            'date' => $value['tukio_tarehe'],
+            'sector' => $sector
         ];
 
         // API URL
@@ -756,7 +756,7 @@ class Ussd extends CI_Controller
         // Setup request to send json via POST
         $data = [
             'contents' => $arr_data,
-            'channel' => 'USSD',
+            'channel' => 'SMS',
             'contact' => $value['msisdn']
         ];
         $payload = json_encode($data);
@@ -801,6 +801,12 @@ class Ussd extends CI_Controller
         $transaction_id = $value['transaction_id'];
         $sent_time = $value['sent_time'];
 
+        //post data to server
+        $arr_data = [
+            'text' => $message,
+            'date' => $sent_time
+        ];
+
         // API URL
         $url = 'http://dev.orangine.co.tz/ems/api/signal/';
 
@@ -809,7 +815,7 @@ class Ussd extends CI_Controller
 
         // Setup request to send json via POST
         $data = [
-            'contents' => $message,
+            'contents' => $arr_data,
             'channel' => 'SMS',
             'contact' => $msisdn
         ];
