@@ -685,12 +685,14 @@ class Ussd extends CI_Controller
     /*=================================================
     TRAKOMA USSD SETIINGS
     =================================================*/
-    //insert tb data
+    //process trakoma mda data
     function trakoma_mda_data()
     {
         //receive as json
         $post_data = file_get_contents("php://input");
         log_message("debug", 'TRAKOMA DATA  =>' . $post_data);
+
+        // TRAKOMA DATA  =>{"welcome_page":"4","ntdcp_password":"1000","ntdcp_days":"1","womenzith_table":"10","menzith_tablets":"10","womenzith_pos":"20","menzith_pos":"12","msisdn":"255753437856","mno":"vodacom","transaction_id":"1383469660"}
 
         $value = json_decode($post_data, TRUE);
 
@@ -703,6 +705,39 @@ class Ussd extends CI_Controller
             'sms_text' => 'Taarifa zako zimetufikia'
         );
 
+
+        //   if ($result) {
+        //       //response
+        //       $response = array(
+        //           'status' => TRUE,
+        //           'sms_reply' => FALSE,
+        //           'sms_text' => 'Taarifa zako zimetufikia'
+        //       );
+        //   } else {
+        //       $response = array('success' => FALSE);
+        //   }
+        echo json_encode($response);
+    }
+
+    /*=================================================
+    ONE HEALTH DETECT USSD SETIINGS
+    =================================================*/
+    //process one health detect data
+    function ohd_data()
+    {
+        //receive as json
+        $post_data = file_get_contents("php://input");
+        log_message("debug", 'OHD DATA  =>' . $post_data);
+        $value = json_decode($post_data, TRUE);
+
+        //post data to server
+
+        //response
+        $response = array(
+            'status' => TRUE,
+            'sms_reply' => FALSE,
+            'sms_text' => 'Taarifa zako zimetufikia'
+        );
 
         //   if ($result) {
         //       //response
