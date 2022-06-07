@@ -780,6 +780,9 @@ class Ussd extends CI_Controller
             $response = array('success' => FALSE);
         }
 
+        //log response
+        log_message("debug", 'response  =>' . json_encode($response));
+
         //return response
         echo json_encode($response);
     }
@@ -830,6 +833,11 @@ class Ussd extends CI_Controller
         } else {
             $response = array('success' => FALSE);
         }
+
+        //log response
+        log_message("debug", 'response  =>' . json_encode($response));
+
+        //response
         echo json_encode($response);
     }
 }
