@@ -696,8 +696,6 @@ class Ussd extends CI_Controller
 
         $value = json_decode($post_data, TRUE);
 
-        //post data to server
-
         //response
         $response = array(
             'status' => TRUE,
@@ -730,25 +728,59 @@ class Ussd extends CI_Controller
         log_message("debug", 'OHD DATA  =>' . $post_data);
         $value = json_decode($post_data, TRUE);
 
+        //check for 
+        if ($value['tukio_sekta'] == 1)
+            $sector = 'Wanyama';
+        elseif ($value['tukio_sekta'] == 2)
+            $sector = 'Binadamu';
+        elseif ($value['tukio_sekta'] == 3)
+            $sector = 'Mazingira';
+        elseif ($value['tukio_sekta'] == 2)
+            $sector = 'Mifugo';
+
         //post data to server
+        $arr_data = [
+            'Text' => $value['menu_tukio'],
+            'Village' => $value['tukio_kijiji'],
+            'Ward' => $value['tukio_kata'],
+            'Date' => $value['tukio_tarehe'],
+            'Sector' => $sector
+        ];
 
-        //response
-        $response = array(
-            'status' => TRUE,
-            'sms_reply' => FALSE,
-            'sms_text' => 'Taarifa zako zimetufikia'
-        );
+        // API URL
+        $url = 'http://dev.orangine.co.tz/ems/api/signal/';
 
-        //   if ($result) {
-        //       //response
-        //       $response = array(
-        //           'status' => TRUE,
-        //           'sms_reply' => FALSE,
-        //           'sms_text' => 'Taarifa zako zimetufikia'
-        //       );
-        //   } else {
-        //       $response = array('success' => FALSE);
-        //   }
+        // Create a new cURL resource
+        $ch = curl_init($url);
+
+        // Setup request to send json via POST
+        $data = [
+            'contents' => $arr_data,
+            'channel' => 'USSD',
+            'contact' => $value['msisdn']
+        ];
+        $payload = json_encode($data);
+
+        // Attach encoded JSON string to the POST fields
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($http_response_code == 200 || $http_response_code == 300) {
+            //response
+            $response = array(
+                'status' => TRUE,
+                'sms_reply' => FALSE,
+                'sms_text' => 'Taarifa zako zimetufikia'
+            );
+        } else {
+            $response = array('success' => FALSE);
+        }
+
+        //return response
         echo json_encode($response);
     }
 
@@ -766,15 +798,38 @@ class Ussd extends CI_Controller
         $transaction_id = $value['transaction_id'];
         $sent_time = $value['sent_time'];
 
-        log_message("debug", 'pull_message ' . $post_data);
+        // API URL
+        $url = 'http://dev.orangine.co.tz/ems/api/signal/';
 
-        //response
-        $response = array(
-            'transaction_id' => $transaction_id,
-            'message'        => 'Request Received Successfully.',
-            'reply'          => 1
-        );
+        // Create a new cURL resource
+        $ch = curl_init($url);
 
+        // Setup request to send json via POST
+        $data = [
+            'contents' => $message,
+            'channel' => 'SMS',
+            'contact' => $msisdn
+        ];
+        $payload = json_encode($data);
+
+        // Attach encoded JSON string to the POST fields
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($http_response_code == 200 || $http_response_code == 300) {
+            //response
+            $response = array(
+                'transaction_id' => $transaction_id,
+                'message'        => 'Request Received Successfully.',
+                'reply'          => 1
+            );
+        } else {
+            $response = array('success' => FALSE);
+        }
         echo json_encode($response);
     }
 }
