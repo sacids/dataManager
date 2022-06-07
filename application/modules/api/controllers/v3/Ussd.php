@@ -751,4 +751,30 @@ class Ussd extends CI_Controller
         //   }
         echo json_encode($response);
     }
+
+    //pull message
+    function ohd_sms_pull()
+    {
+        //receive as json
+        $post_data = file_get_contents("php://input");
+
+        $value = json_decode($post_data, TRUE);
+
+        //variables
+        $message = $value['message'];
+        $msisdn = $value['msisdn'];
+        $transaction_id = $value['transaction_id'];
+        $sent_time = $value['sent_time'];
+
+        log_message("debug", 'pull_message ' . $post_data);
+
+        //response
+        $response = array(
+            'transaction_id' => $transaction_id,
+            'message'        => 'Request Received Successfully.',
+            'reply'          => 1
+        );
+
+        echo json_encode($response);
+    }
 }
