@@ -691,29 +691,52 @@ class Ussd extends CI_Controller
         //receive as json
         $post_data = file_get_contents("php://input");
         log_message("debug", 'TRAKOMA DATA  =>' . $post_data);
-
-        // TRAKOMA DATA  =>{"welcome_page":"4","ntdcp_password":"1000","ntdcp_days":"1","womenzith_table":"10","menzith_tablets":"10","womenzith_pos":"20","menzith_pos":"12","msisdn":"255753437856","mno":"vodacom","transaction_id":"1383469660"}
-
         $value = json_decode($post_data, TRUE);
 
-        //response
-        $response = array(
-            'status' => TRUE,
-            'sms_reply' => FALSE,
-            'sms_text' => 'Taarifa zako zimetufikia'
-        );
+        //post data to server
+        $data = [
+            'password' => $value['ntdcp_password'],
+            'mday' => $value['ntdcp_days'],
+            'womenzith_tablets' => $value['womenzith_table'],
+            'menzith_tablets' => $value['menzith_tablets'],
+            'womenzith_pos' => $value['womenzith_pos'],
+            'menzith_pos' => $value['menzith_pos'],
+            'phone'       => $value['msisdn']
 
+        ];
 
-        //   if ($result) {
-        //       //response
-        //       $response = array(
-        //           'status' => TRUE,
-        //           'sms_reply' => FALSE,
-        //           'sms_text' => 'Taarifa zako zimetufikia'
-        //       );
-        //   } else {
-        //       $response = array('success' => FALSE);
-        //   }
+        // API URL
+        $url = 'http://mda.ntdcp.go.tz/api/trachoma_survey_responses/';
+
+        // Create a new cURL resource
+        $ch = curl_init($url);
+
+        // Setup request to send json via POST
+        $payload = json_encode($data);
+
+        // Attach encoded JSON string to the POST fields
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+        $http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($http_response_code == 200 || $http_response_code == 300) {
+            //response
+            $response = array(
+                'status' => TRUE,
+                'sms_reply' => FALSE,
+                'sms_text' => 'Taarifa zako zimetufikia'
+            );
+        } else {
+            $response = array('success' => FALSE);
+        }
+
+        //log response
+        log_message("debug", 'response  =>' . json_encode($response));
+
+        //return response
         echo json_encode($response);
     }
 
