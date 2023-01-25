@@ -773,7 +773,8 @@ class Xform extends MX_Controller
                         } else {
                             $this->session->set_flashdata("message", display_message($create_table_statement, "danger"));
                         }
-
+                        
+                        //redirect
                         redirect("xform/add_new/{$project_id}");
                     }
                 }
@@ -898,57 +899,57 @@ class Xform extends MX_Controller
 
         // TODO
         // Search field by table name from mapping fields
-        $db_table_fields = $this->Xform_model->get_fieldname_map($form->form_id);
+        // $db_table_fields = $this->Xform_model->get_fieldname_map($form->form_id);
 
-        //table fields
-        $table_fields = $this->Xform_model->find_table_columns($form->form_id);
+        // //table fields
+        // $table_fields = $this->Xform_model->find_table_columns($form->form_id);
 
-        if (count($db_table_fields) != count($table_fields)) {
-            foreach ($table_fields as $tf) {
-                if ($this->Xform_model->xform_table_column_exists($form->form_id, $tf) == 0) {
-                    $details = [
-                        "table_name" => $form->form_id,
-                        "col_name" => $tf,
-                        "field_name" => $tf,
-                        "field_label" => str_replace("_", " ", $tf)
-                    ];
-                    $this->Xform_model->create_field_name_map($details);
-                }
-            }
-        }
+        // if (count($db_table_fields) != count($table_fields)) {
+        //     foreach ($table_fields as $tf) {
+        //         if ($this->Xform_model->xform_table_column_exists($form->form_id, $tf) == 0) {
+        //             $details = [
+        //                 "table_name" => $form->form_id,
+        //                 "col_name" => $tf,
+        //                 "field_name" => $tf,
+        //                 "field_label" => str_replace("_", " ", $tf)
+        //             ];
+        //             $this->Xform_model->create_field_name_map($details);
+        //         }
+        //     }
+        // }
 
-        $data['table_fields'] = $this->Xform_model->get_fieldname_map($form->form_id);
+        // $data['table_fields'] = $this->Xform_model->get_fieldname_map($form->form_id);
 
         $allow_dhis2_checked = (isset($_POST['allow_dhis2'])) ? 1 : 0;
 
         $this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required");
         $this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
 
-        if ($allow_dhis2_checked) {
-            $this->form_validation->set_rules("data_set", $this->lang->line("validation_label_data_set"), "required");
-            $this->form_validation->set_rules("org_unit_id", $this->lang->line("validation_label_org_unit_id"), "required");
-            $this->form_validation->set_rules("period_type", $this->lang->line("validation_label_period_type"), "required");
-        }
+        // if ($allow_dhis2_checked) {
+        //     $this->form_validation->set_rules("data_set", $this->lang->line("validation_label_data_set"), "required");
+        //     $this->form_validation->set_rules("org_unit_id", $this->lang->line("validation_label_org_unit_id"), "required");
+        //     $this->form_validation->set_rules("period_type", $this->lang->line("validation_label_period_type"), "required");
+        // }
 
         if ($this->form_validation->run() === FALSE) {
-            $users = $this->User_model->find_all(500);
-            $groups = $this->User_model->find_user_groups();
+            // $users = $this->User_model->find_all(500);
+            // $groups = $this->User_model->find_user_groups();
 
-            $available_group_permissions = [];
-            $available_user_permissions = [];
+            // $available_group_permissions = [];
+            // $available_user_permissions = [];
 
-            foreach ($groups as $group) {
-                $available_group_permissions['G' . $group->id . 'G'] = $group->description;
-            }
-            $data['group_perms'] = $available_group_permissions;
+            // foreach ($groups as $group) {
+            //     $available_group_permissions['G' . $group->id . 'G'] = $group->description;
+            // }
+            // $data['group_perms'] = $available_group_permissions;
 
-            foreach ($users as $user) {
-                $available_user_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
-            }
-            $data['user_perms'] = $available_user_permissions;
+            // foreach ($users as $user) {
+            //     $available_user_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
+            // }
+            // $data['user_perms'] = $available_user_permissions;
 
-            $current_permissions = explode(",", $form->perms);
-            $data['current_perms'] = $current_permissions;
+            // $current_permissions = explode(",", $form->perms);
+            // $data['current_perms'] = $current_permissions;
 
             $this->load->view('header', $data);
             $this->load->view("edit_form", $data);
@@ -988,23 +989,23 @@ class Xform extends MX_Controller
                 $this->db->trans_start();
                 $this->Xform_model->update_form($form_id, $new_form_details);
 
-                $mapped_fields = [];
-                $i = 0;
-                foreach ($labels as $key => $value) {
-                    $mapped_fields[$i]["field_label"] = $value;
-                    $mapped_fields[$i]["id"] = $ids[$i];
-                    $mapped_fields[$i]["field_type"] = $field_types[$i];
-                    $mapped_fields[$i]["chart_use"] = $chart_use[$i];
-                    $mapped_fields[$i]["type"] = $type_option[$i];
-                    $mapped_fields[$i]["hide"] = 0;
-                    //$mapped_fields[$i]["dhis_data_element"] = $dhis2_data_element[$i];
+                // $mapped_fields = [];
+                // $i = 0;
+                // foreach ($labels as $key => $value) {
+                //     $mapped_fields[$i]["field_label"] = $value;
+                //     $mapped_fields[$i]["id"] = $ids[$i];
+                //     $mapped_fields[$i]["field_type"] = $field_types[$i];
+                //     $mapped_fields[$i]["chart_use"] = $chart_use[$i];
+                //     $mapped_fields[$i]["type"] = $type_option[$i];
+                //     $mapped_fields[$i]["hide"] = 0;
+                //     //$mapped_fields[$i]["dhis_data_element"] = $dhis2_data_element[$i];
 
-                    if (!empty($hides) && in_array($ids[$i], $hides)) {
-                        $mapped_fields[$i]["hide"] = 1;
-                    }
-                    $i++;
-                }
-                $this->Xform_model->update_field_name_maps($mapped_fields);
+                //     if (!empty($hides) && in_array($ids[$i], $hides)) {
+                //         $mapped_fields[$i]["hide"] = 1;
+                //     }
+                //     $i++;
+                // }
+                // $this->Xform_model->update_field_name_maps($mapped_fields);
                 $this->db->trans_complete();
 
                 if ($this->db->trans_status()) {
@@ -1027,7 +1028,7 @@ class Xform extends MX_Controller
     function delete_form($project_id, $form_id)
     {
         $this->_is_logged_in();
-        $this->has_allowed_perm($this->router->fetch_method());
+        //$this->has_allowed_perm($this->router->fetch_method());
 
         $project = $this->Project_model->get_project_by_id($project_id);
 
@@ -1277,7 +1278,7 @@ class Xform extends MX_Controller
 
         //render view
         $this->load->view('header', $data);
-        $this->load->view("form_data_details");
+        $this->load->view("form_data");
         $this->load->view('footer');
     }
 

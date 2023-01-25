@@ -133,7 +133,7 @@ class Projects extends MX_Controller
             if ($id) {
                 $this->_update_session_projects();
                 $this->session->set_flashdata('message', display_message($this->lang->line("message_project_added")));
-                redirect('projects/forms/' . $id, 'refresh');
+                redirect('projects/lists/', 'refresh');
             } else {
                 $this->session->set_flashdata('message', display_message($this->lang->line("message_project_not_added"), 'danger'));
                 redirect('projects/add_new', 'refresh');
@@ -146,8 +146,9 @@ class Projects extends MX_Controller
             'id' => 'name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('name'),
-            'class' => 'form-control',
-            'placeholder' => $this->lang->line("placeholder_project_title")
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+            'placeholder' => $this->lang->line("placeholder_project_title"),
+            'required' => ''
         );
 
         $this->data['description'] = array(
@@ -155,9 +156,10 @@ class Projects extends MX_Controller
             'id' => 'description',
             'type' => 'text area',
             'value' => $this->form_validation->set_value('description'),
-            'rows' => '5',
-            'class' => 'form-control',
-            'placeholder' => $this->lang->line("placeholder_project_description")
+            'rows' => '3',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+            'placeholder' => $this->lang->line("placeholder_project_description"),
+            'required' => ''
         );
 
         //render view
@@ -189,7 +191,7 @@ class Projects extends MX_Controller
             $this->db->update('projects', $data, array('id' => $project_id));
 
             $this->session->set_flashdata('message', display_message($this->lang->line("message_project_updated")));
-            redirect('projects/forms/' . $project_id, 'refresh');
+            redirect('projects/lists', 'refresh');
         }
 
         //populate data
@@ -198,7 +200,8 @@ class Projects extends MX_Controller
             'id' => 'name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('name', $project->title),
-            'class' => 'form-control'
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+            'required' => ''
         );
 
         $this->data['description'] = array(
@@ -206,8 +209,9 @@ class Projects extends MX_Controller
             'id' => 'description',
             'type' => 'text area',
             'value' => $this->form_validation->set_value('description', $project->description),
-            'rows' => '5',
-            'class' => 'form-control'
+            'rows' => '3',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+            'required' => ''
         );
 
         //render view
@@ -220,7 +224,7 @@ class Projects extends MX_Controller
     function delete($project_id)
     {
         $this->data['title'] = "Delete Project";
-        $this->has_allowed_perm($this->router->fetch_method());
+        //$this->has_allowed_perm($this->router->fetch_method());
 
         $this->model->set_table('projects');
         $project = $this->model->get_by(array('id' => $project_id));

@@ -1,142 +1,97 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <div id="header-title">
-                <h3 class="title">Projects</h3>
-            </div>
+<header class="bg-gray-100">
+    <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-xl font-medium tracking-tight text-gray-900">Projects</h1>
+    </div>
+</header>
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li class="active">Projects</li>
-            </ol>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="pull-left">
-                        <?php if (perms_role('Projects', 'add_new')) { ?>
-                            <?= anchor("projects/add_new/", '<i class="fa fa-plus"></i> Add New', 'class="btn btn-primary btn-sm"') ?>
-                        <?php } ?>
-                    </div>
-                </div>
-                <!--./col-md-4 -->
-            </div>
-            <!--./row -->
-
-            <div class="row">
-                <?php
-                if ($this->session->flashdata('message') != '') {
-                    echo '<div class="col-sm-12 col-md-12 col-lg-12">';
-                    echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-                    echo '</div>';
-                }
-                ?>
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <?php if (count($project_list) > 0) { ?>
-                        <table class="table table-responsive table-hover table-bordered">
-                            <tr>
-                                <th width="3%">#</th>
-                                <th width="24%"><?= $this->lang->line("label_project_title") ?></th>
-                                <th width="50%"><?= $this->lang->line("label_project_description") ?></th>
-                                <th width="12%"><?= $this->lang->line("label_project_created_date") ?></th>
-                                <th style="width: 80px;"><?= $this->lang->line("label_action") ?></th>
-                            </tr>
-
-                            <?php
-                            $serial = 1;
-                            foreach ($project_list as $project) { ?>
-                                <tr class="projectRow" id="<?= $project->id ?>">
-                                    <td><?php echo $serial; ?></td>
-                                    <td><?php echo anchor("projects/forms/" . $project->id, '<b>' . $project->title . '</b>'); ?></td>
-                                    <td><?php echo $project->description; ?></td>
-                                    <td><?php echo date('d-m-Y H:i:s', strtotime($project->created_at)); ?></td>
-                                    <td>
-                                        <?php if (perms_role('Projects', 'forms')) { ?>
-                                            <?php echo anchor("projects/forms/" . $project->id, '<i class="fa fa-folder-open"></i>', ['class' => 'btn btn-primary btn-xs']); ?>&nbsp;
-                                        <?php } ?>
-                                        <?php if (perms_role('Projects', 'edit')) { ?>
-                                            <?php echo anchor("projects/edit/" . $project->id, '<i class="fa fa-pencil"></i>', ['class' => 'btn btn-secondary btn-xs']); ?>&nbsp;
-                                        <?php } ?>
-                                        <?php if ($this->ion_auth->is_admin()) { ?>
-                                            <a href="<?= site_url("projects/delete/" . $project->id) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete?');"><i class="fa fa-trash"></i></a>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                            <?php $serial++;
-                            } ?>
-                        </table>
-                        <?php if (!empty($links)) : ?>
-                            <div class="widget-foot">
-                                <?= $links ?>
-                                <div class="clearfix"></div>
+<main class="bg-white h-full">
+    <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-row flex-wrap mt-2">
+            <div class="w-full">
+                <div class="relative overflow-x-auto">
+                    <?php if ($this->session->flashdata('message') != "") { ?>
+                        <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
+                            <div class="flex">
+                                <div>
+                                    <p class="text-sm font-normal"><?= $this->session->flashdata('message'); ?></p>
+                                </div>
                             </div>
-                        <?php endif; ?>
+                        </div>
+                    <?php } ?>
 
+                    <?php if (count($project_list) > 0) { ?>
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-left text-sm font-medium text-gray-700  bg-white border-b dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="py-3">
+                                        Title
+                                    </th>
+                                    <th scope="col" class="py-3">
+                                        Description
+                                    </th>
+                                    <th scope="col" class="py-3">
+                                        Created On
+                                    </th>
+                                    <th scope="col" class="py-3">
+
+                                    </th>
+
+                                    <th scope="col" class="py-3">
+
+                                    </th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <?php
+                                foreach ($project_list as $project) { ?>
+                                    <tr class="bg-white border-b" id="<?= $project->id ?>">
+                                        <td class="px-0 py-4 text-left whitespace-nowrap">
+                                            <span class="font-medium text-gray-800"><?php echo anchor("projects/forms/" . $project->id, $project->title); ?></span>
+                                        </td>
+
+                                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
+                                            <?php echo $project->description; ?>
+                                        </td>
+                                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo date('d-m-Y H:i:s', strtotime($project->created_at)); ?></td>
+                                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
+                                            <?php if (perms_role('Projects', 'edit')) { ?>
+                                                <a href="<?= site_url("projects/edit/" . $project->id) ?>" class="hover:">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                    </svg>
+                                                </a>
+                                            <?php } ?>
+                                        </td>
+
+                                        <td class="px-0 py-4 text-left font-normal text-xs text-gray-600 whitespace-nowrap">
+                                            <?php if ($this->ion_auth->is_admin()) { ?>
+                                                <a href="<?= site_url("projects/delete/" . $project->id) ?>" class="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                    </svg>
+                                                </a>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     <?php } else { ?>
-                        <div class="alert alert-warning">No any project at the moment</div>
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <span class="block sm:inline">No any project at the moment</span>
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                                <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <title>Close</title>
+                                    <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                                </svg>
+                            </span>
+                        </div>
                     <?php } ?>
                 </div>
-
-                <!-- <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div id="notificationBar"><?= $this->lang->line("label_select_project_to_list_forms") ?></div>
-                    <div id="formsListArea"></div>
-                </div> -->
             </div>
-
         </div>
+        <!-- /End replace -->
     </div>
-</div>
-<script type="text/javascript">
-    // $(document).ready(function() {
-    //     $('tr.projectRow').on('click', function() {
-    //         var projectId = $(this).attr('id');
-
-    //         $.ajax({
-    //             url: "<?= base_url("projects/forms") ?>/" + projectId,
-    //             type: "post",
-    //             dataType: 'json',
-    //             data: {
-    //                 project_id: projectId
-    //             },
-    //             success: function(data) {
-    //                 $("#notificationBar").html("");
-    //                 var html = '<h3 class="title"><?= $this->lang->line("title_project_forms") ?> <span class="pull-right"><a class="btn btn-primary btn-xs" href="<?= base_url('xform/add_new') ?>/' + projectId + '"><i class="fa fa-plus"></i> <?= $this->lang->line("button_upload_new_form") ?></a></span></h3>';
-
-    //                 if (data.status == "success" && data.forms_count > 0) {
-    //                     var forms = data.forms;
-
-    //                     $.each(forms, function(i, form) {
-
-    //                         var form_status = null;
-    //                         if (form.access == "private") {
-    //                             form_status = "<span class='pull-right small'>Private</span>";
-    //                         } else {
-    //                             form_status = "<span class='pull-right small'>Public</span>";
-    //                         }
-
-    //                         html += "<div><h4>" + form.title + form_status + "</h4><span class='small'>" + form.description +
-    //                             "</span><span class='pull-right'><a class='btn btn-primary btn-xs' href='<?= base_url('xform/edit_form/') ?>" + projectId + "/" + form.id + "'><i class='fa fa-pencil'></i> <?= $this->lang->line("label_edit") ?></a></span>" +
-    //                             "<p>" +
-    //                             "<a href='<?= base_url("xform/form_overview") ?>/" + form.form_id + "' class='mr-3'>Overview</a>&nbsp;&nbsp;" +
-    //                             "<a href='<?= base_url("xform/form_data") ?>/" + projectId + "/" + form.id + "'' class='mr-3'>Form Data</a>&nbsp;&nbsp;" +
-    //                             "<a href='<?= base_url("visualization/visualization/chart") ?>/" + projectId + "/" + form.id + "' class='mr-3'>Chart</a>&nbsp;&nbsp;" +
-    //                             "<a href='<?= base_url("visualization/visualization/map") ?>/" + projectId + "/" + form.id + "' >Map</a><hr>" +
-    //                             "</p></div>";
-    //                     });
-    //                 }
-
-    //                 if (data.status == "success" && data.forms_count == 0) {
-    //                     $("#notificationBar").html('<?= display_message($this->lang->line("message_project_has_no_form"), "info") ?>');
-    //                     html = "<div><a class='btn btn-primary btn-xs' href='<?= base_url('xform/add_new') ?>/" + projectId + "'><i class='fa fa-plus'></i> <?= $this->lang->line("button_upload_new_form") ?></a></div>";
-    //                 }
-    //                 $("#formsListArea").html(html);
-    //             },
-    //             beforeSend() {
-    //                 $("#formsListArea").html("");
-    //                 $("#notificationBar").html('<?= display_message("<i class=\"fa fa-spinner fa-refresh fa-spin fa-1x\" aria-hidden=\"true\"></i> " . $this->lang->line("status_message_getting_forms")) ?>');
-    //             },
-    //             error() {}
-    //         });
-    //     });
-    // });
-</script>
+</main>

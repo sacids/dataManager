@@ -79,6 +79,7 @@ class Visualization extends CI_Controller
         $data['xforms'] = $xforms = $this->Xform_model->get_form_list();
 
         $form = $this->Xform_model->find_by_id($form_id);
+        $data['form'] = $form;
         if ($form) {
             // Capture selected x and y fields
             // Capture dates ranges if selected
