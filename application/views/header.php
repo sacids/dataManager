@@ -137,8 +137,11 @@
                                 <?php if (perms_role('Groups', 'lists')) {  ?>
                                     <li><?php echo anchor('auth/groups/lists', $this->lang->line("nav_item_list_groups")); ?></li>
                                 <?php }  ?>
-                                <li class="divider"></li>
-                                <li><?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl")); ?></li>
+                                
+                                <?php if (perms_role('AccessControl', 'lists')) {  ?>
+                                    <li class="divider"></li>
+                                    <li><?php echo anchor('auth/accesscontrol', $this->lang->line("nav_item_acl")); ?></li>
+                                <?php }  ?>
                             </ul>
                         </li>
                     <?php } ?>

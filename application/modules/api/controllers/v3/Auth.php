@@ -35,7 +35,7 @@ class Auth extends REST_Controller
             $this->response(array('status' => 'success', 'app_version' => $app_version), 200);
 
         } else {
-            $this->response(array('status' => 'failed', 'message' => 'Nenhuma versão do aplicativo disponível'), 204);
+            $this->response(array('status' => 'failed', 'message' => 'No app version available'), 204);
 
         }
     }
@@ -44,7 +44,7 @@ class Auth extends REST_Controller
     function login_post()
     {
         if (!$this->post('code') || !$this->post('mobile') || !$this->post('password')) {
-            $this->response(array('error' => TRUE, 'error_msg' => 'Parâmetro obrigatório ausente'), 202);
+            $this->response(array('error' => TRUE, 'error_msg' => 'Required parameter are missing'), 202);
         }
 
         //post data
@@ -57,7 +57,7 @@ class Auth extends REST_Controller
 
         if (!$this->ion_auth->login($username, $password)) {
             //return response for failure
-            $this->response(array('error' => TRUE, 'error_msg' => 'Celular ou senha incorreta'), 203);
+            $this->response(array('error' => TRUE, 'error_msg' => 'Incorrect mobile or password'), 203);
 
         } else {
             //get user details after successfully
@@ -80,7 +80,7 @@ class Auth extends REST_Controller
     function register_post()
     {
         if (!$this->post('code') || !$this->post('mobile') || !$this->post('password') || !$this->post('password_confirm')) {
-            $this->response(array('status' => TRUE, 'error_msg' => 'Parâmetro obrigatório ausente'), 202);
+            $this->response(array('status' => TRUE, 'error_msg' => 'Required parameter are missing'), 202);
         }
 
         //post data
@@ -95,11 +95,11 @@ class Auth extends REST_Controller
         //check mobile number existence
         if ($this->check_user_existence($username)) {
             //return error response
-            $this->response(array('error' => TRUE, 'error_msg' => 'O número do celular já existe.'), 203);
+            $this->response(array('error' => TRUE, 'error_msg' => 'Mobile number used by another user'), 203);
 
         } else if ($password != $password_confirm) {
             //return error response
-            $this->response(array('error' => TRUE, 'error_msg' => 'Senha não corresponde'), 203);
+            $this->response(array('error' => TRUE, 'error_msg' => 'Password does not match'), 203);
 
         } else {
             //digest password
@@ -128,7 +128,7 @@ class Auth extends REST_Controller
                 //success response
                 $this->response($response, 200);
             } else {
-                $this->response(array('error' => TRUE, 'error_msg' => 'Falha ao criar conta'), 204);
+                $this->response(array('error' => TRUE, 'error_msg' => 'Failed to create account'), 204);
             }
         }
     }

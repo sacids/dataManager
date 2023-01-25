@@ -693,6 +693,10 @@ class Ussd extends CI_Controller
         log_message("debug", 'TRAKOMA DATA  =>' . $post_data);
         $value = json_decode($post_data, TRUE);
 
+        //save data from menu session
+        $this->model->set_table('vhw_rti_mda');
+        $result = $this->model->insert(['json' => $post_data]);
+
         //post data to server
         $data = [
             'password' => $value['ntdcp_password'],
@@ -751,27 +755,34 @@ class Ussd extends CI_Controller
         log_message("debug", 'OHD DATA  =>' . $post_data);
         $value = json_decode($post_data, TRUE);
 
-        //check for 
-        if ($value['tukio_sekta'] == 1)
-            $sector = 'Wanyama';
-        elseif ($value['tukio_sekta'] == 2)
-            $sector = 'Binadamu';
-        elseif ($value['tukio_sekta'] == 3)
-            $sector = 'Mazingira';
-        elseif ($value['tukio_sekta'] == 2)
-            $sector = 'Mifugo';
-
         //post data to server
         $arr_data = [
             'text' => $value['menu_tukio'],
             'village' => $value['tukio_kijiji'],
-            'ward' => $value['tukio_kata'],
-            'date' => $value['tukio_tarehe'],
-            'sector' => $sector
+            'ward' => $value['tukio_kata']
         ];
 
+        //check the data
+        if (strtoupper($value['tukio_tarehe']) == 'LEO') {
+            $arr_data['date'] = date('d/m/Y');
+        } else {
+            $arr_data['date'] = $value['tukio_tarehe'];
+        }
+
+        //reporter name
+        if (isset($value['tukio_name']) && $value['tukio_name'] != '')
+            $arr_data['name_of_reporter'] = $value['tukio_name'];
+
+        //human affected
+        if (isset($value['tukio_human']) && $value['tukio_human'] != '')
+            $arr_data['no_of_human_affected'] = $value['tukio_human'];
+
+        //animal affected
+        if (isset($value['tukio_animal']) && $value['tukio_animal'] != '')
+            $arr_data['no_of_animal_affected'] = $value['tukio_animal'];
+
         // API URL
-        $url = 'http://dev.orangine.co.tz/ems/api/signal/';
+        $url = 'https://dev.sacids.org/ems/api/signal/';
 
         // Create a new cURL resource
         $ch = curl_init($url);
@@ -792,7 +803,7 @@ class Ussd extends CI_Controller
         $http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        if ($http_response_code == 200 || $http_response_code == 300) {
+        if ($http_response_code == 200 || $http_response_code == 201) {
             //response
             $response = array(
                 'status' => TRUE,
@@ -831,7 +842,7 @@ class Ussd extends CI_Controller
         ];
 
         // API URL
-        $url = 'http://dev.orangine.co.tz/ems/api/signal/';
+        $url = 'http://dev.sacids.org/ems/api/signal/';
 
         // Create a new cURL resource
         $ch = curl_init($url);
