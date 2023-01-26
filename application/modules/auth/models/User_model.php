@@ -33,6 +33,7 @@ class User_model extends CI_Model
             ->group_start()
             ->where('groups.name', 'data_collectors')
             ->or_where('groups.name', 'chr')
+            ->or_where('groups.name', 'members')
             ->group_end()
             ->join('users_groups', 'users_groups.user_id = users.id')
             ->join('groups', 'groups.id = users_groups.group_id')

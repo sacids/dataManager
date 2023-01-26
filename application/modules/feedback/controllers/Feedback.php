@@ -98,13 +98,13 @@ class Feedback extends MX_Controller
      * @param $instance_id
      * @return array
      */
-    function user_feedback($instance_id)
+    function details($instance_id)
     {
         $this->data['title'] = "Chat Conversation";
 
         //check if logged in
         $this->is_logged_in();
-        $this->has_allowed_perm($this->router->fetch_method());
+        //$this->has_allowed_perm($this->router->fetch_method());
 
         //feedback
         $feedback = $this->Feedback_model->get_feedback_by_instance($instance_id);
@@ -126,10 +126,21 @@ class Feedback extends MX_Controller
         //update all feedback from android app using instance_id
         $this->Feedback_model->update_user_feedback($instance_id, 'user');
 
-        //form data
+        //form
         $this->model->set_table('xforms');
         $xform = $this->model->get_by(['form_id' => $feedback->form_id]);
+        $this->data['form'] = $xform;
 
+        //project
+        $project = $this->Project_model->get_project_by_id($xform->project_id);
+
+        if (!$project)
+            show_error("Project not exist", 500);
+
+        $this->data['project'] = $project;    
+
+
+        //form data    
         $this->table_name = $xform->form_id;
         $this->label = 'meta_instanceID';
         $this->search_value = $instance_id;
@@ -145,6 +156,7 @@ class Feedback extends MX_Controller
             $this->data['form_data'] = $form_data;
         else
             $this->data['form_data'] = [];
+
 
         //submit data
         if ($_POST) {
@@ -164,14 +176,14 @@ class Feedback extends MX_Controller
             ));
 
             if ($result)
-                redirect('feedback/user_feedback/' . $instance_id . '/#chats', 'refresh');
+                redirect('feedback/details/' . $instance_id, 'refresh');
             else
-                redirect('feedback/user_feedback/' . $instance_id . '/#chats', 'refresh');
+                redirect('feedback/details/' . $instance_id, 'refresh');
         }
 
         //render view
         $this->load->view('header', $this->data);
-        $this->load->view("user_feedback");
+        $this->load->view("details");
         $this->load->view('footer');
     }
 
@@ -238,7 +250,7 @@ class Feedback extends MX_Controller
                 foreach ($tmp1 as $item) {
                     $item = trim($item);
 
-                    if($item != "NA")
+                    if ($item != "NA")
                         array_push($arr, $val['option'][$item]);
                 }
                 $l = implode(",", $arr);

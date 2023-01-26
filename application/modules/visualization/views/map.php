@@ -66,7 +66,7 @@
 <?php echo $addressPoints; ?>
 <script type="text/javascript">
     // initialize the map
-    const map = L.map('map').setView([-18.6696553, 35.5273354], 6);
+    const map = L.map('map').setView([-6.40177, 34.99269], 6);
 
     //create tileUrl and attribution
     const tileUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXVsdGljcyIsImEiOiJjazVvMnprajEwaG4wM2xuczQ2YjVqZzQ5In0.udinWRnw_kgrlqkZSVlNQQ';

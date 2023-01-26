@@ -17,31 +17,31 @@
                 </li>
 
                 <li class="border-b-4 border-red-900">
-                    <a href="<?= site_url("xform/form_data/" . $project->id . '/' . $form->id)?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                    <a href="<?= site_url("xform/form_data/" . $project->id . '/' . $form->id) ?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
                         Table
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="<?= site_url("visualization/visualization/chart/" . $project->id . '/' . $form->id)?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                    <a href="<?= site_url("visualization/visualization/chart/" . $project->id . '/' . $form->id) ?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
                         Charts
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="<?= site_url("visualization/visualization/map/" . $project->id . '/' . $form->id)?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                    <a href="<?= site_url("visualization/visualization/map/" . $project->id . '/' . $form->id) ?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
                         Map
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="<?= site_url("xform/mapping/" . $project->id . '/' . $form->id)?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                    <a href="<?= site_url("xform/mapping/" . $project->id . '/' . $form->id) ?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
                         Mapping Fields
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="<?= site_url("xform/permissions/" . $project->id . '/' . $form->id)?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                    <a href="<?= site_url("xform/permissions/" . $project->id . '/' . $form->id) ?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
                         Permission
                     </a>
                 </li>
@@ -66,6 +66,11 @@
                     <?php } ?>
 
                     <?php if (isset($form_data) && $form_data) { ?>
+                        <div class="flex justify-end">
+                            <a href="<?= site_url("xform/xls_export_form_data/" . $form_id) ?>" 
+                            class="text-sm font-normal">Export XLS</a>
+                        </div>
+
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                             <table class="w-full text-sm text-left">
                                 <thead class="text-left text-sm font-medium text-gray-700  bg-white border-b">
@@ -103,7 +108,7 @@
                                             }
 
                                             if ($key == "meta_instanceID") {
-                                                echo '<td class="px-4 py-3"><a href="' . site_url('feedback/user_feedback/' . $entry) . '"><b>' . $entry . '</b></a></td>';
+                                                echo '<td class="px-4 py-3"><a href="' . site_url('feedback/details/' . $entry) . '"><b>' . $entry . '</b></a></td>';
                                             } else {
                                                 if ($key == "meta_username") {
                                                     echo "<td class='px-4 py-3'>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";

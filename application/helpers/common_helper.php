@@ -69,6 +69,17 @@ if (!function_exists('display_full_name')) {
     }
 }
 
+//display first name and last name
+if (!function_exists('show_first_name')) {
+    function show_first_name()
+    {
+        $CI = &get_instance();
+        $user_id = $CI->session->userdata('user_id');
+        $User = $CI->User_model->find_by_id($user_id);
+        echo ucfirst($User->first_name);
+    }
+}
+
 //time ago
 if (!function_exists('time_ago')) {
     function time_ago($date)
