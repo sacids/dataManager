@@ -38,19 +38,21 @@
                 <div class="flex h-14 items-center justify-between">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            <img class="block h-8 w-auto lg:hidden" src="<?= base_url('assets/img/logo_C.png')?>" alt="Afyadata">
-                            <img class="hidden h-8 w-auto lg:block" src="<?= base_url('assets/img/logo_C.png')?>" alt="Afyadata">
+                            <a href="<?= site_url('dashboard') ?>">
+                                <img class="block h-8 w-auto lg:hidden" src="<?= base_url('assets/img/logo_C.png') ?>" alt="Afyadata">
+                                <img class="hidden h-8 w-auto lg:block" src="<?= base_url('assets/img/logo_C.png') ?>" alt="Afyadata">
+                            </a>
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="<?= site_url('projects/lists');?>" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                                <a href="<?= site_url('projects/lists'); ?>" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
 
                                 <a href="#" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">OHKR</a>
 
                                 <a href="#" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Reports</a>
 
-                                <a href="<?= site_url('projects/add_new');?>" class="text-white bg-red-900 hover:bg-red-800 px-3 py-2 rounded-sm text-sm font-medium">
+                                <a href="<?= site_url('projects/add_new'); ?>" class="text-white bg-red-900 hover:bg-red-800 px-3 py-2 rounded-sm text-sm font-medium">
                                     + Create Project
                                 </a>
                             </div>
@@ -71,7 +73,7 @@
                             <div x-data="{dropdownMenu: false}" class="relative ml-3">
                                 <div>
                                     <button @click="dropdownMenu = ! dropdownMenu" type="button" class="flex items-center focus:outline-none mr-3" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                        <img class="w-8 h-8 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of User"> 
+                                        <img class="w-8 h-8 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of User">
                                         <span class="hidden md:inline-block text-sm">Hi, <?php display_full_name(); ?>
                                         </span>
                                         <svg class="pl-2 h-2" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">

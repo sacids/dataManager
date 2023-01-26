@@ -63,6 +63,7 @@ local.properties
 
 # Created by .ignore support plugin (hsz.mobi)
 .idea
+sql
 assets/forms/data/audio/*
 !assets/forms/data/audio/index.html
 

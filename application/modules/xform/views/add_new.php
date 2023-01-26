@@ -57,33 +57,33 @@
 
                     <?php echo form_open_multipart('xform/add_new/' . $project_id, 'role="form"'); ?>
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
                             <?php echo $this->lang->line("label_form_title") ?> <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" name="title" id="title" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write form title..." required>
+                        <input type="text" name="title" id="title" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Write form title..." required>
                     </div>
 
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
                             <?php echo $this->lang->line("label_form_xml_file") ?> <span class="text-red-500">*</span>
                         </label>
-                        <input class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="file_input" name="userfile" type="file" require>
+                        <input class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="file_input" name="userfile" type="file" require>
                     </div>
 
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
                             <?php echo $this->lang->line("label_description") ?> <span class="text-red-500">*</span>
                         </label>
-                        <textarea id="description" name="description" rows="3" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write description here..." required></textarea>
+                        <textarea id="description" name="description" rows="3" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Write description here..." required></textarea>
 
                     </div>
 
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
                             <?php echo $this->lang->line("label_access") ?> <span class="text-red-500">*</span>
                         </label>
 
-                        <select id="access" name="access" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <select id="access" name="access" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                             <option value="">Select</option>
                             <option value="private">Private</option>
                             <option value="public">Public</option>
@@ -91,12 +91,12 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
                             Push
                         </label>
                         <?php
-                                        echo form_checkbox('push', 1, set_checkbox('push', 1), 'id="push"');
-                                        echo form_label('Yes', 'push'); ?>
+                        echo form_checkbox('push', 1, set_checkbox('push', 1), 'id="push"');
+                        echo form_label('Yes', 'push'); ?>
 
                     </div>
 

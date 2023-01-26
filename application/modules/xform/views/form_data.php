@@ -35,13 +35,13 @@
                 </li>
 
                 <li class="">
-                    <a href="#" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                    <a href="<?= site_url("xform/mapping/" . $project->id . '/' . $form->id)?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
                         Mapping Fields
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="#" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                    <a href="<?= site_url("xform/permissions/" . $project->id . '/' . $form->id)?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
                         Permission
                     </a>
                 </li>
@@ -67,25 +67,25 @@
 
                     <?php if (isset($form_data) && $form_data) { ?>
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <thead class="text-xs text-gray-600 capitalize bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-left text-sm font-medium text-gray-700  bg-white border-b">
                                     <th scope="col" class="p-4">
                                         <div class="flex items-center">
-                                            <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
                                             <label for="checkbox-all-search" class="sr-only">checkbox</label>
                                         </div>
                                     </th>
                                     <?php
                                     if (isset($selected_columns)) {
                                         foreach ($selected_columns as $column) {
-                                            echo '<th scope="col" class="px-6 py-3">' . $column . '</th>';
+                                            echo '<th scope="col" class="px-4 py-3">' . $column . '</th>';
                                         }
                                     } else {
                                         foreach ($mapped_fields as $key => $column) {
                                             if (array_key_exists($column, $field_maps)) {
-                                                echo '<th scope="col" class="px-6 py-3">' . $field_maps[$column] . '</th>';
+                                                echo '<th scope="col" class="px-4 py-3">' . $field_maps[$column] . '</th>';
                                             } else {
-                                                echo '<th scope="col" class="px-6 py-3">' . $column . '</th>';
+                                                echo '<th scope="col" class="px-4 py-3">' . $column . '</th>';
                                             }
                                         }
                                     } ?>
@@ -95,23 +95,23 @@
                                 <tbody>
                                     <?php
                                     foreach ($form_data as $data) {
-                                        echo "<tr class='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>";
+                                        echo "<tr class='bg-white border-b hover:bg-gray-50'>";
                                         foreach ($data as $key => $entry) {
 
                                             if ($key == "id") {
-                                                echo "<td class='px-6 py-4'>" . form_checkbox("entry_id[]", $entry) . "</td>";
+                                                echo "<td class='px-4 py-3'>" . form_checkbox("entry_id[]", $entry) . "</td>";
                                             }
 
                                             if ($key == "meta_instanceID") {
-                                                echo '<td class="px-6 py-4"><a href="' . site_url('feedback/user_feedback/' . $entry) . '"><b>' . $entry . '</b></a></td>';
+                                                echo '<td class="px-4 py-3"><a href="' . site_url('feedback/user_feedback/' . $entry) . '"><b>' . $entry . '</b></a></td>';
                                             } else {
                                                 if ($key == "meta_username") {
-                                                    echo "<td class='px-6 py-4'>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
+                                                    echo "<td class='px-4 py-3'>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
                                                 } else {
                                                     if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                                                        echo "<td class='px-6 py-4'><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                                                        echo "<td class='py-3'><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
                                                     } else {
-                                                        echo "<td class='px-6 py-4'>" . $entry . "</td>";
+                                                        echo "<td class='px-4 py-3'>" . $entry . "</td>";
                                                     }
                                                 }
                                             }

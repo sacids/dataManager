@@ -146,7 +146,7 @@ class Projects extends MX_Controller
             'id' => 'name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('name'),
-            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'placeholder' => $this->lang->line("placeholder_project_title"),
             'required' => ''
         );
@@ -157,7 +157,7 @@ class Projects extends MX_Controller
             'type' => 'text area',
             'value' => $this->form_validation->set_value('description'),
             'rows' => '3',
-            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'placeholder' => $this->lang->line("placeholder_project_description"),
             'required' => ''
         );
@@ -200,7 +200,7 @@ class Projects extends MX_Controller
             'id' => 'name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('name', $project->title),
-            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'required' => ''
         );
 
@@ -210,7 +210,7 @@ class Projects extends MX_Controller
             'type' => 'text area',
             'value' => $this->form_validation->set_value('description', $project->description),
             'rows' => '3',
-            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'required' => ''
         );
 

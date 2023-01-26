@@ -57,27 +57,27 @@
 
                     <?php echo form_open_multipart(uri_string(), 'role="form"'); ?>
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
                             <?php echo $this->lang->line("label_form_title") ?> <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" name="title" id="title" value="<?php echo set_value('title', $form->title); ?>" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write form title..." required>
+                        <input type="text" name="title" id="title" value="<?php echo set_value('title', $form->title); ?>" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Write form title..." required>
                     </div>
 
 
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
                             <?php echo $this->lang->line("label_description") ?> <span class="text-red-500">*</span>
                         </label>
-                        <textarea id="description" name="description" rows="3" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write description here..." required><?php echo set_value('description', $form->description); ?></textarea>
+                        <textarea id="description" name="description" rows="3" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Write description here..." required><?php echo set_value('description', $form->description); ?></textarea>
 
                     </div>
 
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
                             <?php echo $this->lang->line("label_access") ?> <span class="text-red-500">*</span>
                         </label>
 
-                        <select id="access" name="access" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <select id="access" name="access" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                             <option value="<?= $form->access ?>"><?= ucfirst($form->access) ?></option>
                             <option value="private">Private</option>
                             <option value="public">Public</option>
@@ -85,21 +85,21 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Push</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Push</label>
                         <?php
                         echo form_checkbox('push', 1, ($form->push == 1) ? TRUE : FALSE);
                         echo form_label('Yes', 'push'); ?>
                     </div>
 
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Has Symptoms</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Has Symptoms</label>
                         <?php
                         echo form_checkbox('has_symptoms_field', 1, ($form->has_symptoms_field == 1) ? TRUE : FALSE);
                         echo form_label('Yes', 'has_symptoms_field'); ?>
                     </div>
 
                     <div class="mb-4">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Has Specie</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Has Specie</label>
                         <?php
                         echo form_checkbox('has_specie_type_field', 1, ($form->has_specie_type_field == 1) ? TRUE : FALSE);
                         echo form_label('Yes', 'has_specie_type_field'); ?>

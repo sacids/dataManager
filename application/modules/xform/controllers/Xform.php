@@ -773,7 +773,7 @@ class Xform extends MX_Controller
                         } else {
                             $this->session->set_flashdata("message", display_message($create_table_statement, "danger"));
                         }
-                        
+
                         //redirect
                         redirect("xform/add_new/{$project_id}");
                     }
@@ -1019,6 +1019,110 @@ class Xform extends MX_Controller
                 redirect("projects");
             }
         }
+    }
+
+
+    //mapping fields
+    function mapping($project_id, $form_id)
+    {
+        $this->_is_logged_in();
+        //$this->has_allowed_perm($this->router->fetch_method());
+
+        //title
+        $data['title'] = $this->lang->line("heading_edit_form");
+
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (!$project) {
+            show_error("Project not exist", 500);
+        }
+        $data['project'] = $project;
+
+        //forms
+        $form = $this->Xform_model->find_by_id($form_id);
+        if (!$form_id) {
+            show_error("Form does not exist", 500);
+        }
+        $data['form'] = $form;
+
+        //TODO
+        // Search field by table name from mapping fields
+        $db_table_fields = $this->Xform_model->get_fieldname_map($form->form_id);
+
+        //table fields
+        $table_fields = $this->Xform_model->find_table_columns($form->form_id);
+
+        if (count($db_table_fields) != count($table_fields)) {
+            foreach ($table_fields as $tf) {
+                if ($this->Xform_model->xform_table_column_exists($form->form_id, $tf) == 0) {
+                    $details = [
+                        "table_name" => $form->form_id,
+                        "col_name" => $tf,
+                        "field_name" => $tf,
+                        "field_label" => str_replace("_", " ", $tf)
+                    ];
+                    $this->Xform_model->create_field_name_map($details);
+                }
+            }
+        }
+
+        $data['table_fields'] = $this->Xform_model->get_fieldname_map($form->form_id);
+
+
+        //render view
+        $this->load->view('header', $data);
+        $this->load->view("mapping_fields", $data);
+        $this->load->view('footer');
+    }
+
+    //change parmission
+    function permissions($project_id, $form_id)
+    {
+        $this->_is_logged_in();
+        //$this->has_allowed_perm($this->router->fetch_method());
+
+        //title
+        $data['title'] = $this->lang->line("heading_edit_form");
+
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (!$project) {
+            show_error("Project not exist", 500);
+        }
+        $data['project'] = $project;
+
+        //forms
+        $form = $this->Xform_model->find_by_id($form_id);
+        if (!$form_id) {
+            show_error("Form does not exist", 500);
+        }
+        $data['form'] = $form;
+
+        $users = $this->User_model->find_all(500);
+        $groups = $this->User_model->find_user_groups();
+
+        $available_group_permissions = [];
+        $available_user_permissions = [];
+
+        foreach ($groups as $group) {
+            $available_group_permissions['G' . $group->id . 'G'] = $group->description;
+        }
+        $data['group_perms'] = $available_group_permissions;
+
+        foreach ($users as $user) {
+            $available_user_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
+        }
+        $data['user_perms'] = $available_user_permissions;
+
+        $current_permissions = explode(",", $form->perms);
+        $data['current_perms'] = $current_permissions;
+
+
+
+        //render view
+        $this->load->view('header', $data);
+        $this->load->view("permissions", $data);
+        $this->load->view('footer');
     }
 
     /**
@@ -1307,8 +1411,8 @@ class Xform extends MX_Controller
         //data collectors
         $data['data_collectors'] =  $this->User_model->get_data_collectors();
 
-        foreach($data['data_collectors'] as $k => $v){
-            $data['data_collectors'][$k]->submission = $this->Submission_model->get_submitted_forms_by_CHW($form->form_id,$v->username);
+        foreach ($data['data_collectors'] as $k => $v) {
+            $data['data_collectors'][$k]->submission = $this->Submission_model->get_submitted_forms_by_CHW($form->form_id, $v->username);
         }
 
         //render view

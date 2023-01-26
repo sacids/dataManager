@@ -42,6 +42,7 @@
     <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div class="flex flex-row flex-wrap mt-2">
             <div class="w-full">
+
                 <div class="relative overflow-x-auto">
                     <?php if ($this->session->flashdata('message') != "") { ?>
                         <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
@@ -54,54 +55,76 @@
                     <?php } ?>
 
                     <?php if (!empty($forms)) { ?>
-                        <table class="w-full text-sm text-left text-gray-900">
-                            <thead class="text-xs text-gray-700  bg-white dark:bg-gray-700 dark:text-gray-400">
+                        <table class="w-full text-sm text-left table-fixed">
+                            <thead class="text-left text-sm font-medium text-gray-700  bg-white border-b">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        Product name
+                                    <th scope="col" class="w-1/4 py-3">
+                                        Title
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Color
+
+                                    <th scope="col" class="w-1/4 py-3">
+                                        Description
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Category
+
+                                    <th scope="col" class="text-center py-3">
+                                        Status
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Price
+
+                                    <th scope="col" class=" py-3">
+                                        Submission
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        <span class="sr-only">Edit</span>
+
+                                    <th scope="col" class="py-3">
+                                        Created On
                                     </th>
+
+                                    <th scope="col" class="py-3">
+                                    </th>
+
                                 </tr>
                             </thead>
 
-                            <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tbody class="bg-white border-b hover:bg-gray-50">
                                 <?php
                                 foreach ($forms as $form) { ?>
                                     <tr class="bg-white border-b">
                                         <td class="px-0 py-4 text-left whitespace-nowrap">
-                                            <span class="font-semibold text-gray-800"><?php echo anchor("xform/form_data/" . $project_id . '/' . $form->id, $form->title); ?></span>
-                                            <p class="pt-2 text-gray-600"><?php echo $form->description; ?></p>
-
+                                            <span class="font-medium text-gray-800">
+                                                <?php echo anchor("xform/form_data/" . $project_id . '/' . $form->id, $form->title); ?>
+                                            </span>
                                         </td>
-                                        <td class="px-0 py-4 text-left font-medium text-gray-700 whitespace-nowrap"></td>
-                                        <td class="px-0 py-4 text-left font-medium text-gray-700 whitespace-nowrap">
+
+                                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
+                                            <p class="truncate">
+                                                <?php echo $form->description; ?>
+                                            </p>
+                                        </td>
+
+                                        <td class="px-0 py-4 text-center font-normal text-sm text-gray-600 whitespace-nowrap">
                                             <?php
                                             if ($form->access == "private")
-                                                echo "<span class='bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300'>" . ucfirst($form->access) . "</span>";
+                                                echo "<span class='bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded  border border-yellow-300'>" . ucfirst($form->access) . "</span>";
                                             else
-                                                echo "<span class='bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400'>" . ucfirst($form->access) . "</span>";
+                                                echo "<span class='bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400'>" . ucfirst($form->access) . "</span>";
                                             ?>
                                         </td>
-                                        <td class="px-0 py-4 text-left font-medium text-gray-700 whitespace-nowrap"><?php echo number_format($form->sent_forms); ?></td>
-                                        <td class="px-0 py-4 text-left font-medium text-gray-700 whitespace-nowrap"><?php echo date('d-m-Y H:i:s', strtotime($form->created_at)); ?></td>
-                                        <td class="px-0 py-4 text-left font-medium text-gray-700 whitespace-nowrap">
+                                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo number_format($form->sent_forms); ?></td>
+                                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo date('d-m-Y H:i:s', strtotime($form->created_at)); ?></td>
+                                        <td class="px-0 py-4 text-center font-medium text-gray-700 flex flex-row">
                                             <?php if (perms_role('Xform', 'edit_form')) { ?>
-                                                <?php echo anchor("xform/edit_form/" . $project_id . '/' . $form->id, 'Edit', ['class' => '']); ?>&nbsp;|
+                                                <a href="<?= site_url("xform/edit_form/" . $project_id . '/' . $form->id) ?>" class="text-gray-600 hover:text-gray-900 pr-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                    </svg>
+                                                </a>
                                             <?php } ?>
-
+                                        
                                             <?php if ($this->ion_auth->is_admin()) { ?>
-                                                <a href="<?= site_url("xform/delete_form/" . $project_id . '/' . $form->id) ?>" class="">Delete</a>
+                                                <a href="<?= site_url("xform/delete_form/" . $project_id . '/' . $form->id) ?>" class="text-gray-600 hover:text-red-800">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                    </svg>
+                                                </a>
                                             <?php } ?>
                                         </td>
                                     </tr>

@@ -35,13 +35,13 @@
                 </li>
 
                 <li class="">
-                    <a href="#" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                    <a href="<?= site_url("xform/mapping/" . $project->id . '/' . $form->id)?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
                         Mapping Fields
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="#" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                    <a href="<?= site_url("xform/permissions/" . $project->id . '/' . $form->id)?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
                         Permission
                     </a>
                 </li>
