@@ -50,18 +50,41 @@
     </div>
 </header>
 
-<main class="bg-white h-full">
+<main class="bg-white h-full h-screen">
     <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div class="flex flex-row flex-wrap mt-2">
             <div class="w-full">
                 <div class="relative overflow-x-auto">
+                    <!--./tabs -->
+                    <div x-data="{ tab: 'data' }" class="">
+                        <!-- nav -->
+                        <nav class="flex flex-wrap -mb-px mb-2 text-sm font-medium text-gray-600">
+                            <a :class="{ 'active': tab === 'data' }" x-on:click.prevent="tab = 'data'" href="#" class="pr-2  py-3 inline-flex border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">Data</a>
+                            <a :class="{ 'active': tab === 'chats' }" x-on:click.prevent="tab = 'chats'" href="#" class="px-2  py-3 inline-flex border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">Chats</a>
+                            <a :class="{ 'active': tab === 'location' }" x-on:click.prevent="tab = 'location'" href="#" class="px-2  py-3 inline-flex border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300">Location</a>
+                        </nav>
 
-                    <!-- component -->
-                    <div class="flex h-screen antialiased text-gray-800">
-                        <div class="flex flex-row h-full w-full overflow-x-hidden">
+                        <!-- content -->
+                        <div x-show="tab === 'data'">
+                            <h3 class="uppercase font-semibold">Submitted Data</h3>
 
-                            <div class="flex flex-col flex-auto h-full p-6">
-                                <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
+                            <?php if (isset($form_data) && $form_data) { ?>
+                                <table class="w-1/2 text-sm text-left">
+                                    <tbody class="bg-white border-b hover:bg-gray-50">
+                                        <?php foreach ($form_data as $val) { ?>
+                                            <tr class="bg-white border-b">
+                                                <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $val['label'] ?></td>
+                                                <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $val['value'] ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            <?php } ?>
+                        </div>
+
+                        <div x-show="tab === 'chats'">
+                            <div class="flex flex-col flex-auto h-full">
+                                <div class="flex flex-col flex-auto flex-shrink-0 rounded-xl bg-gray-100 h-full p-4">
                                     <div class="flex flex-col h-full overflow-x-auto mb-4">
                                         <div class="flex flex-col h-full">
                                             <div class="grid grid-cols-12 gap-y-2">
@@ -125,8 +148,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                        <div x-show="tab === 'location'">
+                            <h3>Location</h3>
+                            <p>
+                                No map at the moment
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
