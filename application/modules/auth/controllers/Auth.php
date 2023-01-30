@@ -237,9 +237,7 @@ class Auth extends MX_Controller
             );
 
             //render view
-            $this->load->view('web/header', $this->data);
-            $this->_render_page('auth/login');
-            $this->load->view('web/footer');
+            $this->_render_page('auth/login', $this->data);
         }
     }
 
@@ -269,7 +267,9 @@ class Auth extends MX_Controller
                 'id' => 'old',
                 'type' => 'password',
                 'class' => 'form-control',
-                'placeholder' => 'Enter old password'
+                'placeholder' => 'Enter old password',
+                'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'required' => ''
             );
             $this->data['new_password'] = array(
                 'name' => 'new',
@@ -277,7 +277,9 @@ class Auth extends MX_Controller
                 'type' => 'password',
                 'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
                 'class' => 'form-control',
-                'placeholder' => 'Enter new password'
+                'placeholder' => 'Enter new password',
+                'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'required' => ''
             );
             $this->data['new_password_confirm'] = array(
                 'name' => 'new_confirm',
@@ -285,7 +287,9 @@ class Auth extends MX_Controller
                 'type' => 'password',
                 'pattern' => '^.{' . $this->data['min_password_length'] . '}.*$',
                 'class' => 'form-control',
-                'placeholder' => 'Confirm new password'
+                'placeholder' => 'Confirm new password',
+                'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'required' => ''
             );
             $this->data['user_id'] = array(
                 'name' => 'user_id',

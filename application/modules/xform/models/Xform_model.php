@@ -388,6 +388,27 @@ class Xform_model extends CI_Model
         return $this->db->get($table_name)->result();
     }
 
+    /**
+     * @param $table_name
+     * @param int $limit
+     * @param int $offset
+     * @param null $perm_conditions
+     * @return mixed returns data from tables created by uploading xform definitions files.
+     */
+    public function find_all_form_data($table_name, $perm_conditions = null)
+    {
+        if ($perm_conditions != null) {
+            if ($perm_conditions != null) {
+                $this->db->where($perm_conditions, "", false);
+            }
+        }
+
+        $this->db->order_by("id", "DESC");
+        return $this->db->get($table_name)->result();
+    }
+
+
+
     //search form data
     public function search_form_data($table_name, $perm_conditions = null, $start_at = null, $end_at = null)
     {

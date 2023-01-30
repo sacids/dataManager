@@ -93,18 +93,50 @@ class Feedback extends MX_Controller
         $this->load->view('footer');
     }
 
+    //form data preview
+    function form_data_preview($form_id, $data_id)
+    {
+        //form
+        $this->model->set_table('xforms');
+        $xform = $this->model->get_by(['form_id' => $form_id]);
+        $this->data['form'] = $xform;
+
+        //search varialbles  
+        $this->table_name = $xform->form_id;
+        $this->label = 'id';
+        $this->search_value = $data_id;
+
+        //form data
+        $this->model->set_table($this->table_name);
+        $form_data = $this->model->get_by('id', $data_id);
+        $this->data['form_data'] = $form_data;
+
+        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $xform->filename);
+        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+        $form_definition = $this->xform_comm->get_defn();
+
+        //get form data
+        $mapped_form_data = $this->get_form_data($form_definition, $this->get_fieldname_map($this->table_name));
+
+        if ($mapped_form_data)
+            $this->data['mapped_form_data'] = $mapped_form_data;
+        else
+            $this->data['mapped_form_data'] = [];
+
+        //render view
+        $this->load->view("form_data_preview", $this->data);
+    }
 
     /**
      * @param $instance_id
      * @return array
      */
-    function details($instance_id)
+    function chats($form_id, $instance_id)
     {
-        $this->data['title'] = "Chat Conversation";
-
-        //check if logged in
-        $this->is_logged_in();
-        //$this->has_allowed_perm($this->router->fetch_method());
+        //form
+        $this->model->set_table('xforms');
+        $xform = $this->model->get_by(['form_id' => $form_id]);
+        $this->data['form'] = $xform;
 
         //feedback
         $feedback = $this->Feedback_model->get_feedback_by_instance($instance_id);
@@ -126,65 +158,48 @@ class Feedback extends MX_Controller
         //update all feedback from android app using instance_id
         $this->Feedback_model->update_user_feedback($instance_id, 'user');
 
-        //form
-        $this->model->set_table('xforms');
-        $xform = $this->model->get_by(['form_id' => $feedback->form_id]);
-        $this->data['form'] = $xform;
+        //search varialbles  
+        $this->table_name = $form_id;
 
-        //project
-        $project = $this->Project_model->get_project_by_id($xform->project_id);
+        //form data
+        $this->model->set_table($this->table_name);
+        $form_data = $this->model->get_by('meta_instanceID', $instance_id);
+        $this->data['form_data'] = $form_data;
 
-        if (!$project)
-            show_error("Project not exist", 500);
+        //render view
+        $this->load->view("chats", $this->data);
+    }
 
-        $this->data['project'] = $project;    
+    //post new chat
+    function new_chat()
+    {
+        //post data
+        $instance_id = $this->input->post('instance_id');
+        $message = $this->input->post('message');
 
+        $fb = $this->Feedback_model->get_feedback_details_by_instance($instance_id);
 
-        //form data    
-        $this->table_name = $xform->form_id;
-        $this->label = 'meta_instanceID';
-        $this->search_value = $instance_id;
-
-        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $xform->filename);
-        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
-        $form_definition = $this->xform_comm->get_defn();
-
-        //get form data
-        $form_data = $this->get_form_data($form_definition, $this->get_fieldname_map($this->table_name));
-
-        if ($form_data)
-            $this->data['form_data'] = $form_data;
-        else
-            $this->data['form_data'] = [];
-
-
-        //submit data
-        if ($_POST) {
-            $message = $this->input->post('message');
-            $fb = $this->Feedback_model->get_feedback_details_by_instance($instance_id);
-
+        if ($fb) {
             //Insert data from ajax
             $result = $this->Feedback_model->create_feedback(array(
                 'form_id' => $fb->form_id,
                 'message' => $message,
                 'date_created' => date('Y-m-d H:i:s'),
                 'instance_id' => $instance_id,
-                'user_id' => $fb->user_id,
+                'user_id' => get_current_user_id(),
                 'sender' => 'server',
                 'status' => 'pending',
-                'reply_by' => $this->user_id
+                'reply_by' => get_current_user_id()
             ));
 
-            if ($result)
-                redirect('feedback/details/' . $instance_id, 'refresh');
-            else
-                redirect('feedback/details/' . $instance_id, 'refresh');
+            if ($result) {
+                echo json_encode(['error' => false, 'success_msg' => 'New chat successful sent!', 'message' => $message]);
+            } else {
+                echo json_encode(['error' => true, 'success_msg' => 'Failed to sent chat!']);
+            }
+        } else {
+            echo json_encode(['error' => true, 'success_msg' => 'Form data does not exist!']);
         }
-
-        //render view
-        $this->load->view('header', $this->data);
-        $this->load->view("details");
-        $this->load->view('footer');
     }
 
     //get form data

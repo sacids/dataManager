@@ -11,16 +11,25 @@
     <title>AfyaData - <?= (!empty($title)) ? $title : config_item("site_name"); ?></title>
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
     <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
 
     <!-- Google fonts - witch you want to use - (rest you can just remove) -->
     <link href='https://fonts.googleapis.com/css?family=Lato:300,400,600,700' rel='stylesheet' type='text/css'>
 
+    <!--./Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!--./jquery -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 
     <!-- Leaflets Maps-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
@@ -34,7 +43,7 @@
 
 <body class="h-screen bg-gray-100 leading-normal tracking-normal">
     <!-- Begin page -->
-    <div class="min-h-full">
+    <div class="h-full overflow-hidden">
         <nav class="bg-white">
             <div class="mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex h-14 items-center justify-between">
@@ -98,11 +107,11 @@
                     -->
                                 <div x-show="dropdownMenu" @click.outside="dropdownMenu = false" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                     <!-- Active: "bg-gray-100", Not Active: "" -->
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">MyProfile</a>
+                                    <a href="<?= site_url('auth/profile') ?>" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">MyProfile</a>
 
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Change Password</a>
+                                    <a href="<?= site_url('auth/change_password') ?>" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Change Password</a>
 
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Logout</a>
+                                    <a href="<?= site_url('auth/logout') ?>" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Logout</a>
                                 </div>
                             </div>
                         </div>

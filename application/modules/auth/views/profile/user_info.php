@@ -1,76 +1,89 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <div id="header-title">
-                <h3 class="title">My Profile</h3>
-            </div>
+<header class="bg-gray-100">
+    <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-xl font-medium tracking-tight text-gray-900">My Profile</h1>
+    </div>
+</header>
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>">Dashboard</a></li>
-                <li class="active">My profile</li>
-            </ol>
+<header class="bg-gray-100">
+    <div class="mx-auto py-0 px-4 sm:px-6">
+        <div class="text-sm text-center text-gray-900">
+            <ul class="flex flex-wrap">
+                <li class="border-b-4 border-red-900">
+                    <a href="<?= site_url('auth/profile'); ?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                        My Profile
+                    </a>
+                </li>
 
-            <div class="row">
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <div id="header-title" style="" class="text-center">
-                        <div style="width: auto; float: left; display: inline-block;">
-                            <img src="<?php echo base_url(); ?>assets/public/images/profile.png"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-9 col-md-9 col-lg-9">
-                    <div class="table table-responsive">
+                <li class="">
+                    <a href="<?= site_url('auth/change_password'); ?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
+                        Change Password
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><b>About me</b></div>
-                            <div class="panel-body">
-                                <table class="table table-striped table-responsive table-hover">
-                                    <tr>
-                                        <td>Name</td>
-                                        <td><?php echo $fname; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Username</td>
-                                        <td><?php echo $username; ?></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Phone</td>
-                                        <td><?php echo $phone; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-                                        <td><?php echo $email; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Phone</td>
-                                        <td><?php echo $phone; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Status</td>
-                                        <td><?php
-                                            if ($status == '1') {
-                                                echo 'Active';
-                                            } else {
-                                                echo 'Inactive';
-                                            }
-                                            ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Created on</td>
-                                        <td><?php echo $created; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Last Login</td>
-                                        <td><?php echo $last_login; ?></td>
-                                    </tr>
-                                </table>
+<main class="bg-white h-full">
+    <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-row flex-wrap mt-2">
+            <div class="w-full">
+                <div class="relative overflow-x-auto">
+                    <?php if ($this->session->flashdata('message') != "") { ?>
+                        <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
+                            <div class="flex">
+                                <div>
+                                    <p class="text-sm font-normal"><?= $this->session->flashdata('message'); ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
+
+                    <table class="w-1/3 text-sm text-left">
+                        <tr class="bg-white border-b">
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Name</td>
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo $fname; ?></td>
+                        </tr>
+
+                        <tr class="bg-white border-b">
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Username</td>
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo $username; ?></td>
+                        </tr>
+
+                        <tr class="bg-white border-b">
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Phone</td>
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo $phone; ?></td>
+                        </tr>
+                        <tr class="bg-white border-b">
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Email</td>
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo $email; ?></td>
+                        </tr>
+                        <tr class="bg-white border-b">
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Phone</td>
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo $phone; ?></td>
+                        </tr>
+                        <tr class="bg-white border-b">
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Status</td>
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php
+                                if ($status == '1') {
+                                    echo 'Active';
+                                } else {
+                                    echo 'Inactive';
+                                }
+                                ?></td>
+                        </tr>
+                        <tr class="bg-white border-b">
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Created on</td>
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo $created; ?></td>
+                        </tr>
+                        <tr class="bg-white border-b">
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Last Login</td>
+                            <td class="px-0 py-2 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo $last_login; ?></td>
+                        </tr>
+                    </table>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
+</main>

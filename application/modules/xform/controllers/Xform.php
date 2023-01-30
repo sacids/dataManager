@@ -71,6 +71,10 @@ class Xform extends MX_Controller
     private $user;
     private $sms_push_url;
 
+    private $table_name;
+    private $form_data_id;
+
+
     public function __construct()
     {
         parent::__construct();
