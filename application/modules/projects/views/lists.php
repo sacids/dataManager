@@ -57,22 +57,22 @@
                             $serial = 1;
                             foreach ($project_list as $project) { ?>
                                 <tr class="bg-white border-b">
-                                    <td class="px-1 py-4 text-left whitespace-nowrap">
+                                    <td class="px-2 py-1 text-left whitespace-nowrap">
                                         <p class="font-semibold text-gray-800 truncate">
                                             <?php echo anchor("projects/forms/" . $project->id, $project->title); ?>
                                         </p>
                                     </td>
 
-                                    <td class="">
+                                    <td class="px-2 py-1">
                                         <p class="truncate">
                                             <?php echo $project->description; ?>
                                         </p>
                                     </td>
 
-                                    <td class="px-1 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
+                                    <td class="px-2 py-1 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
                                         <?php echo date('d-m-Y H:i:s', strtotime($project->created_at)); ?>
                                     </td>
-                                    <td class="px-1 py-4 text-center font-medium text-gray-700 flex flex-row">
+                                    <td class="px-2 py-1 text-center font-medium text-gray-700 flex flex-row">
                                         <?php if (perms_role('Projects', 'edit')) { ?>
                                             <a href="<?= site_url("projects/edit/" . $project->id) ?>" class="text-gray-600 hover:text-gray-900 pr-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">

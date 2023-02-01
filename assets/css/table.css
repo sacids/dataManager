@@ -24,7 +24,8 @@
     width: calc(63vw - 150px);
     height: calc(100vh - 80px);
     overflow-y: scroll;
-    background-color: #EEEEEE;
+    background-color: #ffffff;
+    border-left: 1px solid#dcdcdc;
 } 
 
 /*===============================================

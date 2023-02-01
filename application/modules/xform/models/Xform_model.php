@@ -375,7 +375,7 @@ class Xform_model extends CI_Model
      * @param null $perm_conditions
      * @return mixed returns data from tables created by uploading xform definitions files.
      */
-    public function find_form_data($table_name, $limit = 500, $offset = 0, $perm_conditions = null)
+    public function find_form_data($table_name, $limit = 10, $offset = 0, $perm_conditions = null)
     {
         if ($perm_conditions != null) {
             if ($perm_conditions != null) {
@@ -434,7 +434,7 @@ class Xform_model extends CI_Model
      * @param null $perm_conditions
      * @return mixed
      */
-    public function find_form_data_by_fields($table_name, $selected_columns = array(), $limit = 30, $offset = 0, $perm_conditions = null)
+    public function find_form_data_by_fields($table_name, $selected_columns = array(), $limit = 10, $offset = 0, $perm_conditions = null)
     {
         $this->db->select(implode(",", array_keys($selected_columns)));
         $this->db->limit($limit, $offset);

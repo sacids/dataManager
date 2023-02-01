@@ -94,20 +94,20 @@
                                 foreach ($data as $key => $entry) {
 
                                     if ($key == "id") {
-                                        echo "<td class='px-4 py-3'>" . form_checkbox("entry_id[]", $entry) . "</td>";
+                                        echo "<td class='px-2 py-1'>" . form_checkbox("entry_id[]", $entry) . "</td>";
                                     }
 
                                     if ($key == "meta_instanceID") {
-                                        echo "<td class='px-4 py-3 dt-click' data-id=" . $data->id . "  form-id=" . $form_id . ">" . $entry . "</td>";
+                                        echo "<td class='px-2 py-1 dt-click' data-id=" . $data->id . "  form-id=" . $form_id . ">" . $entry . "</td>";
                                     } else {
                                         if ($key == "meta_username") {
-                                            echo "<td class='px-4 py-3'>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
+                                            echo "<td class='px-2 py-1'>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
                                         } else {
-                                            if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                                                echo "<td class='py-3'><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
-                                            } else {
-                                                echo "<td class='px-4 py-3'>" . $entry . "</td>";
-                                            }
+                                            // if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                                            //     //echo "<td class='py-3'><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
+                                            // } else {
+                                            echo "<td class='px-2 py-1'>" . $entry . "</td>";
+                                            //}
                                         }
                                     }
                                 }

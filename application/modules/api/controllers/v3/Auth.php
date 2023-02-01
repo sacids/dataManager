@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 require APPPATH . '/libraries/REST_Controller.php';
@@ -17,6 +17,7 @@ class Auth extends REST_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library(array('ion_auth'));
         $this->load->model('model');
 
         $this->realm = 'Authorized users of Sacids Openrosa';
@@ -33,10 +34,8 @@ class Auth extends REST_Controller
 
         if ($app_version) {
             $this->response(array('status' => 'success', 'app_version' => $app_version), 200);
-
         } else {
             $this->response(array('status' => 'failed', 'message' => 'No app version available'), 204);
-
         }
     }
 
@@ -58,7 +57,6 @@ class Auth extends REST_Controller
         if (!$this->ion_auth->login($username, $password)) {
             //return response for failure
             $this->response(array('error' => TRUE, 'error_msg' => 'Incorrect mobile or password'), 203);
-
         } else {
             //get user details after successfully
             $this->model->set_table('users');
@@ -96,11 +94,9 @@ class Auth extends REST_Controller
         if ($this->check_user_existence($username)) {
             //return error response
             $this->response(array('error' => TRUE, 'error_msg' => 'Mobile number used by another user'), 203);
-
         } else if ($password != $password_confirm) {
             //return error response
             $this->response(array('error' => TRUE, 'error_msg' => 'Password does not match'), 203);
-
         } else {
             //digest password
             $digest_password = md5("{$username}:{$this->realm}:{$password}");
@@ -113,7 +109,11 @@ class Auth extends REST_Controller
                 'digest_password' => $digest_password
             );
 
-            if ($id = $this->ion_auth->register($username, $password, $this->default_email, $additional_data)) {
+            //user groups
+            $groups = [2];
+
+            //register now
+            if ($id = $this->ion_auth->register($username, $password, "afyadata@sacids.org", $additional_data, $groups)) {
                 //get user details after successfully
                 $this->model->set_table('users');
                 $user = $this->model->get_by('id', $id);
