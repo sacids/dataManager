@@ -105,6 +105,12 @@ class Projects extends MX_Controller
         }
         $this->data["links"] = $this->pagination->create_links();
 
+        //links
+        $this->data['links'] = [
+            'project_lists' => anchor('projects/lists', 'List Projects', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'create_project' => anchor('projects/add_new', 'Create Project', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
+
         $this->load->view('header', $this->data);
         $this->load->view("lists");
         $this->load->view('footer');
@@ -162,6 +168,12 @@ class Projects extends MX_Controller
             'required' => ''
         );
 
+        //links
+        $this->data['links'] = [
+            'project_lists' => anchor('projects/lists', 'List Projects', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'create_project' => anchor('projects/add_new', 'Create Project', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+        ];
+
         //render view
         $this->load->view('header', $this->data);
         $this->load->view("add_new");
@@ -214,6 +226,12 @@ class Projects extends MX_Controller
             'required' => ''
         );
 
+        //links
+        $this->data['links'] = [
+            'project_lists' => anchor('projects/lists', 'List Projects', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'create_project' => anchor('projects/add_new', 'Create Project', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+        ];
+
         //render view
         $this->load->view('header', $this->data);
         $this->load->view("edit");
@@ -260,6 +278,13 @@ class Projects extends MX_Controller
 
         $this->data['project'] = $project;
         $this->data['project_id'] = $project_id;
+
+        //links
+        $this->data['links'] = [
+            'details' => anchor("projects/forms/" . $project_id, 'Details', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'list_forms' => anchor("projects/forms/" . $project_id, 'List Forms', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'upload_form' => anchor("xform/add_new/" . $project_id, 'Upload Form', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
 
         $filter_conditions = null;
         if (!$this->ion_auth->is_admin()) {

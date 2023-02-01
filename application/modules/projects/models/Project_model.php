@@ -53,7 +53,7 @@ class Project_model extends CI_Model
      * @param null $filter_condition
      * @return mixed
      */
-    function get_project_list($num, $start, $owner = null, $filter_condition = null)
+    function get_project_list($num = 50, $start = 0, $owner = null, $filter_condition = null)
     {
         if ($filter_condition != null && $owner != null) {
             $this->db->where('created_by', $owner);

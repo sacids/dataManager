@@ -99,7 +99,7 @@ class Dashboard extends CI_Controller
         $this->data['daily_data'] = json_encode($daily_data);
 
         //feedback
-        $this->data['feedback'] = $this->Feedback_model->find_all(5, 0);
+        $this->data['feedback'] = $this->Feedback_model->find_all(8, 0);
 
         //detected diseases
         $this->model->set_table('ohkr_detected_diseases');

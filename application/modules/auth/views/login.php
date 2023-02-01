@@ -42,8 +42,11 @@
                             <!-- <h4 class="text-xl font-semibold mt-1 mb-12 pb-1"></h4> -->
                         </div>
 
-                        <?= form_open('auth/login', 'class="form-horizontal"') ?>
+                        <?php if ($message != "") {
+                            echo '<span class="text-center text-red-600 text-sm font-normal mb-3">' . $message . '</span>';
+                        } ?>
 
+                        <?= form_open('auth/login', 'class="mt-4"') ?>
                         <p class="mb-4 text-center">Please login to your account</p>
                         <div class="mb-4">
                             <input type="username" class="form-control block w-full px-3 py-3 text-sm font-normal text-gray-900 placeholder-gray-500 bg-white bg-clip-padding border border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="id_username" name="identity" placeholder="Write email/username ..." />

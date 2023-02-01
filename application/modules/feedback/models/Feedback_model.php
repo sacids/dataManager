@@ -94,7 +94,7 @@ class Feedback_model extends CI_Model
     function find_all($limit = 30, $offset = 0)
     {
         return $this->db->query("
-             SELECT fb.id, fb.instance_id, fb.message, fb.date_created,xforms.title,
+             SELECT fb.id, fb.instance_id, fb.message, fb.sender, fb.date_created,xforms.title,
              users.first_name, users.last_name, users.username
              FROM " . self::$table_name_feedback . " fb
              JOIN " . self::$table_name_xform . " ON fb.form_id = xforms.form_id

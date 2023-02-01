@@ -1,59 +1,50 @@
-<div class="container body-content">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <div id="header-title">
-                <h3 class="title">CHW Submission Stats : <?= $form->title ?></h3>
-            </div>
+<header class="bg-gray-100">
+    <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-xl font-medium tracking-tight text-gray-900">
+            <a href="<?= site_url('projects/forms/' . $project->id) ?>" class="text-red-900"><?= isset($project) ? $project->title : '' ?></a> > <?= $form->title ?>
+        </h1>
+    </div>
+</header>
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
-                <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?></a></li>
-                <li class="active"><?= $form->title ?></li>
-            </ol>
-
+<header class="bg-gray-100">
+    <div class="mx-auto py-0 px-4 sm:px-6">
+        <div class="text-sm text-left text-gray-900">
             <?php
-            if ($this->session->flashdata('message') != '') {
-                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-            } ?>
-
-            <div class="row">
-                <div class="col-md-12 col-12">
-                    <?php if (isset($data_collectors) && $data_collectors) { ?>
-                        <table class="table table-striped table-responsive table-hover table-bordered" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <th width="3%">#</th>
-                                <th width="60%">Full Name</th>
-                                <th width="10%">Username</th>
-                                <th width="10%">No. of Submission</th>
-                            </tr>
-
-                            <?php
-                            $serial = 1;
-                            foreach ($data_collectors as $val) { ?>
-                                <tr>
-                                    <td><?= $serial ?></td>
-                                    <td><?= $val->first_name . ' ' . $val->last_name; ?></td>
-                                    <td><?= $val->username; ?></td>
-                                    <td align="right"><b><?= number_format($val->submission) ?></b></td>
-                                </tr>
-                            <?php $serial++;
-                            } ?>
-                        </table>
-                        <?php if (!empty($links)) : ?>
-                            <div class="widget-foot">
-                                <?= $links ?>
-                                <div class="clearfix"></div>
-                            </div>
-                        <?php endif; ?>
-
-                    <?php } else { ?>
-                        <div class="fail_message">Nothing found</div>
-                    <?php } ?>
-                </div>
-            </div>
-
+            foreach ($links as $key => $link) {
+                echo $link;
+            }
+            ?>
         </div>
     </div>
-</div>
+</header>
+
+<main class="bg-white h-full flex overflow-hidden">
+    <div class="flex-1 h-full overflow-y-scroll">
+        <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
+            <?php if (isset($data_collectors) && $data_collectors) { ?>
+                <div class="relative overflow-x-auto">
+                    <table class="table table-striped table-responsive table-hover table-bordered" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th width="3%">#</th>
+                            <th width="60%">Full Name</th>
+                            <th width="10%">Username</th>
+                            <th width="10%">No. of Submission</th>
+                        </tr>
+
+                        <?php
+                        $serial = 1;
+                        foreach ($data_collectors as $val) { ?>
+                            <tr>
+                                <td><?= $serial ?></td>
+                                <td><?= $val->first_name . ' ' . $val->last_name; ?></td>
+                                <td><?= $val->username; ?></td>
+                                <td align="right"><b><?= number_format($val->submission) ?></b></td>
+                            </tr>
+                        <?php $serial++;
+                        } ?>
+                    </table>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</main>

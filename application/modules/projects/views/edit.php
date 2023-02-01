@@ -8,20 +8,12 @@
 
 <header class="bg-gray-100">
     <div class="mx-auto py-0 px-4 sm:px-6">
-        <div class="text-sm text-center text-gray-900">
-            <ul class="flex flex-wrap">
-                <li class="">
-                    <a href="<?= site_url('projects/lists'); ?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
-                        List Projects
-                    </a>
-                </li>
-
-                <li class="border-b-4 border-red-900">
-                    <a href="<?= site_url('projects/add_new'); ?>" class="inline-block border-b-2 p-2 border-transparent rounded-t-lg hover:text-gray-600  dark:hover:text-gray-900">
-                        Create Project
-                    </a>
-                </li>
-            </ul>
+        <div class="text-sm text-left text-gray-900">
+            <?php
+            foreach ($links as $key => $link) {
+                echo $link;
+            }
+            ?>
         </div>
     </div>
 </header>

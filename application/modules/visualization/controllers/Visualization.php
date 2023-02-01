@@ -80,6 +80,8 @@ class Visualization extends CI_Controller
 
         $form = $this->Xform_model->find_by_id($form_id);
         $data['form'] = $form;
+
+
         if ($form) {
             // Capture selected x and y fields
             // Capture dates ranges if selected
@@ -156,6 +158,16 @@ class Visualization extends CI_Controller
         }
 
         $data['title'] = 'Chart';
+
+        //links
+        $data['links'] = [
+            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Table', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Charts', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
 
         //render view
         $this->load->view("header", $data);
@@ -353,6 +365,16 @@ class Visualization extends CI_Controller
 
         $form = $this->Xform_model->find_by_id($form_id);
         $data['form'] = $form;
+
+        //links
+        $data['links'] = [
+            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Table', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Charts', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
 
         if ($form) {
             $map_data = $this->_load_points($form->form_id);

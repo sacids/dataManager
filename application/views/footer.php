@@ -2,6 +2,8 @@
 
    <script>
       $(document).ready(function() {
+         $('.multiple-select').select2();
+
          //custom search
          let dTable = $('#dt').DataTable({
             "paging": false,

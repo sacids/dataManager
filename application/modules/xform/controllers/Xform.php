@@ -132,7 +132,7 @@ class Xform extends MX_Controller
         // Form Received in openrosa server
         $http_response_code = 201;
 
-        //log_message("DEBUG","diggest => " . $_SERVER ['PHP_AUTH_DIGEST']);
+        log_message("DEBUG","diggest => " . $_SERVER ['PHP_AUTH_DIGEST']);
 
         // Get the digest from the http header
         if (isset($_SERVER['PHP_AUTH_DIGEST']))
@@ -235,7 +235,7 @@ class Xform extends MX_Controller
             // call function to insert xform data in a database
             if (!$this->insert_data($uploaded_filename)) {
                 $this->Submission_model->delete_submission($inserted_form_id);
-                // @unlink($path);
+                @unlink($path);
             }
         }
 
@@ -490,7 +490,7 @@ class Xform extends MX_Controller
             $feedback = array(
                 "user_id" => $this->user_submitting_feedback_id,
                 "form_id" => $this->xFormReader->get_table_name(),
-                "message" => 'Obrigado pelo envio das informações, Recebemos o seu formulário.',
+                "message" => 'Asante kwa kutuma taarifa, Tumepokea fomu yako.',
                 "date_created" => date('Y-m-d H:i:s'),
                 "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
                 "sender" => "server",
@@ -638,7 +638,6 @@ class Xform extends MX_Controller
         $xml = '<xforms xmlns="http://openrosa.org/xforms/xformsList">';
 
         foreach ($forms as $form) {
-
             // used to notify if anything has changed with the form, so that it may be updated on download
             $hash = md5($form->form_id . $form->created_at . $form->filename . $form->id . $form->title . $form->last_updated);
 
@@ -684,6 +683,13 @@ class Xform extends MX_Controller
 
         $data['project'] = $project;
         $data['project_id'] = $project_id;
+
+        //links
+        $data['links'] = [
+            'details' => anchor("projects/forms/" . $project_id, 'Details', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'list_forms' => anchor("projects/forms/" . $project_id, 'List Forms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'upload_form' => anchor("xform/add_new/" . $project_id, 'Upload Form', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+        ];
 
         $this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
         $this->form_validation->set_rules("access", $this->lang->line("validation_label_form_access"), "required");
@@ -901,28 +907,12 @@ class Xform extends MX_Controller
         }
         $data['form'] = $form;
 
-        // TODO
-        // Search field by table name from mapping fields
-        // $db_table_fields = $this->Xform_model->get_fieldname_map($form->form_id);
-
-        // //table fields
-        // $table_fields = $this->Xform_model->find_table_columns($form->form_id);
-
-        // if (count($db_table_fields) != count($table_fields)) {
-        //     foreach ($table_fields as $tf) {
-        //         if ($this->Xform_model->xform_table_column_exists($form->form_id, $tf) == 0) {
-        //             $details = [
-        //                 "table_name" => $form->form_id,
-        //                 "col_name" => $tf,
-        //                 "field_name" => $tf,
-        //                 "field_label" => str_replace("_", " ", $tf)
-        //             ];
-        //             $this->Xform_model->create_field_name_map($details);
-        //         }
-        //     }
-        // }
-
-        // $data['table_fields'] = $this->Xform_model->get_fieldname_map($form->form_id);
+        //links
+        $data['links'] = [
+            'details' => anchor("projects/forms/" . $project_id, 'Details', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'list_forms' => anchor("projects/forms/" . $project_id, 'List Forms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'upload_form' => anchor("xform/add_new/" . $project_id, 'Upload Form', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+        ];
 
         $allow_dhis2_checked = (isset($_POST['allow_dhis2'])) ? 1 : 0;
 
@@ -936,45 +926,11 @@ class Xform extends MX_Controller
         // }
 
         if ($this->form_validation->run() === FALSE) {
-            // $users = $this->User_model->find_all(500);
-            // $groups = $this->User_model->find_user_groups();
-
-            // $available_group_permissions = [];
-            // $available_user_permissions = [];
-
-            // foreach ($groups as $group) {
-            //     $available_group_permissions['G' . $group->id . 'G'] = $group->description;
-            // }
-            // $data['group_perms'] = $available_group_permissions;
-
-            // foreach ($users as $user) {
-            //     $available_user_permissions['P' . $user->id . 'P'] = $user->first_name . " " . $user->last_name;
-            // }
-            // $data['user_perms'] = $available_user_permissions;
-
-            // $current_permissions = explode(",", $form->perms);
-            // $data['current_perms'] = $current_permissions;
-
             $this->load->view('header', $data);
             $this->load->view("edit_form", $data);
             $this->load->view('footer');
         } else {
-            $hides = $this->input->post("hide[]");
-            $ids = $this->input->post("ids[]");
-            $labels = $this->input->post("label[]");
-            $field_types = $this->input->post("field_type[]");
-            $chart_use = $this->input->post("chart_use[]");
-            $type_option = $this->input->post("type[]");
-            $dhis2_data_element = $this->input->post("data_element[]");
-
             if ($form) {
-                $new_perms = $this->input->post("perms");
-
-                $new_perms_string = "";
-                if ($new_perms) {
-                    $new_perms_string = join(",", $new_perms);
-                }
-
                 $new_form_details = array(
                     "title" => $this->input->post("title"),
                     "description" => $this->input->post("description"),
@@ -982,7 +938,6 @@ class Xform extends MX_Controller
                     "push" => $this->input->post("push"),
                     "has_symptoms_field" => $this->input->post("has_symptoms_field"),
                     "has_specie_type_field" => $this->input->post("has_specie_type_field"),
-                    "perms" => $new_perms_string,
                     "last_updated" => date("c"),
                     "allow_dhis" => $allow_dhis2_checked,
                     "dhis_data_set" => $this->input->post("data_set"),
@@ -992,24 +947,6 @@ class Xform extends MX_Controller
 
                 $this->db->trans_start();
                 $this->Xform_model->update_form($form_id, $new_form_details);
-
-                // $mapped_fields = [];
-                // $i = 0;
-                // foreach ($labels as $key => $value) {
-                //     $mapped_fields[$i]["field_label"] = $value;
-                //     $mapped_fields[$i]["id"] = $ids[$i];
-                //     $mapped_fields[$i]["field_type"] = $field_types[$i];
-                //     $mapped_fields[$i]["chart_use"] = $chart_use[$i];
-                //     $mapped_fields[$i]["type"] = $type_option[$i];
-                //     $mapped_fields[$i]["hide"] = 0;
-                //     //$mapped_fields[$i]["dhis_data_element"] = $dhis2_data_element[$i];
-
-                //     if (!empty($hides) && in_array($ids[$i], $hides)) {
-                //         $mapped_fields[$i]["hide"] = 1;
-                //     }
-                //     $i++;
-                // }
-                // $this->Xform_model->update_field_name_maps($mapped_fields);
                 $this->db->trans_complete();
 
                 if ($this->db->trans_status()) {
@@ -1069,13 +1006,61 @@ class Xform extends MX_Controller
                 }
             }
         }
-
         $data['table_fields'] = $this->Xform_model->get_fieldname_map($form->form_id);
 
+        //links
+        $data['links'] = [
+            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Table', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Charts', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
+
+        //posting
+        if (isset($_POST['submit'])) {
+            $hides = $this->input->post("hide[]");
+            $ids = $this->input->post("ids[]");
+            $labels = $this->input->post("label[]");
+            $field_types = $this->input->post("field_type[]");
+            $chart_use = $this->input->post("chart_use[]");
+            $type_option = $this->input->post("type[]");
+            //$dhis2_data_element = $this->input->post("data_element[]");
+
+            $this->db->trans_start();
+
+            $mapped_fields = [];
+            $i = 0;
+            foreach ($labels as $key => $value) {
+                $mapped_fields[$i]["field_label"] = $value;
+                $mapped_fields[$i]["id"] = $ids[$i];
+                $mapped_fields[$i]["field_type"] = $field_types[$i];
+                $mapped_fields[$i]["chart_use"] = $chart_use[$i];
+                $mapped_fields[$i]["type"] = $type_option[$i];
+                $mapped_fields[$i]["hide"] = 0;
+                //$mapped_fields[$i]["dhis_data_element"] = $dhis2_data_element[$i];
+
+                if (!empty($hides) && in_array($ids[$i], $hides)) {
+                    $mapped_fields[$i]["hide"] = 1;
+                }
+                $i++;
+            }
+            $this->Xform_model->update_field_name_maps($mapped_fields);
+            $this->db->trans_complete();
+
+            //redirect
+            if ($this->db->trans_status()) {
+                $this->session->set_flashdata("message", display_message("Successful mapping fields"));
+            } else {
+                $this->session->set_flashdata("message", display_message("Failed to map fields", "warning"));
+            }
+            redirect("xform/mapping/{$project_id}/{$form_id}");
+        }
 
         //render view
         $this->load->view('header', $data);
-        $this->load->view("mapping_fields", $data);
+        $this->load->view("mapping_fields");
         $this->load->view('footer');
     }
 
@@ -1121,11 +1106,46 @@ class Xform extends MX_Controller
         $current_permissions = explode(",", $form->perms);
         $data['current_perms'] = $current_permissions;
 
+        //links
+        $data['links'] = [
+            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Table', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Charts', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+        ];
 
+        //posting
+        if (isset($_POST['submit'])) {
+            $new_perms = $this->input->post("perms");
+
+            $new_perms_string = "";
+            if ($new_perms) {
+                $new_perms_string = join(",", $new_perms);
+            }
+
+            $new_form_details = array(
+                "perms" => $new_perms_string,
+                "last_updated" => date("c"),
+            );
+
+            $this->db->trans_start();
+            $this->Xform_model->update_form($form_id, $new_form_details);
+            $this->db->trans_complete();
+
+            //redirect
+            if ($this->db->trans_status()) {
+                $this->session->set_flashdata("message", display_message("Successful assigned permissions"));
+            } else {
+                $this->session->set_flashdata("message", display_message("Failed to assign permissions", "warning"));
+            }
+            redirect("xform/permissions/{$project_id}/{$form_id}");
+        }
 
         //render view
         $this->load->view('header', $data);
-        $this->load->view("permissions", $data);
+        $this->load->view("permissions");
         $this->load->view('footer');
     }
 
@@ -1324,7 +1344,7 @@ class Xform extends MX_Controller
         }
 
         //apply search
-        if (isset($_POST['search'])) {
+        if (isset($_POST['filter'])) {
             $start_at = $this->input->post('start_at');
             $end_at = $this->input->post('end_at');
 
@@ -1384,6 +1404,16 @@ class Xform extends MX_Controller
             $data["links"] = $this->pagination->create_links();
         }
 
+        //links
+        $data['links'] = [
+            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Table', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Charts', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
+
         //render view
         $this->load->view('header', $data);
         $this->load->view("form_data");
@@ -1418,6 +1448,16 @@ class Xform extends MX_Controller
         foreach ($data['data_collectors'] as $k => $v) {
             $data['data_collectors'][$k]->submission = $this->Submission_model->get_submitted_forms_by_CHW($form->form_id, $v->username);
         }
+
+        //links
+        $data['links'] = [
+            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Table', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Charts', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
 
         //render view
         $this->load->view('header', $data);
