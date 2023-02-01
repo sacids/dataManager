@@ -1,12 +1,10 @@
-<header class="bg-gray-100">
+<div class="bg-gray-100">
     <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
             <?= isset($project) ? $project->title : '' ?>
         </h1>
     </div>
-</header>
 
-<header class="bg-gray-100">
     <div class="mx-auto py-0 px-4 sm:px-6">
         <div class="text-sm text-left text-gray-900">
             <?php
@@ -16,7 +14,10 @@
             ?>
         </div>
     </div>
+</div>
 </header>
+
+
 
 <main class="bg-white h-full flex overflow-hidden">
     <div class="h-full overflow-y-scroll">
@@ -65,7 +66,7 @@
                                     <td class="px-1 py-4 text-left whitespace-nowrap">
                                         <p class="font-semibold text-gray-800 truncate">
                                             <?php echo anchor("xform/form_data/" . $project_id . '/' . $form->id, $form->title); ?>
-                            </p>
+                                        </p>
                                     </td>
 
                                     <td class="">

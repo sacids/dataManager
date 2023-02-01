@@ -1405,7 +1405,7 @@ class Xform extends MX_Controller
             }
             //form data
             $data['form_data'] = $form_data;
-            $data["links"] = $this->pagination->create_links();
+            $data["page_links"] = $this->pagination->create_links();
         }
 
         //links

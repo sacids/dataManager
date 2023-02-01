@@ -50,8 +50,8 @@
 
 <body class="h-full leading-normal tracking-normal">
     <!-- Begin page -->
-    <div class="h-full overflow-hidden">
-        <nav class="bg-white">
+    <header class="sticky top-0 z-50">
+        <nav class="bg-white border-b">
             <div class="mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex h-14 items-center justify-between">
                     <div class="flex items-center">

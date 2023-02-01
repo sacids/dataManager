@@ -1,10 +1,8 @@
-<header class="bg-gray-100">
-    <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
+<div class="bg-gray-100">
+    <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">Projects</h1>
     </div>
-</header>
 
-<header class="bg-gray-100">
     <div class="mx-auto py-0 px-4 sm:px-6">
         <div class="text-sm text-left text-gray-900">
             <?php
@@ -14,9 +12,10 @@
             ?>
         </div>
     </div>
+</div>
 </header>
 
-<main class="bg-white h-full flex overflow-hidden">
+<main class="bg-white h-full relative">
     <div class="h-full overflow-y-scroll">
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <?php if ($this->session->flashdata('message') != "") { ?>
@@ -38,8 +37,8 @@
 
                         <div>
                             <!-- <a href="#" class="text-white bg-green-800 hover:bg-green-900 font-medium rounded text-sm px-5 py-3">
-                                <i class="fa-solid fa-file-export text-white"></i> XLS
-                            </a> -->
+                            <i class="fa-solid fa-file-export text-white"></i> XLS
+                        </a> -->
                         </div>
                     </div>
 

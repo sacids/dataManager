@@ -1,12 +1,10 @@
-<header class="bg-gray-100">
+<div class="bg-gray-100">
     <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
             <a href="<?= site_url('projects/forms/' . $project->id) ?>" class="text-red-900"><?= isset($project) ? $project->title : '' ?></a> > <?= $form->title ?>
         </h1>
     </div>
-</header>
 
-<header class="bg-gray-100">
     <div class="mx-auto py-0 px-4 sm:px-6">
         <div class="text-sm text-left text-gray-900">
             <?php
@@ -16,7 +14,10 @@
             ?>
         </div>
     </div>
+
+</div>
 </header>
+
 
 <main class="bg-white h-full flex overflow-hidden">
     <div class="flex-1 h-full overflow-y-scroll">
@@ -49,13 +50,25 @@
             </div>
             <?php echo form_close(); ?>
 
+            <?php if ($this->session->flashdata('message') != "") { ?>
+                <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-2 mt-2" role="alert">
+                    <div class="flex">
+                        <div>
+                            <p class="text-sm font-normal"><?= $this->session->flashdata('message'); ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
             <?php if (isset($form_data) && $form_data) { ?>
                 <div class="relative overflow-x-auto">
+                    <?= form_open("xform/delete_entry/" . $project->id . '/' . $form->id, array("role" => "form")); ?>
+                    <?= form_hidden("table_name", $form_id); ?>
                     <table id="dt" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead class="text-gray-600 text-sm font-medium">
                             <tr>
                                 <th scope="col" class="text-center">
-                                    <input type="checkbox" id="select-all">
+                                    <input type="checkbox" id="selectAll">
                                 </th>
                                 <?php
                                 if (isset($selected_columns)) {
@@ -85,7 +98,7 @@
                                     }
 
                                     if ($key == "meta_instanceID") {
-                                        echo '<td class="px-4 py-3">' . $entry . '</td>';
+                                        echo "<td class='px-4 py-3 dt-click' data-id=" . $data->id . "  form-id=" . $form_id . ">" . $entry . "</td>";
                                     } else {
                                         if ($key == "meta_username") {
                                             echo "<td class='px-4 py-3'>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
@@ -103,6 +116,23 @@
                             ?>
                         </tbody>
                     </table>
+
+                    <div class="flex flex-row justify-between">
+                        <div>
+                            <button type="submit" name="delete" class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 font-normal rounded-0 text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                                Delete Selected
+                            </button>
+                        </div>
+
+                        <div>
+                            <?php if (!empty($page_links)) : ?>
+                                <nav aria-label="Page navigation example">
+                                    <?= $page_links ?>
+                                </nav>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?= form_close(); ?>
                 </div>
             <?php } else { ?>
                 <div class="w-full bg-red-100 border border-red-400 text-red-700 mt-4 px-4 py-3 rounded" role="alert">
@@ -127,7 +157,7 @@
         //close offcanvas wrp
         $('#offcanvas-wrp').hide();
 
-        $(document).on('click', '#dt tbody tr', function(event) {
+        $(document).on('click', '.dt-click', function(event) {
             event.preventDefault();
 
             $('#offcanvas-wrp').animate({

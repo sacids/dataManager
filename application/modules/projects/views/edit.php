@@ -1,12 +1,10 @@
-<header class="bg-gray-100">
-    <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
+<div class="bg-gray-100 ">
+    <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
             Update Project
         </h1>
     </div>
-</header>
 
-<header class="bg-gray-100">
     <div class="mx-auto py-0 px-4 sm:px-6">
         <div class="text-sm text-left text-gray-900">
             <?php
@@ -16,12 +14,13 @@
             ?>
         </div>
     </div>
+</div>
 </header>
+
 
 <main class="bg-white h-full">
     <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div class="flex flex-row flex-wrap mt-2">
-
             <div class="flex w-1/2 flex-col">
                 <div class="relative overflow-x-auto">
 

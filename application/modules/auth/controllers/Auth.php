@@ -173,6 +173,12 @@ class Auth extends MX_Controller
         $this->data['created'] = mdate($date_string, $User->created_on);
         $this->data['last_login'] = mdate($date_string, $User->last_login);
 
+        //links
+        $this->data['links'] = [
+            'my_profile' => anchor("auth/profile", 'My Profile', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'change_password' => anchor("auth/change_password", 'Change Password', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
+
         $this->data['title'] = 'My profile';
         $this->load->view('header', $this->data);
         $this->load->view('profile/user_info');
@@ -297,6 +303,12 @@ class Auth extends MX_Controller
                 'type' => 'hidden',
                 'value' => $user->id,
             );
+
+            //links
+            $this->data['links'] = [
+                'my_profile' => anchor("auth/profile", 'My Profile', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'change_password' => anchor("auth/change_password", 'Change Password', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            ];
 
             // render view
             $this->load->view('header', $this->data);

@@ -1,12 +1,10 @@
-<header class="bg-gray-100">
+<div class="bg-gray-100">
     <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
-        <a href="<?= site_url('projects/forms/' . $project->id) ?>" class="text-red-900"><?= isset($project) ? $project->title : '' ?></a> > <?= $form->title ?>
+            <a href="<?= site_url('projects/forms/' . $project->id) ?>" class="text-red-900"><?= isset($project) ? $project->title : '' ?></a> > <?= $form->title ?>
         </h1>
     </div>
-</header>
 
-<header class="bg-gray-100">
     <div class="mx-auto py-0 px-4 sm:px-6">
         <div class="text-sm text-left text-gray-900">
             <?php
@@ -16,6 +14,8 @@
             ?>
         </div>
     </div>
+
+</div>
 </header>
 
 <main class="bg-white h-full">
@@ -23,7 +23,7 @@
         <div class="flex flex-row flex-wrap mt-2">
             <div class="w-full">
                 <div class="relative overflow-x-auto">
-                <div style="min-height: 800px; height: auto; margin-bottom: 20px;" id="map"></div>
+                    <div style="min-height: 800px; height: auto; margin-bottom: 20px;" id="map"></div>
                 </div>
             </div>
         </div>

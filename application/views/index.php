@@ -1,10 +1,11 @@
-<header class="bg-gray-100">
+<div class="bg-gray-100">
     <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">Dashboard</h1>
     </div>
+</div>
 </header>
 
-<main class="bg-white h-full">
+<main class="bg-white h-full relative">
     <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
 
         <!-- Stats -->
