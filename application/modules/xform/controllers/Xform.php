@@ -1292,6 +1292,10 @@ class Xform extends MX_Controller
     {
         $this->_is_logged_in();
 
+        $start_at = null;
+        $end_at   = null;
+
+        //projects
         $project = $this->Project_model->get_project_by_id($project_id);
 
         if (!$project)
@@ -1414,6 +1418,9 @@ class Xform extends MX_Controller
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
+        $data['start_at'] = $start_at;
+        $data['end_at'] = $end_at;
+
         //render view
         $this->load->view('header', $data);
         $this->load->view("form_data");
@@ -1471,8 +1478,14 @@ class Xform extends MX_Controller
      *
      * @param null $form_id
      */
-    function xls_export_form_data($form_id)
+    function xls_export_form_data()
     {
+        //get variables
+        $form_id = $this->input->get('form_id');
+        $start_at = $this->input->get('start');
+        $end_at = $this->input->get('end_at');
+
+        //where condition
         $where_condition = null;
         if (!$this->ion_auth->is_admin()) {
             $where_condition = $this->Acl_model->find_user_permissions($this->user_id, $form_id);
@@ -1503,7 +1516,7 @@ class Xform extends MX_Controller
                 $this->spreadsheet->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
                 $serial++;
             }
-            $form_data = $this->Xform_model->find_form_data_by_fields($form_id, $form_filters, 5000, 0, $where_condition);
+            $form_data = $this->Xform_model->search_form_data_by_fields($form_id, $form_filters, $where_condition, $start_at, $end_at);
         } else {
             //table fields
             $table_fields = $this->Xform_model->find_table_columns($form_id);
@@ -1537,7 +1550,7 @@ class Xform extends MX_Controller
                 $this->spreadsheet->setActiveSheetIndex(0)->setCellValue($column_title . $inc, $column_name);
                 $serial++;
             }
-            $form_data = $this->Xform_model->find_form_data($form_id, 5000, 0, $where_condition);
+            $form_data = $this->Xform_model->search_form_data($form_id, $where_condition, $start_at, $end_at);
         }
 
         $inc = 2;

@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="flex items-end self-end ml-4">
-                    <a href="<?= site_url("xform/xls_export_form_data/" . $form_id) ?>" class="text-white bg-green-800 hover:bg-green-900 font-normal rounded-0 text-sm px-5 py-2.5">
+                    <a href="<?= site_url("xform/xls_export_form_data/?form_id=" . $form_id . '&start_at=' . $start_at . '&end_at=' . $end_at) ?>" class="text-white bg-green-800 hover:bg-green-900 font-normal rounded-0 text-sm px-5 py-2.5">
                         <i class="fa-solid fa-file-csv text-white"></i> Export
                     </a>
                 </div>
