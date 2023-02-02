@@ -61,7 +61,7 @@
                         </div>
                         <div class="flex-1 text-right md:text-center">
                             <h5 class="font-medium text-gray-600">Data Collected</h5>
-                            <h3 class="font-bold text-2xl">0</h3>
+                            <h3 class="font-bold text-2xl"><?= number_format($sum_collected_data); ?></h3>
                         </div>
                     </div>
                 </div>

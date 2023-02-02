@@ -1,4 +1,5 @@
 <?php
+
 /**
  * AfyaData
  *
@@ -35,7 +36,7 @@
  * @since        Version 1.0.0
  */
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller
 {
@@ -82,9 +83,10 @@ class Dashboard extends CI_Controller
         //submitted forms
         $submitted_forms = $this->Submission_model->get_submitted_forms($filter_conditions);
 
+
         $i = 0;
         foreach ($submitted_forms as $value) {
-            $form_title[$i] = '<a href="' . site_url('xform/form_data/' . $value->project_id.'/'.$value->id) . '" >' . $value->title . '</a>';
+            $form_title[$i] = '<a href="' . site_url('xform/form_data/' . $value->project_id . '/' . $value->id) . '" >' . $value->title . '</a>';
             $overall_data[$i] = $this->Submission_model->count_overall_submitted_forms($value->form_id);
             $monthly_data[$i] = $this->Submission_model->count_monthly_submitted_forms($value->form_id);
             $weekly_data[$i] = $this->Submission_model->count_weekly_submitted_forms($value->form_id);
@@ -97,6 +99,12 @@ class Dashboard extends CI_Controller
         $this->data['monthly_data'] = json_encode($monthly_data);
         $this->data['weekly_data'] = json_encode($weekly_data);
         $this->data['daily_data'] = json_encode($daily_data);
+
+        $sum_collected_data = 0;
+        foreach ($overall_data as $k => $v) {
+            $sum_collected_data += $v;
+        }
+        $this->data['sum_collected_data'] = $sum_collected_data;
 
         //feedback
         $this->data['feedback'] = $this->Feedback_model->find_all(8, 0);
@@ -119,5 +127,4 @@ class Dashboard extends CI_Controller
         $this->load->view('index');
         $this->load->view('footer');
     }
-
 }
