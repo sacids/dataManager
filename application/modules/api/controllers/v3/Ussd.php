@@ -99,51 +99,54 @@ class Ussd extends CI_Controller
         echo json_encode($response);
     }
 
-    //    //fao data
-    //    function fao_data()
-    //    {
-    //        //receive as json
-    //        $post_data = file_get_contents("php://input");
-    //        log_message("debug", 'fao_data  ' . $post_data);
-    //
-    //        $value = json_decode($post_data, TRUE);
-    //
-    //        //post data to server
-    //        $data = array(
-    //            'district' => $value['fao_wilaya'],
-    //            'ward_ng' => $value['fao_kata_ng'],
-    //            'ward_kls' => $value['fao_kata_kls'],
-    //            'ward_wt' => $value['fao_kata_wt'],
-    //            'animal' => $value['fao_mnyama'],
-    //            'age' => $value['fao_umri'],
-    //            'problem' => $this->clean($value['fao_tatizo']),
-    //            'created_at' => date('Y-m-d H:i:s')
-    //        );
-    //
-    //        //insert a data bunch
-    //        $this->model->set_table('ad_build_fao_data');
-    //        $result = $this->model->insert($data);
-    //
-    //        if ($result) {
-    //            //response
-    //            $response = array(
-    //                'status' => TRUE,
-    //                'sms_reply' => FALSE,
-    //                'sms_text' => 'Taarifa zako zimetufikia'
-    //            );
-    //        } else {
-    //            $response = array('success' => FALSE);
-    //        }
-    //        echo json_encode($response);
-    //    }
-    //
-    //    function clean($string)
-    //    {
-    //        $string = str_replace(' ', '', $string); // Replaces all spaces with hyphens.
-    //
-    //        return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
-    //    }
-    //
+    //fao data
+    function fao_data()
+    {
+        //receive as json
+        $post_data = file_get_contents("php://input");
+        log_message("debug", 'fao_data  ' . $post_data);
+
+        $value = json_decode($post_data, TRUE);
+
+        //post data to server
+        $data = array(
+            'district' => $value['fao_wilaya'],
+            'ward_ng' => $value['fao_kata_ng'],
+            'ward_kls' => $value['fao_kata_kls'],
+            'ward_wt' => $value['fao_kata_wt'],
+            'animal' => $value['fao_mnyama'],
+            'age' => $value['fao_umri'],
+            'problem' => $this->clean($value['fao_tatizo']),
+            'created_at' => date('Y-m-d H:i:s')
+        );
+
+        //insert a data bunch
+        $this->model->set_table('ad_build_fao_data');
+        $result = $this->model->insert($data);
+
+        if ($result) {
+            //response
+            $response = array(
+                'status' => TRUE,
+                'sms_reply' => FALSE,
+                'sms_text' => 'Taarifa zako zimetufikia'
+            );
+        } else {
+            $response = array('success' => FALSE);
+        }
+        echo json_encode($response);
+    }
+
+    function clean($string)
+    {
+        $string = str_replace(' ', '', $string); // Replaces all spaces with hyphens.
+
+        return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+    }
+
+
+
+
     //receive data
     function receive_data()
     {
