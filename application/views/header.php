@@ -79,6 +79,13 @@
 
                     <div class="hidden md:block">
                         <div class="ml-4 flex items-center md:ml-6">
+
+                            <a href="<?= site_url('auth/users/lists')?>" class="rounded-full bg-slate-800 p-1 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+
                             <button type="button" class="rounded-full bg-red-800 p-1 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                 <span class="sr-only">View notifications</span>
                                 <!-- Heroicon name: outline/bell -->
@@ -91,7 +98,7 @@
                             <div x-data="{dropdownMenu: false}" class="relative ml-3">
                                 <div>
                                     <button @click="dropdownMenu = ! dropdownMenu" type="button" class="flex items-center focus:outline-none mr-3" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                        <img class="w-8 h-8 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of User">
+                                        <img class="w-8 h-8 rounded-full mr-4" src="<?= base_url('favicon.png') ?>" alt="<?php show_first_name(); ?>">
                                         <span class="hidden md:inline-block text-sm">Hi, <?php show_first_name(); ?>
                                         </span>
                                         <svg class="pl-2 h-2" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">

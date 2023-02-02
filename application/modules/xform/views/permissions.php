@@ -65,7 +65,8 @@
                             $perms_option[$key] = ucfirst($value);
                         }
                     }
-                    echo form_dropdown('perms[]', $perms_option, set_value('perms[]', $current_perms), 'data-placeholder="Select perms...." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 multiple-select" multiple'); ?>
+                    echo form_dropdown('perms[]', $perms_option, set_value('perms[]', $current_perms), 'data-placeholder="Select perms...." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 multiple-select" multiple');
+                    ?>
 
 
 

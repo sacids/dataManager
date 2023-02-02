@@ -1,69 +1,61 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <div id="header-title">
-                <h3 class="title">Add New Access Control</h3>
-            </div>
+<div class="bg-gray-100">
+    <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-xl font-medium tracking-tight text-gray-900">
+            Create New Access Control
+        </h1>
+    </div>
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li><a href="<?= site_url('auth/accesscontrol') ?>">Access Control</a></li>
-                <li class="active">Add New Access Control</li>
-            </ol>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <?php if (validation_errors() != "") {
-                        echo '<div class="alert alert-danger fade in">' . validation_errors() . '</div>';
-                    } else if ($this->session->flashdata('message') != "") {
-                        echo $this->session->flashdata('message');
-                    } ?>
-
-                    <div class="pure-form">
-                        <?= form_open("auth/accesscontrol/new_permission") ?>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>ACL name <span style="color: red">*</span></label>
-                                    <?= form_input($name) ?>
-                                </div>
-                            </div>
-                            <!--./col-md-12 -->
-                        </div>
-                        <!--./row -->
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <?= form_textarea($description) ?>
-                                </div>
-                            </div>
-                            <!--./col-md-12 -->
-                        </div>
-                        <!--./row -->
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <?= form_submit('submit', 'Save', array('class' => "btn btn-primary")); ?>
-                                    <?= anchor('auth/accesscontrol', 'Cancel', 'class="btn btn-warning"') ?>
-                                </div> <!-- /form-group -->
-                            </div>
-                            <!--./col-md-12 -->
-                        </div>
-                        <!--./row -->
-                        <?= form_close() ?>
-                    </div>
-                    <!--./pure-form -->
-
-                </div>
-                <!--./col-sm-12 -->
-            </div>
-            <!--./row -->
+    <div class="mx-auto py-0 px-4 sm:px-6">
+        <div class="text-sm text-left text-gray-900">
+            <?php
+            foreach ($links as $key => $link) {
+                echo $link;
+            }
+            ?>
         </div>
     </div>
-    <!--./row -->
 </div>
-<!--./container -->
+</header>
+
+
+<main class="bg-white h-full">
+    <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-row flex-wrap mt-2">
+            <div class="flex w-1/2 flex-col">
+                <div class="relative overflow-x-auto">
+                    <?php if ($this->session->flashdata('message') != "") { ?>
+                        <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
+                            <div class="flex">
+                                <div>
+                                    <p class="text-sm font-normal"><?= $this->session->flashdata('message'); ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                    <?php echo form_open('auth/accesscontrol/new_permission', 'role="form"'); ?>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
+                            ACL name <span class="text-red-500">*</span>
+                        </label>
+                        <?php echo form_input($name); ?>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
+                            Description 
+                        </label>
+                        <?php echo form_textarea($description); ?>
+                    </div>
+
+                    <div class="flex items-start">
+                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                    </div>
+                    <?php echo form_close(); ?>
+
+                </div>
+            </div>
+        </div>
+        <!-- /End replace -->
+    </div>
+</main>

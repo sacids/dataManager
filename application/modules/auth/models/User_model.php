@@ -48,6 +48,7 @@ class User_model extends CI_Model
             ->group_start()
             ->where('groups.name', 'data_collectors')
             ->or_where('groups.name', 'chr')
+            ->or_where('groups.name', 'members')
             ->group_end()
             ->join('users_groups', 'users_groups.user_id = users.id')
             ->join('groups', 'groups.id = users_groups.group_id')
@@ -313,16 +314,13 @@ class User_model extends CI_Model
      * @param $start
      * @return mixed
      */
-    function get_all($num = null, $start = null)
-    {
+    function get_all(){
         //$this->where_condition();
-
-        if ($num != null && $start != null)
-            $this->db->limit($num, $start);
 
         return $this->db
             ->select('*, users.id as user_id')
             ->order_by('users.first_name')
+            ->limit(2000)
             ->get('users')->result();
     }
 

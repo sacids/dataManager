@@ -49,14 +49,33 @@ class Users extends MX_Controller
         $this->data['title'] = 'Users';
         $this->has_allowed_perm($this->router->method);
 
+        //pagination
+        // $config = array(
+        //     'base_url' => $this->config->base_url("auth/users/lists/"),
+        //     'total_rows' => $this->User_model->count_all(),
+        //     'uri_segment' => 4,
+        // );
+
+        // $this->pagination->initialize($config);
+        // $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
         $this->data['users'] = $this->User_model->get_all();
 
         foreach ($this->data['users'] as $k => $user) {
             $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->user_id)->result();
         }
 
+        //$this->data["page_links"] = $this->pagination->create_links();
+
         //populate data
-        $this->data['groups'] = $this->Group_model->get_all();
+        // $this->data['groups'] = $this->Group_model->get_all();
+
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
 
         //render view
         $this->load->view('header', $this->data);
@@ -102,7 +121,8 @@ class Users extends MX_Controller
                 'digest_password' => $digest_password,
             );
         }
-        if ($this->form_validation->run() == true && $id = $this->ion_auth->register(strtolower($identity), $password, $email, $additional_data, $groups)) {
+
+        if ($this->form_validation->run() == true && $id = $this->ion_auth->register($identity, $password, $email, $additional_data, $groups)) {
             // redirect them back to the admin page
             $this->session->set_flashdata('message', display_message($this->ion_auth->messages()));
             redirect("auth/users/lists", 'refresh');
@@ -117,6 +137,8 @@ class Users extends MX_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('first_name'),
                 'class' => 'form-control',
+                'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'required' => '',
                 'placeholder' => 'Write first name...'
             );
             $this->data['last_name'] = array(
@@ -125,6 +147,8 @@ class Users extends MX_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('last_name'),
                 'class' => 'form-control',
+                'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'required' => '',
                 'placeholder' => 'Write last name...'
             );
             $this->data['identity'] = array(
@@ -133,6 +157,8 @@ class Users extends MX_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('identity'),
                 'class' => 'form-control',
+                'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'required' => '',
                 'placeholder' => 'Write username...'
             );
             $this->data['email'] = array(
@@ -140,7 +166,8 @@ class Users extends MX_Controller
                 'id' => 'email',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('email'),
-                'class' => 'form-control',
+                'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'required' => '',
                 'placeholder' => 'Write email address...'
             );
 
@@ -149,7 +176,7 @@ class Users extends MX_Controller
                 'id' => 'phone',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('phone'),
-                'class' => 'form-control',
+                'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
                 'placeholder' => 'Write phone number...'
             );
             $this->data['password'] = array(
@@ -157,7 +184,8 @@ class Users extends MX_Controller
                 'id' => 'password',
                 'type' => 'password',
                 'value' => $this->form_validation->set_value('password'),
-                'class' => 'form-control',
+                'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'required' => '',
                 'placeholder' => 'Write password...'
             );
             $this->data['password_confirm'] = array(
@@ -165,11 +193,19 @@ class Users extends MX_Controller
                 'id' => 'password_confirm',
                 'type' => 'password',
                 'value' => $this->form_validation->set_value('password_confirm'),
-                'class' => 'form-control',
+                'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+                'required' => '',
                 'placeholder' => 'Confirm password...'
             );
 
             $this->data['groups'] = $this->Group_model->get_all();
+
+            //links
+            $this->data['links'] = [
+                'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+                'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            ];
 
             //render view
             $this->load->view('header', $this->data);
@@ -197,9 +233,9 @@ class Users extends MX_Controller
 
         if (isset($_POST) && !empty($_POST)) {
             // do we have a valid request?
-            if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
-                show_error($this->lang->line('error_csrf'));
-            }
+            // if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id')) {
+            //     show_error($this->lang->line('error_csrf'));
+            // }
 
             // update the password if it was posted
             if ($this->input->post('password')) {
@@ -271,14 +307,16 @@ class Users extends MX_Controller
             'id' => 'first_name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('first_name', $user->first_name),
-            'class' => 'form-control'
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'required' => '',
         );
         $this->data['last_name'] = array(
             'name' => 'last_name',
             'id' => 'last_name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('last_name', $user->last_name),
-            'class' => 'form-control'
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'required' => '',
         );
 
         $this->data['identity'] = array(
@@ -286,14 +324,16 @@ class Users extends MX_Controller
             'id' => 'identity',
             'type' => 'text',
             'value' => $this->form_validation->set_value('identity', $user->username),
-            'class' => 'form-control'
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'required' => '',
         );
         $this->data['email'] = array(
             'name' => 'email',
             'id' => 'email',
             'type' => 'text',
             'value' => $this->form_validation->set_value('email', $user->email),
-            'class' => 'form-control'
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'required' => '',
         );
 
         $this->data['phone'] = array(
@@ -301,23 +341,30 @@ class Users extends MX_Controller
             'id' => 'phone',
             'type' => 'text',
             'value' => $this->form_validation->set_value('phone', $user->phone),
-            'class' => 'form-control'
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
         );
         $this->data['password'] = array(
             'name' => 'password',
             'id' => 'password',
             'type' => 'password',
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'placeholder' => 'Write password...'
         );
         $this->data['password_confirm'] = array(
             'name' => 'password_confirm',
             'id' => 'password_confirm',
             'type' => 'password',
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'placeholder' => 'Confirm password...'
         );
         $this->data['groups'] = $this->Group_model->get_all();
+
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
 
         //render view
         $this->load->view('header', $this->data);
@@ -383,6 +430,13 @@ class Users extends MX_Controller
                 'class' => 'form-control',
                 'readonly' => ''
             );
+
+            //links
+            $this->data['links'] = [
+                'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+                'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            ];
 
             //render view
             $this->load->view('header', $this->data);
@@ -458,9 +512,16 @@ class Users extends MX_Controller
             redirect('auth/users/mapping/' . $id, 'refresh');
         }
 
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
+
         //render view
         $this->load->view('header', $this->data);
-        $this->load->view('auth/users/mapping');
+        $this->load->view('users/mapping');
         $this->load->view('footer');
     }
 
@@ -530,6 +591,13 @@ class Users extends MX_Controller
             $this->session->set_flashdata('message', display_message('You have assigned permission(s) successfully'));
             redirect(uri_string(), 'refresh');
         }
+
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
 
         //render view
         $this->load->view("header", $this->data);

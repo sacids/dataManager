@@ -32,6 +32,13 @@ class AccessControl extends MX_Controller
     {
         $this->data['permissions'] = $this->Acl_model->find_permissions();
 
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+        ];
+
         $this->load->view("header", $this->data);
         $this->load->view("acl/list_permissions", $this->data);
         $this->load->view("footer");
@@ -73,7 +80,8 @@ class AccessControl extends MX_Controller
             'id' => 'name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('name'),
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'required' => '',
             'placeholder' => 'Write permission name ...'
         );
 
@@ -83,10 +91,16 @@ class AccessControl extends MX_Controller
             'type' => 'text area',
             'rows' => 3,
             'value' => $this->form_validation->set_value('description'),
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'placeholder' => 'Write permission description ...'
         );
 
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+        ];
 
         //render view
         $this->load->view("header", $this->data);
@@ -132,7 +146,8 @@ class AccessControl extends MX_Controller
             'id' => 'name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('name', $perm->title),
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'required' => '',
             'placeholder' => 'Write permission name ...'
         );
 
@@ -142,9 +157,16 @@ class AccessControl extends MX_Controller
             'type' => 'text area',
             'rows' => 3,
             'value' => $this->form_validation->set_value('description', $perm->description),
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'placeholder' => 'Write permission description ...'
         );
+
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+        ];
 
         //render view
         $this->load->view("header", $this->data);
@@ -244,7 +266,8 @@ class AccessControl extends MX_Controller
             'id' => 'filter',
             'type' => 'text',
             'value' => $this->form_validation->set_value('filter'),
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'required' => '',
             'placeholder' => 'Write filter name ...'
         );
 
@@ -253,9 +276,17 @@ class AccessControl extends MX_Controller
             'id' => 'filter_value',
             'type' => 'text',
             'value' => $this->form_validation->set_value('filter_value'),
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+            'required' => '',
             'placeholder' => 'Write filter value ...'
         );
+
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+        ];
 
         //render view
         $this->load->view("header", $this->data);

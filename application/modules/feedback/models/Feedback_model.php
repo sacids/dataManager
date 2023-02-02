@@ -208,7 +208,6 @@ class Feedback_model extends CI_Model
             $this->db->where("form_id", $where_perm);
         }
 
-
         if ($date_created != NULL)
             $this->db->where('date_created >', $date_created);
 

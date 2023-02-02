@@ -194,10 +194,12 @@ class Xform_model extends CI_Model
      */
     public function get_form_list_by_perms($perms, $limit = 30, $offset = 0, $status = NULL, $push = NULL)
     {
+        //TODO don't apply access is public
         if (is_array($perms)) {
             $this->db->group_start();
             foreach ($perms as $key => $value) {
                 $this->db->or_like("perms", $value);
+                $this->db->or_like("access", 'public');
             }
             $this->db->group_end();
         } else {

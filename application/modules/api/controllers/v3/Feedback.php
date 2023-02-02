@@ -23,7 +23,7 @@ class Feedback extends REST_Controller
     function index_get()
     {
         if (!$this->get('username')) {
-            $this->response(array('status' => 'failed', 'message' => 'Nome de usuário é requerido'), 202);
+            $this->response(array('status' => 'failed', 'message' => 'Username is required'), 202);
         }
 
         //get data
@@ -39,14 +39,14 @@ class Feedback extends REST_Controller
         if ($user) {
             //TODO: call function for permission, return chat user (form_id) needed to see
             $my_perms = $this->Perm_model->get_my_perms($user->id);
-            $cond = "FALSE OR (`perms` LIKE '%" . implode("%' OR `perms` LIKE '%", $my_perms) . "%')";
+        
+            $cond = "FALSE OR (`perms` LIKE '%" . implode("%' OR `perms` LIKE '%", $my_perms) . "%') OR (`access`='public')";
 
             $where = ' where ' . $cond;
             $table_name = 'xforms';
 
             //Perms module
             $perms = $this->db->query('SELECT * FROM ' . $table_name . ' ' . $where)->result();
-
 
             $i = 1;
             foreach ($perms as $perm) {
@@ -112,18 +112,18 @@ class Feedback extends REST_Controller
                 $this->response(array("status" => "success", "feedback" => $feedback), 200);
 
             } else {
-                $this->response(array('status' => 'failed', 'message' => 'Nenhum feedback encontrado'), 202);
+                $this->response(array('status' => 'failed', 'message' => 'No feedback found'), 202);
             }
         } else {
-            $this->response(array('status' => 'failed', 'message' => 'Usuário não existe'));
+            $this->response(array('status' => 'failed', 'message' => 'User does not exist'));
         }
     }
 
-//post feedback
+    //post feedback
     function send_post()
     {
         if (!$this->post('username')) {
-            $this->response(array('status' => 'failed', 'message' => 'Nome de usuário é requerido'));
+            $this->response(array('status' => 'failed', 'message' => 'Username is required'));
         }
 
         //get user details from database
@@ -153,12 +153,12 @@ class Feedback extends REST_Controller
 
             //check if feedback inserted
             if ($result)
-                $this->response(array('status' => 'success', 'message' => 'Feedback recebido'), 200);
+                $this->response(array('status' => 'success', 'message' => 'Feedback received'), 200);
             else
-                $this->response(array('status' => 'failed', 'message' => 'Ocorreu um erro desconhecido'), 202);
+                $this->response(array('status' => 'failed', 'message' => 'Unknown error occurred'), 202);
 
         } else {
-            $this->response(array('status' => 'failed', 'message' => 'Usuário não existe'), 203);
+            $this->response(array('status' => 'failed', 'message' => 'User does not exist'), 203);
         }
     }
 
@@ -167,7 +167,7 @@ class Feedback extends REST_Controller
     function form_details_get()
     {
         if (!$this->get('table_name') || !$this->get('instance_id')) {
-            $this->response(array('status' => 'failed', 'message' => 'Parâmetro obrigatório ausente'), 202);
+            $this->response(array('status' => 'failed', 'message' => 'Invalid table name or instance Id'), 202);
         }
 
         //get variables
@@ -189,7 +189,7 @@ class Feedback extends REST_Controller
         if ($form_data)
             $this->response(array("status" => "success", "form_details" => $form_data), 200);
         else
-            $this->response(array("status" => "failed", "message" => "Nenhum detalhe encontrado"), 202);
+            $this->response(array("status" => "failed", "message" => "No details found"), 202);
     }
 
     //get form data
