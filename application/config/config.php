@@ -22,8 +22,8 @@
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = APP_URL;
-// $config['base_url'] = (ENVIRONMENT == 'development') ? 'http://afyadata.local' : "http://sandbox.sacids.org";
+//$config['base_url'] = APP_URL;
+$config['base_url'] = (ENVIRONMENT == 'development') ? 'https://afyadata.ins.gov.mz/' : "https://afyadata.ins.gov.mz/";
 
 /*
 |--------------------------------------------------------------------------
