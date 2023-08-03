@@ -23,7 +23,7 @@
 |
 */
 //$config['base_url'] = APP_URL;
-$config['base_url'] = (ENVIRONMENT == 'development') ? 'https://afyadata.ins.gov.mz/' : "https://afyadata.ins.gov.mz/";
+$config['base_url'] = (ENVIRONMENT == 'development') ? 'http://afyadata.local' : "https://afyadata.ins.gov.mz";
 
 /*
 |--------------------------------------------------------------------------
