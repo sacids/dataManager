@@ -5,14 +5,6 @@
             <div id="header-title">
                 <h3 class="title">Add new disease</h3>
             </div>
-
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li><a href="<?= site_url('ohkr/diseases') ?>">Diseases</a></li>
-                <li class="active">Add new disease</li>
-            </ol>
-
             <?php
             if ($this->session->flashdata('message') != '') {
                 echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';

@@ -93,6 +93,39 @@ class Feedback extends MX_Controller
         $this->load->view('footer');
     }
 
+    //menu bar
+    function menu_bar($form_id, $data_id)
+    {
+        //form
+        $this->model->set_table('xforms');
+        $xform = $this->model->get_by(['form_id' => $form_id]);
+        $this->data['form'] = $xform;
+
+        //search varialbles  
+        $this->table_name = $xform->form_id;
+        $this->label = 'id';
+        $this->search_value = $data_id;
+
+        //form data
+        $this->model->set_table($this->table_name);
+        $form_data = $this->model->get_by('id', $data_id);
+        $this->data['form_data'] = $form_data;
+
+        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $xform->filename);
+        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+        $form_definition = $this->xform_comm->get_defn();
+
+        //get form data
+        $mapped_form_data = $this->get_form_data($form_definition, $this->get_fieldname_map($this->table_name));
+
+        if ($mapped_form_data)
+            $this->data['mapped_form_data'] = $mapped_form_data;
+        else
+            $this->data['mapped_form_data'] = [];
+
+        $this->load->view("menu_bar", $this->data);
+    }
+
     //form data preview
     function form_data_preview($form_id, $data_id)
     {

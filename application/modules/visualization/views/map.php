@@ -18,18 +18,15 @@
 </div>
 </header>
 
-<main class="bg-white h-full">
-    <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-row flex-wrap mt-2">
-            <div class="w-full">
-                <div class="relative overflow-x-auto">
-                    <div style="min-height: 800px; height: auto; margin-bottom: 20px;" id="map"></div>
-                </div>
-            </div>
+<main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
+    <div class="flex-1 h-full overflow-y-scroll">
+        <div class="w-full py-0 px-0 sm:px-0 lg:px-0">
+            <div style="min-height: 600px; height: auto; margin-bottom: 20px;" id="map"></div>
         </div>
-        <!-- /End replace -->
     </div>
 </main>
+
+
 
 <?php echo $addressPoints; ?>
 <script type="text/javascript">

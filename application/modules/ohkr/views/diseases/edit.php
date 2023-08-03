@@ -1,147 +1,73 @@
-<script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-            <div id="header-title">
-                <h3 class="title">Edit disease</h3>
-            </div>
+<div class="bg-gray-100">
+    <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-xl font-medium tracking-tight text-gray-900">
+            Create New Project
+        </h1>
+    </div>
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li><a href="<?= site_url('ohkr/diseases') ?>">Diseases</a></li>
-                <li class="active">Edit disease</li>
-            </ol>
-
+    <div class="mx-auto py-0 px-4 sm:px-6">
+        <div class="text-sm text-left text-gray-900">
             <?php
-            if ($this->session->flashdata('message') != '') {
-                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-            } ?>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <?php echo form_open(uri_string(), 'role="form"'); ?>
-                    <div>
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#diseaseInfo" aria-controls="diseaseInfo" role="tab" data-toggle="tab">Disease
-                                    Info</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#alertMsgTab" aria-controls="alertMsgTab" role="tab" data-toggle="tab">Alert
-                                    Messages</a>
-                            </li>
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active " id="diseaseInfo" style="padding-top: 10px;">
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label><?php echo $this->lang->line("label_disease_name") ?> <span class="red"> * </span></label>
-                                            <input type="text" name="name" placeholder="Enter disease name" class="form-control" value="<?php echo $disease->title; ?>">
-                                        </div>
-                                        <div class="error" style="color: red"><?php echo form_error('name'); ?></div>
-
-                                        <div class="form-group">
-                                            <label><?php echo $this->lang->line("label_specie_name") ?> <span class="red"> * </span></label>
-                                            <?php
-                                            
-                                            foreach ($species as $specie) {
-                                                $species_options[$specie->id] = $specie->title;
-                                            }
-                                            echo form_dropdown("specie[]", $species_options, $assigned_species, 'class="form-control chosen-select" data-placeholder="-- Select --" multiple')
-                                            ?>
-                                        </div>
-                                        <div class="error" style="color: red"><?php echo form_error('specie'); ?></div>
-
-                                        <div class="form-group">
-                                            <label><?php echo $this->lang->line("label_description") ?> :</label>
-                                            <textarea class="form-control" name="description" id="description"><?php echo $disease->description; ?></textarea>
-
-                                            <script>
-                                                CKEDITOR.replace('description');
-                                            </script>
-                                        </div>
-                                        <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
-                                    </div>
-                                    <!--./col-md-12 -->
-                                </div>
-                                <!--./row -->
-                            </div>
-                            <!--./tab-panel -->
-
-                            <div role="tabpanel" class="tab-pane" id="alertMsgTab" style="padding-top: 10px;">
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <?php echo anchor("ohkr/add_new_response_sms/" . $disease->id, '<button type="button" class="btn btn-primary">Add Disease Alert SMS</button>', "class='pull-right' style='margin-bottom:10px;'"); ?>
-
-                                        <table class="table table-responsive table-bordered ">
-
-                                            <tr>
-                                                <th class="text-center">Group</th>
-                                                <th class="text-center">Message</th>
-                                                <th class="text-center">Date created</th>
-                                                <th class="text-center">status</th>
-                                                <th colspan="2" class="text-center">Action</th>
-                                            </tr>
-
-                                            <?php foreach ($messages as $msg) { ?>
-                                                <tr>
-                                                    <td><?php echo $msg->name ?></td>
-                                                    <td><?php echo $msg->message ?></td>
-                                                    <td><?php echo $msg->date_created ?></td>
-                                                    <td><?php echo $msg->status ?></td>
-                                                    <td><?php echo anchor("ohkr/edit_response_sms/" . $msg->id, "Edit") ?></td>
-                                                    <td><?php echo anchor("ohkr/delete_response_sms/" . $msg->id, "Delete") ?></td>
-                                                </tr>
-                                            <?php } ?>
-
-                                        </table>
-                                    </div>
-                                    <!--./col-md-12 -->
-                                </div>
-                                <!--./row -->
-                            </div>
-                            <!--./tab-panel -->
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Save
-                                </button>
-                            </div>
-                        </div>
-                        <!--./col-md-12 -->
-                    </div>
-                    <!--./row -->
-                    <?php echo form_close(); ?>
-                </div>
-            </div>
+            foreach ($page_links as $key => $link) {
+                echo $link;
+            }
+            ?>
         </div>
     </div>
 </div>
+</header>
 
-<script type="text/javascript">
-    $(document).ready(function() {
 
-        $("#addAnotherMessage").on("click", function(e) {
-            e.preventDefault();
-            var alertMessaagesCount = $("#alertMessages").children().length;
+<main class="bg-white h-full">
+    <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-row flex-wrap mt-2">
+            <div class="flex w-1/2 flex-col">
+                <div class="relative overflow-x-auto">
+                    <?php if ($this->session->flashdata('message') != "") { ?>
+                        <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
+                            <div class="flex">
+                                <div>
+                                    <p class="text-sm font-normal"><?= $this->session->flashdata('message'); ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
 
-            console.log("Has " + alertMessaagesCount + " childrens");
+                    <?php echo form_open(uri_string(), 'role="form"'); ?>
 
-            if (alertMessaagesCount < 5) {
-                $(".sigleAlertMessage:first").clone().appendTo("#alertMessages");
-            } else {
-                alert("You can not have more than five alert messages");
-            }
-        });
-    });
-</script>
+                    <div class="mb-3">
+                        <label class="block mb-2 text-sm font-medium text-gray-900"><?php echo $this->lang->line("label_disease_name") ?> <span class="red"> * </span></label>
+                        <input type="text" name="name" placeholder="Enter disease name" class="form-control" value="<?php echo $disease->title; ?>" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="block mb-2 text-sm font-medium text-gray-900"><?php echo $this->lang->line("label_specie_name") ?> <span class="red"> * </span></label>
+                        <?php
+
+                        foreach ($species as $specie) {
+                            $species_options[$specie->id] = $specie->title;
+                        }
+                        echo form_dropdown("specie[]", $species_options, $assigned_species, 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 select" data-placeholder="-- Select --" multiple')
+                        ?>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="block mb-2 text-sm font-medium text-gray-900"><?php echo $this->lang->line("label_description") ?> :</label>
+                        <textarea class="form-control" name="description" id="description" rows="5" class="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"><?php echo $disease->description; ?></textarea>
+
+                        <!-- <script>
+                            CKEDITOR.replace('description');
+                        </script> -->
+                    </div>
+
+                    <div class="flex items-start">
+                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                    </div>
+                    <?php echo form_close(); ?>
+
+                </div>
+            </div>
+        </div>
+        <!-- /End replace -->
+    </div>
+</main>

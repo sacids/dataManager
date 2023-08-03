@@ -1,99 +1,66 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 main">
-            <div id="header-title">
-                <h3 class="title"><?php echo $disease->title; ?> - Clinical Manifestation</h3>
-            </div>
+<div class="bg-gray-100">
+    <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-xl font-medium tracking-tight text-gray-900">
+            <?php echo $disease->title; ?> - Clinical Manifestation</h3>
+        </h1>
+    </div>
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li><a href="<?= site_url('ohkr/disease_list') ?>">Diseases</a></li>
-                <li class="active"><?= $disease->title; ?> Clinical Manifestation</li>
-            </ol>
+    <div class="mx-auto py-0 px-4 sm:px-6">
+        <div class="text-sm text-left text-gray-900">
+        <?php
+            foreach ($page_links as $key => $link) {
+                echo $link;
+            }
+            ?>
+        </div>
+    </div>
+</div>
+</header>
 
-            <?php if ($this->session->flashdata('message') != "") {
-                echo $this->session->flashdata('message');
-            } ?>
-
-            <?php if (perms_role('Ohkr', 'add_disease_symptoms')) { ?>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="pure-form">
-                            <?= form_open(uri_string(), 'role="form"'); ?>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="form-group">
-                                        <label>Clinical Manifestation <span style="color: red;">*</span></label>
-                                        <?php
-                                        $symptoms_options = array();
-                                        foreach ($symptoms as $value) {
-                                            $symptoms_options[$value->id] = $value->code . '. ' . $value->title;
-                                        }
-                                        $symptoms_options = array('' => 'Choose Symptoms') + $symptoms_options;
-                                        echo form_dropdown('symptom_id', $symptoms_options, set_value('symptom_id'), 'class="form-control"');
-                                        ?>
-                                        <span class="form-text text-danger"><?= form_error('symptom_id') ?></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="form-group">
-                                        <label>Species <span style="color: red;">*</span></label><br />
-                                        <?php
-                                        foreach ($species as $specie) {
-                                            $species_options[$specie->id] = $specie->title;
-                                        }
-                                        echo form_dropdown("specie_id[]", $species_options, set_value("specie_id"), 'class="form-control chosen-select" data-placeholder="-- Select --" multiple');
-                                        ?>
-                                        <span class="form-text text-danger"><?= form_error('specie_id[]') ?></span>
-                                    </div>
-                                </div>
-                                <!--./col-md-4 -->
-
-                                <div class="col-lg-4 col-md-4">
-                                    <div class="form-group">
-                                        <label>Importance (%) <span style="color: red;">*</span></label>
-                                        <?= form_input($importance); ?>
-                                        <span class="form-text text-danger"><?= form_error('importance') ?></span>
-                                    </div>
-                                </div>
-                            </div> <!-- /.row -->
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <?= form_submit('save', 'Save', array('class' => "btn btn-primary")); ?>
-                                    </div> <!-- /form-group -->
-                                </div>
-                            </div> <!-- /.row -->
-
-                            <?= form_close() ?>
+<main class="bg-white h-full relative">
+    <div class="h-full overflow-y-scroll">
+        <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
+            <?php if ($this->session->flashdata('message') != "") { ?>
+                <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
+                    <div class="flex">
+                        <div>
+                            <p class="text-sm font-normal"><?= $this->session->flashdata('message'); ?></p>
                         </div>
-                        <!--./pure-form -->
                     </div>
-                    <!--./col-md-12 -->
                 </div>
-                <!--./row -->
             <?php } ?>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <?php if (isset($diseases_symptoms) && $diseases_symptoms) { ?>
-                        <table class="table table-striped table-responsive table-hover table-bordered">
+            <?php if (isset($diseases_symptoms) && $diseases_symptoms) { ?>
+                <div class="relative overflow-x-auto ">
+                    <div class="flex flex-row justify-between mb-3">
+                        <div>
+                            <input type="text" id="myCustomSearchBox" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-0 focus:ring-blue-500 focus:border-blue-500 block pr-24" placeholder="Search here...">
+                        </div>
+
+                        <div>
+                            <!-- <a href="#" class="text-white bg-green-800 hover:bg-green-900 font-medium rounded text-sm px-5 py-3">
+                            <i class="fa-solid fa-file-export text-white"></i> XLS
+                        </a> -->
+                        </div>
+                    </div>
+
+                    <table id="dt" class="table table-bordered dt-responsive nowrap w-100">
+                        <thead class="text-gray-600 text-sm font-medium">
                             <tr>
-                                <th width="5%">#</th>
+                                <th width="3%">#</th>
                                 <th width="40%">Species</th>
                                 <th width="30%"><?php echo $this->lang->line("label_symptom_name"); ?></th>
                                 <th width="15%">Importance (%)</th>
                                 <th style="width: 60px; text-align: right;"><?php echo $this->lang->line("label_action"); ?></th>
                             </tr>
+                        </thead>
 
+                        <tbody class="overflow-y-scroll text-gray-600 text-sm font-normal">
                             <?php
                             $serial = 1;
                             foreach ($diseases_symptoms as $value) { ?>
                                 <tr>
-                                    <td><?= $serial ?></td>
+                                <td><?= $serial ?></td>
                                     <td><?php echo $value->specie->title; ?></td>
                                     <td><?php echo $value->symptom->title . ' (' . $value->symptom->code . ')'; ?></td>
                                     <td><?php echo $value->importance; ?></td>
@@ -102,27 +69,29 @@
                                         if (perms_role('Ohkr', 'edit_disease_symptom'))
                                             echo anchor("ohkr/edit_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"'). '&nbsp;';
 
-                                        if (perms_role('Ohkr', 'delete_disease_symptom'))
-                                            echo anchor("ohkr/delete_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"');
+                                        // if (perms_role('Ohkr', 'delete_disease_symptom'))
+                                        //     echo anchor("ohkr/delete_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"');
                                         ?>
                                     </td>
+
                                 </tr>
                             <?php $serial++;
                             } ?>
-                        </table>
-
-                        <?php if (!empty($links)) : ?>
-                            <div class="widget-foot">
-                                <?= $links ?>
-                                <div class="clearfix"></div>
-                            </div>
-                        <?php endif; ?>
-                    <?php } else {
-                        echo display_message('No disease symptom has been found', 'warning');
-                    } ?>
+                        </tbody>
+                    </table>
                 </div>
-                <!--./col-md-12 -->
-            </div><!-- ./row -->
+            <?php } else { ?>
+                <div class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+                    <span class="block sm:inline text-sm font-normal">No any species at the moment</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <title>Close</title>
+                            <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                        </svg>
+                    </span>
+                </div>
+            <?php } ?>
+
         </div>
     </div>
-</div>
+</main>

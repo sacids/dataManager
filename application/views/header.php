@@ -14,6 +14,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 
     <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.5"></script>
 
     <!-- Google fonts - witch you want to use - (rest you can just remove) -->
     <link href='https://fonts.googleapis.com/css?family=Lato:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -48,9 +49,9 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
 </head>
 
-<body class="h-full leading-normal tracking-normal">
+<body class="h-screen leading-normal tracking-normal overflow-hidden">
     <!-- Begin page -->
-    <header class="sticky top-0 z-50">
+    <header class="w-full h-36 z-50">
         <nav class="bg-white border-b">
             <div class="mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex h-14 items-center justify-between">
@@ -66,7 +67,7 @@
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                                 <a href="<?= site_url('projects/lists'); ?>" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
 
-                                <a href="#" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">OHKR</a>
+                                <a href="<?= site_url('ohkr/diseases')?>" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">OHKR</a>
 
                                 <a href="#" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Reports</a>
 
