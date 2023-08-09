@@ -42,7 +42,7 @@
  *
  * Automatic base url
  */
-//define('APP_URL', ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'https') . "://{$_SERVER['SERVER_NAME']}".str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']));
+define('APP_URL', ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'https') . "://{$_SERVER['SERVER_NAME']}".str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']));
 
 
 /*
@@ -63,18 +63,18 @@
  * NOTE: If you change these, also change the error_reporting() code below
  */
 
-if (isset($_SERVER['REQUEST_URI'])) {
-	$path = $_SERVER['REQUEST_URI'];
-	if ($path == "/afyadata/unittest") {
-		define('ENVIRONMENT', 'testing');
-	} else
-		define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
-} else {
-    define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
-}
-define('AFYADATA_MODE', isset($_SERVER['AD_MODE']) ? $_SERVER['AD_MODE'] : 'public');
+// if (isset($_SERVER['REQUEST_URI'])) {
+// 	$path = $_SERVER['REQUEST_URI'];
+// 	if ($path == "/afyadata/unittest") {
+// 		define('ENVIRONMENT', 'testing');
+// 	} else
+// 		define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+// } else {
+//     define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+// }
+// define('AFYADATA_MODE', isset($_SERVER['AD_MODE']) ? $_SERVER['AD_MODE'] : 'public');
 
-//define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 
 /*
  *---------------------------------------------------------------
