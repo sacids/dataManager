@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 require APPPATH . '/libraries/REST_Controller.php';
@@ -39,7 +39,7 @@ class Feedback extends REST_Controller
         if ($user) {
             //TODO: call function for permission, return chat user (form_id) needed to see
             $my_perms = $this->Perm_model->get_my_perms($user->id);
-        
+
             $cond = "FALSE OR (`perms` LIKE '%" . implode("%' OR `perms` LIKE '%", $my_perms) . "%') OR (`access`='public')";
 
             $where = ' where ' . $cond;
@@ -88,10 +88,10 @@ class Feedback extends REST_Controller
                     $this->model->set_table($value->form_id);
                     $table = $this->model->as_array()->get_by('meta_instanceID', $value->instance_id);
 
-//                    if (array_key_exists('meta_instanceName', $table))
-//                        $label = ' - ' . $table['meta_instanceName'];
-//                    else
-//                        $label = '';
+                    //                    if (array_key_exists('meta_instanceName', $table))
+                    //                        $label = ' - ' . $table['meta_instanceName'];
+                    //                    else
+                    //                        $label = '';
 
                     //feedback array
                     $feedback[] = array(
@@ -110,7 +110,6 @@ class Feedback extends REST_Controller
                 }
                 //response
                 $this->response(array("status" => "success", "feedback" => $feedback), 200);
-
             } else {
                 $this->response(array('status' => 'failed', 'message' => 'No feedback found'), 202);
             }
@@ -138,7 +137,8 @@ class Feedback extends REST_Controller
             //update all feedback from this user
             $this->Feedback_model->update_user_feedback($instance_id, 'server');
 
-            $result = $this->db->insert('feedback',
+            $result = $this->db->insert(
+                'feedback',
                 array(
                     'user_id' => $user->id,
                     'instance_id' => $this->post('instance_id'),
@@ -156,7 +156,6 @@ class Feedback extends REST_Controller
                 $this->response(array('status' => 'success', 'message' => 'Feedback received'), 200);
             else
                 $this->response(array('status' => 'failed', 'message' => 'Unknown error occurred'), 202);
-
         } else {
             $this->response(array('status' => 'failed', 'message' => 'User does not exist'), 203);
         }
@@ -211,7 +210,8 @@ class Feedback extends REST_Controller
             '3gpp' => 'audio',
             'amr' => 'audio',
             '3gp' => 'video',
-            'mp4' => 'video');
+            'mp4' => 'video'
+        );
 
         $c = 1;
         $id = $data->id;
@@ -297,5 +297,39 @@ class Feedback extends REST_Controller
             $map[$key] = $part;
         }
         return $map;
+    }
+
+    //post feedback
+    function case_information_post()
+    {
+        if (!$this->post('username')) {
+            $this->response(array('status' => 'failed', 'message' => 'Username is required'));
+        }
+
+        //get user details from database
+        $user = $this->User_model->find_by_username($this->post('username'));
+        log_message("debug", "User posting feedback is " . $user->username);
+
+        if ($user) {
+            // 1. if the case has been attended or not To be used as flag
+            // 2. Suspected disease
+            // 3. Actions taken
+            // 4. Reported on EMA-i (Y/N)
+            // 5. Created at
+            // 6. Created By
+            // 7. Instance Id
+
+            //get variables
+            $instance_id = $this->post('instance_id');
+            $case_attended = $this->post('case_attended');
+            $suspected_disease = $this->post('disease');
+            $action_taken = $this->post('action_taken');
+            $reported = $this->post('reported_emai');
+
+            //response
+            $this->response(array('status' => 'success', 'message' => 'Case information recorded'), 200);
+        } else {
+            $this->response(array('status' => 'failed', 'message' => 'User does not exist'), 203);
+        }
     }
 }
