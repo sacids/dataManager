@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: administrator
@@ -56,5 +57,44 @@ class Forms extends REST_Controller
         } else {
             $this->response(array('status' => 'failed', 'message' => 'User does not exist'));
         }
+    }
+
+    function charts_get()
+    {
+        $filter_conditions = null;
+
+        //submitted forms
+        $submitted_forms = $this->Submission_model->get_submitted_forms($filter_conditions);
+
+        //declare array
+        $data_array = [];
+
+        foreach ($submitted_forms as $value) {
+            $form_title = '<a href="' . site_url('xform/form_data/' . $value->project_id . '/' . $value->id) . '" >' . $value->title . '</a>';
+
+            if (isset($_GET['period']) && $_GET['period'] != null) {
+                $period = $_GET['period'];
+
+                if ($period == 'All')
+                    $data = $this->Submission_model->count_overall_submitted_forms($value->form_id);
+                else if ($period == 'Monthly')
+                    $data = $this->Submission_model->count_monthly_submitted_forms($value->form_id);
+                else if ($period == 'Weekly')
+                    $data = $this->Submission_model->count_weekly_submitted_forms($value->form_id);
+                else if ($period == 'Daily')
+                    $data = $this->Submission_model->count_daily_submitted_forms($value->form_id);
+            } else {
+                $data = $this->Submission_model->count_overall_submitted_forms($value->form_id);
+            }
+
+            //create data array
+            $data_array[] = [
+                "survey" => $form_title,
+                "data" =>  (int) $data
+            ];
+        }
+
+        //response
+        echo json_encode(['error' => FALSE, 'chart' => $data_array], 200);
     }
 }

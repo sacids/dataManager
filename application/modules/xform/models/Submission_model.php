@@ -98,8 +98,7 @@ class Submission_model extends CI_Model
      */
     function count_overall_submitted_forms($table_name)
     {
-        return $this->db
-            ->get($table_name)->num_rows();
+        return $this->db->get($table_name)->num_rows();
     }
 
     /**
@@ -108,8 +107,7 @@ class Submission_model extends CI_Model
      */
     function count_monthly_submitted_forms($table_name)
     {
-        return $this->db
-            ->get_where($table_name, array('MONTH(submitted_at)' => date('m')))->num_rows();
+        return $this->db->get_where($table_name, ['MONTH(submitted_at)' => date('m'), 'YEAR(submitted_at)' => date('Y')])->num_rows();
     }
 
     /**

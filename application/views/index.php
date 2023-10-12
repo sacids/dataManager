@@ -5,9 +5,9 @@
 </div>
 </header>
 
-<main class="bg-white h-full flex overflow-hidden relative">
-    <div class="flex flex-row h-full overflow-y-auto">
-        <div class="mx-auto py-4 px-4">
+<main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
+    <div class="flex-1 h-full overflow-y-scroll">
+        <div class="mx-auto px-4">
             <!-- Stats -->
             <div class="flex flex-wrap mb-4">
                 <div class="w-full md:w-1/4 xl:w-1/4 pr-2">
@@ -92,10 +92,22 @@
             <div class="flex flex-row flex-wrap mb-2">
                 <div class="w-full md:w-3/4 pr-2">
                     <div class="bg-slate-200 border rounded-0">
-                        <div class="p-2">
-                            <h5 class="font-medium text-gray-600 text-left">
-                                Recent Form Submission
-                            </h5>
+                        <div class="flex justify-between p-2">
+                            <div>
+                                <h5 class="font-bold text-gray-600 text-left py-1">
+                                    Recent Form Submission
+                                </h5>
+                            </div>
+
+                            <div>
+                                <select id="select-period" class="bg-white text-gray-600 border border-gray-200 rounded-sm py-1 focus:border focus:border-blue-200 focus:bg-white text-sm font-normal">
+                                    <option value="All">-- Period --</option>
+                                    <option value="All">All</option>
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Daily">Daily</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="p-2">
@@ -161,40 +173,4 @@
         </div>
     </div>
 </main>
-
-<script type="text/javascript">
-    //TODO: make function to be called within view
-
-    //Overall data
-    $(function() {
-        Highcharts.setOptions({
-            lang: {
-                thousandsSep: ','
-            }
-        });
-
-        $('#overall-graph').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: null
-            },
-            xAxis: {
-                categories: <?php echo $form_title; ?>
-            },
-            yAxis: {
-                title: {
-                    text: 'No. of submitted data'
-                }
-            },
-            series: [{
-                name: '<?php echo $this->lang->line("label_graph_series_name"); ?>',
-                data: <?php echo $overall_data; ?>
-            }],
-            credits: {
-                enabled: false
-            }
-        });
-    });
-</script>
+<?php $this->load->view('charts');?>
