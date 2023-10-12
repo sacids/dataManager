@@ -235,6 +235,34 @@ class Feedback extends MX_Controller
         }
     }
 
+
+    function case_info($form_id, $instance_id)
+    {
+        //form
+        $this->model->set_table('xforms');
+        $xform = $this->model->get_by(['form_id' => $form_id]);
+        $this->data['form'] = $xform;
+
+        //reported case
+        $this->model->set_table('ohkr_reported_cases');
+        $case = $this->model->get_by(['form_id' => $form_id, 'instance_id' => $instance_id]);
+
+        if (!$case)
+            show_error("Case does not exists");
+
+        $this->data['case'] = $case;
+
+        //disease
+        $this->data['disease'] = $this->Disease_model->get_by(['id' => $case->disease_id]);
+
+        //user
+        $this->data['user'] = $this->User_model->get_by(['id' => $case->updated_by]);
+
+        //render view
+        $this->load->view("case_info", $this->data);
+    }
+
+
     //get form data
     function get_form_data($structure, $map)
     {
