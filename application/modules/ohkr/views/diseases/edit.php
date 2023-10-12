@@ -1,14 +1,15 @@
+<script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
 <div class="bg-gray-100">
     <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
-            Create New Project
+            Edit Disease
         </h1>
     </div>
 
     <div class="mx-auto py-0 px-4 sm:px-6">
         <div class="text-sm text-left text-gray-900">
             <?php
-            foreach ($page_links as $key => $link) {
+            foreach ($links as $key => $link) {
                 echo $link;
             }
             ?>
@@ -35,34 +36,56 @@
 
                     <?php echo form_open(uri_string(), 'role="form"'); ?>
 
-                    <div class="mb-3">
-                        <label class="block mb-2 text-sm font-medium text-gray-900"><?php echo $this->lang->line("label_disease_name") ?> <span class="red"> * </span></label>
-                        <input type="text" name="name" placeholder="Enter disease name" class="form-control" value="<?php echo $disease->title; ?>" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label>
+                                <?php echo $this->lang->line("label_disease_name") ?> <span class="text-red-500"> * </span>
+                            </label>
+                            <input type="text" name="name" value="<?php echo $disease->title; ?>" placeholder="Write disease name..." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo set_value('name'); ?>">
+                            <div class="text-red-500"><?php echo form_error('name'); ?></div>
+                        </div>
+
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block mb-2 text-sm font-medium text-gray-900">
+                            <?php echo $this->lang->line("label_specie_name") ?> <span class="text-red-500">*</span>
+                            </label>
+                            <?php
+                                $species_options = [];
+                                foreach ($species as $specie) {
+                                    $species_options[$specie->id] = $specie->title;
+                                }
+                                $species_options = ['' => '--Select--'] + $species_options;
+                                echo form_dropdown("specie", $species_options, set_value("specie", $disease->species), 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"')
+                                ?>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="block mb-2 text-sm font-medium text-gray-900"><?php echo $this->lang->line("label_specie_name") ?> <span class="red"> * </span></label>
-                        <?php
-
-                        foreach ($species as $specie) {
-                            $species_options[$specie->id] = $specie->title;
-                        }
-                        echo form_dropdown("specie[]", $species_options, $assigned_species, 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 select" data-placeholder="-- Select --" multiple')
-                        ?>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="block mb-2 text-sm font-medium text-gray-900"><?php echo $this->lang->line("label_description") ?> :</label>
-                        <textarea class="form-control" name="description" id="description" rows="5" class="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"><?php echo $disease->description; ?></textarea>
-
-                        <!-- <script>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
+                            <?php echo $this->lang->line("label_description") ?> <span class="text-red-500">*</span>
+                        </label>
+                        <textarea class="form-control" name="description" id="description"><?php echo $disease->description; ?></textarea>
+                        <script>
                             CKEDITOR.replace('description');
-                        </script> -->
+                        </script>
+                        <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
                     </div>
 
                     <div class="flex items-start">
-                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Update</button>
                     </div>
+
+                    <!-- <div class="mb-3">
+                        <label class="block mb-2 text-sm font-medium text-gray-900"><?php //echo $this->lang->line("label_specie_name") ?> <span class="red"> * </span></label>
+                        <?php
+
+                        // foreach ($species as $specie) {
+                        //     $species_options[$specie->id] = $specie->title;
+                        // }
+                        //echo form_dropdown("specie[]", $species_options, $assigned_species, 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 select" data-placeholder="-- Select --" multiple')
+                        ?>
+                    </div> -->
+                    
                     <?php echo form_close(); ?>
 
                 </div>

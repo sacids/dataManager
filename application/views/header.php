@@ -47,6 +47,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.0/dist/MarkerCluster.Default.css" />
     <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+
+    <!--js -->
+    <script type="text/javascript" src="<?= base_url('assets/js/afyadata.js'); ?>"></script>
 </head>
 
 <body class="h-screen leading-normal tracking-normal overflow-hidden">

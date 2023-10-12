@@ -15,8 +15,8 @@
 </div>
 </header>
 
-<main class="bg-white h-full relative">
-    <div class="h-full overflow-y-scroll">
+<main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
+    <div class="flex-1 h-full overflow-y-scroll">
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <?php if ($this->session->flashdata('message') != "") { ?>
                 <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
@@ -28,56 +28,54 @@
                 </div>
             <?php } ?>
 
-            <?php if (isset($diseases) && $diseases) { ?>
-                <div class="relative overflow-x-auto">
-                    <div class="flex flex-row justify-between mb-3">
-                        <div>
-                            <input type="text" id="myCustomSearchBox" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-0 focus:ring-blue-500 focus:border-blue-500 block pr-24" placeholder="Search here...">
-                        </div>
-
-                        <div>
-                            <!-- <a href="#" class="text-white bg-green-800 hover:bg-green-900 font-medium rounded text-sm px-5 py-3">
-                            <i class="fa-solid fa-file-export text-white"></i> XLS
-                        </a> -->
-                        </div>
-                    </div>
-
-                    <table id="dt" class="table table-bordered dt-responsive nowrap w-100 table-fixed">
-                        <thead class="text-gray-600 text-sm font-medium">
-                            <tr>
-                                <th width="3%">#</th>
-                                <th width="40%"><?= $this->lang->line("label_disease_name"); ?></th>
-                                <th width="30%"><?= $this->lang->line("label_specie_name"); ?></th>
-                                <th width="15%"><?= $this->lang->line("label_action"); ?></th>
-                            </tr>
-                        </thead>
-
-                        <tbody class="overflow-y-scroll text-gray-600 text-sm font-normal">
-                            <?php
-                            $serial = 1;
-                            foreach ($diseases as $disease) { ?>
-                                <tr class="bg-white border-b">
-                                    <td><?= $serial ?></td>
-                                    <td><?= anchor("ohkr/disease_symptoms/" . $disease->id, $disease->title, '') ?></td>
-                                    <td><?= $disease->species; ?></td>
-                                    <td>
-                                        <?php
-                                        if (perms_role('Ohkr', 'disease_symptoms_list'))
-                                            echo anchor("ohkr/disease_symptoms/" . $disease->id, '<i class="fa fa-stethoscope"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;';
-                                        if (perms_role('Ohkr', 'edit_disease'))
-                                            echo anchor("ohkr/diseases/edit/" . $disease->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-secondary btn-xs"') . '&nbsp;';
-                                        // if (perms_role('Ohkr', 'delete_disease'))
-                                        //     echo anchor("ohkr/diseases/delete/" . $disease->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"');
-                                        ?>
-
-                                    </td>
-                                </tr>
-                            <?php
-                                $serial++;
-                            } ?>
-                        </tbody>
-                    </table>
+            <div class="flex flex-row justify-between my-3">
+                <div>
+                    <a href="<?= site_url('ohkr/diseases/add_new')?>" class="text-white bg-red-800 hover:bg-red-900 font-medium rounded text-sm px-5 py-3">
+                        <i class="fa-solid fa-plus text-white"></i> Add New
+                    </a>
                 </div>
+
+                <div>
+                    <input type="text" id="myCustomSearchBox" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-0 focus:ring-blue-500 focus:border-blue-500 block pr-24" placeholder="Search here...">
+                </div>  
+            </div>
+
+            <?php if (isset($diseases) && $diseases) { ?>
+                <table id="dt" class="table table-bordered dt-responsive nowrap w-100 table-fixed">
+                    <thead class="text-gray-600 text-sm font-medium">
+                        <tr>
+                            <th width="3%">#</th>
+                            <th width="40%"><?= $this->lang->line("label_disease_name"); ?></th>
+                            <th width="30%"><?= $this->lang->line("label_specie_name"); ?></th>
+                            <th width="15%"><?= $this->lang->line("label_action"); ?></th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="overflow-y-scroll text-gray-600 text-sm font-normal">
+                        <?php
+                        $serial = 1;
+                        foreach ($diseases as $disease) { ?>
+                            <tr class="bg-white border-b">
+                                <td><?= $serial ?></td>
+                                <td><?= anchor("ohkr/disease_symptoms/" . $disease->id, $disease->title, '') ?></td>
+                                <td><?= $disease->species; ?></td>
+                                <td>
+                                    <?php
+                                    if (perms_role('Ohkr', 'disease_symptoms_list'))
+                                        echo anchor("ohkr/disease_symptoms/" . $disease->id, '<i class="fa fa-stethoscope"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;';
+                                    if (perms_role('Ohkr', 'edit_disease'))
+                                        echo anchor("ohkr/diseases/edit/" . $disease->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-secondary btn-xs"') . '&nbsp;';
+                                    // if (perms_role('Ohkr', 'delete_disease'))
+                                    //     echo anchor("ohkr/diseases/delete/" . $disease->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"');
+                                    ?>
+
+                                </td>
+                            </tr>
+                        <?php
+                            $serial++;
+                        } ?>
+                    </tbody>
+                </table>
             <?php } else { ?>
                 <div class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
                     <span class="block sm:inline text-sm font-normal">No any disease at the moment</span>
