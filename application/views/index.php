@@ -1,6 +1,6 @@
 <div class="bg-gray-100">
     <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-xl font-medium tracking-tight text-gray-900">Dashboard</h1>
+        <h1 class="text-xl font-medium tracking-tight text-gray-900">Tableau de bord</h1>
     </div>
 </div>
 </header>
@@ -8,10 +8,10 @@
 <main class="bg-white h-full relative">
     <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
 
-        <!-- Stats -->
+        <!-- Statistiques -->
         <div class="flex flex-wrap mb-4">
+            <!-- Carte de métrique -->
             <div class="w-full md:w-1/4 xl:w-1/4 pr-2">
-                <!--Metric Card-->
                 <div class="bg-slate-200 border rounded p-4">
                     <div class="flex flex-row items-center">
                         <div class="flex-shrink pr-4">
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="flex-1 text-right md:text-center">
-                            <h5 class="font-medium text-gray-600">Data Collectors</h5>
+                            <h5 class="font-medium text-gray-600">Collecteurs de données</h5>
                             <h3 class="font-bold text-2xl"><?= (isset($data_collectors) ? number_format($data_collectors) : '0'); ?></h3>
                         </div>
                     </div>
@@ -30,7 +30,6 @@
             </div>
 
             <div class="w-full md:w-1/4 xl:w-1/4 px-2 ">
-                <!--Metric Card-->
                 <div class="bg-slate-200 border rounded p-4">
                     <div class="flex flex-row items-center">
                         <div class="flex-shrink pr-4">
@@ -41,7 +40,7 @@
                             </div>
                         </div>
                         <div class="flex-1 text-right md:text-center">
-                            <h5 class="font-medium text-gray-600">Published Forms</h5>
+                            <h5 class="font-medium text-gray-600">Formulaires publiés</h5>
                             <h3 class="font-bold text-2xl"><?= (isset($published_forms) ? number_format($published_forms) : '0') ?></h3>
                         </div>
                     </div>
@@ -49,7 +48,6 @@
             </div>
 
             <div class="w-full md:w-1/4 xl:w-1/4 px-2">
-                <!--Metric Card-->
                 <div class="bg-slate-200 border rounded p-4">
                     <div class="flex flex-row items-center">
                         <div class="flex-shrink pr-4">
@@ -60,7 +58,7 @@
                             </div>
                         </div>
                         <div class="flex-1 text-right md:text-center">
-                            <h5 class="font-medium text-gray-600">Data Collected</h5>
+                            <h5 class="font-medium text-gray-600">Données collectées</h5>
                             <h3 class="font-bold text-2xl"><?= number_format($sum_collected_data); ?></h3>
                         </div>
                     </div>
@@ -68,7 +66,6 @@
             </div>
 
             <div class="w-full md:w-1/4 xl:w-1/4 pl-2">
-                <!--Metric Card-->
                 <div class="bg-slate-200 border rounded p-4">
                     <div class="flex flex-row items-center">
                         <div class="flex-shrink pr-4">
@@ -79,7 +76,7 @@
                             </div>
                         </div>
                         <div class="flex-1 text-right md:text-center">
-                            <h5 class="font-medium text-gray-600">No. of Feedback</h5>
+                            <h5 class="font-medium text-gray-600">Nombre de retours</h5>
                             <h3 class="font-bold text-xl">
                                 <?= (isset($new_feedback) ? number_format($new_feedback) : '0'); ?>
                             </h3>
@@ -94,7 +91,7 @@
                 <div class="bg-slate-200 border rounded-0">
                     <div class="p-2">
                         <h5 class="font-medium text-gray-600 text-left">
-                            Recent Form Submission
+                            Soumissions de formulaires récentes
                         </h5>
                     </div>
 
@@ -108,7 +105,7 @@
                 <div class="bg-slate-200 border rounded-0">
                     <div class="p-2">
                         <h5 class="font-medium text-gray-600 text-left">
-                            Recent Feedback
+                            Retours récents
                         </h5>
                     </div>
 
@@ -157,14 +154,14 @@
                 </div>
             </div>
         </div>
-        <!-- /End replace -->
+        <!-- /Fin de remplacement -->
     </div>
 </main>
 
 <script type="text/javascript">
-    //TODO: make function to be called within view
+    //TODO: Créer une fonction à appeler dans la vue
 
-    //Overall data
+    // Données générales
     $(function() {
         Highcharts.setOptions({
             lang: {
@@ -184,7 +181,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'No. of submitted data'
+                    text: 'Nombre de données soumises'
                 }
             },
             series: [{

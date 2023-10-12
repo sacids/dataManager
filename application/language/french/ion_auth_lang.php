@@ -1,81 +1,78 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('Accès direct au script interdit');
 /**
-* Name:  Ion Auth Lang - French
+* Nom:  Ion Auth Lang - Français
 *
-* Author:     Stan
-* 		      tfspir@gmail.com
+* Auteur: Ben Edmunds
+*         ben.edmunds@gmail.com
+*         @benedmunds
 *
-* Updated by: Gwenaël Gallon
-* 			  github@dev-ggallon
+* Emplacement: http://github.com/benedmunds/ion_auth/
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Créé le:  14.03.2010
 *
-* Created:  03.23.2010
-* Updated:  22.10.2014
-*
-* Description:  French language file for Ion Auth messages and errors
+* Description: Fichier de langue française pour les messages et les erreurs de Ion Auth
 *
 */
 
-// Account Creation
+// Création de compte
 $lang['account_creation_successful']            = 'Compte créé avec succès';
 $lang['account_creation_unsuccessful']          = 'Impossible de créer le compte';
-$lang['account_creation_duplicate_email']       = 'Email déjà utilisé ou invalide';
-$lang['account_creation_duplicate_identity']    = 'Nom d\'utilisateur déjà utilisé ou invalide';
-$lang['account_creation_missing_default_group'] = 'Le groupe par défaut n\'est pas configuré';
-$lang['account_creation_invalid_default_group'] = 'Le nom du groupe par défaut n\'est pas valide';
+$lang['account_creation_duplicate_email']       = 'Adresse e-mail déjà utilisée ou invalide';
+$lang['account_creation_duplicate_identity']    = 'Identité déjà utilisée ou invalide';
+$lang['account_creation_missing_default_group'] = 'Le groupe par défaut n\'est pas défini';
+$lang['account_creation_invalid_default_group'] = 'Nom de groupe par défaut invalide';
 
 
-// Password
-$lang['password_change_successful']   = 'Le mot de passe a été changé avec succès';
-$lang['password_change_unsuccessful'] = 'Impossible de changer le mot de passe';
-$lang['forgot_password_successful']   = 'Mail de réinitialisation du mot de passe envoyé';
-$lang['forgot_password_unsuccessful'] = 'Impossible de réinitialiser le mot de passe';
+// Mot de passe
+$lang['password_change_successful']          = 'Mot de passe modifié avec succès';
+$lang['password_change_unsuccessful']        = 'Impossible de changer le mot de passe';
+$lang['forgot_password_successful']          = 'E-mail de réinitialisation du mot de passe envoyé';
+$lang['forgot_password_unsuccessful']        = 'Impossible de réinitialiser le mot de passe';
 
 // Activation
-$lang['activate_successful']           = 'Compte activé';
-$lang['activate_unsuccessful']         = 'Impossible d\'activer le compte';
-$lang['deactivate_successful']         = 'Compte désactivé';
-$lang['deactivate_unsuccessful']       = 'Impossible de désactiver le compte';
-$lang['activation_email_successful']   = 'Email d\'activation envoyé avec succès';
-$lang['activation_email_unsuccessful'] = 'Impossible d\'envoyer l\'email d\'activation';
+$lang['activate_successful']                 = 'Compte activé';
+$lang['activate_unsuccessful']               = 'Impossible d\'activer le compte';
+$lang['deactivate_successful']               = 'Compte désactivé';
+$lang['deactivate_unsuccessful']             = 'Impossible de désactiver le compte';
+$lang['activation_email_successful']         = 'E-mail d\'activation envoyé';
+$lang['activation_email_unsuccessful']       = 'Impossible d\'envoyer l\'e-mail d\'activation';
 
-// Login / Logout
-$lang['login_successful']              = 'Connecté avec succès';
-$lang['login_unsuccessful']            = 'Erreur lors de la connexion';
-$lang['login_unsuccessful_not_active'] = 'Ce compte est inactif';
-$lang['login_timeout']                 = 'Compte temporairement verrouillé. Réessayez plus tard.';
-$lang['logout_successful']             = 'Déconnexion effectuée avec succès';
+// Connexion / Déconnexion
+$lang['login_successful']                    = 'Connecté avec succès';
+$lang['login_unsuccessful']                  = 'Identification incorrecte';
+$lang['login_unsuccessful_not_active']       = 'Le compte est inactif';
+$lang['login_timeout']                       = 'Temporairement bloqué. Réessayez plus tard.';
+$lang['logout_successful']                   = 'Déconnecté avec succès';
 
-// Account Changes
-$lang['update_successful']   = 'Compte utilisateur mis à jour avec succès';
-$lang['update_unsuccessful'] = 'Impossible de mettre à jour le compte utilisateur';
-$lang['delete_successful']   = 'Utilisateur supprimé';
-$lang['delete_unsuccessful'] = 'Impossible de supprimer l\'utilisateur';
+// Modifications du compte
+$lang['update_successful']                   = 'Informations du compte mises à jour avec succès';
+$lang['update_unsuccessful']                 = 'Impossible de mettre à jour les informations du compte';
+$lang['delete_successful']                   = 'Utilisateur supprimé';
+$lang['delete_unsuccessful']                 = 'Impossible de supprimer l\'utilisateur';
 
-// Groups
-$lang['group_creation_successful'] = 'Groupe créé avec succès';
-$lang['group_already_exists']      = 'Nom du groupe déjà pris';
-$lang['group_update_successful']   = 'Informations sur le groupe mis à jour';
-$lang['group_delete_successful']   = 'Groupe supprimé';
-$lang['group_delete_unsuccessful'] = 'Impossible de supprimer le groupe';
-$lang['group_delete_notallowed']    = 'Can\'t delete the administrators\' group';
-$lang['group_name_required']       = 'Le nom du groupe est un champ obligatoire';
-$lang['group_name_admin_not_alter'] = 'Admin group name can not be changed';
+// Groupes
+$lang['group_creation_successful']           = 'Groupe créé avec succès';
+$lang['group_already_exists']                = 'Nom de groupe déjà pris';
+$lang['group_update_successful']             = 'Détails du groupe mis à jour';
+$lang['group_delete_successful']             = 'Groupe supprimé';
+$lang['group_delete_unsuccessful']           = 'Impossible de supprimer le groupe';
+$lang['group_delete_notallowed']             = 'Impossible de supprimer le groupe des administrateurs';
+$lang['group_name_required']                 = 'Le nom du groupe est un champ obligatoire';
+$lang['group_name_admin_not_alter']          = 'Le nom du groupe administrateur ne peut pas être modifié';
 
-// Activation Email
-$lang['email_activation_subject']  = 'Activation du compte';
-$lang['email_activate_heading']    = 'Activer le compte pour %s';
-$lang['email_activate_subheading'] = 'S\'il vous plaît cliquer sur ce lien pour %s.';
-$lang['email_activate_link']       = 'Activez votre compte';
+// E-mail d'activation
+$lang['email_activation_subject']            = 'Activation du compte';
+$lang['email_activate_heading']              = 'Activer le compte pour %s';
+$lang['email_activate_subheading']           = 'Veuillez cliquer sur ce lien pour %s.';
+$lang['email_activate_link']                 = 'Activer votre compte';
 
-// Forgot Password Email
-$lang['email_forgotten_password_subject'] = 'Mot de Passe Oublié - Vérification';
-$lang['email_forgot_password_heading']    = 'Réinitialiser le mot de passe pour %s';
-$lang['email_forgot_password_subheading'] = 'S\'il vous plaît cliquer sur ce lien pour %s.';
-$lang['email_forgot_password_link']       = 'Réinitialiser votre mot de passe';
+// E-mail de réinitialisation du mot de passe
+$lang['email_forgotten_password_subject']    = 'Vérification de réinitialisation du mot de passe oublié';
+$lang['email_forgot_password_heading']       = 'Réinitialiser le mot de passe pour %s';
+$lang['email_forgot_password_subheading']    = 'Veuillez cliquer sur ce lien pour %s.';
+$lang['email_forgot_password_link']          = 'Réinitialiser votre mot de passe';
 
-// New Password Email
-$lang['email_new_password_subject']    = 'Nouveau Mot de Passe';
-$lang['email_new_password_heading']    = 'Nouveau Mot de Passe pour %s';
-$lang['email_new_password_subheading'] = 'Votre mot de passe a été réinitialisé à : %s';
+// E-mail du nouveau mot de passe
+$lang['email_new_password_subject']          = 'Nouveau mot de passe';
+$lang['email_new_password_heading']          = 'Nouveau mot de passe pour %s';
+$lang['email_new_password_subheading']       = 'Votre mot de passe a été réinitialisé en : %s';
