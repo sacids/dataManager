@@ -5,9 +5,9 @@
 
     <div class="mx-auto py-0 px-4 sm:px-6">
         <div class="text-sm text-left text-gray-900">
-            <a hx-get="<?= site_url('feedback/form_data_preview/' . $form->form_id . '/' . $form_data->id); ?>" hx-target="#jembe" class="inline-block p-2 border-b-4 border-red-900">Data Preview</a>
-            <a hx-get="<?= site_url('feedback/chats/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="inline-block p-2 border-b-4 border-transparent">Chats</a>
-            <a hx-get="<?= site_url('feedback/case_info/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="inline-block p-2 border-b-4 border-transparent">Case Information</a>
+            <a hx-get="<?= site_url('feedback/form_data_preview/' . $form->form_id . '/' . $form_data->id); ?>" hx-target="#jembe" class="inline-block p-2 border-b-4 border-red-900 cursor-pointer">Data Preview</a>
+            <a hx-get="<?= site_url('feedback/chats/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="inline-block p-2 border-b-4 border-transparent cursor-pointer">Chats</a>
+            <a hx-get="<?= site_url('feedback/case_info/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="inline-block p-2 border-b-4 border-transparent cursor-pointer">Case Information</a>
         </div>
     </div>
 </div>

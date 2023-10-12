@@ -2,19 +2,19 @@
     <div class="flex w-full justify-between text-sm text-gray-900 p-3 border-b">
         <div class="flex w-full">
             <div>
-                <a hx-get="<?= site_url('feedback/form_data_preview/' . $form->form_id . '/' . $form_data->id); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2">
+                <a hx-get="<?= site_url('feedback/form_data_preview/' . $form->form_id . '/' . $form_data->id); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2 cursor-pointer">
                     Data Preview
                 </a>
             </div>
 
             <div>
-                <a hx-get="<?= site_url('feedback/chats/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2">
+                <a hx-get="<?= site_url('feedback/chats/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2 cursor-pointer">
                     Chats
                 </a>
             </div>
 
             <div>
-                <a hx-get="<?= site_url('feedback/case_info/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2">
+                <a hx-get="<?= site_url('feedback/case_info/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2 cursor-pointer">
                     Case Information
                 </a>
             </div>
