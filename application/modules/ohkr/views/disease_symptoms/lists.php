@@ -108,10 +108,10 @@
                                         <td>
                                             <?php
                                             if (perms_role('Ohkr', 'edit_disease_symptom'))
-                                                echo anchor("ohkr/edit_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;';
+                                                echo anchor("ohkr/edit_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa-regular fa-pen-to-square"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;&nbsp;';
 
                                             if (perms_role('Ohkr', 'delete_disease_symptom'))
-                                                echo anchor("ohkr/delete_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"');
+                                                echo anchor("ohkr/delete_disease_symptom/" . $disease->id . "/" . $value->id, '<i class="fa-regular fa-trash-can text-red-400"></i>', 'class="btn btn-danger btn-xs delete"');
                                             ?>
                                         </td>
 

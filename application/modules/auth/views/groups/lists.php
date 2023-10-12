@@ -65,10 +65,10 @@
                                     <td>
                                     <?php
                                     //if ($this->ion_auth->is_admin() || perms_role('groups', 'edit'))
-                                        echo anchor("auth/groups/edit/" . $values->id, '<i class="fa fa-pencil"></i>', array("class" => 'btn btn-primary btn-xs')) . '&nbsp;&nbsp;';
+                                        echo anchor("auth/groups/edit/" . $values->id, '<i class="fa-regular fa-pen-to-square"></i>', array("class" => 'btn btn-primary btn-xs')) . '&nbsp;&nbsp;';
 
                                     //if ($this->ion_auth->is_admin() || perms_role('groups', 'assign_perms'))
-                                        echo anchor('auth/groups/perms/' . $values->id, '<i class="fa fa-user-secret"></i>', array("class" => 'btn btn-warning btn-xs'));
+                                        echo anchor('auth/groups/perms/' . $values->id, '<i class="fa-solid fa-users-gear"></i>', array("class" => 'btn btn-warning btn-xs'));
                                     ?>
                                     </td> 
                                 </tr>

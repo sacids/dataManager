@@ -62,11 +62,11 @@
                                 <td>
                                     <?php
                                     if (perms_role('Ohkr', 'disease_symptoms_list'))
-                                        echo anchor("ohkr/disease_symptoms/" . $disease->id, '<i class="fa fa-stethoscope"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;';
+                                        echo anchor("ohkr/disease_symptoms/" . $disease->id, '<i class="fa fa-stethoscope"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;&nbsp;';
                                     if (perms_role('Ohkr', 'edit_disease'))
-                                        echo anchor("ohkr/diseases/edit/" . $disease->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-secondary btn-xs"') . '&nbsp;';
-                                    // if (perms_role('Ohkr', 'delete_disease'))
-                                    //     echo anchor("ohkr/diseases/delete/" . $disease->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"');
+                                        echo anchor("ohkr/diseases/edit/" . $disease->id, '<i class="fa-regular fa-pen-to-square"></i>', 'class="btn btn-secondary btn-xs"') . '&nbsp;&nbsp;';
+                                    if (perms_role('Ohkr', 'delete_disease'))
+                                        echo anchor("ohkr/diseases/delete/" . $disease->id, '<i class="fa-regular fa-trash-can text-red-400"></i>', 'class="btn btn-danger btn-xs delete"');
                                     ?>
 
                                 </td>

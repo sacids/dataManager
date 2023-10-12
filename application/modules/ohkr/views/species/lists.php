@@ -60,10 +60,10 @@
                                 <td>
                                     <?php
                                     if (perms_role('Ohkr', 'edit_specie'))
-                                        echo anchor("ohkr/species/edit/" . $specie->id, '<i class="fa fa-pencil"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;';
+                                        echo anchor("ohkr/species/edit/" . $specie->id, '<i class="fa-regular fa-pen-to-square"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;&nbsp;';
 
                                     if (perms_role('Ohkr', 'delete_specie'))
-                                        echo anchor("ohkr/species/delete/" . $specie->id, '<i class="fa fa-trash"></i>', 'class="btn btn-danger btn-xs delete"');
+                                        echo anchor("ohkr/species/delete/" . $specie->id, '<i class="fa-regular fa-trash-can text-red-400"></i>', 'class="btn btn-danger btn-xs delete"');
                                     ?>
                                 </td>
                             </tr>
