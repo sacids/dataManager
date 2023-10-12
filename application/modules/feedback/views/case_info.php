@@ -5,7 +5,7 @@
             <tr class="border-b">
                 <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Case Attended</td>
                 <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
-                    <?= ($case->attended == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No</span>'; ?>
+                    <?= ($case->attended == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No ('.calculate_number_of_days($case->created_at).')</span>'; ?>
                 </td>
             </tr>
 

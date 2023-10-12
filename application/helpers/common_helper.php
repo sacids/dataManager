@@ -124,6 +124,21 @@ if (!function_exists('time_ago')) {
     }
 }
 
+//calculate number of days
+if (!function_exists('calculate_number_of_days')) {
+    function calculate_number_of_days($date)
+    {
+        // Declare two dates
+        $start_date = strtotime($date);
+        $end_date = now();
+
+        // number of days
+        $days = ($end_date - $start_date) / 60 / 60 / 24;
+
+        return floor($days);
+    }
+}
+
 
 if (!function_exists('array_utf8_encode')) {
     /**
