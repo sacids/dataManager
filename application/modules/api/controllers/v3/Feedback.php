@@ -317,17 +317,34 @@ class Feedback extends REST_Controller
             // 4. Reported on EMA-i (Y/N)
             // 5. Created at
             // 6. Created By
-            // 7. Instance Id
+            // 7. Form Id
+            // 8. Instance Id
 
             //get variables
+            $form_id = $this->post('form_id');
             $instance_id = $this->post('instance_id');
-            $case_attended = $this->post('case_attended');
-            $suspected_disease = $this->post('disease');
-            $action_taken = $this->post('action_taken');
-            $reported = $this->post('reported_emai');
 
-            //response
-            $this->response(array('status' => 'success', 'message' => 'Case information recorded'), 200);
+            //reported case
+            $this->model->set_table('ohkr_reported_cases');
+            $case = $this->model->get_by(['form_id' => $form_id, 'instance_id' => $instance_id]);
+
+            if ($case) {
+                $this->model->set_table('ohkr_reported_cases');
+                $this->model->update($case->id,[
+                    'disease_id' => $this->post('disease_id'),
+                    'other_disease' => $this->post('other_disease'),
+                    'attended' => $this->post('attended'),
+                    'action_taken' => $this->post('action_taken'),
+                    'attended' => $this->post('attended'),
+                    'reported_emai' => $this->post('reported_emai'),
+                    'updated_by' => $user->id,
+                    'updated_at' => date("Y-m-d H:i:s"),
+                ]);
+                //response
+                $this->response(array('status' => 'success', 'message' => 'Case information recorded'), 200);
+            }else{
+                $this->response(array('status' => 'failed', 'message' => 'Case does not exist'), 203); 
+            }
         } else {
             $this->response(array('status' => 'failed', 'message' => 'User does not exist'), 203);
         }
