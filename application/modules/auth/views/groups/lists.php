@@ -15,8 +15,8 @@
 </div>
 </header>
 
-<main class="bg-white h-full relative">
-    <div class="h-full overflow-y-scroll">
+<main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
+    <div class="flex-1 h-full overflow-y-scroll">
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <?php if ($this->session->flashdata('message') != "") { ?>
                 <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
