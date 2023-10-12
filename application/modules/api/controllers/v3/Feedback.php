@@ -330,21 +330,33 @@ class Feedback extends REST_Controller
 
             if ($case) {
                 $this->model->set_table('ohkr_reported_cases');
-                $this->model->update($case->id,[
+                $this->model->update($case->id, [
                     'disease_id' => $this->post('disease_id'),
                     'other_disease' => $this->post('other_disease'),
-                    'attended' => $this->post('attended'),
+                    'attended' => $this->post('case_attended'),
                     'action_taken' => $this->post('action_taken'),
-                    'attended' => $this->post('attended'),
-                    'reported_emai' => $this->post('reported_emai'),
+                    'reported_emai' => $this->post('reported'),
                     'updated_by' => $user->id,
                     'updated_at' => date("Y-m-d H:i:s"),
                 ]);
-                //response
-                $this->response(array('status' => 'success', 'message' => 'Case information recorded'), 200);
-            }else{
-                $this->response(array('status' => 'failed', 'message' => 'Case does not exist'), 203); 
+            } else {
+                $this->model->set_table('ohkr_reported_cases');
+                $this->model->insert([
+                    'form_id' => $form_id,
+                    'instance_id' => $instance_id,
+                    'disease_id' => $this->post('disease_id'),
+                    'other_disease' => $this->post('other_disease'),
+                    'attended' => $this->post('case_attended'),
+                    'action_taken' => $this->post('action_taken'),
+                    'reported_emai' => $this->post('reported'),
+                    'created_by' => $user->id,
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_by' => $user->id,
+                    'updated_at' => date("Y-m-d H:i:s"),
+                ]);
             }
+            //response
+            $this->response(array('status' => 'success', 'message' => 'Case information recorded'), 200);
         } else {
             $this->response(array('status' => 'failed', 'message' => 'User does not exist'), 203);
         }
