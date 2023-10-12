@@ -94,7 +94,7 @@ class Feedback_model extends CI_Model
     function find_all($limit = 30, $offset = 0)
     {
         return $this->db->query("
-             SELECT fb.id, fb.instance_id, fb.message, fb.sender, fb.date_created,xforms.title,
+             SELECT fb.id, fb.form_id, fb.instance_id, fb.message, fb.sender, fb.date_created,xforms.title,
              users.first_name, users.last_name, users.username
              FROM " . self::$table_name_feedback . " fb
              JOIN " . self::$table_name_xform . " ON fb.form_id = xforms.form_id
@@ -118,7 +118,7 @@ class Feedback_model extends CI_Model
             $this->db->like("users.username", $username);
 
         return $this->db
-            ->select('feedback.id, feedback.instance_id, feedback.message, feedback.date_created,
+            ->select('feedback.id, feedback.form_id, feedback.instance_id, feedback.message, feedback.date_created,
                     users.first_name, users.last_name, users.username, xforms.title')
             ->order_by('feedback.id', 'DESC')
             ->where_in("(SELECT MAX(feedback.id) FROM feedback GROUP BY instance_id)")

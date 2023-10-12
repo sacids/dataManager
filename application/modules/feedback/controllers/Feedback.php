@@ -93,6 +93,52 @@ class Feedback extends MX_Controller
         $this->load->view('footer');
     }
 
+
+    /**
+     * @param $instance_id
+     * @return array
+     */
+    function user_feedback($form_id, $instance_id)
+    {
+        $this->data['title'] = "Chat Conversation";
+
+        //check if logged in
+        $this->is_logged_in();
+        $this->has_allowed_perm($this->router->fetch_method());
+
+        //form
+        $this->model->set_table('xforms');
+        $xform = $this->model->get_by(['form_id' => $form_id]);
+        $this->data['form'] = $xform;
+
+        //search varialbles  
+        $this->table_name = $xform->form_id;
+        $this->label = 'meta_instanceID';
+        $this->search_value = $instance_id;
+
+        //form data
+        $this->model->set_table($this->table_name);
+        $form_data = $this->model->get_by('meta_instanceID', $instance_id);
+        $this->data['form_data'] = $form_data;
+
+        $this->xform_comm->set_defn_file($this->config->item("form_definition_upload_dir") . $xform->filename);
+        $this->xform_comm->load_xml_definition($this->config->item("xform_tables_prefix"));
+        $form_definition = $this->xform_comm->get_defn();
+
+        //get form data
+        $mapped_form_data = $this->get_form_data($form_definition, $this->get_fieldname_map($this->table_name));
+
+        if ($mapped_form_data)
+            $this->data['mapped_form_data'] = $mapped_form_data;
+        else
+            $this->data['mapped_form_data'] = [];
+
+        //render view
+        $this->load->view('header', $this->data);
+        $this->load->view("user_feedback");
+        $this->load->view('footer');
+    }
+
     //menu bar
     function menu_bar($form_id, $data_id)
     {
