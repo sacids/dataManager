@@ -1425,6 +1425,7 @@ class Xform extends MX_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         $data['start_at'] = $start_at;
