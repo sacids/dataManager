@@ -497,7 +497,7 @@ class Xform extends MX_Controller
             $feedback = array(
                 "user_id" => $this->user_submitting_feedback_id,
                 "form_id" => $this->xFormReader->get_table_name(),
-                "message" => 'Asante kwa kutuma taarifa, Tumepokea fomu yako.',
+                "message" => "Merci d'avoir envoyé l'information.",
                 "date_created" => date('Y-m-d H:i:s'),
                 "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
                 "sender" => "server",
@@ -564,7 +564,7 @@ class Xform extends MX_Controller
      *            Input string
      * @return string response
      */
-    function _get_response($http_response_code, $response_message = "Asante, Fomu imepokelewa!")
+    function _get_response($http_response_code, $response_message = "Merci d'avoir envoyé l'information!")
     {
         // OpenRosa Success Response
         $response = '<OpenRosaResponse xmlns="http://openrosa.org/http/response">
