@@ -1,15 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Godluck Akyoo
- * Date: 18/01/2018
- * Time: 13:36
+ * Créé par : Godluck Akyoo
+ * Date : 18/01/2018
+ * Heure : 13h36
  */
 
-//Response messages
-$lang['message_data_received'] = 'We have received your form, this is a list of suspected diseases based on the information you submitted:\n';
+// Messages de réponse
+$lang['message_data_received'] = 'Nous avons bien reçu votre formulaire. Voici une liste de maladies suspectées en fonction des informations que vous avez soumises : \n';
 
-$lang['message_auto_detect_disease_failed'] = 'We have received your information, Unfortunately the system can not auto detect mostly likely disease
-please seek further advice from our experts';
+$lang['message_auto_detect_disease_failed'] = 'Nous avons bien reçu vos informations. Malheureusement, le système ne peut pas détecter automatiquement la maladie la plus probable. Veuillez consulter nos experts pour obtenir des conseils supplémentaires.';
 
-$lang['message_feedback_data_received'] = "Thanks for submitting your forms, we have successfully received your form data";
+$lang['message_feedback_data_received'] = "Merci d'avoir soumis vos formulaires, nous avons bien reçu les données de votre formulaire.";

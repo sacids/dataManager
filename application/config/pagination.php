@@ -4,7 +4,7 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 
-$config['per_page']           = 10;
+$config['per_page']           = 500;
 $config['num_links']          = 10;
 $config['full_tag_open']      = '<ul class="inline-flex -space-x-px">';
 $config['full_tag_close']     = '</ul><!--pagination-->';

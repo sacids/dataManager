@@ -15,8 +15,8 @@
 </div>
 </header>
 
-<main class="bg-white h-full relative">
-    <div class="h-full overflow-y-scroll">
+<main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
+    <div class="flex-1 h-full overflow-y-scroll">
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <?php if ($this->session->flashdata('message') != "") { ?>
                 <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
@@ -65,10 +65,10 @@
                                     <td>
                                     <?php
                                     //if ($this->ion_auth->is_admin() || perms_role('groups', 'edit'))
-                                        echo anchor("auth/groups/edit/" . $values->id, '<i class="fa fa-pencil"></i>', array("class" => 'btn btn-primary btn-xs')) . '&nbsp;&nbsp;';
+                                        echo anchor("auth/groups/edit/" . $values->id, '<i class="fa-regular fa-pen-to-square"></i>', array("class" => 'btn btn-primary btn-xs')) . '&nbsp;&nbsp;';
 
                                     //if ($this->ion_auth->is_admin() || perms_role('groups', 'assign_perms'))
-                                        echo anchor('auth/groups/perms/' . $values->id, '<i class="fa fa-user-secret"></i>', array("class" => 'btn btn-warning btn-xs'));
+                                        echo anchor('auth/groups/perms/' . $values->id, '<i class="fa-solid fa-users-gear"></i>', array("class" => 'btn btn-warning btn-xs'));
                                     ?>
                                     </td> 
                                 </tr>

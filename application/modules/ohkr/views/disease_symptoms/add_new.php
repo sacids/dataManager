@@ -45,7 +45,7 @@
                                 $symptoms_options[$value->id] = $value->code . '. ' . $value->title;
                             }
                             $symptoms_options = array('' => '-- Select --') + $symptoms_options;
-                            echo form_dropdown('symptom_id', $symptoms_options, set_value('symptom_id', $disease_symptom->symptom_id), 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"');
+                            echo form_dropdown('symptom_id', $symptoms_options, set_value('symptom_id'), 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"');
                             ?>
                             <div class="text-red-500"><?php echo form_error('symptom_id'); ?></div>
                         </div>
@@ -57,8 +57,28 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Species <span style="color: red;">*</span></label><br/>
+                                <?php
+                     
+                                $serial = 1;
+                                if (isset($species) && $species) {
+                                    foreach ($species as $v) { ?>
+                                        <input type="checkbox" name="specie_id[]"
+                                               value="<?= $v->id; ?>" <?= set_checkbox('specie_id[]', $v->id); ?>>
+                                        <?= $v->title . '<br />';
+                                        $serial++;
+                                    }
+                                } ?>
+                                <span class="form-text text-danger"><?= form_error('specie_id[]') ?></span>
+                            </div>
+                        </div>
+                    </div> <!-- /.row -->
+
                     <div class="flex items-start">
-                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Update</button>
+                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
                     </div>
                     <?php echo form_close(); ?>
 

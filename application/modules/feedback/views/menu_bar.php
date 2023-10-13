@@ -1,29 +1,51 @@
-<div class="flex flex-row  text-sm text-gray-900 mb-4 fixed">
-    <div>
-        <a data-id="<?= $form_data->id; ?>" form-id="<?= $form->form_id; ?>" id="btn-data-preview" class="px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2">
-            Data Preview
-        </a>
+<div class="w-full h-full overflow-hidden">
+    <div class="flex w-full justify-between text-sm text-gray-900 p-3 border-b">
+        <div class="flex w-full">
+            <div>
+                <a hx-get="<?= site_url('feedback/form_data_preview/' . $form->form_id . '/' . $form_data->id); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2 cursor-pointer">
+                    Data Preview
+                </a>
+            </div>
+
+            <div>
+                <a hx-get="<?= site_url('feedback/chats/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2 cursor-pointer">
+                    Chats
+                </a>
+            </div>
+
+            <div>
+                <a hx-get="<?= site_url('feedback/case_info/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2 cursor-pointer">
+                    Case Information
+                </a>
+            </div>
+        </div>
+
+        <div class="">
+            <a class="text-red-700" @click="sideBarOpen=false">
+                <i class="fa-regular fa-circle-xmark text-red-700 fa-lg"></i>
+            </a>
+        </div>
     </div>
 
-    <div>
-        <a instance-id="<?= $form_data->meta_instanceID; ?>" form-id="<?= $form->form_id; ?>" id="btn-chat" class="px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2">
-            Chats
-        </a>
-    </div>
-
-    <div>
-        <a class="px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2">
-            Location
-        </a>
-    </div>
-
-    <div class="flex justify-end items-end">
-        <a id="close-offcanvas" class="text-red-700">
-            <i class="fa-regular fa-rectangle-xmark text-red-700 fa-lg"></i>
-        </a>
+    <div class="h-full w-full overflow-hidden" id="jembe">
+        <!-- content -->
+        <div class="flex flex-col flex-auto h-full overflow-y-scroll p-3">
+                <?php if (isset($mapped_form_data) && $mapped_form_data) { ?>
+                    <table class="w-full text-sm text-left table-fixed">
+                        <tbody class="border-b">
+                            <?php foreach ($mapped_form_data as $val) { ?>
+                                <tr class="border-b">
+                                    <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $val['label'] ?></td>
+                                    <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $val['value'] ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+        </div>
     </div>
 </div>
-
+<!-- 
 <script>
     $(document).ready(function() {
         //close canvas
@@ -91,4 +113,4 @@
 
 
     });
-</script>
+</script> -->

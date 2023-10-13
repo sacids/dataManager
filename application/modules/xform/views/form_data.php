@@ -14,12 +14,10 @@
             ?>
         </div>
     </div>
-
 </div>
 </header>
 
-
-<main class="bg-white h-full flex overflow-hidden">
+<main class="bg-white h-full flex overflow-hidden relative" x-data="manageData()">
     <div class="flex-1 h-full overflow-y-scroll">
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <?php echo form_open(uri_string()); ?>
@@ -64,7 +62,8 @@
                 <div class="relative overflow-x-auto">
                     <?= form_open("xform/delete_entry/" . $project->id . '/' . $form->id, array("role" => "form")); ?>
                     <?= form_hidden("table_name", $form_id); ?>
-                    <table id="dt" class="table table-bordered dt-responsive  nowrap w-100">
+
+                    <table id='datatable' class="table table-bordered dt-responsive nowrap w-100">
                         <thead class="text-gray-600 text-sm font-medium">
                             <tr>
                                 <th scope="col" class="text-center">
@@ -94,20 +93,16 @@
                                 foreach ($data as $key => $entry) {
 
                                     if ($key == "id") {
-                                        echo "<td class='px-2 py-1'>" . form_checkbox("entry_id[]", $entry) . "</td>";
+                                        echo "<td class='px-4 py-3'>" . form_checkbox("entry_id[]", $entry) . "</td>";
                                     }
 
                                     if ($key == "meta_instanceID") {
-                                        echo "<td class='px-2 py-1 dt-click' data-id=" . $data->id . "  form-id=" . $form_id . ">" . $entry . "</td>";
+                                        echo "<td class='px-4 py-3' @click=\"sideBarOpen=true\" hx-get='/feedback/menu_bar/".$form_id."/".$data->id."' hx-target='#sidebar_wrp' data-id=" . $data->id . "  form-id=" . $form_id . ">" . $entry . "</td>";
                                     } else {
                                         if ($key == "meta_username") {
-                                            echo "<td class='px-2 py-1'>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
+                                            echo "<td class='px-4 py-3'>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
                                         } else {
-                                            // if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
-                                            //     //echo "<td class='py-3'><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
-                                            // } else {
-                                            echo "<td class='px-2 py-1'>" . $entry . "</td>";
-                                            //}
+                                            echo "<td class='px-4 py-3'>" . $entry . "</td>";
                                         }
                                     }
                                 }
@@ -149,43 +144,44 @@
         </div>
     </div>
 
-    <div id="offcanvas-wrp"></div>
+    <div id="sidebar_wrp" class="border-l w-0 shadow-md bg-white transition-all duration-500 absolute top-0 right-0 h-full" :class="{'w-1/2' : sideBarOpen }"></div>
 </main>
 
 <script>
-    $(document).ready(function() {
-        //close offcanvas wrp
-        $('#offcanvas-wrp').hide();
+    // $(document).ready(function() {
+    //     //close offcanvas wrp
+    //     $('#offcanvas-wrp').hide();
 
-        $(document).on('click', '.dt-click', function(event) {
-            event.preventDefault();
+    //     $(document).on('click', '.dt-click', function(event) {
+    //         event.preventDefault();
 
-            $('#offcanvas-wrp').animate({
-                width: "show"
-            });
+    //         $('#offcanvas-wrp').animate({
+    //             width: "show"
+    //         });
+
+    //         var formId = $(this).attr('form-id');
+    //         var dataId = $(this).attr('data-id');
+    //         var url = window.location.origin + '/feedback/form_data_preview/' + formId + '/' + dataId;
+
+    //         var jqXHR = $.ajax({
+    //             type: "GET",
+    //             url: url,
+    //         }).done(function(data) {
+    //             //offcanvas
+    //             $('#offcanvas-wrp').html(data);
+
+    //         }).fail(function(jqXHR, textStatus, errorThrown) {
+    //             alert('Failed to update progress');
+    //             if (console && console.log) {
+    //                 console.log("Loading Ajax: " + textStatus + ", " + errorThrown);
+    //             }
+    //         });
+
+    //     });
+
+    // });
 
 
-            var formId = $(this).attr('form-id');
-            var dataId = $(this).attr('data-id');
-            var url = window.location.origin + '/feedback/form_data_preview/' + formId + '/' + dataId;
-
-            var jqXHR = $.ajax({
-                type: "GET",
-                url: url,
-            }).done(function(data) {
-                //offcanvas
-                $('#offcanvas-wrp').html(data);
-
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                alert('Failed to update progress');
-                if (console && console.log) {
-                    console.log("Loading Ajax: " + textStatus + ", " + errorThrown);
-                }
-            });
-
-        });
-
-    });
 
 
 
@@ -219,20 +215,20 @@
 
 
 
-    // function manageData() {
-    //     return {
-    //         sidebarOpen: false,
+    function manageData() {
+        return {
+            sideBarOpen: false,
 
-    //         getFormData(id) {
-    //             // get form data using fetch
-    //             var url = window.location.origin + '/feedback/details/' + id;
-    //             fetch(url)
-    //                 .then(response => response.text())
-    //                 .then(data => {
-    //                     // put data in div
-    //                     $('#form_data_wrp').html(data);
-    //                 })
-    //         },
-    //     }
-    // }
+            getFormData(id) {
+                // get form data using fetch
+                var url = window.location.origin + '/feedback/details/' + id;
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        // put data in div
+                        $('#form_data_wrp').html(data);
+                    })
+            },
+        }
+    }
 </script>

@@ -175,11 +175,11 @@ class Auth extends MX_Controller
 
         //links
         $this->data['links'] = [
-            'my_profile' => anchor("auth/profile", 'My Profile', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
-            'change_password' => anchor("auth/change_password", 'Change Password', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'my_profile' => anchor("auth/profile", 'Mon Profile', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'change_password' => anchor("auth/change_password", 'Changement de mot de passe', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
-        $this->data['title'] = 'My profile';
+        $this->data['title'] = 'Mon profile';
         $this->load->view('header', $this->data);
         $this->load->view('profile/user_info');
         $this->load->view('footer');
@@ -247,10 +247,10 @@ class Auth extends MX_Controller
         }
     }
 
-    // change password
+    // changement de mot de passe
     function change_password()
     {
-        $this->data['title'] = "Change Password";
+        $this->data['title'] = "Changement de mot de passe";
 
         $this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
         $this->form_validation->set_rules('new', $this->lang->line('change_password_validation_new_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
@@ -306,8 +306,8 @@ class Auth extends MX_Controller
 
             //links
             $this->data['links'] = [
-                'my_profile' => anchor("auth/profile", 'My Profile', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'change_password' => anchor("auth/change_password", 'Change Password', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+                'my_profile' => anchor("auth/profile", 'Mon Profile', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'change_password' => anchor("auth/change_password", 'Changement de mot de passe', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
             ];
 
             // render view

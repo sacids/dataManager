@@ -1,202 +1,195 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('Aucun accès direct au script n\'est autorisé');
 
 /**
- * Created by PhpStorm.
- * User: Godluck Akyoo
- * Date: 2/22/2016
- * Time: 12:32 PM
+ * Créé par : Godluck Akyoo
+ * Date : 22 février 2016
+ * Heure : 12h32
  *
  * @Author Godluck Akyoo
  *
- * Description: English language file for Sacids views
+ * Description : Fichier de langue anglaise pour les vues de Sacids
  *
  */
 
-// Form upload
-$lang['heading_form_list'] = 'Forms';
-$lang['heading_add_new_form'] = 'Add new form';
-$lang['heading_edit_form'] = 'Edit form';
-$lang['validation_label_form_title'] = 'Form title';
-$lang['validation_label_form_access'] = 'Form access';
-$lang['form_upload_successful'] = 'Form was successfully saved';
-$lang['form_update_successful'] = 'Form was successfully updated';
-$lang['form_update_failed'] = 'Failed to update form';
-$lang['form_upload_failed'] = 'Failed to save form';
-$lang['form_saving_failed'] = 'Failed to save form';
+// Formulaire d'envoi
+$lang['heading_form_list'] = 'Formulaires';
+$lang['heading_add_new_form'] = 'Ajouter un nouveau formulaire';
+$lang['heading_edit_form'] = 'Modifier le formulaire';
+$lang['validation_label_form_title'] = 'Titre du formulaire';
+$lang['validation_label_form_access'] = 'Accès au formulaire';
+$lang['form_upload_successful'] = 'Formulaire enregistré avec succès';
+$lang['form_update_successful'] = 'Formulaire mis à jour avec succès';
+$lang['form_update_failed'] = 'Échec de la mise à jour du formulaire';
+$lang['form_upload_failed'] = 'Échec de l\'enregistrement du formulaire';
+$lang['form_saving_failed'] = 'Échec de l\'enregistrement du formulaire';
 
-$lang['label_form_name'] = "Form name";
-$lang['label_form_title'] = "Form title";
-$lang['label_form_id'] = "Form Id";
-$lang['label_date_created'] = "Created on";
+$lang['label_form_name'] = "Nom du formulaire";
+$lang['label_form_title'] = "Titre du formulaire";
+$lang['label_form_id'] = "Identifiant du formulaire";
+$lang['label_date_created'] = "Créé le";
 $lang['label_description'] = "Description";
 $lang['label_cause'] = "Causes";
-$lang['label_symptoms'] = "Common Symptoms";
-$lang['label_diagnosis'] = "Diagnosis";
-$lang['label_treatment'] = "Treatment";
+$lang['label_symptoms'] = "Symptômes courants";
+$lang['label_diagnosis'] = "Diagnostic";
+$lang['label_treatment'] = "Traitement";
 $lang['label_question'] = "Question";
-$lang['label_answer'] = "Answer";
-$lang['label_access'] = "Access";
-$lang['label_allow_dhis2'] = "Allow Dhis2 Integration";
-$lang['label_xml'] = "XML file";
-$lang['label_form_xml_file'] = "Form XML file";
+$lang['label_answer'] = "Réponse";
+$lang['label_access'] = "Accès";
+$lang['label_allow_dhis2'] = "Autoriser l'intégration DHIS2";
+$lang['label_xml'] = "Fichier XML";
+$lang['label_form_xml_file'] = "Fichier XML du formulaire";
 $lang['label_action'] = "Action";
 
-$lang['label_post_title'] = "Title";
-$lang['label_content'] = "Content";
-$lang['label_status'] = "Status";
+$lang['label_post_title'] = "Titre";
+$lang['label_content'] = "Contenu";
+$lang['label_status'] = "Statut";
 
-$lang['nav_item_form_list'] = "Form";
-$lang['nav_item_form_add_new'] = "Add new form";
+$lang['nav_item_form_list'] = "Formulaires";
+$lang['nav_item_form_add_new'] = "Ajouter un nouveau formulaire";
 
-$lang['label_instance_id'] = "Instance Id";
+$lang['label_instance_id'] = "ID de l'instance";
 $lang['label_message'] = "Message";
-$lang['label_user'] = "User";
-$lang['label_username'] = "Username";
-$lang['label_feedback_date'] = "Time";
-$lang['label_status'] = "Status";
-$lang['label_data_set'] = "Dhis2 Data set ID";
-$lang['label_org_unit_id'] = "Organization unit ID";
-$lang['label_period_type'] = "Period Type";//i.e daily, weekly, monthly
-$lang['validation_label_data_set'] = "Data set ID";
-$lang['validation_label_org_unit_id'] = "Organization unit ID";
-$lang['validation_label_period_type'] = "Reporting Period type";
+$lang['label_user'] = "Utilisateur";
+$lang['label_username'] = "Nom d'utilisateur";
+$lang['label_feedback_date'] = "Heure";
+$lang['label_status'] = "Statut";
+$lang['label_data_set'] = "ID du jeu de données DHIS2";
+$lang['label_org_unit_id'] = "ID de l'unité organisationnelle";
+$lang['label_period_type'] = "Type de période"; // par exemple, quotidien, hebdomadaire, mensuel
+$lang['validation_label_data_set'] = "ID du jeu de données";
+$lang['validation_label_org_unit_id'] = "ID de l'unité organisationnelle";
+$lang['validation_label_period_type'] = "Type de période de déclaration";
 
-// Form management
-$lang['form_archived_successful'] = "Form was archived successful";
-$lang['form_restored_successful'] = "Form was restored from archive successful";
-$lang['error_failed_to_restore_form'] = "Form restoration failed";
-$lang['form_delete_successful'] = "Form was deleted successful";
-$lang['select_form_to_edit'] = "You must select a form to edit";
-$lang['select_form_to_delete'] = "You must select a form to delete";
-$lang['error_failed_to_delete_form'] = "Failed to delete form";
+// Gestion de formulaire
+$lang['form_archived_successful'] = "Formulaire archivé avec succès";
+$lang['form_restored_successful'] = "Formulaire restauré avec succès depuis les archives";
+$lang['error_failed_to_restore_form'] = "Échec de la restauration du formulaire";
+$lang['form_delete_successful'] = "Formulaire supprimé avec succès";
+$lang['select_form_to_edit'] = "Vous devez sélectionner un formulaire à modifier";
+$lang['select_form_to_delete'] = "Vous devez sélectionner un formulaire à supprimer";
+$lang['error_failed_to_delete_form'] = "Échec de la suppression du formulaire";
 
-//Disease
-$lang['label_disease_name'] = "Disease name";
-$lang['label_specie_name'] = "Specie affected";
-$lang['label_symptom_name'] = "Clinical manifestation";
-$lang['label_symptom_code'] = "Clinical manifestation code";
-$lang['label_specie'] = "Species";
-$lang['label_recipient_group'] = "Group to receive alerts";
-$lang['label_alert_message'] = "Alert message";
+// Maladie
+$lang['label_disease_name'] = "Nom de la maladie";
+$lang['label_specie_name'] = "Espèce affectée";
+$lang['label_symptom_name'] = "Manifestation clinique";
+$lang['label_symptom_code'] = "Code de manifestation clinique";
+$lang['label_specie'] = "Espèces";
+$lang['label_recipient_group'] = "Groupe pour recevoir des alertes";
+$lang['label_alert_message'] = "Message d'alerte";
 
-$lang['select_disease_to_edit'] = "You must select a disease to edit";
-$lang['select_disease_to_delete'] = "You must select a disease to delete";
-$lang['select_symptom_to_edit'] = "You must select a clinical manifestation to edit";
-$lang['select_symptom_to_delete'] = "You must select a clinical manifestation to delete";
-$lang['select_specie_to_edit'] = "You must select a species to edit";
-$lang['select_specie_to_delete'] = "You must select a species to delete";
-$lang['add_disease_successful'] = "Disease was added successfully";
-$lang['add_specie_successful'] = "Species was added successfully";
-$lang['add_symptom_successful'] = "Clinical manifestation was added successfully";
-$lang['edit_disease_successful'] = "Disease was edited successfully";
-$lang['edit_specie_successful'] = "Species was edited successfully";
-$lang['edit_symptom_successful'] = "Clinical manifestation was edit successfully";
-$lang['delete_disease_successful'] = "Disease was deleted successfully";
-$lang['delete_specie_successful'] = "Species was deleted successfully";
-$lang['delete_symptom_successful'] = "Clinical manifestation was deleted successfully";
-$lang['error_failed_to_add_disease'] = "Failed to add new disease";
-$lang['error_failed_to_add_specie'] = "Failed to add new species";
-$lang['error_failed_to_add_symptom'] = "Failed to add clinical manifestation";
-$lang['error_failed_to_edit_disease'] = "Failed to edit new disease";
-$lang['error_failed_to_edit_specie'] = "Failed to edit new species";
-$lang['error_failed_to_edit_symptom'] = "Failed to edit new clinical manifestation";
+$lang['select_disease_to_edit'] = "Vous devez sélectionner une maladie à modifier";
+$lang['select_disease_to_delete'] = "Vous devez sélectionner une maladie à supprimer";
+$lang['select_symptom_to_edit'] = "Vous devez sélectionner une manifestation clinique à modifier";
+$lang['select_symptom_to_delete'] = "Vous devez sélectionner une manifestation clinique à supprimer";
+$lang['select_specie_to_edit'] = "Vous devez sélectionner une espèce à modifier";
+$lang['select_specie_to_delete'] = "Vous devez sélectionner une espèce à supprimer";
+$lang['add_disease_successful'] = "Maladie ajoutée avec succès";
+$lang['add_specie_successful'] = "Espèce ajoutée avec succès";
+$lang['add_symptom_successful'] = "Manifestation clinique ajoutée avec succès";
+$lang['edit_disease_successful'] = "Maladie modifiée avec succès";
+$lang['edit_specie_successful'] = "Espèce modifiée avec succès";
+$lang['edit_symptom_successful'] = "Manifestation clinique modifiée avec succès";
+$lang['delete_disease_successful'] = "Maladie supprimée avec succès";
+$lang['delete_specie_successful'] = "Espèce supprimée avec succès";
+$lang['delete_symptom_successful'] = "Manifestation clinique supprimée avec succès";
+$lang['error_failed_to_add_disease'] = "Échec de l'ajout d'une nouvelle maladie";
+$lang['error_failed_to_add_specie'] = "Échec de l'ajout d'une nouvelle espèce";
+$lang['error_failed_to_add_symptom'] = "Échec de l'ajout de manifestation clinique";
+$lang['error_failed_to_edit_disease'] = "Échec de la modification d'une nouvelle maladie";
+$lang['error_failed_to_edit_specie'] = "Échec de la modification d'une nouvelle espèce";
+$lang['error_failed_to_edit_symptom'] = "Échec de la modification d'une nouvelle manifestation clinique";
 
+$lang['select_faq_to_edit'] = "Vous devez sélectionner une FAQ à modifier";
+$lang['select_faq_to_delete'] = "Vous devez sélectionner une FAQ à supprimer";
+$lang['add_faq_successful'] = "FAQ ajoutée avec succès";
+$lang['error_failed_to_add_faq'] = "Échec de l'ajout d'une nouvelle FAQ";
+$lang['edit_faq_successful'] = "FAQ modifiée avec succès";
+$lang['error_failed_to_edit_faq'] = "Échec de la modification de la FAQ";
+$lang['delete_faq_successful'] = "FAQ supprimée avec succès";
+$lang['error_failed_to_delete_faq'] = "Échec de la suppression de la FAQ";
 
-$lang['select_faq_to_edit'] = "You must select a faq to edit";
-$lang['select_faq_to_delete'] = "You must select a faq to delete";
-$lang['add_faq_successful'] = "Faq was added successfully";
-$lang['error_failed_to_add_faq'] = "Failed to add new faq";
-$lang['edit_faq_successful'] = "Faq was edit successfully";
-$lang['error_failed_to_edit_faq'] = "Failed to edit faq";
-$lang['delete_faq_successful'] = "Faq was deleted successfully";
-$lang['error_failed_to_delete_faq'] = "Failed to delete faq";
+// Retour d'information
+$lang['feedback_received_successful'] = 'Retour d\'information reçu avec succès';
+$lang['no_content'] = 'Aucun contenu';
+$lang['unknown_error_occurred'] = 'Erreur inconnue';
+$lang['user_does_not_exist'] = 'L\'utilisateur n\'existe pas';
 
-
-//Feedback
-$lang['feedback_received_successful'] = 'Feedback was received successfully';
-$lang['no_content'] = 'No content';
-$lang['unknown_error_occurred'] = 'Unknown error occurred';
-$lang['user_does_not_exist'] = 'user does not exist';
-
-//Campaign
-$lang['label_campaign_title'] = "Title";
+// Campagne
+$lang['label_campaign_title'] = "Titre";
 $lang['label_campaign_type'] = "Type";
-$lang['label_campaign_icon'] = "Icon";
-$lang['label_campaign_featured'] = "Featured";
-$lang['label_campaign_created_date'] = "Created date";
+$lang['label_campaign_icon'] = "Icône";
+$lang['label_campaign_featured'] = "En vedette";
+$lang['label_campaign_created_date'] = "Date de création";
 
+// Tableau de bord
+$lang['label_read_more'] = "Lire la suite";
+$lang['label_detected_disease'] = "Maladies principalement détectées";
+$lang['label_user_chats'] = "Chats d'utilisateurs";
+$lang['label_graphical_submission'] = "Soumissions récentes sous forme graphique";
+$lang['label_recent_user_chats'] = 'Chats d\'utilisateurs récents';
+$lang['label_active_campaigns'] = 'Campagnes actives';
+$lang['label_published_forms'] = 'Formulaires publics';
+$lang['label_data_collectors'] = 'Collecteurs de données';
+$lang['label_frequently_detected_disease'] = 'Maladie fréquemment détectée';
+$lang['label_conversation'] = "Conversation";
+$lang['label_graph_title'] = "Formulaires soumis globalement";
+$lang['label_graph_series_name'] = "Formulaires soumis";
+$lang['label_form_submitted'] = "Formulaire soumis";
+$lang['label_graph_period_overall'] = "Global";
+$lang['label_graph_period_monthly'] = "Mensuel";
+$lang['label_graph_period_weekly'] = "Hebdomadaire";
+$lang['label_graph_period_daily'] = "Quotidien";
 
-//Dashboard
-$lang['label_read_more']            = "Read more";
-$lang['label_detected_disease']     = "Mostly detected diseases";
-$lang['label_user_chats']           = "User chats";
-$lang['label_graphical_submission'] = "Graphical recent submission";
-$lang['label_recent_user_chats']    = 'Recent user chats';
-$lang['label_active_campaigns']     = 'Active campaigns';
-$lang['label_published_forms']      = 'Public forms';
-$lang['label_data_collectors']      = 'Data collectors';
-$lang['label_frequently_detected_disease']= 'Frequently detected disease';
-$lang['label_conversation']         = "Conversation";
-$lang['label_graph_title']          = "Overall form submitted";
-$lang['label_graph_series_name']    = "Submitted forms";
-$lang['label_form_submitted']       = "Form submitted";
-$lang['label_graph_period_overall'] = "Overall";
-$lang['label_graph_period_monthly'] = "Monthly";
-$lang['label_graph_period_weekly']  = "Weekly";
-$lang['label_graph_period_daily']   = "Daily";
+/* Module CHR */
 
+$lang['label_chr_first_name'] = 'Prénom';
+$lang['label_chr_last_name'] = 'Nom de famille';
+$lang['label_chr_email'] = 'Adresse e-mail';
+$lang['label_chr_phone'] = 'Numéro de téléphone';
+$lang['label_chr_school_college'] = 'École ou collège';
+$lang['label_chr_field_study'] = 'Domaine d\'études';
+$lang['label_chr_grade'] = 'Grade ou qualification';
+$lang['label_chr_activities'] = 'Activités et sociétés';
+$lang['label_chr_from_year'] = 'De l\'année';
+$lang['label_chr_to_year'] = 'À l\'année (ou prévue)';
 
-/* CHR Module */
+$lang['btn_add_chr'] = 'Ajouter un CHR';
 
-$lang['label_chr_first_name']    = 'First name';
-$lang['label_chr_last_name']     = 'Last name';
-$lang['label_chr_email']         = 'Email address';
-$lang['label_chr_phone']         = 'Phone number';
-$lang['label_chr_school_college']= 'School or College';
-$lang['label_chr_field_study']   = 'Field of study';
-$lang['label_chr_grade']         = 'Grade or Qualification';
-$lang['label_chr_activities']    = 'Activities and societies';
-$lang['label_chr_from_year']     = 'From Year';
-$lang['label_chr_to_year']       = 'To Year (or expected)';
-
-
-$lang['btn_add_chr']             = 'Add CHR';
-
-/*button*/
-$lang['button_save']            = 'Save';
-$lang['button_cancel']          = 'Cancel';
-
+/* Bouton */
+$lang['button_save'] = 'Enregistrer';
+$lang['button_cancel'] = 'Annuler';
 
 /*
- * Project module
+ * Module de projet
  */
-$lang['title_add_new_project']         = 'Add new project';
-$lang['title_manage_project']          = 'Manage projects';
-$lang['label_project_title']           = 'Title';
-$lang['label_project_description']     = 'Description';
-$lang['label_project_created_date']    = 'Created date';
-$lang['label_action']                  = 'Action';
-$lang['label_edit']                    = 'Edit';
-$lang['placeholder_project_title']     = 'Enter project title';
-$lang['placeholder_project_description']= 'Enter project description';
-$lang['button_add_project']            = 'Save project';
-$lang['button_upload_new_form']        = 'Upload new form';
+$lang['title_add_new_project'] = 'Ajouter un nouveau projet';
+$lang['title_manage_project'] = 'Gérer les projets';
+$lang['label_project_title'] = 'Titre';
+$lang['label_project_description'] = 'Description';
+$lang['label_project_created_date'] = 'Date de création';
+$lang['label_action'] = 'Action';
+$lang['label_edit'] = 'Modifier';
+$lang['placeholder_project_title'] = 'Entrez le titre du projet';
+$lang['placeholder_project_description'] = 'Entrez la description du projet';
+$lang['button_add_project'] = 'Enregistrer le projet';
+$lang['button_upload_new_form'] = 'Télécharger un nouveau formulaire';
 
-$lang['title_list_projects']          = 'Projects';
-$lang['label_select_project_to_list_forms']= 'Select project to see forms';
-$lang['title_project_forms']           = 'Project forms';
+$lang['title_list_projects'] = 'Projets';
+$lang['label_select_project_to_list_forms'] = 'Sélectionnez un projet pour voir les formulaires';
+$lang['title_project_forms'] = 'Formulaires de projet';
 
-$lang['title_edit_project']            = 'Edit Project';
-$lang['button_save_changes']           = 'Save Changes';
+$lang['title_edit_project'] = 'Modifier le projet';
+$lang['button_save_changes'] = 'Enregistrer les modifications';
 
-$lang['message_project_added']         = 'Project added';
-$lang['message_project_not_added']     = 'Failed to add project';
-$lang['message_project_updated']       = 'Project updated';
-$lang['message_project_has_no_form']   = 'This project does not have any form';
-$lang['status_message_getting_forms']  = 'Getting project forms, please wait... ';
+$lang['message_project_added'] = 'Projet ajouté';
+$lang['message_project_not_added'] = 'Échec de l\'ajout du projet';
+$lang['message_project_updated'] = 'Projet mis à jour';
+$lang['message_project_has_no_form'] = 'Ce projet n\'a pas de formulaire';
+$lang['status_message_getting_forms'] = 'Récupération des formulaires de projet, veuillez patienter...';
 
-$lang['label_manage_access_permissions']= 'Manage Access Permissions';
-$lang['label_map_columns']             = 'Map columns';
-$lang['label_dhis2_configurations']    = 'Dhis2 configurations';
-$lang['label_group_permissions']       = 'Group Permissions';
-$lang['label_user_permissions']        = "User permissions";
+$lang['label_manage_access_permissions'] = 'Gérer les autorisations d\'accès';
+$lang['label_map_columns'] = 'Associer les colonnes';
+$lang['label_dhis2_configurations'] = 'Configurations DHIS2';
+$lang['label_group_permissions'] = 'Autorisations de groupe';
+$lang['label_user_permissions'] = "Autorisations d'utilisateur";

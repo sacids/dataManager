@@ -132,7 +132,7 @@ class Xform extends MX_Controller
         // Form Received in openrosa server
         $http_response_code = 201;
 
-        log_message("DEBUG","diggest => " . $_SERVER ['PHP_AUTH_DIGEST']);
+        log_message("DEBUG", "diggest => " . $_SERVER['PHP_AUTH_DIGEST']);
 
         // Get the digest from the http header
         if (isset($_SERVER['PHP_AUTH_DIGEST']))
@@ -481,6 +481,15 @@ class Xform extends MX_Controller
                 );
 
                 $this->Feedback_model->create_feedback($feedback);
+
+                //case reported data
+                $this->model->set_table('ohkr_reported_cases');
+                $this->model->insert([
+                    'form_id' => $this->xFormReader->get_table_name(),
+                    'instance_id' => $this->xFormReader->get_form_data()['meta_instanceID'],
+                    'created_by' => $this->user_submitting_feedback_id,
+                    'created_at' => date("Y-m-d H:i:s"),
+                ]);
             } else {
                 log_message("debug", "No symptom reported");
             }

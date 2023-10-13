@@ -15,8 +15,8 @@
 </div>
 </header>
 
-<main class="bg-white h-full relative">
-    <div class="h-full overflow-y-scroll">
+<main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
+    <div class="flex-1 h-full overflow-y-scroll">
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <?php if ($this->session->flashdata('message') != "") { ?>
                 <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
@@ -30,15 +30,15 @@
 
             <div class="flex flex-row justify-between mb-0">
                 <div>
-                    <input type="text" id="myCustomSearchBox" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-0 focus:ring-blue-500 focus:border-blue-500 block pr-24" placeholder="Search here...">
+                    <?php if ($this->ion_auth->is_admin() || perms_role('users', 'create')) { ?>
+                        <a href="<?= site_url('auth/users/create') ?>" class="text-white bg-red-900 hover:bg-red-800 font-normal rounded text-sm px-4 py-2">
+                        <i class="fa-solid fa-plus text-white"></i> Register
+                        </a>
+                    <?php } ?>
                 </div>
 
                 <div>
-                    <?php if ($this->ion_auth->is_admin() || perms_role('users', 'create')) { ?>
-                        <a href="<?= site_url('auth/users/create') ?>" class="text-white bg-red-900 hover:bg-red-800 font-normal rounded text-sm px-4 py-2">
-                            Register
-                        </a>
-                    <?php } ?>
+                    <input type="text" id="myCustomSearchBox" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-0 focus:ring-blue-500 focus:border-blue-500 block pr-24" placeholder="Search here...">
                 </div>
             </div>
 
@@ -89,23 +89,15 @@
                                     <td class="px-2 py-1 text-center font-medium text-gray-700 flex flex-row">
                                         <?php if ($this->ion_auth->is_admin() || perms_role('users', 'edit')) { ?>
                                             <a href="<?= site_url('auth/users/edit/' . $values->user_id) ?>" class="text-gray-600 hover:text-gray-900 pr-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                                </svg>
+                                                <i class="fa-regular fa-pen-to-square"></i>
                                             </a>
 
                                             <a href="<?= site_url("auth/users/mapping/" . $values->user_id) ?>" class="text-gray-600 hover:text-red-800 pr-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m-6 3.75l3 3m0 0l3-3m-3 3V1.5m6 9h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
-                                                </svg>
-
+                                                <i class="fa-solid fa-users-gear"></i>
                                             </a>
 
                                             <a href="<?= site_url("auth/users/data_access/" . $values->user_id) ?>" class="text-gray-600 hover:text-red-800">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
-                                                </svg>
-
+                                                <i class="fa-solid fa-chalkboard-user"></i>
                                             </a>
                                         <?php } ?>
                                     </td>

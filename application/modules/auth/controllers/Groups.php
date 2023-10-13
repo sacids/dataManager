@@ -208,6 +208,13 @@ class Groups extends MX_Controller
             redirect('auth/groups/perms/' . $id);
         }
 
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
+
         //render view
         $this->load->view('header', $this->data);
         $this->load->view('groups/perms');

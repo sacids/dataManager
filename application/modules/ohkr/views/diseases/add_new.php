@@ -1,185 +1,83 @@
 <script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-            <div id="header-title">
-                <h3 class="title">Add new disease</h3>
-            </div>
+<div class="bg-gray-100">
+    <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-xl font-medium tracking-tight text-gray-900">
+        Add new disease
+        </h1>
+    </div>
 
-            <!-- Breadcrumb -->
-            <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li><a href="<?= site_url('ohkr/diseases') ?>">Diseases</a></li>
-                <li class="active">Add new disease</li>
-            </ol>
-
+    <div class="mx-auto py-0 px-4 sm:px-6">
+        <div class="text-sm text-left text-gray-900">
             <?php
-            if ($this->session->flashdata('message') != '') {
-                echo '<div class="success_message">' . $this->session->flashdata('message') . '</div>';
-            } ?>
-
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <?php echo form_open('ohkr/add_new_disease', 'role="form"'); ?>
-                    <div>
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#diseaseInfo" aria-controls="diseaseInfo" role="tab" data-toggle="tab">Disease
-                                    Info</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#alertMsgTab" aria-controls="alertMsgTab" role="tab" data-toggle="tab">Alert
-                                    Messages</a>
-                            </li>
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active " id="diseaseInfo" style="padding-top: 10px;">
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label><?php echo $this->lang->line("label_disease_name") ?> <span class="red"> * </span></label>
-                                            <input type="text" name="name" placeholder="Enter disease name" class="form-control" value="<?php echo set_value('name'); ?>">
-                                        </div>
-                                        <div class="error" style="color: red"><?php echo form_error('name'); ?></div>
-
-                                        <div class="form-group">
-                                            <label><?php echo $this->lang->line("label_specie_name") ?> <span class="red"> * </span></label>
-                                            <?php
-                                            foreach ($species as $specie) {
-                                                $species_options[$specie->id] = $specie->title;
-                                            }
-                                            echo form_dropdown("specie[]", $species_options, set_value("specie"), 'class="form-control chosen-select" data-placeholder="-- Select --" multiple')
-                                            ?>
-                                        </div>
-                                        <div class="error" style="color: red"><?php echo form_error('specie'); ?></div>
-
-                                        <div class="form-group">
-                                            <label><?php echo $this->lang->line("label_description") ?> :</label>
-                                            <textarea class="form-control" name="description" id="description"><?php echo set_value('description'); ?></textarea>
-
-                                            <script>
-                                                CKEDITOR.replace('description');
-                                            </script>
-                                        </div>
-                                        <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
-                                    </div>
-                                    <!--./col-md-12 -->
-                                </div>
-                                <!--./row -->
-                            </div>
-                            <!--./tab-panel -->
-
-                            <div role="tabpanel" class="tab-pane" id="alertMsgTab" style="padding-top: 10px;">
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div id="alertMessages">
-
-                                            <?php
-
-                                            $user_groups = array("" => "Choose Group to alert");
-                                            foreach ($groups as $group) {
-                                                $user_groups[$group->id] = $group->name;
-                                            }
-
-                                            $input = $this->input->post('message');
-
-                                            if ($this->form_validation->run() === FALSE && $input) {
-                                                foreach ($this->input->post('message') as $index => $item) {
-                                            ?>
-
-                                                    <div class="sigleAlertMessage">
-
-                                                        <div class="form-group">
-                                                            <label><?php echo $this->lang->line("label_recipient_group") ?>
-                                                            <span class="red"> * </span></label>
-                                                            <?php echo form_dropdown("group[]", $user_groups, set_value("group[" . $index . "]"), array("id" => "group", "class" => "form-control")) ?>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label><?php echo $this->lang->line("label_alert_message") ?>
-                                                            <span class="red"> * </span></label>
-                                                            <textarea class="form-control" name="message[]" id="message"><?php echo set_value('message[' . $index . ']'); ?></textarea>
-                                                        </div>
-                                                        <div class="error" style="color: #ff2b0d"><?php echo form_error('message'); ?></div>
-                                                    </div>
-
-                                                <?php }
-                                            } else {
-                                                ?>
-
-                                                <div class="sigleAlertMessage">
-
-                                                    <div class="form-group">
-                                                        <label><?php echo $this->lang->line("label_recipient_group") ?>
-                                                        <span class="red"> * </span></label>
-                                                        <select name="group[]" id="group" class="form-control">
-                                                            <option value="">Choose Group</option>
-                                                            <?php foreach ($groups as $group) { ?>
-                                                                <option value="<?php echo $group->id; ?>"><?php echo $group->name; ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label><?php echo $this->lang->line("label_alert_message") ?> <span class="red"> * </span></label>
-                                                        <textarea class="form-control" name="message[]" id="message"><?php echo set_value('message[]'); ?></textarea>
-                                                    </div>
-                                                    <div class="error" style="color: #ff2b0d"><?php echo form_error('message'); ?></div>
-                                                </div>
-                                            <?php } ?>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <button type="button" class="btn btn-success" id="addAnotherMessage">Add Another
-                                                Message
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!--./col-md-12 -->
-                                </div>
-                                <!--./row -->
-                            </div>
-                            <!--./tab-panel -->
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Save
-                                </button>
-                            </div>
-                        </div>
-                        <!--./col-md-12 -->
-                    </div>
-                    <!--./row -->
-                    <?php echo form_close(); ?>
-                </div>
-            </div>
+            foreach ($links as $key => $link) {
+                echo $link;
+            }
+            ?>
         </div>
     </div>
 </div>
+</header>
 
-<script type="text/javascript">
-    $(document).ready(function() {
+<main class="bg-white h-full">
+    <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-row flex-wrap mt-2">
+            <div class="flex w-1/2 flex-col">
+                <div class="relative overflow-x-auto">
+                    <?php if ($this->session->flashdata('message') != "") { ?>
+                        <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-3 mb-4" role="alert">
+                            <div class="flex">
+                                <div>
+                                    <p class="text-sm font-normal"><?= $this->session->flashdata('message'); ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
 
-        $("#addAnotherMessage").on("click", function(e) {
-            e.preventDefault();
-            var alertMessaagesCount = $("#alertMessages").children().length;
+                    <?php echo form_open('ohkr/add_new_disease', 'role="form"'); ?>
 
-            console.log("Has " + alertMessaagesCount + " childrens");
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label>
+                                <?php echo $this->lang->line("label_disease_name") ?> <span class="text-red-500"> * </span>
+                            </label>
+                            <input type="text" name="name" placeholder="Write disease name..." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo set_value('name'); ?>">
+                            <div class="text-red-500"><?php echo form_error('name'); ?></div>
+                        </div>
 
-            if (alertMessaagesCount < 5) {
-                $(".sigleAlertMessage:first").clone().appendTo("#alertMessages");
-            } else {
-                alert("You can not have more than five alert messages");
-            }
-        });
-    });
-</script>
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block mb-2 text-sm font-medium text-gray-900">
+                            <?php echo $this->lang->line("label_specie_name") ?> <span class="text-red-500">*</span>
+                            </label>
+                            <?php
+                                $species_options = [];
+                                foreach ($species as $specie) {
+                                    $species_options[$specie->id] = $specie->title;
+                                }
+                                $species_options = ['' => '--Select--'] + $species_options;
+                                echo form_dropdown("specie", $species_options, set_value("specie"), 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"')
+                                ?>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">
+                            <?php echo $this->lang->line("label_description") ?> <span class="text-red-500">*</span>
+                        </label>
+                        <textarea class="form-control" name="description" id="description"><?php echo set_value('description'); ?></textarea>
+                        <script>
+                            CKEDITOR.replace('description');
+                        </script>
+                        <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                    </div>
+                    <?php echo form_close(); ?>
+
+                </div>
+            </div>
+        </div>
+        <!-- /End replace -->
+    </div>
+</main>

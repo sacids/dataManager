@@ -99,51 +99,54 @@ class Ussd extends CI_Controller
         echo json_encode($response);
     }
 
-    //    //fao data
-    //    function fao_data()
-    //    {
-    //        //receive as json
-    //        $post_data = file_get_contents("php://input");
-    //        log_message("debug", 'fao_data  ' . $post_data);
-    //
-    //        $value = json_decode($post_data, TRUE);
-    //
-    //        //post data to server
-    //        $data = array(
-    //            'district' => $value['fao_wilaya'],
-    //            'ward_ng' => $value['fao_kata_ng'],
-    //            'ward_kls' => $value['fao_kata_kls'],
-    //            'ward_wt' => $value['fao_kata_wt'],
-    //            'animal' => $value['fao_mnyama'],
-    //            'age' => $value['fao_umri'],
-    //            'problem' => $this->clean($value['fao_tatizo']),
-    //            'created_at' => date('Y-m-d H:i:s')
-    //        );
-    //
-    //        //insert a data bunch
-    //        $this->model->set_table('ad_build_fao_data');
-    //        $result = $this->model->insert($data);
-    //
-    //        if ($result) {
-    //            //response
-    //            $response = array(
-    //                'status' => TRUE,
-    //                'sms_reply' => FALSE,
-    //                'sms_text' => 'Taarifa zako zimetufikia'
-    //            );
-    //        } else {
-    //            $response = array('success' => FALSE);
-    //        }
-    //        echo json_encode($response);
-    //    }
-    //
-    //    function clean($string)
-    //    {
-    //        $string = str_replace(' ', '', $string); // Replaces all spaces with hyphens.
-    //
-    //        return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
-    //    }
-    //
+    //fao data
+    function fao_data()
+    {
+        //receive as json
+        $post_data = file_get_contents("php://input");
+        log_message("debug", 'fao_data  ' . $post_data);
+
+        $value = json_decode($post_data, TRUE);
+
+        //post data to server
+        $data = array(
+            'district' => $value['fao_wilaya'],
+            'ward_ng' => $value['fao_kata_ng'],
+            'ward_kls' => $value['fao_kata_kls'],
+            'ward_wt' => $value['fao_kata_wt'],
+            'animal' => $value['fao_mnyama'],
+            'age' => $value['fao_umri'],
+            'problem' => $this->clean($value['fao_tatizo']),
+            'created_at' => date('Y-m-d H:i:s')
+        );
+
+        //insert a data bunch
+        $this->model->set_table('ad_build_fao_data');
+        $result = $this->model->insert($data);
+
+        if ($result) {
+            //response
+            $response = array(
+                'status' => TRUE,
+                'sms_reply' => FALSE,
+                'sms_text' => 'Taarifa zako zimetufikia'
+            );
+        } else {
+            $response = array('success' => FALSE);
+        }
+        echo json_encode($response);
+    }
+
+    function clean($string)
+    {
+        $string = str_replace(' ', '', $string); // Replaces all spaces with hyphens.
+
+        return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+    }
+
+
+
+
     //receive data
     function receive_data()
     {
@@ -757,32 +760,20 @@ class Ussd extends CI_Controller
 
         //post data to server
         $arr_data = [
-            'text' => $value['menu_tukio'],
-            'village' => $value['tukio_kijiji'],
-            'ward' => $value['tukio_kata']
+            'text' => $value['thread_text'],
+            'village' => $value['thread_kijiji'],
+            'ward' => $value['thread_kata']
         ];
 
         //check the data
-        if (strtoupper($value['tukio_tarehe']) == 'LEO') {
+        if (strtoupper($value['thread_tarehe']) == 'LEO') {
             $arr_data['date'] = date('d/m/Y');
         } else {
-            $arr_data['date'] = $value['tukio_tarehe'];
+            $arr_data['date'] = $value['thread_tarehe'];
         }
 
-        //reporter name
-        if (isset($value['tukio_name']) && $value['tukio_name'] != '')
-            $arr_data['name_of_reporter'] = $value['tukio_name'];
-
-        //human affected
-        if (isset($value['tukio_human']) && $value['tukio_human'] != '')
-            $arr_data['no_of_human_affected'] = $value['tukio_human'];
-
-        //animal affected
-        if (isset($value['tukio_animal']) && $value['tukio_animal'] != '')
-            $arr_data['no_of_animal_affected'] = $value['tukio_animal'];
-
         // API URL
-        $url = 'https://dev.sacids.org/ems/api/signal/';
+        $url = 'http://154.118.228.237/api/rumors/';
 
         // Create a new cURL resource
         $ch = curl_init($url);
@@ -790,7 +781,7 @@ class Ussd extends CI_Controller
         // Setup request to send json via POST
         $data = [
             'contents' => $arr_data,
-            'channel' => 'SMS',
+            'channel' => 'USSD',
             'contact' => $value['msisdn']
         ];
         $payload = json_encode($data);
@@ -842,7 +833,7 @@ class Ussd extends CI_Controller
         ];
 
         // API URL
-        $url = 'http://dev.sacids.org/ems/api/signal/';
+        $url = 'http://154.118.228.237/api/rumors/';
 
         // Create a new cURL resource
         $ch = curl_init($url);
