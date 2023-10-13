@@ -180,10 +180,6 @@ class Xform extends MX_Controller
         $A2 = md5("{$_SERVER['REQUEST_METHOD']}:{$digest_parts['uri']}");
         $valid_response = md5("{$A1}:{$digest_parts['nonce']}:{$digest_parts['nc']}:{$digest_parts['cnonce']}:{$digest_parts['qop']}:{$A2}");
 
-        log_message("debug", "request method => " .$_SERVER['REQUEST_METHOD']);
-        log_message("debug", "valid response => " .$valid_response);
-        log_message("debug", "digest response => " . $digest_parts['response']);
-
         // If digest fails, show login
         if ($digest_parts['response'] != $valid_response) {
             // populate login form if no digest authenticate
