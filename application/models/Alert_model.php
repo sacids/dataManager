@@ -112,7 +112,7 @@ class Alert_model extends CI_Model
     public function send_post_symptoms_request($query_params)
     {
 
-        $url = base_url("api/v2/intel/disease");
+        $url = base_url("api/v3/intel/disease");
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

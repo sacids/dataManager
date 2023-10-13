@@ -1023,6 +1023,7 @@ class Xform extends MX_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //posting
@@ -1121,6 +1122,7 @@ class Xform extends MX_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //posting
@@ -1153,6 +1155,53 @@ class Xform extends MX_Controller
         //render view
         $this->load->view('header', $data);
         $this->load->view("permissions");
+        $this->load->view('footer');
+    }
+
+
+    function case_information($project_id, $form_id)
+    {
+        $this->_is_logged_in();
+        //$this->has_allowed_perm($this->router->fetch_method());
+
+        //title
+        $data['title'] = $this->lang->line("heading_edit_form");
+
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (!$project) {
+            show_error("Project not exist", 500);
+        }
+        $data['project'] = $project;
+
+        //forms
+        $form = $this->Xform_model->find_by_id($form_id);
+        if (!$form_id) {
+            show_error("Form does not exist", 500);
+        }
+        $data['form'] = $form;
+
+
+        //querying case information
+        $this->model->set_table('ohkr_reported_cases');
+        $cases = $this->model->get_all();
+
+        $this->data['cases'] = $cases;
+
+        //links
+        $data['links'] = [
+            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Table', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Charts', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
+
+        //render view
+        $this->load->view('header', $data);
+        $this->load->view("case_information");
         $this->load->view('footer');
     }
 
@@ -1423,7 +1472,7 @@ class Xform extends MX_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         $data['start_at'] = $start_at;
@@ -1472,6 +1521,7 @@ class Xform extends MX_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //render view
