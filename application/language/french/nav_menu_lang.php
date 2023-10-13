@@ -8,11 +8,8 @@
 
 // Projets
 $lang['nav_item_projects'] = "Projets";
-$lang['nav_item_rapports'] = "Rapports";
-
 $lang['nav_item_list_projects'] = "Projets";
 $lang['nav_item_add_new_project'] = "Ajouter un nouveau projet";
-$lang['nav_item_create_project'] = "Créer un projet";
 
 // Formulaires
 $lang['nav_item_forms'] = "Formulaires";

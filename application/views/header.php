@@ -68,14 +68,14 @@
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="<?= site_url('projects/lists'); ?>" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                                <a href="<?= site_url('projects/lists'); ?>" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium"><?= $this->lang->line('nav_item_projects');?></a>
 
                                 <a href="<?= site_url('ohkr/diseases')?>" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">OHKR</a>
 
-                                <a href="#" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium">Reports</a>
+                                <a href="#" class="text-neutral-900 hover:bg-red-100 hover:rounded-md hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium"><?= $this->lang->line('nav_item_rapports');?></a>
 
                                 <a href="<?= site_url('projects/add_new'); ?>" class="text-white bg-red-900 hover:bg-red-800 px-3 py-2 rounded-sm text-sm font-medium">
-                                    + Create Project
+                                    + <?= $this->lang->line('nav_item_create_project');?>
                                 </a>
                             </div>
                         </div>
