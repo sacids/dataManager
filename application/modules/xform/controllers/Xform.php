@@ -198,8 +198,9 @@ class Xform extends MX_Controller
                 // check file extension
                 $value = explode('.', $file_name);
                 $file_extension = end($value);
-
                 $inserted_form_id = NULL;
+
+                log_message("debug", "file extension => " . $file_extension);
 
                 if ($file_extension === 'xml') {
                     // path to store xml
