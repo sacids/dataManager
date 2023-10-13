@@ -132,8 +132,6 @@ class Xform extends MX_Controller
         // Form Received in openrosa server
         $http_response_code = 201;
 
-        log_message("DEBUG", "diggest => " . $_SERVER['PHP_AUTH_DIGEST']);
-
         // Get the digest from the http header
         if (isset($_SERVER['PHP_AUTH_DIGEST']))
             $digest = $_SERVER['PHP_AUTH_DIGEST'];
@@ -156,6 +154,8 @@ class Xform extends MX_Controller
         // username obtained from http digest
         $username = $digest_parts['username'];
 
+        //remove + if there is 
+
         // get user details from database
         $user = $this->User_model->find_by_username($username);
         $this->sender = $user;
@@ -164,10 +164,9 @@ class Xform extends MX_Controller
         $this->user_submitting_feedback_id = $user->id;
         $uploaded_filename = NULL;
 
-
-        if (isset($digest_parts['language'])) {
-            $this->mobile_app_language = $digest_parts['language'];
-        }
+        // if (isset($digest_parts['language'])) {
+        //     $this->mobile_app_language = $digest_parts['language'];
+        // }
 
         // show status header if user not available in database
         if (empty($db_username)) {
@@ -179,10 +178,14 @@ class Xform extends MX_Controller
         // Based on all the info we gathered we can figure out what the response should be
         $A1 = $password; // digest password
         $A2 = md5("{$_SERVER['REQUEST_METHOD']}:{$digest_parts['uri']}");
-        $calculated_response = md5("{$A1}:{$digest_parts['nonce']}:{$digest_parts['nc']}:{$digest_parts['cnonce']}:{$digest_parts['qop']}:{$A2}");
+        $valid_response = md5("{$A1}:{$digest_parts['nonce']}:{$digest_parts['nc']}:{$digest_parts['cnonce']}:{$digest_parts['qop']}:{$A2}");
+
+        log_message("debug", "request method => " .$_SERVER['REQUEST_METHOD']);
+        log_message("debug", "valid response => " .$valid_response);
+        log_message("debug", "digest response => " . $digest_parts['response']);
 
         // If digest fails, show login
-        if ($digest_parts['response'] != $calculated_response) {
+        if ($digest_parts['response'] != $valid_response) {
             // populate login form if no digest authenticate
             $this->form_auth->require_login_prompt($realm, $nonce);
             exit();
@@ -192,7 +195,6 @@ class Xform extends MX_Controller
         if ($_SERVER['REQUEST_METHOD'] === "HEAD") {
             $http_response_code = 204;
         } elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
-
             foreach ($_FILES as $file) {
                 // File details
                 $file_name = $file['name'];
