@@ -101,6 +101,8 @@
                                     } else {
                                         if ($key == "meta_username") {
                                             echo "<td class='px-4 py-3'>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
+                                        }else if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                                            echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
                                         } else {
                                             echo "<td class='px-4 py-3'>" . $entry . "</td>";
                                         }
