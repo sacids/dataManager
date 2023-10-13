@@ -226,6 +226,9 @@ class Xform extends MX_Controller
                     // path to store video
                     $path = $this->config->item("video_data_upload_dir") . $file_name;
                 }
+                //log message
+                log_message("debug", "image path => " . $path);
+                log_message("debug", "temp name => " . $file['tmp_name']);
 
                 // upload file to the server
                 move_uploaded_file($file['tmp_name'], $path);
