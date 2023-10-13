@@ -132,8 +132,6 @@ class Xform extends MX_Controller
         // Form Received in openrosa server
         $http_response_code = 201;
 
-        log_message("DEBUG", "diggest => " . $_SERVER['PHP_AUTH_DIGEST']);
-
         // Get the digest from the http header
         if (isset($_SERVER['PHP_AUTH_DIGEST']))
             $digest = $_SERVER['PHP_AUTH_DIGEST'];
@@ -156,6 +154,8 @@ class Xform extends MX_Controller
         // username obtained from http digest
         $username = $digest_parts['username'];
 
+        //remove + if there is 
+
         // get user details from database
         $user = $this->User_model->find_by_username($username);
         $this->sender = $user;
@@ -164,10 +164,9 @@ class Xform extends MX_Controller
         $this->user_submitting_feedback_id = $user->id;
         $uploaded_filename = NULL;
 
-
-        if (isset($digest_parts['language'])) {
-            $this->mobile_app_language = $digest_parts['language'];
-        }
+        // if (isset($digest_parts['language'])) {
+        //     $this->mobile_app_language = $digest_parts['language'];
+        // }
 
         // show status header if user not available in database
         if (empty($db_username)) {
@@ -179,10 +178,10 @@ class Xform extends MX_Controller
         // Based on all the info we gathered we can figure out what the response should be
         $A1 = $password; // digest password
         $A2 = md5("{$_SERVER['REQUEST_METHOD']}:{$digest_parts['uri']}");
-        $calculated_response = md5("{$A1}:{$digest_parts['nonce']}:{$digest_parts['nc']}:{$digest_parts['cnonce']}:{$digest_parts['qop']}:{$A2}");
+        $valid_response = md5("{$A1}:{$digest_parts['nonce']}:{$digest_parts['nc']}:{$digest_parts['cnonce']}:{$digest_parts['qop']}:{$A2}");
 
         // If digest fails, show login
-        if ($digest_parts['response'] != $calculated_response) {
+        if ($digest_parts['response'] != $valid_response) {
             // populate login form if no digest authenticate
             $this->form_auth->require_login_prompt($realm, $nonce);
             exit();
@@ -192,7 +191,6 @@ class Xform extends MX_Controller
         if ($_SERVER['REQUEST_METHOD'] === "HEAD") {
             $http_response_code = 204;
         } elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
-
             foreach ($_FILES as $file) {
                 // File details
                 $file_name = $file['name'];
@@ -200,8 +198,9 @@ class Xform extends MX_Controller
                 // check file extension
                 $value = explode('.', $file_name);
                 $file_extension = end($value);
-
                 $inserted_form_id = NULL;
+
+                log_message("debug", "file extension => " . $file_extension);
 
                 if ($file_extension === 'xml') {
                     // path to store xml
@@ -220,6 +219,10 @@ class Xform extends MX_Controller
                     // path to store images
                     $path = $this->config->item("images_data_upload_dir") . $file_name;
                     //TODO Resize image here
+
+                    //log message
+                    log_message("debug", "image path => " . $path);
+                    log_message("debug", "temp name => " . $file['tmp_name']);
 
                 } elseif ($file_extension == '3gpp' or $file_extension == 'amr') {
                     // path to store audio
@@ -499,7 +502,7 @@ class Xform extends MX_Controller
             $feedback = array(
                 "user_id" => $this->user_submitting_feedback_id,
                 "form_id" => $this->xFormReader->get_table_name(),
-                "message" => 'Asante kwa kutuma taarifa, Tumepokea fomu yako.',
+                "message" => "Merci d'avoir envoyé l'information.",
                 "date_created" => date('Y-m-d H:i:s'),
                 "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
                 "sender" => "server",
@@ -566,7 +569,7 @@ class Xform extends MX_Controller
      *            Input string
      * @return string response
      */
-    function _get_response($http_response_code, $response_message = "Asante, Fomu imepokelewa!")
+    function _get_response($http_response_code, $response_message = "Merci d'avoir envoyé l'information!")
     {
         // OpenRosa Success Response
         $response = '<OpenRosaResponse xmlns="http://openrosa.org/http/response">
@@ -1025,6 +1028,7 @@ class Xform extends MX_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //posting
@@ -1123,6 +1127,7 @@ class Xform extends MX_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //posting
@@ -1155,6 +1160,53 @@ class Xform extends MX_Controller
         //render view
         $this->load->view('header', $data);
         $this->load->view("permissions");
+        $this->load->view('footer');
+    }
+
+
+    function case_information($project_id, $form_id)
+    {
+        $this->_is_logged_in();
+        //$this->has_allowed_perm($this->router->fetch_method());
+
+        //title
+        $data['title'] = $this->lang->line("heading_edit_form");
+
+        $project = $this->Project_model->get_project_by_id($project_id);
+
+        if (!$project) {
+            show_error("Project not exist", 500);
+        }
+        $data['project'] = $project;
+
+        //forms
+        $form = $this->Xform_model->find_by_id($form_id);
+        if (!$form_id) {
+            show_error("Form does not exist", 500);
+        }
+        $data['form'] = $form;
+
+
+        //querying case information
+        $this->model->set_table('ohkr_reported_cases');
+        $cases = $this->model->get_all();
+
+        $this->data['cases'] = $cases;
+
+        //links
+        $data['links'] = [
+            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Table', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Charts', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
+
+        //render view
+        $this->load->view('header', $data);
+        $this->load->view("case_information");
         $this->load->view('footer');
     }
 
@@ -1425,6 +1477,7 @@ class Xform extends MX_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         $data['start_at'] = $start_at;
@@ -1473,6 +1526,7 @@ class Xform extends MX_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, 'Case Information', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //render view

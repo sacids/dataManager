@@ -45,8 +45,8 @@
                     <thead class="text-gray-600 text-sm font-medium">
                         <tr>
                             <th width="3%">#</th>
-                            <th width="40%"><?= $this->lang->line("label_disease_name"); ?></th>
-                            <th width="30%"><?= $this->lang->line("label_specie_name"); ?></th>
+                            <th width="40%"><?= $this->lang->line("label_symptom_name"); ?></th>
+                            <th width="30%"><?= $this->lang->line("label_symptom_code"); ?></th>
                             <th width="15%"><?= $this->lang->line("label_action"); ?></th>
                         </tr>
                     </thead>
