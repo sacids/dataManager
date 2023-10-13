@@ -219,6 +219,10 @@ class Xform extends MX_Controller
                     $path = $this->config->item("images_data_upload_dir") . $file_name;
                     //TODO Resize image here
 
+                    //log message
+                    log_message("debug", "image path => " . $path);
+                    log_message("debug", "temp name => " . $file['tmp_name']);
+
                 } elseif ($file_extension == '3gpp' or $file_extension == 'amr') {
                     // path to store audio
                     $path = $this->config->item("audio_data_upload_dir") . $file_name;
@@ -226,9 +230,6 @@ class Xform extends MX_Controller
                     // path to store video
                     $path = $this->config->item("video_data_upload_dir") . $file_name;
                 }
-                //log message
-                log_message("debug", "image path => " . $path);
-                log_message("debug", "temp name => " . $file['tmp_name']);
 
                 // upload file to the server
                 move_uploaded_file($file['tmp_name'], $path);
