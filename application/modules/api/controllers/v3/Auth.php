@@ -62,14 +62,24 @@ class Auth extends REST_Controller
             $this->model->set_table('users');
             $user = $this->model->get_by('username', $username);
 
+            //find user group
+            $groups = $this->ion_auth->get_users_groups($user->id)->result();
+
+            $group_name = "CAW";
+            if ($groups) {
+                if ($groups[0]->name == "members")
+                    $group_name = "CAW";
+                else
+                    $group_name = $groups[0]->name;
+            }
+
             //return response after successfully
             $response["error"] = FALSE;
             $response["uid"] = $user->id;
             $response["user"]["username"] = $user->username;
             $response["user"]["first_name"] = $user->first_name;
             $response["user"]["last_name"] = $user->last_name;
-            $response["user"]["group"] = "CAW";
-
+            $response["user"]["group"] = $group_name;
 
             //success response
             $this->response($response, 200);
@@ -120,13 +130,24 @@ class Auth extends REST_Controller
                 $this->model->set_table('users');
                 $user = $this->model->get_by('id', $id);
 
+                //find user group
+                $groups = $this->ion_auth->get_users_groups($user->id)->result();
+
+                $group_name = "CAW";
+                if ($groups) {
+                    if ($groups[0]->name == "members")
+                        $group_name = "CAW";
+                    else
+                        $group_name = $groups[0]->name;
+                }
+
                 //return response after successfully
                 $response["error"] = FALSE;
                 $response["uid"] = $user->id;
                 $response["user"]["username"] = $user->username;
                 $response["user"]["first_name"] = $user->first_name;
                 $response["user"]["last_name"] = $user->last_name;
-                $response["user"]["group"] = "LOF";
+                $response["user"]["group"] = $group_name;
 
                 //success response
                 $this->response($response, 200);
