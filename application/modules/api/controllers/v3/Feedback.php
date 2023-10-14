@@ -313,15 +313,6 @@ class Feedback extends REST_Controller
         log_message("debug", "User posting feedback is " . $user->username);
 
         if ($user) {
-            // 1. if the case has been attended or not To be used as flag
-            // 2. Suspected disease
-            // 3. Actions taken
-            // 4. Reported on EMA-i (Y/N)
-            // 5. Created at
-            // 6. Created By
-            // 7. Form Id
-            // 8. Instance Id
-
             //get variables
             $form_id = $this->post('form_id');
             $instance_id = $this->post('instance_id');
@@ -329,6 +320,7 @@ class Feedback extends REST_Controller
             //reported case
             $this->model->set_table('ohkr_reported_cases');
             $case = $this->model->get_by(['form_id' => $form_id, 'instance_id' => $instance_id]);
+            log_message("debug", json_encode($case));
 
             if ($case) {
                 $this->model->set_table('ohkr_reported_cases');
@@ -357,6 +349,8 @@ class Feedback extends REST_Controller
                     'updated_at' => date("Y-m-d H:i:s"),
                 ]);
             }
+            log_message("debug","case submitted");
+
             //response
             $this->response(array('status' => 'success', 'message' => 'Case information recorded'), 200);
         } else {
