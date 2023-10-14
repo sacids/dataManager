@@ -324,14 +324,26 @@ class Feedback extends REST_Controller
             log_message("debug", "case_attended => " . $this->post('case_attended'));
             log_message("debug", "reported => " . $this->post('reported'));
 
+            //configuring case attended
+            if($this->post('case_attended') == "Oui")
+                $attended_yes = 1;
+            else if($this->post('case_attended') == "Non")
+                $attended_yes = 0; 
+                
+            //configuring case attended
+            if($this->post('reported') == "Oui")
+                $reported_yes = 1;
+            else if($this->post('reported') == "Non")
+                $reported_yes = 0;    
+
             if ($case) {
                 $this->model->set_table('ohkr_reported_cases');
                 $this->model->update($case->id, [
                     'disease_id' => $this->post('disease_id'),
                     'other_disease' => $this->post('other_disease'),
-                    'attended' => $this->post('case_attended'),
+                    'attended' => $attended_yes,
                     'action_taken' => $this->post('action_taken'),
-                    'reported_emai' => $this->post('reported'),
+                    'reported_emai' => $reported_yes,
                     'updated_by' => $user->id,
                     'updated_at' => date("Y-m-d H:i:s"),
                 ]);
@@ -342,9 +354,9 @@ class Feedback extends REST_Controller
                     'instance_id' => $instance_id,
                     'disease_id' => $this->post('disease_id'),
                     'other_disease' => $this->post('other_disease'),
-                    'attended' => $this->post('case_attended'),
+                    'attended' => $attended_yes,
                     'action_taken' => $this->post('action_taken'),
-                    'reported_emai' => $this->post('reported'),
+                    'reported_emai' => $reported_yes,
                     'created_by' => $user->id,
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_by' => $user->id,
