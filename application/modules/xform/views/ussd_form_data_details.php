@@ -2,13 +2,13 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 main">
             <div id="header-title">
-                <h3 class="title"><?= $project->title . ' : ' . $title ?> ussd data collected</h3>
+                <h3 class="title"><?= $project->title . ' : ' . $title ?> données USSD collectées</h3>
             </div>
 
-            <!-- Breadcrumb -->
+            <!-- Fil d'Ariane -->
             <ol class="breadcrumb">
-                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Dashboard</a></li>
-                <li><a href="<?= site_url('projects/lists') ?>">Projects</a></li>
+                <li><a href="<?= site_url('dashboard') ?>"><i class="fa fa-home"></i> Tableau de bord</a></li>
+                <li><a href="<?= site_url('projects/lists') ?>">Projets</a></li>
                 <li><a href="<?= site_url('projects/forms/' . $project->id) ?>"><?= $project->title ?></a></li>
                 <li class="active"><?= $title ?></li>
             </ol>
@@ -17,7 +17,7 @@
                 <div class="col-sm-12">
 
                     <div class="pull-right">
-                        <?php echo anchor("api/v3/ussd/export_fao_data", '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Export XLS"') ?>
+                        <?php echo anchor("api/v3/ussd/export_fao_data", '<i class="fa fa-file-excel-o fa-lg"></i>&nbsp;&nbsp;', 'title="Exporter XLS"') ?>
                     </div>
                 </div>
             </div>
@@ -35,13 +35,13 @@
                 <table class="table table_list table-bordered table-striped table-hover">
                     <thead>
                     <tr>
-                        <th width="5%">S/n</th>
+                        <th width="5%">N°</th>
                         <th width="10%">District</th>
                         <th width="12%">Ward</th>
                         <th width="10%">Animal</th>
-                        <th width="12%">Age</th>
-                        <th width="30%">Problem</th>
-                        <th width="15%">Submitted Date</th>
+                        <th width="12%">Âge</th>
+                        <th width="30%">Problème</th>
+                        <th width="15%">Date de Soumission</th>
                     </tr>
                     </thead>
 
@@ -53,7 +53,7 @@
                         $ward_kls_array = ['1' => 'Madoto', '2' => 'Parakuyo'];
                         $ward_wt_array = ['1' => 'Kisiwani', '2' => 'Kinyasini'];
 
-                        //district
+                        // District
                         $district = '';
                         $ward = '';
                         if ($value->district == 1) {
@@ -69,19 +69,19 @@
                             $ward = $ward_wt_array[$value->ward_wt];
                         }
 
-                        //animal
+                        // Animal
                         $animal_array = ['1' => 'Ng\'ombe', '2' => 'Mbuzi', '3' => 'Kondoo', '4' => 'Nguruwe', '5' => 'Kuku', '6' => 'Mbwa'];
                         $animal = $animal_array[$value->animal];
 
-                        //age
-                        $age_array = ['1' => 'Chini ya Mwaka', '2' => 'Mwaka na zaidi'];
+                        // Âge
+                        $age_array = ['1' => 'Moins d\'un an', '2' => 'Un an et plus'];
                         $age = $age_array[$value->age];
 
-                        //problems
+                        // Problèmes
                         $problems = str_split($value->problem);
 
-                        $problems_array = ['1' => 'Kuharisha', '2' => 'Kukohoa', '3' => 'Kutoka Damu', '4' => 'Kutupa mimba',
-                            '5' => 'Kuhema kwa shida', '6' => 'Kutetemeka', '7' => 'Vidonda miguu na midomo', '8' => 'Kutokula', '9' => 'Amekufa'
+                        $problems_array = ['1' => 'Diarrhée', '2' => 'Toux', '3' => 'Saignements', '4' => 'Avortement',
+                            '5' => 'Difficulté à respirer', '6' => 'Tremblements', '7' => 'Lésions aux pattes et à la bouche', '8' => 'Refus de s\'alimenter', '9' => 'Décédé'
                         ];
 
                         $push = [];

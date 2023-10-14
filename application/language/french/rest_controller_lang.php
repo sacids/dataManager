@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Langue française
+ * English language
  */
 
 $lang['text_rest_invalid_api_key'] = 'Clé API invalide %s'; // %s est la clé API REST

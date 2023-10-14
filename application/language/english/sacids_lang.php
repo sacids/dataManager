@@ -193,3 +193,4 @@ $lang['label_map_columns'] = 'Associer les colonnes';
 $lang['label_dhis2_configurations'] = 'Configurations DHIS2';
 $lang['label_group_permissions'] = 'Autorisations de groupe';
 $lang['label_user_permissions'] = "Autorisations d'utilisateur";
+

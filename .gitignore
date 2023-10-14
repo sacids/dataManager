@@ -89,7 +89,7 @@ assets/Intel/
 /composer.lock
 /vendor/
 application/logs
-application/config
+application/config/database.php
 application/tests
 !application/tests/controllers
 !application/tests/models

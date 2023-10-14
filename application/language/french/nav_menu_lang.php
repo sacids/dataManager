@@ -1,9 +1,9 @@
 <?php
 /**
- * Créé par PhpStorm.
- * Utilisateur : Godluck Akyoo
- * Date : 23-Sep-16
- * Heure : 09:13
+ * Created by PhpStorm.
+ * User: Godluck Akyoo
+ * Date: 23-Sep-16
+ * Time: 09:13
  */
 
 // Projets
@@ -20,21 +20,21 @@ $lang['nav_item_searchable_form'] = "Formulaires consultables";
 // Utilisateurs
 $lang['nav_item_manage_users'] = "Gérer les utilisateurs";
 $lang['nav_item_list_users'] = "Utilisateurs";
-$lang['nav_item_create_user'] = "Enregistrer un nouvel utilisateur";
+$lang['nav_item_create_user'] = "Inscrire un nouvel utilisateur";
 
 // Groupes d'utilisateurs
 $lang['nav_item_manage_user_groups'] = "Gérer les rôles des utilisateurs";
 $lang['nav_item_list_groups'] = "Rôles";
 $lang['nav_item_create_group'] = "Créer un nouveau rôle";
 
-// Autorisations
+// Permissions
 $lang['nav_item_manage_permission'] = "Gérer les autorisations";
 $lang['nav_item_list_module'] = "Modules";
-$lang['nav_item_list_permission'] = "Autorisations";
+$lang['nav_item_list_permission'] = "Permissions";
 $lang['nav_item_create_permission'] = "Créer une autorisation";
-$lang['nav_item_acl']       = "Contrôle d'accès";
-$lang['nav_item_permissions']       = "Autorisations";
-$lang['nav_item_add_filter']       = "Ajouter des filtres";
+$lang['nav_item_acl'] = "Contrôle d'accès";
+$lang['nav_item_permissions'] = "Permissions";
+$lang['nav_item_add_filter'] = "Ajouter des filtres";
 
 // OHKR - Afya Moja
 $lang['nav_item_ohkr'] = "OHKR";
@@ -51,25 +51,23 @@ $lang['nav_item_list_species'] = "Espèces";
 $lang['nav_item_create_species'] = "Ajouter une nouvelle espèce";
 
 // Campagnes
-$lang['nav_item_manage_campaign'] = "Gérer les campagnes";
+$lang['nav_item_manage_campaign'] = "Campagnes";
 $lang['nav_item_list_campaign'] = "Campagnes";
 $lang['nav_item_create_campaign'] = "Ajouter une nouvelle campagne";
 
-// Discussions/Rétroactions
-$lang['nav_item_chats'] = "Discussions";
+// Conversations/Rétroaction
+$lang['nav_item_chats'] = "Conversations";
 
 // Compte
 $lang['nav_item_my_profile'] = "Mon profil";
 $lang['nav_item_change_password'] = "Changer le mot de passe";
 $lang['nav_item_logout'] = "Déconnexion";
 
-
 // Pied de page
 $lang['nav_item_change_language'] = "Changer la langue";
 $lang['nav_item_language_english'] = "Anglais";
 $lang['nav_item_language_swahili'] = "Swahili";
 $lang['nav_item_language_portuguese'] = "Portugais";
-$lang['nav_item_language']      = "Langue";
-
+$lang['nav_item_language'] = "Langue";
 
 $lang['nav_item_dashboard'] = 'Tableau de bord';

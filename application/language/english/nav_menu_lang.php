@@ -6,70 +6,71 @@
  * Time: 09:13
  */
 
-//Projects
-$lang['nav_item_projects'] = "Projects";
-$lang['nav_item_list_projects'] = "Projects";
-$lang['nav_item_add_new_project'] = "Add new project";
+// Projets
+$lang['nav_item_projects'] = "Projets";
+$lang['nav_item_rapports'] = "Rapports";
 
-//Forms
-$lang['nav_item_forms'] = "Forms";
-$lang['nav_item_list_forms'] = "Forms";
-$lang['nav_item_add_new_form'] = "Add new Form";
-$lang['nav_item_searchable_form'] = "Searchable forms";
+$lang['nav_item_list_projects'] = "Projets";
+$lang['nav_item_add_new_project'] = "Ajouter un nouveau projet";
+$lang['nav_item_create_project'] = "Créer un projet";
 
-//Users
-$lang['nav_item_manage_users'] = "Manage Users";
-$lang['nav_item_list_users'] = "Users";
-$lang['nav_item_create_user'] = "Register new";
+// Formulaires
+$lang['nav_item_forms'] = "Formulaires";
+$lang['nav_item_list_forms'] = "Formulaires";
+$lang['nav_item_add_new_form'] = "Ajouter un nouveau formulaire";
+$lang['nav_item_searchable_form'] = "Formulaires consultables";
 
-//User groups
-$lang['nav_item_manage_user_groups'] = "Manage user roles";
-$lang['nav_item_list_groups'] = "Roles";
-$lang['nav_item_create_group'] = "Create new";
+// Utilisateurs
+$lang['nav_item_manage_users'] = "Gérer les utilisateurs";
+$lang['nav_item_list_users'] = "Utilisateurs";
+$lang['nav_item_create_user'] = "Inscrire un nouvel utilisateur";
 
-//Permission
-$lang['nav_item_manage_permission'] = "Manage Permission";
+// Groupes d'utilisateurs
+$lang['nav_item_manage_user_groups'] = "Gérer les rôles des utilisateurs";
+$lang['nav_item_list_groups'] = "Rôles";
+$lang['nav_item_create_group'] = "Créer un nouveau rôle";
+
+// Permissions
+$lang['nav_item_manage_permission'] = "Gérer les autorisations";
 $lang['nav_item_list_module'] = "Modules";
 $lang['nav_item_list_permission'] = "Permissions";
-$lang['nav_item_create_permission'] = "Create Permission";
-$lang['nav_item_acl']       = "Access Control";
-$lang['nav_item_permissions']       = "Permissions";
-$lang['nav_item_add_filter']       = "Add filters";
+$lang['nav_item_create_permission'] = "Créer une autorisation";
+$lang['nav_item_acl'] = "Contrôle d'accès";
+$lang['nav_item_permissions'] = "Permissions";
+$lang['nav_item_add_filter'] = "Ajouter des filtres";
 
-//OHKR - Afya Moja
+// OHKR - Afya Moja
 $lang['nav_item_ohkr'] = "OHKR";
-$lang['nav_item_manage_diseases'] = "Manage Diseases";
-$lang['nav_item_list_disease'] = "Diseases";
-$lang['nav_item_add_disease'] = "Add new";
+$lang['nav_item_manage_diseases'] = "Gérer les maladies";
+$lang['nav_item_list_disease'] = "Maladies";
+$lang['nav_item_add_disease'] = "Ajouter une nouvelle maladie";
 
-$lang['nav_item_manage_symptoms'] = "Manage symptoms";
-$lang['nav_item_list_symptoms'] = "Symptoms";
-$lang['nav_item_create_symptom'] = "Add new";
+$lang['nav_item_manage_symptoms'] = "Gérer les symptômes";
+$lang['nav_item_list_symptoms'] = "Symptômes";
+$lang['nav_item_create_symptom'] = "Ajouter un nouveau symptôme";
 
-$lang['nav_item_manage_species'] = "Manage Species";
-$lang['nav_item_list_species'] = "Species";
-$lang['nav_item_create_species'] = "Add new";
+$lang['nav_item_manage_species'] = "Gérer les espèces";
+$lang['nav_item_list_species'] = "Espèces";
+$lang['nav_item_create_species'] = "Ajouter une nouvelle espèce";
 
-//Campaign
-$lang['nav_item_manage_campaign'] = "Campaigns";
-$lang['nav_item_list_campaign'] = "Campaigns";
-$lang['nav_item_create_campaign'] = "Add new campaign";
+// Campagnes
+$lang['nav_item_manage_campaign'] = "Campagnes";
+$lang['nav_item_list_campaign'] = "Campagnes";
+$lang['nav_item_create_campaign'] = "Ajouter une nouvelle campagne";
 
-//Chats/Feedback
-$lang['nav_item_chats'] = "Chats";
+// Conversations/Rétroaction
+$lang['nav_item_chats'] = "Conversations";
 
-//Account
-$lang['nav_item_my_profile'] = "My Profile";
-$lang['nav_item_change_password'] = "Change Password";
-$lang['nav_item_logout'] = "Logout";
+// Compte
+$lang['nav_item_my_profile'] = "Mon profil";
+$lang['nav_item_change_password'] = "Changer le mot de passe";
+$lang['nav_item_logout'] = "Déconnexion";
 
-
-//Footer
-$lang['nav_item_change_language'] = "Change language";
-$lang['nav_item_language_english'] = "English";
+// Pied de page
+$lang['nav_item_change_language'] = "Changer la langue";
+$lang['nav_item_language_english'] = "Anglais";
 $lang['nav_item_language_swahili'] = "Swahili";
-$lang['nav_item_language_portuguese'] = "Portuguese";
-$lang['nav_item_language']      = "Lang";
+$lang['nav_item_language_portuguese'] = "Portugais";
+$lang['nav_item_language'] = "Langue";
 
-
-$lang['nav_item_dashboard'] = 'Dashboard';
+$lang['nav_item_dashboard'] = 'Tableau de bord';
