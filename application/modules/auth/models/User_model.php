@@ -31,8 +31,7 @@ class User_model extends CI_Model
     {
         return $this->db
             ->group_start()
-            ->where('groups.name', 'data_collectors')
-            ->or_where('groups.name', 'chr')
+            ->or_where('groups.name', 'caw')
             ->or_where('groups.name', 'members')
             ->group_end()
             ->join('users_groups', 'users_groups.user_id = users.id')
@@ -41,13 +40,12 @@ class User_model extends CI_Model
     }
 
     //data collectors
-    function get_data_collectors()
+    function get_chw()
     {
         return $this->db
             ->select('users.id, users.first_name, users.last_name, users.username, users.phone')
             ->group_start()
-            ->where('groups.name', 'data_collectors')
-            ->or_where('groups.name', 'chr')
+            ->or_where('groups.name', 'chw')
             ->or_where('groups.name', 'members')
             ->group_end()
             ->join('users_groups', 'users_groups.user_id = users.id')

@@ -223,7 +223,6 @@ class Xform extends MX_Controller
                     //log message
                     log_message("debug", "image path => " . $path);
                     log_message("debug", "temp name => " . $file['tmp_name']);
-
                 } elseif ($file_extension == '3gpp' or $file_extension == 'amr') {
                     // path to store audio
                     $path = $this->config->item("audio_data_upload_dir") . $file_name;
@@ -1416,6 +1415,8 @@ class Xform extends MX_Controller
             $start_at = $this->input->post('start_at');
             $end_at = $this->input->post('end_at');
 
+
+
             //set field keys
             if (isset($_POST["apply"]) || $this->session->userdata("form_filters")) {
                 if (!isset($_POST["apply"])) {
@@ -1432,6 +1433,9 @@ class Xform extends MX_Controller
                 $form_data = $this->Xform_model->search_form_data_by_fields($form->form_id, $selected_columns, $where_condition, $start_at, $end_at);
             } else {
                 $form_data = $this->Xform_model->search_form_data($form->form_id, $where_condition, $start_at, $end_at);
+
+                log_message("debug", $this->db->last_query());
+                log_message("debug", json_encode($form_data));
             }
 
             if ($form_data) {
@@ -1515,11 +1519,23 @@ class Xform extends MX_Controller
         $data['form'] = $form;
 
         //data collectors
-        $data['data_collectors'] =  $this->User_model->get_data_collectors();
+        $data['data_collectors'] =  $this->User_model->get_chw();
 
-        foreach ($data['data_collectors'] as $k => $v) {
-            $data['data_collectors'][$k]->submission = $this->Submission_model->get_submitted_forms_by_CHW($form->form_id, $v->username);
+        $arr_data = [];
+        foreach ($data['data_collectors'] as $k => $val) {
+            $submission = $this->Submission_model->get_submitted_forms_by_CHW($form->form_id, $val->username);
+
+            //array data
+            $arr_data[] = [
+                "name" => ucwords(strtolower($val->first_name . ' ' . $val->last_name)),
+                "phone" => $val->username,
+                "submission" => $submission
+            ];
         }
+
+        //Sort array by stock in descending order
+        $sorted_arr_data = $this->sort_array_by_key($arr_data, 'submission');
+        $data['arr_data'] = $sorted_arr_data;
 
         //links
         $data['links'] = [
@@ -1536,6 +1552,14 @@ class Xform extends MX_Controller
         $this->load->view('header', $data);
         $this->load->view("submission_stats");
         $this->load->view('footer');
+    }
+
+    //Function to sort array by key
+    function sort_array_by_key($array, $sort_key)
+    {
+        $key_array = array_column($array, $sort_key);
+        array_multisort($key_array, SORT_DESC, $array); //or SORT_ASC
+        return $array;
     }
 
     /**

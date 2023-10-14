@@ -17,30 +17,43 @@
 </div>
 </header>
 
-<main class="bg-white h-full flex overflow-hidden">
+<main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
     <div class="flex-1 h-full overflow-y-scroll">
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
-            <?php if (isset($data_collectors) && $data_collectors) { ?>
+            <?php if (isset($arr_data) && $arr_data) { ?>
                 <div class="relative overflow-x-auto">
-                    <table class="table table-striped table-responsive table-hover table-bordered" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <th width="3%">#</th>
-                            <th width="60%">Full Name</th>
-                            <th width="10%">Username</th>
-                            <th width="10%">No. of Submission</th>
-                        </tr>
 
-                        <?php
-                        $serial = 1;
-                        foreach ($data_collectors as $val) { ?>
+                    <div class="flex flex-row justify-between mb-3">
+                        <div></div>
+                        <div>
+                            <input type="text" id="myCustomSearchBox" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-0 focus:ring-blue-500 focus:border-blue-500 block pr-24" placeholder="Search here...">
+                        </div>
+                    </div>
+
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap w-100 table-fixed">
+                        <thead class="text-gray-600 text-sm font-medium">
                             <tr>
-                                <td><?= $serial ?></td>
-                                <td><?= $val->first_name . ' ' . $val->last_name; ?></td>
-                                <td><?= $val->username; ?></td>
-                                <td align="right"><b><?= number_format($val->submission) ?></b></td>
+                                <th width="3%">#</th>
+                                <th width="60%">Full Name</th>
+                                <th width="10%">Username</th>
+                                <th width="10%">No. of Submission</th>
                             </tr>
-                        <?php $serial++;
-                        } ?>
+                        </thead>
+
+                        <tbody class="text-gray-600 text-sm font-normal">
+
+                            <?php
+                            $serial = 1;
+                            foreach ($arr_data as $val) { ?>
+                                <tr>
+                                    <td><?= $serial ?></td>
+                                    <td><?= $val['name']; ?></td>
+                                    <td><?= $val['phone']; ?></td>
+                                    <td align="right"><?= number_format($val['submission']) ?></td>
+                                </tr>
+                            <?php $serial++;
+                            } ?>
+                        </tbody>
                     </table>
                 </div>
             <?php } ?>
