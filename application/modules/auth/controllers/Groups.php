@@ -86,9 +86,10 @@ class Groups extends MX_Controller
             'type' => 'text',
             'value' => $this->form_validation->set_value('group_name'),
             'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-            'placeholder' => 'Write role name...'
+            'placeholder' => 'Write role name...',
+            'required' => '',
         );
-        
+
         $this->data['description'] = array(
             'name' => 'description',
             'id' => 'description',
@@ -96,7 +97,8 @@ class Groups extends MX_Controller
             'rows' => 5,
             'value' => $this->form_validation->set_value('description'),
             'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-            'placeholder' => 'Write role description...'
+            'placeholder' => 'Write role description...',
+            'required' => '',
         );
 
         //links

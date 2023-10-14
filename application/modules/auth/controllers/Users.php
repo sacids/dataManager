@@ -137,7 +137,7 @@ class Users extends MX_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('first_name'),
                 'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-                //'required' => '',
+                'required' => '',
                 'placeholder' => 'Write first name...'
             );
             $this->data['last_name'] = array(
@@ -146,7 +146,7 @@ class Users extends MX_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('last_name'),
                 'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-                //'required' => '',
+                'required' => '',
                 'placeholder' => 'Write last name...'
             );
             $this->data['identity'] = array(
@@ -155,7 +155,7 @@ class Users extends MX_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('identity'),
                 'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-                //'required' => '',
+                'required' => '',
                 'placeholder' => 'Write username...'
             );
             $this->data['email'] = array(
@@ -164,7 +164,7 @@ class Users extends MX_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('email'),
                 'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-                //'required' => '',
+                'required' => '',
                 'placeholder' => 'Write email address...'
             );
 
@@ -182,7 +182,7 @@ class Users extends MX_Controller
                 'type' => 'password',
                 'value' => $this->form_validation->set_value('password'),
                 'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-                //'required' => '',
+                'required' => '',
                 'placeholder' => 'Write password...'
             );
             $this->data['password_confirm'] = array(
@@ -191,7 +191,7 @@ class Users extends MX_Controller
                 'type' => 'password',
                 'value' => $this->form_validation->set_value('password_confirm'),
                 'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-                //'required' => '',
+                'required' => '',
                 'placeholder' => 'Confirm password...'
             );
 
