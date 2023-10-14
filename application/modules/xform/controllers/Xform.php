@@ -1238,6 +1238,9 @@ class Xform extends MX_Controller
         //DROP TABLE IF EXISTS table_name
         $this->dbforge->drop_table($form->form_id, TRUE);
 
+        //delete mapping
+        $this->db->delete('xform_fieldname_map', ['table_name' => $form->form_id]);
+
         //delete form
         $result = $this->db->delete('xforms', array('id' => $form_id));
 
