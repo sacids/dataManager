@@ -85,18 +85,26 @@ class Groups extends MX_Controller
             'id' => 'group_name',
             'type' => 'text',
             'value' => $this->form_validation->set_value('group_name'),
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'placeholder' => 'Write role name...'
         );
+        
         $this->data['description'] = array(
             'name' => 'description',
             'id' => 'description',
             'type' => 'text area',
             'rows' => 5,
             'value' => $this->form_validation->set_value('description'),
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'placeholder' => 'Write role description...'
         );
+
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
 
         //render view
         $this->load->view('header', $this->data);
@@ -141,7 +149,7 @@ class Groups extends MX_Controller
             'name' => 'group_name',
             'id' => 'group_name',
             'type' => 'text',
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'value' => $this->form_validation->set_value('group_name', $group->name),
             $readonly => $readonly,
         );
@@ -150,9 +158,16 @@ class Groups extends MX_Controller
             'id' => 'group_description',
             'type' => 'text area',
             'rows' => 5,
-            'class' => 'form-control',
+            'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
             'value' => $this->form_validation->set_value('group_description', $group->description),
         );
+
+        //links
+        $this->data['links'] = [
+            'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'Roles' => anchor("auth/groups/lists", 'Roles', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'Perms' => anchor("auth/accesscontrol", 'Perms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+        ];
 
         //render view
         $this->load->view('header', $this->data);

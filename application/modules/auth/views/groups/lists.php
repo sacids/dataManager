@@ -30,15 +30,15 @@
 
             <div class="flex flex-row justify-between mb-0">
                 <div>
-                    <input type="text" id="myCustomSearchBox" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-0 focus:ring-blue-500 focus:border-blue-500 block pr-24" placeholder="Search here...">
+                    <?php if ($this->ion_auth->is_admin() || perms_role('auth', 'create_group')) { ?>
+                        <a href="<?= site_url('auth/groups/create') ?>" class="text-white bg-red-900 hover:bg-red-800 font-normal rounded text-sm px-4 py-2">
+                        <i class="fa-solid fa-plus text-white"></i> Create
+                        </a>
+                    <?php } ?>
                 </div>
 
                 <div>
-                    <!-- <?php if ($this->ion_auth->is_admin() || perms_role('auth', 'create_group')) { ?>
-                        <a href="<?= site_url('auth/groups/create') ?>" class="text-white bg-red-900 hover:bg-red-800 font-normal rounded text-sm px-4 py-2">
-                            Create
-                        </a>
-                    <?php } ?> -->
+                    <input type="text" id="myCustomSearchBox" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-0 focus:ring-blue-500 focus:border-blue-500 block pr-24" placeholder="Search here...">
                 </div>
             </div>
 
