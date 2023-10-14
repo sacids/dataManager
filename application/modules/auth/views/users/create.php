@@ -25,28 +25,28 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900">First name<span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($first_name); ?>
-                    <span class="text-red-500"><?= form_error('first_name'); ?></span>
+                    <span class="text-red-500 text-xs"><?= form_error('first_name'); ?></span>
                 </div>
 
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                     <label class="block mb-2 text-sm font-medium text-gray-900">Lastname <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($last_name); ?>
-                    <span class="text-red-500"><?= form_error('last_name'); ?></span>
+                    <span class="text-red-500 text-xs"><?= form_error('last_name'); ?></span>
                 </div>
 
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                     <label class="block mb-2 text-sm font-medium text-gray-900">Email <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($email); ?>
-                    <span class="text-red-500"><?= form_error('email'); ?></span>
+                    <span class="text-red-500 text-xs"><?= form_error('email'); ?></span>
                 </div>
 
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                     <label class="block mb-2 text-sm font-medium text-gray-900">Phone
                     </label>
                     <?php echo form_input($phone); ?>
-                    <span class="text-red-500"><?= form_error('phone'); ?></span>
+                    <span class="text-red-500 text-xs"><?= form_error('phone'); ?></span>
                 </div>
             </div>
 
@@ -55,21 +55,21 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900">Username <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($identity); ?>
-                    <span class="text-red-500"><?= form_error('identity'); ?></span>
+                    <span class="text-red-500 text-xs"><?= form_error('identity'); ?></span>
                 </div>
             
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                     <label class="block mb-2 text-sm font-medium text-gray-900">Password <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($password); ?>
-                    <span class="text-red-500"><?= form_error('password'); ?></span>
+                    <span class="text-red-500 text-xs"><?= form_error('password'); ?></span>
                 </div>
 
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                     <label class="block mb-2 text-sm font-medium text-gray-900">Confirm Password <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($password_confirm); ?>
-                    <span class="text-red-500"><?= form_error('password_confirm'); ?></span>
+                    <span class="text-red-500 text-xs"><?= form_error('password_confirm'); ?></span>
                 </div>
             </div>
 
@@ -94,9 +94,10 @@
                             <?php $serial++;
                                 }
                             } ?>
-                            <span class="text-red-500"><?= form_error('groups_ids[]'); ?></span>
+                            
                         </tr>
                     </table>
+                    <span class="text-red-500 text-xs"><?= form_error('groups_ids[]'); ?></span>
                 </div>
             </div>
 
