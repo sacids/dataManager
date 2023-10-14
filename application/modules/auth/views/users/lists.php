@@ -108,6 +108,13 @@
                         </tbody>
                     </table>
 
+                    <?php if (!empty($pagination_links)): ?>
+                        <nav aria-label="Page navigation example">
+                            <?= $pagination_links ?>
+                            <div class="clearfix"></div>
+                        </nav>
+                    <?php endif; ?>
+
                 </div>
             <?php } else { ?>
                 <div class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
