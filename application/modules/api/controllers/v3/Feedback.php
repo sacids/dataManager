@@ -80,33 +80,35 @@ class Feedback extends REST_Controller
                     $this->model->set_table('xforms');
                     $form = $this->model->get_by('form_id', $value->form_id);
 
-                    //get reply user
-                    if ($value->reply_by != 0) $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
-                    else $reply_user = $value->reply_by;
+                    if($form){
+                        //get reply user
+                        if ($value->reply_by != 0) $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
+                        else $reply_user = $value->reply_by;
 
-                    //calculate week number
-                    $this->model->set_table($value->form_id);
-                    $table = $this->model->as_array()->get_by('meta_instanceID', $value->instance_id);
+                        //calculate week number
+                        $this->model->set_table($value->form_id);
+                        $table = $this->model->as_array()->get_by('meta_instanceID', $value->instance_id);
 
-                    //                    if (array_key_exists('meta_instanceName', $table))
-                    //                        $label = ' - ' . $table['meta_instanceName'];
-                    //                    else
-                    //                        $label = '';
+                        //                    if (array_key_exists('meta_instanceName', $table))
+                        //                        $label = ' - ' . $table['meta_instanceName'];
+                        //                    else
+                        //                        $label = '';
 
-                    //feedback array
-                    $feedback[] = array(
-                        'id' => $value->id,
-                        'form_id' => $value->form_id,
-                        'instance_id' => $value->instance_id,
-                        'title' => $form->title,
-                        'message' => $value->message,
-                        'sender' => $value->sender,
-                        'user' => $username,
-                        'chr_name' => $user->first_name . ' ' . $user->last_name,
-                        'date_created' => $value->date_created,
-                        'status' => $value->status,
-                        'reply_by' => $reply_user
-                    );
+                        //feedback array
+                        $feedback[] = array(
+                            'id' => $value->id,
+                            'form_id' => $value->form_id,
+                            'instance_id' => $value->instance_id,
+                            'title' => $form->title,
+                            'message' => $value->message,
+                            'sender' => $value->sender,
+                            'user' => $username,
+                            'chr_name' => $user->first_name . ' ' . $user->last_name,
+                            'date_created' => $value->date_created,
+                            'status' => $value->status,
+                            'reply_by' => $reply_user
+                        );
+                    }
                 }
                 //response
                 $this->response(array("status" => "success", "feedback" => $feedback), 200);

@@ -126,7 +126,7 @@ class Auth extends REST_Controller
                 $response["user"]["username"] = $user->username;
                 $response["user"]["first_name"] = $user->first_name;
                 $response["user"]["last_name"] = $user->last_name;
-                $response["user"]["group"] = "CAW";
+                $response["user"]["group"] = "LOF";
 
                 //success response
                 $this->response($response, 200);
