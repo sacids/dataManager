@@ -321,6 +321,8 @@ class Feedback extends REST_Controller
             $this->model->set_table('ohkr_reported_cases');
             $case = $this->model->get_by(['form_id' => $form_id, 'instance_id' => $instance_id]);
             log_message("debug", json_encode($case));
+            log_message("debug", "case_attended => " . $this->post('case_attended'));
+            log_message("debug", "reported => " . $this->post('reported'));
 
             if ($case) {
                 $this->model->set_table('ohkr_reported_cases');
