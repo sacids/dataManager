@@ -146,7 +146,7 @@
         </div>
     </div>
 
-    <div id="sidebar_wrp" class="border-l w-0 shadow-md bg-white transition-all duration-500 absolute top-0 right-0 h-full" :class="{'w-1/2' : sideBarOpen }"></div>
+    <div id="sidebar_wrp" class="border-l border-gray-300 w-0 shadow-md bg-white transition-all duration-500 absolute top-0 right-0 h-full" :class="{'w-1/2' : sideBarOpen }"></div>
 </main>
 
 <script>
