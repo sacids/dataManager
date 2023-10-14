@@ -1,5 +1,5 @@
-<main>
-    <div class="relative px-6 lg:px-8">
+<main class="">
+    <!-- <div class="relative px-6 lg:px-8">
         <div class="mx-auto max-w-2xl pt-12 pb-12 sm:pt-24 lg:pt-28">
             <div class="hidden sm:mb-8 sm:flex sm:justify-center">
                 <div class="relative rounded-full py-1 px-3 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
@@ -28,72 +28,68 @@
                 </defs>
             </svg>
         </div>
-    </div>
+    </div> -->
 
-    <div class="bg-white py-4 sm:py-8">
+    <div class="bg-white py-4 sm:py-8 container mx-auto">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl lg:text-center">
-                <h2 class="text-lg font-semibold leading-8 tracking-tight text-blue-800">Seamless Data Collection</h2>
-                <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Everything you need to use AfyaData app</p>
+                <h2 class="text-lg font-semibold leading-8 tracking-tight text-blue-800">Collecte de données fluide</h2>
+                <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Tout ce dont vous avez besoin pour utiliser l'application AfyaData</p>
                 <p class="mt-6 text-lg leading-8 text-gray-600">
-                    In order to use AfyaData need to follow the step from collection to analysis of data.
+                    Pour utiliser AfyaData, vous devez suivre les étapes de la collecte à l'analyse des données.
                 </p>
             </div>
         </div>
     </div>
 
-    <div class="flex flex-wrap mb-4 px-12 py-4">
+    <div class="flex flex-wrap mb-4 px-12 py-4 container mx-auto">
         <div class="w-full md:w-1/3 xl:w-1/3">
             <img class="h-64" src="<?= base_url('assets/public/images/upload_new_form.png') ?>" width="100%" />
-            <h3 class="text-center text-base font-semibold leading-7 text-gray-900"> Create Project</h3>
+            <h3 class="text-center text-base font-semibold leading-7 text-gray-900">Créer un projet</h3>
             <p class="text-center text-sm leading-8 text-gray-600">
                 <a href="<?= site_url('create-project') ?>" class="">
-                    Read More <span aria-hidden="true">&rarr;</span>
+                    En savoir plus <span aria-hidden="true">&rarr;</span>
                 </a>
             </p>
         </div>
 
         <div class="w-full md:w-1/3 xl:w-1/3">
             <img class="h-64" src="<?= base_url('assets/public/images/collect_data.png') ?>" width="100%" />
-            <h3 class="text-center text-base font-semibold leading-7 text-gray-900">Collect online/offline data</h3>
+            <h3 class="text-center text-base font-semibold leading-7 text-gray-900">Collecte de données en ligne/hors ligne</h3>
             <p class="text-center text-sm leading-8 text-gray-600">
                 <a href="<?= site_url('collect-data') ?>" class="">
-                    Read More <span aria-hidden="true">&rarr;</span>
+                    En savoir plus <span aria-hidden="true">&rarr;</span>
                 </a>
             </p>
         </div>
 
         <div class="w-full md:w-1/3 xl:w-1/3">
             <img class="h-64" src="<?= base_url('assets/public/images/visualize.png') ?>" width="100%" />
-            <h3 class="text-center text-base font-semibold leading-7 text-gray-900">Visualize and Analyse data</h3>
+            <h3 class="text-center text-base font-semibold leading-7 text-gray-900">Visualiser et analyser les données</h3>
             <p class="text-center text-sm leading-8 text-gray-600">
                 <a href="<?= site_url('analyze-data') ?>" class="">
-                    Read More <span aria-hidden="true">&rarr;</span>
+                    En savoir plus <span aria-hidden="true">&rarr;</span>
                 </a>
             </p>
         </div>
     </div>
 
-
     <div class="bg-gray-100 py-4 sm:py-8">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl lg:text-center">
-                <h2 class="text-lg font-semibold leading-8 tracking-tight text-blue-800">Open Source Platform</h2>
-                <p class="mt-2 text-2xl font-semibold tracking-tight text-gray-900 sm:text-2xl">Involve with AfyaData</p>
+                <h2 class="text-lg font-semibold leading-8 tracking-tight text-blue-800">Plateforme Open Source</h2>
+                <p class="mt-2 text-2xl font-semibold tracking-tight text-gray-900 sm:text-2xl">Participer avec AfyaData</p>
                 <p class="mt-6 text-lg leading-8 text-gray-600 mb-4">
-                    Are you interested with using AfyaData for data collection or contribute in coding?
+                    Êtes-vous intéressé par l'utilisation d'AfyaData pour la collecte de données ou pour contribuer au codage ?
                 </p>
 
                 <a href="https://play.google.com/store/apps/details?id=org.sacids.app.afyadata" class="rounded-sm border border-transparent bg-red-900 px-4 py-2 text-sm font-medium text-white hover:bg-red-600">
-                    <i class="fa fa-android fa-lg"></i> Download App</a>&nbsp;&nbsp;
+                    <i class="fa fa-android fa-lg"></i> Télécharger l'application</a>&nbsp;&nbsp;
 
                 <a href="https://github.com/sacids/dataManager" class="rounded-sm border border-transparent bg-slate-700 px-4 py-2 text-sm font-medium text-white hover:bg-slate-600">
-                    <i class="fa fa-github fa-lg"></i> Github Repository</a>
+                    <i class="fa fa-github fa-lg"></i> Dépôt GitHub</a>
             </div>
-
-
         </div>
     </div>
-
 
 </main>

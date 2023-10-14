@@ -107,9 +107,10 @@ class Projects extends MX_Controller
 
         //links
         $this->data['links'] = [
-            'project_lists' => anchor('projects/lists', 'List Projects', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
-            'create_project' => anchor('projects/add_new', 'Create Project', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'project_lists' => anchor('projects/lists', 'Liste des Projets', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'create_project' => anchor('projects/add_new', 'Créer un Projet', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
+
 
         $this->load->view('header', $this->data);
         $this->load->view("lists");
@@ -170,9 +171,10 @@ class Projects extends MX_Controller
 
         //links
         $this->data['links'] = [
-            'project_lists' => anchor('projects/lists', 'List Projects', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'create_project' => anchor('projects/add_new', 'Create Project', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'project_lists' => anchor('projects/lists', 'Liste des Projets', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'create_project' => anchor('projects/add_new', 'Créer un Projet', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
         ];
+        
 
         //render view
         $this->load->view('header', $this->data);

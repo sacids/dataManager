@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('Accès direct au script interdit');
 /**
 * Name:  Ion Auth Lang - English
 *
@@ -6,7 +6,7 @@
 *         ben.edmunds@gmail.com
 *         @benedmunds
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Créé le:  14.03.2010
 *
 * Created:  03.14.2010
 *

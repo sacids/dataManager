@@ -21,7 +21,7 @@
                 <div class="col-md-12">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#chats">Chats</a></li>
-                        <li><a data-toggle="tab" href="#data-details">Submitted Data</a></li>
+                        <li><a data-toggle="tab" href="#data-details">Données soumises</a></li>
                     </ul>
 
                     <div class="tab-content">

@@ -29,12 +29,12 @@
                         categories: arr_surveys,
                         crosshair: true,
                         title: {
-                            text: "Forms"
+                            text: "Formulaires"
                         }
                     },
                     yAxis: {
                         title: {
-                            text: "No. of submitted Data"
+                            text: "Nombre de données soumises"
                         }
                     },
                     tooltip: {
@@ -59,7 +59,7 @@
                         }
                     },
                     series: [{
-                        name: 'Submitted Data',
+                        name: 'Données soumises',
                         color: '#1565C0',
                         data: arr_collected_data
                     }
@@ -105,12 +105,12 @@
                             categories: arr_surveys,
                             crosshair: true,
                             title: {
-                                text: "Forms"
+                                text: "Formulaires"
                             }
                         },
                         yAxis: {
                             title: {
-                                text: "No. of submitted Data"
+                                text: "Nombre de données soumises"
                             }
                         },
                         tooltip: {
@@ -135,7 +135,7 @@
                             }
                         },
                         series: [{
-                            name: 'Submitted Data',
+                            name: 'Données soumises',
                             color: '#1565C0',
                             data: arr_collected_data
                         }

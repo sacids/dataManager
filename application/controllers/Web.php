@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: administrator
- * Date: 10/09/2018
- * Time: 10:51
+ * Créé avec PhpStorm.
+ * Utilisateur : administrateur
+ * Date : 10/09/2018
+ * Heure : 10:51
  */
 
 class Web extends CI_Controller
@@ -15,7 +15,7 @@ class Web extends CI_Controller
         parent::__construct();
     }
 
-    //default
+    // Page par défaut
     function index()
     {
         $this->data['title'] = 'Taarifa kwa wakati!';
@@ -23,51 +23,50 @@ class Web extends CI_Controller
         $stories = [];
         $this->data['stories'] = $stories;
 
-        //render view
+        // Afficher la vue
         $this->load->view('web/header', $this->data);
         $this->load->view('web/index');
         $this->load->view('web/footer');
     }
 
-    //about page
+    // Page "À propos"
     function about()
     {
-        $this->data['title'] = 'About Afyadata';
+        $this->data['title'] = 'À propos d\'Afyadata';
 
-        //render view
+        // Afficher la vue
         $this->load->view('web/header', $this->data);
         $this->load->view('web/about');
         $this->load->view('web/footer');
     }
 
-    //create project
+    // Créer un projet
     function create_project(){
-        $this->data['title'] = 'Create Project';
+        $this->data['title'] = 'Créer un projet';
 
-        //render view
+        // Afficher la vue
         $this->load->view('web/header', $this->data);
         $this->load->view('web/create_project');
         $this->load->view('web/footer');
     }
 
-    //collect data
+    // Collecter des données
     function collect_data(){
-        $this->data['title'] = 'Collect Data';
+        $this->data['title'] = 'Collecter des données';
 
-        //render view
+        // Afficher la vue
         $this->load->view('web/header', $this->data);
         $this->load->view('web/collect_data');
         $this->load->view('web/footer');
     }
 
-    //analyze data
+    // Analyser des données
     function analyze_data(){
-        $this->data['title'] = 'Analyze Data';
+        $this->data['title'] = 'Analyser des données';
 
-        //render view
+        // Afficher la vue
         $this->load->view('web/header', $this->data);
         $this->load->view('web/analyze_data');
         $this->load->view('web/footer');
     }
-
 }

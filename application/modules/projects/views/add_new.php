@@ -1,7 +1,7 @@
 <div class="bg-gray-100">
     <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
-            Create New Project
+            Créer un nouveau projet
         </h1>
     </div>
 
@@ -16,7 +16,6 @@
     </div>
 </div>
 </header>
-
 
 <main class="bg-white h-full">
     <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
@@ -49,13 +48,13 @@
                     </div>
 
                     <div class="flex items-start">
-                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Envoyer</button>
                     </div>
                     <?php echo form_close(); ?>
 
                 </div>
             </div>
         </div>
-        <!-- /End replace -->
+        <!-- /Fin du remplacement -->
     </div>
 </main>

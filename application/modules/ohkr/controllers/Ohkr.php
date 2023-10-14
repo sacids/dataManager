@@ -108,10 +108,12 @@ class Ohkr extends MX_Controller
         if ($this->form_validation->run() === FALSE) {
             //links
             $data['links'] = [
-                'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'symptoms' => anchor('ohkr/symptoms', 'Symptômes', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
+            
+
 
             //render view
             $this->load->view('header', $data);
@@ -184,10 +186,11 @@ class Ohkr extends MX_Controller
 
             //links
             $data['links'] = [
-                'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'symptoms' => anchor('ohkr/symptoms', 'Symptômes', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
+
 
             //render view
             $this->load->view('header', $data);
@@ -439,10 +442,11 @@ class Ohkr extends MX_Controller
         if ($this->form_validation->run() === FALSE) {
             //links
             $data['links'] = [
-                'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'symptoms' => anchor('ohkr/symptoms', 'Symptômes', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
+
 
             //render view
             $this->load->view('header', $data);
@@ -494,10 +498,11 @@ class Ohkr extends MX_Controller
         if ($this->form_validation->run() === FALSE) {
             //links
             $data['links'] = [
-                'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'symptoms' => anchor('ohkr/symptoms', 'Symptômes', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
+
 
             //render view
             $this->load->view('header', $data);
