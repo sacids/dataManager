@@ -1190,7 +1190,8 @@ class Xform extends MX_Controller
         $this->model->set_table('ohkr_reported_cases');
         $cases = $this->model->get_many_by(['form_id' => $form_id]);
         $this->data['cases'] = $cases;
-
+        echo $this->db->last_query();
+        
         echo "<pre/>";
         print_r($cases);
         exit();
