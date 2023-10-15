@@ -34,13 +34,13 @@
                 <table id="datatable" class="table table-bordered dt-responsive nowrap w-100 table-fixed">
                     <thead class="text-gray-600 text-sm font-medium">
                         <tr>
-                            <th width="24%">Attended</th>
-                            <th width="24%">Attended By</th>
-                            <th width="24%">Attended Date</th>
-                            <th width="24%">OHKR Disease</th>
-                            <th width="24%">Disease Detected</th>
-                            <th width="48%">Action Taken</th>
-                            <th width="48%">Reported E-Mai</th>
+                            <th width="8%">Attended</th>
+                            <th width="20%">Attended By</th>
+                            <th width="14%">Attended Date</th>
+                            <th width="14%">OHKR Disease</th>
+                            <th width="14%">Disease Detected</th>
+                            <th width="20%">Action Taken</th>
+                            <th width="10%">Reported E-Mai</th>
                             <th width="12%">Created At</th>
                         </tr>
                     </thead>
@@ -50,7 +50,7 @@
                         $serial = 1;
                         foreach ($cases as $values) { ?>
                             <tr class="bg-white border-b">
-                                <td class="px-2 py-1 text-left whitespace-nowrap">
+                                <td class="px-2 py-1 text-center whitespace-nowrap">
                                     <?= ($values->attended == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No</span>'; ?>
                                 </td>
 
@@ -67,7 +67,7 @@
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
                                     <?= $values->action_taken; ?>
                                 </td>
-                                <td class="px-2 py-1 text-left whitespace-nowrap">
+                                <td class="px-2 py-1 text-center whitespace-nowrap">
                                     <?= ($values->reported_emai == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No</span>'; ?>
                                 </td>
                                 <td class="px-2 py-1 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
