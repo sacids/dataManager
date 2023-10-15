@@ -697,9 +697,8 @@ class Xform extends MX_Controller
 
         //links
         $data['links'] = [
-            'details' => anchor("projects/forms/" . $project_id, 'Details', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'list_forms' => anchor("projects/forms/" . $project_id, 'List Forms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'upload_form' => anchor("xform/add_new/" . $project_id, 'Upload Form', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'list_forms' => anchor("projects/forms/" . $project_id, 'Liste des formulaires', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'upload_form' => anchor("xform/add_new/" . $project_id, 'Formulaires chargés', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
         ];
 
         $this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
@@ -920,9 +919,8 @@ class Xform extends MX_Controller
 
         //links
         $data['links'] = [
-            'details' => anchor("projects/forms/" . $project_id, 'Details', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'list_forms' => anchor("projects/forms/" . $project_id, 'List Forms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'upload_form' => anchor("xform/add_new/" . $project_id, 'Upload Form', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'list_forms' => anchor("projects/forms/" . $project_id, 'Liste des formulaires', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'upload_form' => anchor("xform/add_new/" . $project_id, 'Formulaires chargés', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
         ];
 
         $allow_dhis2_checked = (isset($_POST['allow_dhis2'])) ? 1 : 0;

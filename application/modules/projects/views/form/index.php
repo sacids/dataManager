@@ -1,10 +1,19 @@
 <div class="bg-gray-100">
-    <div class="mx-auto py-3 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-xl font-medium tracking-tight text-gray-900">
-            <?= isset($project) ? $project->title : '' ?>
-        </h1>
+    <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
+        <h1 class="text-xl font-medium tracking-tight text-gray-900"><?= isset($project) ? $project->title : '' ?></h1>
+    </div>
+
+    <div class="mx-auto py-0 px-4 sm:px-6">
+        <div class="text-sm text-left text-gray-900">
+            <?php
+            foreach ($links as $key => $link) {
+                echo $link;
+            }
+            ?>
+        </div>
     </div>
 </div>
+</header>
 
 <main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
     <div class="flex-1 h-full overflow-y-scroll">

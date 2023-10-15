@@ -230,8 +230,8 @@ class Projects extends MX_Controller
 
         //links
         $this->data['links'] = [
-            'project_lists' => anchor('projects/lists', 'List Projects', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'create_project' => anchor('projects/add_new', 'Create Project', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'project_lists' => anchor('projects/lists', 'Liste des Projets', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'create_project' => anchor('projects/add_new', 'Créer un Projet', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
         ];
 
         //render view
@@ -283,8 +283,7 @@ class Projects extends MX_Controller
 
         //links
         $this->data['links'] = [
-            'details' => anchor("projects/forms/" . $project_id, 'Details', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'list_forms' => anchor("projects/forms/" . $project_id, 'List Forms', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'list_forms' => anchor("projects/forms/" . $project_id, 'Liste des formulaires', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
             'upload_form' => anchor("xform/add_new/" . $project_id, 'Upload Form', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
