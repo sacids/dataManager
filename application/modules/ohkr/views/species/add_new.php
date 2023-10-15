@@ -1,8 +1,9 @@
 <script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
+
 <div class="bg-gray-100">
     <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
-        Add new specie
+            Ajouter une nouvelle espèce
         </h1>
     </div>
 
@@ -40,19 +41,19 @@
                             <label>
                                 <?php echo $this->lang->line("label_specie_name") ?> <span class="text-red-500"> * </span>
                             </label>
-                            <input type="text" name="specie" placeholder="Write specie name..." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo set_value('specie'); ?>">
+                            <input type="text" name="specie" placeholder="Entrez le nom de l'espèce..." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo set_value('specie'); ?>">
                             <div class="text-red-500"><?php echo form_error('specie'); ?></div>
                         </div>
                     </div>
 
                     <div class="flex items-start">
-                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Soumettre</button>
                     </div>
                     <?php echo form_close(); ?>
 
                 </div>
             </div>
         </div>
-        <!-- /End replace -->
+        <!-- /Fin de la section -->
     </div>
 </main>

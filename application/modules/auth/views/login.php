@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -20,19 +20,21 @@
 </head>
 
 <body class="h-screen leading-normal tracking-normal">
-    <!-- This example requires Tailwind CSS v3.0+ -->
-    <div class="isolate bg-white">
+    <!-- Cet exemple nécessite Tailwind CSS v3.0+ -->
+    <div class="isolate bg-white ">
 
         <section class="h-full gradient-form bg-gray-200 md:h-screen">
             <div class="h-full lg:flex lg:flex-wrap g-0">
-                <div class="lg:w-3/5 flex items-center" style="background-image: url('https://e-combus.com/assets/img/emblame.png'); background-size: cover;">
-                    <div class="text-white px-4 py-6 md:p-12 md:mx-6">
-                        <h4 class="text-xl font-medium mb-6">Qu'est-ce qu'Afyadata?</h4>
-                        <p class="text-sm">
+            <div class="lg:w-3/5 flex items-center" style="background-image: url('<?= base_url('assets/img/emblame.png') ?>'); background-size: cover;">
+                <div class="text-white px-4 py-6 md:p-12 md:mx-6">
+                    <h4 class="text-xl font-medium mb-6">Qu'est-ce qu'Afyadata ?</h4>
+                    <p class="text-sm">
                         Afyadata est un outil qui analyse toutes les données collectées sur le terrain et envoie intelligemment des commentaires au collecteur de données et alerte les responsables de l'autorité supérieure en cas de détection d'un modèle anormal dans les données collectées. Cet outil fournit une interface utilisateur graphique aux parties prenantes de la santé impliquées pour analyser et visualiser les données collectées via l'application mobile Afyadata pour Android.
-                        </p>
-                    </div>
+                    </p>
                 </div>
+            </div>
+
+
 
                 <div class="lg:w-2/5 px-4 md:px-0">
                     <div class="md:p-12 md:mx-6">
@@ -68,7 +70,7 @@
 
                         <div class="text-center pt-1 mb-8 pb-1">
                             <button class="inline-block py-2.5 px-4 text-white font-medium text-sm leading-tight rounded shadow-md hover:bg-red-900 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3 bg-red-800" type="submit">
-                            Se connecter
+                                Se connecter
                             </button>
                         </div>
 

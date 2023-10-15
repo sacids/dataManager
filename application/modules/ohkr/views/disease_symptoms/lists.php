@@ -1,7 +1,7 @@
 <div class="bg-gray-100">
     <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
-            <?php echo $disease->title; ?> - Clinical Manifestation</h3>
+            <?php echo $disease->title; ?> - Manifestation Clinique</h3>
         </h1>
     </div>
 
@@ -44,7 +44,7 @@
                                 foreach ($symptoms as $value) {
                                     $symptoms_options[$value->id] = $value->code . '. ' . $value->title;
                                 }
-                                $symptoms_options = array('' => '-- Select --') + $symptoms_options;
+                                $symptoms_options = array('' => '-- Sélectionnez --') + $symptoms_options;
                                 echo form_dropdown('symptom_id', $symptoms_options, set_value('symptom_id'), 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"');
                                 ?>
                                 <div class="text-red-500"><?php echo form_error('symptom_id'); ?></div>
@@ -60,7 +60,7 @@
                         <div class="row mb-2">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Species <span style="color: red;">*</span></label><br />
+                                    <label>Espèces <span style="color: red;">*</span></label><br />
                                     <?php
 
                                     $serial = 1;
@@ -77,7 +77,7 @@
                         </div> <!-- /.row -->
 
                         <div class="flex items-start">
-                            <button type="submit" name="save" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                            <button type="submit" name="save" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Soumettre</button>
                         </div>
                         <?php echo form_close(); ?>
                     </div>
@@ -89,7 +89,7 @@
                             <thead class="text-gray-600 text-sm font-medium">
                                 <tr>
                                     <th width="3%">#</th>
-                                    <th width="20%">Species</th>
+                                    <th width="20%">Espèce</th>
                                     <th width="50%"><?php echo $this->lang->line("label_symptom_name"); ?></th>
                                     <th width="10%">%</th>
                                     <th style="width: 60px; text-align: right;"><?php echo $this->lang->line("label_action"); ?></th>
@@ -122,10 +122,10 @@
                         </table>
                     <?php } else { ?>
                         <div class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
-                            <span class="block sm:inline text-sm font-normal">No any species at the moment</span>
+                            <span class="block sm:inline text-sm font-normal">Aucune espèce pour le moment</span>
                             <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
                                 <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <title>Close</title>
+                                    <title>Fermer</title>
                                     <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
                                 </svg>
                             </span>
@@ -133,9 +133,6 @@
                     <?php } ?>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </main>
