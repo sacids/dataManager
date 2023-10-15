@@ -573,7 +573,7 @@ class Ohkr extends MX_Controller
         if (isset($_POST['save'])) {
             //form validation
             $this->form_validation->set_rules("symptom_id", $this->lang->line("label_symptom_name"), "required");
-            //$this->form_validation->set_rules("specie_id[]", "Specie", "required");
+            $this->form_validation->set_rules("specie_id[]", "Specie", "required");
             $this->form_validation->set_rules("importance", "Importance", "required");
 
             if ($this->form_validation->run() === TRUE) {
@@ -581,9 +581,10 @@ class Ohkr extends MX_Controller
                 foreach ($this->input->post('specie_id') as $specie_id) {
                     log_message("debug", "specie => ". $specie_id);
                     log_message("debug", "symptom => ". $this->input->post("symptom_id"));
+
                     //check existence of symptom for specie
                     $this->model->set_table('ohkr_disease_symptoms');
-                    $sp = $this->model->get_by(['specie_id' => $specie_id, 'symptom_id' => $this->input->post("symptom_id")]);
+                    $sp = $this->model->get_by(['disease_id' => $disease_id, 'specie_id' => $specie_id, 'symptom_id' => $this->input->post("symptom_id")]);
                     log_message("debug", json_encode($sp));
 
                     if (!$sp) {
@@ -612,7 +613,8 @@ class Ohkr extends MX_Controller
             'type' => 'text',
             'value' => $this->form_validation->set_value('importance'),
             'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-            'placeholder' => 'Write  system importance...'
+            'placeholder' => 'Write  system importance...',
+            'required' => ''
         );
 
         //symptoms
@@ -678,6 +680,7 @@ class Ohkr extends MX_Controller
 
         //form validation
         $this->form_validation->set_rules("symptom_id", $this->lang->line("label_symptom_name"), "required");
+        $this->form_validation->set_rules("specie_id[]", "Specie", "required");
         $this->form_validation->set_rules("importance", "Importance", "required");
 
         if ($this->form_validation->run() === TRUE) {
