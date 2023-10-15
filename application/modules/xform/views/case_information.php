@@ -55,7 +55,7 @@
                                 </td>
 
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
-                                    <?= ucwords(strtolower($values->attended->first_name . ' ' . $values->attended->last_name)); ?>
+                                    <?= ucwords(strtolower($values->attended)); ?>
                                 </td>
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
                                     <?php echo date('d-m-Y H:i:s', strtotime($values->updated_at)); ?>
