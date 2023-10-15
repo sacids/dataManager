@@ -680,7 +680,6 @@ class Ohkr extends MX_Controller
 
         //form validation
         $this->form_validation->set_rules("symptom_id", $this->lang->line("label_symptom_name"), "required");
-        $this->form_validation->set_rules("specie_id[]", "Specie", "required");
         $this->form_validation->set_rules("importance", "Importance", "required");
 
         if ($this->form_validation->run() === TRUE) {
