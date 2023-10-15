@@ -583,6 +583,8 @@ class Ohkr extends MX_Controller
                     $this->model->set_table('ohkr_disease_symptoms');
                     $sp = $this->model->get_by(['specie_id' => $specie_id, 'symptom_id' => $this->input->post("symptom_id")]);
 
+                    log_message("debug", json_encode($sp));
+
                     if (!$sp) {
                         $id = $this->model->insert(
                             [
