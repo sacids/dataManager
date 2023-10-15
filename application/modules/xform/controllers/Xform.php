@@ -1193,6 +1193,7 @@ class Xform extends MX_Controller
 
         foreach($this->data['cases'] as $k => $v){
             $this->data['cases'][$k]->attended = $this->User_model->get_user_details($v->updated_by);
+            $this->data['cases'][$k]->detected_disease = $this->Ohkr_model->get_disease_by_id($v->disease_id);
         }
 
 

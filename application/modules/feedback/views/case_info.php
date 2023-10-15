@@ -32,7 +32,7 @@
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
                             <?php
                             if ($disease) {
-                                echo $disease->name;
+                                echo $disease->title;
                             }
                             ?>
                         </td>
