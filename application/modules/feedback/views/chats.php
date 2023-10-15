@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <form id="myform" class="border-t" role="form" enctype="multipart/form-data" hx-post="" hx-target="">
+    <form id="myform" class="border-t" role="form" enctype="multipart/form-data">
         <input type="hidden" name="instance_id" value="<?= $form_data->meta_instanceID; ?>">
 
         <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
@@ -75,7 +75,7 @@
 </div>
 
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function() {
 
         //hang on event of form with id=myform
@@ -130,4 +130,4 @@
         });
 
     });
-</script> -->
+</script>

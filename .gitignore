@@ -88,6 +88,7 @@ assets/forms/definition/*.jpg
 assets/Intel/
 /composer.lock
 /vendor/
+/system/
 application/logs
 application/config/database.php
 application/tests

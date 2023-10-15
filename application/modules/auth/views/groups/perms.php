@@ -31,27 +31,29 @@
             <?= form_open(uri_string()) ?>
             <?php if (isset($perms) && $perms) {
                 foreach ($perms as $key => $value) { ?>
-                    <h5 class="uppercase"> <?= $key; ?></h5>
-                    <?= form_hidden('classes[]', $key) ?>
-                    <table class="">
-                        <tr>
-                            <?php
-                            $serial = 0;
-                            foreach ($value as $k => $v) :
-                                if (($serial % 5) == 0) {
-                                    echo "</tr><tr>";
-                                } ?>
-                                <td>
-                                    <?php
-                                    echo form_checkbox("perms[]", $v[1], (in_array($v[1], $assigned_perms)) ? TRUE : FALSE);
-                                    echo '<span>' . $v[2] . '</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-                                    ?>
-                                </td>
+                    <div class="my-3">
+                        <span class="uppercase font-medium"> <?= $key; ?></span>
+                        <?= form_hidden('classes[]', $key) ?>
+                        <table class="">
+                            <tr>
                                 <?php
-                                $serial++;
-                            endforeach; ?>&nbsp;
-                        </tr>
-                    </table>
+                                $serial = 0;
+                                foreach ($value as $k => $v) :
+                                    if (($serial % 5) == 0) {
+                                        echo "</tr><tr>";
+                                    } ?>
+                                    <td>
+                                        <?php
+                                        echo form_checkbox("perms[]", $v[1], (in_array($v[1], $assigned_perms)) ? TRUE : FALSE);
+                                        echo '<span>' . $v[2] . '</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                                        ?>
+                                    </td>
+                                    <?php
+                                    $serial++;
+                                endforeach; ?>&nbsp;
+                            </tr>
+                        </table>
+                    </div>
             <?php }
             } ?>
 

@@ -80,33 +80,35 @@ class Feedback extends REST_Controller
                     $this->model->set_table('xforms');
                     $form = $this->model->get_by('form_id', $value->form_id);
 
-                    //get reply user
-                    if ($value->reply_by != 0) $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
-                    else $reply_user = $value->reply_by;
+                    if($form){
+                        //get reply user
+                        if ($value->reply_by != 0) $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
+                        else $reply_user = $value->reply_by;
 
-                    //calculate week number
-                    $this->model->set_table($value->form_id);
-                    $table = $this->model->as_array()->get_by('meta_instanceID', $value->instance_id);
+                        //calculate week number
+                        $this->model->set_table($value->form_id);
+                        $table = $this->model->as_array()->get_by('meta_instanceID', $value->instance_id);
 
-                    //                    if (array_key_exists('meta_instanceName', $table))
-                    //                        $label = ' - ' . $table['meta_instanceName'];
-                    //                    else
-                    //                        $label = '';
+                        //                    if (array_key_exists('meta_instanceName', $table))
+                        //                        $label = ' - ' . $table['meta_instanceName'];
+                        //                    else
+                        //                        $label = '';
 
-                    //feedback array
-                    $feedback[] = array(
-                        'id' => $value->id,
-                        'form_id' => $value->form_id,
-                        'instance_id' => $value->instance_id,
-                        'title' => $form->title,
-                        'message' => $value->message,
-                        'sender' => $value->sender,
-                        'user' => $username,
-                        'chr_name' => $user->first_name . ' ' . $user->last_name,
-                        'date_created' => $value->date_created,
-                        'status' => $value->status,
-                        'reply_by' => $reply_user
-                    );
+                        //feedback array
+                        $feedback[] = array(
+                            'id' => $value->id,
+                            'form_id' => $value->form_id,
+                            'instance_id' => $value->instance_id,
+                            'title' => $form->title,
+                            'message' => $value->message,
+                            'sender' => $value->sender,
+                            'user' => $username,
+                            'chr_name' => $user->first_name . ' ' . $user->last_name,
+                            'date_created' => $value->date_created,
+                            'status' => $value->status,
+                            'reply_by' => $reply_user
+                        );
+                    }
                 }
                 //response
                 $this->response(array("status" => "success", "feedback" => $feedback), 200);
@@ -311,15 +313,6 @@ class Feedback extends REST_Controller
         log_message("debug", "User posting feedback is " . $user->username);
 
         if ($user) {
-            // 1. if the case has been attended or not To be used as flag
-            // 2. Suspected disease
-            // 3. Actions taken
-            // 4. Reported on EMA-i (Y/N)
-            // 5. Created at
-            // 6. Created By
-            // 7. Form Id
-            // 8. Instance Id
-
             //get variables
             $form_id = $this->post('form_id');
             $instance_id = $this->post('instance_id');
@@ -327,15 +320,30 @@ class Feedback extends REST_Controller
             //reported case
             $this->model->set_table('ohkr_reported_cases');
             $case = $this->model->get_by(['form_id' => $form_id, 'instance_id' => $instance_id]);
+            log_message("debug", json_encode($case));
+            log_message("debug", "case_attended => " . $this->post('case_attended'));
+            log_message("debug", "reported => " . $this->post('reported'));
+
+            //configuring case attended
+            if($this->post('case_attended') == "Oui")
+                $attended_yes = 1;
+            else if($this->post('case_attended') == "Non")
+                $attended_yes = 0; 
+                
+            //configuring case attended
+            if($this->post('reported') == "Oui")
+                $reported_yes = 1;
+            else if($this->post('reported') == "Non")
+                $reported_yes = 0;    
 
             if ($case) {
                 $this->model->set_table('ohkr_reported_cases');
                 $this->model->update($case->id, [
                     'disease_id' => $this->post('disease_id'),
                     'other_disease' => $this->post('other_disease'),
-                    'attended' => $this->post('case_attended'),
+                    'attended' => $attended_yes,
                     'action_taken' => $this->post('action_taken'),
-                    'reported_emai' => $this->post('reported'),
+                    'reported_emai' => $reported_yes,
                     'updated_by' => $user->id,
                     'updated_at' => date("Y-m-d H:i:s"),
                 ]);
@@ -346,15 +354,17 @@ class Feedback extends REST_Controller
                     'instance_id' => $instance_id,
                     'disease_id' => $this->post('disease_id'),
                     'other_disease' => $this->post('other_disease'),
-                    'attended' => $this->post('case_attended'),
+                    'attended' => $attended_yes,
                     'action_taken' => $this->post('action_taken'),
-                    'reported_emai' => $this->post('reported'),
+                    'reported_emai' => $reported_yes,
                     'created_by' => $user->id,
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_by' => $user->id,
                     'updated_at' => date("Y-m-d H:i:s"),
                 ]);
             }
+            log_message("debug","case submitted");
+
             //response
             $this->response(array('status' => 'success', 'message' => 'Case information recorded'), 200);
         } else {

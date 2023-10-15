@@ -15,7 +15,7 @@
 
             <div>
                 <a hx-get="<?= site_url('feedback/case_info/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2 cursor-pointer">
-                    Case Information
+                    Notification de cas
                 </a>
             </div>
         </div>
@@ -30,18 +30,24 @@
     <div class="h-full w-full overflow-hidden" id="jembe">
         <!-- content -->
         <div class="flex flex-col flex-auto h-full overflow-y-scroll p-3">
-                <?php if (isset($mapped_form_data) && $mapped_form_data) { ?>
-                    <table class="w-full text-sm text-left table-fixed">
-                        <tbody class="border-b">
-                            <?php foreach ($mapped_form_data as $val) { ?>
-                                <tr class="border-b">
-                                    <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $val['label'] ?></td>
-                                    <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $val['value'] ?></td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                <?php } ?>
+            <?php if (isset($mapped_form_data) && $mapped_form_data) { ?>
+                <table class="w-full text-sm text-left table-fixed">
+                    <tbody class="border-b">
+                        <?php foreach ($mapped_form_data as $val) { ?>
+                            <tr class="border-b">
+                                <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $val['label'] ?></td>
+                                <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
+                                    <?php if (preg_match('/(\.jpg|\.png|\.bmp)$/', $val['value'])) {
+                                        echo "<img src=' " . base_url() . "assets/forms/data/images/" . $val['value'] . "' style='max-width:100px;' />";
+                                    } else {
+                                        echo $val['value'];
+                                    }?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            <?php } ?>
         </div>
     </div>
 </div>

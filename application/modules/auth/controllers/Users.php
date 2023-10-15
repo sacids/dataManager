@@ -98,7 +98,7 @@ class Users extends MX_Controller
         $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
         $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'valid_email');
-        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|callback_valid_phone|trim');
+        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|callback_valid_phone');
         $this->form_validation->set_rules('groups_ids[]', 'Group', 'required|trim');
         $this->form_validation->set_rules('identity', 'Username', 'required|callback_valid_user');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|matches[password_confirm]');
@@ -136,7 +136,6 @@ class Users extends MX_Controller
                 'id' => 'first_name',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('first_name'),
-                'class' => 'form-control',
                 'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
                 'required' => '',
                 'placeholder' => 'Write first name...'
@@ -146,7 +145,6 @@ class Users extends MX_Controller
                 'id' => 'last_name',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('last_name'),
-                'class' => 'form-control',
                 'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
                 'required' => '',
                 'placeholder' => 'Write last name...'
@@ -156,7 +154,6 @@ class Users extends MX_Controller
                 'id' => 'identity',
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('identity'),
-                'class' => 'form-control',
                 'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
                 'required' => '',
                 'placeholder' => 'Write username...'
