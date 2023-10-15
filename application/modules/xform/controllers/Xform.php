@@ -1477,9 +1477,9 @@ class Xform extends MX_Controller
             $data["page_links"] = $this->pagination->create_links();
         }
 
-        echo "<pre/>";
-        print_r($form_data);
-        exit();
+        // echo "<pre/>";
+        // print_r($form_data);
+        // exit();
 
 
         //links
