@@ -15,7 +15,7 @@
 
             <div>
                 <a hx-get="<?= site_url('feedback/case_info/' . $form->form_id . '/' . $form_data->meta_instanceID); ?>" hx-target="#jembe" class="rounded-none px-2 py-2 text-gray-600 bg-gray-200 rounded-md hover:text-gray-900 hover:hover:bg-red-100 mr-2 cursor-pointer">
-                    Case Information
+                    Notification de cas
                 </a>
             </div>
         </div>

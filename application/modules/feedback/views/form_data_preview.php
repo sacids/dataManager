@@ -8,7 +8,7 @@
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $val['label'] ?></td>
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
                             <?php if (preg_match('/(\.jpg|\.png|\.bmp)$/', $val['value'])) {
-                                echo "<img src=' " . base_url() . "assets/forms/data/images/" . $val['value'] . "' style='max-width:100px;' />";
+                                echo "<img src=' " . $val['value'] . "' style='max-width:100px;' />";
                             } else {
                                 echo $val['value'];
                             } ?>

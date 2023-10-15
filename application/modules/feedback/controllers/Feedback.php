@@ -293,16 +293,18 @@ class Feedback extends MX_Controller
         $this->model->set_table('ohkr_reported_cases');
         $case = $this->model->get_by(['form_id' => $form_id, 'instance_id' => $instance_id]);
 
-        if (!$case)
-            show_error("Case does not exists");
+        if (!$case) {
+            $this->data['case'] = [];
+            $this->data['error_message'] = "Case notification does not exists";
+        } else {
+            $this->data['case'] = $case;
 
-        $this->data['case'] = $case;
+            //disease
+            $this->data['disease'] = $this->Disease_model->get_by(['id' => $case->disease_id]);
 
-        //disease
-        $this->data['disease'] = $this->Disease_model->get_by(['id' => $case->disease_id]);
-
-        //user
-        $this->data['user'] = $this->User_model->get_by(['id' => $case->updated_by]);
+            //user
+            $this->data['user'] = $this->User_model->get_by(['id' => $case->updated_by]);
+        }
 
         //render view
         $this->load->view("case_info", $this->data);

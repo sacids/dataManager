@@ -167,6 +167,7 @@ class Visualization extends CI_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, ' Notification de cas', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //render view
@@ -374,6 +375,7 @@ class Visualization extends CI_Controller
             'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
             'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, ' Notification de cas', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         if ($form) {
