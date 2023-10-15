@@ -14,14 +14,14 @@
     "vendor-dir": "vendor"
   },
   "require": {
-    "php": ">=5.3.7"
+    "php": ">=5.3.7",
+    "phpoffice/phpspreadsheet": "^1.29"
   },
   "require-dev": {
     "mikey179/vfsstream": "1.1.*",
     "fzaninotto/faker": "dev-master",
     "kenjis/ci-phpunit-test": "^0.15.0",
-    "phpoffice/phpexcel": "1.8.1",
-    "phpoffice/phpspreadsheet": "^1.7"
+    "phpoffice/phpexcel": "1.8.1"
 
   }
 }
