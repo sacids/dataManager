@@ -44,8 +44,6 @@ class Intel extends REST_Controller{
 
 
     public function disease_post(){
-
-
         $stream     = $this->input->raw_input_stream;
         $req        = json_decode($stream,true);
         log_message('DEBUG','Epi Intel: Received request '.$stream);

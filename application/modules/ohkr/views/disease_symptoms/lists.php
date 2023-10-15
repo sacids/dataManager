@@ -17,7 +17,7 @@
 </div>
 </header>
 
-<main class="g-white h-[calc(100%-9rem)] flex overflow-hidden relative">
+<main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
     <div class="flex-1 h-full overflow-y-scroll">
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <?php if ($this->session->flashdata('message') != "") { ?>
