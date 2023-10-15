@@ -2,7 +2,7 @@
 <div class="bg-gray-100">
     <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
-            Add new disease
+            Ajouter une nouvelle maladie
         </h1>
     </div>
 
@@ -106,6 +106,8 @@
                             </div>
                         <?php echo form_close(); ?>
 
+                    <div class="flex items-start">
+                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Soumettre</button>
                     </div>
                 </div>
             </div>

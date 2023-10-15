@@ -45,12 +45,12 @@ class Ohkr extends MX_Controller
     }
 
     /*==============================================
-    Diseases
+    Maladies
     ==============================================*/
     //lists
     function disease_list()
     {
-        $this->data['title'] = "Diseases";
+        $this->data['title'] = "Maladies";
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
@@ -78,9 +78,9 @@ class Ohkr extends MX_Controller
 
         //links
         $this->data['page_links'] = [
-            'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //render view
@@ -172,7 +172,7 @@ class Ohkr extends MX_Controller
         $disease = $this->Disease_model->get($id);
 
         if (!$disease)
-            show_error("Disease not found", 404);
+            show_error("Maladie non trouvée", 404);
 
         $data['disease'] = $disease;
 
@@ -263,7 +263,7 @@ class Ohkr extends MX_Controller
         $disease = $this->Disease_model->get($id);
 
         if (!$disease)
-            show_error("Disease not found", 404);
+            show_error("Maladie non trouvée", 404);
 
         //delete
         if ($this->Disease_model->delete($id)) {
@@ -280,7 +280,7 @@ class Ohkr extends MX_Controller
     ==============================================*/
     public function species_list()
     {
-        $data['title'] = "Species";
+        $data['title'] = "Espèces";
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
@@ -298,9 +298,9 @@ class Ohkr extends MX_Controller
 
         //links
         $data['page_links'] = [
-            'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //render view
@@ -326,9 +326,9 @@ class Ohkr extends MX_Controller
         if ($this->form_validation->run() === FALSE) {
             //links
             $data['page_links'] = [
-                'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
                 'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
 
             //render view
@@ -376,9 +376,9 @@ class Ohkr extends MX_Controller
         if ($this->form_validation->run() === FALSE) {
             //links
             $data['page_links'] = [
-                'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
                 'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-                'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
 
             //render view
@@ -433,7 +433,7 @@ class Ohkr extends MX_Controller
     //lists
     public function symptoms_list()
     {
-        $data['title'] = "Symptoms";
+        $data['title'] = "Symptomes";
         $this->has_allowed_perm($this->router->fetch_method());
 
         $config = array(
@@ -450,9 +450,9 @@ class Ohkr extends MX_Controller
 
         //links
         $data['page_links'] = [
-            'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'symptoms' => anchor('ohkr/symptoms', 'Symptomes', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //render view
@@ -464,7 +464,7 @@ class Ohkr extends MX_Controller
     //add new symptom
     function add_new_symptom()
     {
-        $data['title'] = "Add Symptom";
+        $data['title'] = "Ajout de symptomes";
         $this->has_allowed_perm($this->router->fetch_method());
 
         //validation
@@ -507,7 +507,7 @@ class Ohkr extends MX_Controller
      */
     public function edit_symptom($symptom_id)
     {
-        $data['title'] = "Edit symptom";
+        $data['title'] = "Modification de symptome";
         //$this->has_allowed_perm($this->router->fetch_method());
 
         if (!$symptom_id) {
@@ -520,7 +520,7 @@ class Ohkr extends MX_Controller
         $symptom = $this->Symptom_model->get($symptom_id);
 
         if (!$symptom)
-            show_error("Symptom not found", 404);
+            show_error("Symptome non trouvé", 404);
 
         $data['symptom'] = $symptom;
 
@@ -573,7 +573,7 @@ class Ohkr extends MX_Controller
         $symptom = $this->Symptom_model->get($symptom_id);
 
         if (!$symptom)
-            show_error("Symptom not found", 404);
+            show_error("Symptome non trouvé", 404);
 
         if ($this->Symptom_model->delete($symptom_id)) {
             file_get_contents(base_url("api/v3/intel/set_epi_map"));
@@ -591,14 +591,14 @@ class Ohkr extends MX_Controller
     //disease symptoms
     public function disease_symptoms_list($disease_id)
     {
-        $data['title'] = "Disease Symptoms";
+        $data['title'] = "";
         $this->has_allowed_perm($this->router->fetch_method());
 
         //disease
         $disease = $this->Disease_model->get($disease_id);
 
         if (!$disease)
-            show_error("Disease not found", 500);
+            show_error("Maladie non trouvée", 500);
 
         $data['disease'] = $disease;
 
@@ -669,9 +669,9 @@ class Ohkr extends MX_Controller
 
         //links
         $data['page_links'] = [
-            'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //render view
@@ -684,12 +684,12 @@ class Ohkr extends MX_Controller
     //edit disease symptom
     public function edit_disease_symptom($disease_id, $disease_symptom_id)
     {
-        $data['title'] = "Edit Disease Symptom";
+        $data['title'] = "Modifier les symptômes de la maladie";
         $this->has_allowed_perm($this->router->fetch_method());
 
         $disease = $this->Disease_model->get($disease_id);
         if (!$disease)
-            show_error("Disease not found", 500);
+            show_error("Maladie non trouvée", 500);
 
         $data['disease'] = $disease;
 
@@ -698,7 +698,7 @@ class Ohkr extends MX_Controller
         $disease_symptom = $this->model->get($disease_symptom_id);
 
         if (!$disease_symptom)
-            show_error("Disease symptom not found", 500);
+            show_error("Symptôme de la maladie non trouvé", 500);
 
         $data['disease_symptom'] = $disease_symptom;
 
@@ -743,9 +743,9 @@ class Ohkr extends MX_Controller
 
         //links
         $data['page_links'] = [
-            'diseases' => anchor('ohkr/diseases', 'Diseases', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'species' => anchor('ohkr/species', 'Species', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         //render view
@@ -757,12 +757,12 @@ class Ohkr extends MX_Controller
     //delete disease symptoms
     function delete_disease_symptom($disease_id, $disease_symptom_id)
     {
-        $data['title'] = "Delete Disease Symptom";
+        $data['title'] = "Supprimer le symptôme de la maladie";
         $this->has_allowed_perm($this->router->fetch_method());
 
         $disease = $this->Disease_model->get($disease_id);
         if (!$disease)
-            show_error("Disease not found", 500);
+            show_error("Maladie non trouvée", 500);
 
         $data['disease'] = $disease;
 
@@ -783,7 +783,7 @@ class Ohkr extends MX_Controller
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
-        $data['title'] = "Disease FAQ";
+        $data['title'] = "FAQ sur les maladies";
         $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
         $data['faq'] = $this->Ohkr_model->find_disease_faq($disease_id);
 
@@ -804,7 +804,7 @@ class Ohkr extends MX_Controller
             exit;
         }
 
-        $data['title'] = "Add Disease FAQ";
+        $data['title'] = "Ajouter des FAQ sur les maladies";
         $data['disease'] = $this->Ohkr_model->get_disease_by_id($disease_id);
 
         $this->form_validation->set_rules("question", $this->lang->line("label_question"), "required");
@@ -967,7 +967,7 @@ class Ohkr extends MX_Controller
             exit;
         }
 
-        $data['title'] = "Add New Disease Alert SMS";
+        $data['title'] = "Ajouter un nouveau SMS d'alerte de maladie";
         $data['disease_id'] = $disease_id;
 
         $data['groups'] = $this->User_model->find_user_groups();
@@ -1012,7 +1012,7 @@ class Ohkr extends MX_Controller
             exit;
         }
 
-        $data['title'] = "Edit Disease Response SMS";
+        $data['title'] = "Modifier la réponse SMS de la maladie";
         $data['message'] = $this->Ohkr_model->find_response_sms_by_id($sms_id);
         $data['groups'] = $this->User_model->find_user_groups();
 

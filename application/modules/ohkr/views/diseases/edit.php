@@ -100,10 +100,22 @@
                                 </div>
                             </div>
 
-                            <div class="flex items-start">
-                                <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Soumettre</button>
-                            </div>
-                        <?php echo form_close(); ?>
+                    <div class="flex items-start">
+                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Modifier</button>
+                    </div>
+
+                    <!-- <div class="mb-3">
+                        <label class="block mb-2 text-sm font-medium text-gray-900"><?php //echo $this->lang->line("label_specie_name") ?> <span class="red"> * </span></label>
+                        <?php
+
+                        // foreach ($species as $specie) {
+                        //     $species_options[$specie->id] = $specie->title;
+                        // }
+                        //echo form_dropdown("specie[]", $species_options, $assigned_species, 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 select" data-placeholder="-- Select --" multiple')
+                        ?>
+                    </div> -->
+                    
+                    <?php echo form_close(); ?>
 
                     </div>
                 </div>

@@ -61,14 +61,14 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Has Symptoms</label><br>
+                                    <label>A des symptômes</label><br>
                                     <?php
                                     echo form_checkbox('has_symptoms_field', 1, ($form->has_symptoms_field == 1) ? TRUE : FALSE);
                                     echo form_label('Yes', 'has_symptoms_field'); ?>
                                 </div><!--./has symptom -->
 
                                 <div class="form-group">
-                                    <label>Has Specie</label><br>
+                                    <label>A une espèce</label><br>
                                     <?php
                                     echo form_checkbox('has_specie_type_field', 1, ($form->has_specie_type_field == 1) ? TRUE : FALSE);
                                     echo form_label('Yes', 'has_specie_type_field'); ?>

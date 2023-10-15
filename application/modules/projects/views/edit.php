@@ -1,7 +1,7 @@
 <div class="bg-gray-100 ">
     <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
-            Update Project
+            Modification du projet
         </h1>
     </div>
 
