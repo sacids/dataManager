@@ -1191,7 +1191,7 @@ class Xform extends MX_Controller
         $cases = $this->model->get_many_by(['form_id' => $form->form_id]);
         $data['cases'] = $cases;
 
-        foreach($this->data['cases'] as $k => $v){
+        foreach($data['cases'] as $k => $v){
             $data['cases'][$k]->attended = $this->User_model->get_user_details($v->updated_by);
             $data['cases'][$k]->detected_disease = $this->Ohkr_model->get_disease_by_id($v->disease_id);
         }
