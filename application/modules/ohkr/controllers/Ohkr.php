@@ -102,7 +102,7 @@ class Ohkr extends MX_Controller
         //validation
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
         $this->form_validation->set_rules("species[]", $this->lang->line("label_specie_name"), "trim");
-        $this->form_validation->set_rules("photo", "Photo", "callback_upload_photo");
+        $this->form_validation->set_rules("photo", "Photo", "required|callback_upload_photo");
         $this->form_validation->set_rules("description", $this->lang->line("label_description"), "required");
 
         //validation == false
@@ -470,16 +470,16 @@ class Ohkr extends MX_Controller
         //validation
         $this->form_validation->set_rules("name", $this->lang->line("label_symptom_name"), "required");
         $this->form_validation->set_rules("code", $this->lang->line("label_symptom_code"), "required");
+        $this->form_validation->set_rules("photo", "Photo", "required|callback_upload_photo");
 
         //validation == false
-        if ($this->form_validation->run() === FALSE) {
+        if ($this->form_validation->run($this) === FALSE) {
             //links
             $data['links'] = [
                 'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
                 'symptoms' => anchor('ohkr/symptoms', 'Symptômes', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
                 'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
-
 
             //render view
             $this->load->view('header', $data);
@@ -489,6 +489,7 @@ class Ohkr extends MX_Controller
             $data = array(
                 "title" => $this->input->post("name"),
                 "code" => $this->input->post("code"),
+                "photo" => $_POST['photo'],
                 "description" => $this->input->post("description")
             );
 
@@ -528,7 +529,7 @@ class Ohkr extends MX_Controller
         $this->form_validation->set_rules("name", $this->lang->line("label_symptom_name"), "required");
 
         //validation == false
-        if ($this->form_validation->run() === FALSE) {
+        if ($this->form_validation->run($this) === FALSE) {
             //links
             $data['links'] = [
                 'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
@@ -536,15 +537,20 @@ class Ohkr extends MX_Controller
                 'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
 
-
             //render view
             $this->load->view('header', $data);
             $this->load->view("ohkr/symptoms/edit", $data);
             $this->load->view('footer');
         } else {
+            $photo = $symptom->photo;
+            if(isset($_POST['photo']) && $_POST['photo'] != null)
+                $photo = $_POST['photo'];
+
+            //data    
             $data = array(
                 "title" => $this->input->post("name"),
                 "code" => $this->input->post("code"),
+                "photo" => $photo,
                 "description" => $this->input->post("description")
             );
 

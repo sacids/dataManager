@@ -45,8 +45,9 @@
                     <thead class="text-gray-600 text-sm font-medium">
                         <tr>
                             <th width="3%">#</th>
+                            <th width="10%">#</th>
                             <th width="40%"><?= $this->lang->line("label_symptom_name"); ?></th>
-                            <th width="30%"><?= $this->lang->line("label_symptom_code"); ?></th>
+                            <th width="20%"><?= $this->lang->line("label_symptom_code"); ?></th>
                             <th width="15%"><?= $this->lang->line("label_action"); ?></th>
                         </tr>
                     </thead>
@@ -57,6 +58,17 @@
                         foreach ($symptoms as $symptom) { ?>
                             <tr class="bg-white border-b">
                                 <td><?= $serial ?></td>
+                                <td>
+                                    <?php
+                                    if ($symptom->photo != '') {
+                                        if (file_exists('./assets/forms/data/images/thumb_' . $symptom->photo))
+                                            echo '<img width="60" src="' . base_url('assets/forms/data/images/thumb_' . $symptom->photo) . '" alt="" />';
+                                        else
+                                            echo '<img width="60" src="http://placehold.it/400x300" alt="">';
+                                    } else {
+                                        echo '<img width="60" src="http://placehold.it/400x300" alt="">';
+                                    } ?>
+                                </td>
                                 <td><?= $symptom->title; ?></td>
                                 <td><?= $symptom->code; ?></td>
                                 <td>

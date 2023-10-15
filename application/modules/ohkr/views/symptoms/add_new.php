@@ -2,7 +2,7 @@
 <div class="bg-gray-100">
     <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
-        Add new symptom
+            Add new symptom
         </h1>
     </div>
 
@@ -33,7 +33,7 @@
                         </div>
                     <?php } ?>
 
-                    <?php echo form_open('ohkr/add_new_symptom', 'role="form"'); ?>
+                    <?php echo form_open_multipart('ohkr/add_new_symptom', 'role="form"'); ?>
 
                     <div class="flex flex-wrap -mx-3 mb-4">
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -50,6 +50,16 @@
                             </label>
                             <input type="text" name="code" placeholder="Write symptom code..." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo set_value('code'); ?>">
                             <div class="text-red-500 text-xs"><?php echo form_error('code'); ?></div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap -mx-3 mb-3">
+                        <div class="w-full md:w-full px-3 mb-6 md:mb-0">
+                            <label class="block mb-2 text-sm font-medium text-gray-900">
+                                Photo <span class="text-red-500">*</span>
+                            </label>
+                            <input class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="photo" name="photo" type="file" accept="image/*">
+                            <div class="text-red-500 text-xs"><?php echo form_error('photo'); ?></div>
                         </div>
                     </div>
 
