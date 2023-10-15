@@ -697,9 +697,8 @@ class Xform extends MX_Controller
 
         //links
         $data['links'] = [
-            'details' => anchor("projects/forms/" . $project_id, 'Details', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'list_forms' => anchor("projects/forms/" . $project_id, 'List Forms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'upload_form' => anchor("xform/add_new/" . $project_id, 'Upload Form', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'list_forms' => anchor("projects/forms/" . $project_id, 'Liste des formulaires', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'upload_form' => anchor("xform/add_new/" . $project_id, 'Formulaires chargés', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
         ];
 
         $this->form_validation->set_rules("title", $this->lang->line("validation_label_form_title"), "required|is_unique[xforms.title]");
@@ -920,9 +919,8 @@ class Xform extends MX_Controller
 
         //links
         $data['links'] = [
-            'details' => anchor("projects/forms/" . $project_id, 'Details', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'list_forms' => anchor("projects/forms/" . $project_id, 'List Forms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'upload_form' => anchor("xform/add_new/" . $project_id, 'Upload Form', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'list_forms' => anchor("projects/forms/" . $project_id, 'Liste des formulaires', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'upload_form' => anchor("xform/add_new/" . $project_id, 'Formulaires chargés', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
         ];
 
         $allow_dhis2_checked = (isset($_POST['allow_dhis2'])) ? 1 : 0;
@@ -1420,8 +1418,6 @@ class Xform extends MX_Controller
             $start_at = $this->input->post('start_at');
             $end_at = $this->input->post('end_at');
 
-
-
             //set field keys
             if (isset($_POST["apply"]) || $this->session->userdata("form_filters")) {
                 if (!isset($_POST["apply"])) {
@@ -1479,6 +1475,11 @@ class Xform extends MX_Controller
             //form data
             $data['form_data'] = $form_data;
             $data["page_links"] = $this->pagination->create_links();
+        }
+
+        foreach($data['form_data'] as $k => $v){
+            $this->model->set_table('ohkr_reported_cases');
+            $data['form_data'][$k]->case = $this->model->get_by(['form_id' => $form->form_id, 'instance_id' => $v->meta_instanceID]);
         }
 
         //links
