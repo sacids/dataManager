@@ -15,10 +15,10 @@ class Ohkr extends MX_Controller
     {
         parent::__construct();
 
+        $this->load->library(array('ion_auth', 'form_validation', 'user_agent', 'upload'));
         $this->load->model(array("Ohkr_model", "Perm_model", "User_model", "Disease_model", "Symptom_model", "Specie_model"));
         log_message('debug', 'Ohkr controller initialized');
         //$this->load->library("Db_exp");
-
         $this->controller = "Ohkr";
 
         if (!$this->ion_auth->logged_in()) {
@@ -69,9 +69,9 @@ class Ohkr extends MX_Controller
             $species = explode(',', $v->species);
 
             $arr_species = [];
-            foreach ($species as $sp) {
-                $spe = $this->Specie_model->get($sp);
-                $arr_species[] = $spe->title;
+            foreach ($species as $val) {
+                $specie = $this->Specie_model->get_by(['id' => $val]);
+                $arr_species[] = $specie->title;
             }
             $this->data['diseases'][$k]->species = join(', ', $arr_species);
         }
@@ -101,30 +101,45 @@ class Ohkr extends MX_Controller
 
         //validation
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
-        $this->form_validation->set_rules("specie", $this->lang->line("label_specie_name"), "trim");
+        $this->form_validation->set_rules("species[]", $this->lang->line("label_specie_name"), "trim");
         $this->form_validation->set_rules("photo", "Photo", "callback_upload_photo");
         $this->form_validation->set_rules("description", $this->lang->line("label_description"), "required");
 
         //validation == false
-        if ($this->form_validation->run() === FALSE) {
+        if ($this->form_validation->run($this) === FALSE) {
             //links
             $data['links'] = [
                 'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
                 'symptoms' => anchor('ohkr/symptoms', 'Symptômes', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
                 'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
-            
+
             //render view
             $this->load->view('header', $data);
             $this->load->view("ohkr/diseases/add_new", $data);
             $this->load->view('footer');
         } else {
+            //species
+            $arr_species = [];
+            if (isset($_POST['species'])) {
+                $species = $_POST['species'];
+
+                if ($species) {
+                    foreach ($species as $val) {
+                        array_push($arr_species, $val);
+                    }
+                }
+            }
+
+            //data array
             $data = array(
                 "title" => $this->input->post("name"),
-                "species" => $this->input->post('specie'),
-                "description" => $this->input->post("description")
+                "species" => join(',', $arr_species),
+                "description" => $this->input->post("description"),
+                "photo" => $_POST['photo']
             );
 
+            //create disease
             $disease_id = $this->Disease_model->insert($data);
 
             if ($disease_id) {
@@ -167,21 +182,22 @@ class Ohkr extends MX_Controller
 
         //validation
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
-        $this->form_validation->set_rules("specie", $this->lang->line("label_specie_name"), "required");
+        $this->form_validation->set_rules("species[]", $this->lang->line("label_specie_name"), "trim");
+        $this->form_validation->set_rules("photo", "Photo", "callback_upload_photo");
         $this->form_validation->set_rules("description", $this->lang->line("label_description"), "required");
 
         //validation == false
-        if ($this->form_validation->run() === FALSE) {
+        if ($this->form_validation->run($this) === FALSE) {
             //species
-            // $species = explode(',', $disease->species);
+            $species = explode(',', $disease->species);
 
-            // $arr_species = [];
-            // if ($species) {
-            //     foreach ($species as $specie_id) {
-            //         array_push($arr_species, $specie_id);
-            //     }
-            // }
-            // $data['assigned_species'] = $arr_species;
+            $arr_species = [];
+            if ($species) {
+                foreach ($species as $specie_id) {
+                    array_push($arr_species, $specie_id);
+                }
+            }
+            $data['assigned_species'] = $arr_species;
 
             //links
             $data['links'] = [
@@ -190,16 +206,34 @@ class Ohkr extends MX_Controller
                 'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
 
-
             //render view
             $this->load->view('header', $data);
             $this->load->view("ohkr/diseases/edit", $data);
             $this->load->view('footer');
         } else {
+            //species
+            $arr_species = [];
+            if (isset($_POST['species'])) {
+                $species = $_POST['species'];
+
+                if ($species) {
+                    foreach ($species as $val) {
+                        array_push($arr_species, $val);
+                    }
+                }
+            }
+
+            $photo = $disease->photo;
+            if(isset($_POST['photo']) && $_POST['photo'] != null)
+                $photo = $_POST['photo'];
+
+
+            //data array
             $data = array(
                 "title" => $this->input->post("name"),
-                "species" => $this->input->post("specie"),
-                "description" => $this->input->post("description")
+                "species" => join(',', $arr_species),
+                "description" => $this->input->post("description"),
+                "photo" => $photo
             );
 
             if ($this->Disease_model->update($data, $id)) {
@@ -578,8 +612,8 @@ class Ohkr extends MX_Controller
             if ($this->form_validation->run() === TRUE) {
                 //iterate specie
                 foreach ($this->input->post('specie_id') as $specie_id) {
-                    log_message("debug", "specie => ". $specie_id);
-                    log_message("debug", "symptom => ". $this->input->post("symptom_id"));
+                    log_message("debug", "specie => " . $specie_id);
+                    log_message("debug", "symptom => " . $this->input->post("symptom_id"));
 
                     //check existence of symptom for specie
                     $this->model->set_table('ohkr_disease_symptoms');
@@ -761,8 +795,6 @@ class Ohkr extends MX_Controller
 
     public function add_disease_faq($disease_id)
     {
-
-
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
@@ -801,8 +833,6 @@ class Ohkr extends MX_Controller
 
     public function edit_disease_faq($disease_id, $faq_id)
     {
-
-
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
@@ -843,8 +873,6 @@ class Ohkr extends MX_Controller
 
     function delete_disease_faq($disease_id, $faq_id)
     {
-
-
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
@@ -866,7 +894,6 @@ class Ohkr extends MX_Controller
 
     public function manage_specie_disease()
     {
-
         $this->save_dbexp_post_vars();
 
         $ele_id = $this->session->userdata['post']['ele_id'];
@@ -931,8 +958,6 @@ class Ohkr extends MX_Controller
     //add response message
     public function add_new_response_sms($disease_id)
     {
-
-
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
@@ -978,8 +1003,6 @@ class Ohkr extends MX_Controller
     //Edit response message
     public function edit_response_sms($sms_id)
     {
-
-
         //check permission
         $this->has_allowed_perm($this->router->fetch_method());
 
@@ -1033,11 +1056,9 @@ class Ohkr extends MX_Controller
         redirect("ohkr/edit_disease/" . $message->disease_id);
     }
 
-
-    /**
-     * upload photo
-     * @return bool
-     */
+    /*==============================================
+    Callback function
+    ==============================================*/
     function upload_photo()
     {
         $config['upload_path'] = './assets/forms/data/images/';
@@ -1052,11 +1073,10 @@ class Ohkr extends MX_Controller
         $this->upload->initialize($config);
 
         if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
-
             if ($this->upload->do_upload('photo')) {
                 // set a $_POST value for 'image' that we can use later
                 $upload_data = $this->upload->data();
-                $_POST['icon'] = $upload_data['file_name'];
+                $_POST['photo'] = $upload_data['file_name'];
 
                 //Image Resizing
                 $resize_conf['source_image'] = $this->upload->upload_path . $this->upload->file_name;
@@ -1070,15 +1090,8 @@ class Ohkr extends MX_Controller
                 $this->image_lib->resize();
 
                 return true;
-            } else {
-                // possibly do some clean up ... then throw an error
-                $this->form_validation->set_message('upload_photo', $this->upload->display_errors());
-                return false;
             }
-        } else {
-            // throw an error because nothing was uploaded
-            $this->form_validation->set_message('upload_photo', "Upload photo");
-            return false;
         }
+        return true;
     }
 }

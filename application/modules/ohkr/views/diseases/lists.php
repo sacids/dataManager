@@ -30,7 +30,7 @@
 
             <div class="flex flex-row justify-between my-3">
                 <div>
-                    <a href="<?= site_url('ohkr/diseases/add_new')?>" class="text-white bg-red-800 hover:bg-red-900 font-medium rounded text-sm px-5 py-3">
+                    <a href="<?= site_url('ohkr/diseases/add_new') ?>" class="text-white bg-red-800 hover:bg-red-900 font-medium rounded text-sm px-5 py-3">
                         <i class="fa-solid fa-plus text-white"></i> Ajouter une nouvelle maladie
                     </a>
                 </div>
@@ -45,9 +45,10 @@
                     <thead class="text-gray-600 text-sm font-medium">
                         <tr>
                             <th width="3%">#</th>
-                            <th width="40%"><?= $this->lang->line("label_disease_name"); ?></th>
-                            <th width="30%"><?= $this->lang->line("label_specie_name"); ?></th>
-                            <th width="15%"><?= $this->lang->line("label_action"); ?></th>
+                            <th width="10%">#</th>
+                            <th width="28%"><?= $this->lang->line("label_disease_name"); ?></th>
+                            <th width="42%"><?= $this->lang->line("label_specie_name"); ?></th>
+                            <th width="10%"><?= $this->lang->line("label_action"); ?></th>
                         </tr>
                     </thead>
 
@@ -57,6 +58,17 @@
                         foreach ($diseases as $disease) { ?>
                             <tr class="bg-white border-b">
                                 <td><?= $serial ?></td>
+                                <td>
+                                    <?php
+                                    if ($disease->photo != '') {
+                                        if (file_exists('./assets/forms/data/images/thumb_' . $disease->photo))
+                                            echo '<img width="60" src="' . base_url('assets/forms/data/images/thumb_' . $disease->photo) . '" alt="" />';
+                                        else
+                                            echo '<img width="60" src="http://placehold.it/400x300" alt="">';
+                                    } else {
+                                        echo '<img width="60" src="http://placehold.it/400x300" alt="">';
+                                    } ?>
+                                </td>
                                 <td><?= anchor("ohkr/disease_symptoms/" . $disease->id, $disease->title, '') ?></td>
                                 <td><?= $disease->species; ?></td>
                                 <td>

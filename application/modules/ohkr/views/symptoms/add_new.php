@@ -41,7 +41,7 @@
                                 <?php echo $this->lang->line("label_symptom_name"); ?> <span class="text-red-500"> * </span>
                             </label>
                             <input type="text" name="name" placeholder="Write symptom name..." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo set_value('name'); ?>">
-                            <div class="text-red-500"><?php echo form_error('name'); ?></div>
+                            <div class="text-red-500 text-xs"><?php echo form_error('name'); ?></div>
                         </div>
 
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -49,7 +49,7 @@
                                 <?php echo $this->lang->line("label_symptom_code"); ?> <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="code" placeholder="Write symptom code..." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo set_value('code'); ?>">
-                            <div class="text-red-500"><?php echo form_error('code'); ?></div>
+                            <div class="text-red-500 text-xs"><?php echo form_error('code'); ?></div>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
                         <script>
                             CKEDITOR.replace('description');
                         </script>
-                        <div class="error" style="color: red"><?php echo form_error('description'); ?></div>
+                        <div class="text-red-500 text-xs"><?php echo form_error('description'); ?></div>
                     </div>
 
                     <div class="flex items-start">

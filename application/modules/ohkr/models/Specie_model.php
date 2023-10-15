@@ -111,8 +111,7 @@ class Specie_model extends CI_Model
      */
     function get($id)
     {
-        return $this->db
-            ->get_where($this->table, ['id' => $id])->row();
+        return $this->db->get_where($this->table, ['id' => $id])->row();
     }
 
     /**
@@ -120,8 +119,6 @@ class Specie_model extends CI_Model
      */
     function get_by($where)
     {
-        return $this->db
-            ->order_by('title', 'ASC')
-            ->get_where($this->table, $where)->row();
+        return $this->db->get_where($this->table, $where)->row();
     }
 }
