@@ -68,14 +68,14 @@ class Projects extends MX_Controller
     function has_allowed_perm($method_name)
     {
         if (!perms_role($this->controller, $method_name)) {
-            show_error("You are not allowed to view this page", 401, "Unauthorized");
+            show_error("Vous n'êtes pas autorisé à visiter cette page", 401, "Unauthorized");
         }
     }
 
     //list projects
     function lists()
     {
-        $this->data['title'] = "Projects";
+        $this->data['title'] = "Projets";
 
         //check permission
         $this->has_allowed_perm("lists");
@@ -243,14 +243,14 @@ class Projects extends MX_Controller
     //delete project
     function delete($project_id)
     {
-        $this->data['title'] = "Delete Project";
+        $this->data['title'] = "Suppression de projet";
         //$this->has_allowed_perm($this->router->fetch_method());
 
         $this->model->set_table('projects');
         $project = $this->model->get_by(array('id' => $project_id));
 
         if (!$project)
-            show_error("Project not exists", 500);
+            show_error("Ce projet n'existe pas", 500);
 
 
         //delete
@@ -269,14 +269,14 @@ class Projects extends MX_Controller
     //project details
     public function forms($project_id)
     {
-        $this->data['title'] = "Project Form";
+        $this->data['title'] = "Formulaire du projet";
         $this->has_allowed_perm($this->router->fetch_method());
 
         $this->model->set_table('projects');
         $project = $this->model->get_by(array('id' => $project_id));
 
         if (!$project)
-            show_error("Project not exists", 500);
+            show_error("Ce projet n'existe pas", 500);
 
         $this->data['project'] = $project;
         $this->data['project_id'] = $project_id;
@@ -284,7 +284,7 @@ class Projects extends MX_Controller
         //links
         $this->data['links'] = [
             'list_forms' => anchor("projects/forms/" . $project_id, 'Liste des formulaires', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
-            'upload_form' => anchor("xform/add_new/" . $project_id, 'Upload Form', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'upload_form' => anchor("xform/add_new/" . $project_id, 'Formulaire d\'ajout', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
         $filter_conditions = null;

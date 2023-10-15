@@ -39,7 +39,7 @@
                         <label class="block mb-2 text-sm font-medium text-gray-900">
                             <?php echo $this->lang->line("label_form_title") ?> <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" name="title" id="title" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Write form title..." required>
+                        <input type="text" name="title" id="title" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Titre du formulaire..." required>
                     </div>
 
                     <div class="mb-4">
@@ -53,7 +53,7 @@
                         <label class="block mb-2 text-sm font-medium text-gray-900">
                             <?php echo $this->lang->line("label_description") ?> <span class="text-red-500">*</span>
                         </label>
-                        <textarea id="description" name="description" rows="3" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Write description here..." required></textarea>
+                        <textarea id="description" name="description" rows="3" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Description du formulaire..." required></textarea>
 
                     </div>
 
@@ -63,15 +63,15 @@
                         </label>
 
                         <select id="access" name="access" class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                            <option value="">Select</option>
-                            <option value="private">Private</option>
+                            <option value="">Selectionner</option>
+                            <option value="private">Privé</option>
                             <option value="public">Public</option>
                         </select>
                     </div>
 
                     <div class="mb-4">
                         <label class="block mb-2 text-sm font-medium text-gray-900">
-                            Push
+                            Notifier
                         </label>
                         <?php
                         echo form_checkbox('push', 1, set_checkbox('push', 1), 'id="push"');
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="flex items-start">
-                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Soumettre</button>
                     </div>
                     <?php echo form_close(); ?>
                 </div>
