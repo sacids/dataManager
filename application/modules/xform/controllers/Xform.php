@@ -1477,10 +1477,10 @@ class Xform extends MX_Controller
             $data["page_links"] = $this->pagination->create_links();
         }
 
-        foreach($data['form_data'] as $k => $v){
-            $this->model->set_table('ohkr_reported_cases');
-            $data['form_data'][$k]->case = $this->model->get_by(['form_id' => $form->form_id, 'instance_id' => $v->meta_instanceID]);
-        }
+        // echo "<pre/>";
+        // print_r($form_data);
+        // exit();
+
 
         //links
         $data['links'] = [

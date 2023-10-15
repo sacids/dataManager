@@ -17,7 +17,7 @@
 </div>
 </header>
 
-<main class="g-white h-[calc(100%-9rem)] flex overflow-hidden relative">
+<main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
     <div class="flex-1 h-full overflow-y-scroll">
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <?php if ($this->session->flashdata('message') != "") { ?>
@@ -61,16 +61,27 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Espèces <span style="color: red;">*</span></label><br />
-                                    <?php
-
-                                    $serial = 1;
-                                    if (isset($species) && $species) {
-                                        foreach ($species as $v) { ?>
-                                            <input type="checkbox" name="specie_id[]" value="<?= $v->id; ?>" <?= set_checkbox('specie_id[]', $v->id); ?>>
-                                    <?= $v->title . '<br />';
-                                            $serial++;
-                                        }
-                                    } ?>
+                                    <table class="text-sm font-normal">
+                                        <tr>
+                                            <?php
+                                                $serial = 0;
+                                                if (isset($species) && $species) {
+                                                    foreach ($species as $v) {
+                                                        if (($serial % 3) == 0) {
+                                                            echo '</tr><tr>';
+                                                        } ?>
+                                                        <td>
+                                                            <span id="sp-<?= $v->id ?>">
+                                                                <input type="checkbox" name="specie_id[]" value="<?= $v->id; ?>"
+                                                                <?= set_checkbox('specie_id[]', $v->id); ?>>
+                                                                <?= $v->title; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                                        </td>
+                                                        <?php $serial++;
+                                                    }
+                                                } 
+                                            ?>
+                                        </tr>
+                                    </table>
                                     <span class="form-text text-danger"><?= form_error('specie_id[]') ?></span>
                                 </div>
                             </div>

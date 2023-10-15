@@ -101,7 +101,8 @@ class Ohkr extends MX_Controller
 
         //validation
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
-        $this->form_validation->set_rules("specie", $this->lang->line("label_specie_name"), "required");
+        $this->form_validation->set_rules("specie", $this->lang->line("label_specie_name"), "trim");
+        $this->form_validation->set_rules("photo", "Photo", "callback_upload_photo");
         $this->form_validation->set_rules("description", $this->lang->line("label_description"), "required");
 
         //validation == false
@@ -113,8 +114,6 @@ class Ohkr extends MX_Controller
                 'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             ];
             
-
-
             //render view
             $this->load->view('header', $data);
             $this->load->view("ohkr/diseases/add_new", $data);
@@ -573,15 +572,19 @@ class Ohkr extends MX_Controller
         if (isset($_POST['save'])) {
             //form validation
             $this->form_validation->set_rules("symptom_id", $this->lang->line("label_symptom_name"), "required");
-            //$this->form_validation->set_rules("specie_id[]", "Specie", "required");
+            $this->form_validation->set_rules("specie_id[]", "Specie", "required");
             $this->form_validation->set_rules("importance", "Importance", "required");
 
             if ($this->form_validation->run() === TRUE) {
                 //iterate specie
                 foreach ($this->input->post('specie_id') as $specie_id) {
+                    log_message("debug", "specie => ". $specie_id);
+                    log_message("debug", "symptom => ". $this->input->post("symptom_id"));
+
                     //check existence of symptom for specie
                     $this->model->set_table('ohkr_disease_symptoms');
-                    $sp = $this->model->get_by(['specie_id' => $specie_id, 'symptom_id' => $this->input->post("symptom_id")]);
+                    $sp = $this->model->get_by(['disease_id' => $disease_id, 'specie_id' => $specie_id, 'symptom_id' => $this->input->post("symptom_id")]);
+                    log_message("debug", json_encode($sp));
 
                     if (!$sp) {
                         $id = $this->model->insert(
@@ -609,7 +612,8 @@ class Ohkr extends MX_Controller
             'type' => 'text',
             'value' => $this->form_validation->set_value('importance'),
             'class' => 'bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
-            'placeholder' => 'Write  system importance...'
+            'placeholder' => 'Write  system importance...',
+            'required' => ''
         );
 
         //symptoms
@@ -1027,5 +1031,54 @@ class Ohkr extends MX_Controller
             $this->session->set_flashdata("message", display_message("warning", "Failed to delete alert SMS"));
         }
         redirect("ohkr/edit_disease/" . $message->disease_id);
+    }
+
+
+    /**
+     * upload photo
+     * @return bool
+     */
+    function upload_photo()
+    {
+        $config['upload_path'] = './assets/forms/data/images/';
+        $config['allowed_types'] = 'png|jpg|jpeg|gif';
+        $config['max_size'] = '4000';
+        $config['max_width'] = '';
+        $config['max_height'] = '';
+        $config['overwrite'] = TRUE;
+        $config['remove_spaces'] = TRUE;
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (isset($_FILES['photo']) && !empty($_FILES['photo']['name'])) {
+
+            if ($this->upload->do_upload('photo')) {
+                // set a $_POST value for 'image' that we can use later
+                $upload_data = $this->upload->data();
+                $_POST['icon'] = $upload_data['file_name'];
+
+                //Image Resizing
+                $resize_conf['source_image'] = $this->upload->upload_path . $this->upload->file_name;
+                $resize_conf['new_image'] = $this->upload->upload_path . 'thumb_' . $this->upload->file_name;
+                $resize_conf['maintain_ratio'] = FALSE;
+                $resize_conf['width'] = 800;
+                $resize_conf['height'] = 600;
+
+                // initializing image_lib
+                $this->image_lib->initialize($resize_conf);
+                $this->image_lib->resize();
+
+                return true;
+            } else {
+                // possibly do some clean up ... then throw an error
+                $this->form_validation->set_message('upload_photo', $this->upload->display_errors());
+                return false;
+            }
+        } else {
+            // throw an error because nothing was uploaded
+            $this->form_validation->set_message('upload_photo', "Upload photo");
+            return false;
+        }
     }
 }
