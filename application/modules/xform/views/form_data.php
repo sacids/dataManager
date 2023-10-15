@@ -91,11 +91,10 @@
                             foreach ($form_data as $data) {
                                 echo "<tr data-id=" . $data->id . "  form-id=" . $form_id . ">";
                                 foreach ($data as $key => $entry) {
-
                                     if ($key == "id") {
                                         echo "<td class='px-4 py-3'>" . form_checkbox("entry_id[]", $entry) . "</td>";
                                     }
-
+                                    
                                     if ($key == "meta_instanceID") {
                                         echo "<td class='px-4 py-3' @click=\"sideBarOpen=true\" hx-get='/feedback/menu_bar/".$form_id."/".$data->id."' hx-target='#sidebar_wrp' data-id=" . $data->id . "  form-id=" . $form_id . ">" . $entry . "</td>";
                                     } else {

@@ -1420,8 +1420,6 @@ class Xform extends MX_Controller
             $start_at = $this->input->post('start_at');
             $end_at = $this->input->post('end_at');
 
-
-
             //set field keys
             if (isset($_POST["apply"]) || $this->session->userdata("form_filters")) {
                 if (!isset($_POST["apply"])) {
@@ -1479,6 +1477,11 @@ class Xform extends MX_Controller
             //form data
             $data['form_data'] = $form_data;
             $data["page_links"] = $this->pagination->create_links();
+        }
+
+        foreach($data['form_data'] as $k => $v){
+            $this->model->set_table('ohkr_reported_cases');
+            $data['form_data'][$k]->case = $this->model->get_by(['form_id' => $form->form_id, 'instance_id' => $v->meta_instanceID]);
         }
 
         //links
