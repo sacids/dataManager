@@ -77,7 +77,7 @@
                                         echo anchor("ohkr/symptoms/edit/" . $symptom->id, '<i class="fa-regular fa-pen-to-square"></i>', 'class="btn btn-primary btn-xs"'). '&nbsp;&nbsp;';
 
                                     if (perms_role('Ohkr', 'delete_symptom'))
-                                        anchor("ohkr/symptoms/delete/" . $symptom->id, '<i class="fa-regular fa-trash-can text-red-400"></i>', 'class="btn btn-danger btn-xs delete"');
+                                        echo anchor("ohkr/symptoms/delete/" . $symptom->id, '<i class="fa-regular fa-trash-can text-red-400"></i>', 'class="btn btn-danger btn-xs delete"');
                                     ?>
                                 </td>
                             </tr>

@@ -102,7 +102,7 @@ class Ohkr extends MX_Controller
         //validation
         $this->form_validation->set_rules("name", $this->lang->line("label_disease_name"), "required");
         $this->form_validation->set_rules("species[]", $this->lang->line("label_specie_name"), "trim");
-        $this->form_validation->set_rules("photo", "Photo", "required|callback_upload_photo");
+        $this->form_validation->set_rules("photo", "Photo", "callback_upload_photo");
         $this->form_validation->set_rules("description", $this->lang->line("label_description"), "required");
 
         //validation == false
@@ -470,7 +470,7 @@ class Ohkr extends MX_Controller
         //validation
         $this->form_validation->set_rules("name", $this->lang->line("label_symptom_name"), "required");
         $this->form_validation->set_rules("code", $this->lang->line("label_symptom_code"), "required");
-        $this->form_validation->set_rules("photo", "Photo", "required|callback_upload_photo");
+        $this->form_validation->set_rules("photo", "Photo", "callback_upload_photo");
 
         //validation == false
         if ($this->form_validation->run($this) === FALSE) {
@@ -509,7 +509,7 @@ class Ohkr extends MX_Controller
     public function edit_symptom($symptom_id)
     {
         $data['title'] = "Modification de symptome";
-        //$this->has_allowed_perm($this->router->fetch_method());
+        $this->has_allowed_perm($this->router->fetch_method());
 
         if (!$symptom_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_symptom_to_edit")));
@@ -527,6 +527,8 @@ class Ohkr extends MX_Controller
 
         //validation
         $this->form_validation->set_rules("name", $this->lang->line("label_symptom_name"), "required");
+        $this->form_validation->set_rules("code", $this->lang->line("label_symptom_code"), "required");
+        $this->form_validation->set_rules("photo", "Photo", "callback_upload_photo");
 
         //validation == false
         if ($this->form_validation->run($this) === FALSE) {

@@ -20,7 +20,6 @@
 
 <main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative">
     <div class="flex-1 h-full overflow-y-scroll">
-
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <div class="flex flex-row flex-wrap mt-2">
                 <div class="flex w-full flex-col">
@@ -103,24 +102,12 @@
                     <div class="flex items-start">
                         <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Modifier</button>
                     </div>
-
-                    <!-- <div class="mb-3">
-                        <label class="block mb-2 text-sm font-medium text-gray-900"><?php //echo $this->lang->line("label_specie_name") ?> <span class="red"> * </span></label>
-                        <?php
-
-                        // foreach ($species as $specie) {
-                        //     $species_options[$specie->id] = $specie->title;
-                        // }
-                        //echo form_dropdown("specie[]", $species_options, $assigned_species, 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 select" data-placeholder="-- Select --" multiple')
-                        ?>
-                    </div> -->
-                    
+                
                     <?php echo form_close(); ?>
 
                     </div>
                 </div>
             </div>
-            <!-- /End replace -->
         </div>
     </div>
 </main>
