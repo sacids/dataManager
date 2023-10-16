@@ -349,6 +349,8 @@ class Feedback extends REST_Controller
                     'attended' => $attended_yes,
                     'action_taken' => $this->post('action_taken'),
                     'reported_emai' => $reported_yes,
+                    'latitude' => $this->post('latitude'),
+                    'longitude' => $this->post('longitude'),
                     'updated_by' => $user->id,
                     'updated_at' => date("Y-m-d H:i:s"),
                 ]);
@@ -361,6 +363,8 @@ class Feedback extends REST_Controller
                     'other_disease' => $this->post('other_disease'),
                     'attended' => $attended_yes,
                     'action_taken' => $this->post('action_taken'),
+                    'latitude' => $this->post('latitude'),
+                    'longitude' => $this->post('longitude'),
                     'reported_emai' => $reported_yes,
                     'created_by' => $user->id,
                     'created_at' => date("Y-m-d H:i:s"),
