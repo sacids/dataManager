@@ -92,7 +92,7 @@ class Feedback extends REST_Controller
                         if (array_key_exists('meta_instanceName', $table))
                             $label = ' - ' . $table['meta_instanceName'];
                         else
-                            $label = '';
+                            $label = 'gg';
 
                         log_message("debug", "label => ".$label);    
 
@@ -103,7 +103,7 @@ class Feedback extends REST_Controller
                             'id' => $value->id,
                             'form_id' => $value->form_id,
                             'instance_id' => $value->instance_id,
-                            'title' => $form->title,
+                            'title' => $form->title . $label,
                             'message' => $value->message,
                             'sender' => $value->sender,
                             'user' => $username,
