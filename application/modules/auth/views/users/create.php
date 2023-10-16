@@ -51,13 +51,27 @@
             </div>
 
             <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                    <label class="block mb-2 text-sm font-medium text-gray-900">District <span class="text-red-500">*</span>
+                    </label>
+                    <?php
+                    $options = array();
+                    foreach ($districts as $val) {
+                        $options[$val->id] = $val->name;
+                    }
+                    $options = array('' => '-- Sélectionnez --') + $options;
+                    echo form_dropdown('district', $options, set_value('district'), 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"');
+                    ?>
+                    <div class="text-red-500 text-xs"><?php echo form_error('district'); ?></div>
+                </div>
+
+                <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                     <label class="block mb-2 text-sm font-medium text-gray-900">Username <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($identity); ?>
                     <span class="text-red-500 text-xs"><?= form_error('identity'); ?></span>
                 </div>
-            
+
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                     <label class="block mb-2 text-sm font-medium text-gray-900">Password <span class="text-red-500">*</span>
                     </label>
@@ -94,7 +108,7 @@
                             <?php $serial++;
                                 }
                             } ?>
-                            
+
                         </tr>
                     </table>
                     <span class="text-red-500 text-xs"><?= form_error('groups_ids[]'); ?></span>

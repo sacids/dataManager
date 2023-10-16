@@ -58,16 +58,6 @@ class Feedback extends MX_Controller
     {
         $this->data['title'] = "Feedback";
 
-        $phone = "+224612008882";
-        $message = "Hello Afyadata";
-
-        $this->messaging->send_sms($phone, $message);
-
-        //print_r($post_data);
-        //echo json_encode($post_data);
-
-        exit();
-
         //check if logged in
         $this->is_logged_in();
         $this->has_allowed_perm($this->router->fetch_method());

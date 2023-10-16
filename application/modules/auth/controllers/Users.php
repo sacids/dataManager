@@ -99,6 +99,7 @@ class Users extends MX_Controller
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
         $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'valid_email');
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|callback_valid_phone');
+        $this->form_validation->set_rules('district', 'District', 'required|trim');
         $this->form_validation->set_rules('groups_ids[]', 'Group', 'required|trim');
         $this->form_validation->set_rules('identity', 'Username', 'required|callback_valid_user');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|matches[password_confirm]');
@@ -119,6 +120,7 @@ class Users extends MX_Controller
                 'last_name' => ucfirst($this->input->post('last_name')),
                 'phone' => $this->input->post('phone'),
                 'digest_password' => $digest_password,
+                'district' => $this->input->post('district')
             );
         }
 
@@ -197,6 +199,9 @@ class Users extends MX_Controller
 
             $this->data['groups'] = $this->Group_model->get_all();
 
+            $this->model->set_table('district');
+            $this->data['districts'] = $this->model->get_all();
+
             //links
             $this->data['links'] = [
                 'Users' => anchor("auth/users/lists", 'Users', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
@@ -226,6 +231,7 @@ class Users extends MX_Controller
         $this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'required');
         $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
         $this->form_validation->set_rules('groups_ids[]', 'User Groups', 'required');
+        $this->form_validation->set_rules('district', 'District', 'required|trim');
         $this->form_validation->set_rules('identity', 'Username', 'required');
 
         if (isset($_POST) && !empty($_POST)) {
@@ -249,7 +255,8 @@ class Users extends MX_Controller
                     'first_name' => ucfirst($this->input->post('first_name')),
                     'last_name' => ucfirst($this->input->post('last_name')),
                     'phone' => $this->input->post('phone'),
-                    'email' => $this->input->post('email')
+                    'email' => $this->input->post('email'),
+                    'district' => $this->input->post('district')
                 );
 
                 // update the password if it was posted
@@ -355,6 +362,9 @@ class Users extends MX_Controller
             'placeholder' => 'Confirm password...'
         );
         $this->data['groups'] = $this->Group_model->get_all();
+
+        $this->model->set_table('district');
+        $this->data['districts'] = $this->model->get_all();
 
         //links
         $this->data['links'] = [

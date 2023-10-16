@@ -428,9 +428,16 @@ class Xform extends MX_Controller
                             "location" => $district
                         );
 
+                        //save detected disease
+                        $this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
+
                         //get response message
                         //$this->model->set_table('ohkr_response_sms');
                         //$sender_msg = $this->model->get_by(['disease_id' => $disease->disease_id, 'group_id' => 4]);
+
+                        //1. Find message
+                        //2. Find user of the group who have permission to a given form
+                        //3. send message to users
 
                         $sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
 
@@ -467,7 +474,7 @@ class Xform extends MX_Controller
                         $i++;
                     }
 
-                    $this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
+                    
                 } else {
                     $suspected_diseases_list = $this->lang->line("message_auto_detect_disease_failed");
                 }
