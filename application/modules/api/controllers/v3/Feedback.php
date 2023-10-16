@@ -80,7 +80,7 @@ class Feedback extends REST_Controller
                     $this->model->set_table('xforms');
                     $form = $this->model->get_by('form_id', $value->form_id);
 
-                    if($form){
+                    if ($form) {
                         //get reply user
                         if ($value->reply_by != 0) $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
                         else $reply_user = $value->reply_by;
@@ -94,9 +94,18 @@ class Feedback extends REST_Controller
                         else
                             $label = $form->title;
 
-                        log_message("debug", "label => ".$label);    
-
                         //query for case notification
+                        $this->model->set_table('ohkr_reported_cases');
+                        $case = $this->model->get_by(['form_id' => $form->form_id, 'instance_id' => $value->instance_id]);
+
+                        if (!$case) {
+                            $attend_status = "Pending";
+                        } else {
+                            if ($case->attended == 1)
+                                $attend_status = "Attended";
+                            else if ($case->attended == 0)
+                                $attend_status = "Pending";
+                        }
 
                         //feedback array
                         $feedback[] = array(
@@ -110,7 +119,7 @@ class Feedback extends REST_Controller
                             'chr_name' => $user->first_name . ' ' . $user->last_name,
                             'date_created' => $value->date_created,
                             'status' => $value->status,
-                            'attend_status' => "Pending",
+                            'attend_status' => $attend_status,
                             'reply_by' => $reply_user
                         );
                     }
@@ -330,16 +339,16 @@ class Feedback extends REST_Controller
             log_message("debug", "reported => " . $this->post('reported'));
 
             //configuring case attended
-            if($this->post('case_attended') == "Oui")
+            if ($this->post('case_attended') == "Oui")
                 $attended_yes = 1;
-            else if($this->post('case_attended') == "Non")
-                $attended_yes = 0; 
-                
+            else if ($this->post('case_attended') == "Non")
+                $attended_yes = 0;
+
             //configuring case attended
-            if($this->post('reported') == "Oui")
+            if ($this->post('reported') == "Oui")
                 $reported_yes = 1;
-            else if($this->post('reported') == "Non")
-                $reported_yes = 0;    
+            else if ($this->post('reported') == "Non")
+                $reported_yes = 0;
 
             if ($case) {
                 $this->model->set_table('ohkr_reported_cases');
@@ -372,7 +381,7 @@ class Feedback extends REST_Controller
                     'updated_at' => date("Y-m-d H:i:s"),
                 ]);
             }
-            log_message("debug","case submitted");
+            log_message("debug", "case submitted");
 
             //response
             $this->response(array('status' => 'success', 'message' => 'Case information recorded'), 200);
