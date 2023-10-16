@@ -1684,6 +1684,9 @@ class Xform extends MX_Controller
                         $column_value = $entry;
                     }
                 }
+
+                //add case notification columns
+
                 $this->spreadsheet->getActiveSheet()->setCellValue($column_title . $inc, $column_value);
                 $serial++;
             }

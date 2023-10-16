@@ -94,6 +94,11 @@ class Feedback extends REST_Controller
                         //                    else
                         //                        $label = '';
 
+
+                        //query for Numero ID
+
+                        //query for case notification
+
                         //feedback array
                         $feedback[] = array(
                             'id' => $value->id,
@@ -106,6 +111,7 @@ class Feedback extends REST_Controller
                             'chr_name' => $user->first_name . ' ' . $user->last_name,
                             'date_created' => $value->date_created,
                             'status' => $value->status,
+                            'attend_status' => "Pending",
                             'reply_by' => $reply_user
                         );
                     }
