@@ -90,9 +90,9 @@ class Feedback extends REST_Controller
                         $table = $this->model->as_array()->get_by('meta_instanceID', $value->instance_id);
 
                         if (array_key_exists('meta_instanceName', (array)$table))
-                            $label = ' - ' . $table['meta_instanceName'];
+                            $label = $table['meta_instanceName'];
                         else
-                            $label = 'gg';
+                            $label = $form->title;
 
                         log_message("debug", "label => ".$label);    
 
@@ -103,7 +103,7 @@ class Feedback extends REST_Controller
                             'id' => $value->id,
                             'form_id' => $value->form_id,
                             'instance_id' => $value->instance_id,
-                            'title' => $form->title . $label,
+                            'title' => $label,
                             'message' => $value->message,
                             'sender' => $value->sender,
                             'user' => $username,
