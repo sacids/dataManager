@@ -69,7 +69,7 @@
                                                 $serial = 0;
                                                 if (isset($species) && $species) {
                                                     foreach ($species as $v) {
-                                                        if (($serial % 4) == 0) {
+                                                        if (($serial % 3) == 0) {
                                                             echo '</tr><tr>';
                                                         } ?>
                                                         <td>

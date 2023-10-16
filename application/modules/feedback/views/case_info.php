@@ -10,6 +10,11 @@
                     </td>
                 </tr>
 
+                <tr class="border-b">
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Reported Date</td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo date('d-m-Y H:i:s', strtotime($case->created_at)); ?></td>
+                    </tr>
+
                 <?php if ($case->attended == 1) { ?>
                     <tr class="border-b">
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Attended By</td>
@@ -24,7 +29,7 @@
 
                     <tr class="border-b">
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Attend Date</td>
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo date('d-m-Y H:i:s', $case->updated_at); ?></td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo date('d-m-Y H:i:s', strtotime($case->updated_at)); ?></td>
                     </tr>
 
                     <tr class="border-b">
