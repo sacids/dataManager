@@ -89,13 +89,12 @@ class Feedback extends REST_Controller
                         $this->model->set_table($value->form_id);
                         $table = $this->model->as_array()->get_by('meta_instanceID', $value->instance_id);
 
-                        //                    if (array_key_exists('meta_instanceName', $table))
-                        //                        $label = ' - ' . $table['meta_instanceName'];
-                        //                    else
-                        //                        $label = '';
+                        if (array_key_exists('meta_instanceName', $table))
+                            $label = ' - ' . $table['meta_instanceName'];
+                        else
+                            $label = '';
 
-
-                        //query for Numero ID
+                        log_message("debug", "label => " + $label);    
 
                         //query for case notification
 
