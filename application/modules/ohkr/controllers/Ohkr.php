@@ -224,7 +224,7 @@ class Ohkr extends MX_Controller
             }
 
             $photo = $disease->photo;
-            if(isset($_POST['photo']) && $_POST['photo'] != null)
+            if (isset($_POST['photo']) && $_POST['photo'] != null)
                 $photo = $_POST['photo'];
 
 
@@ -545,7 +545,7 @@ class Ohkr extends MX_Controller
             $this->load->view('footer');
         } else {
             $photo = $symptom->photo;
-            if(isset($_POST['photo']) && $_POST['photo'] != null)
+            if (isset($_POST['photo']) && $_POST['photo'] != null)
                 $photo = $_POST['photo'];
 
             //data    
@@ -963,17 +963,27 @@ class Ohkr extends MX_Controller
         }
     }
 
+
+
     //add response message
     public function add_new_response_sms($disease_id)
     {
         //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
+        //$this->has_allowed_perm($this->router->fetch_method());
 
         if (!$disease_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_edit")));
             redirect("ohkr/disease_list");
             exit;
         }
+
+        //disease
+        $disease = $this->Disease_model->get($disease_id);
+
+        if (!$disease)
+            show_error("Maladie non trouvée", 500);
+
+        $data['disease'] = $disease;
 
         $data['title'] = "Ajouter un nouveau SMS d'alerte de maladie";
         $data['disease_id'] = $disease_id;
@@ -985,9 +995,24 @@ class Ohkr extends MX_Controller
         $this->form_validation->set_rules("status", $this->lang->line("label_status"), "required");
 
         if ($this->form_validation->run() === FALSE) {
+            //disease symptoms
+            $this->model->set_table('ohkr_response_sms');
+            $diseases_responses = $this->model->get_many_by(['disease_id' => $disease_id]);
+            $data['diseases_responses'] = $diseases_responses;
+
+            foreach ($data['diseases_responses'] as $k => $v) {
+                $data['diseases_responses'][$k]->group = $this->Group_model->get_by(['id' => $v->group_id]);
+            }
+
+            //links
+            $data['page_links'] = [
+                'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            ];
 
             $this->load->view('header', $data);
-            $this->load->view("ohkr/add_response_sms", $data);
+            $this->load->view("ohkr/response_sms/add", $data);
             $this->load->view('footer');
         } else {
             $message = array(
@@ -1012,7 +1037,7 @@ class Ohkr extends MX_Controller
     public function edit_response_sms($sms_id)
     {
         //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
+       // $this->has_allowed_perm($this->router->fetch_method());
 
         if (!$sms_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_edit")));
@@ -1028,9 +1053,15 @@ class Ohkr extends MX_Controller
         $this->form_validation->set_rules("message", $this->lang->line("label_alert_message"), "required");
 
         if ($this->form_validation->run() === FALSE) {
+             //links
+             $data['page_links'] = [
+                'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+                'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            ];
 
             $this->load->view('header', $data);
-            $this->load->view("ohkr/edit_response_sms", $data);
+            $this->load->view("ohkr/response_sms/edit", $data);
             $this->load->view('footer');
         } else {
             $message = array(
@@ -1052,7 +1083,7 @@ class Ohkr extends MX_Controller
     public function delete_response_sms($sms_id)
     {
         //check permission
-        $this->has_allowed_perm($this->router->fetch_method());
+        //$this->has_allowed_perm($this->router->fetch_method());
 
         $message = $this->Ohkr_model->find_response_sms_by_id($sms_id);
 
@@ -1061,7 +1092,7 @@ class Ohkr extends MX_Controller
         } else {
             $this->session->set_flashdata("message", display_message("warning", "Failed to delete alert SMS"));
         }
-        redirect("ohkr/edit_disease/" . $message->disease_id);
+        redirect("ohkr/add_new_response_sms/" . $message->disease_id);
     }
 
     /*==============================================

@@ -75,6 +75,8 @@
                                     <?php
                                     if (perms_role('Ohkr', 'disease_symptoms_list'))
                                         echo anchor("ohkr/disease_symptoms/" . $disease->id, '<i class="fa fa-stethoscope"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;&nbsp;';
+                                    //if (perms_role('Ohkr', 'disease_symptoms_list'))
+                                        echo anchor("ohkr/add_new_response_sms/" . $disease->id, '<i class="fa-solid fa-comment-sms"></i>', 'class="btn btn-primary btn-xs"') . '&nbsp;&nbsp;';
                                     if (perms_role('Ohkr', 'edit_disease'))
                                         echo anchor("ohkr/diseases/edit/" . $disease->id, '<i class="fa-regular fa-pen-to-square"></i>', 'class="btn btn-secondary btn-xs"') . '&nbsp;&nbsp;';
                                     if (perms_role('Ohkr', 'delete_disease'))
