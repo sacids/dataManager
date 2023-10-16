@@ -66,7 +66,7 @@
         </table>
     <?php } else { ?>
         <div class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
-            <span class="block sm:inline text-sm font-normal">No any case notification at the moment</span>
+            <span class="block sm:inline text-sm font-normal">Case notification is pending at the moment</span>
         </div>
     <?php } ?>
 </div>

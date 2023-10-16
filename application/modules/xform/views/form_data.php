@@ -94,13 +94,22 @@
                                     if ($key == "id") {
                                         echo "<td class='px-4 py-3'>" . form_checkbox("entry_id[]", $entry) . "</td>";
                                     }
-                                    
+
                                     if ($key == "meta_instanceID") {
-                                        echo "<td class='px-4 py-3' @click=\"sideBarOpen=true\" hx-get='/feedback/menu_bar/".$form_id."/".$data->id."' hx-target='#sidebar_wrp' data-id=" . $data->id . "  form-id=" . $form_id . ">" . $entry . "</td>";
+                                        echo "<td class='px-4 py-3' @click=\"sideBarOpen=true\" hx-get='/feedback/menu_bar/" . $form_id . "/" . $data->id . "' hx-target='#sidebar_wrp' data-id=" . $data->id . "  form-id=" . $form_id . ">";
+                                        echo $entry;
+                                        echo "<br/>";
+
+                                        if ($data->attend_status == "Pending")
+                                            echo '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">' . $data->attend_status . '</span>';
+                                        else if ($data->attend_status == "Attended")
+                                            echo '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">' . $data->attend_status . '</span>';
+
+                                        echo "</td>";
                                     } else {
                                         if ($key == "meta_username") {
                                             echo "<td class='px-4 py-3'>" . get_collector_name_from_phone($entry) . '<br />' . $entry . "</td>";
-                                        }else if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
+                                        } else if (preg_match('/(\.jpg|\.png|\.bmp)$/', $entry)) {
                                             echo "<td><img src=' " . base_url() . "assets/forms/data/images/" . $entry . "' style='max-width:100px;' /></td>";
                                         } else {
                                             echo "<td class='px-4 py-3'>" . $entry . "</td>";

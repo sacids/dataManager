@@ -473,8 +473,6 @@ class Xform extends MX_Controller
                         }
                         $i++;
                     }
-
-                    
                 } else {
                     $suspected_diseases_list = $this->lang->line("message_auto_detect_disease_failed");
                 }
@@ -1196,7 +1194,7 @@ class Xform extends MX_Controller
         $cases = $this->model->get_many_by(['form_id' => $form->form_id]);
         $data['cases'] = $cases;
 
-        foreach($data['cases'] as $k => $v){
+        foreach ($data['cases'] as $k => $v) {
             $data['cases'][$k]->attended = $this->User_model->get_user_details($v->updated_by);
             $data['cases'][$k]->disease = $this->Ohkr_model->get_disease_by_id($v->disease_id);
         }
@@ -1497,6 +1495,27 @@ class Xform extends MX_Controller
 
         $data['start_at'] = $start_at;
         $data['end_at'] = $end_at;
+
+        foreach ($form_data as $k => $v) {
+            $this->model->set_table('ohkr_reported_cases');
+            $case = $this->model->get_by(['form_id' => $form->form_id, 'instance_id' => $v->meta_instanceID]);
+
+            if ($case) {
+                if ($case->attended == 1)
+                    $attend_status = "Attended";
+                else
+                    $attend_status = "Pending";
+            } else {
+                $attend_status = "Pending";
+            }
+
+            $data['form_data'][$k]->attend_status = $attend_status;
+        }
+
+
+        // echo "<pre/>";
+        // print_r($form_data);
+        // exit();
 
         //render view
         $this->load->view('header', $data);
