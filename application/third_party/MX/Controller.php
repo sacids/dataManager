@@ -56,6 +56,7 @@ require dirname(__FILE__) . '/Base.php';
  * @property db_exp $db_exp
  * @property Analyze_model $Analyze_model
  * @property xform_comm $xform_comm
+ * @property Messaging $messaging
  * @property Alert_model $Alert_model
  * @property Barcode $barcode
  * @property MailChimp $MailChimp

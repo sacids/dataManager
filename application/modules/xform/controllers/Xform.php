@@ -1477,11 +1477,6 @@ class Xform extends MX_Controller
             $data["page_links"] = $this->pagination->create_links();
         }
 
-        // echo "<pre/>";
-        // print_r($form_data);
-        // exit();
-
-
         //links
         $data['links'] = [
             'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-transparent']),

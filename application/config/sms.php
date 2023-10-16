@@ -7,3 +7,4 @@
  */
 
 $config['bauth'] = "YWZ5YWRhdGE6U2FjaWRzMSE=";
+$config['orange_token'] = "WGZKR2N6bUFNSFpyODA2dlZMb3JiREZ5d2hkWFNkNFM6VHRFV0xYYlVkcUtHZkdQVA==";
