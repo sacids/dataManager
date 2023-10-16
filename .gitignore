@@ -91,6 +91,7 @@ assets/Intel/
 /system/
 application/logs
 application/config/database.php
+application/config/sms.php
 application/tests
 !application/tests/controllers
 !application/tests/models
