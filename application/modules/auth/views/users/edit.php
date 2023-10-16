@@ -57,10 +57,10 @@
                     <?php
                     $options = array();
                     foreach ($districts as $val) {
-                        $options[$val->id] = $val->name;
+                        $options[$val->name] = $val->name;
                     }
                     $options = array('' => '-- Sélectionnez --') + $options;
-                    echo form_dropdown('district', $options, set_value('district'), 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"');
+                    echo form_dropdown('district', $options, set_value('district', $user->district), 'class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"');
                     ?>
                     <div class="text-red-500 text-xs"><?php echo form_error('district'); ?></div>
                 </div>
