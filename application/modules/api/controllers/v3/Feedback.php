@@ -30,6 +30,9 @@ class Feedback extends REST_Controller
         $username = $this->get('username');
         $date_created = $this->get("date_created");
 
+        //format date
+        $date_created = date("Y-m-d H:i:s", strtotime($date_created));
+
         //get user details
         $this->model->set_table('users');
         $user = $this->model->get_by('username', $username);
@@ -117,7 +120,7 @@ class Feedback extends REST_Controller
                             'sender' => $value->sender,
                             'user' => $username,
                             'chr_name' => $user->first_name . ' ' . $user->last_name,
-                            'date_created' => $value->date_created,
+                            'date_created' => date("d-m-Y H:i", strtotime($value->date_created)),
                             'status' => $value->status,
                             'attend_status' => $attend_status,
                             'reply_by' => $reply_user
