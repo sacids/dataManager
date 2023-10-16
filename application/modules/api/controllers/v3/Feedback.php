@@ -94,7 +94,7 @@ class Feedback extends REST_Controller
                         else
                             $label = '';
 
-                        log_message("debug", "label => " + $label);    
+                        log_message("debug", "label => ".$label);    
 
                         //query for case notification
 
