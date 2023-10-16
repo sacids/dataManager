@@ -52,7 +52,7 @@
 
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">District <span class="text-red-500">*</span>
+                    <label class="block mb-2 text-sm font-medium text-gray-900">District
                     </label>
                     <?php
                     $options = array();
