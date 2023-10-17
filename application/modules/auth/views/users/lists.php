@@ -73,7 +73,7 @@
                                         $i = 1;
                                         $grp_array = [];
                                         foreach ($values->groups as $group) {
-                                            echo $group->name . ', ';
+                                            echo $group->name . '<br/>';
                                             array_push($grp_array, $group->name);
                                             $i++;
                                         } ?>
