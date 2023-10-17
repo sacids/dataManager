@@ -11,9 +11,9 @@
                 </tr>
 
                 <tr class="border-b">
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Reported Date</td>
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo date('d-m-Y H:i:s', strtotime($case->created_at)); ?></td>
-                    </tr>
+                    <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Reported Date</td>
+                    <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo date('d-m-Y H:i:s', strtotime($case->created_at)); ?></td>
+                </tr>
 
                 <?php if ($case->attended == 1) { ?>
                     <tr class="border-b">
@@ -58,6 +58,11 @@
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
                             <?= ($case->reported_emai == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No</span>'; ?>
                         </td>
+                    </tr>
+
+                    <tr class="border-b">
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Location Point</td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $case->latitude . ', ' . $case->longitude; ?></td>
                     </tr>
                 <?php } else { ?>
                     <tr class="border-b">

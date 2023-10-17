@@ -43,7 +43,8 @@
                             <th width="14%">Disease Detected</th>
                             <th width="20%">Action Taken</th>
                             <th width="10%">Reported E-Mai</th>
-                            
+                            <th width="10%">Location Point</th>
+
                         </tr>
                     </thead>
 
@@ -75,6 +76,10 @@
                                 </td>
                                 <td class="px-2 py-1 text-center whitespace-nowrap">
                                     <?= ($values->reported_emai == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No</span>'; ?>
+                                </td>
+
+                                <td class="px-2 py-1 text-left whitespace-nowrap">
+                                    <?= $values->latitude . ', ' . $values->longitude; ?>
                                 </td>
                             </tr>
                         <?php
