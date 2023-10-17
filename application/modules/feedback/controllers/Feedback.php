@@ -273,7 +273,7 @@ class Feedback extends MX_Controller
                 'user_id' => $fb->user_id,
                 'sender' => 'server',
                 'status' => 'pending',
-                'reply_by' => $this->user_id
+                'reply_by' => get_current_user_id()
             ));
 
             if ($result) {
