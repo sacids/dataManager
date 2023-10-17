@@ -88,7 +88,7 @@ class Feedback extends REST_Controller
                         if ($value->reply_by != 0) $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
                         else $reply_user = $value->reply_by;
 
-                        //calculate week number
+                        //query for form 
                         $this->model->set_table($value->form_id);
                         $table = $this->model->as_array()->get_by('meta_instanceID', $value->instance_id);
 

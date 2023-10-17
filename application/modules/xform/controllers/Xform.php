@@ -412,6 +412,7 @@ class Xform extends MX_Controller
                 $message = $this->lang->line("message_data_received");
                 $suspected_diseases_list = $message . "<br/>";
 
+                $arr_diseases = [];
                 if ($suspected_diseases) {
                     $i = 1;
                     foreach ($suspected_diseases as $disease) {
@@ -429,43 +430,14 @@ class Xform extends MX_Controller
                         //save detected disease
                         $this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
 
-                        //1. get response message
-                        $this->model->set_table('ohkr_response_sms');
-                        $response_messages = $this->model->get_by(['disease_id' => $disease->disease_id]);
-
-                        //2. Find user of the group who have permission to a given form
-                        $where = "FIND_IN_SET('" . $this->user_submitting_feedback_id . "', users)";
-                        $feedback_users = $this->db->where($where)->get('feedback_user_map')->result();
-
-                        if ($feedback_users) {
-                            foreach ($feedback_users as $fb_user) {
-                                $user = $this->User_model->get_by(['id' => $fb_user->user_id]);
-
-                                if ($user) {
-                                    //3. user phone
-                                    $phone = $user->phone;
-
-                                    //4. Construct message
-                                    //$message = "Mkulima {$farmer->name} ({$farmer->phone}) ameomba ushauri : \r\n {$message}";
-                                    $message = "";
-
-                                    //5. send message to users
-                                    $this->messaging->send_sms($phone, $message);
-
-                                    //6. Send response messages
-                                    if ($response_messages) {
-                                        foreach ($response_messages as $val) {
-                                            $this->messaging->send_sms($phone, $val->message);
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        //push disease to array
+                        array_push($arr_diseases, $disease->disease_name);
                     }
                 } else {
                     $suspected_diseases_list = $this->lang->line("message_auto_detect_disease_failed");
                 }
 
+                //feedback data
                 $feedback = array(
                     "user_id" => $this->user_submitting_feedback_id,
                     "form_id" => $this->xFormReader->get_table_name(),
@@ -475,7 +447,6 @@ class Xform extends MX_Controller
                     "sender" => "server",
                     "status" => "pending"
                 );
-
                 $this->Feedback_model->create_feedback($feedback);
 
                 //case reported data
@@ -486,6 +457,51 @@ class Xform extends MX_Controller
                     'created_by' => $this->user_submitting_feedback_id,
                     'created_at' => date("Y-m-d H:i:s"),
                 ]);
+
+                //send message to Officials
+                //0. CAW Information
+                $CAW_User = $this->User_model->get_by(['id' => $this->user_submitting_feedback_id]);
+
+                if ($CAW_User) {
+                    $CAW_Name = $CAW_User->first_name . ' ' . $CAW_User->last_name;
+                    $CAW_Phone = $CAW_User->phone;
+
+                    //for details
+                    $this->model->set_table($this->xFormReader->get_table_name());
+                    $xFormData = $this->model->as_array()->get_by('meta_instanceID', $this->xFormReader->get_form_data()['meta_instanceID']);
+
+                    if (array_key_exists('meta_instanceName', (array)$xFormData))
+                        $ID_Number = $xFormData['meta_instanceName'];
+                    else
+                        $ID_Number = $xFormData->title;
+
+                    //2. Find user of the group who have permission to a given form
+                    $where = "FIND_IN_SET('" . $this->user_submitting_feedback_id . "', users)";
+                    $feedback_users = $this->db->where($where)->get('feedback_user_map')->result();
+
+                    if ($feedback_users) {
+                        foreach ($feedback_users as $fb_user) {
+                            $user = $this->User_model->get_by(['id' => $fb_user->user_id]);
+
+                            if ($user) {
+                                //3. user phone
+                                $phone = $user->phone;
+                                $LFO_Name = $user->first_name . ' ' . $user->last_name;
+
+                                //4. Construct message
+                                if ($arr_diseases) {
+                                    $Diseases = implode(", ", $arr_diseases);
+                                    $message = "Cher {$LFO_Name}, la ou les maladies suivantes ont été prédites {$Diseases} à partir des données soumises par {$CAW_Name} {$CAW_Phone} avec le formulaire ID {$ID_Number}. Veuillez examiner les informations et attendre le cas. Merci.";
+                                } else {
+                                    $message = "Cher {$LFO_Name}, le système n'a été en mesure de prédire aucune maladie à partir des données soumises par {$CAW_Name} {$CAW_Phone} avec l'ID de formulaire {$ID_Number}. Veuillez examiner les informations et assister au cas. Merci.";
+                                }
+
+                                //5. send message to users
+                                $this->messaging->send_sms($phone, $message);
+                            }
+                        }
+                    }
+                }
             } else {
                 log_message("debug", "No symptom reported");
             }
