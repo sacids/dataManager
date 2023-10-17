@@ -67,10 +67,14 @@ class Auth extends REST_Controller
 
             $group_name = "CAW";
             if ($groups) {
-                if ($groups[0]->name == "members")
-                    $group_name = "CAW";
-                else
-                    $group_name = $groups[0]->name;
+                if (count($groups) == 1) {
+                    if ($groups[0]->name == "members")
+                        $group_name = "CAW";
+                    else
+                        $group_name = $groups[0]->name;
+                } else {
+                    $group_name = "LFO";
+                }
             }
 
             //return response after successfully
@@ -133,13 +137,8 @@ class Auth extends REST_Controller
                 //find user group
                 $groups = $this->ion_auth->get_users_groups($user->id)->result();
 
+                //group name
                 $group_name = "CAW";
-                if ($groups) {
-                    if ($groups[0]->name == "members")
-                        $group_name = "CAW";
-                    else
-                        $group_name = $groups[0]->name;
-                }
 
                 //return response after successfully
                 $response["error"] = FALSE;
