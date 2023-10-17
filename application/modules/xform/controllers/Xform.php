@@ -164,9 +164,9 @@ class Xform extends MX_Controller
         $this->user_submitting_feedback_id = $user->id;
         $uploaded_filename = NULL;
 
-        // if (isset($digest_parts['language'])) {
-        //     $this->mobile_app_language = $digest_parts['language'];
-        // }
+        if (isset($digest_parts['language'])) {
+            $this->mobile_app_language = $digest_parts['language'];
+        }
 
         // show status header if user not available in database
         if (empty($db_username)) {
@@ -405,9 +405,7 @@ class Xform extends MX_Controller
             }
 
             if ($symptoms_reported) {
-                $message_sender_name = config_item("sms_sender_id");
-                $request_url_endpoint = "sms/1/text/single";
-
+                //suspected array
                 $suspected_diseases_array = array();
                 $suspected_diseases = $this->Ohkr_model->find_diseases_by_symptoms_code($symptoms_reported);
 
@@ -431,47 +429,38 @@ class Xform extends MX_Controller
                         //save detected disease
                         $this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
 
-                        //get response message
-                        //$this->model->set_table('ohkr_response_sms');
-                        //$sender_msg = $this->model->get_by(['disease_id' => $disease->disease_id, 'group_id' => 4]);
+                        //1. get response message
+                        $this->model->set_table('ohkr_response_sms');
+                        $response_messages = $this->model->get_by(['disease_id' => $disease->disease_id]);
 
-                        //1. Find message
                         //2. Find user of the group who have permission to a given form
-                        //3. send message to users
+                        $where = "FIND_IN_SET('" . $this->user_submitting_feedback_id . "', users)";
+                        $feedback_users = $this->db->where($where)->get('feedback_user_map')->result();
 
-                        $sender_msg = $this->Ohkr_model->find_sender_response_message($disease->disease_id, "sender");
+                        if ($feedback_users) {
+                            foreach ($feedback_users as $fb_user) {
+                                $user = $this->User_model->get_by(['id' => $fb_user->user_id]);
 
-                        if ($sender_msg) {
-                            $this->_save_msg_and_send(
-                                $sender_msg->id,
-                                $this->sender->phone,
-                                $sender_msg->message,
-                                $this->sender->first_name,
-                                $message_sender_name,
-                                $request_url_endpoint
-                            );
-                        }
+                                if ($user) {
+                                    //3. user phone
+                                    $phone = $user->phone;
 
-                        $response_messages = $this->Ohkr_model->find_response_messages_and_groups(
-                            $disease->disease_id,
-                            str_ireplace("_", " ", $district)
-                        );
+                                    //4. Construct message
+                                    //$message = "Mkulima {$farmer->name} ({$farmer->phone}) ameomba ushauri : \r\n {$message}";
+                                    $message = "";
 
-                        $counter = 1;
-                        if ($response_messages) {
-                            foreach ($response_messages as $sms) {
-                                $this->_save_msg_and_send(
-                                    $sms->rsms_id,
-                                    $sms->phone,
-                                    $sms->message,
-                                    $sms->first_name,
-                                    $message_sender_name,
-                                    $request_url_endpoint
-                                );
-                                $counter++;
+                                    //5. send message to users
+                                    $this->messaging->send_sms($phone, $message);
+
+                                    //6. Send response messages
+                                    if ($response_messages) {
+                                        foreach ($response_messages as $val) {
+                                            $this->messaging->send_sms($phone, $val->message);
+                                        }
+                                    }
+                                }
                             }
                         }
-                        $i++;
                     }
                 } else {
                     $suspected_diseases_list = $this->lang->line("message_auto_detect_disease_failed");

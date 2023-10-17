@@ -132,12 +132,16 @@ class Ohkr extends MX_Controller
                 }
             }
 
+            //check for photo
+            if (isset($_POST['photo']) && $_POST['photo'] != null)
+                $photo = $_POST['photo'];
+
             //data array
             $data = array(
                 "title" => $this->input->post("name"),
                 "species" => join(',', $arr_species),
                 "description" => $this->input->post("description"),
-                "photo" => $_POST['photo']
+                "photo" => $photo
             );
 
             //create disease
@@ -224,6 +228,7 @@ class Ohkr extends MX_Controller
                 }
             }
 
+            //check for photo
             $photo = $disease->photo;
             if (isset($_POST['photo']) && $_POST['photo'] != null)
                 $photo = $_POST['photo'];
@@ -487,10 +492,14 @@ class Ohkr extends MX_Controller
             $this->load->view("ohkr/symptoms/add_new", $data);
             $this->load->view('footer');
         } else {
+            //check for photo
+            if (isset($_POST['photo']) && $_POST['photo'] != null)
+                $photo = $_POST['photo'];
+
             $data = array(
                 "title" => $this->input->post("name"),
                 "code" => $this->input->post("code"),
-                "photo" => $_POST['photo'],
+                "photo" => $photo,
                 "description" => $this->input->post("description")
             );
 
@@ -545,6 +554,7 @@ class Ohkr extends MX_Controller
             $this->load->view("ohkr/symptoms/edit", $data);
             $this->load->view('footer');
         } else {
+            //check for photo
             $photo = $symptom->photo;
             if (isset($_POST['photo']) && $_POST['photo'] != null)
                 $photo = $_POST['photo'];
