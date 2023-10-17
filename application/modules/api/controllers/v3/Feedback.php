@@ -29,15 +29,18 @@ class Feedback extends REST_Controller
         //get data
         $username = $this->get('username');
         $date_created = $this->get("date_created");
+        log_message("debug", "date created 1 =>  " . $date_created);
 
         //format date
         $date_created = date("Y-m-d H:i:s", strtotime($date_created));
+        log_message("debug", "date created 2 =>  " . $date_created);
 
         //get user details
         $this->model->set_table('users');
         $user = $this->model->get_by('username', $username);
 
         log_message("debug", "username getting forms feedback is " . $username);
+        
 
         if ($user) {
             //TODO: call function for permission, return chat user (form_id) needed to see
