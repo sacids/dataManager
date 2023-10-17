@@ -475,7 +475,7 @@ class Ohkr extends MX_Controller
 
         //validation
         $this->form_validation->set_rules("name", $this->lang->line("label_symptom_name"), "required");
-        $this->form_validation->set_rules("code", $this->lang->line("label_symptom_code"), "required");
+        $this->form_validation->set_rules("code", $this->lang->line("label_symptom_code"), "required|is_unique[ohkr_symptoms.code]");
         $this->form_validation->set_rules("photo", "Photo", "callback_upload_photo");
 
         //validation == false
