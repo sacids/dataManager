@@ -72,6 +72,9 @@
             </div>
         </div>
     </form>
+
+    <div id="success-messages" class="mx-3"></div>
+    <div id="error-messages" class="mx-3"></div>
 </div>
 
 
@@ -105,7 +108,7 @@
 
                     //show success msg
                     $('#success-messages').css('display', '');
-                    $("#success-messages").html(response.success_msg)
+                    $("#success-messages").html("<div class='bg-teal-100 text-teal-900 rounded-b text-teal-900 px-4 py-3'>" + response.success_msg + "</div>");
 
                     //new message
                     $('#new-message-div').css('display', '');
@@ -124,7 +127,7 @@
                     $('#new-message-div').css('display', 'none');
 
                     //show error msg
-                    $("#error-messages").html(response.error_msg);
+                    $("#error-messages").html("<div class='bg-red-100 text-red-900 rounded-b text-teal-900 px-4 py-3'>" + response.error_msg + "</div>");
                 },
             });
         });

@@ -94,8 +94,8 @@ class Feedback extends MX_Controller
     }
 
 
-    function send_sms(){
-
+    function send_sms()
+    {
     }
 
 
@@ -263,26 +263,30 @@ class Feedback extends MX_Controller
 
         $fb = $this->Feedback_model->get_feedback_details_by_instance($instance_id);
 
-        if ($fb) {
-            //Insert data from ajax
-            $result = $this->Feedback_model->create_feedback(array(
-                'form_id' => $fb->form_id,
-                'message' => $message,
-                'date_created' => date('Y-m-d H:i:s'),
-                'instance_id' => $instance_id,
-                'user_id' => $fb->user_id,
-                'sender' => 'server',
-                'status' => 'pending',
-                'reply_by' => get_current_user_id()
-            ));
+        if ($this->user_id != null) {
+            if ($fb) {
+                //Insert data from ajax
+                $result = $this->Feedback_model->create_feedback(array(
+                    'form_id' => $fb->form_id,
+                    'message' => $message,
+                    'date_created' => date('Y-m-d H:i:s'),
+                    'instance_id' => $instance_id,
+                    'user_id' => $fb->user_id,
+                    'sender' => 'server',
+                    'status' => 'pending',
+                    'reply_by' => $this->user_id
+                ));
 
-            if ($result) {
-                echo json_encode(['error' => false, 'success_msg' => 'New chat successful sent!', 'message' => $message]);
+                if ($result) {
+                    echo json_encode(['error' => false, 'success_msg' => 'Nouveau chat envoyé avec succès !', 'message' => $message]);
+                } else {
+                    echo json_encode(['error' => true, 'error_msg' => 'Échec de l\'envoi du chat']);
+                }
             } else {
-                echo json_encode(['error' => true, 'success_msg' => 'Failed to sent chat!']);
+                echo json_encode(['error' => true, 'error_msg' => 'Les données du formulaire n\'existent pas']);
             }
         } else {
-            echo json_encode(['error' => true, 'success_msg' => 'Form data does not exist!']);
+            echo json_encode(['error' => true, 'error_msg' => 'Session expirée, veuillez vous déconnecter maintenant.']);
         }
     }
 

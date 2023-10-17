@@ -1517,11 +1517,6 @@ class Xform extends MX_Controller
             $data['form_data'][$k]->attend_status = $attend_status;
         }
 
-
-        // echo "<pre/>";
-        // print_r($form_data);
-        // exit();
-
         //render view
         $this->load->view('header', $data);
         $this->load->view("form_data");
