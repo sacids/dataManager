@@ -71,7 +71,8 @@ class Ohkr extends MX_Controller
             $arr_species = [];
             foreach ($species as $val) {
                 $specie = $this->Specie_model->get_by(['id' => $val]);
-                $arr_species[] = $specie->title;
+                if($specie)
+                    $arr_species[] = $specie->title;
             }
             $this->data['diseases'][$k]->species = join(', ', $arr_species);
         }
