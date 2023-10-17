@@ -482,7 +482,7 @@ class Users extends MX_Controller
         $this->data['user'] = $user;
 
         //users lists
-        $this->data['users'] = $this->User_model->get_data_collectors();
+        $this->data['users'] = $this->User_model->get_chw();
 
         //mapped users
         $this->model->set_table('feedback_user_map');
