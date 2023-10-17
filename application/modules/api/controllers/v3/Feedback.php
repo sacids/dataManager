@@ -171,7 +171,7 @@ class Feedback extends REST_Controller
                     'sender' => $this->post("sender"),
                     'date_created' => date('Y-m-d H:i:s'),
                     'status' => $this->post("status"),
-                    'reply_by' => 0
+                    'reply_by' => $user->id
                 )
             );
 
