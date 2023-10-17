@@ -209,7 +209,7 @@ class Feedback_model extends CI_Model
         }
 
         if ($date_created != NULL)
-            $this->db->where('DATE(date_created) >', $date_created);
+            $this->db->where('date_created >', $date_created);
 
 
         $query = $this->db
