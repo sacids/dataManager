@@ -270,10 +270,10 @@ class Feedback extends MX_Controller
                 'message' => $message,
                 'date_created' => date('Y-m-d H:i:s'),
                 'instance_id' => $instance_id,
-                'user_id' => get_current_user_id(),
+                'user_id' => $fb->user_id,
                 'sender' => 'server',
                 'status' => 'pending',
-                'reply_by' => get_current_user_id()
+                'reply_by' => $this->user_id
             ));
 
             if ($result) {
