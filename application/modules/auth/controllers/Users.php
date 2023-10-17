@@ -228,7 +228,7 @@ class Users extends MX_Controller
         // validate form input
         $this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'required');
         $this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'required');
-        $this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'required');
+        $this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'required|callback_valid_phone');
         $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
         $this->form_validation->set_rules('groups_ids[]', 'User Groups', 'required');
         //$this->form_validation->set_rules('district', 'District', 'required|trim');
@@ -246,7 +246,7 @@ class Users extends MX_Controller
                 $this->form_validation->set_rules('password_confirm', $this->lang->line('edit_user_validation_password_confirm_label'), 'required');
             }
 
-            if ($this->form_validation->run() === TRUE) {
+            if ($this->form_validation->run($this) === TRUE) {
                 $identity = $this->input->post('identity');
 
                 //update data
@@ -624,7 +624,7 @@ class Users extends MX_Controller
             if (preg_match("/^[0-9]{10}$/", $str)) {
                 return TRUE;
             } else {
-                $this->form_validation->set_message('valid_phone', "The %s must contain 10 digit eg:0717705746");
+                $this->form_validation->set_message('valid_phone', "Le %s doit contenir 10 chiffres eg:0612008882");
                 return FALSE;
             }
         }

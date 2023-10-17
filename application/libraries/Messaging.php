@@ -125,7 +125,7 @@ class Messaging
     {
         if (preg_match("~^0\d+$~", $mobile)) {
             return '+224' . substr($mobile, 1);
-        } else if (substr($mobile, 0, 4) != '+224' & strlen($mobile) == 9) {
+        } else if (substr($mobile, 0, 3) != '224' & strlen($mobile) == 9) {
             return '+224' . $mobile;
         }
     }

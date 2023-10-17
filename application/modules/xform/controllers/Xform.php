@@ -464,7 +464,7 @@ class Xform extends MX_Controller
 
                 if ($CAW_User) {
                     $CAW_Name = $CAW_User->first_name . ' ' . $CAW_User->last_name;
-                    $CAW_Phone = $CAW_User->phone;
+                    $CAW_Phone = $this->messaging->cast_mobile($CAW_User->phone);
 
                     //for details
                     $this->model->set_table($this->xFormReader->get_table_name());
@@ -485,7 +485,7 @@ class Xform extends MX_Controller
 
                             if ($user) {
                                 //3. user phone
-                                $phone = $user->phone;
+                                $phone = $this->messaging->cast_mobile($user->phone);
                                 $LFO_Name = $user->first_name . ' ' . $user->last_name;
 
                                 //4. Construct message

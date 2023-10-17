@@ -22,28 +22,32 @@
 
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">First name<span class="text-red-500">*</span>
+                    <label class="block mb-2 text-sm font-medium text-gray-900">
+                        First name<span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($first_name); ?>
                     <span class="text-red-500 text-xs"><?= form_error('first_name'); ?></span>
                 </div>
 
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">Lastname <span class="text-red-500">*</span>
+                    <label class="block mb-2 text-sm font-medium text-gray-900">
+                        Lastname <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($last_name); ?>
                     <span class="text-red-500 text-xs"><?= form_error('last_name'); ?></span>
                 </div>
 
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">Email <span class="text-red-500">*</span>
+                    <label class="block mb-2 text-sm font-medium text-gray-900">
+                        Email <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($email); ?>
                     <span class="text-red-500 text-xs"><?= form_error('email'); ?></span>
                 </div>
 
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">Phone
+                    <label class="block mb-2 text-sm font-medium text-gray-900">
+                        Phone <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($phone); ?>
                     <span class="text-red-500 text-xs"><?= form_error('phone'); ?></span>
@@ -52,7 +56,8 @@
 
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">District
+                    <label class="block mb-2 text-sm font-medium text-gray-900">
+                        District
                     </label>
                     <?php
                     $options = array();
@@ -66,21 +71,24 @@
                 </div>
 
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">Username <span class="text-red-500">*</span>
+                    <label class="block mb-2 text-sm font-medium text-gray-900">
+                        Username <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($identity); ?>
                     <span class="text-red-500 text-xs"><?= form_error('identity'); ?></span>
                 </div>
 
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">Password <span class="text-red-500">*</span>
+                    <label class="block mb-2 text-sm font-medium text-gray-900">
+                        Password <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($password); ?>
                     <span class="text-red-500 text-xs"><?= form_error('password'); ?></span>
                 </div>
 
                 <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">Confirm Password <span class="text-red-500">*</span>
+                    <label class="block mb-2 text-sm font-medium text-gray-900">
+                        Confirm Password <span class="text-red-500">*</span>
                     </label>
                     <?php echo form_input($password_confirm); ?>
                     <span class="text-red-500 text-xs"><?= form_error('password_confirm'); ?></span>
@@ -89,7 +97,8 @@
 
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full px-3 mb-6 md:mb-0">
-                    <label class="block mb-2 text-sm font-medium text-gray-900">Roles <span class="text-red-500">*</span>
+                    <label class="block mb-2 text-sm font-medium text-gray-900">
+                        Roles <span class="text-red-500">*</span>
                     </label>
                     <table class="text-sm font-normal">
                         <tr>
