@@ -127,6 +127,8 @@ class Messaging
             return '+224' . substr($mobile, 1);
         } else if (substr($mobile, 0, 3) != '224' & strlen($mobile) == 9) {
             return '+224' . $mobile;
+        }else if (substr($mobile, 0, 3) == '224') {
+            return '+224' . substr($mobile, 3);
         }
     }
 
