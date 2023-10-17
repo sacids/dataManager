@@ -47,8 +47,9 @@
                     <table id="dt" class="table table-bordered dt-responsive nowrap w-100 table-fixed">
                         <thead class="text-gray-600 text-sm font-medium">
                             <tr>
-                                <th width="16%">Name</th>
-                                <th width="18%">Email</th>
+                                <th width="14%">Name</th>
+                                <th width="16%">Email</th>
+                                <th width="12%">Phone</th>
                                 <th width="10%">Username</th>
                                 <th width="12%">Roles</th>
                                 <th width="8%">Status</th>
@@ -66,6 +67,7 @@
                                         <?= ucfirst($values->first_name) . ' ' . ucfirst($values->last_name); ?>
                                     </td>
                                     <td class="px-2 py-1"><?= $values->email; ?></td>
+                                    <td class="px-2 py-1"><?= $values->phone; ?></td>
                                     <td class="px-2 py-1"><?= $values->username; ?></td>
 
                                     <td class="px-2 py-1">
