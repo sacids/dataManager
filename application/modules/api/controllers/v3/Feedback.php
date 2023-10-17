@@ -90,8 +90,8 @@ class Feedback extends REST_Controller
 
                     if ($form) {
                         //get reply user
-                        if ($value->reply_by != 0) $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
-                        else $reply_user = $value->reply_by;
+                        // if ($value->reply_by != 0) $reply_user = $this->Feedback_model->get_reply_user($value->reply_by);
+                        // else $reply_user = $value->reply_by;
 
                         //query for form 
                         $this->model->set_table($value->form_id);
@@ -128,7 +128,7 @@ class Feedback extends REST_Controller
                             'date_created' => date("d-m-Y H:i", strtotime($value->date_created)),
                             'status' => $value->status,
                             'attend_status' => $attend_status,
-                            'reply_by' => $reply_user
+                            'reply_by' => $value->reply_by
                         );
                     }
                 }
