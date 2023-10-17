@@ -44,14 +44,13 @@
 
             <?php if (!empty($users)) { ?>
                 <div class="relative overflow-x-auto">
-                    <table id="dt" class="table table-bordered dt-responsive nowrap w-100 table-fixed">
+                    <table id="dt" class="table table-bordered dt-responsive nowrap w-100">
                         <thead class="text-gray-600 text-sm font-medium">
                             <tr>
-                                <th width="14%">Name</th>
-                                <th width="16%">Email</th>
+                                <th width="20%">Name</th>
                                 <th width="12%">Phone</th>
-                                <th width="10%">Username</th>
-                                <th width="12%">Roles</th>
+                                <th width="12%">Username</th>
+                                <th width="14%">Roles</th>
                                 <th width="8%">Status</th>
                                 <th width="12%">Created On</th>
                                 <th width="6%"></th>
@@ -66,7 +65,6 @@
                                     <td class="px-2 py-1 text-left whitespace-nowrap">
                                         <?= ucfirst($values->first_name) . ' ' . ucfirst($values->last_name); ?>
                                     </td>
-                                    <td class="px-2 py-1"><?= $values->email; ?></td>
                                     <td class="px-2 py-1"><?= $values->phone; ?></td>
                                     <td class="px-2 py-1"><?= $values->username; ?></td>
 
