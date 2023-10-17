@@ -35,7 +35,6 @@
                     <thead class="text-gray-600 text-sm font-medium">
                         <tr>
                             <th width="12%">Reported</th>
-                            <th width="12%">Reported By</th>
                             <th width="8%">Attended</th>
                             <th width="20%">Attended By</th>
                             <th width="12%">Attended Date</th>
@@ -56,7 +55,7 @@
                                 <td class="px-2 py-1 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
                                     <?php echo date('d-m-Y H:i:s', strtotime($values->created_at)); ?>
                                 </td>
-                                <td></td>
+
                                 <td class="px-2 py-1 text-center whitespace-nowrap">
                                     <?= ($values->attended == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No</span>'; ?>
                                 </td>
@@ -64,6 +63,7 @@
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
                                     <?= ucwords(strtolower($values->attended)); ?>
                                 </td>
+                                
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
                                     <?php echo date('d-m-Y H:i:s', strtotime($values->updated_at)); ?>
                                 </td>
