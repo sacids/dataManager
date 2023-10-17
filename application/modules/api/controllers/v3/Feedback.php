@@ -32,7 +32,7 @@ class Feedback extends REST_Controller
         log_message("debug", "date created 1 =>  " . $date_created);
 
         //format date
-        $date_created = date("Y-m-d H:i:s", strtotime($date_created));
+        $date_created = date("Y-m-d H:i", strtotime($date_created));
         log_message("debug", "date created 2 =>  " . $date_created);
 
         //get user details
