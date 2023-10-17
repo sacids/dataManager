@@ -73,6 +73,8 @@ class Feedback extends REST_Controller
 
             //feedback List
             $feedback_list = $this->Feedback_model->get_feedback_list($where_perm, $where_array, $date_created);
+            log_message("debug", "query => ".json_encode($feedback_list));
+            log_message("debug", "query => ".$this->db->last_query());
 
             if ($feedback_list) {
                 $feedback = array();
