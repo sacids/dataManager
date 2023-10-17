@@ -17,7 +17,7 @@
 </div>
 </header>
 
-<main class="bg-white h-full flex overflow-hidden relative" x-data="manageData()">
+<main class="bg-white h-[calc(100%-9rem)] flex overflow-hidden relative" x-data="manageData()">
     <div class="flex-1 h-full overflow-y-scroll">
         <div class="mx-auto py-4 px-4 sm:px-6 lg:px-8">
             <?php echo form_open(uri_string()); ?>

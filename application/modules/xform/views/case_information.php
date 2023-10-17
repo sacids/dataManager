@@ -31,7 +31,7 @@
             <?php } ?>
 
             <?php if (!empty($cases)) { ?>
-                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100 table-fixed">
+                <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                     <thead class="text-gray-600 text-sm font-medium">
                         <tr>
                             <th width="12%">Reported</th>
