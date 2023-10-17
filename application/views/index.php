@@ -67,10 +67,10 @@
                     </div>
                 </div>
 
-                <div class="w-full md:w-1/4 xl:w-1/4 pl-2">
+                <div class="w-full md:w-1/4 xl:w-1/4 px-2">
                     <!-- Carte métrique -->
                     <div class="bg-slate-200 border rounded p-4">
-                        <div class "flex flex-row items-center">
+                        <div class="flex flex-row items-center">
                             <div class="flex-shrink pr-4">
                                 <div class="rounded p-3 bg-green-600 text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -80,9 +80,8 @@
                             </div>
                             <div class="flex-1 text-right md:text-center">
                                 <h5 class="font-medium text-gray-600">Nombre de retours</h5>
-                                <h3 class="font-bold text-xl">
-                                    <?= (isset($new_feedback) ? number_format($new_feedback) : '0'); ?>
-                                </h3>
+                                <h3 class="font-bold text-2xl"> <?= (isset($new_feedback) ? number_format($new_feedback) : '0'); ?></h3>
+                               
                             </div>
                         </div>
                     </div>
