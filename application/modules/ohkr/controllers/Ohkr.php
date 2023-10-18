@@ -1177,13 +1177,7 @@ class Ohkr extends MX_Controller
                 $this->image_lib->initialize($resize_conf);
                 $this->image_lib->resize();
 
-                echo json_encode(
-                    [
-                        'uploaded' => true,
-                        'file_name' => $upload_data['file_name'],
-                        'url' => base_url('assets/forms/data/images/') . $upload_data['file_name']
-                    ]
-                );
+                echo base_url('assets/forms/data/images/') . $upload_data['file_name'];
             } else {
                 echo json_encode(['error' => $this->upload->display_errors()]);
             }
