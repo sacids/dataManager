@@ -367,7 +367,7 @@ class Xform extends MX_Controller
                 $species_column_name = $this->Xform_model->find_form_map_by_field_type($xForm_form->form_id, "SPECIE")->col_name;
                 $species_name = $inserted_form_data->$species_column_name;
             } else {
-                $species_name = "binadamu";
+                $species_name = "Bovins";
             }
             log_message("debug", "specie => " . $species_name);
 
@@ -386,9 +386,19 @@ class Xform extends MX_Controller
                 log_message("debug", "requested_data => " . json_encode($request_data));
                 log_message("debug", "results => " . $result);
 
+                //declare disease detected
+                $message = $this->lang->line("message_data_received");
+                $suspected_diseases_list = $message . "<br/>";
+
                 if (isset($json_object->status) && $json_object->status == 1) {
+                    $message = $this->lang->line("message_data_received");
+                    $suspected_diseases_list = $message . "<br/>";
+
+                    //detected diseases
                     $detected_diseases = [];
 
+                    $arr_diseases = [];
+                    $i = 1;
                     foreach ($json_object->data as $disease) {
                         $ungonjwa = $this->Ohkr_model->find_by_disease_name($disease->title);
 
@@ -399,46 +409,23 @@ class Xform extends MX_Controller
                             "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
                             "date_detected" => date("Y-m-d H:i:s")
                         ];
-                    }
-                    $this->Ohkr_model->save_detected_diseases($detected_diseases);
-                }
-            }
 
-            if ($symptoms_reported) {
-                //suspected array
-                $suspected_diseases_array = array();
-                $suspected_diseases = $this->Ohkr_model->find_diseases_by_symptoms_code($symptoms_reported);
-
-                $message = $this->lang->line("message_data_received");
-                $suspected_diseases_list = $message . "<br/>";
-
-                $arr_diseases = [];
-                if ($suspected_diseases) {
-                    $i = 1;
-                    foreach ($suspected_diseases as $disease) {
+                        //format message
                         $suspected_diseases_list .= $i . "." . $disease->disease_name . "\n<br/>";
 
-                        $suspected_diseases_array[$i - 1] = array(
-                            "form_id" => $this->xFormReader->get_table_name(),
-                            "disease_id" => $disease->disease_id,
-                            "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
-                            "date_detected" => date("Y-m-d H:i:s"),
-                            "location" => $district
-                        );
-
-                        //save detected disease
-                        $this->Ohkr_model->save_detected_diseases($suspected_diseases_array);
-
                         //push disease to array
-                        array_push($arr_diseases, $disease->disease_name);
+                        array_push($arr_diseases, $disease->title);
 
+                        //increment disease
                         $i++;
+
                     }
+                    $this->Ohkr_model->save_detected_diseases($detected_diseases);
                 } else {
                     $suspected_diseases_list = $this->lang->line("message_auto_detect_disease_failed");
                 }
 
-                //feedback data
+                //create feedback
                 $feedback = array(
                     "user_id" => $this->user_submitting_feedback_id,
                     "form_id" => $this->xFormReader->get_table_name(),
@@ -450,7 +437,7 @@ class Xform extends MX_Controller
                 );
                 $this->Feedback_model->create_feedback($feedback);
 
-                //case reported data
+                //create case reported
                 $this->model->set_table('ohkr_reported_cases');
                 $this->model->insert([
                     'form_id' => $this->xFormReader->get_table_name(),
@@ -503,8 +490,6 @@ class Xform extends MX_Controller
                         }
                     }
                 }
-            } else {
-                log_message("debug", "No symptom reported");
             }
         } else {
             log_message("debug", "Form does not have symptoms field or symptoms field is not specified in " . base_url("xform/edit_form/" . $xForm_form->id));
