@@ -338,6 +338,7 @@ class Ohkr_model extends CI_Model
             $this->db->join(self::$table_name_symptoms . " ds", "ds.id = sds.symptom_id");
             $this->db->where_in("code", $code);
             $this->db->group_by("d.title");
+            $this->db->limit(2);
             return $this->db->get()->result();
         }
     }

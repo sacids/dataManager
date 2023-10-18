@@ -416,7 +416,6 @@ class Xform extends MX_Controller
                 if ($suspected_diseases) {
                     $i = 1;
                     foreach ($suspected_diseases as $disease) {
-
                         $suspected_diseases_list .= $i . "." . $disease->disease_name . "\n<br/>";
 
                         $suspected_diseases_array[$i - 1] = array(
@@ -432,6 +431,8 @@ class Xform extends MX_Controller
 
                         //push disease to array
                         array_push($arr_diseases, $disease->disease_name);
+
+                        $i++;
                     }
                 } else {
                     $suspected_diseases_list = $this->lang->line("message_auto_detect_disease_failed");
