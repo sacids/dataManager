@@ -35,75 +35,71 @@
                         <?php } ?>
 
                         <?php echo form_open_multipart(uri_string(), 'role="form"'); ?>
-                            <div class="flex flex-wrap -mx-3 mb-3">
-                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                    <div class="flex flex-wrap -mx-3 mb-3">
-                                        <div class="w-full md:w-full px-3 mb-6 md:mb-0">
-                                            <label>
-                                                <?php echo $this->lang->line("label_disease_name") ?> <span class="text-red-500"> * </span>
-                                            </label>
-                                            <input type="text" name="name" placeholder="Write disease name..." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo $disease->title; ?>">
-                                            <div class="text-red-500 text-xs"><?php echo form_error('name'); ?></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex flex-wrap -mx-3 mb-3">
-                                        <div class="w-full md:w-full px-3 mb-6 md:mb-0">
-                                            <label class="block mb-2 text-sm font-medium text-gray-900">
-                                                Photo
-                                            </label>
-                                            <input class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="photo" name="photo" type="file" accept="image/*">
-                                        </div>
-                                    </div>
-
-                                    <div class="flex flex-wrap -mx-3 mb-3">
-                                        <div class="w-full md:w-full px-3 mb-6 md:mb-0">
-                                            <label class="block mb-2 text-sm font-medium text-gray-900">
-                                                <?php echo $this->lang->line("label_specie_name") ?>
-                                            </label>
-                                            <table class="text-sm font-normal">
-                                                <tr>
-                                                    <?php
-                                                    $serial = 0;
-                                                    if (isset($species) && $species) {
-                                                        foreach ($species as $v) {
-                                                            if (($serial % 3) == 0) {
-                                                                echo '</tr><tr>';
-                                                            } ?>
-                                                            <td>
-                                                                <span id="sp-<?= $v->id ?>">
-                                                                    <input type="checkbox" name="species[]" value="<?= $v->id; ?>" <?= in_array($v->id, $assigned_species) ? 'checked' : ''; ?>>
-                                                                    <?= $v->title; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                                            </td>
-                                                    <?php $serial++;
-                                                        }
-                                                    }
-                                                    ?>
-                                                </tr>
-                                            </table>
-                                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-3">
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <div class="flex flex-wrap -mx-3 mb-3">
+                                    <div class="w-full md:w-full px-3 mb-6 md:mb-0">
+                                        <label>
+                                            <?php echo $this->lang->line("label_disease_name") ?> <span class="text-red-500"> * </span>
+                                        </label>
+                                        <input type="text" name="name" placeholder="Write disease name..." class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo $disease->title; ?>">
+                                        <div class="text-red-500 text-xs"><?php echo form_error('name'); ?></div>
                                     </div>
                                 </div>
 
-                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                    <div class="mb-4">
+                                <div class="flex flex-wrap -mx-3 mb-3">
+                                    <div class="w-full md:w-full px-3 mb-6 md:mb-0">
                                         <label class="block mb-2 text-sm font-medium text-gray-900">
-                                            <?php echo $this->lang->line("label_description") ?> <span class="text-red-500">*</span>
+                                            Photo
                                         </label>
-                                        <textarea class="form-control" name="description" id="description"><?php echo $disease->description; ?></textarea>
-                                        <script>
-                                            CKEDITOR.replace('description');
-                                        </script>
-                                        <div class="text-red-500 text-xs"><?php echo form_error('description'); ?></div>
+                                        <input class="bg-white border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="photo" name="photo" type="file" accept="image/*">
                                     </div>
+                                </div>
+
+                                <div class="flex flex-wrap -mx-3 mb-3">
+                                    <div class="w-full md:w-full px-3 mb-6 md:mb-0">
+                                        <label class="block mb-2 text-sm font-medium text-gray-900">
+                                            <?php echo $this->lang->line("label_specie_name") ?>
+                                        </label>
+                                        <table class="text-sm font-normal">
+                                            <tr>
+                                                <?php
+                                                $serial = 0;
+                                                if (isset($species) && $species) {
+                                                    foreach ($species as $v) {
+                                                        if (($serial % 3) == 0) {
+                                                            echo '</tr><tr>';
+                                                        } ?>
+                                                        <td>
+                                                            <span id="sp-<?= $v->id ?>">
+                                                                <input type="checkbox" name="species[]" value="<?= $v->id; ?>" <?= in_array($v->id, $assigned_species) ? 'checked' : ''; ?>>
+                                                                <?= $v->title; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                                        </td>
+                                                <?php $serial++;
+                                                    }
+                                                }
+                                                ?>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Modifier</button>
                                 </div>
                             </div>
 
-                    <div class="flex items-start">
-                        <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Modifier</button>
-                    </div>
-                
-                    <?php echo form_close(); ?>
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <div class="mb-4">
+                                    <label class="block mb-2 text-sm font-medium text-gray-900">
+                                        <?php echo $this->lang->line("label_description") ?> <span class="text-red-500">*</span>
+                                    </label>
+                                    <textarea class="form-control" name="description" id="editor"><?php echo $disease->description; ?></textarea>
+                                    <div class="text-red-500 text-xs"><?php echo form_error('description'); ?></div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php echo form_close(); ?>
 
                     </div>
                 </div>

@@ -20,6 +20,10 @@
 }
 */
 
+.ck-editor__editable {
+  height: 480px !important;
+}
+
 #offcanvas-wrp {
     width: calc(63vw - 150px);
     height: calc(100vh - 80px);

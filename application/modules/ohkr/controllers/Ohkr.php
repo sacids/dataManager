@@ -71,7 +71,7 @@ class Ohkr extends MX_Controller
             $arr_species = [];
             foreach ($species as $val) {
                 $specie = $this->Specie_model->get_by(['id' => $val]);
-                if($specie)
+                if ($specie)
                     $arr_species[] = $specie->title;
             }
             $this->data['diseases'][$k]->species = join(', ', $arr_species);
@@ -1048,7 +1048,7 @@ class Ohkr extends MX_Controller
     public function edit_response_sms($sms_id)
     {
         //check permission
-       // $this->has_allowed_perm($this->router->fetch_method());
+        // $this->has_allowed_perm($this->router->fetch_method());
 
         if (!$sms_id) {
             $this->session->set_flashdata("message", display_message($this->lang->line("select_disease_to_edit")));
@@ -1064,8 +1064,8 @@ class Ohkr extends MX_Controller
         $this->form_validation->set_rules("message", $this->lang->line("label_alert_message"), "required");
 
         if ($this->form_validation->run() === FALSE) {
-             //links
-             $data['page_links'] = [
+            //links
+            $data['page_links'] = [
                 'diseases' => anchor('ohkr/diseases', 'Maladies', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
                 'symptoms' => anchor('ohkr/symptoms', 'Symptoms', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
                 'species' => anchor('ohkr/species', 'Espèces', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
@@ -1143,5 +1143,52 @@ class Ohkr extends MX_Controller
             }
         }
         return true;
+    }
+
+    //api to upload image
+    function api_upload_photo()
+    {
+        $config['upload_path'] = './assets/forms/data/images/';
+        $config['allowed_types'] = 'png|jpg|jpeg|gif|webp';
+        $config['max_size'] = '4000';
+        $config['max_width'] = '';
+        $config['max_height'] = '';
+        $config['overwrite'] = TRUE;
+        $config['remove_spaces'] = TRUE;
+
+        log_message("debug", "reached hapa => upload image");
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (isset($_FILES['upload']) && !empty($_FILES['upload']['name'])) {
+            if ($this->upload->do_upload('upload')) {
+                // set a $_POST value for 'image' that we can use later
+                $upload_data = $this->upload->data();
+
+                //Image Resizing
+                $resize_conf['source_image'] = $this->upload->upload_path . $this->upload->file_name;
+                $resize_conf['new_image'] = $this->upload->upload_path . 'thumb_' . $this->upload->file_name;
+                $resize_conf['maintain_ratio'] = FALSE;
+                $resize_conf['width'] = 800;
+                $resize_conf['height'] = 600;
+
+                // initializing image_lib
+                $this->image_lib->initialize($resize_conf);
+                $this->image_lib->resize();
+
+                echo json_encode(
+                    [
+                        'uploaded' => true,
+                        'file_name' => $upload_data['file_name'],
+                        'url' => base_url('assets/forms/data/images/') . $upload_data['file_name']
+                    ]
+                );
+            } else {
+                echo json_encode(['error' => $this->upload->display_errors()]);
+            }
+        } else {
+            echo json_encode(['error' => "Failed to upload image"]);
+        }
     }
 }

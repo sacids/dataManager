@@ -1,4 +1,10 @@
    <script>
+      CKEDITOR.replace('editor', {
+         filebrowserUploadUrl: '/ohkr/api_upload_photo',
+         filebrowserUploadMethod: 'form'
+      });
+
+      //datatable
       let dataTable = $('#datatable').DataTable({
          "paging": false,
          "ordering": true,
@@ -11,7 +17,6 @@
 
       $(document).ready(function() {
          $('.multiple-select').select2();
-
 
 
          $('#myCustomSearchBox').keyup(function() {

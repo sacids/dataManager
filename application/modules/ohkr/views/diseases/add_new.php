@@ -1,4 +1,5 @@
 <script src="<?php echo base_url() ?>assets/public/ckeditor/ckeditor.js"></script>
+
 <div class="bg-gray-100">
     <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
         <h1 class="text-xl font-medium tracking-tight text-gray-900">
@@ -83,6 +84,10 @@
                                         </table>
                                     </div>
                                 </div>
+
+                                <div class="flex items-start">
+                                    <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Soumettre</button>
+                                </div>
                             </div>
 
                             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -90,17 +95,10 @@
                                     <label class="block mb-2 text-sm font-medium text-gray-900">
                                         <?php echo $this->lang->line("label_description") ?> <span class="text-red-500">*</span>
                                     </label>
-                                    <textarea class="form-control" name="description" id="description"><?php echo set_value('description'); ?></textarea>
-                                    <script>
-                                        CKEDITOR.replace('description');
-                                    </script>
+                                    <textarea class="form-control" name="description" id="editor"><?php echo set_value('description'); ?></textarea>
                                     <div class="text-red-500 text-xs"><?php echo form_error('description'); ?></div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="flex items-start">
-                            <button type="submit" class="text-white bg-slate-800 hover:bg-red-900 focus:ring-4 font-medium rounded text-sm w-full sm:w-auto px-5 py-2.5 text-center">Soumettre</button>
                         </div>
                         <?php echo form_close(); ?>
                     </div>
