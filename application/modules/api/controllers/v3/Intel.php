@@ -71,24 +71,19 @@ class Intel extends REST_Controller
         if (array_key_exists('symptoms', $req)) {
             $arr_code   = $req['symptoms'];
 
-            //concert array code to string
-            // $code   = str_replace(",", "','" , $code);
-            $string_code = implode(",", $arr_code);
+            //format the symptoms code
+            $code = implode(",", $arr_code);
+            $code   = str_replace(",", "','", $code);
+            $sym_code   = "('" . $code . "')";
 
-            //format code for query
-            $code   = "('" . $string_code . "')";
-            log_message("debug", "symptoms code => " . $code);
-
-            $query      = "SELECT id FROM ohkr_symptoms WHERE code IN $code";
+            $query      = "SELECT id FROM ohkr_symptoms WHERE code IN $sym_code";
             $sql        = $this->db->query($query);
             $symptoms   = array();
             foreach ($sql->result() as $row) {
                 array_push($symptoms, $row->id);
             }
-
-            //format symptoms
             $symptoms   = "('" . implode("','", $symptoms) . "')";
-            log_message("debug", "json symptoms => " . json_encode($symptoms));
+            log_message("debug", "symptoms => " . json_encode($symptoms));
         } else {
             $this->resp['status']   = '0';
             $this->resp['data']     = 'Symptoms not specified';
@@ -102,7 +97,6 @@ class Intel extends REST_Controller
 
         $disease_map_json   = file_get_contents(FCPATH . 'assets/Intel/disease_map.json');
         $disease_map        = json_decode($disease_map_json, true);
-
         $score    = array();
 
         if ($sql->num_rows() == 0) {
@@ -114,6 +108,7 @@ class Intel extends REST_Controller
         }
 
         foreach ($sql->result() as $row) {
+
             $sc  = $row->imp / $epi_map[$specie_id][$row->disease_id] * 100;
             $sc  = number_format((float)$sc, 2, '.', '');
 

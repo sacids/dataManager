@@ -63,8 +63,22 @@ class Feedback extends MX_Controller
 
         // $response = $this->messaging->send_sms($phone, $message);
 
+        // $code = ["G2","G3","G4"];
+        // //
+        // // $code   = "('" . $code . "')";
+        // $code = implode(",", $code);
+        // $code   = str_replace(",", "','" , $code);
+        // $code   = "('" . $code . "')";
+
+        // $query      = "SELECT id FROM ohkr_symptoms WHERE code IN $code";
+        // $sql        = $this->db->query($query);
+
         // echo "<pre/>";
-        // print_r($response);
+        // print_r($sql->result());
+
+
+        // // echo "<pre/>";
+        // // print_r($response);
         // exit();
 
         //check if logged in
