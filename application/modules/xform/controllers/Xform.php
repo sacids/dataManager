@@ -491,9 +491,9 @@ class Xform extends MX_Controller
                                 //4. Construct message
                                 if ($arr_diseases) {
                                     $Diseases = implode(", ", $arr_diseases);
-                                    $message = "Cher {$LFO_Name}, la ou les maladies suivantes ont été prédites {$Diseases} à partir des données soumises par {$CAW_Name} {$CAW_Phone} avec le formulaire ID {$ID_Number}. Veuillez examiner les informations et attendre le cas. Merci.";
+                                    $message = "Cher {$LFO_Name}, le système a identifié la ou les maladies suivantes {$Diseases} à partir des signes cliniques soumis par {$CAW_Name} {$CAW_Phone} avec le formulaire ID {$ID_Number}. Veuillez examiner les signes cliniques dans AfyaData et investiguer le cas dans son site (localisation). Merci.";
                                 } else {
-                                    $message = "Cher {$LFO_Name}, le système n'a été en mesure de prédire aucune maladie à partir des données soumises par {$CAW_Name} {$CAW_Phone} avec l'ID de formulaire {$ID_Number}. Veuillez examiner les informations et assister au cas. Merci.";
+                                    $message = "Cher {$LFO_Name}, le système n'a pas été en mesure d'identifier une maladie à partir des signes cliniques soumis par {$CAW_Name} {$CAW_Phone} avec le formulaire ID {$ID_Number}. Veuillez examiner les signes cliniques dans AfyaData et investiguer le cas dans son site (localisation). Merci.";
                                 }
 
                                 //5. send message to users
