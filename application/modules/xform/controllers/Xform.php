@@ -411,7 +411,7 @@ class Xform extends MX_Controller
                         ];
 
                         //format message
-                        $suspected_diseases_list .= $i . "." . $disease->disease_name . "\n<br/>";
+                        $suspected_diseases_list .= $i . "." . $disease->title . "\n<br/>";
 
                         //push disease to array
                         array_push($arr_diseases, $disease->title);
