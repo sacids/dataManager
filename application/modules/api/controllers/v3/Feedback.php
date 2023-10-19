@@ -203,7 +203,7 @@ class Feedback extends REST_Controller
 
         //set file defn
         $this->Xformreader_model->set_defn_file($this->config->item("form_definition_upload_dir") . $form_details->filename);
-        $this->Xformreader_model->load_xml_definition();
+        $this->Xformreader_model->load_xml_definition($this->config->item("xform_tables_prefix"));
         $form_definition = $this->Xformreader_model->get_defn();
 
         //get form data
