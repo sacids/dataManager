@@ -101,9 +101,9 @@
                                         echo "<br/>";
 
                                         if ($data->attend_status == "Pending")
-                                            echo '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">' . $data->attend_status . '</span>';
+                                            echo '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">En attente</span>';
                                         else if ($data->attend_status == "Attended")
-                                            echo '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">' . $data->attend_status . '</span>';
+                                            echo '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Participé</span>';
 
                                         echo "</td>";
                                     } else {

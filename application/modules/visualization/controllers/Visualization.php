@@ -161,12 +161,12 @@ class Visualization extends CI_Controller
 
         //links
         $data['links'] = [
-            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Table', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Charts', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
-            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Aperçu', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Tableau', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Graphiques', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Carte', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Champs de mappage', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Autorisations', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, ' Notification de cas', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 
@@ -369,12 +369,12 @@ class Visualization extends CI_Controller
 
         //links
         $data['links'] = [
-            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Overview', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Table', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Charts', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Map', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
-            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Mapping Fields', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
-            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Permissions', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'overview' => anchor("xform/submission_stats/" . $project->id . '/' . $form->id, 'Aperçu', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'table' => anchor("xform/form_data/" . $project->id . '/' . $form->id, 'Tableau', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'charts' => anchor("visualization/visualization/chart/" . $project->id . '/' . $form->id, 'Graphiques', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'map' => anchor("visualization/visualization/map/" . $project->id . '/' . $form->id, 'Carte', ['class' => 'inline-block p-2 border-b-4 border-red-900']),
+            'mapping_field' => anchor("xform/mapping/" . $project->id . '/' . $form->id, 'Champs de mappage', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
+            'permission' => anchor("xform/permissions/" . $project->id . '/' . $form->id, 'Autorisations', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
             'case_information' => anchor("xform/case_information/" . $project->id . '/' . $form->id, ' Notification de cas', ['class' => 'inline-block p-2 border-b-4 border-transparent']),
         ];
 

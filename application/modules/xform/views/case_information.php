@@ -34,15 +34,15 @@
                 <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                     <thead class="text-gray-600 text-sm font-medium">
                         <tr>
-                            <th width="12%">Reported</th>
-                            <th width="8%">Attended</th>
-                            <th width="20%">Attended By</th>
-                            <th width="12%">Attended Date</th>
-                            <th width="14%">OHKR Disease</th>
-                            <th width="14%">Disease Detected</th>
-                            <th width="20%">Action Taken</th>
-                            <th width="10%">Reported E-Mai</th>
-                            <th width="10%">Location Point</th>
+                            <th width="12%">Signalé</th>
+                            <th width="8%">Participé</th>
+                            <th width="20%">En présence de</th>
+                            <th width="12%">Date de participation</th>
+                            <th width="14%">Maladie OHKR</th>
+                            <th width="14%">Maladie suspectée</th>
+                            <th width="20%">Action prise</th>
+                            <th width="10%">Courriel signalé E-Mai</th>
+                            <th width="10%">Point de localisation</th>
 
                         </tr>
                     </thead>
@@ -57,7 +57,7 @@
                                 </td>
 
                                 <td class="px-2 py-1 text-center whitespace-nowrap">
-                                    <?= ($values->attended == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No</span>'; ?>
+                                    <?= ($values->attended == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Oui</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">Non</span>'; ?>
                                 </td>
 
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
@@ -75,7 +75,7 @@
                                     <?= $values->action_taken; ?>
                                 </td>
                                 <td class="px-2 py-1 text-center whitespace-nowrap">
-                                    <?= ($values->reported_emai == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No</span>'; ?>
+                                    <?= ($values->reported_emai == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Oui</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">Non</span>'; ?>
                                 </td>
 
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
@@ -91,7 +91,7 @@
 
             <?php } else { ?>
                 <div class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
-                    <span class="block sm:inline text-sm font-normal">No any case at the moment</span>
+                    <span class="block sm:inline text-sm font-normal">Aucun cas pour le moment</span>
                     <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
                         <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <title>Close</title>

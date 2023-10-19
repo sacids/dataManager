@@ -4,20 +4,20 @@
         <table class="w-full text-sm text-left table-fixed">
             <tbody class="border-b">
                 <tr class="border-b">
-                    <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Case Attended</td>
+                    <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Signalé</td>
                     <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
                         <?= ($case->attended == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No</span>'; ?>
                     </td>
                 </tr>
 
                 <tr class="border-b">
-                    <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Reported Date</td>
+                    <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Date de rapport</td>
                     <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo date('d-m-Y H:i:s', strtotime($case->created_at)); ?></td>
                 </tr>
 
                 <?php if ($case->attended == 1) { ?>
                     <tr class="border-b">
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Attended By</td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">En présence de</td>
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
                             <?php
                             if ($user) {
@@ -28,12 +28,12 @@
                     </tr>
 
                     <tr class="border-b">
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Attend Date</td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Date de participation</td>
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?php echo date('d-m-Y H:i:s', strtotime($case->updated_at)); ?></td>
                     </tr>
 
                     <tr class="border-b">
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Disease Detected</td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Maladie suspectée</td>
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
                             <?php
                             if ($disease) {
@@ -44,29 +44,29 @@
                     </tr>
 
                     <tr class="border-b">
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Other Disease</td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Autre maladie</td>
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $case->other_disease; ?></td>
                     </tr>
 
                     <tr class="border-b">
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Action Taken</td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Action prise</td>
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $case->action_taken; ?></td>
                     </tr>
 
                     <tr class="border-b">
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Reported to E-Mai</td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Courriel signalé E-Mai</td>
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
                             <?= ($case->reported_emai == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Yes</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">No</span>'; ?>
                         </td>
                     </tr>
 
                     <tr class="border-b">
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Location Point</td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Point de localisation</td>
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap"><?= $case->latitude . ', ' . $case->longitude; ?></td>
                     </tr>
                 <?php } else { ?>
                     <tr class="border-b">
-                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Pending Days</td>
+                        <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">Jours en attente</td>
                         <td class="px-0 py-4 text-left font-normal text-sm text-gray-600 whitespace-nowrap">
                             <?= calculate_number_of_days($case->created_at); ?>
                         </td>
@@ -76,7 +76,7 @@
         </table>
     <?php } else { ?>
         <div class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
-            <span class="block sm:inline text-sm font-normal">Case notification is pending at the moment</span>
+            <span class="block sm:inline text-sm font-normal">La notification du cas est en attente pour le moment</span>
         </div>
     <?php } ?>
 </div>

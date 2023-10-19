@@ -28,10 +28,13 @@ class Intel extends REST_Controller
         $query  = $this->db->query('SELECT specie_id, disease_id, SUM(importance) as imp FROM `ohkr_disease_symptoms` group by specie_id, disease_id');
         $epi_map    = array();
         foreach ($query->result() as $row) {
-            $epi_map[$row->specie_id][$row->disease_id]    = $row->imp;
+            $epi_map[$row->specie_id][$row->disease_id]= $row->imp;
         }
 
         $epi_map_json   = json_encode($epi_map);
+        log_message("debug", $epi_map_json);
+
+        //write file
         write_file(FCPATH . 'assets/Intel/epi_map.json', $epi_map_json);
 
         $query  = "SELECT id, title FROM ohkr_diseases";
@@ -108,7 +111,6 @@ class Intel extends REST_Controller
         }
 
         foreach ($sql->result() as $row) {
-
             $sc  = $row->imp / $epi_map[$specie_id][$row->disease_id] * 100;
             $sc  = number_format((float)$sc, 2, '.', '');
 
