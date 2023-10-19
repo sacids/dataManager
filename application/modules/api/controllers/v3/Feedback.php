@@ -286,7 +286,7 @@ class Feedback extends REST_Controller
                 foreach ($tmp1 as $value) {
                     $code = trim($value);
 
-                    if (strpos($code, 'A') === false) {
+                    if (strpos($code, 'G') === false) {
                         $item = $code;
                     } else {
                         $this->model->set_table('ohkr_symptoms');
