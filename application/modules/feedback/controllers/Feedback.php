@@ -62,6 +62,7 @@ class Feedback extends MX_Controller
         $phone = $this->messaging->cast_mobile("224612008882");
 
         $response = $this->messaging->send_sms($phone, $message);
+        
 
         // $code = ["G2","G3","G4"];
         // //
@@ -77,9 +78,9 @@ class Feedback extends MX_Controller
         // print_r($sql->result());
 
 
-        // // echo "<pre/>";
-        // // print_r($response);
-        // exit();
+        echo "<pre/>";
+        print_r($response);
+        exit();
 
         //check if logged in
         $this->is_logged_in();
