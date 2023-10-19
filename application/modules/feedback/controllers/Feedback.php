@@ -58,10 +58,10 @@ class Feedback extends MX_Controller
     {
         $this->data['title'] = "Feedback";
 
-        // $message = "Cher Renfrid, le système n'a été en mesure de prédire aucune maladie à partir des données soumises par Mpoki 224612008882 avec l'ID de formulaire T00093. Veuillez examiner les informations et assister au cas. Merci.";
-        // $phone = $this->messaging->cast_mobile("224612008882");
+        $message = "Cher Renfrid, le système n'a été en mesure de prédire aucune maladie à partir des données soumises par Mpoki 224612008882 avec l'ID de formulaire T00093. Veuillez examiner les informations et assister au cas. Merci.";
+        $phone = $this->messaging->cast_mobile("224612008882");
 
-        // $response = $this->messaging->send_sms($phone, $message);
+        $response = $this->messaging->send_sms($phone, $message);
 
         // $code = ["G2","G3","G4"];
         // //
