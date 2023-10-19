@@ -55,7 +55,7 @@ class Feedback extends REST_Controller
             $perms = $this->db->query('SELECT * FROM ' . $table_name . ' ' . $where)->result();
 
             $i = 1;
-            $where_perm = [];
+            //$where_perm = [];
             foreach ($perms as $perm) {
                 $where_perm[$i] = $perm->form_id;
                 $i++;
