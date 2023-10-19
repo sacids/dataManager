@@ -63,13 +63,19 @@
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
                                     <?= ucwords(strtolower($values->attended)); ?>
                                 </td>
-                                
+
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
-                                    <?php echo date('d-m-Y H:i:s', strtotime($values->updated_at)); ?>
+                                    <?php
+                                        if ($values->updated_at != "")
+                                            echo date('d-m-Y H:i:s', strtotime($values->updated_at)); 
+                                    ?>
                                 </td>
                                 <td class="px-2 py-1 text-left whitespace-nowrap"></td>
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
-                                    <?= $values->disease->title; ?>
+                                    <?php
+                                        if($values->disease)
+                                            echo $values->disease->title; 
+                                    ?>
                                 </td>
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
                                     <?= $values->action_taken; ?>
@@ -79,7 +85,10 @@
                                 </td>
 
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
-                                    <?= $values->latitude . ', ' . $values->longitude; ?>
+                                    <?php
+                                        if($values->latitude != null && $values->longitude != null)
+                                            echo $values->latitude . ', ' . $values->longitude; 
+                                    ?>
                                 </td>
                             </tr>
                         <?php
@@ -87,8 +96,6 @@
                         } ?>
                     </tbody>
                 </table>
-
-
             <?php } else { ?>
                 <div class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
                     <span class="block sm:inline text-sm font-normal">Aucun cas pour le moment</span>
