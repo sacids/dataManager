@@ -206,14 +206,28 @@ class Xform extends MX_Controller
                     // path to store xml
                     $uploaded_filename = $file_name;
                     $path = $this->config->item("form_data_upload_dir") . $file_name;
-                    // insert form details in database
-                    $data = array(
-                        'file_name' => $file_name,
-                        'user_id' => $user->id,
-                        "submitted_on" => date("Y-m-d h:i:s")
-                    );
 
-                    $inserted_form_id = $this->Submission_model->create($data);
+                    //check if file alreay submitted
+                    $this->model->set_table('submission_form');
+                    $db_submission = $this->model->get_by(['file_name' => $file_name, 'user_id' => $user->id]);
+
+                    if (!$db_submission) {
+                        // insert form details in database
+                        $data = array(
+                            'file_name' => $file_name,
+                            'user_id' => $user->id,
+                            "submitted_on" => date("Y-m-d h:i:s")
+                        );
+                        $inserted_form_id = $this->Submission_model->create($data);
+                    } else {
+                        $data = [
+                            'file_name' => $file_name,
+                            'user_id' => $user->id,
+                            "submitted_on" => date("Y-m-d h:i:s")
+                        ];
+                        $inserted_form_id  = $this->Submission_model->update($data, $db_submission->id);
+                    }
+                    //log inserted id
                     log_message("debug", "submission inserted => " . $inserted_form_id);
                 } elseif ($file_extension == 'jpg' or $file_extension == 'jpeg' or $file_extension == 'png') {
                     // path to store images
@@ -418,7 +432,6 @@ class Xform extends MX_Controller
 
                         //increment disease
                         $i++;
-
                     }
                     $this->Ohkr_model->save_detected_diseases($detected_diseases);
                 } else {

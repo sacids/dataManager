@@ -58,6 +58,16 @@ class Submission_model extends CI_Model
         return $this->db->insert_id();
     }
 
+
+    /**
+     * @param $data array with corresponding table fields
+     * @return int id of the form data inserted
+     */
+    function update($data, $id)
+    {
+        return $this->db->update(self::$table_name, $data, array('id' => $id));
+    }
+
     /**
      * @param $submission_id
      * @return mixed
