@@ -449,6 +449,7 @@ class Xform extends MX_Controller
                 //send message to Officials
                 //0. CAW Information
                 $CAW_User = $this->User_model->get_by(['id' => $this->user_submitting_feedback_id]);
+                log_message("debug", "caw info => " . json_encode($CAW_User));
 
                 if ($CAW_User) {
                     $CAW_Name = $CAW_User->first_name . ' ' . $CAW_User->last_name;
@@ -470,6 +471,7 @@ class Xform extends MX_Controller
                     if ($feedback_users) {
                         foreach ($feedback_users as $fb_user) {
                             $user = $this->User_model->get_by(['id' => $fb_user->user_id]);
+                            log_message("debug", "official info => " . json_encode($user));
 
                             if ($user) {
                                 //3. user phone
