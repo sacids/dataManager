@@ -83,7 +83,7 @@
                     Êtes-vous intéressé par l'utilisation d'AfyaData pour la collecte de données ou pour contribuer au codage ?
                 </p>
 
-                <a href="https://play.google.com/store/apps/details?id=org.sacids.app.afyadata" class="rounded-sm border border-transparent bg-red-900 px-4 py-2 text-sm font-medium text-white hover:bg-red-600">
+                <a href="http://142.93.198.244/Afyadata_v1.4.apk" class="rounded-sm border border-transparent bg-red-900 px-4 py-2 text-sm font-medium text-white hover:bg-red-600">
                     <i class="fa fa-android fa-lg"></i> Télécharger l'application</a>&nbsp;&nbsp;
 
                 <a href="https://github.com/sacids/dataManager" class="rounded-sm border border-transparent bg-slate-700 px-4 py-2 text-sm font-medium text-white hover:bg-slate-600">
