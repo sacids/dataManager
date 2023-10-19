@@ -38,7 +38,6 @@ class Feedback extends REST_Controller
         //get user details
         $this->model->set_table('users');
         $user = $this->model->get_by('username', $username);
-
         log_message("debug", "username getting forms feedback is " . $username);
         
 
