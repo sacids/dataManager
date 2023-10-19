@@ -13,7 +13,6 @@
       $(document).ready(function() {
          $('.multiple-select').select2();
 
-
          $('#myCustomSearchBox').keyup(function() {
             dataTable.search($(this).val())
                .draw(); // this  is for customized searchbox with datatable search feature.
