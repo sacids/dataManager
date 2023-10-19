@@ -108,3 +108,10 @@
         </div>
     </div>
 </main>
+
+<script>
+    CKEDITOR.replace('editor', {
+        filebrowserUploadUrl: '/ohkr/api_upload_photo',
+        filebrowserUploadMethod: 'form'
+    });
+</script>

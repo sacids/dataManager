@@ -99,7 +99,7 @@ class Users extends MX_Controller
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
         $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'valid_email');
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'required|callback_valid_phone');
-        //$this->form_validation->set_rules('district', 'District', 'required|trim');
+        $this->form_validation->set_rules('district', 'District', 'trim');
         $this->form_validation->set_rules('groups_ids[]', 'Group', 'required|trim');
         $this->form_validation->set_rules('identity', 'Username', 'required|callback_valid_user');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|matches[password_confirm]');

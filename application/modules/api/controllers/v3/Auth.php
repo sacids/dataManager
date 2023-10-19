@@ -104,7 +104,8 @@ class Auth extends REST_Controller
         $password_confirm = $this->post('password_confirm');
 
         //username
-        $username = substr($code, 1) . $this->cast_mobile($mobile);
+        $mobile = $this->cast_mobile($mobile);
+        $username = substr($code, 1) . $mobile;
 
         //check mobile number existence
         if ($this->check_user_existence($username)) {
@@ -121,7 +122,7 @@ class Auth extends REST_Controller
             $additional_data = array(
                 'first_name' => $this->post('first_name'),
                 'last_name' => $this->post('last_name'),
-                'phone' => $username,
+                'phone' => $mobile,
                 'digest_password' => $digest_password
             );
 
