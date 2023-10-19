@@ -1195,6 +1195,7 @@ class Xform extends MX_Controller
         }
 
         echo "<pre/>";
+        print_r($data['cases']);
         exit();
 
 
