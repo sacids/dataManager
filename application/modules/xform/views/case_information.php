@@ -57,7 +57,7 @@
                                 </td>
 
                                 <td class="px-2 py-1 text-center whitespace-nowrap">
-                                    <?= ($values->attended == "1") ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Oui</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">Non</span>'; ?>
+                                    <?= ($values->attended == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Oui</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">Non</span>'; ?>
                                 </td>
 
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
@@ -81,7 +81,7 @@
                                     <?= $values->action_taken; ?>
                                 </td>
                                 <td class="px-2 py-1 text-center whitespace-nowrap">
-                                    <?= ($values->reported_emai == "1") ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Oui</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">Non</span>'; ?>
+                                    <?= ($values->reported_emai == 1) ?  '<span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-green-400">Oui</span>' : '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded border border-red-400">Non</span>'; ?>
                                 </td>
 
                                 <td class="px-2 py-1 text-left whitespace-nowrap">

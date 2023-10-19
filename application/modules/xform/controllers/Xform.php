@@ -1190,14 +1190,9 @@ class Xform extends MX_Controller
         $data['cases'] = $cases;
 
         foreach ($data['cases'] as $k => $v) {
-            $data['cases'][$k]->attended = $this->User_model->get_user_details($v->updated_by);
+            $data['cases'][$k]->attended_by = $this->User_model->get_user_details($v->updated_by);
             $data['cases'][$k]->disease = $this->Ohkr_model->get_disease_by_id($v->disease_id);
         }
-
-        echo "<pre/>";
-        print_r($data['cases']);
-        exit();
-
 
         //links
         $data['links'] = [
