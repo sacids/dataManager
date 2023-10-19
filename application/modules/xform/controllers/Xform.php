@@ -429,7 +429,8 @@ class Xform extends MX_Controller
                 $feedback = array(
                     "user_id" => $this->user_submitting_feedback_id,
                     "form_id" => $this->xFormReader->get_table_name(),
-                    "message" => $suspected_diseases_list,
+                    // "message" => $suspected_diseases_list,
+                    "message" => "Merci d'avoir envoyé l'information.",
                     "date_created" => date('Y-m-d H:i:s'),
                     "instance_id" => $this->xFormReader->get_form_data()['meta_instanceID'],
                     "sender" => "server",

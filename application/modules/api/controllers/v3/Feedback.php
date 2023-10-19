@@ -347,10 +347,11 @@ class Feedback extends REST_Controller
             log_message("debug", "reported => " . $this->post('reported'));
 
             //configuring case attended
-            if ($this->post('case_attended') == "Oui")
-                $attended_yes = 1;
-            else if ($this->post('case_attended') == "Non")
-                $attended_yes = 0;
+            $attended_yes = 1;
+            // if ($this->post('case_attended') == "Oui")
+            //     $attended_yes = 1;
+            // else if ($this->post('case_attended') == "Non")
+            //     $attended_yes = 0;
 
             //configuring case attended
             if ($this->post('reported') == "Oui")
