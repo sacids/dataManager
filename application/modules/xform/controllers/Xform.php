@@ -1194,6 +1194,9 @@ class Xform extends MX_Controller
             $data['cases'][$k]->disease = $this->Ohkr_model->get_disease_by_id($v->disease_id);
         }
 
+        echo "<pre/>";
+        exit();
+
 
         //links
         $data['links'] = [
