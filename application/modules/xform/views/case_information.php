@@ -61,7 +61,7 @@
                                 </td>
 
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
-                                    <?= ucwords(strtolower($values->attended)); ?>
+                                    <?= ucwords(strtolower($values->attended_by)); ?>
                                 </td>
 
                                 <td class="px-2 py-1 text-left whitespace-nowrap">
