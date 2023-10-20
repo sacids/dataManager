@@ -41,7 +41,7 @@
                             <th width="14%">Maladie OHKR</th>
                             <th width="14%">Maladie suspectée</th>
                             <th width="20%">Action prise</th>
-                            <th width="10%">Courriel signalé E-Mai</th>
+                            <th width="10%">Courriel signalé EMA-i</th>
                             <th width="10%">Point de localisation</th>
 
                         </tr>
